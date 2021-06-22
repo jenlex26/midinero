@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BASASwitchItemCell" rowHeight="112" id="OzQ-Ew-p91" customClass="BASASwitchItemCell" customModule="GSSAFront" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="322" height="112"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OzQ-Ew-p91" id="Wxv-qd-F9f">
+                <rect key="frame" x="0.0" y="0.0" width="322" height="112"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FCO-1D-J9k">
+                        <rect key="frame" x="16" y="111" width="290" height="1"/>
+                        <color key="backgroundColor" red="0.81568627449999997" green="0.82352941180000006" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="6iq-RC-pT2"/>
+                        </constraints>
+                    </view>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="56" translatesAutoresizingMaskIntoConstraints="NO" id="23k-p8-9QD">
+                        <rect key="frame" x="38" y="22" width="252" height="73"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="kAj-iZ-i0y">
+                                <rect key="frame" x="0.0" y="0.0" width="145" height="73"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CLABE Interbancaria" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eu6-sz-He6" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                                        <rect key="frame" x="0.0" y="0.0" width="145" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="styleType">
+                                                <integer key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1271 8099 7700 1123 98" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NFm-Rj-A2J" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                                        <rect key="frame" x="0.0" y="39" width="145" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="styleType">
+                                                <integer key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5d7-2d-czu">
+                                <rect key="frame" x="201" y="0.0" width="51" height="73"/>
+                                <subviews>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="G0O-rC-nnj">
+                                        <rect key="frame" x="0.0" y="21" width="53" height="31"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="51" id="bXV-jA-lNZ"/>
+                                        </constraints>
+                                    </switch>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="G0O-rC-nnj" firstAttribute="centerY" secondItem="5d7-2d-czu" secondAttribute="centerY" id="Ppl-1p-eBx"/>
+                                    <constraint firstAttribute="width" constant="51" id="YCn-94-DKI"/>
+                                    <constraint firstAttribute="trailing" secondItem="G0O-rC-nnj" secondAttribute="trailing" id="tu2-YW-x6m"/>
+                                    <constraint firstItem="G0O-rC-nnj" firstAttribute="leading" secondItem="5d7-2d-czu" secondAttribute="leading" id="vRd-jt-Y7J"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="FCO-1D-J9k" secondAttribute="bottom" id="U2B-f0-KAl"/>
+                    <constraint firstItem="FCO-1D-J9k" firstAttribute="leading" secondItem="Wxv-qd-F9f" secondAttribute="leading" constant="16" id="VKM-uf-qJr"/>
+                    <constraint firstItem="23k-p8-9QD" firstAttribute="top" secondItem="Wxv-qd-F9f" secondAttribute="top" constant="22" id="aJP-FW-JHB"/>
+                    <constraint firstItem="FCO-1D-J9k" firstAttribute="top" secondItem="23k-p8-9QD" secondAttribute="bottom" constant="16" id="efi-e0-j0F"/>
+                    <constraint firstItem="23k-p8-9QD" firstAttribute="leading" secondItem="Wxv-qd-F9f" secondAttribute="leading" constant="38" id="fi2-PQ-fKQ"/>
+                    <constraint firstAttribute="trailing" secondItem="23k-p8-9QD" secondAttribute="trailing" constant="32" id="g82-Pv-iC8"/>
+                    <constraint firstAttribute="trailing" secondItem="FCO-1D-J9k" secondAttribute="trailing" constant="16" id="gqt-gC-lq3"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="dJx-tx-3eJ"/>
+            <connections>
+                <outlet property="lblSubTitle" destination="NFm-Rj-A2J" id="sg9-gi-Chi"/>
+                <outlet property="lblTitle" destination="eu6-sz-He6" id="3N2-z4-mqf"/>
+                <outlet property="separatorView" destination="FCO-1D-J9k" id="i1G-0h-EzD"/>
+                <outlet property="swtch" destination="G0O-rC-nnj" id="EAe-Cp-5xo"/>
+            </connections>
+            <point key="canvasLocation" x="139.13043478260872" y="90.401785714285708"/>
+        </tableViewCell>
+    </objects>
+    <designables>
+        <designable name="NFm-Rj-A2J">
+            <size key="intrinsicContentSize" width="188" height="20.5"/>
+        </designable>
+        <designable name="eu6-sz-He6">
+            <size key="intrinsicContentSize" width="157" height="20.5"/>
+        </designable>
+    </designables>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

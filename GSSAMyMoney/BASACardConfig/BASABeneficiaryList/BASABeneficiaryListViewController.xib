@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BASABeneficiaryListViewController" customModule="GSSAFront" customModuleProvider="target">
+            <connections>
+                <outlet property="btnNewBeneficiary" destination="FyO-Tb-OhZ" id="75y-I7-74q"/>
+                <outlet property="view" destination="iN0-l3-epB" id="5j8-M9-IbY"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gfp-ld-NcX" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                    <rect key="frame" x="0.0" y="44" width="390" height="50"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="md8-Xv-RMz">
+                            <rect key="frame" x="20" y="10" width="30" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="jdn-rA-b2D"/>
+                                <constraint firstAttribute="width" constant="30" id="z2v-RG-jVh"/>
+                            </constraints>
+                            <state key="normal" image="arrow.backward" catalog="system"/>
+                            <connections>
+                                <action selector="close:" destination="-1" eventType="touchUpInside" id="xIe-xn-MTZ"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Beneficiarios" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Y3-QL-gb1" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                            <rect key="frame" x="143.33333333333334" y="13.666666666666666" width="103.66666666666666" height="22.666666666666671"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="styleType">
+                                    <integer key="value" value="7"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="md8-Xv-RMz" firstAttribute="leading" secondItem="Gfp-ld-NcX" secondAttribute="leading" constant="20" id="0Y6-sQ-rJ7"/>
+                        <constraint firstItem="0Y3-QL-gb1" firstAttribute="centerY" secondItem="md8-Xv-RMz" secondAttribute="centerY" id="7os-st-cvp"/>
+                        <constraint firstItem="md8-Xv-RMz" firstAttribute="centerY" secondItem="Gfp-ld-NcX" secondAttribute="centerY" id="MIT-yA-3fO"/>
+                        <constraint firstItem="0Y3-QL-gb1" firstAttribute="centerX" secondItem="Gfp-ld-NcX" secondAttribute="centerX" id="RLO-ul-bwa"/>
+                        <constraint firstAttribute="height" constant="50" id="exF-cK-cFH"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Podrás agregar hasta cuatro beneficiarios." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RTO-wI-NEZ" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                    <rect key="frame" x="24" y="121.99999999999999" width="342" height="20.333333333333329"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="styleType">
+                            <integer key="value" value="6"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FyO-Tb-OhZ" customClass="GSVCButton" customModule="GSSAVisualComponents">
+                    <rect key="frame" x="24" y="166.33333333333334" width="200" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="200" id="JQF-gV-UET"/>
+                        <constraint firstAttribute="height" constant="40" id="fm7-3Z-uve"/>
+                    </constraints>
+                    <state key="normal" title="  Agregar beneficiarios" image="person.crop.circle.fill" catalog="system"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="style">
+                            <integer key="value" value="2"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="newBeneficiary:" destination="-1" eventType="touchUpInside" id="EzX-5G-tgf"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="RTO-wI-NEZ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="24" id="KOb-IG-BOm"/>
+                <constraint firstItem="RTO-wI-NEZ" firstAttribute="top" secondItem="Gfp-ld-NcX" secondAttribute="bottom" constant="28" id="MQS-tt-MDw"/>
+                <constraint firstItem="FyO-Tb-OhZ" firstAttribute="leading" secondItem="RTO-wI-NEZ" secondAttribute="leading" id="Sbk-s3-uBc"/>
+                <constraint firstItem="Gfp-ld-NcX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="X4J-Aq-7Ep"/>
+                <constraint firstItem="FyO-Tb-OhZ" firstAttribute="top" secondItem="RTO-wI-NEZ" secondAttribute="bottom" constant="24" id="a35-iV-5ZO"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="RTO-wI-NEZ" secondAttribute="trailing" constant="24" id="nQK-LI-f6r"/>
+                <constraint firstItem="Gfp-ld-NcX" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="oG8-GZ-srv"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Gfp-ld-NcX" secondAttribute="trailing" id="oR2-9h-pHS"/>
+            </constraints>
+            <point key="canvasLocation" x="38" y="-8"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="0Y3-QL-gb1">
+            <size key="intrinsicContentSize" width="103.66666666666667" height="22.666666666666668"/>
+        </designable>
+        <designable name="FyO-Tb-OhZ">
+            <size key="intrinsicContentSize" width="162" height="32"/>
+        </designable>
+        <designable name="Gfp-ld-NcX"/>
+    </designables>
+    <resources>
+        <image name="arrow.backward" catalog="system" width="128" height="98"/>
+        <image name="person.crop.circle.fill" catalog="system" width="128" height="121"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

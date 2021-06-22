@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BASACardConfigViewController" customModule="GSSAFront" customModuleProvider="target">
+            <connections>
+                <outlet property="table" destination="pUR-qV-axY" id="4Tr-ty-IE9"/>
+                <outlet property="view" destination="iN0-l3-epB" id="089-JK-FaH"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gu5-ni-7Pi" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                    <rect key="frame" x="0.0" y="44" width="414" height="50"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Da5-h7-y0Y">
+                            <rect key="frame" x="20" y="10" width="30" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="CZi-i1-Xj8"/>
+                                <constraint firstAttribute="height" constant="30" id="PZ5-Z0-eHH"/>
+                            </constraints>
+                            <state key="normal" image="arrow.backward" catalog="system"/>
+                            <connections>
+                                <action selector="close:" destination="-1" eventType="touchUpInside" id="S9N-05-adC"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Configuración" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q9v-M3-Slc" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                            <rect key="frame" x="153.5" y="14.5" width="107" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="styleType">
+                                    <integer key="value" value="7"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="456-Rm-RkH"/>
+                        <constraint firstItem="q9v-M3-Slc" firstAttribute="centerY" secondItem="Da5-h7-y0Y" secondAttribute="centerY" id="FtF-iN-LfT"/>
+                        <constraint firstItem="q9v-M3-Slc" firstAttribute="centerX" secondItem="gu5-ni-7Pi" secondAttribute="centerX" id="Pud-4L-ik3"/>
+                        <constraint firstItem="Da5-h7-y0Y" firstAttribute="leading" secondItem="gu5-ni-7Pi" secondAttribute="leading" constant="20" id="kGa-7e-tM6"/>
+                        <constraint firstItem="Da5-h7-y0Y" firstAttribute="centerY" secondItem="gu5-ni-7Pi" secondAttribute="centerY" id="yPb-G2-9H7"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pUR-qV-axY">
+                    <rect key="frame" x="0.0" y="94" width="414" height="802"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </tableView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="pUR-qV-axY" secondAttribute="trailing" id="4vB-NW-lFi"/>
+                <constraint firstItem="gu5-ni-7Pi" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="QBI-Pi-5SM"/>
+                <constraint firstAttribute="bottom" secondItem="pUR-qV-axY" secondAttribute="bottom" id="RnC-ya-vNh"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="gu5-ni-7Pi" secondAttribute="trailing" id="W5E-dU-iw6"/>
+                <constraint firstItem="gu5-ni-7Pi" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="WeI-f2-FDd"/>
+                <constraint firstItem="pUR-qV-axY" firstAttribute="top" secondItem="gu5-ni-7Pi" secondAttribute="bottom" id="rh0-Gj-gml"/>
+                <constraint firstItem="pUR-qV-axY" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="ujf-lN-hgP"/>
+            </constraints>
+            <point key="canvasLocation" x="151" y="62"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="q9v-M3-Slc">
+            <size key="intrinsicContentSize" width="107" height="20.5"/>
+        </designable>
+    </designables>
+    <resources>
+        <image name="arrow.backward" catalog="system" width="128" height="98"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

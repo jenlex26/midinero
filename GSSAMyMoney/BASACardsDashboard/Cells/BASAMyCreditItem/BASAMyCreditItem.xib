@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BASAMyCreditItem" rowHeight="180" id="KGk-i7-Jjw" customClass="BASAMyCreditItem" customModule="GSSAFront" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="378" height="180"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="378" height="180"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Crédito en efectivo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XkD-ZF-xEl" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                        <rect key="frame" x="20" y="20" width="144.5" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="styleType">
+                                <integer key="value" value="6"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vVv-7f-z1U">
+                        <rect key="frame" x="20" y="51" width="318" height="1"/>
+                        <color key="backgroundColor" red="0.81568627449999997" green="0.82352941180000006" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="sDN-sn-wnc"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Debes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wet-nC-SXj" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                        <rect key="frame" x="20" y="62" width="49" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="styleType">
+                                <integer key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$9000.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yHb-Rc-mpG" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                        <rect key="frame" x="156.5" y="113" width="65.5" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="styleType">
+                                <integer key="value" value="2"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="wet-nC-SXj" firstAttribute="leading" secondItem="XkD-ZF-xEl" secondAttribute="leading" id="FDl-6C-9Ci"/>
+                    <constraint firstItem="XkD-ZF-xEl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="LgR-u7-hIo"/>
+                    <constraint firstItem="vVv-7f-z1U" firstAttribute="top" secondItem="XkD-ZF-xEl" secondAttribute="bottom" constant="10" id="Wqk-ZC-3y5"/>
+                    <constraint firstItem="XkD-ZF-xEl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="h0a-Ez-9ct"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="vVv-7f-z1U" secondAttribute="trailing" constant="20" id="hhZ-0e-ksf"/>
+                    <constraint firstItem="yHb-Rc-mpG" firstAttribute="top" secondItem="wet-nC-SXj" secondAttribute="bottom" constant="30" id="jTT-fz-KHz"/>
+                    <constraint firstItem="yHb-Rc-mpG" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="jaA-Zy-GYt"/>
+                    <constraint firstItem="wet-nC-SXj" firstAttribute="top" secondItem="vVv-7f-z1U" secondAttribute="bottom" constant="10" id="o0s-Yk-jc8"/>
+                    <constraint firstItem="vVv-7f-z1U" firstAttribute="leading" secondItem="XkD-ZF-xEl" secondAttribute="leading" id="oCk-v4-Uqs"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="lblAmount" destination="yHb-Rc-mpG" id="5S6-sx-6iJ"/>
+                <outlet property="lblSubTitle" destination="wet-nC-SXj" id="d6z-hW-2ah"/>
+                <outlet property="lblTitle" destination="XkD-ZF-xEl" id="4hu-GF-145"/>
+            </connections>
+            <point key="canvasLocation" x="15.942028985507248" y="77.008928571428569"/>
+        </tableViewCell>
+    </objects>
+</document>

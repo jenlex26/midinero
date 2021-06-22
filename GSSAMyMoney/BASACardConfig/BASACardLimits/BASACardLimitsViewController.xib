@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BASACardLimitsViewController" customModule="GSSAFront" customModuleProvider="target">
+            <connections>
+                <outlet property="table" destination="Qec-Ip-mcZ" id="rH9-nd-sdo"/>
+                <outlet property="view" destination="iN0-l3-epB" id="ntr-cW-T7g"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hRc-ov-gmF" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                    <rect key="frame" x="0.0" y="44" width="414" height="50"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lkl-Df-bBd">
+                            <rect key="frame" x="20" y="10" width="30" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="Rum-qK-7c3"/>
+                                <constraint firstAttribute="width" constant="30" id="zzD-Jm-X0c"/>
+                            </constraints>
+                            <state key="normal" image="arrow.backward" catalog="system"/>
+                            <connections>
+                                <action selector="close:" destination="-1" eventType="touchUpInside" id="ZsI-FN-Qr5"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Límites de la tarjeta" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gf7-rL-dIK" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                            <rect key="frame" x="133" y="14.5" width="148.5" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="styleType">
+                                    <integer key="value" value="7"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="Lkl-Df-bBd" firstAttribute="leading" secondItem="hRc-ov-gmF" secondAttribute="leading" constant="20" id="3XJ-K3-p1o"/>
+                        <constraint firstAttribute="height" constant="50" id="7hH-xZ-M50"/>
+                        <constraint firstItem="gf7-rL-dIK" firstAttribute="centerX" secondItem="hRc-ov-gmF" secondAttribute="centerX" id="P9h-di-7ax"/>
+                        <constraint firstItem="Lkl-Df-bBd" firstAttribute="centerY" secondItem="hRc-ov-gmF" secondAttribute="centerY" id="Z9Z-ja-Ozh"/>
+                        <constraint firstItem="gf7-rL-dIK" firstAttribute="centerY" secondItem="Lkl-Df-bBd" secondAttribute="centerY" id="ZZf-aB-lNt"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Qec-Ip-mcZ">
+                    <rect key="frame" x="0.0" y="104" width="414" height="758"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </tableView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="hRc-ov-gmF" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="2i9-bo-13e"/>
+                <constraint firstItem="hRc-ov-gmF" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="3na-3M-eME"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Qec-Ip-mcZ" secondAttribute="bottom" id="3oB-wd-MM2"/>
+                <constraint firstItem="Qec-Ip-mcZ" firstAttribute="top" secondItem="hRc-ov-gmF" secondAttribute="bottom" constant="10" id="Bij-Ni-YNE"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="hRc-ov-gmF" secondAttribute="trailing" id="G4P-DL-FYY"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Qec-Ip-mcZ" secondAttribute="trailing" id="W9e-Ls-leB"/>
+                <constraint firstItem="Qec-Ip-mcZ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="ZHQ-YS-hT3"/>
+            </constraints>
+            <point key="canvasLocation" x="194" y="56"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="gf7-rL-dIK">
+            <size key="intrinsicContentSize" width="148.5" height="20.5"/>
+        </designable>
+    </designables>
+    <resources>
+        <image name="arrow.backward" catalog="system" width="128" height="98"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
