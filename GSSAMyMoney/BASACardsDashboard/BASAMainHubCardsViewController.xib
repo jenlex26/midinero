@@ -19,6 +19,12 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_header" translatesAutoresizingMaskIntoConstraints="NO" id="tUK-I9-Gu6">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="300" id="RQh-85-VUW"/>
+                    </constraints>
+                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DmX-Qj-fNQ">
                     <rect key="frame" x="0.0" y="333.5" width="375" height="333.5"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -29,18 +35,24 @@
                 </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="5xj-dk-3uS"/>
-            <color key="backgroundColor" red="1" green="0.83529411764705885" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="dhi-zf-36N" firstAttribute="top" secondItem="5xj-dk-3uS" secondAttribute="top" id="A1w-xR-WFA"/>
+                <constraint firstItem="5xj-dk-3uS" firstAttribute="trailing" secondItem="tUK-I9-Gu6" secondAttribute="trailing" id="A8u-9Y-Gl7"/>
                 <constraint firstItem="DmX-Qj-fNQ" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.5" id="Aj0-Sa-JkQ"/>
+                <constraint firstItem="tUK-I9-Gu6" firstAttribute="leading" secondItem="5xj-dk-3uS" secondAttribute="leading" id="DI0-iu-2pf"/>
                 <constraint firstItem="dhi-zf-36N" firstAttribute="leading" secondItem="5xj-dk-3uS" secondAttribute="leading" id="OwB-2f-z5v"/>
                 <constraint firstItem="DmX-Qj-fNQ" firstAttribute="leading" secondItem="5xj-dk-3uS" secondAttribute="leading" id="Ska-93-omB"/>
                 <constraint firstItem="5xj-dk-3uS" firstAttribute="trailing" secondItem="DmX-Qj-fNQ" secondAttribute="trailing" id="hHY-4T-osH"/>
                 <constraint firstAttribute="bottom" secondItem="DmX-Qj-fNQ" secondAttribute="bottom" id="r6l-JF-oMZ"/>
                 <constraint firstItem="dhi-zf-36N" firstAttribute="trailing" secondItem="5xj-dk-3uS" secondAttribute="trailing" id="sFC-BZ-869"/>
                 <constraint firstAttribute="bottom" secondItem="dhi-zf-36N" secondAttribute="bottom" id="tgQ-yU-VT1"/>
+                <constraint firstItem="tUK-I9-Gu6" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="uYF-Zi-nJu"/>
             </constraints>
             <point key="canvasLocation" x="56.799999999999997" y="145.27736131934034"/>
         </view>
     </objects>
+    <resources>
+        <image name="ic_header" width="375" height="273"/>
+    </resources>
 </document>

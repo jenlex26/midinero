@@ -164,18 +164,17 @@
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MLH-xb-dvU" customClass="GSVCButton" customModule="GSSAVisualComponents">
                                                 <rect key="frame" x="97" y="119" width="200" height="50"/>
-                                                <color key="backgroundColor" red="0.99607843139999996" green="0.80535358189999995" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="KKJ-HX-JvG"/>
                                                     <constraint firstAttribute="width" constant="200" id="LZg-KH-juo"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                <state key="normal" title="PAGAR">
+                                                <state key="normal" title="Pagar">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="style">
-                                                        <integer key="value" value="1"/>
+                                                        <integer key="value" value="7"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </button>
@@ -226,7 +225,7 @@
             <size key="intrinsicContentSize" width="182.5" height="20.5"/>
         </designable>
         <designable name="MLH-xb-dvU">
-            <size key="intrinsicContentSize" width="52" height="30"/>
+            <size key="intrinsicContentSize" width="43" height="30"/>
         </designable>
         <designable name="Uii-Yb-Z4A">
             <size key="intrinsicContentSize" width="127.5" height="20.5"/>

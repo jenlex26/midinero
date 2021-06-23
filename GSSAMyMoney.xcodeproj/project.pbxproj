@@ -92,22 +92,6 @@
 		10E9EE00267D6BA400F45640 /* BASADigitalCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10E9EDAB267D6BA400F45640 /* BASADigitalCardViewController.xib */; };
 		10E9EE01267D6BA400F45640 /* BASADigitalCardInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E9EDAC267D6BA400F45640 /* BASADigitalCardInteractor.swift */; };
 		10E9EE03267D6BC200F45640 /* MyMoneyAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10E9EE02267D6BC200F45640 /* MyMoneyAssets.xcassets */; };
-		985AAECE2682ACAE006CD764 /* AWSAuthCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3937E12681424200493448 /* AWSAuthCore.xcframework */; };
-		985AAECF2682ACAE006CD764 /* AWSAuthCore.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EE3937E12681424200493448 /* AWSAuthCore.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		985AAED02682ACAE006CD764 /* AWSCognitoIdentityProvider.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3937E22681424200493448 /* AWSCognitoIdentityProvider.xcframework */; };
-		985AAED12682ACAE006CD764 /* AWSCognitoIdentityProvider.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EE3937E22681424200493448 /* AWSCognitoIdentityProvider.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		985AAED22682ACAE006CD764 /* AWSCognitoIdentityProviderASF.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3937E32681424200493448 /* AWSCognitoIdentityProviderASF.xcframework */; };
-		985AAED32682ACAE006CD764 /* AWSCognitoIdentityProviderASF.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EE3937E32681424200493448 /* AWSCognitoIdentityProviderASF.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		985AAED42682ACAE006CD764 /* AWSCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3937E42681424200493448 /* AWSCore.xcframework */; };
-		985AAED52682ACAE006CD764 /* AWSCore.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EE3937E42681424200493448 /* AWSCore.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		985AAED62682ACAE006CD764 /* AWSLogs.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3937E52681424200493448 /* AWSLogs.xcframework */; };
-		985AAED72682ACAE006CD764 /* AWSLogs.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EE3937E52681424200493448 /* AWSLogs.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		985AAED82682ACAE006CD764 /* AWSMobileClientXCF.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3937E62681424200493448 /* AWSMobileClientXCF.xcframework */; };
-		985AAED92682ACAE006CD764 /* AWSMobileClientXCF.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EE3937E62681424200493448 /* AWSMobileClientXCF.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		985AAEDC2682ACB3006CD764 /* GSSAVisualComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 985AAEDB2682ACB3006CD764 /* GSSAVisualComponents.framework */; };
-		985AAEDD2682ACB3006CD764 /* GSSAVisualComponents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 985AAEDB2682ACB3006CD764 /* GSSAVisualComponents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		985AAEDF2682ACB9006CD764 /* GSSAVisualTemplates.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 985AAEDE2682ACB9006CD764 /* GSSAVisualTemplates.framework */; };
-		985AAEE02682ACB9006CD764 /* GSSAVisualTemplates.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 985AAEDE2682ACB9006CD764 /* GSSAVisualTemplates.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EE037483268291FC00BE681D /* BASADigitalCardEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE037482268291FC00BE681D /* BASADigitalCardEntity.swift */; };
 		EE0655D82682AE6600F7C73D /* GSDigitalCardConfigPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0655D22682AE6600F7C73D /* GSDigitalCardConfigPresenter.swift */; };
 		EE0655D92682AE6600F7C73D /* GSDigitalCardConfigRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0655D32682AE6600F7C73D /* GSDigitalCardConfigRouter.swift */; };
@@ -115,23 +99,39 @@
 		EE0655DB2682AE6600F7C73D /* GSDigitalCardConfigProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0655D52682AE6600F7C73D /* GSDigitalCardConfigProtocols.swift */; };
 		EE0655DC2682AE6600F7C73D /* GSDigitalCardConfigInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0655D62682AE6600F7C73D /* GSDigitalCardConfigInteractor.swift */; };
 		EE0655DD2682AE6600F7C73D /* GSDigitalCardConfigViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE0655D72682AE6600F7C73D /* GSDigitalCardConfigViewController.xib */; };
+		EE97BAEB26839800000AE34C /* AWSAuthCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3937E12681424200493448 /* AWSAuthCore.xcframework */; };
+		EE97BAEC26839800000AE34C /* AWSAuthCore.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EE3937E12681424200493448 /* AWSAuthCore.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EE97BAED26839800000AE34C /* AWSCognitoIdentityProvider.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3937E22681424200493448 /* AWSCognitoIdentityProvider.xcframework */; };
+		EE97BAEE26839800000AE34C /* AWSCognitoIdentityProvider.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EE3937E22681424200493448 /* AWSCognitoIdentityProvider.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EE97BAEF26839800000AE34C /* AWSCognitoIdentityProviderASF.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3937E32681424200493448 /* AWSCognitoIdentityProviderASF.xcframework */; };
+		EE97BAF026839800000AE34C /* AWSCognitoIdentityProviderASF.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EE3937E32681424200493448 /* AWSCognitoIdentityProviderASF.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EE97BAF126839800000AE34C /* AWSCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3937E42681424200493448 /* AWSCore.xcframework */; };
+		EE97BAF226839800000AE34C /* AWSCore.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EE3937E42681424200493448 /* AWSCore.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EE97BAF326839800000AE34C /* AWSLogs.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3937E52681424200493448 /* AWSLogs.xcframework */; };
+		EE97BAF426839800000AE34C /* AWSLogs.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EE3937E52681424200493448 /* AWSLogs.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EE97BAF526839800000AE34C /* AWSMobileClientXCF.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3937E62681424200493448 /* AWSMobileClientXCF.xcframework */; };
+		EE97BAF626839800000AE34C /* AWSMobileClientXCF.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EE3937E62681424200493448 /* AWSMobileClientXCF.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EE97BAF826839805000AE34C /* GSSAVisualComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 106E8DA1267D6CB2000182DC /* GSSAVisualComponents.framework */; };
+		EE97BAF926839805000AE34C /* GSSAVisualComponents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 106E8DA1267D6CB2000182DC /* GSSAVisualComponents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EE97BAFA2683980A000AE34C /* GSSAVisualTemplates.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 106E8DA2267D6CB2000182DC /* GSSAVisualTemplates.framework */; };
+		EE97BAFB2683980A000AE34C /* GSSAVisualTemplates.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 106E8DA2267D6CB2000182DC /* GSSAVisualTemplates.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		985AAEDA2682ACAE006CD764 /* Embed Frameworks */ = {
+		EE97BAF726839800000AE34C /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				985AAEDD2682ACB3006CD764 /* GSSAVisualComponents.framework in Embed Frameworks */,
-				985AAED92682ACAE006CD764 /* AWSMobileClientXCF.xcframework in Embed Frameworks */,
-				985AAEE02682ACB9006CD764 /* GSSAVisualTemplates.framework in Embed Frameworks */,
-				985AAED32682ACAE006CD764 /* AWSCognitoIdentityProviderASF.xcframework in Embed Frameworks */,
-				985AAED12682ACAE006CD764 /* AWSCognitoIdentityProvider.xcframework in Embed Frameworks */,
-				985AAED72682ACAE006CD764 /* AWSLogs.xcframework in Embed Frameworks */,
-				985AAED52682ACAE006CD764 /* AWSCore.xcframework in Embed Frameworks */,
-				985AAECF2682ACAE006CD764 /* AWSAuthCore.xcframework in Embed Frameworks */,
+				EE97BAF926839805000AE34C /* GSSAVisualComponents.framework in Embed Frameworks */,
+				EE97BAF626839800000AE34C /* AWSMobileClientXCF.xcframework in Embed Frameworks */,
+				EE97BAFB2683980A000AE34C /* GSSAVisualTemplates.framework in Embed Frameworks */,
+				EE97BAF026839800000AE34C /* AWSCognitoIdentityProviderASF.xcframework in Embed Frameworks */,
+				EE97BAEE26839800000AE34C /* AWSCognitoIdentityProvider.xcframework in Embed Frameworks */,
+				EE97BAF426839800000AE34C /* AWSLogs.xcframework in Embed Frameworks */,
+				EE97BAF226839800000AE34C /* AWSCore.xcframework in Embed Frameworks */,
+				EE97BAEC26839800000AE34C /* AWSAuthCore.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -260,14 +260,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				985AAEDC2682ACB3006CD764 /* GSSAVisualComponents.framework in Frameworks */,
-				985AAED82682ACAE006CD764 /* AWSMobileClientXCF.xcframework in Frameworks */,
-				985AAEDF2682ACB9006CD764 /* GSSAVisualTemplates.framework in Frameworks */,
-				985AAED22682ACAE006CD764 /* AWSCognitoIdentityProviderASF.xcframework in Frameworks */,
-				985AAED02682ACAE006CD764 /* AWSCognitoIdentityProvider.xcframework in Frameworks */,
-				985AAED62682ACAE006CD764 /* AWSLogs.xcframework in Frameworks */,
-				985AAED42682ACAE006CD764 /* AWSCore.xcframework in Frameworks */,
-				985AAECE2682ACAE006CD764 /* AWSAuthCore.xcframework in Frameworks */,
+				EE97BAF826839805000AE34C /* GSSAVisualComponents.framework in Frameworks */,
+				EE97BAF526839800000AE34C /* AWSMobileClientXCF.xcframework in Frameworks */,
+				EE97BAFA2683980A000AE34C /* GSSAVisualTemplates.framework in Frameworks */,
+				EE97BAEF26839800000AE34C /* AWSCognitoIdentityProviderASF.xcframework in Frameworks */,
+				EE97BAED26839800000AE34C /* AWSCognitoIdentityProvider.xcframework in Frameworks */,
+				EE97BAF326839800000AE34C /* AWSLogs.xcframework in Frameworks */,
+				EE97BAF126839800000AE34C /* AWSCore.xcframework in Frameworks */,
+				EE97BAEB26839800000AE34C /* AWSAuthCore.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -664,7 +664,7 @@
 				10E9ED2D267D6B8200F45640 /* Sources */,
 				10E9ED2E267D6B8200F45640 /* Frameworks */,
 				10E9ED2F267D6B8200F45640 /* Resources */,
-				985AAEDA2682ACAE006CD764 /* Embed Frameworks */,
+				EE97BAF726839800000AE34C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

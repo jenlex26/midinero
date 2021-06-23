@@ -22,6 +22,8 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
     @IBOutlet weak var debitCardbtnConfig       : UIButton!
     @IBOutlet weak var debitCardView            : UIView!
     @IBOutlet weak var imgHeader                : UIImageView!
+    @IBOutlet weak var debitButton              : GSVCButton!
+    @IBOutlet weak var creditButton             : GSVCButton!
 
     var gradient = CAGradientLayer()
     var cellViewController: UIViewController!
@@ -36,10 +38,9 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
         self.cardCollection.delegate = self
         self.cardCollection.dataSource = self
         self.TopHeaderView.applyCurveToView(curvedPercent: 0.12)
-        self.SetGradient(colors: [UIColor.GSVCPrincipal100.cgColor, #colorLiteral(red: 0.999473989, green: 0.8043177724, blue: 0.124026455, alpha: 1).cgColor])
-        
         debitCardView.layer.borderColor = UIColor.lightGray.cgColor
-        debitCardView.blurBackground(style: .light, fallbackColor: #colorLiteral(red: 0.999473989, green: 0.8043177724, blue: 0.124026455, alpha: 1))
+        debitCardbtnConfig.layer.cornerRadius = debitCardbtnConfig.bounds.size.width / 2.0
+        debitCardbtnConfig.clipsToBounds = true
         
         // PONER IMAGEN DE DÉBITO
         if let image:UIImage = UIImage(named: "ic_card_backgroud")  {
@@ -81,27 +82,16 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
     func handleCardChange(index: Int){
         switch index {
         case 0:
-            
-            // PONER IMAGEN NEGRA
-            
-            gradient.colors = [#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).cgColor, #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).cgColor]
             UIView.animate(withDuration: 0.35, animations: {
-                self.TopHeaderView.backgroundColor = .black
                 self.lblTitle.textColor = .white
                 self.backButton.tintColor = .white
             })
             NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "HomeHeaderViewChange"), object: headerColorType.credit, userInfo: nil))
         case 1:
             //PONER IMAGEN AZUL
-            
-            gradient.colors = [#colorLiteral(red: 0.7843, green: 0.8549, blue: 1, alpha: 1).cgColor, #colorLiteral(red: 0.7843, green: 0.8549, blue: 1, alpha: 1).cgColor]
-            UIView.animate(withDuration: 0.35, animations: {
-                self.lblTitle.textColor = .black
-                self.backButton.tintColor = .black
-            })
             NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "HomeHeaderViewChange"), object:  headerColorType.lending, userInfo: nil))
         default:
-            gradient.colors = [UIColor.GSVCPrincipal100.cgColor, #colorLiteral(red: 0.999473989, green: 0.8043177724, blue: 0.124026455, alpha: 1).cgColor]
+            gradient.colors = [UIColor.GSVCPrincipal100.cgColor, UIColor.GSVCPrincipal100.cgColor]
         }
     }
     
@@ -126,20 +116,25 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
         debitCardView.isHidden = false
         cardCollection.isHidden = true
         pageController.isHidden = true
-        gradient.colors = [UIColor.GSVCPrincipal100.cgColor, #colorLiteral(red: 0.999473989, green: 0.8043177724, blue: 0.124026455, alpha: 1).cgColor]
-        UIView.animate(withDuration: 0.35, animations: {
-         self.lblTitle.textColor = .black
-         self.backButton.tintColor = .black
-     })
+        debitButton.backgroundColor = UIColor(red: 130/255, green: 0/255, blue: 255/255, alpha: 1.0)
+        debitButton.setTitleColor(.white, for: .normal)
+        creditButton.backgroundColor = .white
+        creditButton.setTitleColor(.black, for: .normal)
+        debitButton.isEnabled = false
+        creditButton.isEnabled = true
     }
     
     @IBAction func creditCardClick(_ sender: Any){
+        debitButton.isEnabled = true
+        creditButton.isEnabled = false
         debitCardView.isHidden = true
         cardCollection.isHidden = false
         pageController.isHidden = false
-        gradient.colors = [#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).cgColor, #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).cgColor]
+        debitButton.backgroundColor = .white
+        debitButton.setTitleColor(.black, for: .normal)
+        creditButton.backgroundColor = UIColor(red: 130/255, green: 0/255, blue: 255/255, alpha: 1.0)
+        creditButton.setTitleColor(.white, for: .normal)
         UIView.animate(withDuration: 0.35, animations: {
-            self.TopHeaderView.backgroundColor = .black
             self.lblTitle.textColor = .white
             self.backButton.tintColor = .white
         })
@@ -180,24 +175,19 @@ extension BASAHomeHeaderViewComponent: UICollectionViewDelegate, UICollectionVie
         case 0:
             print("case 0")
             let cell = cardCollection.dequeueReusableCell(withReuseIdentifier: "card", for: indexPath) as! BASACardCell
-            cell.iconView.backgroundColor = #colorLiteral(red: 1, green: 0.8353, blue: 0.2078, alpha: 1)
-            cell.lblIcon.textColor = .white
-            cell.lineIconView.backgroundColor = .black
             cell.lblBalance.textColor = .white
             cell.lblExpDate.textColor = .white
-            cell.lblCardType.textColor = .white
             cell.lblVigencia.textColor = .white
-            cell.lblCardType.text = "Crédito"
             cell.lblOweMoney.isHidden = false
             cell.lblCardNumber.isHidden = false
             cell.lblVigencia.isHidden = false
             cell.lblExpDate.isHidden = false
             
-            cell.btnConfig.setImage(UIImage(named: "ic_settings", in: Bundle(for: BASAHomeHeaderViewComponent.self), compatibleWith: nil)!, for: .normal)
+            cell.btnConfig.backgroundColor = .black
             cell.btnConfig.tag = 1
-            cell.lblOweMoney.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            cell.lblOweMoney.textColor = .white
             cell.lblCardNumber.textColor = .white
-            cell.CardBackgroundView.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            cell.CardBackgroundView.layer.borderColor = UIColor.white.cgColor
             cell.CardBackgroundView.blurBackground(style: .dark, fallbackColor: .white)
             
             if data != nil{

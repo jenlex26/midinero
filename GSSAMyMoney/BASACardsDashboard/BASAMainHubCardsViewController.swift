@@ -25,7 +25,6 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     override func viewDidLoad() {
         super.viewDidLoad()
         self.ConfigureCollectionView()
-        self.view.backgroundColor = UIColor.GSVCPrincipal100
         self.BasaMainHubTableView.alwaysBounceVertical = false
         NotificationCenter.default.addObserver(self, selector: #selector(SwitchColors(notification:)), name: NSNotification.Name(rawValue: "HomeHeaderViewChange"), object: nil)
         GSVCLoader.show(type: .native)
@@ -84,9 +83,9 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         header.cellViewController = self
         let accountData = accountBalance?.resultado.cliente?.cuentas
         header.debitCardlblBalance.text = accountData?.first?.saldoDisponible
-        
         header.data = accountBalance
-        
+        header.debitButton.backgroundColor = UIColor(red: 130/255, green: 0/255, blue: 255/255, alpha: 1.0)
+        header.debitButton.setTitleColor(.white, for: .normal)
         if cellsArray.count == 0{
             cellsArray.append([header:380.0])
         }else{
@@ -117,6 +116,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     
     func setTableForCreditCard(){
         removeAllExceptFirst()
+        
         let digitalCardCell = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "RequestCardCell")!
         cellsArray.append([digitalCardCell:119.0])
         
@@ -180,7 +180,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                 cellsToRemove.append([0,n])
             }
             
-            BasaMainHubTableView.deleteRows(at: cellsToRemove, with: .automatic)
+            BasaMainHubTableView.deleteRows(at: cellsToRemove, with: .right)
             
         }
     }
@@ -202,17 +202,16 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
             let colorType = notification.object as! headerColorType
             switch colorType {
             case .credit:
-                self.view.backgroundColor = .black
-                UIApplication.shared.statusBarStyle = .lightContent
+                if #available(iOS 13.0, *) {
+                    UIApplication.shared.statusBarStyle = .darkContent
+                } 
                 setTableForCreditCard()
             case .debit:
-                self.view.backgroundColor = UIColor.GSVCPrincipal100
                 setTableForDebitCard()
                 if #available(iOS 13.0, *) {
                     UIApplication.shared.statusBarStyle = .darkContent
                 }
             case .lending:
-                self.view.backgroundColor = UIColor(red: 0.7843, green: 0.8549, blue: 1, alpha: 1.0)
                 setTableForLends()
                 if #available(iOS 13.0, *) {
                     UIApplication.shared.statusBarStyle = .darkContent

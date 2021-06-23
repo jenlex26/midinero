@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GSSAVisualComponents
 
 class BASACardCell: UICollectionViewCell {
     
@@ -13,12 +14,7 @@ class BASACardCell: UICollectionViewCell {
     @IBOutlet weak var lblCardNumber     : UILabel!
     @IBOutlet weak var lblExpDate        : UILabel!
     @IBOutlet weak var lblBalance        : UILabel!
-    @IBOutlet weak var lblCardType       : UILabel!
     @IBOutlet weak var lblVigencia       : UILabel!
-    @IBOutlet weak var iconView          : UIView!
-    @IBOutlet weak var lblIcon           : UILabel!
-    @IBOutlet weak var lineIconView      : UIView!
-    @IBOutlet weak var iconSettings      : UIImageView!
     @IBOutlet weak var lblOweMoney       : UILabel!
     @IBOutlet weak var btnConfig         : UIButton!
     

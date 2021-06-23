@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -21,7 +20,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g44-JX-qSv">
                         <rect key="frame" x="0.0" y="0.0" width="521" height="250"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kft-PE-OfE">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kft-PE-OfE">
                                 <rect key="frame" x="0.0" y="0.0" width="521" height="250"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dQt-eL-Cz8">
@@ -32,7 +31,7 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="20" id="RAb-TD-Qrb"/>
                                     <constraint firstAttribute="width" constant="20" id="tE6-Wy-0FR"/>
                                 </constraints>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" image="arrow.left" catalog="system"/>
                                 <connections>
                                     <action selector="close:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="BeU-zX-AkY"/>
@@ -74,7 +73,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mi dinero" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X7i-Rd-dT7" customClass="GSVCLabel" customModule="GSSAVisualComponents">
                                 <rect key="frame" x="70" y="19.5" width="112" height="31"/>
                                 <fontDescription key="fontDescription" name="GeezaPro-Bold" family="Geeza Pro" pointSize="25"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="styleType">
@@ -83,7 +82,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemYellowColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="dQt-eL-Cz8" firstAttribute="top" secondItem="g44-JX-qSv" secondAttribute="top" constant="10" id="8sz-cf-aIw"/>
                             <constraint firstItem="X7i-Rd-dT7" firstAttribute="centerY" secondItem="dQt-eL-Cz8" secondAttribute="centerY" id="DFV-Yw-TRs"/>
@@ -112,50 +111,16 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ya1-ct-Igq">
                                         <rect key="frame" x="30" y="0.0" width="461" height="200"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_card_2" translatesAutoresizingMaskIntoConstraints="NO" id="t7Q-8d-r8v">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="debitCard" translatesAutoresizingMaskIntoConstraints="NO" id="t7Q-8d-r8v">
                                                 <rect key="frame" x="0.0" y="0.0" width="461" height="200"/>
                                             </imageView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gTc-1g-Fxr">
-                                                <rect key="frame" x="20" y="0.0" width="40" height="40"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="B" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pva-9m-Y2m">
-                                                        <rect key="frame" x="10" y="10" width="20" height="20"/>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nbo-qL-cZC">
-                                                        <rect key="frame" x="16.5" y="31" width="7" height="2"/>
-                                                        <color key="backgroundColor" red="0.99607843139999996" green="0.80535358189999995" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="2" id="58q-BT-CXQ"/>
-                                                            <constraint firstAttribute="width" constant="7" id="fNw-qc-qVT"/>
-                                                        </constraints>
-                                                    </view>
-                                                </subviews>
-                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoBaz" translatesAutoresizingMaskIntoConstraints="NO" id="FdO-wK-VyN">
+                                                <rect key="frame" x="16" y="16" width="68" height="30"/>
                                                 <constraints>
-                                                    <constraint firstItem="nbo-qL-cZC" firstAttribute="top" secondItem="Pva-9m-Y2m" secondAttribute="bottom" constant="1" id="9Y5-Vf-9iG"/>
-                                                    <constraint firstItem="Pva-9m-Y2m" firstAttribute="top" secondItem="gTc-1g-Fxr" secondAttribute="top" constant="10" id="Ke6-S0-4k3"/>
-                                                    <constraint firstAttribute="width" constant="40" id="amh-t3-7dX"/>
-                                                    <constraint firstItem="Pva-9m-Y2m" firstAttribute="leading" secondItem="gTc-1g-Fxr" secondAttribute="leading" constant="10" id="mUp-cX-Liw"/>
-                                                    <constraint firstAttribute="trailing" secondItem="Pva-9m-Y2m" secondAttribute="trailing" constant="10" id="tL8-23-fgF"/>
-                                                    <constraint firstAttribute="bottom" secondItem="Pva-9m-Y2m" secondAttribute="bottom" constant="10" id="u8s-m8-zCM"/>
-                                                    <constraint firstItem="nbo-qL-cZC" firstAttribute="centerX" secondItem="Pva-9m-Y2m" secondAttribute="centerX" id="yhy-A3-Atv"/>
-                                                    <constraint firstAttribute="height" constant="40" id="zhh-Vu-gBS"/>
+                                                    <constraint firstAttribute="width" constant="68" id="0fg-GA-a4u"/>
+                                                    <constraint firstAttribute="height" constant="30" id="PMm-WL-dQh"/>
                                                 </constraints>
-                                            </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Débito" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fbm-UX-T71" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                                <rect key="frame" x="70" y="12.5" width="37.5" height="15"/>
-                                                <fontDescription key="fontDescription" name="GeezaPro-Bold" family="Geeza Pro" pointSize="12"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="styleType">
-                                                        <integer key="value" value="8"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </label>
+                                            </imageView>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="05/22" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5R-we-V5S">
                                                 <rect key="frame" x="57.5" y="175.5" width="33" height="16"/>
                                                 <fontDescription key="fontDescription" name="GeezaPro-Bold" family="Geeza Pro" pointSize="13"/>
@@ -163,7 +128,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="$9000.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tdv-ye-51P" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                                <rect key="frame" x="306.5" y="49" width="134.5" height="51"/>
+                                                <rect key="frame" x="306.5" y="49" width="134.5" height="45.5"/>
                                                 <fontDescription key="fontDescription" name="GeezaPro-Bold" family="Geeza Pro" pointSize="37"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -180,7 +145,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="---- ---- ---- ----" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eoH-yZ-cf6" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                                <rect key="frame" x="20" y="140.5" width="421" height="21"/>
+                                                <rect key="frame" x="20" y="135" width="421" height="21"/>
                                                 <fontDescription key="fontDescription" name="GeezaPro-Bold" family="Geeza Pro" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -190,15 +155,8 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </label>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cardChip" translatesAutoresizingMaskIntoConstraints="NO" id="zov-DP-bgs">
-                                                <rect key="frame" x="20" y="49.5" width="50" height="50"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="50" id="516-jl-lRh"/>
-                                                    <constraint firstAttribute="height" constant="50" id="bxt-73-aHD"/>
-                                                </constraints>
-                                            </imageView>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Debes $1000.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sSa-5P-rib" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                                <rect key="frame" x="325.5" y="110" width="115.5" height="20.5"/>
+                                                <rect key="frame" x="325.5" y="104.5" width="115.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -210,10 +168,12 @@
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YXc-po-Hfo">
                                                 <rect key="frame" x="422" y="10" width="24" height="24"/>
+                                                <color key="backgroundColor" red="0.45098039215686275" green="0.070588235294117646" blue="0.72156862745098038" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="24" id="BMG-dn-VJC"/>
                                                     <constraint firstAttribute="width" constant="24" id="tLv-Mm-g5F"/>
                                                 </constraints>
+                                                <color key="tintColor" red="0.792156862745098" green="1" blue="0.39215686274509803" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" image="ic_more_icon"/>
                                                 <connections>
                                                     <action selector="openDebitConfig" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ejo-Ip-Xhf"/>
@@ -222,12 +182,8 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.95294117649999999" green="0.96862745100000003" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstItem="fbm-UX-T71" firstAttribute="centerY" secondItem="gTc-1g-Fxr" secondAttribute="centerY" id="1ZA-Yo-PB6"/>
-                                            <constraint firstItem="gTc-1g-Fxr" firstAttribute="leading" secondItem="Ya1-ct-Igq" secondAttribute="leading" constant="20" id="5id-xO-OKa"/>
                                             <constraint firstAttribute="bottom" secondItem="t7Q-8d-r8v" secondAttribute="bottom" id="8fO-QF-6hc"/>
-                                            <constraint firstItem="zov-DP-bgs" firstAttribute="top" secondItem="gTc-1g-Fxr" secondAttribute="bottom" constant="9.5" id="AFG-1M-4fh"/>
                                             <constraint firstItem="eoH-yZ-cf6" firstAttribute="top" secondItem="sSa-5P-rib" secondAttribute="bottom" constant="10" id="KRW-XQ-3rM"/>
-                                            <constraint firstItem="fbm-UX-T71" firstAttribute="leading" secondItem="gTc-1g-Fxr" secondAttribute="trailing" constant="10" id="Kyy-eO-gbB"/>
                                             <constraint firstItem="t7Q-8d-r8v" firstAttribute="leading" secondItem="Ya1-ct-Igq" secondAttribute="leading" id="Lc9-sg-WR8"/>
                                             <constraint firstItem="Tdv-ye-51P" firstAttribute="top" secondItem="YXc-po-Hfo" secondAttribute="bottom" constant="15" id="NUu-YE-oxY"/>
                                             <constraint firstAttribute="trailing" secondItem="YXc-po-Hfo" secondAttribute="trailing" constant="15" id="NvD-Pf-Bvy"/>
@@ -237,15 +193,14 @@
                                             <constraint firstItem="B5R-we-V5S" firstAttribute="centerY" secondItem="zYg-HL-Lq6" secondAttribute="centerY" id="YfL-H8-LGN"/>
                                             <constraint firstAttribute="trailing" secondItem="Tdv-ye-51P" secondAttribute="trailing" constant="20" id="ZjW-de-Ees"/>
                                             <constraint firstItem="B5R-we-V5S" firstAttribute="leading" secondItem="zYg-HL-Lq6" secondAttribute="trailing" constant="5" id="bKR-lw-idx"/>
+                                            <constraint firstItem="FdO-wK-VyN" firstAttribute="top" secondItem="Ya1-ct-Igq" secondAttribute="top" constant="16" id="clh-VW-EoH"/>
+                                            <constraint firstItem="FdO-wK-VyN" firstAttribute="leading" secondItem="Ya1-ct-Igq" secondAttribute="leading" constant="16" id="dND-sN-lyL"/>
                                             <constraint firstItem="sSa-5P-rib" firstAttribute="top" secondItem="Tdv-ye-51P" secondAttribute="bottom" constant="10" id="fjA-nf-kg1"/>
                                             <constraint firstAttribute="bottom" secondItem="zYg-HL-Lq6" secondAttribute="bottom" constant="10" id="j8Q-HA-JV7"/>
-                                            <constraint firstItem="zov-DP-bgs" firstAttribute="leading" secondItem="gTc-1g-Fxr" secondAttribute="leading" id="oSI-Y2-mnq"/>
-                                            <constraint firstItem="gTc-1g-Fxr" firstAttribute="top" secondItem="Ya1-ct-Igq" secondAttribute="top" id="rsc-fg-twe"/>
                                             <constraint firstItem="zYg-HL-Lq6" firstAttribute="leading" secondItem="Ya1-ct-Igq" secondAttribute="leading" constant="10" id="sIA-ko-ewZ"/>
                                             <constraint firstItem="t7Q-8d-r8v" firstAttribute="top" secondItem="Ya1-ct-Igq" secondAttribute="top" id="su9-Dl-dHy"/>
                                             <constraint firstAttribute="trailing" secondItem="t7Q-8d-r8v" secondAttribute="trailing" id="taJ-ed-jUC"/>
                                             <constraint firstItem="eoH-yZ-cf6" firstAttribute="leading" secondItem="Ya1-ct-Igq" secondAttribute="leading" constant="20" id="wRH-fu-EFo"/>
-                                            <constraint firstItem="zov-DP-bgs" firstAttribute="centerY" secondItem="Tdv-ye-51P" secondAttribute="centerY" id="yuL-7D-hsZ"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -290,6 +245,7 @@
                         <color key="currentPageIndicatorTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </pageControl>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="IFG-iG-eaF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="5eK-qf-gYA"/>
                     <constraint firstItem="IFG-iG-eaF" firstAttribute="top" secondItem="BGQ-6r-0OX" secondAttribute="bottom" id="E8R-lx-wPZ"/>
@@ -303,10 +259,13 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="TopHeaderView" destination="g44-JX-qSv" id="wRU-ud-IvF"/>
                 <outlet property="backButton" destination="dQt-eL-Cz8" id="eLc-56-NZu"/>
                 <outlet property="cardCollection" destination="qwJ-hh-yRt" id="U8h-1B-Xlt"/>
+                <outlet property="creditButton" destination="gko-4C-avx" id="Cnr-jI-IsC"/>
+                <outlet property="debitButton" destination="98V-7A-Aa3" id="LEj-mU-IJS"/>
                 <outlet property="debitCardContainer" destination="2YR-3f-FL6" id="0wv-t6-3CR"/>
                 <outlet property="debitCardView" destination="Ya1-ct-Igq" id="zhf-ly-Ifq"/>
                 <outlet property="debitCardbtnConfig" destination="YXc-po-Hfo" id="6qW-aD-1g2"/>
@@ -332,9 +291,6 @@
         <designable name="eoH-yZ-cf6">
             <size key="intrinsicContentSize" width="106.5" height="21"/>
         </designable>
-        <designable name="fbm-UX-T71">
-            <size key="intrinsicContentSize" width="37.5" height="15"/>
-        </designable>
         <designable name="gko-4C-avx">
             <size key="intrinsicContentSize" width="51" height="30"/>
         </designable>
@@ -344,11 +300,8 @@
     </designables>
     <resources>
         <image name="arrow.left" catalog="system" width="128" height="98"/>
-        <image name="cardChip" width="582" height="600"/>
-        <image name="ic_card_2" width="586" height="260"/>
-        <image name="ic_more_icon" width="24" height="24"/>
-        <systemColor name="systemYellowColor">
-            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
+        <image name="debitCard" width="284" height="177"/>
+        <image name="ic_more_icon" width="151" height="151"/>
+        <image name="logoBaz" width="68" height="31"/>
     </resources>
 </document>
