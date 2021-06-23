@@ -32,8 +32,11 @@
                     <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eqw-dX-W6a" userLabel="header">
-                            <rect key="frame" x="0.0" y="0.0" width="434" height="300"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
                             <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_header" translatesAutoresizingMaskIntoConstraints="NO" id="7zr-4F-7VY">
+                                    <rect key="frame" x="0.0" y="-47" width="414" height="347"/>
+                                </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A9Z-o1-Doj">
                                     <rect key="frame" x="10" y="10" width="40" height="40"/>
                                     <constraints>
@@ -58,11 +61,15 @@
                                     </userDefinedRuntimeAttributes>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" red="0.96470588450000005" green="0.77647060160000003" blue="0.26666668059999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
+                                <constraint firstAttribute="bottom" secondItem="7zr-4F-7VY" secondAttribute="bottom" id="4dp-wB-0jE"/>
                                 <constraint firstItem="A9Z-o1-Doj" firstAttribute="leading" secondItem="eqw-dX-W6a" secondAttribute="leading" constant="10" id="Fho-d7-I1F"/>
                                 <constraint firstItem="Hdg-yn-cLe" firstAttribute="leading" secondItem="A9Z-o1-Doj" secondAttribute="leading" constant="13" id="W41-9a-CE2"/>
+                                <constraint firstAttribute="trailing" secondItem="7zr-4F-7VY" secondAttribute="trailing" id="Ydg-AO-cfn"/>
+                                <constraint firstItem="7zr-4F-7VY" firstAttribute="top" secondItem="eqw-dX-W6a" secondAttribute="top" constant="-47" id="a1c-p6-PSO"/>
                                 <constraint firstItem="A9Z-o1-Doj" firstAttribute="top" secondItem="eqw-dX-W6a" secondAttribute="top" constant="10" id="eQh-VU-Vma"/>
+                                <constraint firstItem="7zr-4F-7VY" firstAttribute="leading" secondItem="eqw-dX-W6a" secondAttribute="leading" id="sGc-dz-PMf"/>
                                 <constraint firstItem="Hdg-yn-cLe" firstAttribute="top" secondItem="A9Z-o1-Doj" secondAttribute="bottom" constant="20" id="xnX-Ts-CvF"/>
                                 <constraint firstAttribute="height" constant="300" id="zT0-DF-Uao"/>
                             </constraints>
@@ -76,11 +83,11 @@
                             <rect key="frame" x="25" y="138.5" width="364" height="468.5"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D2R-rK-1Re" customClass="BASAShadowRadiusView" customModule="GSSAMyMoney" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="189" width="364" height="279.5"/>
+                                    <rect key="frame" x="0.0" y="199" width="364" height="269.5"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Se renovará en:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="25y-Lk-dUO" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                            <rect key="frame" x="0.0" y="66" width="364" height="18"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <rect key="frame" x="0.0" y="66" width="364" height="19.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                             <userDefinedRuntimeAttributes>
@@ -90,7 +97,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jRT-Q3-xce" customClass="BASACircularProgressView" customModule="GSSAMyMoney" customModuleProvider="target">
-                                            <rect key="frame" x="147" y="99" width="70" height="70"/>
+                                            <rect key="frame" x="147" y="100.5" width="70" height="70"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="70" id="Oo5-ag-dHX"/>
@@ -104,7 +111,7 @@
                                                     <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="color" keyPath="barFrontLineColor">
-                                                    <color key="value" systemColor="systemYellowColor"/>
+                                                    <color key="value" red="0.46666663889999999" green="0.082352943720000002" blue="0.96078431610000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="timerFinishingText" value="0"/>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isTextLabelHidden" value="NO"/>
@@ -125,10 +132,10 @@
                                     </userDefinedRuntimeAttributes>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iz2-GN-1Hb" customClass="BASAShadowRadiusView" customModule="GSSAMyMoney" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="10" width="364" height="189"/>
+                                    <rect key="frame" x="0.0" y="10" width="364" height="199"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xdr-Ri-2wt">
-                                            <rect key="frame" x="0.0" y="0.0" width="364" height="189"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="364" height="199"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_more_icon" translatesAutoresizingMaskIntoConstraints="NO" id="71h-Sf-eGS">
                                                     <rect key="frame" x="319" y="10" width="25" height="25"/>
@@ -165,8 +172,8 @@
                                             </constraints>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saldo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ixF-2K-5l6" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                            <rect key="frame" x="263" y="40" width="41" height="18.5"/>
-                                            <fontDescription key="fontDescription" name="GeezaPro-Bold" family="Geeza Pro" pointSize="15"/>
+                                            <rect key="frame" x="257.5" y="40" width="46.5" height="21"/>
+                                            <fontDescription key="fontDescription" name="GeezaPro-Bold" family="Geeza Pro" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                             <userDefinedRuntimeAttributes>
@@ -176,8 +183,8 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ke-jT-Sf8" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                            <rect key="frame" x="263" y="63.5" width="81" height="18.5"/>
-                                            <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="15"/>
+                                            <rect key="frame" x="257.5" y="66" width="86.5" height="21"/>
+                                            <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                             <userDefinedRuntimeAttributes>
@@ -187,8 +194,8 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zQz-c1-nKO" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                            <rect key="frame" x="30" y="102" width="0.0" height="0.0"/>
-                                            <fontDescription key="fontDescription" name="GeezaPro-Bold" family="Geeza Pro" pointSize="22"/>
+                                            <rect key="frame" x="30" y="107" width="0.0" height="0.0"/>
+                                            <fontDescription key="fontDescription" name="GeezaPro-Bold" family="Geeza Pro" pointSize="25"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                             <userDefinedRuntimeAttributes>
@@ -198,14 +205,14 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vigencia" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tJ8-dk-zTx">
-                                            <rect key="frame" x="30" y="122" width="57.5" height="18.5"/>
-                                            <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="15"/>
+                                            <rect key="frame" x="30" y="127" width="65" height="21"/>
+                                            <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="-/-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1W1-eF-lRk" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                            <rect key="frame" x="30" y="150.5" width="14.5" height="18.5"/>
-                                            <fontDescription key="fontDescription" name="GeezaPro-Bold" family="Geeza Pro" pointSize="15"/>
+                                            <rect key="frame" x="30" y="158" width="16.5" height="21"/>
+                                            <fontDescription key="fontDescription" name="GeezaPro-Bold" family="Geeza Pro" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                             <userDefinedRuntimeAttributes>
@@ -215,7 +222,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="doc.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="jp1-JM-cev">
-                                            <rect key="frame" x="40" y="89.5" width="25" height="25"/>
+                                            <rect key="frame" x="40" y="94.5" width="25" height="25"/>
                                             <color key="tintColor" systemColor="systemIndigoColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="25" id="OtE-cj-gms"/>
@@ -262,7 +269,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8CP-3L-xH5" customClass="BASAShadowRadiusView" customModule="GSSAMyMoney" customModuleProvider="target">
-                                    <rect key="frame" x="132" y="179" width="100" height="50"/>
+                                    <rect key="frame" x="132" y="189" width="100" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CVV" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m47-a4-9eX">
                                             <rect key="frame" x="20" y="10" width="70" height="15"/>
@@ -320,7 +327,7 @@
                         <constraint firstItem="eqw-dX-W6a" firstAttribute="top" secondItem="xyh-sB-vkc" secondAttribute="top" id="7ZE-mu-B0j"/>
                         <constraint firstAttribute="trailing" secondItem="0a4-Sb-A94" secondAttribute="trailing" constant="25" id="B3a-mH-OKG"/>
                         <constraint firstItem="eqw-dX-W6a" firstAttribute="leading" secondItem="xyh-sB-vkc" secondAttribute="leading" id="FqI-lu-8An"/>
-                        <constraint firstAttribute="trailing" secondItem="eqw-dX-W6a" secondAttribute="trailing" constant="-20" id="PoC-Sh-hvH"/>
+                        <constraint firstAttribute="trailing" secondItem="eqw-dX-W6a" secondAttribute="trailing" id="PoC-Sh-hvH"/>
                         <constraint firstItem="0a4-Sb-A94" firstAttribute="top" secondItem="Hdg-yn-cLe" secondAttribute="bottom" constant="40" id="U7Q-8U-sHD"/>
                         <constraint firstItem="0a4-Sb-A94" firstAttribute="centerX" secondItem="xyh-sB-vkc" secondAttribute="centerX" id="cza-Cs-cuD"/>
                         <constraint firstItem="0a4-Sb-A94" firstAttribute="leading" secondItem="xyh-sB-vkc" secondAttribute="leading" constant="25" id="my6-CW-fB4"/>
@@ -329,7 +336,7 @@
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="E4Y-ec-TWw"/>
-            <color key="backgroundColor" red="0.96470588450000005" green="0.78039217000000005" blue="0.26666668059999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color key="backgroundColor" red="0.1843137443" green="0.64313727620000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="xyh-sB-vkc" secondAttribute="bottom" id="Edu-a0-RSW"/>
                 <constraint firstItem="xyh-sB-vkc" firstAttribute="top" secondItem="E4Y-ec-TWw" secondAttribute="top" id="RZG-Nk-7fi"/>
@@ -341,7 +348,13 @@
     </objects>
     <designables>
         <designable name="1W1-eF-lRk">
-            <size key="intrinsicContentSize" width="14.5" height="18.5"/>
+            <size key="intrinsicContentSize" width="16.5" height="21"/>
+        </designable>
+        <designable name="25y-Lk-dUO">
+            <size key="intrinsicContentSize" width="112.5" height="19.5"/>
+        </designable>
+        <designable name="6Ke-jT-Sf8">
+            <size key="intrinsicContentSize" width="15.5" height="21"/>
         </designable>
         <designable name="Hdg-yn-cLe">
             <size key="intrinsicContentSize" width="149" height="28.5"/>
@@ -349,10 +362,14 @@
         <designable name="J9G-aR-qSY">
             <size key="intrinsicContentSize" width="8.5" height="31"/>
         </designable>
+        <designable name="ixF-2K-5l6">
+            <size key="intrinsicContentSize" width="46.5" height="21"/>
+        </designable>
         <designable name="zQz-c1-nKO"/>
     </designables>
     <resources>
         <image name="doc.fill" catalog="system" width="115" height="128"/>
+        <image name="ic_header" width="375" height="273"/>
         <image name="ic_more_icon" width="24" height="24"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
@@ -360,9 +377,6 @@
         </systemColor>
         <systemColor name="systemIndigoColor">
             <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemYellowColor">
-            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

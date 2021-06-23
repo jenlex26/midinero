@@ -21,6 +21,7 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
     @IBOutlet weak var debitCardlblCardNumber   : GSVCLabel!
     @IBOutlet weak var debitCardbtnConfig       : UIButton!
     @IBOutlet weak var debitCardView            : UIView!
+    @IBOutlet weak var imgHeader                : UIImageView!
 
     var gradient = CAGradientLayer()
     var cellViewController: UIViewController!
@@ -39,7 +40,12 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
         
         debitCardView.layer.borderColor = UIColor.lightGray.cgColor
         debitCardView.blurBackground(style: .light, fallbackColor: #colorLiteral(red: 0.999473989, green: 0.8043177724, blue: 0.124026455, alpha: 1))
-       
+        
+        // PONER IMAGEN DE DÉBITO
+        if let image:UIImage = UIImage(named: "ic_card_backgroud")  {
+            self.imgHeader.image = image
+        }
+        
         
         debitCardView.layer.cornerRadius = 10
         debitCardView.layer.masksToBounds = true
@@ -75,6 +81,9 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
     func handleCardChange(index: Int){
         switch index {
         case 0:
+            
+            // PONER IMAGEN NEGRA
+            
             gradient.colors = [#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).cgColor, #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).cgColor]
             UIView.animate(withDuration: 0.35, animations: {
                 self.TopHeaderView.backgroundColor = .black
@@ -83,6 +92,8 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
             })
             NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "HomeHeaderViewChange"), object: headerColorType.credit, userInfo: nil))
         case 1:
+            //PONER IMAGEN AZUL
+            
             gradient.colors = [#colorLiteral(red: 0.7843, green: 0.8549, blue: 1, alpha: 1).cgColor, #colorLiteral(red: 0.7843, green: 0.8549, blue: 1, alpha: 1).cgColor]
             UIView.animate(withDuration: 0.35, animations: {
                 self.lblTitle.textColor = .black

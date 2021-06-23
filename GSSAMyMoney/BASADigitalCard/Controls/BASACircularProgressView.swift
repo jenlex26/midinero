@@ -46,7 +46,7 @@ protocol TimerHandleDelegate {
     private lazy var counterLabel: UILabel = {
         let label = UILabel()
         label.textColor = .darkText
-        label.font = UIFont.boldSystemFont(ofSize: 14.0)
+        label.font = UIFont.boldSystemFont(ofSize: 20.0)
         label.numberOfLines  = 3
         self.addSubview(label)
         label.adjustsFontSizeToFitWidth = true

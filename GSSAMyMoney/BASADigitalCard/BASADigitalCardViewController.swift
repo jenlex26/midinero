@@ -40,11 +40,13 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
         self.ConfigureBlurCardView()
         GSVCLoader.show(type: .native)
         self.TimerView.delegate = self
+        CardBackgroundView.layer.cornerRadius = 5
+        CardBackgroundView.layer.masksToBounds = true
         
         if userBalance != nil{
             let amountFormat = NSMutableAttributedString.setFormattedText(withStringAmmount: userBalance,
                                                                           withNumberOfDecimals: 0,
-                                                                          withFontSize: 14,
+                                                                          withFontSize: 16,
                                                                           withFontWeight: .bold,
                                                                           withFontColor: .GSVCText100,
                                                                           withLittleCoin: false)
@@ -78,8 +80,8 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
     
     func ConfigureBlurCardView(){
         CardBackgroundView.blurBackground(style: .light, fallbackColor: .white)
-        TopHeaderView.roundCorners([.bottomLeft,.bottomRight], radius:  100)
-        self.SetGradient()
+//        TopHeaderView.roundCorners([.bottomLeft,.bottomRight], radius:  100)
+//        self.SetGradient()
     }
     
     func StartTimer(){
