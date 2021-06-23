@@ -109,6 +109,12 @@
 		985AAEDF2682ACB9006CD764 /* GSSAVisualTemplates.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 985AAEDE2682ACB9006CD764 /* GSSAVisualTemplates.framework */; };
 		985AAEE02682ACB9006CD764 /* GSSAVisualTemplates.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 985AAEDE2682ACB9006CD764 /* GSSAVisualTemplates.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EE037483268291FC00BE681D /* BASADigitalCardEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE037482268291FC00BE681D /* BASADigitalCardEntity.swift */; };
+		EE0655D82682AE6600F7C73D /* GSDigitalCardConfigPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0655D22682AE6600F7C73D /* GSDigitalCardConfigPresenter.swift */; };
+		EE0655D92682AE6600F7C73D /* GSDigitalCardConfigRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0655D32682AE6600F7C73D /* GSDigitalCardConfigRouter.swift */; };
+		EE0655DA2682AE6600F7C73D /* GSDigitalCardConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0655D42682AE6600F7C73D /* GSDigitalCardConfigViewController.swift */; };
+		EE0655DB2682AE6600F7C73D /* GSDigitalCardConfigProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0655D52682AE6600F7C73D /* GSDigitalCardConfigProtocols.swift */; };
+		EE0655DC2682AE6600F7C73D /* GSDigitalCardConfigInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0655D62682AE6600F7C73D /* GSDigitalCardConfigInteractor.swift */; };
+		EE0655DD2682AE6600F7C73D /* GSDigitalCardConfigViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE0655D72682AE6600F7C73D /* GSDigitalCardConfigViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -233,6 +239,12 @@
 		985AAEDE2682ACB9006CD764 /* GSSAVisualTemplates.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GSSAVisualTemplates.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE037476268248AA00BE681D /* GSSAFirebaseManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GSSAFirebaseManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE037482268291FC00BE681D /* BASADigitalCardEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BASADigitalCardEntity.swift; sourceTree = "<group>"; };
+		EE0655D22682AE6600F7C73D /* GSDigitalCardConfigPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSDigitalCardConfigPresenter.swift; sourceTree = "<group>"; };
+		EE0655D32682AE6600F7C73D /* GSDigitalCardConfigRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSDigitalCardConfigRouter.swift; sourceTree = "<group>"; };
+		EE0655D42682AE6600F7C73D /* GSDigitalCardConfigViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSDigitalCardConfigViewController.swift; sourceTree = "<group>"; };
+		EE0655D52682AE6600F7C73D /* GSDigitalCardConfigProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSDigitalCardConfigProtocols.swift; sourceTree = "<group>"; };
+		EE0655D62682AE6600F7C73D /* GSDigitalCardConfigInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSDigitalCardConfigInteractor.swift; sourceTree = "<group>"; };
+		EE0655D72682AE6600F7C73D /* GSDigitalCardConfigViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GSDigitalCardConfigViewController.xib; sourceTree = "<group>"; };
 		EE3937E12681424200493448 /* AWSAuthCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AWSAuthCore.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/AWS/AWSAuthCore.xcframework; sourceTree = "<group>"; };
 		EE3937E22681424200493448 /* AWSCognitoIdentityProvider.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AWSCognitoIdentityProvider.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/AWS/AWSCognitoIdentityProvider.xcframework; sourceTree = "<group>"; };
 		EE3937E32681424200493448 /* AWSCognitoIdentityProviderASF.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AWSCognitoIdentityProviderASF.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/AWS/AWSCognitoIdentityProviderASF.xcframework; sourceTree = "<group>"; };
@@ -592,6 +604,7 @@
 		10E9EDA0267D6BA400F45640 /* BASADigitalCard */ = {
 			isa = PBXGroup;
 			children = (
+				EE0655D12682AE4400F7C73D /* BASADigitalCardConfig */,
 				10E9EDA4267D6BA400F45640 /* Controls */,
 				10E9EDA1267D6BA400F45640 /* BASADigitalCardProtocols.swift */,
 				10E9EDA2267D6BA400F45640 /* BASADigitalCardPresenter.swift */,
@@ -614,6 +627,19 @@
 				10E9EDA9267D6BA400F45640 /* BASACircularProgressView.swift */,
 			);
 			path = Controls;
+			sourceTree = "<group>";
+		};
+		EE0655D12682AE4400F7C73D /* BASADigitalCardConfig */ = {
+			isa = PBXGroup;
+			children = (
+				EE0655D22682AE6600F7C73D /* GSDigitalCardConfigPresenter.swift */,
+				EE0655D32682AE6600F7C73D /* GSDigitalCardConfigRouter.swift */,
+				EE0655D42682AE6600F7C73D /* GSDigitalCardConfigViewController.swift */,
+				EE0655D52682AE6600F7C73D /* GSDigitalCardConfigProtocols.swift */,
+				EE0655D62682AE6600F7C73D /* GSDigitalCardConfigInteractor.swift */,
+				EE0655D72682AE6600F7C73D /* GSDigitalCardConfigViewController.xib */,
+			);
+			path = BASADigitalCardConfig;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -694,6 +720,7 @@
 				10E9EDB5267D6BA400F45640 /* BASATextFieldCell.xib in Resources */,
 				10E9EDC2267D6BA400F45640 /* ConfigItemCell.xib in Resources */,
 				10E9EDE9267D6BA400F45640 /* BASACardCell.xib in Resources */,
+				EE0655DD2682AE6600F7C73D /* GSDigitalCardConfigViewController.xib in Resources */,
 				10E9EDB9267D6BA400F45640 /* BASAButtonCell.xib in Resources */,
 				10E9EDE8267D6BA400F45640 /* BASAButtonsCell.xib in Resources */,
 				10E9EDBB267D6BA400F45640 /* BASACardControl.xib in Resources */,
@@ -725,10 +752,12 @@
 				10E9EDFE267D6BA400F45640 /* BASACircularProgressView.swift in Sources */,
 				10E9EDE4267D6BA400F45640 /* BASALendViewCVC.swift in Sources */,
 				10E9EDBA267D6BA400F45640 /* BASACardControl.swift in Sources */,
+				EE0655D92682AE6600F7C73D /* GSDigitalCardConfigRouter.swift in Sources */,
 				10E9EDFC267D6BA400F45640 /* BASAShadowRadiusView.swift in Sources */,
 				10E9EDD5267D6BA400F45640 /* BASACardConfigInteractor.swift in Sources */,
 				10E9EDF7267D6BA400F45640 /* BASADigitalCardProtocols.swift in Sources */,
 				10E9EDDB267D6BA400F45640 /* BASABeneficiaryListInteractor.swift in Sources */,
+				EE0655DA2682AE6600F7C73D /* GSDigitalCardConfigViewController.swift in Sources */,
 				10E9EDF4267D6BA400F45640 /* BASACardsdashboardEntity.swift in Sources */,
 				10E9EDAD267D6BA400F45640 /* BASACardStatementsProtocols.swift in Sources */,
 				10E9EDF5267D6BA400F45640 /* BASAMainHubCardsViewController.swift in Sources */,
@@ -736,6 +765,7 @@
 				10E9EDE6267D6BA400F45640 /* BASAMyCreditItem.swift in Sources */,
 				10E9EDCB267D6BA400F45640 /* BASACardLimitsPresenter.swift in Sources */,
 				10E9EDF2267D6BA400F45640 /* BASAMainHubCardsPresenter.swift in Sources */,
+				EE0655DB2682AE6600F7C73D /* GSDigitalCardConfigProtocols.swift in Sources */,
 				10E9EDC3267D6BA400F45640 /* ConfigItemCell.swift in Sources */,
 				10E9EDB1267D6BA400F45640 /* BASACardStatementsViewController.swift in Sources */,
 				10E9EDFD267D6BA400F45640 /* BASAShadowRadiusBaseControl.swift in Sources */,
@@ -768,6 +798,7 @@
 				10E9EDFA267D6BA400F45640 /* BASAShadowRadiusImage.swift in Sources */,
 				10E9EDD1267D6BA400F45640 /* BASANewBeneficiaryRouter.swift in Sources */,
 				10E9EDB3267D6BA400F45640 /* BASACardConfigProtocols.swift in Sources */,
+				EE0655DC2682AE6600F7C73D /* GSDigitalCardConfigInteractor.swift in Sources */,
 				10E9EDCE267D6BA400F45640 /* BASACardConfigRouter.swift in Sources */,
 				10E9EE01267D6BA400F45640 /* BASADigitalCardInteractor.swift in Sources */,
 				10E9EDF1267D6BA400F45640 /* BASAMainHubCardsInteractor.swift in Sources */,
@@ -777,6 +808,7 @@
 				10E9EDF6267D6BA400F45640 /* BASAMainHubCardsRouter.swift in Sources */,
 				10E9EDB4267D6BA400F45640 /* BASATextFieldCell.swift in Sources */,
 				10E9EDB0267D6BA400F45640 /* BASACardStatementsRouter.swift in Sources */,
+				EE0655D82682AE6600F7C73D /* GSDigitalCardConfigPresenter.swift in Sources */,
 				10E9EDBD267D6BA400F45640 /* BASASwitchItemCell.swift in Sources */,
 				10E9EDD3267D6BA400F45640 /* BASANewBeneficiaryInteractor.swift in Sources */,
 				10E9EDC5267D6BA400F45640 /* BASAInfoCardCell.swift in Sources */,

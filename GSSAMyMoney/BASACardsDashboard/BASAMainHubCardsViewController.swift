@@ -42,6 +42,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                     self.loadDebitMovements()
                 }
             }else{
+                GSVCLoader.hide()
                 self.presentBottomAlertFullData(status: .error, message: "Ocurrió un error desconocido, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
             }
         })
