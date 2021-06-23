@@ -63,17 +63,9 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
             }
         })
     }
-        
-    override func viewDidDisappear(_ animated: Bool) {
-        TimerView.end()
-    }
-    
+            
     func optionalAction() {
         print("Ok")
-    }
-    
-    @IBAction func TryDismiss(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
     }
     
     func ConfigureBlurCardView(){
@@ -92,6 +84,16 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
         gradient.frame = view.bounds
         gradient.colors = [#colorLiteral(red: 1, green: 0.800180316, blue: 0.1028089598, alpha: 1).cgColor, #colorLiteral(red: 0.9981226325, green: 0.8125876784, blue: 0.140308857, alpha: 1).cgColor]
         TopHeaderView.layer.insertSublayer(gradient, at: 0)
+    }
+    
+    @IBAction func TryDismiss(_ sender: Any) {
+        TimerView.end()
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func openConfig(_ sender: Any){
+        let view = GSDigitalCardConfigRouter.createModule()
+        self.navigationController?.pushViewController(view, animated: true)
     }
 }
 

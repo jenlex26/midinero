@@ -137,11 +137,23 @@
                                                         <constraint firstAttribute="height" constant="25" id="yLd-Ud-Bfz"/>
                                                     </constraints>
                                                 </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lYW-RR-n7N">
+                                                    <rect key="frame" x="316" y="8" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="alN-yU-94c"/>
+                                                        <constraint firstAttribute="width" constant="30" id="hQL-5h-ka4"/>
+                                                    </constraints>
+                                                    <connections>
+                                                        <action selector="openConfig:" destination="-1" eventType="touchUpInside" id="1NY-kC-avU"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="71h-Sf-eGS" secondAttribute="trailing" constant="20" id="Z4l-TN-cNf"/>
                                                 <constraint firstItem="71h-Sf-eGS" firstAttribute="top" secondItem="xdr-Ri-2wt" secondAttribute="top" constant="10" id="Z9s-u3-j26"/>
+                                                <constraint firstAttribute="trailing" secondItem="lYW-RR-n7N" secondAttribute="trailing" constant="18" id="Zcs-xt-pnS"/>
+                                                <constraint firstItem="lYW-RR-n7N" firstAttribute="top" secondItem="xdr-Ri-2wt" secondAttribute="top" constant="8" id="s75-Q6-DeD"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6eW-v3-aEA">
@@ -343,11 +355,20 @@
         <designable name="1W1-eF-lRk">
             <size key="intrinsicContentSize" width="14.5" height="18.5"/>
         </designable>
+        <designable name="25y-Lk-dUO">
+            <size key="intrinsicContentSize" width="106.5" height="18"/>
+        </designable>
+        <designable name="6Ke-jT-Sf8">
+            <size key="intrinsicContentSize" width="13.5" height="18.5"/>
+        </designable>
         <designable name="Hdg-yn-cLe">
             <size key="intrinsicContentSize" width="149" height="28.5"/>
         </designable>
         <designable name="J9G-aR-qSY">
             <size key="intrinsicContentSize" width="8.5" height="31"/>
+        </designable>
+        <designable name="ixF-2K-5l6">
+            <size key="intrinsicContentSize" width="41" height="18.5"/>
         </designable>
         <designable name="zQz-c1-nKO"/>
     </designables>
