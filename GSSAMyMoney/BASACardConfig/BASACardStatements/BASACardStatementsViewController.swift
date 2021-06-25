@@ -12,11 +12,13 @@ import UIKit
 import GSSAVisualComponents
 import GSSAVisualTemplates
 
-class BASACardStatementsViewController: UIViewController, BASACardStatementsViewProtocol, GSVTGenericResultDelegate {
-
-	var presenter: BASACardStatementsPresenterProtocol?
+class BASACardStatementsViewController: UIViewController, BASACardStatementsViewProtocol, GSVTGenericResultDelegate, GSVCBottomAlertHandler {
+    
+    var bottomAlert: GSVCBottomAlert?
+    var presenter: BASACardStatementsPresenterProtocol?
     
     @IBOutlet weak var table: UITableView!
+    var type: CardType! 
     
     struct statement{
         var title: String
@@ -26,22 +28,47 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
     }
     
     var statements: Array<statement> = []
-
-	override func viewDidLoad() {
+    var requestData: [StatementDetail] = []
+    
+    override func viewDidLoad() {
         super.viewDidLoad()
         registerCells()
-        setStatements()
         table.delegate = self
         table.dataSource = self
         table.alwaysBounceVertical = false
+        
+        if type == .debit{
+            GSVCLoader.show(type: .native)
+            let requestBody = DebitCardStatementBody(numeroCuenta: "974563210", fechaInicio: "10-10-2020", fechaFin: "10-12-2020")
+            presenter?.requestStatements(body: requestBody, StatementsResultData: { [self] StatementsResultData in
+                GSVCLoader.hide()
+                if StatementsResultData != nil{
+                    requestData = StatementsResultData?.resultado?.detalles ?? []
+                    setStatements()
+                }else{
+                    self.presentBottomAlertFullData(status: .error, message: "Ocurrió un error desconocido, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
+                }
+            })
+        }
+        
+        if type == .credit{
+            print("NOS IMPLEMENTED...")
+        }
+        
     }
     
     func setStatements(){
-        statements.append(statement.init(title: "Seleccionar todos", subTitle: nil, tag: 1))
-        statements.append(statement(title: "Mayo 2021", subTitle: "19 abril - 17 mayo"))
-        statements.append(statement(title: "Abril 2021", subTitle: "19 marzo - 18 abril"))
-        statements.append(statement(title: "Marzo 2021", subTitle: "17 febrero - 18 marzo"))
-        statements.append(statement(title: "Febrero 2021", subTitle: "15 enero - 16 febrero"))
+        statements.append(statement.init(title: "Seleccionar todos", subTitle: nil, tag: 0))
+        var index = 1
+        for item in requestData{
+            let title = item.fechaFin?.dateFormatter(format: "dd-MM-yyyy", outputFormat: "MMMM yyyy")
+            let initialDate = item.fechaInicio?.dateFormatter(format: "dd-MM-yyyy", outputFormat: "dd MMMM") ?? ""
+            let finalDate = item.fechaFin?.dateFormatter(format: "dd-MM-yyyy", outputFormat: "dd MMMM") ?? ""
+            statements.append(statement(title: title ?? "", subTitle: initialDate + " - " + finalDate, tag: index))
+            index += 1
+        }
+        
+        table.reloadData()
     }
     
     func registerCells(){
@@ -58,6 +85,10 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
         })
     }
     
+    func optionalAction() {
+        print("OK")
+    }
+    
     @objc func selectAllStatements(sender: UISwitch){
         for n in 0..<statements.count{
             if sender.isOn{
@@ -67,6 +98,11 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
             }
         }
         self.table.reloadData()
+    }
+    
+    @objc func stamementSelected(sender: UISwitch){
+        statements[0].switchState = false
+        statements[sender.tag].switchState = sender.isOn
     }
     
     @objc func nextAction(sender: UIButton){
@@ -82,7 +118,7 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
     @IBAction func close(_ sender: Any){
         self.navigationController?.popViewController(animated: true)
     }
-
+    
 }
 
 extension BASACardStatementsViewController: UITableViewDelegate, UITableViewDataSource{
@@ -111,8 +147,10 @@ extension BASACardStatementsViewController: UITableViewDelegate, UITableViewData
         default:
             let cell = table.dequeueReusableCell(withIdentifier: "BASASwitchItemCell") as! BASASwitchItemCell
             let data = statements[indexPath.row - 3]
-            if data.tag == 1{
+            if data.tag == 0{
                 cell.swtch.addTarget(self, action: #selector(selectAllStatements(sender:)), for: .valueChanged)
+            }else{
+                cell.swtch.addTarget(self, action: #selector(stamementSelected(sender:)), for: .valueChanged)
             }
             if data.switchState == true{
                 cell.swtch.isOn = true
@@ -127,7 +165,7 @@ extension BASACardStatementsViewController: UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
         case 0:
-            return 60.0
+            return 65.0
         case 1:
             return 70.0
         case 2:
@@ -137,5 +175,21 @@ extension BASACardStatementsViewController: UITableViewDelegate, UITableViewData
         default:
             return 70.0
         }
+    }
+}
+
+extension String{
+    func dateFormatter(format: String, outputFormat: String) -> String{
+        let dateFormatterIn = DateFormatter()
+        dateFormatterIn.dateFormat = format
+        
+        let dateFormatterOut = DateFormatter()
+        dateFormatterOut.dateFormat = outputFormat
+        dateFormatterOut.locale = Locale(identifier: "es_MX")
+        
+        let dateIn = dateFormatterIn.date(from: self)
+        let dateOut = dateFormatterOut.string(from: dateIn ?? Date())
+        
+        return dateOut.capitalized
     }
 }

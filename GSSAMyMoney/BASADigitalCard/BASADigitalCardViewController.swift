@@ -20,6 +20,10 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
     var bottomAlert: GSVCBottomAlert?
     var presenter: BASADigitalCardPresenterProtocol?
     
+    func dismissBottomAlert(animated: Bool) {
+        bottomAlert = nil
+    }
+    
     //MARK: - Outlets
     
     @IBOutlet weak var DigitalCard: BASAShadowRadiusView!
@@ -72,8 +76,6 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
     
     func ConfigureBlurCardView(){
         CardBackgroundView.blurBackground(style: .light, fallbackColor: .white)
-//        TopHeaderView.roundCorners([.bottomLeft,.bottomRight], radius:  100)
-//        self.SetGradient()
     }
     
     func StartTimer(){
@@ -84,7 +86,7 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
         let view = UIView(frame: CGRect(x: 0, y: 0, width: TopHeaderView.bounds.width, height: TopHeaderView.bounds.height))
         let gradient = CAGradientLayer()
         gradient.frame = view.bounds
-        gradient.colors = [#colorLiteral(red: 1, green: 0.800180316, blue: 0.1028089598, alpha: 1).cgColor, #colorLiteral(red: 0.9981226325, green: 0.8125876784, blue: 0.140308857, alpha: 1).cgColor]
+        gradient.colors = [UIColor.GSVCPrincipal100.cgColor, UIColor.GSVCPrincipal100.cgColor]
         TopHeaderView.layer.insertSublayer(gradient, at: 0)
     }
     

@@ -12,19 +12,49 @@ import UIKit
 import GSSAVisualComponents
 
 class GSDigitalCardConfigViewController: UIViewController, GSDigitalCardConfigViewProtocol {
-
-	var presenter: GSDigitalCardConfigPresenterProtocol?
+    
+    var presenter: GSDigitalCardConfigPresenterProtocol?
     
     @IBOutlet weak var containerView        : UIView!
+    @IBOutlet weak var buttonsView          : UIView!
     @IBOutlet weak var swtch                : UISwitch!
     @IBOutlet weak var lblBuyLimit          : GSVCLabel!
     @IBOutlet weak var lblDigitalCardStatus : GSVCLabel!
     
-
-	override func viewDidLoad() {
+    
+    override func viewDidLoad() {
         super.viewDidLoad()
-        containerView.backgroundColor = UIColor.GSVCBase300
         swtch.addTarget(self, action: #selector(switchChanged(sender:)), for: .valueChanged)
+        buttonsView.layer.borderWidth = 0.5
+        containerView.backgroundColor = .GSVCBase200
+        updateColors()
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        updateColors()
+    }
+    
+    func updateColors(){
+        if #available(iOS 13.0, *) {
+            if overrideUserInterfaceStyle == .dark{
+                setDarkColors()
+            }else{
+                setLightColors()
+            }
+        } else {
+            setLightColors()
+        }
+    }
+    
+    func setLightColors(){
+        buttonsView.layer.borderWidth = 0
+        containerView.backgroundColor = .GSVCBase200
+    }
+    
+    func setDarkColors(){
+        buttonsView.layer.borderWidth = 0.5
+        buttonsView.layer.borderColor = UIColor.white.cgColor
+        containerView.backgroundColor = .black
     }
     
     @objc func switchChanged(sender: UISwitch){

@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GSDigitalCardConfigViewController" customModule="GSSAMyMoney" customModuleProvider="target">
             <connections>
+                <outlet property="buttonsView" destination="l9K-uM-Na1" id="rZ9-Dp-pdR"/>
                 <outlet property="containerView" destination="7qs-xP-P8J" id="Zsd-sx-R3D"/>
                 <outlet property="lblBuyLimit" destination="u2p-7w-fNa" id="WlV-U2-USN"/>
                 <outlet property="lblDigitalCardStatus" destination="YAZ-AI-0k9" id="HLp-9Y-Lez"/>
@@ -38,7 +39,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Configuración" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1aD-I9-aOq" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                            <rect key="frame" x="134" y="15" width="107" height="20.5"/>
+                            <rect key="frame" x="130" y="14" width="115.5" height="22.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -79,7 +80,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Apagar tarjeta digital" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YAZ-AI-0k9" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                                    <rect key="frame" x="48" y="25.5" width="196" height="20.5"/>
+                                                    <rect key="frame" x="48" y="24.5" width="196" height="22.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -138,10 +139,10 @@
                                                     </constraints>
                                                 </view>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="Uyc-NB-Fa6">
-                                                    <rect key="frame" x="56" y="13.5" width="255" height="44"/>
+                                                    <rect key="frame" x="56" y="13" width="255" height="45.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Límite de compra" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2BY-Am-HJL" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                                            <rect key="frame" x="0.0" y="0.0" width="255" height="20.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="255" height="22.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -152,7 +153,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hasta $999,900.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u2p-7w-fNa" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                                            <rect key="frame" x="0.0" y="23.5" width="255" height="20.5"/>
+                                                            <rect key="frame" x="0.0" y="25.5" width="255" height="20"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -218,7 +219,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Debes esperar 3 segundos para hacer configuraciones nuevamente." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hhD-uO-DEt" customClass="GSVCLabel" customModule="GSSAVisualComponents">
                             <rect key="frame" x="57" y="10" width="263" height="52"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="styleType">
@@ -246,7 +247,7 @@
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="pYf-rQ-uFI"/>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="081-uf-Bt8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="1ho-BL-pKR"/>
                 <constraint firstItem="pYf-rQ-uFI" firstAttribute="trailing" secondItem="DYi-qX-BBT" secondAttribute="trailing" constant="20" id="2oj-1T-rS9"/>
@@ -262,14 +263,21 @@
         </view>
     </objects>
     <designables>
+        <designable name="081-uf-Bt8"/>
         <designable name="1aD-I9-aOq">
-            <size key="intrinsicContentSize" width="107" height="20.5"/>
+            <size key="intrinsicContentSize" width="115.5" height="22.5"/>
+        </designable>
+        <designable name="2BY-Am-HJL">
+            <size key="intrinsicContentSize" width="141.5" height="22.5"/>
         </designable>
         <designable name="YAZ-AI-0k9">
-            <size key="intrinsicContentSize" width="158.5" height="20.5"/>
+            <size key="intrinsicContentSize" width="172" height="22.5"/>
         </designable>
         <designable name="hhD-uO-DEt">
-            <size key="intrinsicContentSize" width="519.5" height="20.5"/>
+            <size key="intrinsicContentSize" width="482.5" height="20"/>
+        </designable>
+        <designable name="u2p-7w-fNa">
+            <size key="intrinsicContentSize" width="130" height="20"/>
         </designable>
     </designables>
     <resources>

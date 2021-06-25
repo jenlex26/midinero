@@ -11,7 +11,6 @@
 import UIKit
 
 class BASACardStatementsPresenter: BASACardStatementsPresenterProtocol {
-
     weak private var view: BASACardStatementsViewProtocol?
     var interactor: BASACardStatementsInteractorProtocol?
     private let router: BASACardStatementsWireframeProtocol
@@ -20,6 +19,10 @@ class BASACardStatementsPresenter: BASACardStatementsPresenterProtocol {
         self.view = interface
         self.interactor = interactor
         self.router = router
+    }
+    
+    func requestStatements(body: DebitCardStatementBody, StatementsResultData: @escaping (DebitCardStatementData?) -> ()) {
+        interactor?.getStatements(body: body, StatementsResultData: StatementsResultData)
     }
 
 }

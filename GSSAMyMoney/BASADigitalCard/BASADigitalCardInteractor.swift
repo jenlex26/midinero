@@ -13,41 +13,23 @@ import GSSAServiceCoordinator
 import GSSASecurityManager
 
 class BASADigitalCardInteractor: GSSAURLSessionTaskCoordinatorBridge, BASADigitalCardInteractorProtocol {
-
+    
     weak var presenter: BASADigitalCardPresenterProtocol?
     
     public func TryGetCardDigitalCardData(Body: Transaction,  DataCard: @escaping (AccountResponse?) -> ())
-        {
-                self.urlPath = "https://688div74bd.execute-api.us-east-1.amazonaws.com/"
-                self.strPathEndpoint = "desarrollo/superapp/dinero/captacion/gestion-tarjetas-digitales/v1/tarjetas"
-                
-                let headers: [HeadersCustom] = [
-                    HeadersCustom(value:"3bad1290ac4600a569162efaa09117ea", forHTTPHeaderField: "x-sicu"),
-                    HeadersCustom(value:"3bad1290ac4600a569162efaa09117ea", forHTTPHeaderField: "x-id-interaccion"),
-                    HeadersCustom(value:"Super movil", forHTTPHeaderField: "x-nombre-dispositivo"),
-                    HeadersCustom(value:"3bad1290ac4600a569162efaa09117ea", forHTTPHeaderField: "x-id-dispositivo"),
-                    HeadersCustom(value:"Android", forHTTPHeaderField: "x-sistema-dispositivo"),
-                    HeadersCustom(value:"6.0", forHTTPHeaderField: "x-version-dispositivo"),
-                    HeadersCustom(value:"2.1.1", forHTTPHeaderField: "x-version-aplicacion"),
-                    HeadersCustom(value:"P40", forHTTPHeaderField: "x-modelo-dispositivo"),
-                    HeadersCustom(value:"Huawei", forHTTPHeaderField: "x-fabricante-dispositivo"),
-                    HeadersCustom(value:"mt6735", forHTTPHeaderField: "x-serie-procesador"),
-                    HeadersCustom(value:"Telcel", forHTTPHeaderField: "x-operador-telefonia"),
-                    HeadersCustom(value:"19.49781290", forHTTPHeaderField: "x-latitud"),
-                    HeadersCustom(value:"-99.12698712", forHTTPHeaderField: "x-longitud"),
-                    HeadersCustom(value:"SRfVZrTYvdm7mzzZmcuiDViACkAx", forHTTPHeaderField: "x-token-usuario"),
-                    HeadersCustom(value:"application/json", forHTTPHeaderField: "Content-Type")
-                ]
-            
-            sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: headers, objBody: Body, environment: .custom) { (objRes: AccountResponse?, error) in
-                debugPrint(objRes as Any)
-                    if error.code == 0 {
-                       DataCard(objRes)
-                    } else {
-                        DataCard(nil)
-                        debugPrint(error)
-                    }
-                }
+    {
+        self.urlPath = "https://688div74bd.execute-api.us-east-1.amazonaws.com/"
+        self.strPathEndpoint = "desarrollo/superapp/dinero/captacion/gestion-tarjetas-digitales/v1/tarjetas"
+    
+        sendRequest(strUrl: strPathEndpoint, method: .POST, objBody: Body, environment: .develop) { (objRes: AccountResponse?, error) in
+            debugPrint(objRes as Any)
+            if error.code == 0 {
+                DataCard(objRes)
+            } else {
+                DataCard(nil)
+                debugPrint(error)
             }
+        }
+    }
     
 }

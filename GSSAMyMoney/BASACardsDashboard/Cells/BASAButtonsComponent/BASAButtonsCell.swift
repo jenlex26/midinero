@@ -19,13 +19,15 @@ class BASAButtonsCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
-        self.backgroundColor = UIColor.GSVCBase300
+        self.backgroundColor = UIColor.GSVCBase200
         // corner radius
         cellButtonView.layer.cornerRadius = 10
         cellButtonView.layer.masksToBounds = true
         // border
         cellButtonView.layer.borderWidth = 0.2
-        cellButtonView.layer.borderColor = UIColor.lightGray.cgColor
+        if #available(iOS 13.0, *) {
+            cellButtonView.layer.borderColor = UIColor.label.cgColor
+        }
 
         // shadow
         stack.layer.shadowColor = UIColor.black.cgColor

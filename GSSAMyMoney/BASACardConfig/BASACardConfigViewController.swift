@@ -147,7 +147,12 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
         let cell = table.cellForRow(at: indexPath)
         switch cell!.tag{
         case 1:
-            let view = BASACardStatementsRouter.createModule()
+            var view = UIViewController()
+            if credit == true{
+                view = BASACardStatementsRouter.createModule(type: .credit)
+            }else{
+                view = BASACardStatementsRouter.createModule(type: .debit)
+            }
             self.navigationController?.pushViewController(view, animated: true)
         case 2:
             let view = BASACardLimitsRouter.createModule()

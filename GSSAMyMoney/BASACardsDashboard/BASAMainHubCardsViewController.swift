@@ -27,12 +27,13 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         self.ConfigureCollectionView()
         self.BasaMainHubTableView.alwaysBounceVertical = false
         NotificationCenter.default.addObserver(self, selector: #selector(SwitchColors(notification:)), name: NSNotification.Name(rawValue: "HomeHeaderViewChange"), object: nil)
-        GSVCLoader.show(type: .native)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         loadDebitBalance()
         self.setTableForDebitCard()
     }
     
     func loadDebitBalance(){
+        GSVCLoader.show(type: .native)
         presenter?.requestBalance(Account: "01274624231334908261", Balance: { Balance in
             if let NewBalance = Balance{
                 DispatchQueue.main.async {
@@ -54,7 +55,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                 debitCardMovements = Movements
                 setTableForDebitCard()
             }else{
-                self.presentBottomAlertFullData(status: .error, message: "Ocurrió un error desconocido, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
+                self.presentBottomAlertFullData(status: .error, message: "Ocurrió un error al cargar tus movimientos, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
             }
         })
     }
@@ -76,6 +77,8 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         self.BasaMainHubTableView.register(UINib(nibName: "BASACreditCardInfoCell", bundle: bundle), forCellReuseIdentifier: "BASACreditCardInfoCell")
         self.BasaMainHubTableView.register(UINib(nibName: "BASALendInfoCell", bundle: bundle), forCellReuseIdentifier: "BASALendInfoCell")
         self.BasaMainHubTableView.register(UINib(nibName: "BASAMyCreditItem", bundle: bundle), forCellReuseIdentifier: "BASAMyCreditItem")
+        self.BasaMainHubTableView.register(UINib(nibName: "GSNoMovementsCell", bundle: bundle), forCellReuseIdentifier: "GSNoMovementsCell")
+        
     }
     
     func setTableForDebitCard(){
@@ -83,6 +86,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         header.cellViewController = self
         let accountData = accountBalance?.resultado.cliente?.cuentas
         header.debitCardlblBalance.text = accountData?.first?.saldoDisponible
+        header.debitCardlblCardNumber.text = accountData?.first?.numero
         header.data = accountBalance
         header.debitButton.backgroundColor = UIColor(red: 130/255, green: 0/255, blue: 255/255, alpha: 1.0)
         header.debitButton.setTitleColor(.white, for: .normal)
@@ -109,6 +113,9 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                 movementCell.lblAmount.text = item.importe
                 cellsArray.append([movementCell:88.0])
             }
+        }else{
+            let emptyMovements = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "GSNoMovementsCell")!
+            cellsArray.append([emptyMovements:321])
         }
         
         addTableComponents()
@@ -128,10 +135,12 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         separator.lblTitle.text = "Movimientos"
         cellsArray.append([separator:60.0])
         
-        let movement = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAMovementCell")!
+        let movement = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAMovementCell") as! BASAMovementTableViewCell
+        movement.lblTitle.text = "Compra en Oxxo"
         cellsArray.append([movement:88.0])
         
-        let movement2 = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAMovementCell")!
+        let movement2 = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAMovementCell") as! BASAMovementTableViewCell
+        movement2.lblTitle.text = "Compra el Walmart"
         cellsArray.append([movement2:88.0])
         
         addTableComponents()
@@ -165,14 +174,11 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     }
     
     func removeAllExceptFirst(){
-        
         if cellsArray.count > 0{
             let count = cellsArray.count
-            
             for _ in 1..<count{
                 cellsArray.removeLast()
             }
-            
             
             var cellsToRemove: [IndexPath] = []
             
@@ -181,7 +187,6 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
             }
             
             BasaMainHubTableView.deleteRows(at: cellsToRemove, with: .right)
-            
         }
     }
     
@@ -199,22 +204,22 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     
     @objc func SwitchColors(notification: Notification){
         if notification.object != nil{
-            let colorType = notification.object as! headerColorType
+            let colorType = notification.object as! cardType
             switch colorType {
             case .credit:
                 if #available(iOS 13.0, *) {
-                    UIApplication.shared.statusBarStyle = .darkContent
+                    UIApplication.shared.statusBarStyle = .lightContent
                 } 
                 setTableForCreditCard()
             case .debit:
                 setTableForDebitCard()
                 if #available(iOS 13.0, *) {
-                    UIApplication.shared.statusBarStyle = .darkContent
+                    UIApplication.shared.statusBarStyle = .lightContent
                 }
             case .lending:
                 setTableForLends()
                 if #available(iOS 13.0, *) {
-                    UIApplication.shared.statusBarStyle = .darkContent
+                    UIApplication.shared.statusBarStyle = .lightContent
                 }
             }
         }

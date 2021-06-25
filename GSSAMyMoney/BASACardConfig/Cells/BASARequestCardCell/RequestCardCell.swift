@@ -14,7 +14,7 @@ class RequestCardCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.backgroundColor = UIColor.GSVCBase300
+        //self.backgroundColor = UIColor.GSVCBase200
         self.selectionStyle = .none
         self.buttonView.layer.shadowColor = UIColor.lightGray.cgColor
         self.buttonView.layer.shadowRadius = 6

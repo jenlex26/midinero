@@ -16,7 +16,7 @@ class BASACardControl: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
-        self.backgroundColor = UIColor.GSVCBase300
+        self.backgroundColor = UIColor.GSVCBase200
         self.cardControlView.layer.shadowColor = UIColor.lightGray.cgColor
         self.cardControlView.layer.shadowRadius = 6
         self.cardControlView.layer.shadowOpacity = 0.1

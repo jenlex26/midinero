@@ -17,7 +17,9 @@ class BASALendViewCVC: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        btnConfig.backgroundColor = UIColor(red: 91/255, green: 157/255, blue: 71/255, alpha: 1.0)
+        btnConfig.layer.masksToBounds = true
+        btnConfig.layer.cornerRadius = btnConfig.frame.width/2
     }
 
 }

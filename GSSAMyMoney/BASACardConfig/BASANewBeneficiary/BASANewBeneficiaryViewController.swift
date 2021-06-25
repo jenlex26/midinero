@@ -81,7 +81,6 @@ extension BASANewBeneficiaryViewController: UITableViewDelegate, UITableViewData
             cell.lblTitle.styleType = 6
             cell.lblTitle.text = "Utilizar mi dirección"
             cell.separatorView.isHidden = true
-            cell.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 247/255, alpha: 1.0)
             return cell
         case 2 + tableFields.count:
             let cell = table.dequeueReusableCell(withIdentifier: "BASAInfoCardCell") as! BASAInfoCardCell

@@ -14,13 +14,14 @@ class BASACardStatementsRouter: BASACardStatementsWireframeProtocol {
     
     weak var viewController: UIViewController?
     
-    static func createModule() -> UIViewController {
+    static func createModule(type: CardType) -> UIViewController {
         // Change to get view from storyboard if not using progammatic UI
         let view = BASACardStatementsViewController(nibName: nil, bundle: Bundle.init(for: BASACardStatementsRouter.self))
         let interactor = BASACardStatementsInteractor()
         let router = BASACardStatementsRouter()
         let presenter = BASACardStatementsPresenter(interface: view, interactor: interactor, router: router)
         
+        view.type = type
         view.presenter = presenter
         interactor.presenter = presenter
         router.viewController = view

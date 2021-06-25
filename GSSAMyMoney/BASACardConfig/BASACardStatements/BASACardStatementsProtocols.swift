@@ -16,13 +16,13 @@ protocol BASACardStatementsWireframeProtocol: class {
 }
 //MARK: Presenter -
 protocol BASACardStatementsPresenterProtocol: class {
-
+    func requestStatements(body: DebitCardStatementBody, StatementsResultData: @escaping (DebitCardStatementData?) -> ())
 }
 
 //MARK: Interactor -
 protocol BASACardStatementsInteractorProtocol: class {
-
   var presenter: BASACardStatementsPresenterProtocol?  { get set }
+    func getStatements(body: DebitCardStatementBody, StatementsResultData: @escaping (DebitCardStatementData?) -> ())
 }
 
 //MARK: View -

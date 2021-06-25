@@ -26,7 +26,7 @@ class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASAMainH
         let headers: [HeadersCustom] = [
             HeadersCustom(value:"true", forHTTPHeaderField: "x-consulta-detallada"),
             HeadersCustom(value:"3bad1290ac4600a569162efaa09117ea", forHTTPHeaderField: "x-sicu"),
-            HeadersCustom(value:"3bad1290ac4600a569162efaa09117ea", forHTTPHeaderField: "x-id-interaccion"),
+            HeadersCustom(value:"123e4567-e89b-12d3-a456-426655440000", forHTTPHeaderField: "x-id-interaccion"),
             HeadersCustom(value:"Super movil", forHTTPHeaderField: "x-nombre-dispositivo"),
             HeadersCustom(value:"3bad1290ac4600a569162efaa09117ea", forHTTPHeaderField: "x-id-dispositivo"),
             HeadersCustom(value:"Android", forHTTPHeaderField: "x-sistema-dispositivo"),
@@ -62,7 +62,7 @@ class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASAMainH
         
         let headers: [HeadersCustom] = [
             HeadersCustom(value:"3bad1290ac4600a569162efaa09117ea", forHTTPHeaderField: "x-sicu"),
-            HeadersCustom(value:"3bad1290ac4600a569162efaa09117ea", forHTTPHeaderField: "x-id-interaccion"),
+            HeadersCustom(value:"123e4567-e89b-12d3-a456-426655440000", forHTTPHeaderField: "x-id-interaccion"),
             HeadersCustom(value:"Super movil", forHTTPHeaderField: "x-nombre-dispositivo"),
             HeadersCustom(value:"3bad1290ac4600a569162efaa09117ea", forHTTPHeaderField: "x-id-dispositivo"),
             HeadersCustom(value:"Android", forHTTPHeaderField: "x-sistema-dispositivo"),
@@ -85,7 +85,7 @@ class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASAMainH
                 Movements(objRes)
             }
             if error.code == 0 {
-                print("OK")
+                print(self.cifrado(text: "Texto de prueba"))
             } else {
                 Movements(nil)
                 debugPrint(error)
@@ -93,6 +93,14 @@ class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASAMainH
         }
         
         
+    }
+    
+    func cifrado(text: String) -> String{
+        let serviceSecurity = GSSAServiceSecurity()
+        guard let result = serviceSecurity.dynamicAlgorithm(field: "Cadena cifrada", task: .encrypted) else {
+            return "No se pudo cifrar"
+        }
+       return result
     }
 }
 

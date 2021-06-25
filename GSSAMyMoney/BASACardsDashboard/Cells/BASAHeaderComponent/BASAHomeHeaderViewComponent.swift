@@ -16,14 +16,18 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
     @IBOutlet weak var backButton               : UIButton!
     @IBOutlet weak var lblTitle                 : UILabel!
     @IBOutlet weak var debitCardContainer       : UIView!
+    @IBOutlet weak var debitButton              : GSVCButton!
+    @IBOutlet weak var creditButton             : GSVCButton!
     //MARK: - DebitCard Outlets -
     @IBOutlet weak var debitCardlblBalance      : GSVCLabel!
     @IBOutlet weak var debitCardlblCardNumber   : GSVCLabel!
     @IBOutlet weak var debitCardbtnConfig       : UIButton!
     @IBOutlet weak var debitCardView            : UIView!
     @IBOutlet weak var imgHeader                : UIImageView!
-    @IBOutlet weak var debitButton              : GSVCButton!
-    @IBOutlet weak var creditButton             : GSVCButton!
+    @IBOutlet weak var expDateTitle             : GSVCLabel!
+    @IBOutlet weak var expDateLabel             : GSVCLabel!
+    @IBOutlet weak var CVVTitle                 : GSVCLabel!
+    @IBOutlet weak var CVVLabel                 : GSVCLabel!
 
     var gradient = CAGradientLayer()
     var cellViewController: UIViewController!
@@ -86,10 +90,10 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
                 self.lblTitle.textColor = .white
                 self.backButton.tintColor = .white
             })
-            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "HomeHeaderViewChange"), object: headerColorType.credit, userInfo: nil))
+            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "HomeHeaderViewChange"), object: cardType.credit, userInfo: nil))
         case 1:
             //PONER IMAGEN AZUL
-            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "HomeHeaderViewChange"), object:  headerColorType.lending, userInfo: nil))
+            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "HomeHeaderViewChange"), object:  cardType.lending, userInfo: nil))
         default:
             gradient.colors = [UIColor.GSVCPrincipal100.cgColor, UIColor.GSVCPrincipal100.cgColor]
         }
@@ -107,12 +111,14 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
                                                                           withFontColor: .GSVCText100,
                                                                           withLittleCoin: false)
             
-            debitCardlblBalance.attributedText = amountFormat
+            
+            debitCardlblBalance.text = amountFormat.mutableString.description
+            debitCardlblCardNumber.text = data.resultado.cliente?.cuentas?.first?.numero?.tnuoccaFormat
         }
     }
     
     @IBAction func debitCardClick(_ sender: Any){
-        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "HomeHeaderViewChange"), object:  headerColorType.debit, userInfo: nil))
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "HomeHeaderViewChange"), object:  cardType.debit, userInfo: nil))
         debitCardView.isHidden = false
         cardCollection.isHidden = true
         pageController.isHidden = true
@@ -240,7 +246,7 @@ func applyBlurEffect() {
     }
 }
 
-enum headerColorType{
+enum cardType{
     case debit
     case credit
     case lending
