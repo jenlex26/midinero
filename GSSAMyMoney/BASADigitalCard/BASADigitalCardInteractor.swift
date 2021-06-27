@@ -19,7 +19,7 @@ class BASADigitalCardInteractor: GSSAURLSessionTaskCoordinatorBridge, BASADigita
     public func TryGetCardDigitalCardData(Body: Transaction,  DataCard: @escaping (AccountResponse?) -> ())
     {
         self.urlPath = "https://688div74bd.execute-api.us-east-1.amazonaws.com/"
-        self.strPathEndpoint = "interaccion/superapp/dinero/captacion/gestion-tarjetas-digitales/v1/tarjetas"
+        self.strPathEndpoint = "integracion/superapp/dinero/captacion/gestion-tarjetas-digitales/v1/tarjetas"
     
         sendRequest(strUrl: strPathEndpoint, method: .POST, objBody: Body, environment: .develop) { (objRes: AccountResponse?, error) in
             debugPrint(objRes as Any)

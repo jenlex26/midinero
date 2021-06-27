@@ -8,22 +8,22 @@
 import Foundation
 
 public struct AccountResponse: Codable{
-    var mensaje: String
-    var folio: String
-    var resultado: AccountInfo
+    var mensaje: String?
+    var folio: String?
+    var resultado: AccountInfo?
 }
 
 public struct AccountInfo: Codable{
-    var numeroCuenta: Int
-    var numeroTarjeta: Int
-    var cvv: Int
-    var fechaExpiracion: String
+    var numeroCuenta: Int?
+    var numeroTarjeta: Int?
+    var cvv: Int?
+    var fechaExpiracion: String?
 }
 
 public struct AccoutRequest: Codable{
-    var numeroCuenta: Int
-    var token: Int
-    var primerTokenVerificacion: String
+    var numeroCuenta: Int?
+    var tokenOperacion: Int?
+    var primerTokenVerificacion: String?
 }
 
 public struct Transaction: Codable{

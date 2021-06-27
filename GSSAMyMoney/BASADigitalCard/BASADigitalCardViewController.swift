@@ -53,13 +53,13 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
             self.AvaibleMoneyLabel.attributedText = amountFormat
         }
         
-        presenter?.makeDigitalDataRequest(Body: Transaction(transaccion: AccoutRequest(numeroCuenta: 2575284525826, token: 85284585966396, primerTokenVerificacion: "fac2ac44565db5312fb407c3c9482d04")), DataCard: { [self] DataCard in
+        presenter?.makeDigitalDataRequest(Body: Transaction(transaccion: AccoutRequest(numeroCuenta: 2575284525826, tokenOperacion: 85284585966396, primerTokenVerificacion: "fac2ac44565db5312fb407c3c9482d04")), DataCard: { [self] DataCard in
             GSVCLoader.hide()
             if DataCard != nil{
                 self.StartTimer()
-                CVVCodeLabel.text = String(DataCard!.resultado.cvv)
-                CardNumberLabel.text = String(DataCard!.resultado.numeroTarjeta).tnuoccaFormat
-                ExpDateLabel.text = DataCard?.resultado.fechaExpiracion
+                CVVCodeLabel.text = String(DataCard!.resultado!.cvv ?? 000)
+                CardNumberLabel.text = String(DataCard!.resultado!.numeroTarjeta ?? 0).tnuoccaFormat
+                ExpDateLabel.text = DataCard?.resultado?.fechaExpiracion
             }else{
                 self.presentBottomAlertFullData(status: .error, message: "Ocurrió un error desconocido, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
             }
