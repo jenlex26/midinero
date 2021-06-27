@@ -113,7 +113,7 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
             
             
             debitCardlblBalance.text = amountFormat.mutableString.description
-            debitCardlblCardNumber.text = data.resultado.cliente?.cuentas?.first?.numero?.tnuoccaFormat
+            debitCardlblCardNumber.text = data.resultado.cliente?.cuentas?.first?.numeroTarjeta
         }
     }
     
@@ -122,10 +122,8 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
         debitCardView.isHidden = false
         cardCollection.isHidden = true
         pageController.isHidden = true
-        debitButton.backgroundColor = UIColor(red: 130/255, green: 0/255, blue: 255/255, alpha: 1.0)
-        debitButton.setTitleColor(.white, for: .normal)
-        creditButton.backgroundColor = .white
-        creditButton.setTitleColor(.black, for: .normal)
+        debitButton.style = 7
+        creditButton.style = 8
         debitButton.isEnabled = false
         creditButton.isEnabled = true
     }
@@ -136,10 +134,8 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
         debitCardView.isHidden = true
         cardCollection.isHidden = false
         pageController.isHidden = false
-        debitButton.backgroundColor = .white
-        debitButton.setTitleColor(.black, for: .normal)
-        creditButton.backgroundColor = UIColor(red: 130/255, green: 0/255, blue: 255/255, alpha: 1.0)
-        creditButton.setTitleColor(.white, for: .normal)
+        debitButton.style = 8
+        creditButton.style = 7
         UIView.animate(withDuration: 0.35, animations: {
             self.lblTitle.textColor = .white
             self.backButton.tintColor = .white

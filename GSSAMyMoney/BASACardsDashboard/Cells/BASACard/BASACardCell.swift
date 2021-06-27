@@ -26,7 +26,7 @@ class BASACardCell: UICollectionViewCell {
     @objc func reloadCards(notification: Notification){
         if notification.object != nil{
             let data = notification.object as? BalanceResponse
-            self.lblCardNumber.text = data?.resultado.cliente?.cuentas?.first?.numero?.tnuoccaFormat
+            //self.lblCardNumber.text = data?.resultado.cliente?.cuentas?.first?.numero?.tnuoccaFormat
         }
     }
 }

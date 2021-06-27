@@ -12,6 +12,15 @@ import UIKit
 import GSSAVisualComponents
 
 class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProtocol, GSVCBottomAlertHandler {
+    func cerraBottomAlert() {
+        bottomAlert = nil
+        //bottomAlert?.animateDismissal()
+    }
+    func dismissBottomAlert(animated: Bool) {
+        bottomAlert?.animViewBottomToTop()
+        bottomAlert = nil
+    }
+    
     var bottomAlert: GSVCBottomAlert?
     var presenter: BASAMainHubCardsPresenterProtocol?
     
@@ -49,7 +58,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     }
     
     func loadDebitMovements(){
-        self.presenter?.requestDebitCardMovements(Body: MovimientosBody(transaccion: MovementsBodyData(numeroCuenta: "01274624231334908261", fechaInicial: "20/09/2018", fechaFinal: "23/11/2018")), Movements: { [self] Movements in
+        self.presenter?.requestDebitCardMovements(Body: MovimientosBody(transaccion: MovementsBodyData(numeroCuenta: "01270172461200000001", fechaInicial: "01/01/0001", fechaFinal: "01/01/0001")), Movements: { [self] Movements in
             GSVCLoader.hide()
             if Movements != nil{
                 debitCardMovements = Movements
@@ -86,7 +95,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         header.cellViewController = self
         let accountData = accountBalance?.resultado.cliente?.cuentas
         header.debitCardlblBalance.text = accountData?.first?.saldoDisponible
-        header.debitCardlblCardNumber.text = accountData?.first?.numero
+        header.debitCardlblCardNumber.text = accountData?.first?.numero?.alnovaDecrypt()
         header.data = accountBalance
         header.debitButton.backgroundColor = UIColor(red: 130/255, green: 0/255, blue: 255/255, alpha: 1.0)
         header.debitButton.setTitleColor(.white, for: .normal)
@@ -108,9 +117,12 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         if debitCardMovements != nil{
             for item in debitCardMovements!.resultado.movimientos{
                 let movementCell = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAMovementCell") as! BASAMovementTableViewCell
-                movementCell.lblDate.text = item.fechaOperacion
+                movementCell.lblDate.text = item.fechaOperacion?.dateFormatter(format: "yyyy/MM/dd", outputFormat: "dd MMM yyyy")
                 movementCell.lblTitle.text = item.descripcion
-                movementCell.lblAmount.text = item.importe
+                movementCell.lblAmount.text = item.importe?.moneyFormat()
+                movementCell.setArrow(amount: item.importe ?? "")
+                
+                
                 cellsArray.append([movementCell:88.0])
             }
         }else{
@@ -137,10 +149,12 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         
         let movement = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAMovementCell") as! BASAMovementTableViewCell
         movement.lblTitle.text = "Compra en Oxxo"
+        movement.lblAmount.text = "$200.0"
         cellsArray.append([movement:88.0])
         
         let movement2 = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAMovementCell") as! BASAMovementTableViewCell
         movement2.lblTitle.text = "Compra el Walmart"
+        movement2.lblAmount.text = "$500.0"
         cellsArray.append([movement2:88.0])
         
         addTableComponents()

@@ -13,6 +13,15 @@ import GSSAVisualComponents
 import GSSAVisualTemplates
 
 class BASABeneficiaryListViewController: UIViewController, BASABeneficiaryListViewProtocol, GSVCBottomAlertHandler {
+    func cerraBottomAlert() {
+        bottomAlert = nil
+        //bottomAlert?.animateDismissal()
+    }
+    func dismissBottomAlert(animated: Bool) {
+        bottomAlert?.animViewBottomToTop()
+        bottomAlert = nil
+    }
+    
     var bottomAlert: GSVCBottomAlert?
 	var presenter: BASABeneficiaryListPresenterProtocol?
 

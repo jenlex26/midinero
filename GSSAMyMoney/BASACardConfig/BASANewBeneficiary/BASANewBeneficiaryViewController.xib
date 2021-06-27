@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BASANewBeneficiaryViewController" customModule="GSSAFront" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BASANewBeneficiaryViewController" customModule="GSSAMyMoney" customModuleProvider="target">
             <connections>
                 <outlet property="table" destination="7b5-R9-xFp" id="4RP-nf-BnC"/>
                 <outlet property="view" destination="iN0-l3-epB" id="zM4-Dv-3KA"/>
@@ -35,7 +35,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Beneficiarios" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P7s-r8-8u6" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                            <rect key="frame" x="158" y="15" width="98" height="20.5"/>
+                            <rect key="frame" x="155" y="14" width="104" height="22.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -75,8 +75,9 @@
         </view>
     </objects>
     <designables>
+        <designable name="FOU-BO-b3d"/>
         <designable name="P7s-r8-8u6">
-            <size key="intrinsicContentSize" width="98" height="20.5"/>
+            <size key="intrinsicContentSize" width="104" height="22.5"/>
         </designable>
     </designables>
     <resources>

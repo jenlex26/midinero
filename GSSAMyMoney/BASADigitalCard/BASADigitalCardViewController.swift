@@ -20,10 +20,6 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
     var bottomAlert: GSVCBottomAlert?
     var presenter: BASADigitalCardPresenterProtocol?
     
-    func dismissBottomAlert(animated: Bool) {
-        bottomAlert = nil
-    }
-    
     //MARK: - Outlets
     
     @IBOutlet weak var DigitalCard: BASAShadowRadiusView!

@@ -17,11 +17,12 @@ class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASAMainH
     weak var presenter: BASAMainHubCardsPresenterProtocol?
     
     func TryGetDebitCardBalance(Account:String, Balance: @escaping (BalanceResponse?) -> ()){
-        let Request = TransationBalanceRequest(transaccion: TransationItem(folio: "c7fe6f15-3388-4991-acbb-2961e495004f", numeroCuenta: Account))
-        
+        let Request = TransationBalanceRequest(transaccion: TransationItem(folio: "O0l75ttIPhsswmtHRjcCTzbw8XO8hNbEREiRTjVb8Cp8h-xgRkPPLNiJCsTsn3oI", numeroCuenta: Account))
         
         self.urlPath = "https://dmu8nwfrwl.execute-api.us-east-1.amazonaws.com/"
-        self.strPathEndpoint = "desarrollo/superapp/dinero/captacion/cuentas/v1/busquedas"
+        self.strPathEndpoint = "integracion/superapp/dinero/captacion/cuentas/v1/busquedas"
+        
+      //  https://dmu8nwfrwl.execute-api.us-east-1.amazonaws.com/desarrollo/superapp/dinero/captacion/cuentas/v1/busquedas
         
         let headers: [HeadersCustom] = [
             HeadersCustom(value:"true", forHTTPHeaderField: "x-consulta-detallada"),
@@ -44,8 +45,11 @@ class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASAMainH
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: headers, objBody: Request, environment: .custom) { (objRes: BalanceResponse?, error) in
             debugPrint(objRes as Any)
+            
             if error.code == 0 {
                 if (objRes?.resultado.cliente?.cuentas?.first?.saldoDisponible) != nil{
+                    Balance(objRes)
+                }else{
                     Balance(objRes)
                 }
             } else {
@@ -58,7 +62,7 @@ class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASAMainH
     func TryGetDebitCardMovements(Body: MovimientosBody, Movements: @escaping (DebitCardTransaction?) -> ()){
         
         self.urlPath = "https://dmu8nwfrwl.execute-api.us-east-1.amazonaws.com/"
-        self.strPathEndpoint = "desarrollo/superapp/dinero/captacion/cuentas/v1/movimientos/busquedas"
+        self.strPathEndpoint = "integracion/superapp/dinero/captacion/cuentas/v1/movimientos/busquedas"
         
         let headers: [HeadersCustom] = [
             HeadersCustom(value:"3bad1290ac4600a569162efaa09117ea", forHTTPHeaderField: "x-sicu"),
@@ -80,12 +84,14 @@ class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASAMainH
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: headers, objBody: Body, environment: .custom) { (objRes: DebitCardTransaction?, error) in
             debugPrint(objRes as Any)
-            if let mensaje = objRes?.mensaje {
-                print(mensaje)
-                Movements(objRes)
-            }
+            
             if error.code == 0 {
-                print(self.cifrado(text: "Texto de prueba"))
+                if let mensaje = objRes?.mensaje {
+                    print(mensaje)
+                    Movements(objRes)
+                }else{
+                    Movements(nil)
+                }
             } else {
                 Movements(nil)
                 debugPrint(error)
@@ -93,14 +99,6 @@ class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASAMainH
         }
         
         
-    }
-    
-    func cifrado(text: String) -> String{
-        let serviceSecurity = GSSAServiceSecurity()
-        guard let result = serviceSecurity.dynamicAlgorithm(field: "Cadena cifrada", task: .encrypted) else {
-            return "No se pudo cifrar"
-        }
-       return result
     }
 }
 

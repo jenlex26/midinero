@@ -13,6 +13,16 @@ import GSSAVisualComponents
 import GSSAVisualTemplates
 
 class BASACardStatementsViewController: UIViewController, BASACardStatementsViewProtocol, GSVTGenericResultDelegate, GSVCBottomAlertHandler {
+    func dismissBottomAlert(animated: Bool) {
+        bottomAlert?.animViewBottomToTop()
+        bottomAlert = nil
+    }
+    
+    func cerraBottomAlert() {
+        bottomAlert = nil
+       // bottomAlert?.animateDismissal()
+    }
+    
     
     var bottomAlert: GSVCBottomAlert?
     var presenter: BASACardStatementsPresenterProtocol?

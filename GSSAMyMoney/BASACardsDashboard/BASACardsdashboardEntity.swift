@@ -26,7 +26,7 @@ struct Cliente: Codable {
 
 // MARK: - Debit Account Info  Cuenta
 struct Cuenta: Codable {
-    let alias, numero, clabe, codigoEstatus: String?
+    let alias, numero, numeroTarjeta, clabe, codigoEstatus: String?
     let saldoTotal, saldoRetenido, saldoDisponible: String?
 }
 

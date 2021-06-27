@@ -14,16 +14,41 @@ class BASAMovementTableViewCell: UITableViewCell {
     @IBOutlet weak var lblAmount: GSVCLabel!
     @IBOutlet weak var lblDate: GSVCLabel!
     @IBOutlet weak var imgView: UIImageView!
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
     
+    func setArrow(amount: String){
+        if #available(iOS 13.0, *) {
+            if amount.contains("-"){
+                imgView.image = UIImage(systemName: "arrow.left")
+                imgView.tintColor = .systemPink
+            }else{
+                imgView.image = UIImage(systemName: "arrow.right")
+                imgView.tintColor = .systemGreen
+            }
+        }else{
+            imgView.isHidden = true
+        }
+    }
+}
+
+extension String{
+    func moneyFormat() -> String{
+        var stringAmount = ""
+        guard let formatedAmount = Int(self) else{
+            return self
+        }
+        stringAmount = String(formatedAmount)
+        
+        let amountFormat = NSMutableAttributedString.setFormattedText(withStringAmmount: stringAmount,
+                                                                      withNumberOfDecimals: 0,
+                                                                      withFontSize: 36,
+                                                                      withFontWeight: .bold,
+                                                                      withFontColor: .GSVCText100,
+                                                                      withLittleCoin: false)
+        return amountFormat.mutableString.description
+    }
 }

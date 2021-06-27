@@ -18,7 +18,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="88"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.left" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="PXo-EC-Zzn">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="PXo-EC-Zzn">
                         <rect key="frame" x="10" y="22.5" width="30" height="15"/>
                         <color key="tintColor" systemColor="systemPinkColor"/>
                         <constraints>
@@ -27,7 +27,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Compra en OXXO" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tum-Yi-C0A" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                        <rect key="frame" x="50" y="21" width="121.5" height="18"/>
+                        <rect key="frame" x="50" y="19" width="140.5" height="22.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -38,7 +38,7 @@
                         </userDefinedRuntimeAttributes>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$70.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="21I-Yb-sa8" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                        <rect key="frame" x="232" y="32" width="68" height="24"/>
+                        <rect key="frame" x="246" y="33" width="54" height="22.5"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -49,7 +49,7 @@
                         </userDefinedRuntimeAttributes>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16 Abr 2021" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HQQ-iP-dYm" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                        <rect key="frame" x="50" y="44" width="68" height="14.5"/>
+                        <rect key="frame" x="50" y="46.5" width="74.5" height="20"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -83,17 +83,17 @@
     </objects>
     <designables>
         <designable name="21I-Yb-sa8">
-            <size key="intrinsicContentSize" width="68" height="24"/>
+            <size key="intrinsicContentSize" width="54" height="22.5"/>
         </designable>
         <designable name="HQQ-iP-dYm">
-            <size key="intrinsicContentSize" width="68" height="14.5"/>
+            <size key="intrinsicContentSize" width="74.5" height="20"/>
         </designable>
         <designable name="tum-Yi-C0A">
-            <size key="intrinsicContentSize" width="121.5" height="18"/>
+            <size key="intrinsicContentSize" width="140.5" height="22.5"/>
         </designable>
     </designables>
     <resources>
-        <image name="arrow.left" catalog="system" width="128" height="98"/>
+        <image name="arrow.right" catalog="system" width="128" height="98"/>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
