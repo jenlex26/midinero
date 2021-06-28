@@ -132,8 +132,8 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="$9000.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tdv-ye-51P" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                                <rect key="frame" x="293.5" y="49" width="147.5" height="50.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="$9000.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tdv-ye-51P" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                                                <rect key="frame" x="10" y="49" width="431" height="50.5"/>
                                                 <fontDescription key="fontDescription" name="GeezaPro-Bold" family="Geeza Pro" pointSize="37"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -209,6 +209,7 @@
                                             <constraint firstItem="vlW-yv-wH9" firstAttribute="trailing" secondItem="eoH-yZ-cf6" secondAttribute="trailing" id="7yN-3C-7uA"/>
                                             <constraint firstAttribute="bottom" secondItem="t7Q-8d-r8v" secondAttribute="bottom" id="8fO-QF-6hc"/>
                                             <constraint firstItem="vlW-yv-wH9" firstAttribute="top" secondItem="eoH-yZ-cf6" secondAttribute="bottom" constant="12" id="CVx-yq-ci2"/>
+                                            <constraint firstItem="Tdv-ye-51P" firstAttribute="leading" secondItem="Ya1-ct-Igq" secondAttribute="leading" constant="10" id="Dig-nZ-a8d"/>
                                             <constraint firstItem="t7Q-8d-r8v" firstAttribute="leading" secondItem="Ya1-ct-Igq" secondAttribute="leading" id="Lc9-sg-WR8"/>
                                             <constraint firstItem="Tdv-ye-51P" firstAttribute="top" secondItem="YXc-po-Hfo" secondAttribute="bottom" constant="15" id="NUu-YE-oxY"/>
                                             <constraint firstAttribute="trailing" secondItem="YXc-po-Hfo" secondAttribute="trailing" constant="15" id="NvD-Pf-Bvy"/>

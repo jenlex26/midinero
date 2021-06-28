@@ -23,14 +23,15 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
     //MARK: - Outlets
     
     @IBOutlet weak var DigitalCard: BASAShadowRadiusView!
-    @IBOutlet weak var TopHeaderView: UIView!
+    @IBOutlet weak var TopHeaderView     : UIView!
     @IBOutlet weak var CardBackgroundView: UIView!
-    @IBOutlet weak var CVVCodeLabel: GSVCLabel!
-    @IBOutlet weak var AvaibleMoneyLabel: GSVCLabel!
-    @IBOutlet weak var CardNumberLabel: GSVCLabel!
-    @IBOutlet weak var ExpTitleLabel: GSVCLabel!
-    @IBOutlet weak var ExpDateLabel: GSVCLabel!
-    @IBOutlet weak var TimerView: BASACircularProgressView!
+    @IBOutlet weak var cvvView           : UIView!
+    @IBOutlet weak var CVVCodeLabel      : GSVCLabel!
+    @IBOutlet weak var AvaibleMoneyLabel : GSVCLabel!
+    @IBOutlet weak var CardNumberLabel   : GSVCLabel!
+    @IBOutlet weak var ExpTitleLabel     : GSVCLabel!
+    @IBOutlet weak var ExpDateLabel      : GSVCLabel!
+    @IBOutlet weak var TimerView         : BASACircularProgressView!
     
     var userBalance: String! 
     //MARK: - Life cicle
@@ -40,8 +41,21 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
         self.ConfigureBlurCardView()
         GSVCLoader.show(type: .native)
         self.TimerView.delegate = self
-        CardBackgroundView.layer.cornerRadius = 5
+        
+        
+        CardBackgroundView.layer.cornerRadius = 10
         CardBackgroundView.layer.masksToBounds = true
+        
+        CardBackgroundView.layer.borderWidth = 0.2
+        CardBackgroundView.layer.borderColor = UIColor.lightGray.cgColor
+        
+        
+        cvvView.layer.cornerRadius = 10
+        cvvView.layer.masksToBounds = true
+        
+        cvvView.layer.borderWidth = 0.2
+        cvvView.layer.borderColor = UIColor.lightGray.cgColor
+        
         
         if userBalance != nil{
             let amountFormat = NSMutableAttributedString.setFormattedText(withStringAmmount: userBalance,
@@ -65,7 +79,7 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
             }
         })
     }
-        
+    
     func optionalAction() {
         print("Ok")
     }
@@ -84,6 +98,13 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
         gradient.frame = view.bounds
         gradient.colors = [UIColor.GSVCPrincipal100.cgColor, UIColor.GSVCPrincipal100.cgColor]
         TopHeaderView.layer.insertSublayer(gradient, at: 0)
+    }
+    
+    @IBAction func copyCardNumber(_ sender: Any){
+        if CardNumberLabel.text?.count ?? 0 > 0{
+            UIPasteboard.general.string = CardNumberLabel.text
+            self.presentBottomAlertFullData(status: .success, message: "Número de tarjeta copiado al portapapeles", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
+        }
     }
     
     @IBAction func TryDismiss(_ sender: Any) {

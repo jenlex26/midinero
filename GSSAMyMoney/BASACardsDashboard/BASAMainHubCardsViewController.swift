@@ -12,14 +12,6 @@ import UIKit
 import GSSAVisualComponents
 
 class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProtocol, GSVCBottomAlertHandler {
-    func cerraBottomAlert() {
-        bottomAlert = nil
-        //bottomAlert?.animateDismissal()
-    }
-    func dismissBottomAlert(animated: Bool) {
-        bottomAlert?.animViewBottomToTop()
-        bottomAlert = nil
-    }
     
     var bottomAlert: GSVCBottomAlert?
     var presenter: BASAMainHubCardsPresenterProtocol?
@@ -43,7 +35,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     
     func loadDebitBalance(){
         GSVCLoader.show(type: .native)
-        presenter?.requestBalance(Account: "01274624231334908261", Balance: { Balance in
+        presenter?.requestBalance(Account: "01270172461200000001", Balance: { Balance in
             if let NewBalance = Balance{
                 DispatchQueue.main.async {
                     self.accountBalance = NewBalance

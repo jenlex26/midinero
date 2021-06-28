@@ -38,7 +38,7 @@
                         </userDefinedRuntimeAttributes>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$70.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="21I-Yb-sa8" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                        <rect key="frame" x="246" y="33" width="54" height="22.5"/>
+                        <rect key="frame" x="246" y="45" width="54" height="22.5"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -66,8 +66,9 @@
                     <constraint firstItem="tum-Yi-C0A" firstAttribute="leading" secondItem="PXo-EC-Zzn" secondAttribute="trailing" constant="10" id="GB4-zO-mwv"/>
                     <constraint firstItem="HQQ-iP-dYm" firstAttribute="leading" secondItem="tum-Yi-C0A" secondAttribute="leading" id="JYT-Fj-Fh2"/>
                     <constraint firstItem="tum-Yi-C0A" firstAttribute="centerY" secondItem="PXo-EC-Zzn" secondAttribute="centerY" id="MmH-Mo-tSO"/>
-                    <constraint firstItem="21I-Yb-sa8" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Y8l-ZU-ahk"/>
                     <constraint firstItem="PXo-EC-Zzn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="btT-YW-Iog"/>
+                    <constraint firstItem="21I-Yb-sa8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="HQQ-iP-dYm" secondAttribute="trailing" constant="10" id="fGu-dM-5Rs"/>
+                    <constraint firstItem="21I-Yb-sa8" firstAttribute="centerY" secondItem="HQQ-iP-dYm" secondAttribute="centerY" id="oZS-P6-oxD"/>
                     <constraint firstAttribute="trailing" secondItem="21I-Yb-sa8" secondAttribute="trailing" constant="20" id="rRx-VB-Ccp"/>
                 </constraints>
             </tableViewCellContentView>

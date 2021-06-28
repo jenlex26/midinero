@@ -119,9 +119,18 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
         GSVCLoader.show(type: .native)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
             GSVCLoader.hide()
-            let genericResult = GSVTGenericResultViewController(genericResultDelegate: self, style: .success, title: "Estados de cuenta enviados", message: nil, attributedMessage: .none, folio: nil, optionalButtonTitle: nil, staticButtonTitle: nil)
-            genericResult.modalPresentationStyle = .fullScreen
-            self.present(genericResult, animated: true, completion: nil)
+//            let genericResult = GSVTGenericResultViewController(genericResultDelegate: self, style: .success, title: "Estados de cuenta enviados", message: nil, attributedMessage: .none, folio: nil, optionalButtonTitle: nil, staticButtonTitle: nil)
+//            genericResult.modalPresentationStyle = .fullScreen
+//            self.present(genericResult, animated: true, completion: nil)
+            
+            let success = GSVTOperationStatusViewController(status: .success(title: "Operación completada", message: "Estados de cuenta envíados", views: []), plainButtonAction: {
+                self.dismiss(animated: true, completion: {
+                    self.navigationController?.popViewController(animated: true)
+                })
+            })
+            
+            self.present(success, animated: true, completion: nil)
+            
         })
     }
     

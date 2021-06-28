@@ -17,7 +17,7 @@ class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASAMainH
     weak var presenter: BASAMainHubCardsPresenterProtocol?
     
     func TryGetDebitCardBalance(Account:String, Balance: @escaping (BalanceResponse?) -> ()){
-        let Request = TransationBalanceRequest(transaccion: TransationItem(folio: "O0l75ttIPhsswmtHRjcCTzbw8XO8hNbEREiRTjVb8Cp8h-xgRkPPLNiJCsTsn3oI", numeroCuenta: Account))
+        let Request = TransationBalanceRequest(transaccion: TransationItem(folio: "yx0a8LHTvWQLcQKeGJ3Eqq9cmX_pQnQIB6lBmeFOPUM7wifAmkRTHug-PKiEQv_Y", numeroCuenta: Account))
         
         self.urlPath = "https://dmu8nwfrwl.execute-api.us-east-1.amazonaws.com/"
         self.strPathEndpoint = "integracion/superapp/dinero/captacion/cuentas/v1/busquedas"

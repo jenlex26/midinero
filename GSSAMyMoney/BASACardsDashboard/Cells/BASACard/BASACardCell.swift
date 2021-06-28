@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import GSSAVisualComponents
 
 class BASACardCell: UICollectionViewCell {
     

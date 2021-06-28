@@ -102,18 +102,9 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
     @objc func reloadCards(notification: Notification){
         if notification.object != nil{
            let data = notification.object as! BalanceResponse
-            let amountString = data.resultado.cliente?.cuentas?.first?.saldoDisponible ?? "0"
-            
-            let amountFormat = NSMutableAttributedString.setFormattedText(withStringAmmount: amountString,
-                                                                          withNumberOfDecimals: 0,
-                                                                          withFontSize: 36,
-                                                                          withFontWeight: .bold,
-                                                                          withFontColor: .GSVCText100,
-                                                                          withLittleCoin: false)
-            
-            
-            debitCardlblBalance.text = amountFormat.mutableString.description
-            debitCardlblCardNumber.text = data.resultado.cliente?.cuentas?.first?.numeroTarjeta
+            let amountString = data.resultado.cliente?.cuentas?.first?.saldoDisponible?.alnovaDecrypt().moneyFormat() ?? "0"
+            debitCardlblBalance.text = amountString
+            debitCardlblCardNumber.text = data.resultado.cliente?.cuentas?.first?.numeroTarjeta?.alnovaDecrypt().tnuoccaFormat
         }
     }
     
