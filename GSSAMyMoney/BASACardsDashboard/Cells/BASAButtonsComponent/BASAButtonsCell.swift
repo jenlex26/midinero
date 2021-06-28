@@ -35,11 +35,20 @@ class BASAButtonsCell: UITableViewCell {
         stack.layer.shadowOpacity = 0.7
         stack.layer.shadowRadius = 4.0
         
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateData(notification:)), name: NSNotification.Name(rawValue: "reloadHeaderData"), object: nil)
     }
+    
+    @objc func updateData(notification: Notification){
+        if notification.object != nil{
+            accountBalance = (notification.object as! BalanceResponse)
+        }
+    }
+    
     
     @IBAction func openDigitalCard(sender: Any){
         if cellViewController != nil{
-            let data = accountBalance?.resultado.cliente?.cuentas?.first?.saldoDisponible ?? ""
+            let data = accountBalance?.resultado.cliente?.cuentas?.first?.saldoDisponible?.alnovaDecrypt().moneyFormat() ?? ""
             cellViewController.navigationController?.pushViewController(BASADigitalCardRouter.createModule(userBalance: data), animated: true)
         }
     }

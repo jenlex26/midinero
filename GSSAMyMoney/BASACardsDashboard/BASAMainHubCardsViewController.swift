@@ -39,6 +39,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
             if let NewBalance = Balance{
                 DispatchQueue.main.async {
                     self.accountBalance = NewBalance
+                    
                     NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "reloadHeaderData"), object: NewBalance, userInfo: nil))
                     self.loadDebitMovements()
                 }
@@ -50,7 +51,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     }
     
     func loadDebitMovements(){
-        self.presenter?.requestDebitCardMovements(Body: MovimientosBody(transaccion: MovementsBodyData(numeroCuenta: "01270172461200000001", fechaInicial: "01/01/0001", fechaFinal: "01/01/0001")), Movements: { [self] Movements in
+        self.presenter?.requestDebitCardMovements(Body: MovimientosBody(transaccion: MovementsBodyData(numeroCuenta: "WPg9BeVmNq_ViYB-d-kR6RK_02CifbEdVBfc40Kulto", fechaInicial: "01/01/0001", fechaFinal: "01/01/0001")), Movements: { [self] Movements in
             GSVCLoader.hide()
             if Movements != nil{
                 debitCardMovements = Movements
@@ -110,11 +111,9 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
             for item in debitCardMovements!.resultado.movimientos{
                 let movementCell = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAMovementCell") as! BASAMovementTableViewCell
                 movementCell.lblDate.text = item.fechaOperacion?.dateFormatter(format: "yyyy/MM/dd", outputFormat: "dd MMM yyyy")
-                movementCell.lblTitle.text = item.descripcion
-                movementCell.lblAmount.text = item.importe?.moneyFormat()
-                movementCell.setArrow(amount: item.importe ?? "")
-                
-                
+                movementCell.lblTitle.text = item.descripcion?.alnovaDecrypt()
+                movementCell.lblAmount.text = item.importe?.alnovaDecrypt().moneyFormat()
+                movementCell.setArrow(amount: item.importe?.alnovaDecrypt() ?? "")
                 cellsArray.append([movementCell:88.0])
             }
         }else{

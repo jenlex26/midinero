@@ -23,9 +23,12 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
         var subTitle: String?
         var image: UIImage?
         var tag: Int?
+        var index: Int?
     }
     
     var configurations: Array<userOptions> = []
+    
+    var CLABE = "1271 8099 7700 1123 98"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +44,7 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
     
     func setOptions(){
         if #available(iOS 13.0, *) {
-            configurations.append(userOptions(title: "CLABE Interbancaria", subTitle: "1271 8099 7700 1123 98", image: UIImage(systemName: "square.and.arrow.up")))
+            configurations.append(userOptions(title: "CLABE Interbancaria", subTitle: CLABE, image: UIImage(systemName: "square.and.arrow.up"), tag: 4))
             configurations.append(userOptions(title: "Número de cuenta", subTitle: "9567 1660 1234 87", image: nil))
             configurations.append(userOptions(title: "Celular asociado", subTitle: "55 1234 5678", image: nil))
             configurations.append(userOptions.init(title: "Estado de cuenta", subTitle: nil, image: UIImage(systemName: "chevron.right"), tag: 1))
@@ -160,6 +163,10 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
         case 3:
             let view = BASABeneficiaryListRouter.createModule()
             self.navigationController?.pushViewController(view, animated: true)
+        case 4:
+            let activityViewController = UIActivityViewController(activityItems: [CLABE], applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView = self.view
+            self.present(activityViewController, animated: true, completion: nil)
         default:
             print("default case...")
         }

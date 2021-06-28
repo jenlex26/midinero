@@ -58,13 +58,7 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
         
         
         if userBalance != nil{
-            let amountFormat = NSMutableAttributedString.setFormattedText(withStringAmmount: userBalance,
-                                                                          withNumberOfDecimals: 0,
-                                                                          withFontSize: 16,
-                                                                          withFontWeight: .bold,
-                                                                          withFontColor: .GSVCText100,
-                                                                          withLittleCoin: false)
-            self.AvaibleMoneyLabel.attributedText = amountFormat
+            self.AvaibleMoneyLabel.text = userBalance
         }
         
         presenter?.makeDigitalDataRequest(Body: Transaction(transaccion: AccoutRequest(numeroCuenta: 2575284525826, tokenOperacion: 85284585966396, primerTokenVerificacion: "fac2ac44565db5312fb407c3c9482d04")), DataCard: { [self] DataCard in
