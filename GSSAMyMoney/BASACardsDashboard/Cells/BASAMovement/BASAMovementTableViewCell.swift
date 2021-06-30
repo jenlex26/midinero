@@ -2,7 +2,7 @@
 //  BASAMovementTableViewCell.swift
 //  BASAMyPaymentsScreens
 //
-//  Created by BranchbitG on 18/05/21.
+//  Created by Andoni Suarez on 18/05/21
 //
 
 import UIKit

@@ -102,6 +102,7 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
     @objc func reloadCards(notification: Notification){
         if notification.object != nil{
            let data = notification.object as! BalanceResponse
+            
             let amountString = data.resultado.cliente?.cuentas?.first?.saldoDisponible?.alnovaDecrypt().moneyFormat() ?? "0"
             debitCardlblBalance.text = amountString
             debitCardlblCardNumber.text = data.resultado.cliente?.cuentas?.first?.numeroTarjeta?.alnovaDecrypt().tnuoccaFormat

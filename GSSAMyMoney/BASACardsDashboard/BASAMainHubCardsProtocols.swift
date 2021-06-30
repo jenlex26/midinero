@@ -16,14 +16,14 @@ protocol BASAMainHubCardsWireframeProtocol: class {
 }
 //MARK: Presenter -
 protocol BASAMainHubCardsPresenterProtocol: class {
-    func requestBalance(Account:String, Balance: @escaping (BalanceResponse?) -> ())
+    func requestBalance(Account:[String:String], Balance: @escaping (BalanceResponse?) -> ())
     func requestDebitCardMovements(Body: MovimientosBody, Movements: @escaping (DebitCardTransaction?) -> ())
 }
 
 //MARK: Interactor -
 protocol BASAMainHubCardsInteractorProtocol: class {
   var presenter: BASAMainHubCardsPresenterProtocol?  { get set }
-    func TryGetDebitCardBalance(Account:String, Balance: @escaping (BalanceResponse?) -> ())
+    func TryGetDebitCardBalance(Account:[String:String], Balance: @escaping (BalanceResponse?) -> ())
     func TryGetDebitCardMovements(Body: MovimientosBody, Movements: @escaping (DebitCardTransaction?) -> ())
 }
 

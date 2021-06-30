@@ -75,6 +75,9 @@
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lII-EZ-gAG">
                                                                 <rect key="frame" x="0.0" y="0.0" width="103.5" height="93"/>
+                                                                <connections>
+                                                                    <action selector="sendAndPayWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="pS5-cU-Ze1"/>
+                                                                </connections>
                                                             </button>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_enviar_pagar" translatesAutoresizingMaskIntoConstraints="NO" id="QMj-jq-41L">
                                                                 <rect key="frame" x="0.0" y="5" width="103.5" height="50"/>
@@ -109,6 +112,9 @@
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RXW-5z-zQH">
                                                                 <rect key="frame" x="0.0" y="0.0" width="103" height="93"/>
+                                                                <connections>
+                                                                    <action selector="payWithQRWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="biu-Pp-bkx"/>
+                                                                </connections>
                                                             </button>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_recibir_cobrar" translatesAutoresizingMaskIntoConstraints="NO" id="ZrF-Py-MFR">
                                                                 <rect key="frame" x="0.0" y="5" width="103" height="50"/>
@@ -143,6 +149,9 @@
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6QF-Ur-V71">
                                                                 <rect key="frame" x="0.0" y="0.0" width="103.5" height="93"/>
+                                                                <connections>
+                                                                    <action selector="tiempoAireWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="KaX-Di-d2w"/>
+                                                                </connections>
                                                             </button>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_tiempo_aire" translatesAutoresizingMaskIntoConstraints="NO" id="Vgw-EJ-ltm">
                                                                 <rect key="frame" x="0.0" y="5" width="103.5" height="50"/>

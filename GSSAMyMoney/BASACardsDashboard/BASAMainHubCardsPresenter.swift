@@ -21,7 +21,7 @@ class BASAMainHubCardsPresenter: BASAMainHubCardsPresenterProtocol {
         self.router = router
     }
 
-    func requestBalance(Account:String, Balance: @escaping (BalanceResponse?) -> ()){
+    func requestBalance(Account:[String:String], Balance: @escaping (BalanceResponse?) -> ()){
         interactor?.TryGetDebitCardBalance(Account: Account, Balance: Balance)
     }
     

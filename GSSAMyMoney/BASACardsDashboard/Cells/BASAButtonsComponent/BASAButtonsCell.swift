@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GSSAInterceptor
 
 class BASAButtonsCell: UITableViewCell {
     
@@ -45,6 +46,26 @@ class BASAButtonsCell: UITableViewCell {
         }
     }
     
+    @IBAction func sendAndPay(sender: Any){
+        if cellViewController != nil{
+            GSINAdminNavigator.shared.startFlow(forAction: "GSIFTr_SendCel",
+                                                navigateDelegate: self)
+        }
+    }
+    
+    @IBAction func payWithQR(sender: Any){
+        if cellViewController != nil{
+            GSINAdminNavigator.shared.startFlow(forAction: "GSIFCqr",
+                                                navigateDelegate: self)
+        }
+    }
+    
+    @IBAction func tiempoAire(sender: Any){
+        if cellViewController != nil{
+            GSINAdminNavigator.shared.startFlow(forAction: "GSIFTr_RecCel",
+                                                navigateDelegate: self)
+        }
+    }
     
     @IBAction func openDigitalCard(sender: Any){
         if cellViewController != nil{
@@ -52,4 +73,15 @@ class BASAButtonsCell: UITableViewCell {
             cellViewController.navigationController?.pushViewController(BASADigitalCardRouter.createModule(userBalance: data), animated: true)
         }
     }
+}
+
+extension BASAButtonsCell: GSINNavigateDelegate{
+    func willFinishFlow(withInfo info: [String : Any]?) {
+        
+    }
+    
+    func didFailToEnterFlow(error: NSError) {
+        
+    }
+    
 }

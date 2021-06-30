@@ -61,6 +61,11 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
             self.AvaibleMoneyLabel.text = userBalance
         }
         
+        requestCVV()
+    }
+    
+    
+    func requestCVV(){
         presenter?.makeDigitalDataRequest(Body: Transaction(transaccion: AccoutRequest(numeroCuenta: 2575284525826, tokenOperacion: 85284585966396, primerTokenVerificacion: "fac2ac44565db5312fb407c3c9482d04")), DataCard: { [self] DataCard in
             GSVCLoader.hide()
             if DataCard != nil{
@@ -152,5 +157,9 @@ extension BASADigitalCardViewController: TimerHandleDelegate {
     
     func didEndTimer(sender: BASACircularProgressView) {
         print("Se acabo el tiempo")
+        if self.isOnScreen{
+           GSVCLoader.show(type: .native)
+           requestCVV()
+        }
     }
 }

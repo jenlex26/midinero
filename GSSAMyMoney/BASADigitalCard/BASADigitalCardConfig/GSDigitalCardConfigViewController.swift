@@ -17,10 +17,11 @@ class GSDigitalCardConfigViewController: UIViewController, GSDigitalCardConfigVi
     
     @IBOutlet weak var containerView        : UIView!
     @IBOutlet weak var buttonsView          : UIView!
+    @IBOutlet weak var messageView          : UIView!
     @IBOutlet weak var swtch                : UISwitch!
     @IBOutlet weak var lblBuyLimit          : GSVCLabel!
     @IBOutlet weak var lblDigitalCardStatus : GSVCLabel!
-    
+    @IBOutlet weak var lblMessage           : GSVCLabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,13 +59,22 @@ class GSDigitalCardConfigViewController: UIViewController, GSDigitalCardConfigVi
     }
     
     @objc func switchChanged(sender: UISwitch){
-        if sender.isOn{
-            print("ENCENDER")
+        
+        if sender.isOn == true{
+            let alert = UIAlertController(title: "Encendiste tu tarjeta", message: "Las nuevas compras serán procesadas", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Aceptar", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }else{
-            print("OFF")
+            let alert = UIAlertController(title: "Apagaste tu tarjeta", message: "Las nuevas compras serán rechazadas", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Aceptar", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
+        
+        swtch.isUserInteractionEnabled = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: { [self] in
+            swtch.isUserInteractionEnabled = true
+        })
     }
-    
     @IBAction func close(_ sender: Any){
         self.navigationController?.popViewController(animated: true)
     }
