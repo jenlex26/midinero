@@ -58,7 +58,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5d7-2d-czu">
                                 <rect key="frame" x="378" y="0.0" width="51" height="83"/>
                                 <subviews>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="G0O-rC-nnj">
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G0O-rC-nnj">
                                         <rect key="frame" x="0.0" y="26" width="53" height="31"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="51" id="bXV-jA-lNZ"/>
@@ -98,10 +98,10 @@
     </objects>
     <designables>
         <designable name="NFm-Rj-A2J">
-            <size key="intrinsicContentSize" width="151" height="20"/>
+            <size key="intrinsicContentSize" width="188" height="20.5"/>
         </designable>
         <designable name="eu6-sz-He6">
-            <size key="intrinsicContentSize" width="141.5" height="20"/>
+            <size key="intrinsicContentSize" width="157" height="20.5"/>
         </designable>
     </designables>
     <resources>

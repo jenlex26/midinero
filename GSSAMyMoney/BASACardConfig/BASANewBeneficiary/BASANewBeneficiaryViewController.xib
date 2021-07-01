@@ -35,7 +35,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Beneficiarios" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P7s-r8-8u6" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                            <rect key="frame" x="155" y="14" width="104" height="22.5"/>
+                            <rect key="frame" x="158" y="15" width="98" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -56,7 +56,7 @@
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7b5-R9-xFp">
-                    <rect key="frame" x="0.0" y="94" width="414" height="768"/>
+                    <rect key="frame" x="0.0" y="94" width="414" height="802"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
             </subviews>
@@ -66,18 +66,17 @@
                 <constraint firstItem="FOU-BO-b3d" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="36v-zE-SrZ"/>
                 <constraint firstAttribute="trailing" secondItem="FOU-BO-b3d" secondAttribute="trailing" id="4h3-uU-p4S"/>
                 <constraint firstItem="7b5-R9-xFp" firstAttribute="top" secondItem="FOU-BO-b3d" secondAttribute="bottom" id="IWb-lO-Ztz"/>
+                <constraint firstAttribute="bottom" secondItem="7b5-R9-xFp" secondAttribute="bottom" id="M8g-dr-F5V"/>
                 <constraint firstItem="FOU-BO-b3d" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="UVu-v2-Vwx"/>
                 <constraint firstItem="7b5-R9-xFp" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="h3f-r5-kZs"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="7b5-R9-xFp" secondAttribute="bottom" id="h5R-yg-Uds"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="7b5-R9-xFp" secondAttribute="trailing" id="vHR-G4-4JC"/>
             </constraints>
-            <point key="canvasLocation" x="128" y="67"/>
+            <point key="canvasLocation" x="127.53623188405798" y="66.964285714285708"/>
         </view>
     </objects>
     <designables>
-        <designable name="FOU-BO-b3d"/>
         <designable name="P7s-r8-8u6">
-            <size key="intrinsicContentSize" width="104" height="22.5"/>
+            <size key="intrinsicContentSize" width="98" height="20.5"/>
         </designable>
     </designables>
     <resources>

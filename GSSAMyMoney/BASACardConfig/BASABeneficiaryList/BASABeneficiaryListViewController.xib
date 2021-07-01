@@ -9,9 +9,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BASABeneficiaryListViewController" customModule="GSSAFront" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BASABeneficiaryListViewController" customModule="GSSAMyMoney" customModuleProvider="target">
             <connections>
-                <outlet property="btnNewBeneficiary" destination="FyO-Tb-OhZ" id="75y-I7-74q"/>
+                <outlet property="table" destination="VrR-6i-RZu" id="tyW-3z-p9E"/>
                 <outlet property="view" destination="iN0-l3-epB" id="5j8-M9-IbY"/>
             </connections>
         </placeholder>
@@ -35,7 +35,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Beneficiarios" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Y3-QL-gb1" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                            <rect key="frame" x="143.33333333333334" y="13.666666666666666" width="103.66666666666666" height="22.666666666666671"/>
+                            <rect key="frame" x="146" y="14.999999999999998" width="98" height="20.333333333333329"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -55,7 +55,7 @@
                         <constraint firstAttribute="height" constant="50" id="exF-cK-cFH"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Podrás agregar hasta cuatro beneficiarios." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RTO-wI-NEZ" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Podrás agregar hasta cuatro beneficiarios." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RTO-wI-NEZ" customClass="GSVCLabel" customModule="GSSAVisualComponents">
                     <rect key="frame" x="24" y="121.99999999999999" width="342" height="20.333333333333329"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
@@ -66,31 +66,21 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FyO-Tb-OhZ" customClass="GSVCButton" customModule="GSSAVisualComponents">
-                    <rect key="frame" x="24" y="166.33333333333334" width="200" height="40"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="200" id="JQF-gV-UET"/>
-                        <constraint firstAttribute="height" constant="40" id="fm7-3Z-uve"/>
-                    </constraints>
-                    <state key="normal" title="  Agregar beneficiarios" image="person.crop.circle.fill" catalog="system"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="style">
-                            <integer key="value" value="2"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="newBeneficiary:" destination="-1" eventType="touchUpInside" id="EzX-5G-tgf"/>
-                    </connections>
-                </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VrR-6i-RZu">
+                    <rect key="frame" x="0.0" y="162.33333333333331" width="390" height="647.66666666666674"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="VrR-6i-RZu" secondAttribute="trailing" id="DGY-rE-MgZ"/>
                 <constraint firstItem="RTO-wI-NEZ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="24" id="KOb-IG-BOm"/>
                 <constraint firstItem="RTO-wI-NEZ" firstAttribute="top" secondItem="Gfp-ld-NcX" secondAttribute="bottom" constant="28" id="MQS-tt-MDw"/>
-                <constraint firstItem="FyO-Tb-OhZ" firstAttribute="leading" secondItem="RTO-wI-NEZ" secondAttribute="leading" id="Sbk-s3-uBc"/>
+                <constraint firstItem="VrR-6i-RZu" firstAttribute="top" secondItem="RTO-wI-NEZ" secondAttribute="bottom" constant="20" id="TyL-IW-VcA"/>
                 <constraint firstItem="Gfp-ld-NcX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="X4J-Aq-7Ep"/>
-                <constraint firstItem="FyO-Tb-OhZ" firstAttribute="top" secondItem="RTO-wI-NEZ" secondAttribute="bottom" constant="24" id="a35-iV-5ZO"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="VrR-6i-RZu" secondAttribute="bottom" id="ceS-Rp-rDg"/>
+                <constraint firstItem="VrR-6i-RZu" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="hoe-Zx-QTu"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="RTO-wI-NEZ" secondAttribute="trailing" constant="24" id="nQK-LI-f6r"/>
                 <constraint firstItem="Gfp-ld-NcX" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="oG8-GZ-srv"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Gfp-ld-NcX" secondAttribute="trailing" id="oR2-9h-pHS"/>
@@ -100,16 +90,14 @@
     </objects>
     <designables>
         <designable name="0Y3-QL-gb1">
-            <size key="intrinsicContentSize" width="103.66666666666667" height="22.666666666666668"/>
+            <size key="intrinsicContentSize" width="98" height="20.333333333333332"/>
         </designable>
-        <designable name="FyO-Tb-OhZ">
-            <size key="intrinsicContentSize" width="162" height="32"/>
+        <designable name="RTO-wI-NEZ">
+            <size key="intrinsicContentSize" width="321.66666666666669" height="20.333333333333332"/>
         </designable>
-        <designable name="Gfp-ld-NcX"/>
     </designables>
     <resources>
         <image name="arrow.backward" catalog="system" width="128" height="98"/>
-        <image name="person.crop.circle.fill" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

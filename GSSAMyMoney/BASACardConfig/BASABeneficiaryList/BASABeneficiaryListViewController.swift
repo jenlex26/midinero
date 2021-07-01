@@ -13,36 +13,50 @@ import GSSAVisualComponents
 import GSSAVisualTemplates
 
 class BASABeneficiaryListViewController: UIViewController, BASABeneficiaryListViewProtocol, GSVCBottomAlertHandler {
-    func cerraBottomAlert() {
-        bottomAlert = nil
-        //bottomAlert?.animateDismissal()
-    }
-    func dismissBottomAlert(animated: Bool) {
-        bottomAlert?.animViewBottomToTop()
-        bottomAlert = nil
-    }
+    
+    @IBOutlet weak var table: UITableView!
     
     var bottomAlert: GSVCBottomAlert?
 	var presenter: BASABeneficiaryListPresenterProtocol?
-
-    @IBOutlet weak var btnNewBeneficiary: GSVCButton!
+    var tableData: [BeneficiaryItem] = []
     
 	override func viewDidLoad() {
         super.viewDidLoad()
-        if #available(iOS 13.0, *) {
-            btnNewBeneficiary.setImage(UIImage(systemName: "person.crop.circle.fill")!.withRenderingMode(.alwaysTemplate).tint(with: ColorStyle.GSVCSecundary100.color ), for: .normal)
-        }
-        
+        table.delegate = self
+        table.dataSource = self
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: { [self] in
             presentBottomAlertFullData(status: .info, message: "La suma total de tus beneficiarios debe dar un total del 100%", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
         })
+        table.alwaysBounceVertical = false
+        registerCells()
+        loadBeneficiaries()
+    }
+    
+    func registerCells(){
+        table.register(UINib(nibName: "BASACardLimitCell", bundle: Bundle.init(for: BASACardLimitsViewController.self)), forCellReuseIdentifier: "BASACardLimitCell")
+        table.register(UINib(nibName: "BeneficiaryButtonCell", bundle: Bundle.init(for: BeneficiaryButtonCell.self)), forCellReuseIdentifier: "BeneficiaryButtonCell")
     }
     
     func optionalAction() {
         print("alert closed")
     }
     
-    @IBAction func newBeneficiary(_ sender: Any){
+    func loadBeneficiaries(){
+        GSVCLoader.show(type: .native)
+        presenter?.requestBeneficiaries(account: "12345678901234", beneficiaryList: { [self] beneficiaryList in
+            GSVCLoader.hide()
+            if beneficiaryList?.resultado?.beneficiarios != nil{
+                for item in beneficiaryList!.resultado!.beneficiarios!{
+                    tableData.append(item)
+                    self.table.reloadData()
+                }
+            }else{
+                self.presentBottomAlertFullData(status: .error, message: "Ocurrió un error desconocido, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
+            }
+        })
+    }
+    
+    @objc func newBeneficiary(_ sender: Any){
         let view = BASANewBeneficiaryRouter.createModule()
         self.navigationController?.pushViewController(view, animated: true)
     }
@@ -50,5 +64,46 @@ class BASABeneficiaryListViewController: UIViewController, BASABeneficiaryListVi
     @IBAction func close(_ sender: Any){
         self.navigationController?.popViewController(animated: true)
     }
+}
 
+extension BASABeneficiaryListViewController: UITableViewDelegate, UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableData.count == 4{
+            return tableData.count
+        }else{
+            return tableData.count + 1
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == tableData.count && tableData.count < 4{
+            let cell = table.dequeueReusableCell(withIdentifier: "BeneficiaryButtonCell") as! BeneficiaryButtonCell
+            cell.button.addTarget(self, action: #selector(newBeneficiary(_:)), for: .touchUpInside)
+            return cell
+        }else{
+            let cell = table.dequeueReusableCell(withIdentifier: "BASACardLimitCell") as! BASACardLimitCell
+            let cellData = tableData[indexPath.row]
+            let userName = (cellData.nombre ?? "") + " " + (cellData.apellidoPaterno ?? "") + " " + (cellData.apellidoMaterno ?? "")
+            cell.lblTitle.text = userName
+            cell.lblSubtitle.text = (cellData.porcentaje ?? "0") + "%"
+            cell.btnEdit.isEnabled = false
+            return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == tableData.count && tableData.count < 4{
+            return 100.0
+        }else{
+            return 75.0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = table.cellForRow(at: indexPath)
+        if cell is BASACardLimitCell{
+            let view = BASANewBeneficiaryRouter.createModuleForActiveItem(data: tableData[indexPath.row])
+            self.navigationController?.pushViewController(view, animated: true)
+        }
+    }
 }

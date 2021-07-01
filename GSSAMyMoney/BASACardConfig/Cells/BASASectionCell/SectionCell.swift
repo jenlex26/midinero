@@ -11,6 +11,7 @@ import GSSAVisualComponents
 class SectionCell: UITableViewCell {
     
     @IBOutlet weak var lblTitle: GSVCLabel!
+    @IBOutlet weak var lblSubTitle: GSVCLabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

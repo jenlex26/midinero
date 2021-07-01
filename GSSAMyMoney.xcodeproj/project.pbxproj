@@ -118,6 +118,15 @@
 		EEAFA784268CCC6A00DBC192 /* GSSASessionInfo.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEAFA783268CCC6A00DBC192 /* GSSASessionInfo.xcframework */; };
 		EEAFA787268CCC7200DBC192 /* GSSAVisualComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEAFA786268CCC7200DBC192 /* GSSAVisualComponents.framework */; };
 		EEAFA78A268CCC7800DBC192 /* GSSAVisualTemplates.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEAFA789268CCC7800DBC192 /* GSSAVisualTemplates.framework */; };
+		EEAFA792268CD17A00DBC192 /* BASABeneficiaryListEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAFA791268CD17A00DBC192 /* BASABeneficiaryListEntity.swift */; };
+		EEAFA796268CD75200DBC192 /* BeneficiaryButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAFA794268CD75200DBC192 /* BeneficiaryButtonCell.swift */; };
+		EEAFA797268CD75200DBC192 /* BeneficiaryButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEAFA795268CD75200DBC192 /* BeneficiaryButtonCell.xib */; };
+		EEAFA79F268CF3DD00DBC192 /* GSSANewBeneficiaryAddressPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAFA799268CF3DD00DBC192 /* GSSANewBeneficiaryAddressPresenter.swift */; };
+		EEAFA7A0268CF3DD00DBC192 /* GSSANewBeneficiaryAddressRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAFA79A268CF3DD00DBC192 /* GSSANewBeneficiaryAddressRouter.swift */; };
+		EEAFA7A1268CF3DD00DBC192 /* GSSANewBeneficiaryAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAFA79B268CF3DD00DBC192 /* GSSANewBeneficiaryAddressViewController.swift */; };
+		EEAFA7A2268CF3DD00DBC192 /* GSSANewBeneficiaryAddressProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAFA79C268CF3DD00DBC192 /* GSSANewBeneficiaryAddressProtocols.swift */; };
+		EEAFA7A3268CF3DD00DBC192 /* GSSANewBeneficiaryAddressInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAFA79D268CF3DD00DBC192 /* GSSANewBeneficiaryAddressInteractor.swift */; };
+		EEAFA7A4268CF3DD00DBC192 /* GSSANewBeneficiaryAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEAFA79E268CF3DD00DBC192 /* GSSANewBeneficiaryAddressViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -233,6 +242,15 @@
 		EEAFA783268CCC6A00DBC192 /* GSSASessionInfo.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GSSASessionInfo.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/SuperApp/GSSASessionInfo.xcframework; sourceTree = "<group>"; };
 		EEAFA786268CCC7200DBC192 /* GSSAVisualComponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GSSAVisualComponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEAFA789268CCC7800DBC192 /* GSSAVisualTemplates.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GSSAVisualTemplates.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EEAFA791268CD17A00DBC192 /* BASABeneficiaryListEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BASABeneficiaryListEntity.swift; sourceTree = "<group>"; };
+		EEAFA794268CD75200DBC192 /* BeneficiaryButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeneficiaryButtonCell.swift; sourceTree = "<group>"; };
+		EEAFA795268CD75200DBC192 /* BeneficiaryButtonCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BeneficiaryButtonCell.xib; sourceTree = "<group>"; };
+		EEAFA799268CF3DD00DBC192 /* GSSANewBeneficiaryAddressPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSANewBeneficiaryAddressPresenter.swift; sourceTree = "<group>"; };
+		EEAFA79A268CF3DD00DBC192 /* GSSANewBeneficiaryAddressRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSANewBeneficiaryAddressRouter.swift; sourceTree = "<group>"; };
+		EEAFA79B268CF3DD00DBC192 /* GSSANewBeneficiaryAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSANewBeneficiaryAddressViewController.swift; sourceTree = "<group>"; };
+		EEAFA79C268CF3DD00DBC192 /* GSSANewBeneficiaryAddressProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSANewBeneficiaryAddressProtocols.swift; sourceTree = "<group>"; };
+		EEAFA79D268CF3DD00DBC192 /* GSSANewBeneficiaryAddressInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSANewBeneficiaryAddressInteractor.swift; sourceTree = "<group>"; };
+		EEAFA79E268CF3DD00DBC192 /* GSSANewBeneficiaryAddressViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GSSANewBeneficiaryAddressViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -458,6 +476,7 @@
 		10E9ED6B267D6BA400F45640 /* BASANewBeneficiary */ = {
 			isa = PBXGroup;
 			children = (
+				EEAFA798268CF39A00DBC192 /* GSSANewBeneficiaryAddress */,
 				10E9ED6C267D6BA400F45640 /* BASANewBeneficiaryProtocols.swift */,
 				10E9ED6D267D6BA400F45640 /* BASANewBeneficiaryPresenter.swift */,
 				10E9ED6E267D6BA400F45640 /* BASANewBeneficiaryRouter.swift */,
@@ -471,12 +490,14 @@
 		10E9ED74267D6BA400F45640 /* BASABeneficiaryList */ = {
 			isa = PBXGroup;
 			children = (
+				EEAFA793268CD72E00DBC192 /* Cells */,
 				10E9ED75267D6BA400F45640 /* BASABeneficiaryListViewController.xib */,
 				10E9ED76267D6BA400F45640 /* BASABeneficiaryListViewController.swift */,
 				10E9ED77267D6BA400F45640 /* BASABeneficiaryListPresenter.swift */,
 				10E9ED78267D6BA400F45640 /* BASABeneficiaryListProtocols.swift */,
 				10E9ED79267D6BA400F45640 /* BASABeneficiaryListInteractor.swift */,
 				10E9ED7A267D6BA400F45640 /* BASABeneficiaryListRouter.swift */,
+				EEAFA791268CD17A00DBC192 /* BASABeneficiaryListEntity.swift */,
 			);
 			path = BASABeneficiaryList;
 			sourceTree = "<group>";
@@ -634,6 +655,28 @@
 			path = GSNoMovementsCell;
 			sourceTree = "<group>";
 		};
+		EEAFA793268CD72E00DBC192 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				EEAFA794268CD75200DBC192 /* BeneficiaryButtonCell.swift */,
+				EEAFA795268CD75200DBC192 /* BeneficiaryButtonCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		EEAFA798268CF39A00DBC192 /* GSSANewBeneficiaryAddress */ = {
+			isa = PBXGroup;
+			children = (
+				EEAFA799268CF3DD00DBC192 /* GSSANewBeneficiaryAddressPresenter.swift */,
+				EEAFA79A268CF3DD00DBC192 /* GSSANewBeneficiaryAddressRouter.swift */,
+				EEAFA79B268CF3DD00DBC192 /* GSSANewBeneficiaryAddressViewController.swift */,
+				EEAFA79C268CF3DD00DBC192 /* GSSANewBeneficiaryAddressProtocols.swift */,
+				EEAFA79D268CF3DD00DBC192 /* GSSANewBeneficiaryAddressInteractor.swift */,
+				EEAFA79E268CF3DD00DBC192 /* GSSANewBeneficiaryAddressViewController.xib */,
+			);
+			path = GSSANewBeneficiaryAddress;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -705,6 +748,7 @@
 				10E9EE00267D6BA400F45640 /* BASADigitalCardViewController.xib in Resources */,
 				10E9EDE5267D6BA400F45640 /* BASAMyCreditItem.xib in Resources */,
 				10E9EDEC267D6BA400F45640 /* BASAMovementTableViewCell.xib in Resources */,
+				EEAFA797268CD75200DBC192 /* BeneficiaryButtonCell.xib in Resources */,
 				10E9EE03267D6BC200F45640 /* MyMoneyAssets.xcassets in Resources */,
 				10E9EDBF267D6BA400F45640 /* BASACardLimitCell.xib in Resources */,
 				10E9EDB7267D6BA400F45640 /* RequestCardCell.xib in Resources */,
@@ -720,6 +764,7 @@
 				10E9EDC8267D6BA400F45640 /* BASACardLimitsViewController.xib in Resources */,
 				10E9EDB2267D6BA400F45640 /* BASACardStatementsViewController.xib in Resources */,
 				EE97BB072684DF30000AE34C /* GSNoMovementsCell.xib in Resources */,
+				EEAFA7A4268CF3DD00DBC192 /* GSSANewBeneficiaryAddressViewController.xib in Resources */,
 				10E9EDC4267D6BA400F45640 /* BASAInfoCardCell.xib in Resources */,
 				10E9EDDD267D6BA400F45640 /* BASACreditCardInfoCell.xib in Resources */,
 				10E9EDD2267D6BA400F45640 /* BASANewBeneficiaryViewController.xib in Resources */,
@@ -742,12 +787,14 @@
 				10E9EDEA267D6BA400F45640 /* BASACardCell.swift in Sources */,
 				EE01F6BE268B76A10010C485 /* GSSAMyMoneyExtensions.swift in Sources */,
 				10E9EDCA267D6BA400F45640 /* BASACardLimitsProtocols.swift in Sources */,
+				EEAFA7A2268CF3DD00DBC192 /* GSSANewBeneficiaryAddressProtocols.swift in Sources */,
 				10E9EDFE267D6BA400F45640 /* BASACircularProgressView.swift in Sources */,
 				10E9EDE4267D6BA400F45640 /* BASALendViewCVC.swift in Sources */,
 				10E9EDBA267D6BA400F45640 /* BASACardControl.swift in Sources */,
 				EE0655D92682AE6600F7C73D /* GSDigitalCardConfigRouter.swift in Sources */,
 				10E9EDFC267D6BA400F45640 /* BASAShadowRadiusView.swift in Sources */,
 				10E9EDD5267D6BA400F45640 /* BASACardConfigInteractor.swift in Sources */,
+				EEAFA792268CD17A00DBC192 /* BASABeneficiaryListEntity.swift in Sources */,
 				10E9EDF7267D6BA400F45640 /* BASADigitalCardProtocols.swift in Sources */,
 				10E9EDDB267D6BA400F45640 /* BASABeneficiaryListInteractor.swift in Sources */,
 				EE0655DA2682AE6600F7C73D /* GSDigitalCardConfigViewController.swift in Sources */,
@@ -772,6 +819,7 @@
 				10E9EDDF267D6BA400F45640 /* BASAHomeHeaderViewComponent.swift in Sources */,
 				10E9EDB8267D6BA400F45640 /* BASAButtonCell.swift in Sources */,
 				10E9EDC6267D6BA400F45640 /* BASACardConfigPresenter.swift in Sources */,
+				EEAFA796268CD75200DBC192 /* BeneficiaryButtonCell.swift in Sources */,
 				10E9EDDA267D6BA400F45640 /* BASABeneficiaryListProtocols.swift in Sources */,
 				10E9EDCD267D6BA400F45640 /* BASACardLimitsInteractor.swift in Sources */,
 				10E9EDF0267D6BA400F45640 /* BASAMainHubCardsProtocols.swift in Sources */,
@@ -783,10 +831,14 @@
 				10E9EDF8267D6BA400F45640 /* BASADigitalCardPresenter.swift in Sources */,
 				10E9EDFF267D6BA400F45640 /* BASADigitalCardRouter.swift in Sources */,
 				10E9EDC7267D6BA400F45640 /* BASACardConfigViewController.swift in Sources */,
+				EEAFA7A0268CF3DD00DBC192 /* GSSANewBeneficiaryAddressRouter.swift in Sources */,
 				10E9EDDE267D6BA400F45640 /* BASACreditCardInfoCell.swift in Sources */,
 				10E9EDCC267D6BA400F45640 /* BASACardLimitsRouter.swift in Sources */,
 				EE36C43126878F11001AD9F2 /* GSSASecurityController.swift in Sources */,
 				10E9EDDC267D6BA400F45640 /* BASABeneficiaryListRouter.swift in Sources */,
+				EEAFA79F268CF3DD00DBC192 /* GSSANewBeneficiaryAddressPresenter.swift in Sources */,
+				EEAFA7A1268CF3DD00DBC192 /* GSSANewBeneficiaryAddressViewController.swift in Sources */,
+				EEAFA7A3268CF3DD00DBC192 /* GSSANewBeneficiaryAddressInteractor.swift in Sources */,
 				10E9EDD4267D6BA400F45640 /* BASANewBeneficiaryViewController.swift in Sources */,
 				10E9EDE7267D6BA400F45640 /* BASAButtonsCell.swift in Sources */,
 				10E9EDFA267D6BA400F45640 /* BASAShadowRadiusImage.swift in Sources */,

@@ -12,21 +12,21 @@ import Foundation
 
 //MARK: Wireframe -
 protocol BASABeneficiaryListWireframeProtocol: class {
-
+    
 }
 //MARK: Presenter -
 protocol BASABeneficiaryListPresenterProtocol: class {
-
+    func requestBeneficiaries(account: String, beneficiaryList: @escaping (BeneficiaryListResponse?) -> ())
 }
 
 //MARK: Interactor -
 protocol BASABeneficiaryListInteractorProtocol: class {
-
-  var presenter: BASABeneficiaryListPresenterProtocol?  { get set }
+    var presenter: BASABeneficiaryListPresenterProtocol?  { get set }
+    func tryGetBeneficiaries(account: String, beneficiaryList: @escaping (BeneficiaryListResponse?) -> ())
 }
 
 //MARK: View -
 protocol BASABeneficiaryListViewProtocol: class {
-
-  var presenter: BASABeneficiaryListPresenterProtocol?  { get set }
+    
+    var presenter: BASABeneficiaryListPresenterProtocol?  { get set }
 }

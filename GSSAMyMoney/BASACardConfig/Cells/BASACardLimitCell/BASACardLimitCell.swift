@@ -20,6 +20,7 @@ class BASACardLimitCell: UITableViewCell, UITextFieldDelegate {
         super.awakeFromNib()
         self.selectionStyle = .none
         setUpToolBar()
+        btnEdit.setTitleColor(UIColor.GSVCPrincipal100, for: .normal)
         txtAmount.delegate = self
         txtAmount.layer.borderColor = UIColor(red: 194/255, green: 194/255, blue: 194/255, alpha: 1.0).cgColor
     }
@@ -72,7 +73,6 @@ class BASACardLimitCell: UITableViewCell, UITextFieldDelegate {
         lblSubtitle.text = "Hasta " + txtAmount.text!
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "BASALimitCellEditFinished"), object: nil, userInfo: nil))
     }
-    
     
     @IBAction func beginEdit(sender: GSVCButton){
         lblSubtitle.isHidden = true

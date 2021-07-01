@@ -27,4 +27,20 @@ class BASANewBeneficiaryRouter: BASANewBeneficiaryWireframeProtocol {
         
         return view
     }
+    
+    static func createModuleForActiveItem(data: BeneficiaryItem) -> UIViewController {
+        // Change to get view from storyboard if not using progammatic UI
+        let view = BASANewBeneficiaryViewController(nibName: nil, bundle: Bundle(for: BASANewBeneficiaryRouter.self))
+        let interactor = BASANewBeneficiaryInteractor()
+        let router = BASANewBeneficiaryRouter()
+        let presenter = BASANewBeneficiaryPresenter(interface: view, interactor: interactor, router: router)
+        
+        view.beneficiaryData = data
+        view.presenter = presenter
+        interactor.presenter = presenter
+        router.viewController = view
+        
+        return view
+    }
+    
 }

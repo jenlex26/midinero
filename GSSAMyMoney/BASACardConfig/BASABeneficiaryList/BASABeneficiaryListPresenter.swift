@@ -11,15 +11,19 @@
 import UIKit
 
 class BASABeneficiaryListPresenter: BASABeneficiaryListPresenterProtocol {
-
+    
     weak private var view: BASABeneficiaryListViewProtocol?
     var interactor: BASABeneficiaryListInteractorProtocol?
     private let router: BASABeneficiaryListWireframeProtocol
-
+    
     init(interface: BASABeneficiaryListViewProtocol, interactor: BASABeneficiaryListInteractorProtocol?, router: BASABeneficiaryListWireframeProtocol) {
         self.view = interface
         self.interactor = interactor
         self.router = router
     }
-
+    
+    func requestBeneficiaries(account: String, beneficiaryList: @escaping (BeneficiaryListResponse?) -> ()) {
+        interactor?.tryGetBeneficiaries(account: account, beneficiaryList: beneficiaryList)
+    }
+    
 }

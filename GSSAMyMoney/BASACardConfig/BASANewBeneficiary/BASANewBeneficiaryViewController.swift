@@ -11,26 +11,17 @@
 import UIKit
 
 class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryViewProtocol {
-	var presenter: BASANewBeneficiaryPresenterProtocol?
-    var tableFields: Array<beneficiaryField> = []
+    
+    var presenter: BASANewBeneficiaryPresenterProtocol?
     
     @IBOutlet weak var table: UITableView!
-
-	override func viewDidLoad() {
+    
+    var beneficiaryData: BeneficiaryItem?
+    var tableFields: Array<beneficiaryField> = []
+    
+    override func viewDidLoad() {
         super.viewDidLoad()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(updateData(sender:)), name: NSNotification.Name(rawValue: "TextFieldDidEnd"), object: nil)
-        tableFields.append(beneficiaryField(title: "Nombre", image: nil, placeHolder: nil, pickerData: nil))
-        tableFields.append(beneficiaryField(title: "Apellido paterno", image: nil, placeHolder: nil, pickerData: nil))
-        tableFields.append(beneficiaryField(title: "Apellido materno", image: nil, placeHolder: "Opcional", pickerData: nil))
-        if #available(iOS 13.0, *) {
-            tableFields.append(beneficiaryField(title: "Fecha de nacimiento", image: UIImage(systemName: "calendar"), placeHolder: "DD/MM/AAAA", pickerData: pickerTextField.init(pickerOptions: nil, datePicker: true, dateFormat: "dd/mm/yyyy")))
-            tableFields.append(beneficiaryField(title: "Parentesco", image: UIImage(systemName: "chevron.down"), placeHolder: "Selecciona", pickerData: pickerTextField.init(pickerOptions: ["Tio","Padre","Madre","Primo","Amigo(a)"], datePicker: false, dateFormat: nil)))
-        }
-        tableFields.append(beneficiaryField(title: "Número telefónico", image: nil, placeHolder: nil, pickerData: nil))
-        tableFields.append(beneficiaryField(title: "Correo electrónico", image: nil, placeHolder: nil, pickerData: nil))
-        tableFields.append(beneficiaryField(title: "Porcentaje otorgado", image: nil, placeHolder: nil, pickerData: nil, size: .small, keyboardType: .numberPad))
-        
+        loadOptions()
         registerCells()
         table.alwaysBounceVertical = false
         table.delegate = self
@@ -47,12 +38,48 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
         table.register(UINib(nibName: "BASAButtonCell", bundle: bundle), forCellReuseIdentifier: "BASAButtonCell")
     }
     
+    func loadOptions(){
+        NotificationCenter.default.addObserver(self, selector: #selector(updateData(sender:)), name: NSNotification.Name(rawValue: "TextFieldDidEnd"), object: nil)
+        
+        tableFields.append(beneficiaryField(title: "Nombre", image: nil, placeHolder: nil, pickerData: nil, text: beneficiaryData?.nombre))
+        
+        tableFields.append(beneficiaryField(title: "Apellido paterno", image: nil, placeHolder: nil, pickerData: nil, text: beneficiaryData?.apellidoPaterno))
+        tableFields.append(beneficiaryField(title: "Apellido materno", image: nil, placeHolder: "Opcional", pickerData: nil, text: beneficiaryData?.apellidoMaterno))
+        if #available(iOS 13.0, *) {
+            tableFields.append(beneficiaryField(title: "Fecha de nacimiento", image: UIImage(systemName: "calendar"), placeHolder: "DD/MM/AAAA", pickerData: pickerTextField.init(pickerOptions: nil, datePicker: true, dateFormat: "dd/mm/yyyy"), text: beneficiaryData?.fechaNacimiento))
+            tableFields.append(beneficiaryField(title: "Parentesco", image: UIImage(systemName: "chevron.down"), placeHolder: "Selecciona", pickerData: pickerTextField.init(pickerOptions: ["Tio","Padre","Madre","Primo","Amigo(a)"], datePicker: false, dateFormat: nil)))
+        }
+        tableFields.append(beneficiaryField(title: "Número telefónico", image: nil, placeHolder: nil, pickerData: nil, text: beneficiaryData?.contacto?.numeroTelefono))
+        tableFields.append(beneficiaryField(title: "Correo electrónico", image: nil, placeHolder: nil, pickerData: nil, text: beneficiaryData?.contacto?.correoElectronico))
+        tableFields.append(beneficiaryField(title: "Porcentaje otorgado", image: nil, placeHolder: nil, pickerData: nil, size: .small, keyboardType: .numberPad, text: beneficiaryData?.porcentaje))
+    }
+    
+    @objc func switchChanged(sender: UISwitch){
+        if sender.isOn == true{
+            let alert = UIAlertController(title: "Baz", message: "¿Quieres que tu beneficiario utilice tu dirección?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: {_ in
+                sender.isOn = true
+            }))
+            alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: {_ in
+                sender.isOn = false
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }else{
+            if beneficiaryData?.domicilio != nil {
+                let view = GSSANewBeneficiaryAddressRouter.createModuleWithParams(data: beneficiaryData!.domicilio!)
+                self.present(view, animated: true, completion: nil)
+            }else{
+                let view = GSSANewBeneficiaryAddressRouter.createModule()
+                self.present(view, animated: true, completion: nil)
+            }
+        }
+    }
+    
     @objc func updateData(sender: Notification){
         if sender.object != nil{
             let object = sender.object as! [String:Int]
             if object.first!.value != -1{
                 tableFields[object.first!.value].text = object.first!.key
-                
             }
         }
     }
@@ -60,7 +87,6 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
     @IBAction func close(_ sender: Any){
         self.navigationController?.popViewController(animated: true)
     }
-
 }
 
 extension BASANewBeneficiaryViewController: UITableViewDelegate, UITableViewDataSource{
@@ -80,6 +106,7 @@ extension BASANewBeneficiaryViewController: UITableViewDelegate, UITableViewData
             cell.lblSubTitle.isHidden = true
             cell.lblTitle.styleType = 6
             cell.lblTitle.text = "Utilizar mi dirección"
+            cell.swtch.addTarget(self, action: #selector(switchChanged(sender:)), for: .valueChanged)
             cell.separatorView.isHidden = true
             return cell
         case 2 + tableFields.count:
@@ -128,6 +155,7 @@ struct beneficiaryField{
     var keyboardType: UIKeyboardType?
     var text: String? = ""
     var index: Int?
+    var height: CGFloat?
 }
 
 enum cellSize{
