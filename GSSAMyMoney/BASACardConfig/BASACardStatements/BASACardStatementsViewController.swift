@@ -150,10 +150,12 @@ extension BASACardStatementsViewController: UITableViewDelegate, UITableViewData
         case 0:
             let cell = table.dequeueReusableCell(withIdentifier: "SectionCell") as! SectionCell
             cell.lblTitle.text = "Selecciona los estados de cuenta"
+            cell.lblTitle.numberOfLines = 2
             return cell
         case 1:
             let cell = table.dequeueReusableCell(withIdentifier: "SectionCell") as! SectionCell
             cell.lblTitle.text = "Se enviarán al correo electrónico lili22@gmail.com"
+            cell.lblTitle.numberOfLines = 2
             cell.lblTitle.styleType = 6
             return cell
         case 2:
