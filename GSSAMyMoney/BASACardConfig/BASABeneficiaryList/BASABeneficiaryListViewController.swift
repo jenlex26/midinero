@@ -24,9 +24,6 @@ class BASABeneficiaryListViewController: UIViewController, BASABeneficiaryListVi
         super.viewDidLoad()
         table.delegate = self
         table.dataSource = self
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: { [self] in
-            presentBottomAlertFullData(status: .info, message: "La suma total de tus beneficiarios debe dar un total del 100%", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
-        })
         table.alwaysBounceVertical = false
         registerCells()
         loadBeneficiaries()

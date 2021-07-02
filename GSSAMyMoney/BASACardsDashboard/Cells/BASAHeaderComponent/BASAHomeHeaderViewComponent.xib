@@ -71,7 +71,7 @@
                                 </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dinero" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X7i-Rd-dT7" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                <rect key="frame" x="70" y="19.5" width="79.5" height="31"/>
+                                <rect key="frame" x="55" y="19.5" width="79.5" height="31"/>
                                 <fontDescription key="fontDescription" name="GeezaPro-Bold" family="Geeza Pro" pointSize="25"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -88,7 +88,7 @@
                             <constraint firstItem="X7i-Rd-dT7" firstAttribute="centerY" secondItem="dQt-eL-Cz8" secondAttribute="centerY" id="DFV-Yw-TRs"/>
                             <constraint firstItem="dQt-eL-Cz8" firstAttribute="leading" secondItem="g44-JX-qSv" secondAttribute="leading" constant="30" id="NDJ-kq-Wfh"/>
                             <constraint firstItem="Kft-PE-OfE" firstAttribute="leading" secondItem="g44-JX-qSv" secondAttribute="leading" id="O2E-gs-viv"/>
-                            <constraint firstItem="X7i-Rd-dT7" firstAttribute="leading" secondItem="dQt-eL-Cz8" secondAttribute="trailing" constant="20" id="VFc-n5-xav"/>
+                            <constraint firstItem="X7i-Rd-dT7" firstAttribute="leading" secondItem="dQt-eL-Cz8" secondAttribute="trailing" constant="5" id="VFc-n5-xav"/>
                             <constraint firstItem="Kft-PE-OfE" firstAttribute="top" secondItem="g44-JX-qSv" secondAttribute="top" id="Yaz-Xm-ms8"/>
                             <constraint firstItem="HkK-aB-b5p" firstAttribute="leading" secondItem="g44-JX-qSv" secondAttribute="leading" constant="30" id="ntM-M8-Bb6"/>
                             <constraint firstAttribute="height" constant="250" id="otY-Un-bUf"/>

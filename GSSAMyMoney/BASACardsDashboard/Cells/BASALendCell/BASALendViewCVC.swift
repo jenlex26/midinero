@@ -14,6 +14,7 @@ class BASALendViewCVC: UICollectionViewCell {
     @IBOutlet weak var lblSubtitle      : GSVCLabel!
     @IBOutlet weak var lblDescription   : GSVCLabel!
     @IBOutlet weak var btnConfig        : UIButton!
+    @IBOutlet weak var lendView         : UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

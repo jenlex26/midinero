@@ -16,13 +16,14 @@ class BASADigitalCardInteractor: GSSAURLSessionTaskCoordinatorBridge, BASADigita
     
     weak var presenter: BASADigitalCardPresenterProtocol?
     
-    public func TryGetCardDigitalCardData(Body: Transaction,  DataCard: @escaping (AccountResponse?) -> ())
+    public func TryGetCardDigitalCardData(Body: Transaction,  DataCard: @escaping (DigitalCardResponse?) -> ())
     {
         self.urlPath = "https://688div74bd.execute-api.us-east-1.amazonaws.com/"
-        self.strPathEndpoint = "integracion/superapp/dinero/captacion/gestion-tarjetas-digitales/v1/tarjetas"
+        self.strPathEndpoint = "integracion/superapp/dinero/captacion/gestion-tarjetas-digitales/v1/tarjetas/busquedas"
     
-        sendRequest(strUrl: strPathEndpoint, method: .POST, objBody: Body, environment: .develop) { (objRes: AccountResponse?, error) in
+        sendRequest(strUrl: strPathEndpoint, method: .POST, objBody: Body, environment: .develop) { (objRes: DigitalCardResponse?, error) in
             debugPrint(objRes as Any)
+            
             if error.code == 0 {
                 DataCard(objRes)
             } else {

@@ -16,13 +16,13 @@ protocol BASADigitalCardWireframeProtocol: class {
 }
 //MARK: Presenter -
 protocol BASADigitalCardPresenterProtocol: class {
-    func makeDigitalDataRequest(Body: Transaction,  DataCard: @escaping (AccountResponse?) -> ())
+    func makeDigitalDataRequest(Body: Transaction,  DataCard: @escaping (DigitalCardResponse?) -> ())
 }
 
 //MARK: Interactor -
 protocol BASADigitalCardInteractorProtocol: class {
   var presenter: BASADigitalCardPresenterProtocol?  { get set }
-    func TryGetCardDigitalCardData(Body: Transaction,  DataCard: @escaping (AccountResponse?) -> ())
+    func TryGetCardDigitalCardData(Body: Transaction,  DataCard: @escaping (DigitalCardResponse?) -> ())
 }
 
 //MARK: View -

@@ -61,11 +61,11 @@ class GSDigitalCardConfigViewController: UIViewController, GSDigitalCardConfigVi
     @objc func switchChanged(sender: UISwitch){
         
         if sender.isOn == true{
-            let alert = UIAlertController(title: "Encendiste tu tarjeta", message: "Las nuevas compras serán procesadas", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Apagaste tu tarjeta", message: "Las nuevas compras no serán procesadas. Puedes volver a encenderla cuando lo necesites. ", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Aceptar", style: .cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }else{
-            let alert = UIAlertController(title: "Apagaste tu tarjeta", message: "Las nuevas compras serán rechazadas", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Encendiste tu tarjeta", message: "Las nuevas compras serán procesadas. Puedes volver a apagarla cuando lo necesites. ", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Aceptar", style: .cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
@@ -75,6 +75,7 @@ class GSDigitalCardConfigViewController: UIViewController, GSDigitalCardConfigVi
             swtch.isUserInteractionEnabled = true
         })
     }
+    
     @IBAction func close(_ sender: Any){
         self.navigationController?.popViewController(animated: true)
     }

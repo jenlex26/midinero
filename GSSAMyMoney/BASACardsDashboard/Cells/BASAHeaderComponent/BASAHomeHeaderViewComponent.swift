@@ -142,7 +142,10 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
     
     @IBAction func close(_ sender: Any){
         if cellViewController != nil{
-            cellViewController.navigationController?.popViewController(animated: true)
+            cellViewController.dismiss(animated: true, completion: {
+                self.cellViewController.navigationController?.popViewController(animated: true)
+            })
+            //cellViewController.navigationController?.popViewController(animated: true)
         }
     }
     

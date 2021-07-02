@@ -22,7 +22,7 @@ class BASADigitalCardPresenter: BASADigitalCardPresenterProtocol {
         self.router = router
     }
     
-    func makeDigitalDataRequest(Body: Transaction, DataCard: @escaping (AccountResponse?) -> ()) {
+    func makeDigitalDataRequest(Body: Transaction, DataCard: @escaping (DigitalCardResponse?) -> ()) {
         interactor?.TryGetCardDigitalCardData(Body: Body, DataCard: DataCard)
     }
 }

@@ -176,8 +176,10 @@ extension BASACardStatementsViewController: UITableViewDelegate, UITableViewData
             let cell = table.dequeueReusableCell(withIdentifier: "BASASwitchItemCell") as! BASASwitchItemCell
             let data = statements[indexPath.row - 3]
             if data.tag == 0{
+                cell.backgroundColor = UIColor.GSVCBase300()
                 cell.swtch.addTarget(self, action: #selector(selectAllStatements(sender:)), for: .valueChanged)
             }else{
+                cell.backgroundColor = .white
                 cell.swtch.addTarget(self, action: #selector(stamementSelected(sender:)), for: .valueChanged)
             }
             if data.switchState == true{

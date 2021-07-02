@@ -56,7 +56,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kt5-1K-d29">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kt5-1K-d29">
                                 <rect key="frame" x="414" y="10" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="J5s-ag-e9Z"/>
@@ -65,7 +65,7 @@
                                 <state key="normal" image="ic_more_icon"/>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.95294117649999999" green="0.96862745100000003" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.95294117649999999" green="0.96862745100000003" blue="0.99607843139999996" alpha="0.92169714921357615" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="FpU-QQ-rB5" secondAttribute="trailing" constant="20" id="FGG-dy-Lb5"/>
                             <constraint firstAttribute="trailing" secondItem="kt5-1K-d29" secondAttribute="trailing" constant="15" id="TL7-qi-9sf"/>
@@ -99,6 +99,7 @@
                 <outlet property="lblAmount" destination="XJo-5q-9k4" id="mxt-EK-Fip"/>
                 <outlet property="lblDescription" destination="sV5-k0-0Th" id="Dua-59-sUW"/>
                 <outlet property="lblSubtitle" destination="FpU-QQ-rB5" id="bjR-TW-xY3"/>
+                <outlet property="lendView" destination="ucz-A1-DY2" id="6Wi-vl-nFo"/>
             </connections>
             <point key="canvasLocation" x="473.1884057971015" y="113.83928571428571"/>
         </collectionViewCell>

@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -65,7 +66,7 @@
                                 <rect key="frame" x="0.0" y="31.5" width="318" height="31.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pago con descuento" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8MW-3a-RyU" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                        <rect key="frame" x="0.0" y="0.0" width="247" height="31.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="235" height="31.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -75,8 +76,8 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$80.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N6m-au-GrB" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                        <rect key="frame" x="247" y="0.0" width="71" height="31.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$80.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N6m-au-GrB" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                                        <rect key="frame" x="235" y="0.0" width="83" height="31.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -102,7 +103,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$100.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UHd-Df-KNH" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$100.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UHd-Df-KNH" customClass="GSVCLabel" customModule="GSSAVisualComponents">
                                         <rect key="frame" x="159" y="0.0" width="159" height="32"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -129,7 +130,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$80.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4iM-yo-ucc" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$80.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4iM-yo-ucc" customClass="GSVCLabel" customModule="GSSAVisualComponents">
                                         <rect key="frame" x="159" y="0.0" width="159" height="31.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -184,26 +185,39 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zor-EM-mBk">
+                        <rect key="frame" x="0.0" y="296" width="398" height="8"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="8" id="AVt-D3-tGm"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="k1Q-Bd-0ZT" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="6HB-ts-1YD"/>
                     <constraint firstAttribute="trailingMargin" secondItem="kIp-aG-KNE" secondAttribute="trailing" constant="20" id="8Or-dp-npd"/>
                     <constraint firstItem="xmM-gg-BLJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="8Th-Ob-hjv"/>
                     <constraint firstAttribute="trailing" secondItem="xmM-gg-BLJ" secondAttribute="trailing" constant="10" id="ML9-b6-IrK"/>
+                    <constraint firstAttribute="bottom" secondItem="Zor-EM-mBk" secondAttribute="bottom" id="N3l-M2-JAK"/>
                     <constraint firstAttribute="bottomMargin" secondItem="k1Q-Bd-0ZT" secondAttribute="bottom" constant="15" id="QCh-CI-d9P"/>
                     <constraint firstItem="xmM-gg-BLJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="Upb-0f-ARI"/>
                     <constraint firstItem="kIp-aG-KNE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="ZRZ-zY-eJ1"/>
+                    <constraint firstAttribute="trailing" secondItem="Zor-EM-mBk" secondAttribute="trailing" id="bNb-qb-CUW"/>
                     <constraint firstItem="k1Q-Bd-0ZT" firstAttribute="top" secondItem="kIp-aG-KNE" secondAttribute="bottom" constant="15" id="n4J-33-HTg"/>
                     <constraint firstItem="kIp-aG-KNE" firstAttribute="top" secondItem="xmM-gg-BLJ" secondAttribute="bottom" constant="10" id="tNz-ma-741"/>
+                    <constraint firstItem="Zor-EM-mBk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="zcR-5l-DXD"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="separatorView" destination="Zor-EM-mBk" id="4NN-e5-WKr"/>
+            </connections>
             <point key="canvasLocation" x="194.20289855072465" y="118.52678571428571"/>
         </tableViewCell>
     </objects>
     <designables>
         <designable name="4iM-yo-ucc">
-            <size key="intrinsicContentSize" width="45" height="20.5"/>
+            <size key="intrinsicContentSize" width="55" height="20.5"/>
         </designable>
         <designable name="8MW-3a-RyU">
             <size key="intrinsicContentSize" width="156" height="20.5"/>
@@ -212,13 +226,13 @@
             <size key="intrinsicContentSize" width="95.5" height="20.5"/>
         </designable>
         <designable name="N6m-au-GrB">
-            <size key="intrinsicContentSize" width="45" height="20.5"/>
+            <size key="intrinsicContentSize" width="55" height="20.5"/>
         </designable>
         <designable name="P3x-sw-Gbh">
             <size key="intrinsicContentSize" width="174" height="20.5"/>
         </designable>
         <designable name="UHd-Df-KNH">
-            <size key="intrinsicContentSize" width="52" height="20.5"/>
+            <size key="intrinsicContentSize" width="62.5" height="20.5"/>
         </designable>
         <designable name="aTU-cD-VLj">
             <size key="intrinsicContentSize" width="46" height="20.5"/>
@@ -239,4 +253,9 @@
             <size key="intrinsicContentSize" width="90.5" height="20.5"/>
         </designable>
     </designables>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

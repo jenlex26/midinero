@@ -32,6 +32,7 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
     @IBOutlet weak var ExpTitleLabel     : GSVCLabel!
     @IBOutlet weak var ExpDateLabel      : GSVCLabel!
     @IBOutlet weak var TimerView         : BASACircularProgressView!
+    @IBOutlet weak var configButton      : UIButton!
     
     var userBalance: String! 
     //MARK: - Life cicle
@@ -42,6 +43,10 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
         GSVCLoader.show(type: .native)
         self.TimerView.delegate = self
         
+        
+        configButton.backgroundColor = UIColor(hue: 100/360, saturation: 26/100, brightness: 62/100, alpha: 1.0)
+        configButton.layer.masksToBounds = true
+        configButton.layer.cornerRadius = configButton.frame.width/2
         
         CardBackgroundView.layer.cornerRadius = 10
         CardBackgroundView.layer.masksToBounds = true
@@ -64,15 +69,14 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
         requestCVV()
     }
     
-    
     func requestCVV(){
-        presenter?.makeDigitalDataRequest(Body: Transaction(transaccion: AccoutRequest(numeroCuenta: 2575284525826, tokenOperacion: 85284585966396, primerTokenVerificacion: "fac2ac44565db5312fb407c3c9482d04")), DataCard: { [self] DataCard in
+        presenter?.makeDigitalDataRequest(Body: Transaction(transaccion: AccoutRequest(numeroCuenta: "BfZkyu8csA1MMSbMtyuMiQ")), DataCard: { [self] DataCard in
             GSVCLoader.hide()
             if DataCard != nil{
                 self.StartTimer()
-                CVVCodeLabel.text = String(DataCard!.resultado!.cvv ?? 000)
-                CardNumberLabel.text = String(DataCard!.resultado!.numeroTarjeta ?? 0).tnuoccaFormat
-                ExpDateLabel.text = DataCard?.resultado?.fechaExpiracion
+                CVVCodeLabel.text = DataCard!.resultado!.tarjeta?.cvv?.dynamicDecrypt()
+                CardNumberLabel.text = (DataCard!.resultado!.tarjeta?.numero?.alnovaDecrypt() ?? "0").tnuoccaFormat
+                ExpDateLabel.text = DataCard?.resultado?.tarjeta?.fechaExpiracion?.alnovaDecrypt()
             }else{
                 self.presentBottomAlertFullData(status: .error, message: "Ocurrió un error desconocido, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
             }
