@@ -29,6 +29,7 @@
                                 <constraint firstAttribute="width" constant="30" id="8aC-MV-QlD"/>
                                 <constraint firstAttribute="height" constant="30" id="jKY-xL-tw0"/>
                             </constraints>
+                            <color key="tintColor" red="0.45098039220000002" green="0.070588235289999995" blue="0.72156862749999995" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" image="arrow.backward" catalog="system"/>
                             <connections>
                                 <action selector="close:" destination="-1" eventType="touchUpInside" id="71p-Yi-h8D"/>

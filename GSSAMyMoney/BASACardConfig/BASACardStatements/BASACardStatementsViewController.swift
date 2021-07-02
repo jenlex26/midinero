@@ -63,6 +63,7 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
         
         if type == .credit{
             print("NOS IMPLEMENTED...")
+            setStatements()
         }
         
     }
@@ -77,8 +78,14 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
             statements.append(statement(title: title ?? "", subTitle: initialDate + " - " + finalDate, tag: index))
             index += 1
         }
-        
         table.reloadData()
+        
+        if requestData.count == 0{
+            let view =  UINib(nibName: "GSSAEmptyStatements", bundle: Bundle(for: BASACardStatementsViewController.self)).instantiate(withOwner: nil, options: nil)[0] as! UIView
+            view.frame = self.view.frame
+            table.addSubview(view)
+        }
+        
     }
     
     func registerCells(){

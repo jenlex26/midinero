@@ -27,7 +27,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.view.backgroundColor = UIColor.GSVCBase300()
         self.ConfigureCollectionView()
         self.BasaMainHubTableView.alwaysBounceVertical = false
         NotificationCenter.default.addObserver(self, selector: #selector(SwitchColors(notification:)), name: NSNotification.Name(rawValue: "HomeHeaderViewChange"), object: nil)
@@ -131,7 +131,8 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     func setTableForCreditCard(){
         removeAllExceptFirst()
         
-        let digitalCardCell = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "RequestCardCell")!
+        let digitalCardCell = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "RequestCardCell") as! RequestCardCell
+        digitalCardCell.cellViewController = self
         cellsArray.append([digitalCardCell:119.0])
         
         let infoCreditCell = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASACreditCardInfoCell")!

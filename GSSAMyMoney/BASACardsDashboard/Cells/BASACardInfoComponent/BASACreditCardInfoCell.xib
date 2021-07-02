@@ -19,13 +19,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jfb-KC-gFk">
-                        <rect key="frame" x="0.0" y="10" width="434" height="354"/>
+                        <rect key="frame" x="0.0" y="10" width="434" height="360"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ssA-RF-ceJ">
-                                <rect key="frame" x="20" y="10" width="394" height="339"/>
+                                <rect key="frame" x="20" y="10" width="394" height="345"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Información" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="be5-MC-A62" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                        <rect key="frame" x="0.0" y="0.0" width="394" height="17"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="23"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -36,10 +36,10 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="hWJ-x1-MlD">
-                                        <rect key="frame" x="0.0" y="27" width="394" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="33" width="394" height="20.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fecha de corte" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kCL-x0-rPX" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                                <rect key="frame" x="0.0" y="0.0" width="224" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="255" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -49,8 +49,8 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18 de Abril" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1N-NV-VWX">
-                                                <rect key="frame" x="224" y="0.0" width="170" height="20.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18 Abril" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1N-NV-VWX">
+                                                <rect key="frame" x="255" y="0.0" width="139" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -59,7 +59,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Tjy-9c-afV">
-                                        <rect key="frame" x="0.0" y="57.5" width="394" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="63.5" width="394" height="20.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pago Mínimo " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iTu-7X-jiT" customClass="GSVCLabel" customModule="GSSAVisualComponents">
                                                 <rect key="frame" x="0.0" y="0.0" width="251.5" height="20.5"/>
@@ -82,7 +82,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Qxk-9I-96X">
-                                        <rect key="frame" x="0.0" y="88" width="394" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="94" width="394" height="20.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pago para liquidar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GX0-ti-8mm" customClass="GSVCLabel" customModule="GSSAVisualComponents">
                                                 <rect key="frame" x="0.0" y="0.0" width="249.5" height="20.5"/>
@@ -105,7 +105,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Hzj-le-CNa">
-                                        <rect key="frame" x="0.0" y="118.5" width="394" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="124.5" width="394" height="20.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Límite de crédito" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uii-Yb-Z4A" customClass="GSVCLabel" customModule="GSSAVisualComponents">
                                                 <rect key="frame" x="0.0" y="0.0" width="238.5" height="20.5"/>
@@ -128,7 +128,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7oS-Jj-z0s">
-                                        <rect key="frame" x="0.0" y="149" width="394" height="190"/>
+                                        <rect key="frame" x="0.0" y="155" width="394" height="190"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pago para no generar intereses" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i0O-Ll-ava" customClass="GSVCLabel" customModule="GSSAVisualComponents">
                                                 <rect key="frame" x="10" y="10" width="374" height="20"/>
@@ -155,8 +155,8 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fecha limite 10 de Mayo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LFH-bp-ONh" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                                <rect key="frame" x="106" y="83.5" width="182.5" height="20.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Próxima fecha de pago 10 de Mayo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LFH-bp-ONh" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                                                <rect key="frame" x="64.5" y="83.5" width="265.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -214,7 +214,7 @@
                     <constraint firstItem="Jfb-KC-gFk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="TpV-gw-OWa"/>
                     <constraint firstAttribute="trailing" secondItem="Jfb-KC-gFk" secondAttribute="trailing" id="iyG-vs-9Ty"/>
                     <constraint firstItem="Jfb-KC-gFk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="mD8-3D-vkM"/>
-                    <constraint firstAttribute="bottom" secondItem="Jfb-KC-gFk" secondAttribute="bottom" constant="10" id="qWT-qI-qYB"/>
+                    <constraint firstAttribute="bottom" secondItem="Jfb-KC-gFk" secondAttribute="bottom" constant="4" id="qWT-qI-qYB"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -226,7 +226,7 @@
             <size key="intrinsicContentSize" width="137" height="20.5"/>
         </designable>
         <designable name="LFH-bp-ONh">
-            <size key="intrinsicContentSize" width="182.5" height="20.5"/>
+            <size key="intrinsicContentSize" width="265.5" height="20.5"/>
         </designable>
         <designable name="MLH-xb-dvU">
             <size key="intrinsicContentSize" width="43" height="30"/>

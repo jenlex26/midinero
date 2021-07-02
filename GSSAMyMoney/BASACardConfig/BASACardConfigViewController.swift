@@ -11,7 +11,13 @@
 import UIKit
 import GSSAVisualComponents
 
-class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol {
+class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol, GSVCBottomAlertHandler {
+    var bottomAlert: GSVCBottomAlert?
+    
+    func optionalAction() {
+        print("OK")
+    }
+    
     
     var presenter: BASACardConfigPresenterProtocol?
     var credit: Bool!
@@ -32,6 +38,9 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if credit == true{
+            CLABE = "9012 3456 1234 5678 "
+        }
         registerCells()
         setOptions()
         table.delegate = self
@@ -44,12 +53,17 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
     
     func setOptions(){
         if #available(iOS 13.0, *) {
-            configurations.append(userOptions(title: "CLABE Interbancaria", subTitle: CLABE, image: UIImage(systemName: "square.and.arrow.up"), tag: 4))
-            configurations.append(userOptions(title: "Número de cuenta", subTitle: "9567 1660 1234 87", image: nil))
-            configurations.append(userOptions(title: "Celular asociado", subTitle: "55 1234 5678", image: nil))
-            configurations.append(userOptions.init(title: "Estado de cuenta", subTitle: nil, image: UIImage(systemName: "chevron.right"), tag: 1))
-            configurations.append(userOptions.init(title: "Límites de la tarjeta", subTitle: nil, image: UIImage(systemName: "chevron.right"), tag: 2))
-            configurations.append(userOptions.init(title: "Beneficiarios", subTitle: nil, image: UIImage(systemName: "chevron.right"), tag: 3))
+            if credit == false{
+                configurations.append(userOptions(title: "CLABE Interbancaria", subTitle: CLABE, image: UIImage(systemName: "square.and.arrow.up"), tag: 4))
+                configurations.append(userOptions(title: "Número de cuenta", subTitle: "9567 1660 1234 87", image: nil))
+                configurations.append(userOptions(title: "Celular asociado", subTitle: "55 1234 5678", image: nil))
+                configurations.append(userOptions.init(title: "Estado de cuenta", subTitle: nil, image: UIImage(systemName: "chevron.right"), tag: 1))
+                configurations.append(userOptions.init(title: "Límites de la tarjeta", subTitle: nil, image: UIImage(systemName: "chevron.right"), tag: 2))
+                configurations.append(userOptions.init(title: "Beneficiarios", subTitle: nil, image: UIImage(systemName: "chevron.right"), tag: 3))
+            }else{
+                configurations.append(userOptions(title: "Número de tarjeta física", subTitle: CLABE, image: UIImage(systemName: "doc.fill"), tag: 5))
+                configurations.append(userOptions.init(title: "Estado de cuenta", subTitle: nil, image: UIImage(systemName: "chevron.right"), tag: 1))
+            }
         }
     }
     
@@ -99,11 +113,13 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
         if credit == true{
             switch indexPath.row{
             case 0:
-                let cell = table.dequeueReusableCell(withIdentifier: "RequestCardCell")
-                return cell!
+                let cell = table.dequeueReusableCell(withIdentifier: "BASACardControl") as! BASACardControl
+                cell.reportCardView.isHidden = true
+                return cell
             case 1:
-                let cell = table.dequeueReusableCell(withIdentifier: "SectionCell")
-                return cell!
+                let cell = table.dequeueReusableCell(withIdentifier: "SectionCell") as! SectionCell
+                cell.lblTitle.text = "Información"
+                return cell
             default:
                 let cell = table.dequeueReusableCell(withIdentifier: "ConfigItemCell") as! ConfigItemCell
                 let data = configurations[indexPath.row - 2]
@@ -114,8 +130,9 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
         }else{
             switch indexPath.row{
             case 0:
-                let cell = table.dequeueReusableCell(withIdentifier: "SectionCell")
-                return cell!
+                let cell = table.dequeueReusableCell(withIdentifier: "SectionCell") as! SectionCell
+                cell.lblTitle.text = "Información"
+                return cell
             default:
                 let cell = table.dequeueReusableCell(withIdentifier: "ConfigItemCell") as! ConfigItemCell
                 let data = configurations[indexPath.row - 1]
@@ -130,7 +147,7 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
         if credit == true{
             switch indexPath.row{
             case 0:
-                return 119.0
+                return 165.0
             case 1:
                 return 60.0
             default:
@@ -167,6 +184,9 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
             let activityViewController = UIActivityViewController(activityItems: [CLABE], applicationActivities: nil)
             activityViewController.popoverPresentationController?.sourceView = self.view
             self.present(activityViewController, animated: true, completion: nil)
+        case 5:
+            self.presentBottomAlertFullData(status: .success, message: "Número de cuenta copiado", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
+            UIPasteboard.general.string = CLABE
         default:
             print("default case...")
         }

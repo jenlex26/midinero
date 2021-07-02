@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BASACardStatementsViewController" customModule="GSSAFront" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BASACardStatementsViewController" customModule="GSSAMyMoney" customModuleProvider="target">
             <connections>
                 <outlet property="table" destination="K3h-4a-7kn" id="tAB-LT-OgR"/>
                 <outlet property="view" destination="iN0-l3-epB" id="wzl-lQ-8ja"/>
@@ -29,13 +29,14 @@
                                 <constraint firstAttribute="width" constant="30" id="OlC-xe-Uig"/>
                                 <constraint firstAttribute="height" constant="30" id="efj-3A-stJ"/>
                             </constraints>
+                            <color key="tintColor" red="0.45098039220000002" green="0.070588235289999995" blue="0.72156862749999995" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" image="arrow.backward" catalog="system"/>
                             <connections>
                                 <action selector="close:" destination="-1" eventType="touchUpInside" id="DWc-Oa-kK8"/>
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Estado de cuenta" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C8E-dw-h0v" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                            <rect key="frame" x="136.5" y="14" width="141" height="22.5"/>
+                            <rect key="frame" x="141" y="15" width="132.5" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -76,9 +77,8 @@
     </objects>
     <designables>
         <designable name="C8E-dw-h0v">
-            <size key="intrinsicContentSize" width="141" height="22.5"/>
+            <size key="intrinsicContentSize" width="132.5" height="20.5"/>
         </designable>
-        <designable name="kUC-A5-hdZ"/>
     </designables>
     <resources>
         <image name="arrow.backward" catalog="system" width="128" height="98"/>

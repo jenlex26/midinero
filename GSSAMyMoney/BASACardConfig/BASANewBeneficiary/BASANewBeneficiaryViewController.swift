@@ -106,6 +106,12 @@ extension BASANewBeneficiaryViewController: UITableViewDelegate, UITableViewData
             cell.lblSubTitle.isHidden = true
             cell.lblTitle.styleType = 6
             cell.lblTitle.text = "Utilizar mi dirección"
+            cell.tag = 1
+            if beneficiaryData?.domicilio != nil{
+                cell.swtch.isOn = false
+            }else{
+                cell.swtch.isOn = true
+            }
             cell.swtch.addTarget(self, action: #selector(switchChanged(sender:)), for: .valueChanged)
             cell.separatorView.isHidden = true
             return cell
@@ -136,6 +142,18 @@ extension BASANewBeneficiaryViewController: UITableViewDelegate, UITableViewData
             return 119.0
         default:
             return 117.0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if table.cellForRow(at: indexPath)?.tag == 1{
+            if beneficiaryData?.domicilio != nil {
+                let view = GSSANewBeneficiaryAddressRouter.createModuleWithParams(data: beneficiaryData!.domicilio!)
+                self.present(view, animated: true, completion: nil)
+            }else{
+                let view = GSSANewBeneficiaryAddressRouter.createModule()
+                self.present(view, animated: true, completion: nil)
+            }
         }
     }
 }

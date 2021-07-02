@@ -17,6 +17,7 @@ class ConfigItemCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle  = .none
+        imgView.tintColor = UIColor.GSVCSecundary100
     }
     
     func configureCell(title: String, subtitle: String? = nil, image: UIImage? = nil){

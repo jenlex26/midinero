@@ -70,3 +70,9 @@ extension String{
         return self.replacingOccurrences(of: " ", with: "").count
     }
 }
+
+extension UIColor{
+   class func GSVCBase300() -> UIColor{
+        return UIColor(red: 242/255, green: 242/255, blue: 242/255, alpha: 1.0)
+    }
+}

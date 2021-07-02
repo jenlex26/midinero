@@ -70,8 +70,8 @@
                                     <constraint firstAttribute="width" constant="240" id="onT-fq-7au"/>
                                 </constraints>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mi dinero" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X7i-Rd-dT7" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                <rect key="frame" x="70" y="19.5" width="112" height="31"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dinero" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X7i-Rd-dT7" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                                <rect key="frame" x="70" y="19.5" width="79.5" height="31"/>
                                 <fontDescription key="fontDescription" name="GeezaPro-Bold" family="Geeza Pro" pointSize="25"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -320,7 +320,7 @@
             <size key="intrinsicContentSize" width="134.5" height="45.5"/>
         </designable>
         <designable name="X7i-Rd-dT7">
-            <size key="intrinsicContentSize" width="112" height="31"/>
+            <size key="intrinsicContentSize" width="79.5" height="31"/>
         </designable>
         <designable name="dCi-lk-A6V">
             <size key="intrinsicContentSize" width="34" height="20.5"/>

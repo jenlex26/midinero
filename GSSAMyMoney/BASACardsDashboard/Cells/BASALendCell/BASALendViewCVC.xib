@@ -34,7 +34,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="De tus préstamos en efectivo, Elektra y otros" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sV5-k0-0Th" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="De tus préstamos en Efectivo, Elektra y otros" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sV5-k0-0Th" customClass="GSVCLabel" customModule="GSSAVisualComponents">
                                 <rect key="frame" x="10" y="115" width="423" height="21"/>
                                 <fontDescription key="fontDescription" name="GeezaPro-Bold" family="Geeza Pro" pointSize="17"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -45,8 +45,8 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deuda total" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FpU-QQ-rB5" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                <rect key="frame" x="345" y="89.5" width="88" height="20.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Debes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FpU-QQ-rB5" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                                <rect key="frame" x="384" y="89.5" width="49" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -105,13 +105,13 @@
     </objects>
     <designables>
         <designable name="FpU-QQ-rB5">
-            <size key="intrinsicContentSize" width="88" height="20.5"/>
+            <size key="intrinsicContentSize" width="49" height="20.5"/>
         </designable>
         <designable name="XJo-5q-9k4">
             <size key="intrinsicContentSize" width="134" height="45.5"/>
         </designable>
         <designable name="sV5-k0-0Th">
-            <size key="intrinsicContentSize" width="368" height="21"/>
+            <size key="intrinsicContentSize" width="370" height="21"/>
         </designable>
     </designables>
     <resources>

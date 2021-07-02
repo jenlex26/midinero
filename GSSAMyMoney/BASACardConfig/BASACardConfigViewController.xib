@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BASACardConfigViewController" customModule="GSSAFront" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BASACardConfigViewController" customModule="GSSAMyMoney" customModuleProvider="target">
             <connections>
                 <outlet property="table" destination="pUR-qV-axY" id="4Tr-ty-IE9"/>
                 <outlet property="view" destination="iN0-l3-epB" id="089-JK-FaH"/>
@@ -29,6 +29,7 @@
                                 <constraint firstAttribute="width" constant="30" id="CZi-i1-Xj8"/>
                                 <constraint firstAttribute="height" constant="30" id="PZ5-Z0-eHH"/>
                             </constraints>
+                            <color key="tintColor" red="0.45098039220000002" green="0.070588235289999995" blue="0.72156862749999995" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" image="arrow.backward" catalog="system"/>
                             <connections>
                                 <action selector="close:" destination="-1" eventType="touchUpInside" id="S9N-05-adC"/>

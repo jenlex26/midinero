@@ -18,18 +18,24 @@
                 <rect key="frame" x="0.0" y="0.0" width="315" height="119"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oMf-6b-twD" customClass="GSVCView" customModule="GSSAVisualComponents">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oMf-6b-twD">
                         <rect key="frame" x="24" y="16" width="267" height="76"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZeO-at-1xG">
+                                <rect key="frame" x="0.0" y="0.0" width="267" height="76"/>
+                                <connections>
+                                    <action selector="show:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="G2o-Di-wcY"/>
+                                </connections>
+                            </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="creditcard.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="MFD-Ao-hLo">
                                 <rect key="frame" x="16" y="27.5" width="24" height="20.5"/>
-                                <color key="tintColor" red="0.2901960784" green="0.36862745099999999" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="tintColor" red="0.45098039220000002" green="0.070588235289999995" blue="0.72156862749999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="8lu-bY-cYs"/>
                                     <constraint firstAttribute="width" constant="24" id="BuO-Mg-pyo"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Solicita tu tarjeta" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dtM-yd-udu" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tarjeta digital" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dtM-yd-udu" customClass="GSVCLabel" customModule="GSSAVisualComponents">
                                 <rect key="frame" x="48" y="28" width="148" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -42,7 +48,7 @@
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="OvC-gI-vL3">
                                 <rect key="frame" x="206" y="28" width="24" height="20.5"/>
-                                <color key="tintColor" red="0.2901960784" green="0.36862745099999999" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="tintColor" red="0.45098039220000002" green="0.070588235289999995" blue="0.72156862749999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="EHV-2M-K7T"/>
                                     <constraint firstAttribute="height" constant="24" id="pl4-oQ-pmE"/>
@@ -53,23 +59,24 @@
                         <constraints>
                             <constraint firstItem="MFD-Ao-hLo" firstAttribute="centerY" secondItem="oMf-6b-twD" secondAttribute="centerY" id="7c1-Pn-DB7"/>
                             <constraint firstItem="dtM-yd-udu" firstAttribute="centerY" secondItem="MFD-Ao-hLo" secondAttribute="centerY" id="91h-vW-XLC"/>
+                            <constraint firstItem="ZeO-at-1xG" firstAttribute="top" secondItem="oMf-6b-twD" secondAttribute="top" id="AVd-pj-wzL"/>
                             <constraint firstItem="OvC-gI-vL3" firstAttribute="centerY" secondItem="oMf-6b-twD" secondAttribute="centerY" id="Aez-YG-I6q"/>
+                            <constraint firstAttribute="bottom" secondItem="ZeO-at-1xG" secondAttribute="bottom" id="Gut-MJ-RhH"/>
                             <constraint firstItem="OvC-gI-vL3" firstAttribute="leading" secondItem="dtM-yd-udu" secondAttribute="trailing" constant="10" id="glb-re-fTH"/>
+                            <constraint firstAttribute="trailing" secondItem="ZeO-at-1xG" secondAttribute="trailing" id="lkj-AM-fZF"/>
                             <constraint firstAttribute="trailing" secondItem="OvC-gI-vL3" secondAttribute="trailing" constant="37" id="nqs-AE-0p0"/>
                             <constraint firstItem="MFD-Ao-hLo" firstAttribute="leading" secondItem="oMf-6b-twD" secondAttribute="leading" constant="16" id="qcR-G2-EYV"/>
                             <constraint firstItem="dtM-yd-udu" firstAttribute="leading" secondItem="MFD-Ao-hLo" secondAttribute="trailing" constant="8" id="sfY-bD-pq3"/>
+                            <constraint firstItem="ZeO-at-1xG" firstAttribute="leading" secondItem="oMf-6b-twD" secondAttribute="leading" id="tE8-H9-Y0V"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="style">
-                                <integer key="value" value="4"/>
-                            </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                 <real key="value" value="10"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
-                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="oMf-6b-twD" secondAttribute="trailing" constant="24" id="GKM-BM-0cR"/>
                     <constraint firstItem="oMf-6b-twD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="JpP-X4-y7i"/>
@@ -85,13 +92,14 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="buttonView" destination="oMf-6b-twD" id="O7b-CH-aAf"/>
+                <outlet property="cellButton" destination="ZeO-at-1xG" id="wdL-ml-ned"/>
             </connections>
             <point key="canvasLocation" x="131.15942028985509" y="92.745535714285708"/>
         </tableViewCell>
     </objects>
     <designables>
         <designable name="dtM-yd-udu">
-            <size key="intrinsicContentSize" width="128" height="20.5"/>
+            <size key="intrinsicContentSize" width="102" height="20.5"/>
         </designable>
     </designables>
     <resources>

@@ -24,7 +24,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="386" height="237"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="05/22" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pbN-Bb-cBg" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                <rect key="frame" x="79" y="203" width="35" height="17"/>
+                                <rect key="frame" x="68.5" y="205.5" width="33" height="16"/>
                                 <fontDescription key="fontDescription" name="GeezaPro-Bold" family="Geeza Pro" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -35,7 +35,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="$1,500.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ckp-u2-ztP" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                <rect key="frame" x="197.5" y="49" width="168.5" height="50.5"/>
+                                <rect key="frame" x="200.5" y="49" width="165.5" height="45.5"/>
                                 <fontDescription key="fontDescription" name="GeezaPro-Bold" family="Geeza Pro" pointSize="37"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -46,7 +46,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vigencia" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GXj-fW-syT" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                <rect key="frame" x="21" y="203" width="53" height="17"/>
+                                <rect key="frame" x="21" y="206.5" width="42.5" height="13.5"/>
                                 <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="11"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -57,7 +57,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9012 3456 1234 5678 " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RgV-Cl-72H" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                <rect key="frame" x="16" y="165.5" width="354" height="31"/>
+                                <rect key="frame" x="16" y="168" width="354" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="hij-5z-t5J"/>
                                 </constraints>
@@ -70,8 +70,8 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Debes $1000.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CpU-GS-XIw" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                <rect key="frame" x="266.5" y="99.5" width="99.5" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Debes $1,000.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CpU-GS-XIw" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                                <rect key="frame" x="236.5" y="94.5" width="129.5" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -146,19 +146,19 @@
     </objects>
     <designables>
         <designable name="CpU-GS-XIw">
-            <size key="intrinsicContentSize" width="99.5" height="20"/>
+            <size key="intrinsicContentSize" width="129.5" height="20.5"/>
         </designable>
         <designable name="GXj-fW-syT">
-            <size key="intrinsicContentSize" width="53" height="17"/>
+            <size key="intrinsicContentSize" width="42.5" height="13.5"/>
         </designable>
         <designable name="RgV-Cl-72H">
-            <size key="intrinsicContentSize" width="333.5" height="45"/>
+            <size key="intrinsicContentSize" width="172.5" height="21"/>
         </designable>
         <designable name="ckp-u2-ztP">
-            <size key="intrinsicContentSize" width="168.5" height="50.5"/>
+            <size key="intrinsicContentSize" width="165.5" height="45.5"/>
         </designable>
         <designable name="pbN-Bb-cBg">
-            <size key="intrinsicContentSize" width="35" height="17"/>
+            <size key="intrinsicContentSize" width="33" height="16"/>
         </designable>
     </designables>
     <resources>

@@ -10,14 +10,20 @@ import GSSAVisualComponents
 
 class RequestCardCell: UITableViewCell {
 
-    @IBOutlet weak var buttonView: GSVCView!
+    @IBOutlet weak var buttonView: UIView!
+    @IBOutlet weak var cellButton: UIButton!
+    
+    var cellViewController: UIViewController!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        //self.backgroundColor = UIColor.GSVCBase200
+        self.backgroundColor = UIColor.clear
         self.selectionStyle = .none
-        self.buttonView.layer.shadowColor = UIColor.lightGray.cgColor
-        self.buttonView.layer.shadowRadius = 6
-        self.buttonView.layer.shadowOpacity = 0.1
+        buttonView.layer.cornerRadius = 10
+        buttonView.layer.masksToBounds = true
+    }
+    
+    @IBAction func show(_ sender: Any){
+        cellViewController.navigationController?.pushViewController(BASADigitalCardRouter.createModule(userBalance: "$1,500"), animated: true)
     }
 }

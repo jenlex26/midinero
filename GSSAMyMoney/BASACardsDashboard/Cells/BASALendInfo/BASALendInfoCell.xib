@@ -65,7 +65,7 @@
                                 <rect key="frame" x="0.0" y="31.5" width="318" height="31.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pago con descuento" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8MW-3a-RyU" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                        <rect key="frame" x="0.0" y="0.0" width="248.5" height="31.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="247" height="31.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -76,7 +76,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$80.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N6m-au-GrB" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                        <rect key="frame" x="248.5" y="0.0" width="69.5" height="31.5"/>
+                                        <rect key="frame" x="247" y="0.0" width="71" height="31.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -146,7 +146,7 @@
                                 <rect key="frame" x="0.0" y="126.5" width="318" height="31.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Próxima fecha de pago" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P3x-sw-Gbh" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                        <rect key="frame" x="0.0" y="0.0" width="214.5" height="31.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="233.5" height="31.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -156,8 +156,8 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="14 de Junio" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fHT-kL-Xlw" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                        <rect key="frame" x="214.5" y="0.0" width="103.5" height="31.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18 junio " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fHT-kL-Xlw" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                                        <rect key="frame" x="233.5" y="0.0" width="84.5" height="31.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -203,40 +203,40 @@
     </objects>
     <designables>
         <designable name="4iM-yo-ucc">
-            <size key="intrinsicContentSize" width="46.5" height="22.5"/>
+            <size key="intrinsicContentSize" width="45" height="20.5"/>
         </designable>
         <designable name="8MW-3a-RyU">
-            <size key="intrinsicContentSize" width="165.5" height="22.5"/>
+            <size key="intrinsicContentSize" width="156" height="20.5"/>
         </designable>
         <designable name="IQT-mD-3rc">
-            <size key="intrinsicContentSize" width="102.5" height="22.5"/>
+            <size key="intrinsicContentSize" width="95.5" height="20.5"/>
         </designable>
         <designable name="N6m-au-GrB">
-            <size key="intrinsicContentSize" width="46.5" height="22.5"/>
+            <size key="intrinsicContentSize" width="45" height="20.5"/>
         </designable>
         <designable name="P3x-sw-Gbh">
-            <size key="intrinsicContentSize" width="187" height="22.5"/>
+            <size key="intrinsicContentSize" width="174" height="20.5"/>
         </designable>
         <designable name="UHd-Df-KNH">
-            <size key="intrinsicContentSize" width="52.5" height="22.5"/>
+            <size key="intrinsicContentSize" width="52" height="20.5"/>
         </designable>
         <designable name="aTU-cD-VLj">
-            <size key="intrinsicContentSize" width="48" height="22.5"/>
+            <size key="intrinsicContentSize" width="46" height="20.5"/>
         </designable>
         <designable name="fHT-kL-Xlw">
-            <size key="intrinsicContentSize" width="90.5" height="22.5"/>
+            <size key="intrinsicContentSize" width="63" height="20.5"/>
         </designable>
         <designable name="g5a-mf-BDn">
-            <size key="intrinsicContentSize" width="69" height="22.5"/>
+            <size key="intrinsicContentSize" width="66" height="20.5"/>
         </designable>
         <designable name="ghR-vN-u8w">
-            <size key="intrinsicContentSize" width="116" height="22.5"/>
+            <size key="intrinsicContentSize" width="109.5" height="20.5"/>
         </designable>
         <designable name="k1Q-Bd-0ZT">
-            <size key="intrinsicContentSize" width="50" height="35"/>
+            <size key="intrinsicContentSize" width="40" height="30"/>
         </designable>
         <designable name="xmM-gg-BLJ">
-            <size key="intrinsicContentSize" width="123" height="28"/>
+            <size key="intrinsicContentSize" width="90.5" height="20.5"/>
         </designable>
     </designables>
 </document>

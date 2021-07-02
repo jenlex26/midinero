@@ -11,6 +11,8 @@ import GSSAInterceptor
 class BASAButtonsCell: UITableViewCell {
     
     @IBOutlet weak var cellButtonView: UIView!
+    @IBOutlet weak var separatorView : UIView!
+    @IBOutlet weak var cellContentView : UIView!
     @IBOutlet weak var openDigitalCardButton: UIButton!
     @IBOutlet weak var stack: UIStackView!
 
@@ -20,23 +22,13 @@ class BASAButtonsCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
-        self.backgroundColor = UIColor.GSVCBase200
+//        self.backgroundColor = UIColor.GSVCBase300()
+//        cellContentView.backgroundColor = UIColor.GSVCBase300()
+        separatorView.backgroundColor = UIColor.GSVCBase300()
         // corner radius
         cellButtonView.layer.cornerRadius = 10
         cellButtonView.layer.masksToBounds = true
-        // border
-        cellButtonView.layer.borderWidth = 0.2
-        if #available(iOS 13.0, *) {
-            cellButtonView.layer.borderColor = UIColor.label.cgColor
-        }
-
-        // shadow
-        stack.layer.shadowColor = UIColor.black.cgColor
-        stack.layer.shadowOffset = CGSize(width: 3, height: 3)
-        stack.layer.shadowOpacity = 0.7
-        stack.layer.shadowRadius = 4.0
-        
-        
+     
         NotificationCenter.default.addObserver(self, selector: #selector(updateData(notification:)), name: NSNotification.Name(rawValue: "reloadHeaderData"), object: nil)
     }
     

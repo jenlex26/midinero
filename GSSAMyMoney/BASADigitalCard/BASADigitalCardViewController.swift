@@ -88,7 +88,7 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
     }
     
     func StartTimer(){
-        TimerView.start(beginingValue: 90)
+        TimerView.start(beginingValue: 105)
     }
     
     func SetGradient(){

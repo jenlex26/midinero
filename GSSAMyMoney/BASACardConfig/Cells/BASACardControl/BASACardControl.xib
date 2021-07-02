@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BASACardControl" rowHeight="235" id="KGk-i7-Jjw" customClass="BASACardControl" customModule="GSSAFront" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BASACardControl" rowHeight="235" id="KGk-i7-Jjw" customClass="BASACardControl" customModule="GSSAMyMoney" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="329" height="235"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -29,7 +29,7 @@
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="HgC-zB-efj">
                                                 <rect key="frame" x="16" y="20.5" width="24" height="22.5"/>
-                                                <color key="tintColor" red="0.2901960784" green="0.36862745099999999" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="tintColor" red="0.45098039220000002" green="0.070588235289999995" blue="0.72156862749999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="24" id="4a3-SW-ugg"/>
                                                     <constraint firstAttribute="height" constant="24" id="p7p-Ez-fDU"/>
@@ -80,7 +80,7 @@
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="exclamationmark.triangle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="7OA-gO-4tM">
                                                 <rect key="frame" x="16" y="21" width="24" height="22"/>
-                                                <color key="tintColor" red="0.2901960784" green="0.36862745099999999" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="tintColor" red="0.45098039220000002" green="0.070588235289999995" blue="0.72156862749999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="24" id="gkG-4Y-tRc"/>
                                                     <constraint firstAttribute="height" constant="24" id="o06-bY-Fha"/>
@@ -132,13 +132,13 @@
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="creditcard.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="0Gc-M4-FxG">
                                                 <rect key="frame" x="16" y="22" width="24" height="20.5"/>
-                                                <color key="tintColor" red="0.2901960784" green="0.36862745099999999" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="tintColor" red="0.45098039220000002" green="0.070588235289999995" blue="0.72156862749999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="24" id="URO-oj-zOd"/>
                                                     <constraint firstAttribute="height" constant="24" id="vR0-Ch-WQo"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ver NIP" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xul-6a-bhu" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activa tu tarjeta física" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xul-6a-bhu" customClass="GSVCLabel" customModule="GSSAVisualComponents">
                                                 <rect key="frame" x="48" y="22" width="162.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
@@ -151,7 +151,7 @@
                                             </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ceK-s2-caw">
                                                 <rect key="frame" x="220.5" y="22.5" width="24" height="20.5"/>
-                                                <color key="tintColor" red="0.2901960784" green="0.36862745099999999" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="tintColor" red="0.45098039220000002" green="0.070588235289999995" blue="0.72156862749999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="24" id="FJg-wl-A9x"/>
                                                     <constraint firstAttribute="height" constant="24" id="SdJ-oG-6Ir"/>
@@ -198,7 +198,10 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="cardControlView" destination="wyh-xA-QEb" id="CTy-zM-HaY"/>
+                <outlet property="nipCardView" destination="vei-zf-Q3b" id="3EX-0x-4js"/>
+                <outlet property="reportCardView" destination="JNd-xh-jAJ" id="BQ0-a4-esc"/>
                 <outlet property="turnOfSwitch" destination="eyA-gb-Sja" id="bmZ-eY-ZKb"/>
+                <outlet property="turnOffCard" destination="YjD-3s-Cij" id="gfE-64-TXx"/>
             </connections>
             <point key="canvasLocation" x="168.84057971014494" y="116.18303571428571"/>
         </tableViewCell>
@@ -208,7 +211,7 @@
             <size key="intrinsicContentSize" width="119.5" height="20.5"/>
         </designable>
         <designable name="Xul-6a-bhu">
-            <size key="intrinsicContentSize" width="57" height="20.5"/>
+            <size key="intrinsicContentSize" width="163.5" height="20.5"/>
         </designable>
         <designable name="ghv-VI-RE3">
             <size key="intrinsicContentSize" width="108" height="20.5"/>

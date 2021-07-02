@@ -45,7 +45,7 @@
     </objects>
     <designables>
         <designable name="ONS-Vh-NP8">
-            <size key="intrinsicContentSize" width="84" height="35"/>
+            <size key="intrinsicContentSize" width="67" height="30"/>
         </designable>
     </designables>
 </document>
