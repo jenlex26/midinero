@@ -26,8 +26,8 @@
                             <constraint firstAttribute="height" constant="20" id="dP1-1E-Db2"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Compra en OXXO" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tum-Yi-C0A" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                        <rect key="frame" x="50" y="19" width="140.5" height="22.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Compra en OXXO" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tum-Yi-C0A" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                        <rect key="frame" x="50" y="21" width="260" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -38,7 +38,7 @@
                         </userDefinedRuntimeAttributes>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$70.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="21I-Yb-sa8" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                        <rect key="frame" x="246" y="45" width="54" height="22.5"/>
+                        <rect key="frame" x="232" y="39.5" width="68" height="24"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -49,7 +49,7 @@
                         </userDefinedRuntimeAttributes>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16 Abr 2021" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HQQ-iP-dYm" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                        <rect key="frame" x="50" y="46.5" width="74.5" height="20"/>
+                        <rect key="frame" x="50" y="44" width="68" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -63,6 +63,7 @@
                 <constraints>
                     <constraint firstItem="PXo-EC-Zzn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="4iF-md-kxH"/>
                     <constraint firstItem="HQQ-iP-dYm" firstAttribute="top" secondItem="tum-Yi-C0A" secondAttribute="bottom" constant="5" id="6Uy-cT-Cvi"/>
+                    <constraint firstAttribute="trailing" secondItem="tum-Yi-C0A" secondAttribute="trailing" constant="10" id="BWc-lS-l3D"/>
                     <constraint firstItem="tum-Yi-C0A" firstAttribute="leading" secondItem="PXo-EC-Zzn" secondAttribute="trailing" constant="10" id="GB4-zO-mwv"/>
                     <constraint firstItem="HQQ-iP-dYm" firstAttribute="leading" secondItem="tum-Yi-C0A" secondAttribute="leading" id="JYT-Fj-Fh2"/>
                     <constraint firstItem="tum-Yi-C0A" firstAttribute="centerY" secondItem="PXo-EC-Zzn" secondAttribute="centerY" id="MmH-Mo-tSO"/>
@@ -84,13 +85,13 @@
     </objects>
     <designables>
         <designable name="21I-Yb-sa8">
-            <size key="intrinsicContentSize" width="54" height="22.5"/>
+            <size key="intrinsicContentSize" width="68" height="24"/>
         </designable>
         <designable name="HQQ-iP-dYm">
-            <size key="intrinsicContentSize" width="74.5" height="20"/>
+            <size key="intrinsicContentSize" width="68" height="14.5"/>
         </designable>
         <designable name="tum-Yi-C0A">
-            <size key="intrinsicContentSize" width="140.5" height="22.5"/>
+            <size key="intrinsicContentSize" width="121.5" height="18"/>
         </designable>
     </designables>
     <resources>

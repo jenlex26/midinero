@@ -23,5 +23,6 @@ class BASALendInfoCell: UITableViewCell {
     }
     
     @IBAction func showMessage(_ sender: Any){
+     
     }
 }
