@@ -20,8 +20,8 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ucz-A1-DY2">
                         <rect key="frame" x="30" y="0.0" width="453" height="286"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="$16,000" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XJo-5q-9k4" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                <rect key="frame" x="299" y="34" width="134" height="50.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="$-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XJo-5q-9k4" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                                <rect key="frame" x="400" y="34" width="33" height="50.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50.5" id="I8Z-v0-5JE"/>
                                 </constraints>
@@ -45,8 +45,8 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Debes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FpU-QQ-rB5" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                <rect key="frame" x="384" y="89.5" width="49" height="20.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deuda total" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FpU-QQ-rB5" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                                <rect key="frame" x="345" y="89.5" width="88" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -106,10 +106,10 @@
     </objects>
     <designables>
         <designable name="FpU-QQ-rB5">
-            <size key="intrinsicContentSize" width="49" height="20.5"/>
+            <size key="intrinsicContentSize" width="88" height="20.5"/>
         </designable>
         <designable name="XJo-5q-9k4">
-            <size key="intrinsicContentSize" width="134" height="45.5"/>
+            <size key="intrinsicContentSize" width="33" height="45.5"/>
         </designable>
         <designable name="sV5-k0-0Th">
             <size key="intrinsicContentSize" width="370" height="21"/>

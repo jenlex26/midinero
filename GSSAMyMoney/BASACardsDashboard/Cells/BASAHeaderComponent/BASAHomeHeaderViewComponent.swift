@@ -28,10 +28,12 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
     @IBOutlet weak var expDateLabel             : GSVCLabel!
     @IBOutlet weak var CVVTitle                 : GSVCLabel!
     @IBOutlet weak var CVVLabel                 : GSVCLabel!
-
+    
+    
     var gradient = CAGradientLayer()
     var cellViewController: UIViewController!
     var data: BalanceResponse?
+    var lendsData: LendsResponse?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -54,13 +56,14 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
         
         debitCardView.layer.cornerRadius = 10
         debitCardView.layer.masksToBounds = true
-
+        
         debitCardView.layer.borderWidth = 0.2
         debitCardView.layer.borderColor = UIColor.lightGray.cgColor
-       
+        
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(reloadCards(notification:)), name: NSNotification.Name(rawValue: "reloadHeaderData"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadLends(notification:)), name: NSNotification.Name(rawValue: "reloadLendsData"), object: nil)
     }
     
     func setUpDebitCard(){
@@ -70,7 +73,7 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
         debitCardbtnConfig.setImage(UIImage(named: "ic_more_icon", in: Bundle(for: BASAHomeHeaderViewComponent.self), compatibleWith: nil), for: .normal)
         
         debitCardbtnConfig.tag = 0
-       
+        
         if data != nil{
             debitCardlblBalance.text = data!.resultado.cliente?.cuentas?.first?.saldoDisponible
         }
@@ -101,11 +104,20 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
     
     @objc func reloadCards(notification: Notification){
         if notification.object != nil{
-           let data = notification.object as! BalanceResponse
+            let data = notification.object as! BalanceResponse
             
-            let amountString = data.resultado.cliente?.cuentas?.first?.saldoDisponible?.alnovaDecrypt().moneyFormat() ?? "0"
+            let amountString = data.resultado.cliente?.cuentas?.first?.saldoDisponible?.moneyFormat() ?? "0"
             debitCardlblBalance.text = amountString
             debitCardlblCardNumber.text = data.resultado.cliente?.cuentas?.first?.numeroTarjeta?.alnovaDecrypt().tnuoccaFormat
+        }
+    }
+    
+    @objc func reloadLends(notification: Notification){
+        if notification.object != nil{
+            let data = notification.object as! LendsResponse
+            lendsData = data
+            cardCollection.reloadData()
+            self.pageController.currentPage = 1
         }
     }
     
@@ -189,7 +201,7 @@ extension BASAHomeHeaderViewComponent: UICollectionViewDelegate, UICollectionVie
             
             if data != nil{
                 cell.lblCardNumber.text! = (data?.resultado.cliente?.cuentas?.first?.numero!.tnuoccaFormat) ?? ""
-               // cell.lblBalance.text = data!.resultado.saldoDisponible
+                // cell.lblBalance.text = data!.resultado.saldoDisponible
             }
             
             cell.btnConfig.addTarget(self, action: #selector(openConfig(sender:)), for: .touchUpInside)
@@ -200,10 +212,13 @@ extension BASAHomeHeaderViewComponent: UICollectionViewDelegate, UICollectionVie
             return cell
         case 1:
             print("case 1")
-            let cell = cardCollection.dequeueReusableCell(withReuseIdentifier: "BASALendViewCVC", for: indexPath)
+            let cell = cardCollection.dequeueReusableCell(withReuseIdentifier: "BASALendViewCVC", for: indexPath) as! BASALendViewCVC
+            if lendsData != nil{
+                cell.lblAmount.text = lendsData?.resultado?.pagoLiquidar?.moneyFormat()
+            }
             return cell
         default:
-           return UICollectionViewCell()
+            return UICollectionViewCell()
         }
     }
     
@@ -228,7 +243,7 @@ extension BASAHomeHeaderViewComponent: UICollectionViewDelegate, UICollectionVie
 
 
 extension UIView{
-func applyBlurEffect() {
+    func applyBlurEffect() {
         let blurEffect = UIBlurEffect(style: .light)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = bounds

@@ -22,7 +22,8 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     
     var accountBalance: BalanceResponse?
     var debitCardMovements: DebitCardTransaction?
-
+    var lendsData: LendsResponse?
+    
     var accountNumber: [String:String]?
     
     override func viewDidLoad() {
@@ -66,6 +67,20 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         })
     }
     
+    func loadLends(){
+        GSVCLoader.show(type: .native)
+        presenter?.requestUserLends(Lends: { [self]Lends in
+            GSVCLoader.hide()
+            if let LendsData = Lends{
+                lendsData = LendsData
+                NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "reloadLendsData"), object: LendsData, userInfo: nil))
+                setTableForLends()
+            }else{
+                self.presentBottomAlertFullData(status: .error, message: "Ocurrió un al cargar tus prestamos, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
+            }
+        })
+    }
+    
     func ConfigureCollectionView(){
         self.RegisterCells()
         self.BasaMainHubTableView.delegate = self
@@ -93,6 +108,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         let accountData = accountBalance?.resultado.cliente?.cuentas
         header.debitCardlblBalance.text = accountData?.first?.saldoDisponible
         header.debitCardlblCardNumber.text = accountData?.first?.numero?.alnovaDecrypt()
+        
         header.data = accountBalance
         header.debitButton.backgroundColor = UIColor(red: 130/255, green: 0/255, blue: 255/255, alpha: 1.0)
         header.debitButton.setTitleColor(.white, for: .normal)
@@ -158,28 +174,36 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     
     func setTableForLends(){
         removeAllExceptFirst()
-        let infoCell = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASALendInfoCell")!
+        
+        let infoCell = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASALendInfoCell") as! BASALendInfoCell
+        
+        if lendsData == nil{
+            loadLends()
+        }else{
+            infoCell.lblNextPayment.text = lendsData?.resultado?.fechaProximoPago?.dateFormatter(format: "yyyy/MM/dd", outputFormat: "dd MMMM")
+            infoCell.lblPaymentWithDiscount.text = lendsData?.resultado?.pagoPuntual?.moneyFormat()
+            infoCell.lblSuggestedPayment.text = String(lendsData?.resultado?.pagoSugerido ?? 0).moneyFormat()
+            infoCell.lblFixedPayment.text = lendsData?.resultado?.pagoNormal?.moneyFormat()
+            infoCell.lblPaymentDay.text = lendsData?.resultado?.fechaProximoPago?.dateFormatter(format: "yyyy/MM/dd", outputFormat: "EEEE")
+        }
+        
         cellsArray.append([infoCell:300.0])
         
         let separator = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "SectionCell") as! SectionCell
         separator.lblTitle.text = "Mis créditos"
         cellsArray.append([separator:60.0])
         
+        if lendsData?.resultado?.productos != nil{
+            for item in lendsData!.resultado!.productos!{
+                if item.id != 0{
+                    let creditItem = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAMyCreditItem") as! BASAMyCreditItem
+                    creditItem.lblAmount.text = item.pagoLiquidar?.moneyFormat()
+                    creditItem.setTitle(id: item.id ?? -1)
+                    cellsArray.append([creditItem:180.0])
+                }
+            }
+        }
         
-        let creditExample1 = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAMyCreditItem")!
-        cellsArray.append([creditExample1:180.0])
-        
-        let creditExample2 = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAMyCreditItem") as! BASAMyCreditItem
-        creditExample2.lblAmount.text = "$6,000.00"
-        creditExample2.lblTitle.text = "Crédito Elektra"
-        cellsArray.append([creditExample2:180.0])
-        
-        let creditExample3 = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAMyCreditItem") as! BASAMyCreditItem
-        creditExample3.lblAmount.text = "$1,000.00"
-        creditExample3.lblTitle.text = "Otros créditos"
-        cellsArray.append([creditExample3:180.0])
-        
-        //BasaMainHubTableView.reloadData()
         addTableComponents()
     }
     

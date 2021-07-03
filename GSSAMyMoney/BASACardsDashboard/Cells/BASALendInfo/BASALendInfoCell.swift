@@ -11,8 +11,13 @@ import GSSAVisualTemplates
 
 class BASALendInfoCell: UITableViewCell {
     
-    @IBOutlet weak var separatorView: UIView!
-    @IBOutlet weak var btnInfo      : UIButton!
+    @IBOutlet weak var separatorView           : UIView!
+    @IBOutlet weak var btnInfo                 : UIButton!
+    @IBOutlet weak var lblPaymentDay           : GSVCLabel!
+    @IBOutlet weak var lblPaymentWithDiscount  : GSVCLabel!
+    @IBOutlet weak var lblFixedPayment         : GSVCLabel!
+    @IBOutlet weak var lblSuggestedPayment     : GSVCLabel!
+    @IBOutlet weak var lblNextPayment          : GSVCLabel!
     
     var cellViewController: UIViewController?
 

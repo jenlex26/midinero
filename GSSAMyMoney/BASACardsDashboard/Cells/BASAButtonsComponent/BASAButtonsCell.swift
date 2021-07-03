@@ -61,7 +61,7 @@ class BASAButtonsCell: UITableViewCell {
     
     @IBAction func openDigitalCard(sender: Any){
         if cellViewController != nil{
-            let data = accountBalance?.resultado.cliente?.cuentas?.first?.saldoDisponible?.alnovaDecrypt().moneyFormat() ?? ""
+            let data = accountBalance?.resultado.cliente?.cuentas?.first?.saldoDisponible?.moneyFormat() ?? ""
             cellViewController.navigationController?.pushViewController(BASADigitalCardRouter.createModule(userBalance: data), animated: true)
         }
     }

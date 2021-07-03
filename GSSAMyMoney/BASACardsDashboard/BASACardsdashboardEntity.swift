@@ -83,3 +83,25 @@ struct DebitCardTransactionItem: Codable {
     let importe, saldo, descripcion, fechaOperacion: String?
     let numeroMovimiento, codigoDivisa: String?
 }
+
+
+// MARK: - LendsResponse
+struct LendsResponse: Codable {
+    var mensaje, folio: String?
+    var resultado: LendsResponseResult?
+}
+
+// MARK: - Resultado
+struct LendsResponseResult: Codable {
+    var fechaProximoPago, fechaProximoPagoDesarrollada: String?
+    var pagoPuntual, pagoNormal, pagoSugerido, pagoRequerido: Int?
+    var pagoLiquidar: Int?
+    var productos: [LendsResponseProducts]?
+}
+
+// MARK: - Producto
+struct LendsResponseProducts: Codable {
+    var id: Int?
+    var descripcion, pagoPuntual, pagoNormal, pagoSugerido: String?
+    var pagoLiquidar, pagoRequerido: String?
+}

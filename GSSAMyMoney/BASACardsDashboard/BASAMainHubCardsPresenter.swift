@@ -29,5 +29,8 @@ class BASAMainHubCardsPresenter: BASAMainHubCardsPresenterProtocol {
         interactor?.TryGetDebitCardMovements(Body: Body, Movements: Movements)
     }
     
+    func requestUserLends(Lends: @escaping (LendsResponse?) -> ()){
+        interactor?.tryGetUserLends(Lends: Lends)
+    }
 
 }

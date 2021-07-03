@@ -28,7 +28,7 @@ extension String{
     func dynamicDecrypt() -> String{
         let serviceSecurity = GSSAServiceSecurity()
         guard let result = serviceSecurity.dynamicAlgorithm(field: self, task: .decrypted) else {
-            return "Desencryption error"
+            return self
         }
         
         return result
@@ -37,7 +37,7 @@ extension String{
     func alnovaDecrypt() -> String{
         let serviceSecurity = GSSAServiceSecurity()
         guard let result = serviceSecurity.alnovaAlgorithm(field: self, task: .decrypted) else {
-            return "Desencryption error"
+            return self
         }
         
         return result

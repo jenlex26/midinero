@@ -17,7 +17,7 @@ class BASABeneficiaryListInteractor: GSSAURLSessionTaskCoordinatorBridge, BASABe
     weak var presenter: BASABeneficiaryListPresenterProtocol?
     
     public func tryGetBeneficiaries(account: String, beneficiaryList: @escaping (BeneficiaryListResponse?) -> ()){
-        self.urlPath = "https://jcvtyhj9ne.execute-api.us-east-1.amazonaws.com/"
+        self.urlPath = "https://apigateway.superappbaz.com/"
         self.strPathEndpoint = "integracion/superapp/dinero/captacion/gestion-cuentas/v1/beneficiarios/busquedas"
 
         let body = BeneficiaryListBody(numeroCuenta: account)

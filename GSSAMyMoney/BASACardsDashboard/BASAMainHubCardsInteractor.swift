@@ -19,10 +19,10 @@ class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASAMainH
     func TryGetDebitCardBalance(Account:[String:String], Balance: @escaping (BalanceResponse?) -> ()){
         let Request = TransationBalanceRequest(transaccion: TransationItem(folio: Account.first?.value ?? "yx0a8LHTvWQLcQKeGJ3Eqq9cmX_pQnQIB6lBmeFOPUM7wifAmkRTHug-PKiEQv_Y", numeroCuenta: Account.first?.key ?? "01270172461200000001"))
         
-        self.urlPath = "https://dmu8nwfrwl.execute-api.us-east-1.amazonaws.com/"
+        self.urlPath = "https://apigateway.superappbaz.com/"
         self.strPathEndpoint = "integracion/superapp/dinero/captacion/cuentas/v1/busquedas"
         
-      //  https://dmu8nwfrwl.execute-api.us-east-1.amazonaws.com/desarrollo/superapp/dinero/captacion/cuentas/v1/busquedas
+        //  https://dmu8nwfrwl.execute-api.us-east-1.amazonaws.com/desarrollo/superapp/dinero/captacion/cuentas/v1/busquedas
         
         let headers: [HeadersCustom] = [
             HeadersCustom(value:"true", forHTTPHeaderField: "x-consulta-detallada"),
@@ -44,7 +44,6 @@ class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASAMainH
         ]
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: headers, objBody: Request, environment: .custom) { (objRes: BalanceResponse?, error) in
-            debugPrint(objRes as Any)
             
             if error.code == 0 {
                 if (objRes?.resultado.cliente?.cuentas?.first?.saldoDisponible) != nil{
@@ -61,8 +60,9 @@ class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASAMainH
     
     func TryGetDebitCardMovements(Body: MovimientosBody, Movements: @escaping (DebitCardTransaction?) -> ()){
         
-        self.urlPath = "https://dmu8nwfrwl.execute-api.us-east-1.amazonaws.com/"
+        self.urlPath = "https://apigateway.superappbaz.com/"
         self.strPathEndpoint = "integracion/superapp/dinero/captacion/cuentas/v1/movimientos/busquedas"
+        
         
         let headers: [HeadersCustom] = [
             HeadersCustom(value:"3bad1290ac4600a569162efaa09117ea", forHTTPHeaderField: "x-sicu"),
@@ -83,7 +83,7 @@ class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASAMainH
         ]
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: headers, objBody: Body, environment: .custom) { (objRes: DebitCardTransaction?, error) in
-            debugPrint(objRes as Any)
+            //debugPrint(objRes as Any)
             
             if error.code == 0 {
                 if let mensaje = objRes?.mensaje {
@@ -99,6 +99,43 @@ class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASAMainH
         }
         
         
+    }
+    
+    func tryGetUserLends(Lends: @escaping (LendsResponse?) -> ()){
+        self.urlPath = "https://apigateway.superappbaz.com/"
+        self.strPathEndpoint = "integracion/superapp/pagos/creditos/agenda-pagos/v1/credimax/pagos-pendientes"
+        
+        struct userLendsBody: Codable {}
+        let body = userLendsBody.init()
+        
+        let header: [HeadersCustom] = [
+            HeadersCustom(value: "3bad1290ac4600a569162efaa09117ea", forHTTPHeaderField: "x-sicu"),
+            HeadersCustom(value: "123e4567-e89b-12d3-a456-426655440000", forHTTPHeaderField: "x-id-interaccion"),
+            HeadersCustom(value: "true", forHTTPHeaderField: "x-ismock"),
+            HeadersCustom(value:"19.49781290", forHTTPHeaderField: "x-latitud"),
+            HeadersCustom(value:"-99.12698712", forHTTPHeaderField: "x-longitud"),
+            HeadersCustom(value:"Super movil", forHTTPHeaderField: "x-nombre-dispositivo"),
+            HeadersCustom(value:"3bad1290ac4600a569162efaa09117ea", forHTTPHeaderField: "x-id-dispositivo"),
+            HeadersCustom(value:"Android", forHTTPHeaderField: "x-sistema-dispositivo"),
+            HeadersCustom(value:"6.0", forHTTPHeaderField: "x-version-dispositivo"),
+            HeadersCustom(value:"2.1.1", forHTTPHeaderField: "x-version-aplicacion"),
+            HeadersCustom(value:"P40", forHTTPHeaderField: "x-modelo-dispositivo"),
+            HeadersCustom(value:"Huawei", forHTTPHeaderField: "x-fabricante-dispositivo"),
+            HeadersCustom(value:"mt6735", forHTTPHeaderField: "x-serie-procesador"),
+            HeadersCustom(value:"Telcel", forHTTPHeaderField: "x-operador-telefonia"),
+            HeadersCustom(value:"SRfVZrTYvdm7mzzZmcuiDViACkAx", forHTTPHeaderField: "x-token-usuario")
+        ]
+        
+        
+        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: header, objBody: body, environment: .none) { (objRes: LendsResponse?, error) in
+            debugPrint(objRes as Any)
+            if error.code == 0 {
+                Lends(objRes)
+            } else {
+                Lends(nil)
+                debugPrint(error)
+            }
+        }
     }
 }
 
