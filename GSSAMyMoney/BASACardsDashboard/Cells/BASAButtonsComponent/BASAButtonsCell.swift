@@ -59,6 +59,14 @@ class BASAButtonsCell: UITableViewCell {
         }
     }
     
+    @IBAction func foundAccoun(sender: Any){
+        if cellViewController != nil{
+            GSSAMMDefinition.registerActions()
+            GSINAdminNavigator.shared.startFlow(forAction: "Fondeo",
+                                                navigateDelegate: self)
+        }
+    }
+    
     @IBAction func openDigitalCard(sender: Any){
         if cellViewController != nil{
             let data = accountBalance?.resultado.cliente?.cuentas?.first?.saldoDisponible?.moneyFormat() ?? ""
@@ -73,7 +81,7 @@ extension BASAButtonsCell: GSINNavigateDelegate{
     }
     
     func didFailToEnterFlow(error: NSError) {
-        
+        print(error)
     }
     
 }

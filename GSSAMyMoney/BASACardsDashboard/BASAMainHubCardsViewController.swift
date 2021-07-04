@@ -23,6 +23,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     var accountBalance: BalanceResponse?
     var debitCardMovements: DebitCardTransaction?
     var lendsData: LendsResponse?
+    var creditCardData: CreditCardResponse?
     
     var accountNumber: [String:String]?
     
@@ -77,6 +78,20 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                 setTableForLends()
             }else{
                 self.presentBottomAlertFullData(status: .error, message: "Ocurrió un al cargar tus prestamos, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
+            }
+        })
+    }
+    
+    func loadCreditCardInfo(){
+        GSVCLoader.show(type: .native)
+        presenter?.requestCreditCardData(Body: CreditCardBody.init(transaccion: CreditCardTransaccion.init(numeroCuenta: "", numeroTarjeta: "4762030300111678", numeroContrato: "")), CreditCardData: { [self] CreditCardData in
+            GSVCLoader.hide()
+            if let CreditCard = CreditCardData{
+                creditCardData = CreditCard
+                NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "reloadCreditCardData"), object: CreditCard, userInfo: nil))
+                setTableForCreditCard()
+            }else{
+                self.presentBottomAlertFullData(status: .error, message: "Ocurrió un error al obtener los datos de tarjeta de crédito, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
             }
         })
     }
@@ -146,6 +161,10 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     
     func setTableForCreditCard(){
         removeAllExceptFirst()
+        
+        if creditCardData == nil{
+          //  loadCreditCardInfo()
+        }
         
         let digitalCardCell = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "RequestCardCell") as! RequestCardCell
         digitalCardCell.cellViewController = self

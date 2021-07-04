@@ -34,6 +34,7 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
     var cellViewController: UIViewController!
     var data: BalanceResponse?
     var lendsData: LendsResponse?
+    var creditCardData: CreditCardResponse?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -64,6 +65,7 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
         
         NotificationCenter.default.addObserver(self, selector: #selector(reloadCards(notification:)), name: NSNotification.Name(rawValue: "reloadHeaderData"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadLends(notification:)), name: NSNotification.Name(rawValue: "reloadLendsData"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadCreditCard(notification:)), name: NSNotification.Name(rawValue: "reloadCreditCardData"), object: nil)
     }
     
     func setUpDebitCard(){
@@ -75,7 +77,7 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
         debitCardbtnConfig.tag = 0
         
         if data != nil{
-            debitCardlblBalance.text = data!.resultado.cliente?.cuentas?.first?.saldoDisponible
+            debitCardlblBalance.text = data!.resultado.cliente?.cuentas?.first?.saldoDisponible?.alnovaDecrypt().moneyFormat()
         }
     }
     
@@ -106,9 +108,18 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
         if notification.object != nil{
             let data = notification.object as! BalanceResponse
             
-            let amountString = data.resultado.cliente?.cuentas?.first?.saldoDisponible?.moneyFormat() ?? "0"
+            let amountString = data.resultado.cliente?.cuentas?.first?.saldoDisponible?.alnovaDecrypt().moneyFormat() ?? "0"
             debitCardlblBalance.text = amountString
             debitCardlblCardNumber.text = data.resultado.cliente?.cuentas?.first?.numeroTarjeta?.alnovaDecrypt().tnuoccaFormat
+        }
+    }
+    
+    @objc func reloadCreditCard(notification: Notification){
+        if notification.object != nil{
+            let data = notification.object as! CreditCardResponse
+            creditCardData = data
+            cardCollection.reloadData()
+            self.pageController.currentPage = 0
         }
     }
     

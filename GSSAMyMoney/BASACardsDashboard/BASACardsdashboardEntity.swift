@@ -91,7 +91,7 @@ struct LendsResponse: Codable {
     var resultado: LendsResponseResult?
 }
 
-// MARK: - Resultado
+// MARK: - Prestamos Resultado
 struct LendsResponseResult: Codable {
     var fechaProximoPago, fechaProximoPagoDesarrollada: String?
     var pagoPuntual, pagoNormal, pagoSugerido, pagoRequerido: Int?
@@ -99,9 +99,37 @@ struct LendsResponseResult: Codable {
     var productos: [LendsResponseProducts]?
 }
 
-// MARK: - Producto
+// MARK: - Prestamos Producto
 struct LendsResponseProducts: Codable {
     var id: Int?
     var descripcion, pagoPuntual, pagoNormal, pagoSugerido: String?
     var pagoLiquidar, pagoRequerido: String?
+}
+
+
+// MARK: - CreditCardBody
+struct CreditCardBody: Codable {
+    var transaccion: CreditCardTransaccion?
+}
+
+// MARK: - CreditCard Transaccion
+struct CreditCardTransaccion: Codable {
+    var numeroCuenta, numeroTarjeta, numeroContrato: String?
+}
+
+// MARK: - CreditCardResponse
+struct CreditCardResponse: Codable {
+    var mensaje, folio: String?
+    var resultado: CreditCardResult?
+}
+
+// MARK: - Resultado
+struct CreditCardResult: Codable {
+    var tarjetas: [ CreditCardItem]?
+}
+
+// MARK: - Tarjeta
+struct CreditCardItem: Codable {
+    var numero, nombreCliente, expiracion, tipo: String?
+    var estatus: String?
 }

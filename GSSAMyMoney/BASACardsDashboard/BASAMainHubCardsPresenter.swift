@@ -32,5 +32,9 @@ class BASAMainHubCardsPresenter: BASAMainHubCardsPresenterProtocol {
     func requestUserLends(Lends: @escaping (LendsResponse?) -> ()){
         interactor?.tryGetUserLends(Lends: Lends)
     }
+    
+    func requestCreditCardData(Body: CreditCardBody, CreditCardData: @escaping (CreditCardResponse?) -> ()){
+        interactor?.tryGetCreditCardData(Body: Body, CreditCardData: CreditCardData)
+    }
 
 }

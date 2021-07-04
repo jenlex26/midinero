@@ -187,6 +187,9 @@
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2L4-gf-wNp">
                                                                 <rect key="frame" x="0.0" y="0.0" width="103" height="93"/>
+                                                                <connections>
+                                                                    <action selector="foundAccounWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Bac-f0-NC3"/>
+                                                                </connections>
                                                             </button>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_fondear" translatesAutoresizingMaskIntoConstraints="NO" id="LVa-sd-nhd">
                                                                 <rect key="frame" x="0.0" y="5" width="103" height="50"/>

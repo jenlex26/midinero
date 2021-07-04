@@ -19,6 +19,7 @@ protocol BASAMainHubCardsPresenterProtocol: class {
     func requestBalance(Account:[String:String], Balance: @escaping (BalanceResponse?) -> ())
     func requestDebitCardMovements(Body: MovimientosBody, Movements: @escaping (DebitCardTransaction?) -> ())
     func requestUserLends(Lends: @escaping (LendsResponse?) -> ())
+    func requestCreditCardData(Body: CreditCardBody, CreditCardData: @escaping (CreditCardResponse?) -> ())
 }
 
 //MARK: Interactor -
@@ -27,6 +28,7 @@ protocol BASAMainHubCardsInteractorProtocol: class {
     func TryGetDebitCardBalance(Account:[String:String], Balance: @escaping (BalanceResponse?) -> ())
     func TryGetDebitCardMovements(Body: MovimientosBody, Movements: @escaping (DebitCardTransaction?) -> ())
     func tryGetUserLends(Lends: @escaping (LendsResponse?) -> ())
+    func tryGetCreditCardData(Body: CreditCardBody, CreditCardData: @escaping (CreditCardResponse?) -> ())
 }
 
 //MARK: View -
