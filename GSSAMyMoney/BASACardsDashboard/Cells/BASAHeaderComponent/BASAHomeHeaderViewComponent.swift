@@ -35,6 +35,7 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
     var data: BalanceResponse?
     var lendsData: LendsResponse?
     var creditCardData: CreditCardResponse?
+    var creditCardBalance: CreditCardBalanceResponse?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -66,6 +67,7 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadCards(notification:)), name: NSNotification.Name(rawValue: "reloadHeaderData"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadLends(notification:)), name: NSNotification.Name(rawValue: "reloadLendsData"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadCreditCard(notification:)), name: NSNotification.Name(rawValue: "reloadCreditCardData"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadCreditCardBalance(notification:)), name: NSNotification.Name(rawValue: "reloadCreditCardBalance"), object: nil)
     }
     
     func setUpDebitCard(){
@@ -118,8 +120,19 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
         if notification.object != nil{
             let data = notification.object as! CreditCardResponse
             creditCardData = data
-            cardCollection.reloadData()
-            self.pageController.currentPage = 0
+            let cell = cardCollection.cellForItem(at: [0,0]) as! BASACardCell
+            cell.lblCardNumber.text = data.resultado?.tarjetas?.first?.numero?.tnuoccaFormat
+            cell.lblExpDate.text = data.resultado?.tarjetas?.first?.expiracion
+        }
+    }
+    
+    @objc func reloadCreditCardBalance(notification: Notification){
+        if notification.object != nil{
+            let data = notification.object as! CreditCardBalanceResponse
+            creditCardBalance = data
+            let cell = cardCollection.cellForItem(at: [0,0]) as! BASACardCell
+            cell.lblBalance.text = data.resultado?.montoLimiteCredito?.moneyFormat()
+            cell.lblOweMoney.text = "Debes \(data.resultado?.saldoDispuesto?.moneyFormat() ?? "")"
         }
     }
     
@@ -210,9 +223,9 @@ extension BASAHomeHeaderViewComponent: UICollectionViewDelegate, UICollectionVie
             cell.CardBackgroundView.layer.borderColor = UIColor.white.cgColor
             cell.CardBackgroundView.blurBackground(style: .dark, fallbackColor: .white)
             
-            if data != nil{
-                cell.lblCardNumber.text! = (data?.resultado.cliente?.cuentas?.first?.numero!.tnuoccaFormat) ?? ""
-                // cell.lblBalance.text = data!.resultado.saldoDisponible
+            if creditCardData != nil{
+                cell.lblCardNumber.text = creditCardData?.resultado?.tarjetas?.first?.numero?.tnuoccaFormat
+                cell.lblExpDate.text = creditCardData?.resultado?.tarjetas?.first?.expiracion
             }
             
             cell.btnConfig.addTarget(self, action: #selector(openConfig(sender:)), for: .touchUpInside)

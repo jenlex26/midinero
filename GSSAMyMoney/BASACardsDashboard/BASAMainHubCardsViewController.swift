@@ -24,6 +24,8 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     var debitCardMovements: DebitCardTransaction?
     var lendsData: LendsResponse?
     var creditCardData: CreditCardResponse?
+    var creditCardBalance: CreditCardBalanceResponse?
+    var creditCardMovements: CreditCardMovementsResponse?
     
     var accountNumber: [String:String]?
     
@@ -85,13 +87,38 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     func loadCreditCardInfo(){
         GSVCLoader.show(type: .native)
         presenter?.requestCreditCardData(Body: CreditCardBody.init(transaccion: CreditCardTransaccion.init(numeroCuenta: "", numeroTarjeta: "4762030300111678", numeroContrato: "")), CreditCardData: { [self] CreditCardData in
-            GSVCLoader.hide()
             if let CreditCard = CreditCardData{
                 creditCardData = CreditCard
                 NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "reloadCreditCardData"), object: CreditCard, userInfo: nil))
+               loadCreditCardBalance()
+            }else{
+                GSVCLoader.hide()
+                self.presentBottomAlertFullData(status: .error, message: "Ocurrió un error al obtener los datos de tarjeta de crédito, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
+            }
+        })
+    }
+    
+    func loadCreditCardBalance(){
+        presenter?.requestCreditCardBalance(Body: CreditCardBalanceBody.init(transaccion: CreditCardBalanceTransaccion.init(numeroTarjeta: "4762030300111678")), CreditCardBalance: { [self] CreditCardBalance in
+            if let creditCardBalanceResponse = CreditCardBalance{
+                creditCardBalance = creditCardBalanceResponse
+                NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "reloadCreditCardBalance"), object: creditCardBalanceResponse, userInfo: nil))
+                loadCreditCardMovements()
+            }else{
+                GSVCLoader.hide()
+                self.presentBottomAlertFullData(status: .error, message: "Ocurrió un error al obtener los saldos de la tarjeta de crédito, intente más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
+            }
+        })
+    }
+    
+    func loadCreditCardMovements(){
+        presenter?.requestCreditCardMovements(Body: CreditCardMovementsBody.init(transaccion: CreditCardMovementsTransaccion.init(fechaInicio: "2016-08-26", fechaFin: "2016-07-27")), CreditCardMovements: { [self] CreditCardMovements in
+            GSVCLoader.hide()
+            if let CreditCardMovements = CreditCardMovements{
+                creditCardMovements = CreditCardMovements
                 setTableForCreditCard()
             }else{
-                self.presentBottomAlertFullData(status: .error, message: "Ocurrió un error al obtener los datos de tarjeta de crédito, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
+                self.presentBottomAlertFullData(status: .error, message: "Ocurrió un error al obtener tus movimientos, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
             }
         })
     }
@@ -163,30 +190,46 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         removeAllExceptFirst()
         
         if creditCardData == nil{
-          //  loadCreditCardInfo()
+            loadCreditCardInfo()
         }
         
         let digitalCardCell = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "RequestCardCell") as! RequestCardCell
         digitalCardCell.cellViewController = self
         cellsArray.append([digitalCardCell:119.0])
         
-        let infoCreditCell = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASACreditCardInfoCell")!
-        cellsArray.append([infoCreditCell:380.0])
+        let infoCreditCell = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASACreditCardInfoCell") as! BASACreditCardInfoCell
         
+        if creditCardData != nil{
+            infoCreditCell.lblCreditLimit.text = creditCardBalance?.resultado?.montoLimiteCredito?.moneyFormat()
+            infoCreditCell.lblMinimumPayment.text = creditCardBalance?.resultado?.montoPagoMinimo?.moneyFormat()
+            infoCreditCell.lblCutOffDate.text = creditCardBalance?.resultado?.fechaCorte?.dateFormatter(format: "dd-MM-yyyy", outputFormat: "dd MMMM")
+
+            let date = "Próxima fecha de pago \(creditCardBalance?.resultado?.fechaPago?.dateFormatter(format: "dd-MM-yyyy", outputFormat: "dd MMMM") ?? "Desconocida")"
+            
+            infoCreditCell.lblNextPaymentDate.text = date
+           // infoCreditCell.lblPaymentToSettle.text = creditCardBalance?.resultado?.pagoSinInteres
+            infoCreditCell.lblNotInterestPayment.text = creditCardBalance?.resultado?.pagoSinInteres?.moneyFormat()
+        }
+        
+        cellsArray.append([infoCreditCell:380.0])
         
         let separator = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "SectionCell") as! SectionCell
         separator.lblTitle.text = "Movimientos"
         cellsArray.append([separator:60.0])
         
-        let movement = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAMovementCell") as! BASAMovementTableViewCell
-        movement.lblTitle.text = "Compra en Oxxo"
-        movement.lblAmount.text = "$200.0"
-        cellsArray.append([movement:88.0])
-        
-        let movement2 = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAMovementCell") as! BASAMovementTableViewCell
-        movement2.lblTitle.text = "Compra el Walmart"
-        movement2.lblAmount.text = "$500.0"
-        cellsArray.append([movement2:88.0])
+        if creditCardMovements?.resultado?.movimientos != nil{
+            for item in creditCardMovements!.resultado!.movimientos!{
+                let movement = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAMovementCell") as! BASAMovementTableViewCell
+                movement.lblTitle.text = item.concepto
+                movement.lblAmount.text = "$" + (item.monto?.moneyFormat() ?? "")
+                movement.lblDate.text = item.fechaHora?.dateFormatter(format: "yyyy-MM-dd HH:mm:ss", outputFormat: "dd MMM yyyy")
+                movement.setArrow(amount: (item.monto?.moneyFormat() ?? ""))
+                cellsArray.append([movement:88.0])
+            }
+        }else{
+            let emptyMovements = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "GSNoMovementsCell")!
+            cellsArray.append([emptyMovements:321])
+        }
         
         addTableComponents()
     }

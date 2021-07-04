@@ -6,8 +6,16 @@
 //
 
 import UIKit
+import GSSAVisualComponents
 
 class BASACreditCardInfoCell: UITableViewCell {
+    
+    @IBOutlet weak var lblCutOffDate        : GSVCLabel!
+    @IBOutlet weak var lblMinimumPayment    : GSVCLabel!
+    @IBOutlet weak var lblPaymentToSettle   : GSVCLabel!
+    @IBOutlet weak var lblCreditLimit       : GSVCLabel!
+    @IBOutlet weak var lblNotInterestPayment: GSVCLabel!
+    @IBOutlet weak var lblNextPaymentDate   : GSVCLabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

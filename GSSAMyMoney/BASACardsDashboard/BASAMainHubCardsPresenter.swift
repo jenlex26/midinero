@@ -37,4 +37,13 @@ class BASAMainHubCardsPresenter: BASAMainHubCardsPresenterProtocol {
         interactor?.tryGetCreditCardData(Body: Body, CreditCardData: CreditCardData)
     }
 
+    func requestCreditCardBalance(Body: CreditCardBalanceBody, CreditCardBalance: @escaping (CreditCardBalanceResponse?) -> ()){
+        interactor?.tryGetCreditCardBalance(Body: Body, CreditCardBalance: CreditCardBalance)
+    }
+    
+    
+    func requestCreditCardMovements(Body: CreditCardMovementsBody, CreditCardMovements: @escaping (CreditCardMovementsResponse?) -> ()){
+        interactor?.tryGetCreditCardMovements(Body: Body, CreditCardMovements: CreditCardMovements)
+    }
+    
 }

@@ -139,38 +139,109 @@ class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASAMainH
     }
     
     func tryGetCreditCardData(Body: CreditCardBody, CreditCardData: @escaping (CreditCardResponse?) -> ()){
-            self.urlPath = "https://apigateway.superappbaz.com/"
-            self.strPathEndpoint = "integracion/superapp/prestamos/tarjeta-credito/v1/tarjetas/busquedas"
+        self.urlPath = "https://apigateway.superappbaz.com/"
+        self.strPathEndpoint = "integracion/superapp/prestamos/tarjeta-credito/v1/tarjetas/busquedas"
         
-            let header: [HeadersCustom] = [
-                HeadersCustom(value: "3bad1290ac4600a569162efaa09117ea", forHTTPHeaderField: "x-sicu"),
-                HeadersCustom(value: "123e4567-e89b-12d3-a456-426655440000", forHTTPHeaderField: "x-id-interaccion"),
-                HeadersCustom(value: "true", forHTTPHeaderField: "x-ismock"),
-                HeadersCustom(value:"19.49781290", forHTTPHeaderField: "x-latitud"),
-                HeadersCustom(value:"-99.12698712", forHTTPHeaderField: "x-longitud"),
-                HeadersCustom(value:"Super movil", forHTTPHeaderField: "x-nombre-dispositivo"),
-                HeadersCustom(value:"3bad1290ac4600a569162efaa09117ea", forHTTPHeaderField: "x-id-dispositivo"),
-                HeadersCustom(value:"Android", forHTTPHeaderField: "x-sistema-dispositivo"),
-                HeadersCustom(value:"6.0", forHTTPHeaderField: "x-version-dispositivo"),
-                HeadersCustom(value:"2.1.1", forHTTPHeaderField: "x-version-aplicacion"),
-                HeadersCustom(value:"P40", forHTTPHeaderField: "x-modelo-dispositivo"),
-                HeadersCustom(value:"Huawei", forHTTPHeaderField: "x-fabricante-dispositivo"),
-                HeadersCustom(value:"mt6735", forHTTPHeaderField: "x-serie-procesador"),
-                HeadersCustom(value:"Telcel", forHTTPHeaderField: "x-operador-telefonia"),
-                HeadersCustom(value:"SRfVZrTYvdm7mzzZmcuiDViACkAx", forHTTPHeaderField: "x-token-usuario")
-            ]
+        let header: [HeadersCustom] = [
+            HeadersCustom(value: "3bad1290ac4600a569162efaa09117ea", forHTTPHeaderField: "x-sicu"),
+            HeadersCustom(value: "123e4567-e89b-12d3-a456-426655440000", forHTTPHeaderField: "x-id-interaccion"),
+            HeadersCustom(value: "true", forHTTPHeaderField: "x-ismock"),
+            HeadersCustom(value:"19.49781290", forHTTPHeaderField: "x-latitud"),
+            HeadersCustom(value:"-99.12698712", forHTTPHeaderField: "x-longitud"),
+            HeadersCustom(value:"Super movil", forHTTPHeaderField: "x-nombre-dispositivo"),
+            HeadersCustom(value:"3bad1290ac4600a569162efaa09117ea", forHTTPHeaderField: "x-id-dispositivo"),
+            HeadersCustom(value:"Android", forHTTPHeaderField: "x-sistema-dispositivo"),
+            HeadersCustom(value:"6.0", forHTTPHeaderField: "x-version-dispositivo"),
+            HeadersCustom(value:"2.1.1", forHTTPHeaderField: "x-version-aplicacion"),
+            HeadersCustom(value:"P40", forHTTPHeaderField: "x-modelo-dispositivo"),
+            HeadersCustom(value:"Huawei", forHTTPHeaderField: "x-fabricante-dispositivo"),
+            HeadersCustom(value:"mt6735", forHTTPHeaderField: "x-serie-procesador"),
+            HeadersCustom(value:"Telcel", forHTTPHeaderField: "x-operador-telefonia"),
+            HeadersCustom(value:"SRfVZrTYvdm7mzzZmcuiDViACkAx", forHTTPHeaderField: "x-token-usuario")
+        ]
+        
+        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: header, objBody: Body, environment: .none) { (objRes: CreditCardResponse?, error) in
+            debugPrint(objRes as Any)
             
-            sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: header, objBody: Body, environment: .none) { (objRes: CreditCardResponse?, error) in
-                debugPrint(objRes as Any)
-                
-                if error.code == 0 {
-                    CreditCardData(objRes)
-                } else {
-                    CreditCardData(nil)
-                    debugPrint(error)
-                }
+            if error.code == 0 {
+                CreditCardData(objRes)
+            } else {
+                CreditCardData(nil)
+                debugPrint(error)
             }
+        }
         
+    }
+    
+    func tryGetCreditCardBalance(Body: CreditCardBalanceBody, CreditCardBalance: @escaping (CreditCardBalanceResponse?) -> ()){
+        
+        self.urlPath = "https://apigateway.superappbaz.com/"
+        self.strPathEndpoint = "integracion/superapp/prestamos/tarjeta-credito/v1/tarjetas/saldos/busquedas"
+        
+        let header: [HeadersCustom] = [
+            HeadersCustom(value: "3bad1290ac4600a569162efaa09117ea", forHTTPHeaderField: "x-sicu"),
+            HeadersCustom(value: "123e4567-e89b-12d3-a456-426655440000", forHTTPHeaderField: "x-id-interaccion"),
+            HeadersCustom(value: "true", forHTTPHeaderField: "x-ismock"),
+            HeadersCustom(value:"19.49781290", forHTTPHeaderField: "x-latitud"),
+            HeadersCustom(value:"-99.12698712", forHTTPHeaderField: "x-longitud"),
+            HeadersCustom(value:"Super movil", forHTTPHeaderField: "x-nombre-dispositivo"),
+            HeadersCustom(value:"3bad1290ac4600a569162efaa09117ea", forHTTPHeaderField: "x-id-dispositivo"),
+            HeadersCustom(value:"Android", forHTTPHeaderField: "x-sistema-dispositivo"),
+            HeadersCustom(value:"6.0", forHTTPHeaderField: "x-version-dispositivo"),
+            HeadersCustom(value:"2.1.1", forHTTPHeaderField: "x-version-aplicacion"),
+            HeadersCustom(value:"P40", forHTTPHeaderField: "x-modelo-dispositivo"),
+            HeadersCustom(value:"Huawei", forHTTPHeaderField: "x-fabricante-dispositivo"),
+            HeadersCustom(value:"mt6735", forHTTPHeaderField: "x-serie-procesador"),
+            HeadersCustom(value:"Telcel", forHTTPHeaderField: "x-operador-telefonia"),
+            HeadersCustom(value:"SRfVZrTYvdm7mzzZmcuiDViACkAx", forHTTPHeaderField: "x-token-usuario")
+        ]
+        
+        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: header, objBody: Body, environment: .none) { (objRes: CreditCardBalanceResponse?, error) in
+            debugPrint(objRes as Any)
+            
+            if error.code == 0 {
+                CreditCardBalance(objRes)
+            } else {
+                CreditCardBalance(nil)
+                debugPrint(error)
+            }
+        }
+        
+        
+    }
+    
+    func tryGetCreditCardMovements(Body: CreditCardMovementsBody, CreditCardMovements: @escaping (CreditCardMovementsResponse?) -> ()){
+        self.urlPath = "https://apigateway.superappbaz.com/"
+        self.strPathEndpoint = "integracion/superapp/prestamos/tarjeta-credito/v1/tarjetas/movimientos/busquedas"
+        
+        let header: [HeadersCustom] = [
+            HeadersCustom(value: "3bad1290ac4600a569162efaa09117ea", forHTTPHeaderField: "x-sicu"),
+            HeadersCustom(value: "123e4567-e89b-12d3-a456-426655440000", forHTTPHeaderField: "x-id-interaccion"),
+            HeadersCustom(value: "true", forHTTPHeaderField: "x-ismock"),
+            HeadersCustom(value:"19.49781290", forHTTPHeaderField: "x-latitud"),
+            HeadersCustom(value:"-99.12698712", forHTTPHeaderField: "x-longitud"),
+            HeadersCustom(value:"Super movil", forHTTPHeaderField: "x-nombre-dispositivo"),
+            HeadersCustom(value:"3bad1290ac4600a569162efaa09117ea", forHTTPHeaderField: "x-id-dispositivo"),
+            HeadersCustom(value:"Android", forHTTPHeaderField: "x-sistema-dispositivo"),
+            HeadersCustom(value:"6.0", forHTTPHeaderField: "x-version-dispositivo"),
+            HeadersCustom(value:"2.1.1", forHTTPHeaderField: "x-version-aplicacion"),
+            HeadersCustom(value:"P40", forHTTPHeaderField: "x-modelo-dispositivo"),
+            HeadersCustom(value:"Huawei", forHTTPHeaderField: "x-fabricante-dispositivo"),
+            HeadersCustom(value:"mt6735", forHTTPHeaderField: "x-serie-procesador"),
+            HeadersCustom(value:"Telcel", forHTTPHeaderField: "x-operador-telefonia"),
+            HeadersCustom(value:"SRfVZrTYvdm7mzzZmcuiDViACkAx", forHTTPHeaderField: "x-token-usuario")
+        ]
+        
+        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: header, objBody: Body, environment: .none) { (objRes: CreditCardMovementsResponse?, error) in
+            debugPrint(objRes as Any)
+            
+            if error.code == 0 {
+                CreditCardMovements(objRes)
+            } else {
+                CreditCardMovements(nil)
+                debugPrint(error)
+            }
+        }
     }
 }
 
