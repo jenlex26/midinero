@@ -122,7 +122,7 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
             creditCardData = data
             let cell = cardCollection.cellForItem(at: [0,0]) as! BASACardCell
             cell.lblCardNumber.text = data.resultado?.tarjetas?.first?.numero?.tnuoccaFormat
-            cell.lblExpDate.text = data.resultado?.tarjetas?.first?.expiracion
+            cell.lblExpDate.text = data.resultado?.tarjetas?.first?.expiracion?.replacingOccurrences(of: "-", with: "/")
         }
     }
     
@@ -225,7 +225,7 @@ extension BASAHomeHeaderViewComponent: UICollectionViewDelegate, UICollectionVie
             
             if creditCardData != nil{
                 cell.lblCardNumber.text = creditCardData?.resultado?.tarjetas?.first?.numero?.tnuoccaFormat
-                cell.lblExpDate.text = creditCardData?.resultado?.tarjetas?.first?.expiracion
+                cell.lblExpDate.text = creditCardData?.resultado?.tarjetas?.first?.expiracion?.replacingOccurrences(of: "-", with: "/")
             }
             
             cell.btnConfig.addTarget(self, action: #selector(openConfig(sender:)), for: .touchUpInside)

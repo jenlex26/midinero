@@ -10,6 +10,7 @@
 
 import UIKit
 import GSSAVisualComponents
+import GSSASessionInfo
 
 enum CardType{
     case debit
@@ -63,20 +64,20 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
         
         
         if userBalance != nil{
-            self.AvaibleMoneyLabel.text = userBalance
+            self.AvaibleMoneyLabel.text = userBalance.alnovaDecrypt().moneyFormat()
         }
         
         requestCVV()
     }
     
     func requestCVV(){
-        presenter?.makeDigitalDataRequest(Body: Transaction(transaccion: AccoutRequest(numeroCuenta: "BfZkyu8csA1MMSbMtyuMiQ")), DataCard: { [self] DataCard in
+        presenter?.makeDigitalDataRequest(Body: Transaction(transaccion: AccoutRequest(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.encryptedAccount)), DataCard: { [self] DataCard in
             GSVCLoader.hide()
             if DataCard != nil{
                 self.StartTimer()
                 CVVCodeLabel.text = DataCard!.resultado!.tarjeta?.cvv?.dynamicDecrypt()
                 CardNumberLabel.text = (DataCard!.resultado!.tarjeta?.numero?.alnovaDecrypt() ?? "0").tnuoccaFormat
-                ExpDateLabel.text = DataCard?.resultado?.tarjeta?.fechaExpiracion?.alnovaDecrypt()
+                ExpDateLabel.text = DataCard?.resultado?.tarjeta?.fechaExpiracion?.alnovaDecrypt().replacingOccurrences(of: "-", with: "/")
             }else{
                 self.presentBottomAlertFullData(status: .error, message: "Ocurrió un error desconocido, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
             }

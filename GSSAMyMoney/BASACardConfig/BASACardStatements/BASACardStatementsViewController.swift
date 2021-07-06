@@ -12,23 +12,13 @@ import UIKit
 import GSSAVisualComponents
 import GSSAVisualTemplates
 
-class BASACardStatementsViewController: UIViewController, BASACardStatementsViewProtocol, GSVTGenericResultDelegate, GSVCBottomAlertHandler {
-    func dismissBottomAlert(animated: Bool) {
-        bottomAlert?.animViewBottomToTop()
-        bottomAlert = nil
-    }
-    
-    func cerraBottomAlert() {
-        bottomAlert = nil
-       // bottomAlert?.animateDismissal()
-    }
-    
+class BASACardStatementsViewController: UIViewController, BASACardStatementsViewProtocol, GSVTGenericResultDelegate, GSVCBottomAlertHandler, GSVTDigitalSignDelegate {
     
     var bottomAlert: GSVCBottomAlert?
     var presenter: BASACardStatementsPresenterProtocol?
+    var type: CardType!
     
     @IBOutlet weak var table: UITableView!
-    var type: CardType! 
     
     struct statement{
         var title: String
@@ -65,7 +55,6 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
             print("NOS IMPLEMENTED...")
             setStatements()
         }
-        
     }
     
     func setStatements(){
@@ -82,6 +71,10 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
         
         if requestData.count == 0{
             let view =  UINib(nibName: "GSSAEmptyStatements", bundle: Bundle(for: BASACardStatementsViewController.self)).instantiate(withOwner: nil, options: nil)[0] as! UIView
+            if view.subviews[1] is UIButton{
+                let button = view.subviews[1] as! GSVCButton
+                button.addTarget(self, action: #selector(closeView), for: .touchUpInside)
+            }
             view.frame = self.view.frame
             table.addSubview(view)
         }
@@ -106,6 +99,29 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
         print("OK")
     }
     
+    func sendStatements(){
+        let success = GSVTOperationStatusViewController(status: .success(title: "Operación completada", message: "Estados de cuenta envíados", views: []), plainButtonAction: {
+            self.dismiss(animated: true, completion: {
+                GSVCLoader.hide()
+                self.navigationController?.popViewController(animated: true)
+            })
+        })
+        success.modalPresentationStyle = .fullScreen
+        self.present(success, animated: true, completion: nil)
+    }
+    
+    func forgotDigitalSign(_ forgotSecurityCodeViewController: UIViewController?) {
+        print("forgott")
+    }
+    
+    func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
+        sendStatements()
+    }
+    
+    func cerraBottomAlert() {
+        bottomAlert = nil
+    }
+    
     @objc func selectAllStatements(sender: UISwitch){
         for n in 0..<statements.count{
             if sender.isOn{
@@ -120,25 +136,31 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
     @objc func stamementSelected(sender: UISwitch){
         statements[0].switchState = false
         statements[sender.tag].switchState = sender.isOn
+        if sender.isOn == false{
+           let cell = self.table.cellForRow(at: [0,2]) as! BASASwitchItemCell
+           cell.swtch.isOn = false
+        }
     }
     
     @objc func nextAction(sender: UIButton){
-        GSVCLoader.show(type: .native)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
-            GSVCLoader.hide()
-//            let genericResult = GSVTGenericResultViewController(genericResultDelegate: self, style: .success, title: "Estados de cuenta enviados", message: nil, attributedMessage: .none, folio: nil, optionalButtonTitle: nil, staticButtonTitle: nil)
-//            genericResult.modalPresentationStyle = .fullScreen
-//            self.present(genericResult, animated: true, completion: nil)
-            
-            let success = GSVTOperationStatusViewController(status: .success(title: "Operación completada", message: "Estados de cuenta envíados", views: []), plainButtonAction: {
-                self.dismiss(animated: true, completion: {
-                    self.navigationController?.popViewController(animated: true)
-                })
-            })
-            
-            self.present(success, animated: true, completion: nil)
-            
-        })
+        var statementsSelected = false
+        for n in 0..<statements.count{
+            if statements[n].switchState == true{
+                statementsSelected = true
+            }
+        }
+        
+        if statementsSelected == true{
+            let verification = GSVTDigitalSignViewController(delegate: self, dataSource: nil)
+            verification.modalPresentationStyle = .fullScreen
+            present(verification, animated: true, completion: nil)
+        }else{
+            self.presentBottomAlertFullData(status: .caution, message: "Debe seleccionar al menos un estado de cuenta", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+        }
+    }
+    
+    @objc func closeView(_ sender: Any){
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func close(_ sender: Any){
@@ -165,7 +187,7 @@ extension BASACardStatementsViewController: UITableViewDelegate, UITableViewData
             cell.lblTitle.numberOfLines = 2
             cell.lblTitle.styleType = 6
             return cell
-        case 2:
+        case statements.count + 2:
             let cell = table.dequeueReusableCell(withIdentifier: "BASAInfoCardCell")
             return cell!
         case statements.count + 3:
@@ -174,7 +196,7 @@ extension BASACardStatementsViewController: UITableViewDelegate, UITableViewData
             return cell
         default:
             let cell = table.dequeueReusableCell(withIdentifier: "BASASwitchItemCell") as! BASASwitchItemCell
-            let data = statements[indexPath.row - 3]
+            let data = statements[indexPath.row - 2]
             if data.tag == 0{
                 cell.backgroundColor = UIColor.GSVCBase300()
                 cell.swtch.addTarget(self, action: #selector(selectAllStatements(sender:)), for: .valueChanged)
@@ -198,7 +220,7 @@ extension BASACardStatementsViewController: UITableViewDelegate, UITableViewData
             return 65.0
         case 1:
             return 70.0
-        case 2:
+        case statements.count + 2:
             return 110.0
         case statements.count + 3:
             return 119.0

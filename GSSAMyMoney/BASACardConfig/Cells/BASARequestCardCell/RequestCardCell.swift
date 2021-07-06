@@ -8,8 +8,8 @@
 import UIKit
 import GSSAVisualComponents
 
-class RequestCardCell: UITableViewCell {
-
+class RequestCardCell: UITableViewCell{
+  
     @IBOutlet weak var buttonView: UIView!
     @IBOutlet weak var cellButton: UIButton!
     
@@ -21,9 +21,5 @@ class RequestCardCell: UITableViewCell {
         self.selectionStyle = .none
         buttonView.layer.cornerRadius = 10
         buttonView.layer.masksToBounds = true
-    }
-    
-    @IBAction func show(_ sender: Any){
-        cellViewController.navigationController?.pushViewController(BASADigitalCardRouter.createModule(userBalance: "$1,500"), animated: true)
     }
 }

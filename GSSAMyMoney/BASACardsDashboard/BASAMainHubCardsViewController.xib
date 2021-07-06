@@ -27,7 +27,7 @@
                     </constraints>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DmX-Qj-fNQ">
-                    <rect key="frame" x="0.0" y="487" width="375" height="180"/>
+                    <rect key="frame" x="0.0" y="503.5" width="375" height="163.5"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <color key="tintColor" systemColor="labelColor"/>
                 </view>
@@ -41,7 +41,7 @@
             <constraints>
                 <constraint firstItem="dhi-zf-36N" firstAttribute="top" secondItem="5xj-dk-3uS" secondAttribute="top" id="A1w-xR-WFA"/>
                 <constraint firstItem="5xj-dk-3uS" firstAttribute="trailing" secondItem="tUK-I9-Gu6" secondAttribute="trailing" id="A8u-9Y-Gl7"/>
-                <constraint firstItem="DmX-Qj-fNQ" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.27" id="Aj0-Sa-JkQ"/>
+                <constraint firstItem="DmX-Qj-fNQ" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.245" id="Aj0-Sa-JkQ"/>
                 <constraint firstItem="tUK-I9-Gu6" firstAttribute="leading" secondItem="5xj-dk-3uS" secondAttribute="leading" id="DI0-iu-2pf"/>
                 <constraint firstItem="dhi-zf-36N" firstAttribute="leading" secondItem="5xj-dk-3uS" secondAttribute="leading" id="OwB-2f-z5v"/>
                 <constraint firstItem="DmX-Qj-fNQ" firstAttribute="leading" secondItem="5xj-dk-3uS" secondAttribute="leading" id="Ska-93-omB"/>

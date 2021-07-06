@@ -11,6 +11,7 @@
 import UIKit
 import GSSAVisualComponents
 import GSSAVisualTemplates
+import GSSASessionInfo
 
 class BASABeneficiaryListViewController: UIViewController, BASABeneficiaryListViewProtocol, GSVCBottomAlertHandler {
     
@@ -40,7 +41,7 @@ class BASABeneficiaryListViewController: UIViewController, BASABeneficiaryListVi
     
     func loadBeneficiaries(){
         GSVCLoader.show(type: .native)
-        presenter?.requestBeneficiaries(account: "12345678901234", beneficiaryList: { [self] beneficiaryList in
+        presenter?.requestBeneficiaries(account: GSSISessionInfo.sharedInstance.gsUser.mainAccount ?? "", beneficiaryList: { [self] beneficiaryList in
             GSVCLoader.hide()
             if beneficiaryList?.resultado?.beneficiarios != nil{
                 for item in beneficiaryList!.resultado!.beneficiarios!{
@@ -51,6 +52,8 @@ class BASABeneficiaryListViewController: UIViewController, BASABeneficiaryListVi
                 self.presentBottomAlertFullData(status: .error, message: "Ocurrió un error desconocido, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
             }
         })
+        
+        
     }
     
     @objc func newBeneficiary(_ sender: Any){
@@ -84,6 +87,7 @@ extension BASABeneficiaryListViewController: UITableViewDelegate, UITableViewDat
             cell.lblTitle.text = userName
             cell.lblSubtitle.text = (cellData.porcentaje ?? "0") + "%"
             cell.btnEdit.isEnabled = false
+            
             return cell
         }
     }

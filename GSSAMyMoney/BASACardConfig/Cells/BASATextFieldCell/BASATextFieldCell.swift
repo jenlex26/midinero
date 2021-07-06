@@ -25,10 +25,11 @@ class BASATextFieldCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
-        textField.delegate = self
+       
     }
     
     func configureCell(data: beneficiaryField){
+        textField.delegate = self
         
         lblTitle.text = data.title
         textField.text = data.text
@@ -73,6 +74,20 @@ extension BASATextFieldCell: GSVCPickerControllerDelegate, GSVCPickerControllerD
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "TextFieldDidEnd"), object: [textField.text!: index], userInfo: nil))
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "TextFieldDidStart"), object: [textField.text!: index], userInfo: nil))
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let textFieldText = textField.text,
+            let rangeOfTextToReplace = Range(range, in: textFieldText) else {
+                return false
+        }
+        let substringToReplace = textFieldText[rangeOfTextToReplace]
+        let count = textFieldText.count - substringToReplace.count + string.count
+        return count <= 25
     }
     
     func getElements(component: Int, textField: UITextField) -> [DataPicker]? {

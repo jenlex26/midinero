@@ -19,7 +19,6 @@ class BASACardLimitsViewController: UIViewController, BASACardLimitsViewProtocol
     
     var cellSize = CGFloat(84.0)
     
-    
     struct LimitItem{
         var title: String
         var subtitle: String
@@ -31,7 +30,7 @@ class BASACardLimitsViewController: UIViewController, BASACardLimitsViewProtocol
         super.viewDidLoad()
         
         LimitItems.append(LimitItem(title: "Retiro en cajero", subtitle: "Hasta $7,500.00", height: 84.0))
-        LimitItems.append(LimitItem(title: "Límite de compra", subtitle: "Hasta $999,999,999.00", height: 84.0))
+        LimitItems.append(LimitItem(title: "Límite de compra", subtitle: "Solo múltiplos de $50, hasta $7,500.00", height: 84.0))
         
         registerCells()
         table.delegate = self

@@ -22,23 +22,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="453" height="185"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4zf-vu-qVU">
-                                <rect key="frame" x="20" y="10" width="413" height="155"/>
+                                <rect key="frame" x="20" y="10" width="413" height="149"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="nyq-zb-QYP">
-                                        <rect key="frame" x="0.0" y="0.0" width="413" height="155"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="413" height="149"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HXt-ms-uEe">
-                                                <rect key="frame" x="0.0" y="0.0" width="413" height="62"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="413" height="59.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qOg-3f-RhC">
-                                                        <rect key="frame" x="0.0" y="58" width="413" height="4"/>
+                                                        <rect key="frame" x="0.0" y="55.5" width="413" height="4"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="4" id="k2H-WI-JHk"/>
                                                         </constraints>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="idS-61-jKV">
-                                                        <rect key="frame" x="20" y="13.5" width="373" height="35"/>
+                                                        <rect key="frame" x="67" y="12.5" width="326" height="35"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                         <state key="normal" title="Tarjeta Digital">
                                                             <color key="titleColor" systemColor="labelColor"/>
@@ -48,11 +48,19 @@
                                                         </connections>
                                                     </button>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="QNE-ql-RZe">
-                                                        <rect key="frame" x="373" y="23" width="20" height="16.5"/>
+                                                        <rect key="frame" x="373" y="22" width="20" height="16.5"/>
                                                         <color key="tintColor" red="0.45098039220000002" green="0.070588235289999995" blue="0.72156862749999995" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="jkD-3E-Avd"/>
                                                             <constraint firstAttribute="width" constant="20" id="qWe-Nb-oiO"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="creditcard.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="3lp-Uf-TgG">
+                                                        <rect key="frame" x="16" y="16.5" width="30" height="26.5"/>
+                                                        <color key="tintColor" red="0.41162583229999999" green="0.1316206157" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="30" id="c39-6N-bi1"/>
+                                                            <constraint firstAttribute="width" constant="30" id="lnv-Y2-aJD"/>
                                                         </constraints>
                                                     </imageView>
                                                 </subviews>
@@ -63,19 +71,21 @@
                                                     <constraint firstAttribute="bottom" secondItem="qOg-3f-RhC" secondAttribute="bottom" id="EID-CY-Kue"/>
                                                     <constraint firstItem="idS-61-jKV" firstAttribute="centerY" secondItem="HXt-ms-uEe" secondAttribute="centerY" id="Lw1-sz-EAg"/>
                                                     <constraint firstAttribute="trailing" secondItem="idS-61-jKV" secondAttribute="trailing" constant="20" id="RYR-sN-biX"/>
+                                                    <constraint firstItem="3lp-Uf-TgG" firstAttribute="leading" secondItem="HXt-ms-uEe" secondAttribute="leading" constant="16" id="Zmi-Gp-L4b"/>
+                                                    <constraint firstItem="idS-61-jKV" firstAttribute="leading" secondItem="3lp-Uf-TgG" secondAttribute="trailing" constant="21" id="aA3-ZT-JgH"/>
                                                     <constraint firstAttribute="trailing" secondItem="qOg-3f-RhC" secondAttribute="trailing" id="mAe-wy-x0Z"/>
-                                                    <constraint firstItem="idS-61-jKV" firstAttribute="leading" secondItem="HXt-ms-uEe" secondAttribute="leading" constant="20" id="nQu-1V-DSB"/>
+                                                    <constraint firstItem="3lp-Uf-TgG" firstAttribute="centerY" secondItem="idS-61-jKV" secondAttribute="centerY" id="p87-4R-wbs"/>
                                                     <constraint firstItem="qOg-3f-RhC" firstAttribute="leading" secondItem="HXt-ms-uEe" secondAttribute="leading" id="uou-aG-W5C"/>
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="fnb-NC-EOd">
-                                                <rect key="frame" x="0.0" y="62" width="413" height="93"/>
+                                                <rect key="frame" x="0.0" y="59.5" width="413" height="89.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KGO-xD-R6F">
-                                                        <rect key="frame" x="0.0" y="0.0" width="103.5" height="93"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="103.5" height="89.5"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lII-EZ-gAG">
-                                                                <rect key="frame" x="0.0" y="0.0" width="103.5" height="93"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="103.5" height="89.5"/>
                                                                 <connections>
                                                                     <action selector="sendAndPayWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="pS5-cU-Ze1"/>
                                                                 </connections>
@@ -87,7 +97,7 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enviar y pagar" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zyf-a5-X5g">
-                                                                <rect key="frame" x="5" y="55" width="93.5" height="33"/>
+                                                                <rect key="frame" x="5" y="55" width="93.5" height="29.5"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -109,10 +119,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P4L-4w-hSt">
-                                                        <rect key="frame" x="103.5" y="0.0" width="103" height="93"/>
+                                                        <rect key="frame" x="103.5" y="0.0" width="103" height="89.5"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RXW-5z-zQH">
-                                                                <rect key="frame" x="0.0" y="0.0" width="103" height="93"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="103" height="89.5"/>
                                                                 <connections>
                                                                     <action selector="payWithQRWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="biu-Pp-bkx"/>
                                                                 </connections>
@@ -124,7 +134,7 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cobrar con QR" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6go-dx-BRI">
-                                                                <rect key="frame" x="5" y="55" width="93" height="33"/>
+                                                                <rect key="frame" x="5" y="55" width="93" height="29.5"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -146,10 +156,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y1k-d3-4ma">
-                                                        <rect key="frame" x="206.5" y="0.0" width="103.5" height="93"/>
+                                                        <rect key="frame" x="206.5" y="0.0" width="103.5" height="89.5"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6QF-Ur-V71">
-                                                                <rect key="frame" x="0.0" y="0.0" width="103.5" height="93"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="103.5" height="89.5"/>
                                                                 <connections>
                                                                     <action selector="tiempoAireWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="KaX-Di-d2w"/>
                                                                 </connections>
@@ -161,7 +171,7 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tiempo Aire" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8gy-nS-1Md">
-                                                                <rect key="frame" x="5" y="55" width="93.5" height="33"/>
+                                                                <rect key="frame" x="5" y="55" width="93.5" height="29.5"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -183,10 +193,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MwE-km-DO4">
-                                                        <rect key="frame" x="310" y="0.0" width="103" height="93"/>
+                                                        <rect key="frame" x="310" y="0.0" width="103" height="89.5"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2L4-gf-wNp">
-                                                                <rect key="frame" x="0.0" y="0.0" width="103" height="93"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="103" height="89.5"/>
                                                                 <connections>
                                                                     <action selector="foundAccounWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Bac-f0-NC3"/>
                                                                 </connections>
@@ -198,7 +208,7 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fondear cuenta" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cEY-tC-AX6">
-                                                                <rect key="frame" x="5" y="55" width="93" height="33"/>
+                                                                <rect key="frame" x="5" y="55" width="93" height="29.5"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -220,10 +230,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XRC-TB-eSH">
-                                                        <rect key="frame" x="413" y="0.0" width="10" height="93"/>
+                                                        <rect key="frame" x="413" y="0.0" width="10" height="89.5"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zcv-e0-Ntr">
-                                                                <rect key="frame" x="0.0" y="0.0" width="10" height="93"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="10" height="89.5"/>
                                                             </button>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_enviar_pagar" translatesAutoresizingMaskIntoConstraints="NO" id="ugj-ux-HGQ">
                                                                 <rect key="frame" x="0.0" y="5" width="10" height="50"/>
@@ -232,7 +242,7 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Disponer dinero" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AsQ-a3-bH0">
-                                                                <rect key="frame" x="5" y="55" width="0.0" height="33"/>
+                                                                <rect key="frame" x="5" y="55" width="0.0" height="29.5"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -254,10 +264,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eo2-dZ-ZNg">
-                                                        <rect key="frame" x="413" y="0.0" width="10" height="93"/>
+                                                        <rect key="frame" x="413" y="0.0" width="10" height="89.5"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UsR-lf-lEp">
-                                                                <rect key="frame" x="0.0" y="0.0" width="10" height="93"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="10" height="89.5"/>
                                                             </button>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_tiempo_aire" translatesAutoresizingMaskIntoConstraints="NO" id="cDr-yl-XEJ">
                                                                 <rect key="frame" x="0.0" y="5" width="10" height="50"/>
@@ -266,7 +276,7 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ajustar tarjeta" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lYi-Cn-Mwj">
-                                                                <rect key="frame" x="5" y="55" width="0.0" height="33"/>
+                                                                <rect key="frame" x="5" y="55" width="0.0" height="29.5"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -288,10 +298,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xWy-DM-fch">
-                                                        <rect key="frame" x="413" y="0.0" width="10" height="93"/>
+                                                        <rect key="frame" x="413" y="0.0" width="10" height="89.5"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rGJ-9m-L4g">
-                                                                <rect key="frame" x="0.0" y="0.0" width="10" height="93"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="10" height="89.5"/>
                                                             </button>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_fondear" translatesAutoresizingMaskIntoConstraints="NO" id="d3j-HU-6Mm">
                                                                 <rect key="frame" x="0.0" y="5" width="10" height="50"/>
@@ -300,7 +310,7 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pagar tarjeta" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="96n-Ju-6wn">
-                                                                <rect key="frame" x="5" y="55" width="0.0" height="33"/>
+                                                                <rect key="frame" x="5" y="55" width="0.0" height="29.5"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -347,7 +357,7 @@
                             <constraint firstAttribute="trailing" secondItem="4zf-vu-qVU" secondAttribute="trailing" constant="20" id="KdF-il-GDW"/>
                             <constraint firstItem="4zf-vu-qVU" firstAttribute="top" secondItem="QRP-7P-wzD" secondAttribute="top" constant="10" id="kIr-7A-mlv"/>
                             <constraint firstItem="4zf-vu-qVU" firstAttribute="leading" secondItem="QRP-7P-wzD" secondAttribute="leading" constant="20" id="o8i-dE-XvH"/>
-                            <constraint firstAttribute="bottom" secondItem="4zf-vu-qVU" secondAttribute="bottom" constant="20" id="tW1-BI-eMK"/>
+                            <constraint firstAttribute="bottom" secondItem="4zf-vu-qVU" secondAttribute="bottom" constant="26" id="tW1-BI-eMK"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -372,6 +382,7 @@
     </objects>
     <resources>
         <image name="chevron.right" catalog="system" width="96" height="128"/>
+        <image name="creditcard.fill" catalog="system" width="128" height="88"/>
         <image name="ic_enviar_pagar" width="49" height="46"/>
         <image name="ic_fondear" width="50" height="46"/>
         <image name="ic_recibir_cobrar" width="49" height="46"/>

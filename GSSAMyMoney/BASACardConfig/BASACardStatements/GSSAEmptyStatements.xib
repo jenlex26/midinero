@@ -34,10 +34,24 @@
                         </label>
                     </subviews>
                 </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WkD-Ce-4A7" customClass="GSVCButton" customModule="GSSAVisualComponents">
+                    <rect key="frame" x="171.5" y="461.5" width="32" height="30"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                    <state key="normal" title="Salir">
+                        <color key="titleColor" red="0.36470588235294116" green="0.75686274509803919" blue="0.21568627450980393" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="style">
+                            <integer key="value" value="11"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="WkD-Ce-4A7" firstAttribute="top" secondItem="4wR-C7-jYD" secondAttribute="bottom" constant="56" id="EdE-q8-TsX"/>
+                <constraint firstItem="WkD-Ce-4A7" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="SOq-Kr-9nJ"/>
                 <constraint firstItem="4wR-C7-jYD" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" constant="-100" id="b8v-AA-hr6"/>
                 <constraint firstItem="4wR-C7-jYD" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="70" id="bII-8V-HME"/>
                 <constraint firstAttribute="trailing" secondItem="4wR-C7-jYD" secondAttribute="trailing" constant="70" id="qdn-it-hJj"/>
@@ -46,6 +60,11 @@
             <point key="canvasLocation" x="139" y="68"/>
         </view>
     </objects>
+    <designables>
+        <designable name="KbO-Mf-6vu">
+            <size key="intrinsicContentSize" width="432.5" height="20.5"/>
+        </designable>
+    </designables>
     <resources>
         <image name="noStatements" width="228" height="255"/>
         <systemColor name="systemBackgroundColor">

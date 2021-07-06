@@ -23,9 +23,6 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZeO-at-1xG">
                                 <rect key="frame" x="0.0" y="0.0" width="267" height="76"/>
-                                <connections>
-                                    <action selector="show:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="G2o-Di-wcY"/>
-                                </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="creditcard.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="MFD-Ao-hLo">
                                 <rect key="frame" x="16" y="27.5" width="24" height="20.5"/>

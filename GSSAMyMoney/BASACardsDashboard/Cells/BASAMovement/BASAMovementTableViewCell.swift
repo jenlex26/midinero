@@ -38,9 +38,10 @@ class BASAMovementTableViewCell: UITableViewCell {
 extension String{
     func moneyFormat() -> String{
         var stringAmount = ""
-        guard let formatedAmount = Int(self) else{
+        guard let formatedAmount = Double(self) else{
             return self
         }
+        
         stringAmount = String(formatedAmount)
         
         let amountFormat = NSMutableAttributedString.setFormattedText(withStringAmmount: stringAmount,
@@ -49,6 +50,7 @@ extension String{
                                                                       withFontWeight: .bold,
                                                                       withFontColor: .GSVCText100,
                                                                       withLittleCoin: false)
+        
         return amountFormat.mutableString.description
     }
 }

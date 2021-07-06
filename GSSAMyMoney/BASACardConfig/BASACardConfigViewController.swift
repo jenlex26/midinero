@@ -10,6 +10,7 @@
 
 import UIKit
 import GSSAVisualComponents
+import GSSASessionInfo
 
 class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol, GSVCBottomAlertHandler {
     var bottomAlert: GSVCBottomAlert?
@@ -35,12 +36,16 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
     var configurations: Array<userOptions> = []
     
     var CLABE = "1271 8099 7700 1123 98"
+    var phone = ""
+    var account = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         if credit == true{
             CLABE = "9012 3456 1234 5678 "
         }
+        phone = GSSISessionInfo.sharedInstance.gsUser.phone?.tryToAdCellphoneFormat ?? ""
+        account =  GSSISessionInfo.sharedInstance.gsUser.mainAccount?.tnuoccaFormat ?? ""
         registerCells()
         setOptions()
         table.delegate = self
@@ -56,8 +61,8 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
             if credit == false{
                 configurations.append(userOptions(title: "CLABE Interbancaria", subTitle: CLABE, image: UIImage(systemName: "square.and.arrow.up"), tag: 4))
                 configurations.append(userOptions(title: "Número de cuenta", subTitle: "9567 1660 1234 87", image: nil))
-                configurations.append(userOptions(title: "Celular asociado", subTitle: "55 1234 5678", image: nil))
-                configurations.append(userOptions.init(title: "Estado de cuenta", subTitle: nil, image: UIImage(systemName: "chevron.right"), tag: 1))
+                configurations.append(userOptions(title: "Celular asociado", subTitle: phone, image: nil))
+                configurations.append(userOptions.init(title: "Estados de cuenta", subTitle: nil, image: UIImage(systemName: "chevron.right"), tag: 1))
                 configurations.append(userOptions.init(title: "Límites de la tarjeta", subTitle: nil, image: UIImage(systemName: "chevron.right"), tag: 2))
                 configurations.append(userOptions.init(title: "Beneficiarios", subTitle: nil, image: UIImage(systemName: "chevron.right"), tag: 3))
             }else{
@@ -181,7 +186,8 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
             let view = BASABeneficiaryListRouter.createModule()
             self.navigationController?.pushViewController(view, animated: true)
         case 4:
-            let activityViewController = UIActivityViewController(activityItems: [CLABE], applicationActivities: nil)
+            let text = "Mi número de cuenta CLABE para enviarme dinero desde otro banco (SPEI) es: \(CLABE) Mi número de cuenta para enviarme dinero dentro de baz es: \(account) Mi número de celular asociado para envíos es: \(phone)"
+            let activityViewController = UIActivityViewController(activityItems: [text], applicationActivities: nil)
             activityViewController.popoverPresentationController?.sourceView = self.view
             self.present(activityViewController, animated: true, completion: nil)
         case 5:

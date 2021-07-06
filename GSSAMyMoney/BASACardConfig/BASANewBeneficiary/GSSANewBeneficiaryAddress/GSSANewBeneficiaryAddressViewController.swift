@@ -152,7 +152,6 @@ class GSSANewBeneficiaryAddressViewController: UIViewController, GSSANewBenefici
                 })
                 
             }else{
-                table.shake()
                 let generator = UINotificationFeedbackGenerator()
                 generator.notificationOccurred(.error)
                 self.presentBottomAlertFullData(status: .error, message: "Faltan campos por completar", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)

@@ -18,11 +18,13 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
     
     var beneficiaryData: BeneficiaryItem?
     var tableFields: Array<beneficiaryField> = []
+    var cellsArray: Array<[UITableViewCell:CGFloat]> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadOptions()
         registerCells()
+        setTextFields()
+        setOptions()
         table.alwaysBounceVertical = false
         table.delegate = self
         table.dataSource = self
@@ -38,9 +40,52 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
         table.register(UINib(nibName: "BASAButtonCell", bundle: bundle), forCellReuseIdentifier: "BASAButtonCell")
     }
     
-    func loadOptions(){
+    func setOptions(){
         NotificationCenter.default.addObserver(self, selector: #selector(updateData(sender:)), name: NSNotification.Name(rawValue: "TextFieldDidEnd"), object: nil)
         
+        let headerCell = table.dequeueReusableCell(withIdentifier: "SectionCell") as! SectionCell
+        headerCell.lblTitle.styleType = 6
+        headerCell.lblTitle.text = "Podrás agregar hasta cuatro beneficiarios."
+        cellsArray.append([headerCell:70.0])
+        
+        let addressSwitchCell = table.dequeueReusableCell(withIdentifier: "BASASwitchItemCell") as! BASASwitchItemCell
+        addressSwitchCell.lblSubTitle.isHidden = true
+        addressSwitchCell.lblTitle.styleType = 6
+        addressSwitchCell.backgroundColor = UIColor.GSVCBase300()
+        addressSwitchCell.lblTitle.text = "Utilizar mi dirección"
+        addressSwitchCell.tag = 1
+        if beneficiaryData?.domicilio != nil{
+            addressSwitchCell.swtch.isOn = false
+        }else{
+            addressSwitchCell.swtch.isOn = true
+        }
+        addressSwitchCell.swtch.addTarget(self, action: #selector(switchChanged(sender:)), for: .valueChanged)
+        addressSwitchCell.separatorView.isHidden = true
+        cellsArray.append([addressSwitchCell:56.0])
+        
+        for item in tableFields{
+            let cell = table.dequeueReusableCell(withIdentifier: "BASATextFieldCell") as! BASATextFieldCell
+            cell.configureCell(data: item)
+            cellsArray.append([cell:117.0])
+        }
+        
+        let percentCell = table.dequeueReusableCell(withIdentifier: "BASATextFieldCell") as! BASATextFieldCell
+        percentCell.blankSpace.isHidden = false
+        percentCell.textField.delegate = self
+        percentCell.lblTitle.text = "Porcentaje otorgado"
+        percentCell.textField.placeholder = "%"
+        percentCell.textField.keyboardType = .numberPad
+        cellsArray.append([percentCell:117.0])
+        
+        let cell = table.dequeueReusableCell(withIdentifier: "BASAInfoCardCell") as! BASAInfoCardCell
+        cell.lblText.text = "La suma total de tus beneficiarios debe dar un total del 100%"
+        cellsArray.append([cell:110.0])
+        
+        let buttonCell = table.dequeueReusableCell(withIdentifier: "BASAButtonCell")!
+        cellsArray.append([buttonCell:119.0])
+    }
+    
+    func setTextFields(){
         tableFields.append(beneficiaryField(title: "Nombre", image: nil, placeHolder: nil, pickerData: nil, text: beneficiaryData?.nombre))
         
         tableFields.append(beneficiaryField(title: "Apellido paterno", image: nil, placeHolder: nil, pickerData: nil, text: beneficiaryData?.apellidoPaterno))
@@ -49,9 +94,8 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
             tableFields.append(beneficiaryField(title: "Fecha de nacimiento", image: UIImage(systemName: "calendar"), placeHolder: "DD/MM/AAAA", pickerData: pickerTextField.init(pickerOptions: nil, datePicker: true, dateFormat: "dd/mm/yyyy"), text: beneficiaryData?.fechaNacimiento))
             tableFields.append(beneficiaryField(title: "Parentesco", image: UIImage(systemName: "chevron.down"), placeHolder: "Selecciona", pickerData: pickerTextField.init(pickerOptions: ["Tio","Padre","Madre","Primo","Amigo(a)"], datePicker: false, dateFormat: nil)))
         }
-        tableFields.append(beneficiaryField(title: "Número telefónico", image: nil, placeHolder: nil, pickerData: nil, text: beneficiaryData?.contacto?.numeroTelefono))
-        tableFields.append(beneficiaryField(title: "Correo electrónico", image: nil, placeHolder: nil, pickerData: nil, text: beneficiaryData?.contacto?.correoElectronico))
-        tableFields.append(beneficiaryField(title: "Porcentaje otorgado", image: nil, placeHolder: nil, pickerData: nil, size: .small, keyboardType: .numberPad, text: beneficiaryData?.porcentaje))
+        tableFields.append(beneficiaryField(title: "Número telefónico", image: nil, placeHolder: nil, pickerData: nil, keyboardType: .numberPad, text: beneficiaryData?.contacto?.numeroTelefono))
+        tableFields.append(beneficiaryField(title: "Correo electrónico", image: nil, placeHolder: nil, pickerData: nil, keyboardType: .emailAddress, text: beneficiaryData?.contacto?.correoElectronico))
     }
     
     @objc func switchChanged(sender: UISwitch){
@@ -91,58 +135,15 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
 
 extension BASANewBeneficiaryViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4 + tableFields.count
+        return cellsArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.row{
-        case 0:
-            let cell = table.dequeueReusableCell(withIdentifier: "SectionCell") as! SectionCell
-            cell.lblTitle.styleType = 6
-            cell.lblTitle.text = "Podrás agregar hasta cuatro beneficiarios."
-            return cell
-        case 1:
-            let cell = table.dequeueReusableCell(withIdentifier: "BASASwitchItemCell") as! BASASwitchItemCell
-            cell.lblSubTitle.isHidden = true
-            cell.lblTitle.styleType = 6
-            cell.lblTitle.text = "Utilizar mi dirección"
-            cell.tag = 1
-            if beneficiaryData?.domicilio != nil{
-                cell.swtch.isOn = false
-            }else{
-                cell.swtch.isOn = true
-            }
-            cell.swtch.addTarget(self, action: #selector(switchChanged(sender:)), for: .valueChanged)
-            cell.separatorView.isHidden = true
-            return cell
-        case 2 + tableFields.count:
-            let cell = table.dequeueReusableCell(withIdentifier: "BASAInfoCardCell") as! BASAInfoCardCell
-            cell.lblText.text = "La suma total de tus beneficiarios debe dar un total del 100%"
-            return cell
-        case 3 + tableFields.count:
-            let cell = table.dequeueReusableCell(withIdentifier: "BASAButtonCell")
-            return cell!
-        default:
-            let cell = table.dequeueReusableCell(withIdentifier: "BASATextFieldCell") as! BASATextFieldCell
-            tableFields[indexPath.row - 2].index = indexPath.row - 2
-            cell.configureCell(data: tableFields[indexPath.row - 2])
-            return cell
-        }
+        return cellsArray[indexPath.row].first?.key ?? UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.row{
-        case 0:
-            return 70.0
-        case 1:
-            return 56.0
-        case  2 + tableFields.count:
-            return 110.0
-        case  3 + tableFields.count:
-            return 119.0
-        default:
-            return 117.0
-        }
+        return cellsArray[indexPath.row].first?.value ?? 100.0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -155,6 +156,30 @@ extension BASANewBeneficiaryViewController: UITableViewDelegate, UITableViewData
                 self.present(view, animated: true, completion: nil)
             }
         }
+    }
+}
+
+extension BASANewBeneficiaryViewController: UITextFieldDelegate{
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        UIView.animate(withDuration: 0.3, animations: { () -> Void in
+          self.view.frame.origin.y -= 100.0
+        })
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        UIView.animate(withDuration: 0.3, animations: { () -> Void in
+            self.view.frame.origin.y = 0.0
+        })
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let textFieldText = textField.text,
+               let rangeOfTextToReplace = Range(range, in: textFieldText) else {
+                   return false
+           }
+           let substringToReplace = textFieldText[rangeOfTextToReplace]
+           let count = textFieldText.count - substringToReplace.count + string.count
+           return count <= 3
     }
 }
 
@@ -174,6 +199,7 @@ struct beneficiaryField{
     var text: String? = ""
     var index: Int?
     var height: CGFloat?
+    var tag: Int?
 }
 
 enum cellSize{

@@ -11,6 +11,7 @@
 import UIKit
 import GSSAServiceCoordinator
 import GSSASecurityManager
+import GSSASessionInfo
 
 class BASACardStatementsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASACardStatementsInteractorProtocol {
     
@@ -18,11 +19,11 @@ class BASACardStatementsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASACar
     
     func getStatements(body: DebitCardStatementBody, StatementsResultData: @escaping (DebitCardStatementData?) -> ()){
         
-        self.urlPath = "https://qfdqigfmz4.execute-api.us-east-1.amazonaws.com/"
+        self.urlPath = "https://apigateway.superappbaz.com/"
         self.strPathEndpoint = "desarrollo/superapp/dinero/captacion/estados-cuenta/v1/periodos/busquedas"
-
-            
-        let bodyTest = DebitCardStatementBody(numeroCuenta: "974563210", fechaInicio: "10-10-2020", fechaFin: "10-12-2020")
+        
+        let bodyTest = DebitCardStatementBody(numeroCuenta: ( GSSISessionInfo.sharedInstance.gsUser.mainAccount ?? ""), fechaInicio: "10-10-2020", fechaFin: "10-12-2020")
+        
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, objBody: bodyTest, environment: .develop) { (objRes: DebitCardStatementData?, error) in
             debugPrint(objRes as Any)

@@ -10,6 +10,8 @@
 
 import UIKit
 import GSSAVisualComponents
+import GSSAVisualTemplates
+import GSSASessionInfo
 
 class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProtocol, GSVCBottomAlertHandler {
     
@@ -27,6 +29,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     var creditCardBalance: CreditCardBalanceResponse?
     var creditCardMovements: CreditCardMovementsResponse?
     
+    
     var accountNumber: [String:String]?
     
     override func viewDidLoad() {
@@ -38,12 +41,12 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         loadDebitBalance()
         self.setTableForDebitCard()
+     
     }
     
     func loadDebitBalance(){
         GSVCLoader.show(type: .native)
-        
-        presenter?.requestBalance(Account: [accountNumber?.first?.key.encryptAlnova() ?? "01270172461200000001": accountNumber?.first?.value ?? ""], Balance: { Balance in
+        presenter?.requestBalance(Account: [accountNumber?.first?.key.encryptAlnova() ?? (GSSISessionInfo.sharedInstance.gsUser.encryptedAccount ?? ""): accountNumber?.first?.value ?? (GSSISessionInfo.sharedInstance.gsUser.SICU?.encryptAlnova() ?? "")], Balance: { Balance in
             if let NewBalance = Balance{
                 DispatchQueue.main.async {
                     self.accountBalance = NewBalance
@@ -59,7 +62,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     }
     
     func loadDebitMovements(){
-        self.presenter?.requestDebitCardMovements(Body: MovimientosBody(transaccion: MovementsBodyData(numeroCuenta: accountNumber?.first?.key ?? "WPg9BeVmNq_ViYB-d-kR6RK_02CifbEdVBfc40Kulto", fechaInicial: "01/01/0001", fechaFinal: "01/01/0001")), Movements: { [self] Movements in
+        self.presenter?.requestDebitCardMovements(Body: MovimientosBody(transaccion: MovementsBodyData(numeroCuenta: accountNumber?.first?.key ?? (GSSISessionInfo.sharedInstance.gsUser.encryptedAccount ?? ""), fechaInicial: "01/01/0001", fechaFinal: "01/01/0001")), Movements: { [self] Movements in
             GSVCLoader.hide()
             if Movements != nil{
                 debitCardMovements = Movements
@@ -86,7 +89,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     
     func loadCreditCardInfo(){
         GSVCLoader.show(type: .native)
-        presenter?.requestCreditCardData(Body: CreditCardBody.init(transaccion: CreditCardTransaccion.init(numeroCuenta: "", numeroTarjeta: "4762030300111678", numeroContrato: "")), CreditCardData: { [self] CreditCardData in
+        presenter?.requestCreditCardData(Body: CreditCardBody.init(transaccion: CreditCardTransaccion.init(numeroCuenta: "", numeroTarjeta: GSSISessionInfo.sharedInstance.gsUser.encryptedCard?.alnovaDecrypt(), numeroContrato: "")), CreditCardData: { [self] CreditCardData in
             if let CreditCard = CreditCardData{
                 creditCardData = CreditCard
                 NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "reloadCreditCardData"), object: CreditCard, userInfo: nil))
@@ -99,7 +102,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     }
     
     func loadCreditCardBalance(){
-        presenter?.requestCreditCardBalance(Body: CreditCardBalanceBody.init(transaccion: CreditCardBalanceTransaccion.init(numeroTarjeta: "4762030300111678")), CreditCardBalance: { [self] CreditCardBalance in
+        presenter?.requestCreditCardBalance(Body: CreditCardBalanceBody.init(transaccion: CreditCardBalanceTransaccion.init(numeroTarjeta: GSSISessionInfo.sharedInstance.gsUser.encryptedCard?.alnovaDecrypt())), CreditCardBalance: { [self] CreditCardBalance in
             if let creditCardBalanceResponse = CreditCardBalance{
                 creditCardBalance = creditCardBalanceResponse
                 NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "reloadCreditCardBalance"), object: creditCardBalanceResponse, userInfo: nil))
@@ -163,7 +166,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         let buttons = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAButtonsCell") as! BASAButtonsCell
         buttons.cellViewController = self
         buttons.accountBalance = self.accountBalance
-        cellsArray.append([buttons:200.0])
+        cellsArray.append([buttons:206.0])
         
         let separator = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "SectionCell") as! SectionCell
         separator.lblTitle.text = "Movimientos"
@@ -195,6 +198,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         
         let digitalCardCell = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "RequestCardCell") as! RequestCardCell
         digitalCardCell.cellViewController = self
+        digitalCardCell.cellButton.addTarget(self, action: #selector(showAlert), for: .touchUpInside)
         cellsArray.append([digitalCardCell:119.0])
         
         let infoCreditCell = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASACreditCardInfoCell") as! BASACreditCardInfoCell
@@ -221,7 +225,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
             for item in creditCardMovements!.resultado!.movimientos!{
                 let movement = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAMovementCell") as! BASAMovementTableViewCell
                 movement.lblTitle.text = item.concepto
-                movement.lblAmount.text = "$" + (item.monto?.moneyFormat() ?? "")
+                movement.lblAmount.text = item.monto?.moneyFormat() ?? ""
                 movement.lblDate.text = item.fechaHora?.dateFormatter(format: "yyyy-MM-dd HH:mm:ss", outputFormat: "dd MMM yyyy")
                 movement.setArrow(amount: (item.monto?.moneyFormat() ?? ""))
                 cellsArray.append([movement:88.0])
@@ -239,6 +243,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         
         let infoCell = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASALendInfoCell") as! BASALendInfoCell
         
+        infoCell.btnInfo.addTarget(self, action: #selector(showToolTip), for: .touchUpInside)
         if lendsData == nil{
             loadLends()
         }else{
@@ -248,7 +253,6 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
             infoCell.lblFixedPayment.text = lendsData?.resultado?.pagoNormal?.moneyFormat()
             infoCell.lblPaymentDay.text = lendsData?.resultado?.fechaProximoPago?.dateFormatter(format: "yyyy/MM/dd", outputFormat: "EEEE")
         }
-        
         cellsArray.append([infoCell:300.0])
         
         let separator = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "SectionCell") as! SectionCell
@@ -259,7 +263,9 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
             for item in lendsData!.resultado!.productos!{
                 if item.id != 0{
                     let creditItem = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAMyCreditItem") as! BASAMyCreditItem
+                    
                     creditItem.lblAmount.text = item.pagoLiquidar?.moneyFormat()
+                    
                     creditItem.setTitle(id: item.id ?? -1)
                     cellsArray.append([creditItem:180.0])
                 }
@@ -303,22 +309,21 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
             let colorType = notification.object as! cardType
             switch colorType {
             case .credit:
-                if #available(iOS 13.0, *) {
-                    UIApplication.shared.statusBarStyle = .lightContent
-                } 
                 setTableForCreditCard()
             case .debit:
                 setTableForDebitCard()
-                if #available(iOS 13.0, *) {
-                    UIApplication.shared.statusBarStyle = .lightContent
-                }
             case .lending:
                 setTableForLends()
-                if #available(iOS 13.0, *) {
-                    UIApplication.shared.statusBarStyle = .lightContent
-                }
             }
         }
+    }
+    
+    @objc func showToolTip(){
+        GSVTTooltipRouter.createModule(target: self, title: "Pago sugerido", message: "Al realizar este pago, aprovechas los beneficios del pago puntual y adelantas una semana para terminar de pagar antes.")
+    }
+    
+    @objc func showAlert(){
+        presentBottomAlertFullData(status: .caution, message: "En este momento no cuentas con tarjeta digital", attributedString: .none, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
     }
 }
 
