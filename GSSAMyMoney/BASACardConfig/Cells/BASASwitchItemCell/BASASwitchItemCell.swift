@@ -18,6 +18,7 @@ class BASASwitchItemCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
+        swtch.backgroundColor = .clear
     }
     
     func configureCell(title: String, subtitle: String?){

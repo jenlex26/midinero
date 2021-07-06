@@ -62,7 +62,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     }
     
     func loadDebitMovements(){
-        self.presenter?.requestDebitCardMovements(Body: MovimientosBody(transaccion: MovementsBodyData(numeroCuenta: accountNumber?.first?.key ?? (GSSISessionInfo.sharedInstance.gsUser.encryptedAccount ?? ""), fechaInicial: "01/01/0001", fechaFinal: "01/01/0001")), Movements: { [self] Movements in
+        self.presenter?.requestDebitCardMovements(Body: MovimientosBody(transaccion: MovementsBodyData(numeroCuenta: accountNumber?.first?.key ?? (GSSISessionInfo.sharedInstance.gsUser.encryptedAccount), fechaInicial: "01/01/0001", fechaFinal: "01/01/0001")), Movements: { [self] Movements in
             GSVCLoader.hide()
             if Movements != nil{
                 debitCardMovements = Movements
@@ -82,6 +82,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                 NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "reloadLendsData"), object: LendsData, userInfo: nil))
                 setTableForLends()
             }else{
+                GSVCLoader.hide()
                 self.presentBottomAlertFullData(status: .error, message: "Ocurrió un al cargar tus prestamos, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
             }
         })
@@ -121,6 +122,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                 creditCardMovements = CreditCardMovements
                 setTableForCreditCard()
             }else{
+                GSVCLoader.hide()
                 self.presentBottomAlertFullData(status: .error, message: "Ocurrió un error al obtener tus movimientos, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
             }
         })

@@ -120,7 +120,9 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
         if notification.object != nil{
             let data = notification.object as! CreditCardResponse
             creditCardData = data
-            let cell = cardCollection.cellForItem(at: [0,0]) as! BASACardCell
+            guard let cell = cardCollection.cellForItem(at: [0,0]) as? BASACardCell else{
+                return
+            }
             cell.lblCardNumber.text = data.resultado?.tarjetas?.first?.numero?.tnuoccaFormat
             cell.lblExpDate.text = data.resultado?.tarjetas?.first?.expiracion?.replacingOccurrences(of: "-", with: "/")
         }
@@ -130,7 +132,9 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
         if notification.object != nil{
             let data = notification.object as! CreditCardBalanceResponse
             creditCardBalance = data
-            let cell = cardCollection.cellForItem(at: [0,0]) as! BASACardCell
+            guard let cell = cardCollection.cellForItem(at: [0,0]) as? BASACardCell else{
+                return
+            }
             cell.lblBalance.text = data.resultado?.montoLimiteCredito?.moneyFormat()
             cell.lblOweMoney.text = "Debes \(data.resultado?.saldoDispuesto?.moneyFormat() ?? "")"
         }
