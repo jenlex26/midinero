@@ -10,9 +10,9 @@
 
 import UIKit
 import GSSAVisualComponents
+import GSSAVisualTemplates
 
-class GSDigitalCardConfigViewController: UIViewController, GSDigitalCardConfigViewProtocol {
-    
+class GSDigitalCardConfigViewController: UIViewController, GSDigitalCardConfigViewProtocol, GSVTDigitalSignDelegate {
     var presenter: GSDigitalCardConfigPresenterProtocol?
     
     @IBOutlet weak var containerView        : UIView!
@@ -58,7 +58,20 @@ class GSDigitalCardConfigViewController: UIViewController, GSDigitalCardConfigVi
         containerView.backgroundColor = .black
     }
     
+    func forgotDigitalSign(_ forgotSecurityCodeViewController: UIViewController?) {
+        print("ok")
+    }
+    
+    func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
+        print("ok")
+    }
+    
+    
     @objc func switchChanged(sender: UISwitch){
+        
+//        let verification = GSVTDigitalSignViewController(delegate: self, dataSource: nil)
+//        verification.modalPresentationStyle = .fullScreen
+//        present(verification, animated: true, completion: nil)
         
         if sender.isOn == true{
             let alert = UIAlertController(title: "Apagaste tu tarjeta", message: "Las nuevas compras no serán procesadas. Puedes volver a encenderla cuando lo necesites. ", preferredStyle: .alert)

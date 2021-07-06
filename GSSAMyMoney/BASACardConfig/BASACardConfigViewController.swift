@@ -10,9 +10,19 @@
 
 import UIKit
 import GSSAVisualComponents
+import GSSAVisualTemplates
 import GSSASessionInfo
 
-class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol, GSVCBottomAlertHandler {
+class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol, GSVCBottomAlertHandler, GSVTDigitalSignDelegate {
+    func forgotDigitalSign(_ forgotSecurityCodeViewController: UIViewController?) {
+        print("forgott")
+    }
+    
+    func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
+        let view = BASABeneficiaryListRouter.createModule()
+        self.navigationController?.pushViewController(view, animated: true)
+    }
+    
     var bottomAlert: GSVCBottomAlert?
     
     func optionalAction() {
@@ -183,8 +193,11 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
             let view = BASACardLimitsRouter.createModule()
             self.navigationController?.pushViewController(view, animated: true)
         case 3:
-            let view = BASABeneficiaryListRouter.createModule()
-            self.navigationController?.pushViewController(view, animated: true)
+//             let view = BASABeneficiaryListRouter.createModule()
+//             self.navigationController?.pushViewController(view, animated: true)
+            let verification = GSVTDigitalSignViewController(delegate: self, dataSource: nil)
+            verification.modalPresentationStyle = .fullScreen
+            present(verification, animated: true, completion: nil)
         case 4:
             let text = "Mi número de cuenta CLABE para enviarme dinero desde otro banco (SPEI) es: \(CLABE) Mi número de cuenta para enviarme dinero dentro de baz es: \(account) Mi número de celular asociado para envíos es: \(phone)"
             let activityViewController = UIActivityViewController(activityItems: [text], applicationActivities: nil)

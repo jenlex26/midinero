@@ -9,9 +9,10 @@
 //
 
 import UIKit
+import GSSAVisualComponents
+import GSSAVisualTemplates
 
-class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryViewProtocol {
-    
+class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryViewProtocol, GSVTDigitalSignDelegate {
     var presenter: BASANewBeneficiaryPresenterProtocol?
     
     @IBOutlet weak var table: UITableView!
@@ -81,7 +82,8 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
         cell.lblText.text = "La suma total de tus beneficiarios debe dar un total del 100%"
         cellsArray.append([cell:110.0])
         
-        let buttonCell = table.dequeueReusableCell(withIdentifier: "BASAButtonCell")!
+        let buttonCell = table.dequeueReusableCell(withIdentifier: "BASAButtonCell") as! BASAButtonCell
+        buttonCell.btnNext.addTarget(self, action: #selector(showDigitalSign), for: .touchUpInside)
         cellsArray.append([buttonCell:119.0])
     }
     
@@ -96,6 +98,14 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
         }
         tableFields.append(beneficiaryField(title: "Número telefónico", image: nil, placeHolder: nil, pickerData: nil, keyboardType: .numberPad, text: beneficiaryData?.contacto?.numeroTelefono))
         tableFields.append(beneficiaryField(title: "Correo electrónico", image: nil, placeHolder: nil, pickerData: nil, keyboardType: .emailAddress, text: beneficiaryData?.contacto?.correoElectronico))
+    }
+    
+    func forgotDigitalSign(_ forgotSecurityCodeViewController: UIViewController?) {
+        print("OK")
+    }
+    
+    func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
+        print("ok")
     }
     
     @objc func switchChanged(sender: UISwitch){
@@ -126,6 +136,12 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
                 tableFields[object.first!.value].text = object.first!.key
             }
         }
+    }
+    
+    @objc func showDigitalSign(){
+        let verification = GSVTDigitalSignViewController(delegate: self, dataSource: nil)
+        verification.modalPresentationStyle = .fullScreen
+        present(verification, animated: true, completion: nil)
     }
     
     @IBAction func close(_ sender: Any){
