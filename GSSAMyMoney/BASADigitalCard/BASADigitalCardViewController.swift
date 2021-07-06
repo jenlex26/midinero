@@ -73,6 +73,7 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
     func requestCVV(){
         presenter?.makeDigitalDataRequest(Body: Transaction(transaccion: AccoutRequest(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.encryptedAccount)), DataCard: { [self] DataCard in
             GSVCLoader.hide()
+            
             if DataCard != nil{
                 self.StartTimer()
                 CVVCodeLabel.text = DataCard!.resultado!.tarjeta?.cvv?.dynamicDecrypt()

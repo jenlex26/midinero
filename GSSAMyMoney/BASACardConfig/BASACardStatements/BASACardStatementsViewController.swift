@@ -11,6 +11,7 @@
 import UIKit
 import GSSAVisualComponents
 import GSSAVisualTemplates
+import GSSASessionInfo
 
 class BASACardStatementsViewController: UIViewController, BASACardStatementsViewProtocol, GSVTGenericResultDelegate, GSVCBottomAlertHandler, GSVTDigitalSignDelegate {
     
@@ -46,6 +47,7 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
                     requestData = StatementsResultData?.resultado?.detalles ?? []
                     setStatements()
                 }else{
+                    showEmptyStatementsView()
                     self.presentBottomAlertFullData(status: .error, message: "No podemos cargar tus estados de cuenta en este momento, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
                 }
             })
@@ -70,13 +72,7 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
         table.reloadData()
         
         if requestData.count == 0{
-            let view =  UINib(nibName: "GSSAEmptyStatements", bundle: Bundle(for: BASACardStatementsViewController.self)).instantiate(withOwner: nil, options: nil)[0] as! UIView
-            if view.subviews[1] is UIButton{
-                let button = view.subviews[1] as! GSVCButton
-                button.addTarget(self, action: #selector(closeView), for: .touchUpInside)
-            }
-            view.frame = self.view.frame
-            table.addSubview(view)
+            showEmptyStatementsView()
         }
         
     }
@@ -120,6 +116,16 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
     
     func cerraBottomAlert() {
         bottomAlert = nil
+    }
+    
+    func showEmptyStatementsView(){
+        let view =  UINib(nibName: "GSSAEmptyStatements", bundle: Bundle(for: BASACardStatementsViewController.self)).instantiate(withOwner: nil, options: nil)[0] as! UIView
+        if view.subviews[1] is UIButton{
+            let button = view.subviews[1] as! GSVCButton
+            button.addTarget(self, action: #selector(closeView), for: .touchUpInside)
+        }
+        view.frame = self.view.frame
+        table.addSubview(view)
     }
     
     @objc func selectAllStatements(sender: UISwitch){
@@ -183,7 +189,7 @@ extension BASACardStatementsViewController: UITableViewDelegate, UITableViewData
             return cell
         case 1:
             let cell = table.dequeueReusableCell(withIdentifier: "SectionCell") as! SectionCell
-            cell.lblTitle.text = "Se enviarán al correo electrónico lili22@gmail.com"
+            cell.lblTitle.text = "Se enviarán al correo electrónico \(GSSISessionInfo.sharedInstance.gsUser.email ?? "")"
             cell.lblTitle.numberOfLines = 2
             cell.lblTitle.styleType = 6
             return cell

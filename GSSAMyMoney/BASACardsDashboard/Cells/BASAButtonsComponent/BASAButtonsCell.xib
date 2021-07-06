@@ -55,8 +55,8 @@
                                                             <constraint firstAttribute="width" constant="20" id="qWe-Nb-oiO"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="creditcard.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="3lp-Uf-TgG">
-                                                        <rect key="frame" x="16" y="16.5" width="30" height="26.5"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_card" translatesAutoresizingMaskIntoConstraints="NO" id="3lp-Uf-TgG">
+                                                        <rect key="frame" x="16" y="15" width="30" height="30"/>
                                                         <color key="tintColor" red="0.41162583229999999" green="0.1316206157" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="c39-6N-bi1"/>
@@ -207,7 +207,7 @@
                                                                     <constraint firstAttribute="height" constant="50" id="m8H-Jq-I6M"/>
                                                                 </constraints>
                                                             </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fondear cuenta" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cEY-tC-AX6">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recargar tarjeta" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cEY-tC-AX6">
                                                                 <rect key="frame" x="5" y="55" width="93" height="29.5"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                                 <nil key="textColor"/>
@@ -382,7 +382,7 @@
     </objects>
     <resources>
         <image name="chevron.right" catalog="system" width="96" height="128"/>
-        <image name="creditcard.fill" catalog="system" width="128" height="88"/>
+        <image name="ic_card" width="24" height="24"/>
         <image name="ic_enviar_pagar" width="49" height="46"/>
         <image name="ic_fondear" width="50" height="46"/>
         <image name="ic_recibir_cobrar" width="49" height="46"/>

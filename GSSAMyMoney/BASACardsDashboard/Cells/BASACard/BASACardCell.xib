@@ -35,7 +35,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="$-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ckp-u2-ztP" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                <rect key="frame" x="321.5" y="49" width="44.5" height="50.5"/>
+                                <rect key="frame" x="321.5" y="53" width="44.5" height="50.5"/>
                                 <fontDescription key="fontDescription" name="GeezaPro-Bold" family="Geeza Pro" pointSize="37"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -71,7 +71,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Debes $-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CpU-GS-XIw" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                <rect key="frame" x="301.5" y="99.5" width="64.5" height="20"/>
+                                <rect key="frame" x="301.5" y="103.5" width="64.5" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -82,11 +82,12 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gAG-TV-emh">
-                                <rect key="frame" x="347" y="10" width="24" height="24"/>
+                                <rect key="frame" x="343" y="10" width="28" height="28"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="RI3-F3-jUE"/>
-                                    <constraint firstAttribute="width" constant="24" id="WER-bJ-Mts"/>
+                                    <constraint firstAttribute="height" constant="28" id="RI3-F3-jUE"/>
+                                    <constraint firstAttribute="width" constant="28" id="WER-bJ-Mts"/>
                                 </constraints>
+                                <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                 <state key="normal" image="ic_more_icon">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
                                 </state>
