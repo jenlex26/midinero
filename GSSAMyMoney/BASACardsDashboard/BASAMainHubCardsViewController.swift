@@ -41,7 +41,6 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         loadDebitBalance()
         self.setTableForDebitCard()
-     
     }
     
     func loadDebitBalance(){
@@ -56,7 +55,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                 }
             }else{
                 GSVCLoader.hide()
-                self.presentBottomAlertFullData(status: .error, message: "Ocurrió un error desconocido, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
+                self.presentBottomAlertFullData(status: .error, message: "No podemos cargar tu saldo en este momento, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
             }
         })
     }
@@ -68,7 +67,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                 debitCardMovements = Movements
                 setTableForDebitCard()
             }else{
-                self.presentBottomAlertFullData(status: .error, message: "Ocurrió un error al cargar tus movimientos, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
+                self.presentBottomAlertFullData(status: .error, message: "No podemos cargar tus movimientos en este momento, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
             }
         })
     }
@@ -83,7 +82,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                 setTableForLends()
             }else{
                 GSVCLoader.hide()
-                self.presentBottomAlertFullData(status: .error, message: "Ocurrió un al cargar tus prestamos, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
+                self.presentBottomAlertFullData(status: .error, message: "No podemos cargar tus prestamos en este momento, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
             }
         })
     }
@@ -94,10 +93,10 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
             if let CreditCard = CreditCardData{
                 creditCardData = CreditCard
                 NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "reloadCreditCardData"), object: CreditCard, userInfo: nil))
-               loadCreditCardBalance()
+                loadCreditCardBalance()
             }else{
                 GSVCLoader.hide()
-                self.presentBottomAlertFullData(status: .error, message: "Ocurrió un error al obtener los datos de tarjeta de crédito, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
+                self.presentBottomAlertFullData(status: .error, message: "No podemos obtener los datos de la tarjeta de crédito en este momento, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
             }
         })
     }
@@ -110,7 +109,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                 loadCreditCardMovements()
             }else{
                 GSVCLoader.hide()
-                self.presentBottomAlertFullData(status: .error, message: "Ocurrió un error al obtener los saldos de la tarjeta de crédito, intente más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
+                self.presentBottomAlertFullData(status: .error, message: "No podemos obtener los saldos de la tarjeta de crédito en este momento, intente más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
             }
         })
     }
@@ -123,7 +122,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                 setTableForCreditCard()
             }else{
                 GSVCLoader.hide()
-                self.presentBottomAlertFullData(status: .error, message: "Ocurrió un error al obtener tus movimientos, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
+                self.presentBottomAlertFullData(status: .error, message: "No podemos obtener tus movimientos en este momento, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
             }
         })
     }
@@ -209,11 +208,11 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
             infoCreditCell.lblCreditLimit.text = creditCardBalance?.resultado?.montoLimiteCredito?.moneyFormat()
             infoCreditCell.lblMinimumPayment.text = creditCardBalance?.resultado?.montoPagoMinimo?.moneyFormat()
             infoCreditCell.lblCutOffDate.text = creditCardBalance?.resultado?.fechaCorte?.dateFormatter(format: "dd-MM-yyyy", outputFormat: "dd MMMM")
-
+            
             let date = "Próxima fecha de pago \(creditCardBalance?.resultado?.fechaPago?.dateFormatter(format: "dd-MM-yyyy", outputFormat: "dd MMMM") ?? "Desconocida")"
             
             infoCreditCell.lblNextPaymentDate.text = date
-           // infoCreditCell.lblPaymentToSettle.text = creditCardBalance?.resultado?.pagoSinInteres
+            // infoCreditCell.lblPaymentToSettle.text = creditCardBalance?.resultado?.pagoSinInteres
             infoCreditCell.lblNotInterestPayment.text = creditCardBalance?.resultado?.pagoSinInteres?.moneyFormat()
         }
         

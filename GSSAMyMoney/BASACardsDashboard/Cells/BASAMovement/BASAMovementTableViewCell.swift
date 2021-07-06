@@ -45,7 +45,7 @@ extension String{
         stringAmount = String(formatedAmount)
         
         let amountFormat = NSMutableAttributedString.setFormattedText(withStringAmmount: stringAmount,
-                                                                      withNumberOfDecimals: 0,
+                                                                      withNumberOfDecimals: 2,
                                                                       withFontSize: 36,
                                                                       withFontWeight: .bold,
                                                                       withFontColor: .GSVCText100,
@@ -57,10 +57,13 @@ extension String{
 
 extension Int{
     func moneyFormat() -> String{
-        let stringAmount = String(self)
+        
+        let doubleAmount = Double(self)
+        
+        let stringAmount = String(doubleAmount)
         
         let amountFormat = NSMutableAttributedString.setFormattedText(withStringAmmount: stringAmount,
-                                                                      withNumberOfDecimals: 0,
+                                                                      withNumberOfDecimals: 2,
                                                                       withFontSize: 36,
                                                                       withFontWeight: .bold,
                                                                       withFontColor: .GSVCText100,

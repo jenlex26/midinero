@@ -49,7 +49,7 @@ class BASABeneficiaryListViewController: UIViewController, BASABeneficiaryListVi
                     self.table.reloadData()
                 }
             }else{
-                self.presentBottomAlertFullData(status: .error, message: "Ocurrió un error desconocido, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
+                self.presentBottomAlertFullData(status: .error, message: "No podemos cargar tus beneficiarios en este momento, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
             }
         })
         

@@ -79,7 +79,7 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
                 CardNumberLabel.text = (DataCard!.resultado!.tarjeta?.numero?.alnovaDecrypt() ?? "0").tnuoccaFormat
                 ExpDateLabel.text = DataCard?.resultado?.tarjeta?.fechaExpiracion?.alnovaDecrypt().replacingOccurrences(of: "-", with: "/")
             }else{
-                self.presentBottomAlertFullData(status: .error, message: "Ocurrió un error desconocido, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
+                self.presentBottomAlertFullData(status: .error, message: "No podemos obtener tu tarjeta digital en este momento, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
             }
         })
     }

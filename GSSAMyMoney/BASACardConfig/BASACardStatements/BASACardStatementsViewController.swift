@@ -46,7 +46,7 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
                     requestData = StatementsResultData?.resultado?.detalles ?? []
                     setStatements()
                 }else{
-                    self.presentBottomAlertFullData(status: .error, message: "Ocurrió un error desconocido, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
+                    self.presentBottomAlertFullData(status: .error, message: "No podemos cargar tus estados de cuenta en este momento, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
                 }
             })
         }
