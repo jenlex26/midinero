@@ -34,6 +34,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.view.backgroundColor = UIColor.GSVCBase300()
         self.ConfigureCollectionView()
         self.BasaMainHubTableView.alwaysBounceVertical = false
