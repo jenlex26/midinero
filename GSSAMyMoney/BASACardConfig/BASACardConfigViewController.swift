@@ -52,8 +52,9 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
     override func viewDidLoad() {
         super.viewDidLoad()
         if credit == true{
-            CLABE = "9012 3456 1234 5678 "
+            CLABE = ""
         }
+        
         phone = GSSISessionInfo.sharedInstance.gsUser.phone?.tryToAdCellphoneFormat ?? ""
         account =  GSSISessionInfo.sharedInstance.gsUser.mainAccount?.tnuoccaFormat ?? ""
         registerCells()
