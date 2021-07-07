@@ -103,6 +103,11 @@
 		EE36C43126878F11001AD9F2 /* GSSASecurityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE36C43026878F11001AD9F2 /* GSSASecurityController.swift */; };
 		EE477BF226937F2E00DC5CF9 /* GSSAMainHubDebitEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE477BF126937F2E00DC5CF9 /* GSSAMainHubDebitEntity.swift */; };
 		EE477BF426937F7D00DC5CF9 /* GSSAMainHubCreditEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE477BF326937F7D00DC5CF9 /* GSSAMainHubCreditEntity.swift */; };
+		EE6303CC269625CF001C0BB9 /* GSSASessionInfo.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE6303CB269625CF001C0BB9 /* GSSASessionInfo.xcframework */; };
+		EE6303D0269625DE001C0BB9 /* GSSAServiceCoordinator.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE6303CF269625DE001C0BB9 /* GSSAServiceCoordinator.xcframework */; };
+		EE6303D3269625E8001C0BB9 /* GSSASecurityManager.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE6303D2269625E8001C0BB9 /* GSSASecurityManager.xcframework */; };
+		EE6303D6269625F0001C0BB9 /* GSSAInterceptor.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE6303D5269625F0001C0BB9 /* GSSAInterceptor.xcframework */; };
+		EE6303D9269625FC001C0BB9 /* GSSAFunctionalUtilities.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE6303D8269625FC001C0BB9 /* GSSAFunctionalUtilities.xcframework */; };
 		EE97BB022683FBB1000AE34C /* BASACardStatementsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE97BB012683FBB1000AE34C /* BASACardStatementsEntity.swift */; };
 		EE97BB062684DF30000AE34C /* GSNoMovementsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE97BB042684DF2F000AE34C /* GSNoMovementsCell.swift */; };
 		EE97BB072684DF30000AE34C /* GSNoMovementsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE97BB052684DF2F000AE34C /* GSNoMovementsCell.xib */; };
@@ -122,11 +127,6 @@
 		EEC1F5D526916ED0006FB4CD /* AWSCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC1F5CC26916ED0006FB4CD /* AWSCore.xcframework */; };
 		EEC1F5D726916ED0006FB4CD /* AWSLogs.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC1F5CD26916ED0006FB4CD /* AWSLogs.xcframework */; };
 		EEC1F5D926916ED0006FB4CD /* AWSMobileClientXCF.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC1F5CE26916ED0006FB4CD /* AWSMobileClientXCF.xcframework */; };
-		EEC1F5DD26916EE4006FB4CD /* GSSAFunctionalUtilities.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC1F5DC26916EE4006FB4CD /* GSSAFunctionalUtilities.xcframework */; };
-		EEC1F5E026916EEC006FB4CD /* GSSAInterceptor.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC1F5DF26916EEC006FB4CD /* GSSAInterceptor.xcframework */; };
-		EEC1F5E326916EF4006FB4CD /* GSSASecurityManager.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC1F5E226916EF4006FB4CD /* GSSASecurityManager.xcframework */; };
-		EEC1F5E626916EFC006FB4CD /* GSSAServiceCoordinator.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC1F5E526916EFC006FB4CD /* GSSAServiceCoordinator.xcframework */; };
-		EEC1F5E926916F03006FB4CD /* GSSASessionInfo.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC1F5E826916F03006FB4CD /* GSSASessionInfo.xcframework */; };
 		EEC1F5EC26916F07006FB4CD /* GSSAVisualComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC1F5EB26916F07006FB4CD /* GSSAVisualComponents.framework */; };
 		EEC1F5EF26916F0E006FB4CD /* GSSAVisualTemplates.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC1F5EE26916F0E006FB4CD /* GSSAVisualTemplates.framework */; };
 /* End PBXBuildFile section */
@@ -230,6 +230,11 @@
 		EE36C43026878F11001AD9F2 /* GSSASecurityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSASecurityController.swift; sourceTree = "<group>"; };
 		EE477BF126937F2E00DC5CF9 /* GSSAMainHubDebitEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAMainHubDebitEntity.swift; sourceTree = "<group>"; };
 		EE477BF326937F7D00DC5CF9 /* GSSAMainHubCreditEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAMainHubCreditEntity.swift; sourceTree = "<group>"; };
+		EE6303CB269625CF001C0BB9 /* GSSASessionInfo.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GSSASessionInfo.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/BaseSuperApp/GSSASessionInfo.xcframework; sourceTree = "<group>"; };
+		EE6303CF269625DE001C0BB9 /* GSSAServiceCoordinator.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GSSAServiceCoordinator.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/BaseSuperApp/GSSAServiceCoordinator.xcframework; sourceTree = "<group>"; };
+		EE6303D2269625E8001C0BB9 /* GSSASecurityManager.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GSSASecurityManager.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/BaseSuperApp/GSSASecurityManager.xcframework; sourceTree = "<group>"; };
+		EE6303D5269625F0001C0BB9 /* GSSAInterceptor.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GSSAInterceptor.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/BaseSuperApp/GSSAInterceptor.xcframework; sourceTree = "<group>"; };
+		EE6303D8269625FC001C0BB9 /* GSSAFunctionalUtilities.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GSSAFunctionalUtilities.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/BaseSuperApp/GSSAFunctionalUtilities.xcframework; sourceTree = "<group>"; };
 		EE97BB012683FBB1000AE34C /* BASACardStatementsEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BASACardStatementsEntity.swift; sourceTree = "<group>"; };
 		EE97BB042684DF2F000AE34C /* GSNoMovementsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSNoMovementsCell.swift; sourceTree = "<group>"; };
 		EE97BB052684DF2F000AE34C /* GSNoMovementsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GSNoMovementsCell.xib; sourceTree = "<group>"; };
@@ -249,11 +254,6 @@
 		EEC1F5CC26916ED0006FB4CD /* AWSCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AWSCore.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/AWS/AWSCore.xcframework; sourceTree = "<group>"; };
 		EEC1F5CD26916ED0006FB4CD /* AWSLogs.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AWSLogs.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/AWS/AWSLogs.xcframework; sourceTree = "<group>"; };
 		EEC1F5CE26916ED0006FB4CD /* AWSMobileClientXCF.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AWSMobileClientXCF.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/AWS/AWSMobileClientXCF.xcframework; sourceTree = "<group>"; };
-		EEC1F5DC26916EE4006FB4CD /* GSSAFunctionalUtilities.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GSSAFunctionalUtilities.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/SuperApp/GSSAFunctionalUtilities.xcframework; sourceTree = "<group>"; };
-		EEC1F5DF26916EEC006FB4CD /* GSSAInterceptor.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GSSAInterceptor.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/SuperApp/GSSAInterceptor.xcframework; sourceTree = "<group>"; };
-		EEC1F5E226916EF4006FB4CD /* GSSASecurityManager.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GSSASecurityManager.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/SuperApp/GSSASecurityManager.xcframework; sourceTree = "<group>"; };
-		EEC1F5E526916EFC006FB4CD /* GSSAServiceCoordinator.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GSSAServiceCoordinator.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/SuperApp/GSSAServiceCoordinator.xcframework; sourceTree = "<group>"; };
-		EEC1F5E826916F03006FB4CD /* GSSASessionInfo.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GSSASessionInfo.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/SuperApp/GSSASessionInfo.xcframework; sourceTree = "<group>"; };
 		EEC1F5EB26916F07006FB4CD /* GSSAVisualComponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GSSAVisualComponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEC1F5EE26916F0E006FB4CD /* GSSAVisualTemplates.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GSSAVisualTemplates.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -263,19 +263,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE6303D9269625FC001C0BB9 /* GSSAFunctionalUtilities.xcframework in Frameworks */,
 				EEC1F5EF26916F0E006FB4CD /* GSSAVisualTemplates.framework in Frameworks */,
 				EEC1F5D926916ED0006FB4CD /* AWSMobileClientXCF.xcframework in Frameworks */,
-				EEC1F5DD26916EE4006FB4CD /* GSSAFunctionalUtilities.xcframework in Frameworks */,
-				EEC1F5E626916EFC006FB4CD /* GSSAServiceCoordinator.xcframework in Frameworks */,
 				EEC1F5D326916ED0006FB4CD /* AWSCognitoIdentityProviderASF.xcframework in Frameworks */,
-				EEC1F5E926916F03006FB4CD /* GSSASessionInfo.xcframework in Frameworks */,
+				EE6303D3269625E8001C0BB9 /* GSSASecurityManager.xcframework in Frameworks */,
 				EEC1F5D126916ED0006FB4CD /* AWSCognitoIdentityProvider.xcframework in Frameworks */,
 				EEC1F5D726916ED0006FB4CD /* AWSLogs.xcframework in Frameworks */,
 				EEC1F5D526916ED0006FB4CD /* AWSCore.xcframework in Frameworks */,
 				EEC1F5CF26916ED0006FB4CD /* AWSAuthCore.xcframework in Frameworks */,
-				EEC1F5E026916EEC006FB4CD /* GSSAInterceptor.xcframework in Frameworks */,
+				EE6303CC269625CF001C0BB9 /* GSSASessionInfo.xcframework in Frameworks */,
 				EEC1F5EC26916F07006FB4CD /* GSSAVisualComponents.framework in Frameworks */,
-				EEC1F5E326916EF4006FB4CD /* GSSASecurityManager.xcframework in Frameworks */,
+				EE6303D0269625DE001C0BB9 /* GSSAServiceCoordinator.xcframework in Frameworks */,
+				EE6303D6269625F0001C0BB9 /* GSSAInterceptor.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,13 +285,13 @@
 		106E8DA0267D6CB2000182DC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EE6303D8269625FC001C0BB9 /* GSSAFunctionalUtilities.xcframework */,
+				EE6303D5269625F0001C0BB9 /* GSSAInterceptor.xcframework */,
+				EE6303D2269625E8001C0BB9 /* GSSASecurityManager.xcframework */,
+				EE6303CF269625DE001C0BB9 /* GSSAServiceCoordinator.xcframework */,
+				EE6303CB269625CF001C0BB9 /* GSSASessionInfo.xcframework */,
 				EEC1F5EE26916F0E006FB4CD /* GSSAVisualTemplates.framework */,
 				EEC1F5EB26916F07006FB4CD /* GSSAVisualComponents.framework */,
-				EEC1F5E826916F03006FB4CD /* GSSASessionInfo.xcframework */,
-				EEC1F5E526916EFC006FB4CD /* GSSAServiceCoordinator.xcframework */,
-				EEC1F5E226916EF4006FB4CD /* GSSASecurityManager.xcframework */,
-				EEC1F5DF26916EEC006FB4CD /* GSSAInterceptor.xcframework */,
-				EEC1F5DC26916EE4006FB4CD /* GSSAFunctionalUtilities.xcframework */,
 				EEC1F5C926916ED0006FB4CD /* AWSAuthCore.xcframework */,
 				EEC1F5CA26916ED0006FB4CD /* AWSCognitoIdentityProvider.xcframework */,
 				EEC1F5CB26916ED0006FB4CD /* AWSCognitoIdentityProviderASF.xcframework */,
@@ -1002,8 +1002,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = SF78D67856;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1028,8 +1030,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = SF78D67856;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";

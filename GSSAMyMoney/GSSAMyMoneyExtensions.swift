@@ -69,6 +69,20 @@ extension String{
     func characterCount() -> Int{
         return self.replacingOccurrences(of: " ", with: "").count
     }
+    
+    func dateFormatter(format: String, outputFormat: String) -> String{
+        let dateFormatterIn = DateFormatter()
+        dateFormatterIn.dateFormat = format
+        
+        let dateFormatterOut = DateFormatter()
+        dateFormatterOut.dateFormat = outputFormat
+        dateFormatterOut.locale = Locale(identifier: "es_MX")
+        
+        let dateIn = dateFormatterIn.date(from: self)
+        let dateOut = dateFormatterOut.string(from: dateIn ?? Date())
+        
+        return dateOut.capitalized
+    }
 }
 
 extension UIColor{

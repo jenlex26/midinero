@@ -44,7 +44,6 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
         GSVCLoader.show(type: .native)
         self.TimerView.delegate = self
         
-        
         configButton.backgroundColor = UIColor(hue: 100/360, saturation: 26/100, brightness: 62/100, alpha: 1.0)
         configButton.layer.masksToBounds = true
         configButton.layer.cornerRadius = configButton.frame.width/2
@@ -72,7 +71,7 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
     
     func requestCVV(){
         presenter?.makeDigitalDataRequest(Body: Transaction(transaccion: AccoutRequest(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.encryptedAccount)), DataCard: { [self] DataCard in
-            GSVCLoader.hide()            
+            GSVCLoader.hide()
             if DataCard != nil{
                 self.StartTimer()
                 CVVCodeLabel.text = DataCard!.resultado!.tarjeta?.cvv?.dynamicDecrypt()

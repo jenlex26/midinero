@@ -41,7 +41,7 @@ class BASABeneficiaryListViewController: UIViewController, BASABeneficiaryListVi
     
     func loadBeneficiaries(){
         GSVCLoader.show(type: .native)
-        presenter?.requestBeneficiaries(account: GSSISessionInfo.sharedInstance.gsUser.mainAccount ?? "", beneficiaryList: { [self] beneficiaryList in
+        presenter?.requestBeneficiaries(account: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.encryptAlnova() ?? "", beneficiaryList: { [self] beneficiaryList in
             GSVCLoader.hide()
             if beneficiaryList?.resultado?.beneficiarios != nil{
                 for item in beneficiaryList!.resultado!.beneficiarios!{
