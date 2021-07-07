@@ -74,7 +74,7 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
                 configurations.append(userOptions(title: "Número de cuenta", subTitle: "9567 1660 1234 87", image: nil))
                 configurations.append(userOptions(title: "Celular asociado", subTitle: phone, image: nil))
                 configurations.append(userOptions.init(title: "Estados de cuenta", subTitle: nil, image: UIImage(systemName: "chevron.right"), tag: 1))
-                configurations.append(userOptions.init(title: "Límites de la tarjeta", subTitle: nil, image: UIImage(systemName: "chevron.right"), tag: 2))
+                configurations.append(userOptions.init(title: "Límites", subTitle: nil, image: UIImage(systemName: "chevron.right"), tag: 2))
                 configurations.append(userOptions.init(title: "Beneficiarios", subTitle: nil, image: UIImage(systemName: "chevron.right"), tag: 3))
             }else{
                 configurations.append(userOptions(title: "Número de tarjeta física", subTitle: CLABE, image: UIImage(systemName: "doc.fill"), tag: 5))

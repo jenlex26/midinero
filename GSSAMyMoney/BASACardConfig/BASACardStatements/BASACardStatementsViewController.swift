@@ -40,7 +40,7 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
         
         if type == .debit{
             GSVCLoader.show(type: .native)
-            let requestBody = DebitCardStatementBody(numeroCuenta: "974563210", fechaInicio: "10-10-2020", fechaFin: "10-12-2020")
+            let requestBody = DebitCardStatementBody(numeroCuenta: "", fechaInicio: "", fechaFin: "")
             presenter?.requestStatements(body: requestBody, StatementsResultData: { [self] StatementsResultData in
                 GSVCLoader.hide()
                 if StatementsResultData != nil{
