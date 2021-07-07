@@ -11,79 +11,39 @@
 import UIKit
 import GSSAServiceCoordinator
 import GSSASecurityManager
+import GSSASessionInfo
 
-class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASAMainHubCardsInteractorProtocol{
+open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASAMainHubCardsInteractorProtocol{
     
     weak var presenter: BASAMainHubCardsPresenterProtocol?
     
     func TryGetDebitCardBalance(Account:[String:String], Balance: @escaping (BalanceResponse?) -> ()){
-        let Request = TransationBalanceRequest(transaccion: TransationItem(folio: Account.first?.value ?? "", numeroCuenta: Account.first?.key ?? ""))
+    let Request = TransationBalanceRequest(transaccion: TransationItem(folio: Account.first?.value ?? "", numeroCuenta: Account.first?.key ?? ""))
+    
+    self.urlPath = "https://apigateway.superappbaz.com/"
+    self.strPathEndpoint = "integracion/superapp/dinero/captacion/cuentas/v1/busquedas"
+    
+    sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: Request, environment: .develop) { (objRes: BalanceResponse?, error) in
         
-        self.urlPath = "https://apigateway.superappbaz.com/"
-        self.strPathEndpoint = "integracion/superapp/dinero/captacion/cuentas/v1/busquedas"
-        
-        //  https://dmu8nwfrwl.execute-api.us-east-1.amazonaws.com/desarrollo/superapp/dinero/captacion/cuentas/v1/busquedas
-        
-        let headers: [HeadersCustom] = [
-            HeadersCustom(value:"true", forHTTPHeaderField: "x-consulta-detallada"),
-            HeadersCustom(value:"3bad1290ac4600a569162efaa09117ea", forHTTPHeaderField: "x-sicu"),
-            HeadersCustom(value:"123e4567-e89b-12d3-a456-426655440000", forHTTPHeaderField: "x-id-interaccion"),
-            HeadersCustom(value:"Super movil", forHTTPHeaderField: "x-nombre-dispositivo"),
-            HeadersCustom(value:"3bad1290ac4600a569162efaa09117ea", forHTTPHeaderField: "x-id-dispositivo"),
-            HeadersCustom(value:"Android", forHTTPHeaderField: "x-sistema-dispositivo"),
-            HeadersCustom(value:"6.0", forHTTPHeaderField: "x-version-dispositivo"),
-            HeadersCustom(value:"2.1.1", forHTTPHeaderField: "x-version-aplicacion"),
-            HeadersCustom(value:"P40", forHTTPHeaderField: "x-modelo-dispositivo"),
-            HeadersCustom(value:"Huawei", forHTTPHeaderField: "x-fabricante-dispositivo"),
-            HeadersCustom(value:"mt6735", forHTTPHeaderField: "x-serie-procesador"),
-            HeadersCustom(value:"Telcel", forHTTPHeaderField: "x-operador-telefonia"),
-            HeadersCustom(value:"-99.12698712", forHTTPHeaderField: "x-latitud"),
-            HeadersCustom(value:"19.49781290", forHTTPHeaderField: "x-longitud"),
-            HeadersCustom(value:"SRfVZrTYvdm7mzzZmcuiDViACkAx", forHTTPHeaderField: "x-token-usuario"),
-            HeadersCustom(value: "application/json", forHTTPHeaderField: "Content-Type")
-        ]
-        
-        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: headers, objBody: Request, environment: .custom) { (objRes: BalanceResponse?, error) in
-            
-            if error.code == 0 {
-                if (objRes?.resultado.cliente?.cuentas?.first?.saldoDisponible) != nil{
-                    Balance(objRes)
-                }else{
-                    Balance(objRes)
-                }
-            } else {
-                Balance(nil)
-                debugPrint(error)
+        if error.code == 0 {
+            if (objRes?.resultado.cliente?.cuentas?.first?.saldoDisponible) != nil{
+                Balance(objRes)
+            }else{
+                Balance(objRes)
             }
+        } else {
+            Balance(nil)
+            debugPrint(error)
         }
     }
+}
     
     func TryGetDebitCardMovements(Body: MovimientosBody, Movements: @escaping (DebitCardTransaction?) -> ()){
         
         self.urlPath = "https://apigateway.superappbaz.com/"
         self.strPathEndpoint = "integracion/superapp/dinero/captacion/cuentas/v1/movimientos/busquedas"
         
-        
-        let headers: [HeadersCustom] = [
-            HeadersCustom(value:"3bad1290ac4600a569162efaa09117ea", forHTTPHeaderField: "x-sicu"),
-            HeadersCustom(value:"123e4567-e89b-12d3-a456-426655440000", forHTTPHeaderField: "x-id-interaccion"),
-            HeadersCustom(value:"Super movil", forHTTPHeaderField: "x-nombre-dispositivo"),
-            HeadersCustom(value:"3bad1290ac4600a569162efaa09117ea", forHTTPHeaderField: "x-id-dispositivo"),
-            HeadersCustom(value:"Android", forHTTPHeaderField: "x-sistema-dispositivo"),
-            HeadersCustom(value:"6.0", forHTTPHeaderField: "x-version-dispositivo"),
-            HeadersCustom(value:"2.1.1", forHTTPHeaderField: "x-version-aplicacion"),
-            HeadersCustom(value:"P40", forHTTPHeaderField: "x-modelo-dispositivo"),
-            HeadersCustom(value:"Huawei", forHTTPHeaderField: "x-fabricante-dispositivo"),
-            HeadersCustom(value:"mt6735", forHTTPHeaderField: "x-serie-procesador"),
-            HeadersCustom(value:"Telcel", forHTTPHeaderField: "x-operador-telefonia"),
-            HeadersCustom(value:"-99.12698712", forHTTPHeaderField: "x-latitud"),
-            HeadersCustom(value:"19.49781290", forHTTPHeaderField: "x-longitud"),
-            HeadersCustom(value:"SRfVZrTYvdm7mzzZmcuiDViACkAx", forHTTPHeaderField: "x-token-usuario"),
-            HeadersCustom(value:"application/json", forHTTPHeaderField: "Content-Type")
-        ]
-        
-        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: headers, objBody: Body, environment: .custom) { (objRes: DebitCardTransaction?, error) in
-            //debugPrint(objRes as Any)
+        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: Body, environment: .develop) { (objRes: DebitCardTransaction?, error) in
             
             if error.code == 0 {
                 if let mensaje = objRes?.mensaje {
@@ -107,7 +67,7 @@ class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASAMainH
         
         struct userLendsBody: Codable {}
         let body = userLendsBody.init()
-                
+        
         sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: body, environment: .develop) { (objRes: LendsResponse?, error) in
             debugPrint(objRes as Any)
             if error.code == 0 {
@@ -168,6 +128,19 @@ class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASAMainH
                 debugPrint(error)
             }
         }
+    }
+    
+    public static func refreshUserBalances() -> [String:String]{
+        var data = ["":""]
+//
+//        TryGetDebitCardBalance(Account: [:], Balance: {Balance in
+//            data.updateValue(Balance?.resultado.cliente?.cuentas?.first?.saldoDisponible ?? "", forKey: "debitBalance")
+//            self.tryGetCreditCardBalance(Body: CreditCardBalanceBody.init(transaccion: CreditCardBalanceTransaccion.init(numeroTarjeta: GSSISessionInfo.sharedInstance.gsUser.encryptedCard?.alnovaDecrypt())), CreditCardBalance: { CreditCardBalance in
+//                data.updateValue(CreditCardBalance?.resultado?.saldoDisponible ?? "", forKey: "creditBalance")
+//            })
+//        })
+//
+        return data
     }
 }
 

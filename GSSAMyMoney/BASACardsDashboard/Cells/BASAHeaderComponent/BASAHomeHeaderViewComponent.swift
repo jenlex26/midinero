@@ -50,19 +50,15 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
         debitCardbtnConfig.layer.cornerRadius = debitCardbtnConfig.bounds.size.width / 2.0
         debitCardbtnConfig.clipsToBounds = true
         
-        // PONER IMAGEN DE DÉBITO
         if let image:UIImage = UIImage(named: "ic_card_backgroud")  {
             self.imgHeader.image = image
         }
-        
         
         debitCardView.layer.cornerRadius = 10
         debitCardView.layer.masksToBounds = true
         
         debitCardView.layer.borderWidth = 0.2
         debitCardView.layer.borderColor = UIColor.lightGray.cgColor
-        
-        
         
         NotificationCenter.default.addObserver(self, selector: #selector(reloadCards(notification:)), name: NSNotification.Name(rawValue: "reloadHeaderData"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadLends(notification:)), name: NSNotification.Name(rawValue: "reloadLendsData"), object: nil)
@@ -80,6 +76,8 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
         
         if data != nil{
             debitCardlblBalance.text = data!.resultado.cliente?.cuentas?.first?.saldoDisponible?.alnovaDecrypt().moneyFormat()
+        }else{
+            debitCardlblBalance.text = UserDefaults.standard.value(forKey: "debitAccountBalance") as? String
         }
     }
     
@@ -111,6 +109,7 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
             let data = notification.object as! BalanceResponse
             
             let amountString = data.resultado.cliente?.cuentas?.first?.saldoDisponible?.alnovaDecrypt().moneyFormat() ?? "0"
+            UserDefaults.standard.setValue(amountString, forKey: "debitAccountBalance")
             debitCardlblBalance.text = amountString
             debitCardlblCardNumber.text = data.resultado.cliente?.cuentas?.first?.numeroTarjeta?.alnovaDecrypt().tnuoccaFormat
         }

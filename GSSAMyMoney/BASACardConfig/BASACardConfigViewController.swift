@@ -45,7 +45,7 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
     
     var configurations: Array<userOptions> = []
     
-    var CLABE = "1271 8099 7700 1123 98"
+    var CLABE = UserDefaults.standard.value(forKey: "DebitCardCLABE") as? String
     var phone = ""
     var account = ""
     
@@ -193,13 +193,13 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
             let view = BASACardLimitsRouter.createModule()
             self.navigationController?.pushViewController(view, animated: true)
         case 3:
-//             let view = BASABeneficiaryListRouter.createModule()
-//             self.navigationController?.pushViewController(view, animated: true)
-            let verification = GSVTDigitalSignViewController(delegate: self, dataSource: nil)
-            verification.modalPresentationStyle = .fullScreen
-            present(verification, animated: true, completion: nil)
+             let view = BASABeneficiaryListRouter.createModule()
+             self.navigationController?.pushViewController(view, animated: true)
+//            let verification = GSVTDigitalSignViewController(delegate: self, dataSource: nil)
+//            verification.modalPresentationStyle = .fullScreen
+//            present(verification, animated: true, completion: nil)
         case 4:
-            let text = "Mi número de cuenta CLABE para enviarme dinero desde otro banco (SPEI) es: \(CLABE) Mi número de cuenta para enviarme dinero dentro de baz es: \(account) Mi número de celular asociado para envíos es: \(phone)"
+            let text = "Mi número de cuenta CLABE para enviarme dinero desde otro banco (SPEI) es: \(CLABE ?? "") \nMi número de cuenta para enviarme dinero dentro de baz es: \(account) \nMi número de celular asociado para envíos es: \(phone)"
             let activityViewController = UIActivityViewController(activityItems: [text], applicationActivities: nil)
             activityViewController.popoverPresentationController?.sourceView = self.view
             self.present(activityViewController, animated: true, completion: nil)

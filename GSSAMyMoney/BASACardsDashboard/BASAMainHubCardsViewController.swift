@@ -45,11 +45,12 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     
     func loadDebitBalance(){
         GSVCLoader.show(type: .native)
+        
         presenter?.requestBalance(Account: [accountNumber?.first?.key.encryptAlnova() ?? (GSSISessionInfo.sharedInstance.gsUser.encryptedAccount ?? ""): accountNumber?.first?.value ?? (GSSISessionInfo.sharedInstance.gsUser.SICU?.encryptAlnova() ?? "")], Balance: { Balance in
             if let NewBalance = Balance{
                 DispatchQueue.main.async {
                     self.accountBalance = NewBalance
-                    
+                    UserDefaults.standard.setValue(NewBalance.resultado.cliente?.cuentas?.first?.clabe?.alnovaDecrypt().tnuoccaFormat, forKey: "DebitCardCLABE")
                     NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "reloadHeaderData"), object: NewBalance, userInfo: nil))
                     self.loadDebitMovements()
                 }
@@ -66,8 +67,6 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
             if Movements != nil{
                 debitCardMovements = Movements
                 setTableForDebitCard()
-            }else{
-                self.presentBottomAlertFullData(status: .error, message: "No podemos cargar tus movimientos en este momento, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
             }
         })
     }
@@ -152,7 +151,9 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         let header = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAHomeHeaderViewComponent") as! BASAHomeHeaderViewComponent
         header.cellViewController = self
         let accountData = accountBalance?.resultado.cliente?.cuentas
-        header.debitCardlblBalance.text = accountData?.first?.saldoDisponible
+        
+        header.debitCardlblBalance.text = UserDefaults.standard.value(forKey: "debitAccountBalance") as? String
+        
         header.debitCardlblCardNumber.text = accountData?.first?.numero?.alnovaDecrypt()
         
         header.data = accountBalance

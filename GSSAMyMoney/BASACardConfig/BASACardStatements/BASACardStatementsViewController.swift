@@ -48,7 +48,6 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
                     setStatements()
                 }else{
                     showEmptyStatementsView()
-                    self.presentBottomAlertFullData(status: .error, message: "No podemos cargar tus estados de cuenta en este momento, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
                 }
             })
         }
