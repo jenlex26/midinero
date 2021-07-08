@@ -54,7 +54,7 @@ class BASAButtonsCell: UITableViewCell {
     
     @IBAction func tiempoAire(sender: Any){
         if cellViewController != nil{
-            GSINAdminNavigator.shared.startFlow(forAction: "GSIFTr_RecCel",
+            GSINAdminNavigator.shared.startFlow(forAction: "GSIFAt",
                                                 navigateDelegate: self)
         }
     }

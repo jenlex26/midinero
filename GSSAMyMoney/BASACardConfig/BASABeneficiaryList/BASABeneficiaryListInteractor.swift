@@ -24,8 +24,11 @@ class BASABeneficiaryListInteractor: GSSAURLSessionTaskCoordinatorBridge, BASABe
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, objBody: body, environment: .develop) { (objRes: BeneficiaryListResponse?, error) in
             debugPrint(objRes as Any)
+            
             if error.code == 0 {
                 beneficiaryList(objRes)
+            }else if error.code != 404{
+                beneficiaryList(BeneficiaryListResponse.init(mensaje: "", folio: "", resultado: nil))
             }else{
                 beneficiaryList(BeneficiaryListResponse.init(mensaje: "", folio: "", resultado: BeneficiaryListResult.init(numeroCuenta: "", beneficiarios: [])))
             }
