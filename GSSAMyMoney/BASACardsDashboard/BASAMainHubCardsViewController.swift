@@ -34,7 +34,6 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.ConfigureCollectionView()
         self.BasaMainHubTableView.alwaysBounceVertical = false
         NotificationCenter.default.addObserver(self, selector: #selector(SwitchColors(notification:)), name: NSNotification.Name(rawValue: "HomeHeaderViewChange"), object: nil)
@@ -45,8 +44,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     
     func loadDebitBalance(){
         GSVCLoader.show(type: .native)
-        
-        presenter?.requestBalance(Account: [accountNumber?.first?.key.encryptAlnova() ?? (GSSISessionInfo.sharedInstance.gsUser.encryptedAccount ?? ""): accountNumber?.first?.value ?? (GSSISessionInfo.sharedInstance.gsUser.SICU?.encryptAlnova() ?? "")], Balance: { Balance in
+        presenter?.requestBalance(Account: [accountNumber?.first?.key.encryptAlnova() ?? (GSSISessionInfo.sharedInstance.gsUser.account?.number?.encryptAlnova() ?? ""): accountNumber?.first?.value ?? (GSSISessionInfo.sharedInstance.gsUser.SICU?.encryptAlnova() ?? "")], Balance: { Balance in
             if let NewBalance = Balance{
                 DispatchQueue.main.async {
                     self.accountBalance = NewBalance

@@ -18,12 +18,13 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
     weak var presenter: BASAMainHubCardsPresenterProtocol?
     
     func TryGetDebitCardBalance(Account:[String:String], Balance: @escaping (BalanceResponse?) -> ()){
-    let Request = TransationBalanceRequest(transaccion: TransationItem(folio: Account.first?.value ?? "", numeroCuenta: Account.first?.key ?? ""))
+        
+    let requestBody = TransationBalanceRequest(transaccion: TransationItem(folio: (GSSISessionInfo.sharedInstance.gsUser.SICU?.encryptAlnova() ?? ""), numeroCuenta: (GSSISessionInfo.sharedInstance.gsUser.account?.number?.encryptAlnova() ?? "")))
     
     self.urlPath = "https://apigateway.superappbaz.com/"
     self.strPathEndpoint = "integracion/superapp/dinero/captacion/cuentas/v1/busquedas"
     
-    sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: Request, environment: .develop) { (objRes: BalanceResponse?, error) in
+    sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: requestBody, environment: .develop) { (objRes: BalanceResponse?, error) in
         
         if error.code == 0 {
             if (objRes?.resultado.cliente?.cuentas?.first?.saldoDisponible) != nil{
