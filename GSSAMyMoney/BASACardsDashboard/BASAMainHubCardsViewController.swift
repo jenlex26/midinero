@@ -210,10 +210,10 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
             infoCreditCell.lblMinimumPayment.text = creditCardBalance?.resultado?.montoPagoMinimo?.moneyFormat()
             infoCreditCell.lblCutOffDate.text = creditCardBalance?.resultado?.fechaCorte?.dateFormatter(format: "dd-MM-yyyy", outputFormat: "dd MMMM")
             
-            let date = "Próxima fecha de pago \(creditCardBalance?.resultado?.fechaPago?.dateFormatter(format: "dd-MM-yyyy", outputFormat: "dd MMMM") ?? "Desconocida")"
+            let date = "Próxima fecha de pago \(creditCardBalance?.resultado?.fechaPago?.dateFormatter(format: "dd-MM-yyyy", outputFormat: "dd") ?? "Desconocida") de \(creditCardBalance?.resultado?.fechaPago?.dateFormatter(format: "dd-MM-yyyy", outputFormat: "MMMM") ?? "")"
             
             infoCreditCell.lblNextPaymentDate.text = date
-            // infoCreditCell.lblPaymentToSettle.text = creditCardBalance?.resultado?.pagoSinInteres
+            infoCreditCell.lblPaymentToSettle.text = creditCardBalance?.resultado?.saldoDispuesto?.moneyFormat()
             infoCreditCell.lblNotInterestPayment.text = creditCardBalance?.resultado?.pagoSinInteres?.moneyFormat()
         }
         
@@ -249,7 +249,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         if lendsData == nil{
             loadLends()
         }else{
-            infoCell.lblNextPayment.text = lendsData?.resultado?.fechaProximoPago?.dateFormatter(format: "yyyy/MM/dd", outputFormat: "dd MMMM")
+            infoCell.lblNextPayment.text = "\(lendsData?.resultado?.fechaProximoPago?.dateFormatter(format: "yyyy/MM/dd", outputFormat: "dd") ?? "") de \(lendsData?.resultado?.fechaProximoPago?.dateFormatter(format: "yyyy/MM/dd", outputFormat: "MMMM") ?? "")"
             infoCell.lblPaymentWithDiscount.text = lendsData?.resultado?.pagoPuntual?.moneyFormat()
             infoCell.lblSuggestedPayment.text = String(lendsData?.resultado?.pagoSugerido ?? 0).moneyFormat()
             infoCell.lblFixedPayment.text = lendsData?.resultado?.pagoNormal?.moneyFormat()

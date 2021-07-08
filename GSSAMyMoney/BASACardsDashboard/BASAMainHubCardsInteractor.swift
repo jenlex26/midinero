@@ -70,6 +70,7 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: body, environment: .develop) { (objRes: LendsResponse?, error) in
             debugPrint(objRes as Any)
+            
             if error.code == 0 {
                 Lends(objRes)
             } else {

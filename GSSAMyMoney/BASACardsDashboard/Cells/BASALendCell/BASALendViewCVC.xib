@@ -34,7 +34,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="De tus préstamos en Efectivo, Elektra y otros" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sV5-k0-0Th" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="De tus préstamos en Efectivo, en Elektra y otros" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sV5-k0-0Th" customClass="GSVCLabel" customModule="GSSAVisualComponents">
                                 <rect key="frame" x="10" y="115" width="423" height="21"/>
                                 <fontDescription key="fontDescription" name="GeezaPro-Bold" family="Geeza Pro" pointSize="17"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -112,7 +112,7 @@
             <size key="intrinsicContentSize" width="33" height="45.5"/>
         </designable>
         <designable name="sV5-k0-0Th">
-            <size key="intrinsicContentSize" width="370" height="21"/>
+            <size key="intrinsicContentSize" width="395" height="21"/>
         </designable>
     </designables>
     <resources>

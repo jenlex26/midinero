@@ -74,7 +74,7 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
             GSVCLoader.hide()
             if DataCard != nil{
                 self.StartTimer()
-                CVVCodeLabel.text = DataCard!.resultado!.tarjeta?.cvv?.dynamicDecrypt()
+                CVVCodeLabel.text = DataCard!.resultado!.tarjeta?.cvv?.alnovaDecrypt()
                 CardNumberLabel.text = (DataCard!.resultado!.tarjeta?.numero?.alnovaDecrypt() ?? "0").tnuoccaFormat
                 ExpDateLabel.text = DataCard?.resultado?.tarjeta?.fechaExpiracion?.alnovaDecrypt().replacingOccurrences(of: "-", with: "/")
             }else{
