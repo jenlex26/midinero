@@ -25,7 +25,7 @@ class BASATextFieldCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
-       
+        
     }
     
     func configureCell(data: beneficiaryField){
@@ -36,7 +36,7 @@ class BASATextFieldCell: UITableViewCell {
         
         textField.placeholder = data.placeHolder
         if data.image != nil{
-         textField.image = data.image!
+            textField.image = data.image!
         }
         
         if data.index != nil{
@@ -81,13 +81,26 @@ extension BASATextFieldCell: GSVCPickerControllerDelegate, GSVCPickerControllerD
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
         guard let textFieldText = textField.text,
-            let rangeOfTextToReplace = Range(range, in: textFieldText) else {
-                return false
+              let rangeOfTextToReplace = Range(range, in: textFieldText) else {
+            return false
         }
+        let allowedCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz "
+        let allowedCharacterSet = CharacterSet(charactersIn: allowedCharacters)
+        let typedCharacterSet = CharacterSet(charactersIn: string)
+        let alphabet = allowedCharacterSet.isSuperset(of: typedCharacterSet)
+        
         let substringToReplace = textFieldText[rangeOfTextToReplace]
         let count = textFieldText.count - substringToReplace.count + string.count
-        return count <= 25
+        
+        if textField.keyboardType != .numberPad && textField.keyboardType != .emailAddress{
+            return count <= 25 && alphabet
+        }else if textField.keyboardType == .numberPad{
+            return count <= 10
+        }else{
+            return count <= 25
+        }
     }
     
     func getElements(component: Int, textField: UITextField) -> [DataPicker]? {

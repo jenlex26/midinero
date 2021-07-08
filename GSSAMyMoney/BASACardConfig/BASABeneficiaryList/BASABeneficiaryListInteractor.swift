@@ -26,10 +26,13 @@ class BASABeneficiaryListInteractor: GSSAURLSessionTaskCoordinatorBridge, BASABe
             debugPrint(objRes as Any)
             if error.code == 0 {
                 beneficiaryList(objRes)
-            } else {
-                beneficiaryList(nil)
-                debugPrint(error)
+            }else{
+                beneficiaryList(BeneficiaryListResponse.init(mensaje: "", folio: "", resultado: BeneficiaryListResult.init(numeroCuenta: "", beneficiarios: [])))
             }
+//            }else{
+//                beneficiaryList(nil)
+//                debugPrint(error)
+//            }
         }
     }
 }

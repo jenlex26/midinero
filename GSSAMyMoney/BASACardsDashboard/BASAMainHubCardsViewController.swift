@@ -174,14 +174,17 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         separator.lblTitle.text = "Movimientos"
         cellsArray.append([separator:60.0])
         
+       
         if debitCardMovements != nil{
             for item in debitCardMovements!.resultado.movimientos{
-                let movementCell = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAMovementCell") as! BASAMovementTableViewCell
-                movementCell.lblDate.text = item.fechaOperacion?.dateFormatter(format: "yyyy/MM/dd", outputFormat: "dd MMM yyyy")
-                movementCell.lblTitle.text = item.descripcion?.alnovaDecrypt()
-                movementCell.lblAmount.text = item.importe?.alnovaDecrypt().moneyFormat()
-                movementCell.setArrow(amount: item.importe?.alnovaDecrypt() ?? "")
-                cellsArray.append([movementCell:88.0])
+                if  item.descripcion?.alnovaDecrypt() != ""{
+                    let movementCell = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAMovementCell") as! BASAMovementTableViewCell
+                    movementCell.lblDate.text = item.fechaOperacion?.dateFormatter(format: "yyyy/MM/dd", outputFormat: "dd MMM yyyy")
+                    movementCell.lblTitle.text = item.descripcion?.alnovaDecrypt()
+                    movementCell.lblAmount.text = item.importe?.alnovaDecrypt().moneyFormat()
+                    movementCell.setArrow(amount: item.importe?.alnovaDecrypt() ?? "")
+                    cellsArray.append([movementCell:88.0])
+                }
             }
         }else{
             let emptyMovements = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "GSNoMovementsCell")!
