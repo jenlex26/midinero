@@ -11,8 +11,8 @@
 import UIKit
 import GSSAVisualComponents
 
-class BASACardLimitsViewController: UIViewController, BASACardLimitsViewProtocol {
-    
+class BASACardLimitsViewController: UIViewController, BASACardLimitsViewProtocol, GSVCBottomAlertHandler{
+    var bottomAlert: GSVCBottomAlert?
     var presenter: BASACardLimitsPresenterProtocol?
     
     @IBOutlet weak var table: UITableView!
@@ -23,24 +23,37 @@ class BASACardLimitsViewController: UIViewController, BASACardLimitsViewProtocol
         var title: String
         var subtitle: String
         var height: CGFloat
+        var notificationID: String
     }
+    
     var LimitItems: Array<LimitItem> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        LimitItems.append(LimitItem(title: "Retiro en cajero", subtitle: "Hasta $7,500.00", height: 84.0))
-        LimitItems.append(LimitItem(title: "Límite de compra", subtitle: "Solo múltiplos de $50, hasta $7,500.00", height: 84.0))
-        
+        setCells()
         registerCells()
         table.delegate = self
         table.dataSource = self
         table.alwaysBounceVertical = false
-        NotificationCenter.default.addObserver(self, selector: #selector(handleFinishEditAction), name: NSNotification.Name(rawValue: "BASALimitCellEditFinished"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleFinishEditAction(notification:)), name: NSNotification.Name(rawValue: "BASALimitCellEditFinished"), object: nil)
+    }
+    
+    func setCells(){
+        LimitItems.removeAll()
+        let savedATMLimit = UserDefaults.standard.value(forKey: "debitCardATMLimit") as? String
+        let savedDebitCardLimit = UserDefaults.standard.value(forKey: "debitCardAmountLimit") as? String
+        
+        LimitItems.append(LimitItem(title: "Retiro en cajero", subtitle: "Solo múltiplos de $50, hasta \(savedATMLimit?.moneyFormatWithoutSplit() ?? "$7,500.00")", height: 84.0, notificationID: "debitCardATMLimit"))
+        
+        LimitItems.append(LimitItem(title: "Límite de compra", subtitle: "Hasta \(savedDebitCardLimit?.moneyFormatWithoutSplit() ?? "$7,500.00")", height: 84.0, notificationID: "debitCardAmountLimit"))
     }
     
     func registerCells(){
         table.register(UINib(nibName: "BASACardLimitCell", bundle: Bundle.init(for: BASACardLimitsViewController.self)), forCellReuseIdentifier: "BASACardLimitCell")
+    }
+    
+    func optionalAction() {
+        print("ok")
     }
     
     @objc func handleEditAction(sender: UIButton){
@@ -49,17 +62,44 @@ class BASACardLimitsViewController: UIViewController, BASACardLimitsViewProtocol
         table.endUpdates()
     }
     
-    @objc func handleFinishEditAction(){
-        GSVCLoader.show(type: .native)
+    @objc func handleFinishEditAction(notification: Notification){
+        let text = notification.object as? [String:String]
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: { [self] in
-            GSVCLoader.hide()
-            table.beginUpdates()
-            for n in 0..<LimitItems.count{
-                LimitItems[n].height = 84.0
+        if notification.object != nil{
+            if text?.first?.value.replacingOccurrences(of: " ", with: "").count ?? 0 < 1{
+                self.presentBottomAlertFullData(status: .error, message: "Ingrese una cantidad para continuar", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+                setCells()
+                self.table.reloadData()
+            }else{
+                let amountInt = Int(text?.first?.value ?? "0")!
+                if amountInt.isMultiple(of: 50) && amountInt <= 7500{
+                    GSVCLoader.show(type: .native)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {  [self] in
+                        presenter?.requestCardLimitUpdate(ammount: text?.first?.value ?? "0", DataCard: {DataCard in
+                            GSVCLoader.hide()
+                            if DataCard != nil{
+                                presentBottomAlertFullData(status: .success, message: "Límite actualizado", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+                                
+                                UserDefaults.standard.setValue(text?.first?.value, forKey: text?.first?.key ?? "")
+                            }else{
+                                presentBottomAlertFullData(status: .error, message: "No podemos actualizar tu límite en este momento, por favor intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+                                setCells()
+                                self.table.reloadData()
+                            }
+                        })
+                        table.beginUpdates()
+                        for n in 0..<LimitItems.count{
+                            LimitItems[n].height = 84.0
+                        }
+                        table.endUpdates()
+                    })
+                }else{
+                    self.presentBottomAlertFullData(status: .error, message: "Solo multiplos de $50, hasta $7,500", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+                    setCells()
+                    self.table.reloadData()
+                }
             }
-            table.endUpdates()
-        })
+        }
     }
     
     @IBAction func close(_ sender: Any){
@@ -76,6 +116,7 @@ extension BASACardLimitsViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = table.dequeueReusableCell(withIdentifier: "BASACardLimitCell") as! BASACardLimitCell
         cell.btnEdit.tag = indexPath.row
+        cell.notificationID = LimitItems[indexPath.row].notificationID
         cell.lblTitle.text = LimitItems[indexPath.row].title
         cell.lblSubtitle.text = LimitItems[indexPath.row].subtitle
         cell.btnEdit.addTarget(self, action: #selector(handleEditAction(sender:)), for: .touchUpInside)

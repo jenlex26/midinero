@@ -10,11 +10,13 @@ import GSSAVisualComponents
 import GSSASessionInfo
 
 class BASACardLimitCell: UITableViewCell, UITextFieldDelegate {
-
+    
     @IBOutlet weak var btnEdit: GSVCButton!
     @IBOutlet weak var lblTitle: GSVCLabel!
     @IBOutlet weak var lblSubtitle: GSVCLabel!
     @IBOutlet weak var txtAmount: GSVCTextField!
+    
+    var notificationID: String?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,20 +25,23 @@ class BASACardLimitCell: UITableViewCell, UITextFieldDelegate {
         btnEdit.setTitleColor(UIColor.GSVCPrincipal100, for: .normal)
         txtAmount.delegate = self
         txtAmount.layer.borderColor = UIColor(red: 194/255, green: 194/255, blue: 194/255, alpha: 1.0).cgColor
+        let prefix = UILabel()
+        prefix.font = txtAmount.font
+        prefix.text = " $"
+        prefix.sizeToFit()
+        txtAmount.leftView = prefix
+        txtAmount.leftViewMode = .whileEditing
     }
     
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let hasLittleCoin = false
-        if string.count == 0, txtAmount.text?.dValue ?? 0 < 0.1 {
-            textField.resetAmount(withLittleCoin: hasLittleCoin)
-        } else {
-            let bHideCents = GSSISessionInfo.sharedInstance.bHideCents
-            textField.addText(newText: string,
-                              withMaxFontSize: 80,
-                              withLittleCoin: hasLittleCoin, withFontWeight: .bold,
-                              withNoDecimals: bHideCents)
+        guard let textFieldText = textField.text,
+              let rangeOfTextToReplace = Range(range, in: textFieldText) else {
+            return false
         }
-        return false
+        let substringToReplace = textFieldText[rangeOfTextToReplace]
+        let count = textFieldText.count - substringToReplace.count + string.count
+        return count <= 4
     }
     
     func setUpToolBar(){
@@ -45,7 +50,6 @@ class BASACardLimitCell: UITableViewCell, UITextFieldDelegate {
         
         let buttonTwo =  UIBarButtonItem(title: "Guardar", style: .done, target: self, action: #selector(doneWithNumberPad))
         buttonTwo.tintColor = .white
-        
         
         let numberToolbar = UIToolbar(frame:CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
         numberToolbar.barStyle = .default
@@ -70,13 +74,14 @@ class BASACardLimitCell: UITableViewCell, UITextFieldDelegate {
         btnEdit.isHidden = false
         lblSubtitle.isHidden = false
         txtAmount.isHidden = true
-        lblSubtitle.text = "Hasta " + txtAmount.text!
-        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "BASALimitCellEditFinished"), object: nil, userInfo: nil))
+        lblSubtitle.text = "Hasta " + txtAmount.text!.moneyFormatWithoutSplit()
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "BASALimitCellEditFinished"), object: [notificationID:txtAmount.text], userInfo: nil))
     }
     
     @IBAction func beginEdit(sender: GSVCButton){
         lblSubtitle.isHidden = true
         btnEdit.isHidden = true
+        setUpToolBar()
         txtAmount.isHidden = false
     }
 }

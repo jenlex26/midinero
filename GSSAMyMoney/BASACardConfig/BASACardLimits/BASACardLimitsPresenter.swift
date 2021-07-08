@@ -11,7 +11,6 @@
 import UIKit
 
 class BASACardLimitsPresenter: BASACardLimitsPresenterProtocol {
-
     weak private var view: BASACardLimitsViewProtocol?
     var interactor: BASACardLimitsInteractorProtocol?
     private let router: BASACardLimitsWireframeProtocol
@@ -22,4 +21,7 @@ class BASACardLimitsPresenter: BASACardLimitsPresenterProtocol {
         self.router = router
     }
 
+    func requestCardLimitUpdate(ammount: String, DataCard: @escaping (CardLimitsResponse?) -> ()) {
+        interactor?.tryUpdateCardLimit(ammount: ammount, DataCard: DataCard)
+    }
 }
