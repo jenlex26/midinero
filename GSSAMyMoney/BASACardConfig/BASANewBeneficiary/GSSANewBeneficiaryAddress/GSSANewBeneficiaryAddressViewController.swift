@@ -48,7 +48,7 @@ class GSSANewBeneficiaryAddressViewController: UIViewController, GSSANewBenefici
         
         let street = table.dequeueReusableCell(withIdentifier: "BASATextFieldCell") as! BASATextFieldCell
         street.lblTitle.text = "Calle"
-        street.textField.text = beneficiaryData?.calle
+        street.textField.text = beneficiaryData?.calle?.alnovaDecrypt()
         street.textField.placeholder = nil
         street.textField.returnKeyType = .next
         street.textField.tag = 0
@@ -58,7 +58,7 @@ class GSSANewBeneficiaryAddressViewController: UIViewController, GSSANewBenefici
         
         let streetNumber = table.dequeueReusableCell(withIdentifier: "BASATextFieldCell") as! BASATextFieldCell
         streetNumber.lblTitle.text = "Número exterior"
-        streetNumber.textField.text = beneficiaryData?.numeroExterior
+        streetNumber.textField.text = beneficiaryData?.numeroExterior?.alnovaDecrypt()
         streetNumber.textField.placeholder = nil
         streetNumber.textField.returnKeyType = .next
         streetNumber.textField.tag = 1
@@ -69,7 +69,7 @@ class GSSANewBeneficiaryAddressViewController: UIViewController, GSSANewBenefici
         let internalNumber = table.dequeueReusableCell(withIdentifier: "BASATextFieldCell") as! BASATextFieldCell
         internalNumber.lblTitle.text = "Número interior"
         internalNumber.textField.placeholder = "Opcional"
-        internalNumber.textField.text = beneficiaryData?.numeroInterior
+        internalNumber.textField.text = beneficiaryData?.numeroInterior?.alnovaDecrypt()
         internalNumber.textField.placeholder = nil
         internalNumber.textField.returnKeyType = .next
         internalNumber.textField.tag = 2
@@ -79,7 +79,7 @@ class GSSANewBeneficiaryAddressViewController: UIViewController, GSSANewBenefici
         
         let postalCode = table.dequeueReusableCell(withIdentifier: "BASATextFieldCell") as! BASATextFieldCell
         postalCode.lblTitle.text = "Código postal"
-        postalCode.textField.text = beneficiaryData?.codigoPostal
+        postalCode.textField.text = beneficiaryData?.codigoPostal?.alnovaDecrypt()
         postalCode.textField.placeholder = nil
         postalCode.textField.keyboardType = .numberPad
         postalCode.textField.delegate = self

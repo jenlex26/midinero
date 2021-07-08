@@ -27,7 +27,8 @@ public struct BeneficiaryListResult: Codable {
 
 // MARK: - Beneficiario
 public struct BeneficiaryItem: Codable {
-    var id, idParentesco, nombre, apellidoPaterno: String?
+    var id: Int? 
+    var idParentesco, nombre, apellidoPaterno: String?
     var apellidoMaterno, fechaNacimiento, porcentaje: String?
     var domicilio: BeneficiaryAddress?
     var contacto: BeneficiaryContact?

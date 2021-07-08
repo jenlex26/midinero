@@ -32,7 +32,7 @@ class BASATextFieldCell: UITableViewCell {
         textField.delegate = self
         
         lblTitle.text = data.title
-        textField.text = data.text
+        textField.text = data.text?.alnovaDecrypt()
         
         textField.placeholder = data.placeHolder
         if data.image != nil{

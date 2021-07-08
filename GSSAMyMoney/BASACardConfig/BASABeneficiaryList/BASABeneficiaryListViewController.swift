@@ -83,9 +83,9 @@ extension BASABeneficiaryListViewController: UITableViewDelegate, UITableViewDat
         }else{
             let cell = table.dequeueReusableCell(withIdentifier: "BASACardLimitCell") as! BASACardLimitCell
             let cellData = tableData[indexPath.row]
-            let userName = (cellData.nombre ?? "") + " " + (cellData.apellidoPaterno ?? "") + " " + (cellData.apellidoMaterno ?? "")
+            let userName = (cellData.nombre?.alnovaDecrypt().replacingOccurrences(of: " ", with: "") ?? "") + " " + (cellData.apellidoPaterno?.alnovaDecrypt().replacingOccurrences(of: " ", with: "") ?? "") + " " + (cellData.apellidoMaterno?.alnovaDecrypt().replacingOccurrences(of: " ", with: "") ?? "")
             cell.lblTitle.text = userName
-            cell.lblSubtitle.text = (cellData.porcentaje ?? "0") + "%"
+            cell.lblSubtitle.text = (cellData.porcentaje?.alnovaDecrypt() ?? "0") + "%"
             cell.btnEdit.isEnabled = false
             
             return cell

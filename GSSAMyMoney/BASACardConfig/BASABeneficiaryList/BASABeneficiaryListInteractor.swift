@@ -22,6 +22,7 @@ class BASABeneficiaryListInteractor: GSSAURLSessionTaskCoordinatorBridge, BASABe
 
         let body = BeneficiaryListBody(numeroCuenta: account.replacingOccurrences(of: " ", with: "").encryptAlnova())
         
+        
         sendRequest(strUrl: strPathEndpoint, method: .POST, objBody: body, environment: .develop) { (objRes: BeneficiaryListResponse?, error) in
             debugPrint(objRes as Any)
             
