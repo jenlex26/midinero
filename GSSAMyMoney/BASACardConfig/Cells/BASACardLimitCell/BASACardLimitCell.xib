@@ -41,7 +41,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hasta $7,500.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1nX-FC-S3C" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hasta $7,500.00" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1nX-FC-S3C" customClass="GSVCLabel" customModule="GSSAVisualComponents">
                                         <rect key="frame" x="0.0" y="25.5" width="218" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -116,9 +116,6 @@
         </designable>
         <designable name="ARQ-jK-s9U">
             <size key="intrinsicContentSize" width="40" height="30"/>
-        </designable>
-        <designable name="CZm-ZU-k9j">
-            <size key="intrinsicContentSize" width="47" height="34"/>
         </designable>
         <designable name="ghv-vV-48x">
             <size key="intrinsicContentSize" width="119" height="20.5"/>
