@@ -76,6 +76,14 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
         percentCell.lblTitle.text = "Porcentaje otorgado"
         percentCell.textField.placeholder = "%"
         percentCell.textField.keyboardType = .numberPad
+        
+        let prefix = UILabel()
+        prefix.font = percentCell.textField.font
+        prefix.text = "%"
+        prefix.sizeToFit()
+        percentCell.textField.rightView = prefix
+        percentCell.textField.rightViewMode = .whileEditing
+        
         cellsArray.append([percentCell:117.0])
         
         let cell = table.dequeueReusableCell(withIdentifier: "BASAInfoCardCell") as! BASAInfoCardCell
@@ -177,6 +185,8 @@ extension BASANewBeneficiaryViewController: UITableViewDelegate, UITableViewData
 
 extension BASANewBeneficiaryViewController: UITextFieldDelegate{
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.placeholder = ""
+        
         UIView.animate(withDuration: 0.3, animations: { () -> Void in
           self.view.frame.origin.y -= 100.0
         })

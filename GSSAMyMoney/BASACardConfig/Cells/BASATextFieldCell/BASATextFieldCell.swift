@@ -95,7 +95,7 @@ extension BASATextFieldCell: GSVCPickerControllerDelegate, GSVCPickerControllerD
         let count = textFieldText.count - substringToReplace.count + string.count
         
         if textField.keyboardType != .numberPad && textField.keyboardType != .emailAddress{
-            return count <= 25 && alphabet
+            return count <= 18 && alphabet
         }else if textField.keyboardType == .numberPad{
             return count <= 10
         }else{

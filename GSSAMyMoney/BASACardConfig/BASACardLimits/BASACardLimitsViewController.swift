@@ -64,7 +64,6 @@ class BASACardLimitsViewController: UIViewController, BASACardLimitsViewProtocol
     
     @objc func handleFinishEditAction(notification: Notification){
         let text = notification.object as? [String:String]
-        
         if notification.object != nil{
             if text?.first?.value.replacingOccurrences(of: " ", with: "").count ?? 0 < 1{
                 self.presentBottomAlertFullData(status: .error, message: "Ingrese una cantidad para continuar", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)

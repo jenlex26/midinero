@@ -18,20 +18,20 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JyQ-2z-mYd">
-                        <rect key="frame" x="16" y="92.5" width="286" height="1"/>
+                        <rect key="frame" x="16" y="91" width="286" height="1"/>
                         <color key="backgroundColor" red="0.81568627450980391" green="0.82352941176470584" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="fbx-D9-0g2"/>
                         </constraints>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5sK-WB-Mkw">
-                        <rect key="frame" x="24" y="17" width="258" height="47.5"/>
+                        <rect key="frame" x="24" y="17" width="258" height="46"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="JTO-BM-Z9g">
-                                <rect key="frame" x="0.0" y="0.0" width="218" height="47.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="218" height="46"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Retiro en cajero" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ghv-vV-48x" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                        <rect key="frame" x="0.0" y="0.0" width="218" height="22.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="218" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -42,7 +42,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hasta $7,500.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1nX-FC-S3C" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                        <rect key="frame" x="0.0" y="27.5" width="218" height="20"/>
+                                        <rect key="frame" x="0.0" y="25.5" width="218" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -53,7 +53,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CZm-ZU-k9j" customClass="GSVCTextField" customModule="GSSAVisualComponents">
-                                        <rect key="frame" x="0.0" y="47.5" width="218" height="50"/>
+                                        <rect key="frame" x="0.0" y="46" width="218" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="jo5-fr-R5F"/>
                                         </constraints>
@@ -72,7 +72,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ARQ-jK-s9U" customClass="GSVCButton" customModule="GSSAVisualComponents">
-                                <rect key="frame" x="218" y="0.0" width="40" height="47.5"/>
+                                <rect key="frame" x="218" y="0.0" width="40" height="46"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="MLd-n7-1IX"/>
                                     <constraint firstAttribute="height" constant="30" id="hVM-DC-Ch3"/>
@@ -112,7 +112,7 @@
     </objects>
     <designables>
         <designable name="1nX-FC-S3C">
-            <size key="intrinsicContentSize" width="111" height="20"/>
+            <size key="intrinsicContentSize" width="125" height="20.5"/>
         </designable>
         <designable name="ARQ-jK-s9U">
             <size key="intrinsicContentSize" width="40" height="30"/>
@@ -121,7 +121,7 @@
             <size key="intrinsicContentSize" width="47" height="34"/>
         </designable>
         <designable name="ghv-vV-48x">
-            <size key="intrinsicContentSize" width="126" height="22.5"/>
+            <size key="intrinsicContentSize" width="119" height="20.5"/>
         </designable>
     </designables>
 </document>
