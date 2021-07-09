@@ -11,7 +11,6 @@
 import UIKit
 
 class GSDigitalCardConfigPresenter: GSDigitalCardConfigPresenterProtocol {
-
     weak private var view: GSDigitalCardConfigViewProtocol?
     var interactor: GSDigitalCardConfigInteractorProtocol?
     private let router: GSDigitalCardConfigWireframeProtocol
@@ -21,5 +20,8 @@ class GSDigitalCardConfigPresenter: GSDigitalCardConfigPresenterProtocol {
         self.interactor = interactor
         self.router = router
     }
-
+    
+    func shutdownCardRequest(body: CardStateBody, DataCard: @escaping (DigitalCardResponse?) -> ()) {
+        interactor?.tryShutdownCard(body: body, DataCard: DataCard)
+    }
 }

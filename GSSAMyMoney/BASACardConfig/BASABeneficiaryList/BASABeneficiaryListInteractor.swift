@@ -11,6 +11,7 @@
 import UIKit
 import GSSASecurityManager
 import GSSAServiceCoordinator
+import GSSAFunctionalUtilities
 
 class BASABeneficiaryListInteractor: GSSAURLSessionTaskCoordinatorBridge, BASABeneficiaryListInteractorProtocol {
 
@@ -22,7 +23,7 @@ class BASABeneficiaryListInteractor: GSSAURLSessionTaskCoordinatorBridge, BASABe
 
         let body = BeneficiaryListBody(numeroCuenta: account.replacingOccurrences(of: " ", with: "").encryptAlnova())
         
-        sendRequest(strUrl: strPathEndpoint, method: .POST, objBody: body, environment: .develop) { (objRes: BeneficiaryListResponse?, error) in
+        sendRequest(strUrl: strPathEndpoint, method: .POST, objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: BeneficiaryListResponse?, error) in
             debugPrint(objRes as Any)
             
             if error.code == 0 {

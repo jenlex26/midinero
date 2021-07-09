@@ -12,21 +12,22 @@ import UIKit
 import GSSAServiceCoordinator
 import GSSASecurityManager
 import GSSASessionInfo
+import GSSAFunctionalUtilities
 
 class BASACardLimitsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASACardLimitsInteractorProtocol {
 
     weak var presenter: BASACardLimitsPresenterProtocol?
     
-    public func tryUpdateCardLimit(ammount: String, DataCard: @escaping (CardLimitsResponse?) -> ())
+    public func tryUpdateCardLimit(ammount: String, indicador: String, DataCard: @escaping (CardLimitsResponse?) -> ())
     {
         let integerAmmount = String(Int(Double(ammount) ?? 0) * 100)
         
-        let body = CardLimitsBody.init(transaccion: CardLimitsTransaccion.init(primerTokenVerificacion: "fac2ac44565db5312fb407c3c9482d04", numeroTarjeta: GSSISessionInfo.sharedInstance.gsUser.account?.card?.encryptAlnova(), monto: integerAmmount.encryptAlnova(), indicadorLimite: "01"))
+        let body = CardLimitsBody.init(transaccion: CardLimitsTransaccion.init(primerTokenVerificacion: GSSISessionInfo.sharedInstance.gsUserToken, numeroTarjeta: GSSISessionInfo.sharedInstance.gsUser.account?.card?.encryptAlnova(), monto: integerAmmount.encryptAlnova(), indicadorLimite: indicador))
         
         self.urlPath = "https://apigateway.superappbaz.com/"
         self.strPathEndpoint = "integracion/superapp/dinero/captacion/gestion-tarjetas/v1/tarjetas/montos/limites"
         
-        sendRequest(strUrl: strPathEndpoint, method: .PUT, arrHeaders: [], objBody: body, environment: .develop) { (objRes: CardLimitsResponse?, error) in
+        sendRequest(strUrl: strPathEndpoint, method: .PUT, arrHeaders: [], objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: CardLimitsResponse?, error) in
             debugPrint(objRes as Any)
             if error.code == 0 {
                 DataCard(objRes)

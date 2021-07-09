@@ -50,7 +50,7 @@ struct  DigitalCardData: Codable {
 
 
 public struct AccoutRequest: Codable{
-    var numeroCuenta: String?
+    var numeroCuenta, sicu, latitud, longitud: String?
 }
 
 public struct Transaction: Codable{

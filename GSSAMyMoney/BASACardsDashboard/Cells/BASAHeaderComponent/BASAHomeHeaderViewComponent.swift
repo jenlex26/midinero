@@ -7,6 +7,7 @@
 
 import UIKit
 import GSSAVisualComponents
+import GSSASessionInfo
 
 class BASAHomeHeaderViewComponent: UITableViewCell {
     
@@ -64,6 +65,7 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadLends(notification:)), name: NSNotification.Name(rawValue: "reloadLendsData"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadCreditCard(notification:)), name: NSNotification.Name(rawValue: "reloadCreditCardData"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadCreditCardBalance(notification:)), name: NSNotification.Name(rawValue: "reloadCreditCardBalance"), object: nil)
+        setUpDebitCard()
     }
     
     func setUpDebitCard(){
@@ -73,6 +75,8 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
         debitCardbtnConfig.setImage(UIImage(named: "ic_more_icon", in: Bundle(for: BASAHomeHeaderViewComponent.self), compatibleWith: nil), for: .normal)
         
         debitCardbtnConfig.tag = 0
+        
+        debitCardlblBalance.text = UserDefaults.standard.value(forKey: "debitAccountBalance") as? String
         
         if data != nil{
             debitCardlblBalance.text = data!.resultado.cliente?.cuentas?.first?.saldoDisponible?.alnovaDecrypt().moneyFormat()

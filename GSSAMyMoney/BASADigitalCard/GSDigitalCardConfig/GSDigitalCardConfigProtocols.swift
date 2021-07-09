@@ -16,13 +16,13 @@ protocol GSDigitalCardConfigWireframeProtocol: class {
 }
 //MARK: Presenter -
 protocol GSDigitalCardConfigPresenterProtocol: class {
-
+    func shutdownCardRequest(body: CardStateBody,DataCard: @escaping (DigitalCardResponse?) -> ())
 }
 
 //MARK: Interactor -
 protocol GSDigitalCardConfigInteractorProtocol: class {
-
-  var presenter: GSDigitalCardConfigPresenterProtocol?  { get set }
+    var presenter: GSDigitalCardConfigPresenterProtocol?  { get set }
+    func tryShutdownCard(body: CardStateBody,DataCard: @escaping (DigitalCardResponse?) -> ())
 }
 
 //MARK: View -

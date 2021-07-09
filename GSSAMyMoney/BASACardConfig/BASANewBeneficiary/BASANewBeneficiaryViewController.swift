@@ -147,7 +147,7 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
     }
     
     @objc func showDigitalSign(){
-        let verification = GSVTDigitalSignViewController(delegate: self, dataSource: nil)
+        let verification = GSVTDigitalSignViewController(delegate: self)
         verification.modalPresentationStyle = .fullScreen
         present(verification, animated: true, completion: nil)
     }

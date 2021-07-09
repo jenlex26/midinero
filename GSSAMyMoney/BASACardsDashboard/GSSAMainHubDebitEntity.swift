@@ -50,7 +50,7 @@ struct TransationBalanceRequest: Codable {
 // MARK: - DEBIT Transaccion
 struct TransationItem: Codable {
     let folio: String
-    let numeroCuenta: String
+   // let numeroCuenta: String
 }
 
 // MARK: - DEBIT MOVEMENTS BODY

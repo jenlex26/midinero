@@ -16,14 +16,14 @@ protocol BASACardLimitsWireframeProtocol: class {
 }
 //MARK: Presenter -
 protocol BASACardLimitsPresenterProtocol: class {
-    func requestCardLimitUpdate(ammount: String, DataCard: @escaping (CardLimitsResponse?) -> ())
+    func requestCardLimitUpdate(ammount: String, indicador: String, DataCard: @escaping (CardLimitsResponse?) -> ())
 }
 
 //MARK: Interactor -
 protocol BASACardLimitsInteractorProtocol: class {
 
   var presenter: BASACardLimitsPresenterProtocol?  { get set }
-  func tryUpdateCardLimit(ammount: String, DataCard: @escaping (CardLimitsResponse?) -> ())
+    func tryUpdateCardLimit(ammount: String, indicador: String, DataCard: @escaping (CardLimitsResponse?) -> ())
 }
 
 //MARK: View -

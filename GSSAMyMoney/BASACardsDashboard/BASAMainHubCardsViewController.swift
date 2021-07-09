@@ -34,17 +34,19 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.ConfigureCollectionView()
         self.BasaMainHubTableView.alwaysBounceVertical = false
         NotificationCenter.default.addObserver(self, selector: #selector(SwitchColors(notification:)), name: NSNotification.Name(rawValue: "HomeHeaderViewChange"), object: nil)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         loadDebitBalance()
+       // loadDebitMovements()
         self.setTableForDebitCard()
     }
     
     func loadDebitBalance(){
         GSVCLoader.show(type: .native)
-        presenter?.requestBalance(Account: [accountNumber?.first?.key.encryptAlnova() ?? (GSSISessionInfo.sharedInstance.gsUser.account?.number?.encryptAlnova() ?? ""): accountNumber?.first?.value ?? (GSSISessionInfo.sharedInstance.gsUser.SICU?.encryptAlnova() ?? "")], Balance: { Balance in
+        presenter?.requestBalance(Account: [accountNumber?.first?.key.encryptAlnova() ?? (GSSISessionInfo.sharedInstance.gsUser.mainAccount?.encryptAlnova() ?? ""): accountNumber?.first?.value ?? (GSSISessionInfo.sharedInstance.gsUser.SICU?.encryptAlnova() ?? "")], Balance: { Balance in
             if let NewBalance = Balance{
                 DispatchQueue.main.async {
                     self.accountBalance = NewBalance
@@ -60,11 +62,13 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     }
     
     func loadDebitMovements(){
-        self.presenter?.requestDebitCardMovements(Body: MovimientosBody(transaccion: MovementsBodyData(numeroCuenta: accountNumber?.first?.key ?? (GSSISessionInfo.sharedInstance.gsUser.account?.number?.encryptAlnova()), fechaInicial: "01/01/0001", fechaFinal: "01/01/0001")), Movements: { [self] Movements in
+        self.presenter?.requestDebitCardMovements(Body: MovimientosBody(transaccion: MovementsBodyData(numeroCuenta: accountNumber?.first?.key ?? (GSSISessionInfo.sharedInstance.gsUser.mainAccount?.encryptAlnova()), fechaInicial: "01/01/0001", fechaFinal: "01/01/0001")), Movements: { [self] Movements in
             GSVCLoader.hide()
             if Movements != nil{
                 debitCardMovements = Movements
                 setTableForDebitCard()
+            }else{
+                self.presentBottomAlertFullData(status: .error, message: "No podemos cargar tus movimientos en este momento, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
             }
         })
     }
@@ -150,6 +154,8 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         header.cellViewController = self
         let accountData = accountBalance?.resultado.cliente?.cuentas
         
+        
+        header.debitCardlblBalance.textColor = .white
         header.debitCardlblBalance.text = UserDefaults.standard.value(forKey: "debitAccountBalance") as? String
         
         header.debitCardlblCardNumber.text = accountData?.first?.numero?.alnovaDecrypt()

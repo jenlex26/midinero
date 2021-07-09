@@ -17,6 +17,7 @@ class BASACardLimitCell: UITableViewCell, UITextFieldDelegate {
     @IBOutlet weak var txtAmount: GSVCTextField!
     
     var notificationID: String?
+    var textLenght: Int? 
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -41,7 +42,7 @@ class BASACardLimitCell: UITableViewCell, UITextFieldDelegate {
         }
         let substringToReplace = textFieldText[rangeOfTextToReplace]
         let count = textFieldText.count - substringToReplace.count + string.count
-        return count <= 4
+        return count <= textLenght ?? 4
     }
     
     func setUpToolBar(){

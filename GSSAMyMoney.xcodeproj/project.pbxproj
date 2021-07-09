@@ -129,6 +129,7 @@
 		EEC1F5D926916ED0006FB4CD /* AWSMobileClientXCF.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC1F5CE26916ED0006FB4CD /* AWSMobileClientXCF.xcframework */; };
 		EEC1F5EC26916F07006FB4CD /* GSSAVisualComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC1F5EB26916F07006FB4CD /* GSSAVisualComponents.framework */; };
 		EEC1F5EF26916F0E006FB4CD /* GSSAVisualTemplates.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC1F5EE26916F0E006FB4CD /* GSSAVisualTemplates.framework */; };
+		EEF2ED2A2698A4AA0009F771 /* GSDigitalCardEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF2ED292698A4AA0009F771 /* GSDigitalCardEntity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -256,6 +257,7 @@
 		EEC1F5CE26916ED0006FB4CD /* AWSMobileClientXCF.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AWSMobileClientXCF.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/AWS/AWSMobileClientXCF.xcframework; sourceTree = "<group>"; };
 		EEC1F5EB26916F07006FB4CD /* GSSAVisualComponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GSSAVisualComponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEC1F5EE26916F0E006FB4CD /* GSSAVisualTemplates.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GSSAVisualTemplates.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EEF2ED292698A4AA0009F771 /* GSDigitalCardEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSDigitalCardEntity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -614,7 +616,7 @@
 		10E9EDA0267D6BA400F45640 /* BASADigitalCard */ = {
 			isa = PBXGroup;
 			children = (
-				EE0655D12682AE4400F7C73D /* BASADigitalCardConfig */,
+				EE0655D12682AE4400F7C73D /* GSDigitalCardConfig */,
 				10E9EDA4267D6BA400F45640 /* Controls */,
 				10E9EDA1267D6BA400F45640 /* BASADigitalCardProtocols.swift */,
 				10E9EDA2267D6BA400F45640 /* BASADigitalCardPresenter.swift */,
@@ -639,7 +641,7 @@
 			path = Controls;
 			sourceTree = "<group>";
 		};
-		EE0655D12682AE4400F7C73D /* BASADigitalCardConfig */ = {
+		EE0655D12682AE4400F7C73D /* GSDigitalCardConfig */ = {
 			isa = PBXGroup;
 			children = (
 				EE0655D22682AE6600F7C73D /* GSDigitalCardConfigPresenter.swift */,
@@ -648,8 +650,9 @@
 				EE0655D52682AE6600F7C73D /* GSDigitalCardConfigProtocols.swift */,
 				EE0655D62682AE6600F7C73D /* GSDigitalCardConfigInteractor.swift */,
 				EE0655D72682AE6600F7C73D /* GSDigitalCardConfigViewController.xib */,
+				EEF2ED292698A4AA0009F771 /* GSDigitalCardEntity.swift */,
 			);
-			path = BASADigitalCardConfig;
+			path = GSDigitalCardConfig;
 			sourceTree = "<group>";
 		};
 		EE97BB032684DF08000AE34C /* GSNoMovementsCell */ = {
@@ -810,6 +813,7 @@
 				10E9EDF5267D6BA400F45640 /* BASAMainHubCardsViewController.swift in Sources */,
 				10E9EDEB267D6BA400F45640 /* BASAMovementTableViewCell.swift in Sources */,
 				10E9EDE6267D6BA400F45640 /* BASAMyCreditItem.swift in Sources */,
+				EEF2ED2A2698A4AA0009F771 /* GSDigitalCardEntity.swift in Sources */,
 				10E9EDCB267D6BA400F45640 /* BASACardLimitsPresenter.swift in Sources */,
 				10E9EDF2267D6BA400F45640 /* BASAMainHubCardsPresenter.swift in Sources */,
 				EE0655DB2682AE6600F7C73D /* GSDigitalCardConfigProtocols.swift in Sources */,

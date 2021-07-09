@@ -156,7 +156,7 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
         }
         
         if statementsSelected == true{
-            let verification = GSVTDigitalSignViewController(delegate: self, dataSource: nil)
+            let verification = GSVTDigitalSignViewController(delegate: self)
             verification.modalPresentationStyle = .fullScreen
             present(verification, animated: true, completion: nil)
         }else{

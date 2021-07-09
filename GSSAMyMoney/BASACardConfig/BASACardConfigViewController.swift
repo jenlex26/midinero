@@ -55,8 +55,10 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
             CLABE = ""
         }
         
+        CLABE = GSSISessionInfo.sharedInstance.gsUser.account?.clabe?.tnuoccaFormat ?? ""
         phone = GSSISessionInfo.sharedInstance.gsUser.phone?.tryToAdCellphoneFormat ?? ""
         account =  GSSISessionInfo.sharedInstance.gsUser.mainAccount?.tnuoccaFormat ?? ""
+        
         registerCells()
         setOptions()
         table.delegate = self
@@ -71,7 +73,7 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
         if #available(iOS 13.0, *) {
             if credit == false{
                 configurations.append(userOptions(title: "CLABE Interbancaria", subTitle: CLABE, image: UIImage(systemName: "square.and.arrow.up"), tag: 4))
-                configurations.append(userOptions(title: "Número de cuenta", subTitle: "9567 1660 1234 87", image: nil))
+                configurations.append(userOptions(title: "Número de cuenta", subTitle: account, image: nil))
                 configurations.append(userOptions(title: "Celular asociado", subTitle: phone, image: nil))
                 configurations.append(userOptions.init(title: "Estados de cuenta", subTitle: nil, image: UIImage(systemName: "chevron.right"), tag: 1))
                 configurations.append(userOptions.init(title: "Límites", subTitle: nil, image: UIImage(systemName: "chevron.right"), tag: 2))

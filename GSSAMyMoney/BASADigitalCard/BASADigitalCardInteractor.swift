@@ -11,6 +11,8 @@
 import UIKit
 import GSSAServiceCoordinator
 import GSSASecurityManager
+import GSSAFunctionalUtilities
+import GSSASessionInfo
 
 class BASADigitalCardInteractor: GSSAURLSessionTaskCoordinatorBridge, BASADigitalCardInteractorProtocol {
     
@@ -21,7 +23,7 @@ class BASADigitalCardInteractor: GSSAURLSessionTaskCoordinatorBridge, BASADigita
         self.urlPath = "https://apigateway.superappbaz.com/"
         self.strPathEndpoint = "integracion/superapp/dinero/captacion/gestion-tarjetas-digitales/v1/tarjetas/busquedas"
     
-        sendRequest(strUrl: strPathEndpoint, method: .POST, objBody: Body, environment: .develop) { (objRes: DigitalCardResponse?, error) in
+        sendRequest(strUrl: strPathEndpoint, method: .POST, objBody: Body, environment: GLOBAL_ENVIROMENT) { (objRes: DigitalCardResponse?, error) in
             debugPrint(objRes as Any)
             
             if error.code == 0 {

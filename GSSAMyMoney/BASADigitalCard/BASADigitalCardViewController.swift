@@ -70,7 +70,7 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
     }
     
     func requestCVV(){
-        presenter?.makeDigitalDataRequest(Body: Transaction(transaccion: AccoutRequest(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.encryptedAccount)), DataCard: { [self] DataCard in
+        presenter?.makeDigitalDataRequest(Body: Transaction(transaccion: AccoutRequest(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.encryptAlnova())), DataCard: { [self] DataCard in
             GSVCLoader.hide()
             if DataCard != nil{
                 self.StartTimer()
@@ -92,7 +92,7 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
     }
     
     func StartTimer(){
-        TimerView.start(beginingValue: 105)
+        TimerView.start(beginingValue: 180)
     }
     
     func SetGradient(){

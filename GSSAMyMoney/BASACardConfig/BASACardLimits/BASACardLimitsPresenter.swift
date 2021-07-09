@@ -21,7 +21,7 @@ class BASACardLimitsPresenter: BASACardLimitsPresenterProtocol {
         self.router = router
     }
 
-    func requestCardLimitUpdate(ammount: String, DataCard: @escaping (CardLimitsResponse?) -> ()) {
-        interactor?.tryUpdateCardLimit(ammount: ammount, DataCard: DataCard)
+    func requestCardLimitUpdate(ammount: String, indicador: String, DataCard: @escaping (CardLimitsResponse?) -> ()){
+        interactor?.tryUpdateCardLimit(ammount: ammount, indicador: indicador, DataCard: DataCard)
     }
 }
