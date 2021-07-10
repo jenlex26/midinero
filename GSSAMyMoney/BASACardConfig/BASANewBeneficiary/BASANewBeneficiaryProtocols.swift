@@ -9,20 +9,23 @@
 //
 
 import Foundation
-
+import GSSAServiceCoordinator
+import GSSASecurityManager
+import GSSAFunctionalUtilities
+import GSSASessionInfo
 //MARK: Wireframe -
 protocol BASANewBeneficiaryWireframeProtocol: class {
 
 }
 //MARK: Presenter -
 protocol BASANewBeneficiaryPresenterProtocol: class {
-
+    func requestSetNewBeneficiary(Body: NewBeneficiaryBody, method: EKTHTTPRequestMethod, DataCard: @escaping (DigitalCardResponse?) -> ())
 }
 
 //MARK: Interactor -
 protocol BASANewBeneficiaryInteractorProtocol: class {
-
-  var presenter: BASANewBeneficiaryPresenterProtocol?  { get set }
+    var presenter: BASANewBeneficiaryPresenterProtocol?  { get set }
+    func trySetNewBeneficiary(Body: NewBeneficiaryBody, method: EKTHTTPRequestMethod, DataCard: @escaping (DigitalCardResponse?) -> ())
 }
 
 //MARK: View -

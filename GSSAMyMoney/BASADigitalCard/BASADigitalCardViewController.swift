@@ -11,6 +11,7 @@
 import UIKit
 import GSSAVisualComponents
 import GSSASessionInfo
+import GSSAPermissionsManager
 
 enum CardType{
     case debit
@@ -36,7 +37,6 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
     @IBOutlet weak var configButton      : UIButton!
     
     var userBalance: String! 
-    //MARK: - Life cicle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,10 +70,11 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
     }
     
     func requestCVV(){
-        presenter?.makeDigitalDataRequest(Body: Transaction(transaccion: AccoutRequest(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.encryptAlnova())), DataCard: { [self] DataCard in
+        presenter?.makeDigitalDataRequest(Body: Transaction(transaccion: AccoutRequest.init(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.replacingOccurrences(of: " ", with: "").encryptAlnova(), sicu: GSSISessionInfo.sharedInstance.gsUser.SICU?.encryptAlnova(), latitud: GSPMLocationManager.shared.lastLocation?.coordinate.latitude.description.encryptAlnova(), longitud: GSPMLocationManager.shared.lastLocation?.coordinate.longitude.description.encryptAlnova())), DataCard: { [self] DataCard in
             GSVCLoader.hide()
             if DataCard != nil{
                 self.StartTimer()
+                UserDefaults.standard.set(DataCard!.resultado!.tarjeta?.numero ?? "0", forKey: "DigitalCardNumber")
                 CVVCodeLabel.text = DataCard!.resultado!.tarjeta?.cvv?.alnovaDecrypt()
                 CardNumberLabel.text = (DataCard!.resultado!.tarjeta?.numero?.alnovaDecrypt() ?? "0").tnuoccaFormat
                 ExpDateLabel.text = DataCard?.resultado?.tarjeta?.fechaExpiracion?.alnovaDecrypt().replacingOccurrences(of: "-", with: "/")

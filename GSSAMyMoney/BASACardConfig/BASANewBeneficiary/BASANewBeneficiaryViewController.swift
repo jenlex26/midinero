@@ -11,6 +11,7 @@
 import UIKit
 import GSSAVisualComponents
 import GSSAVisualTemplates
+import GSSASessionInfo
 
 class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryViewProtocol, GSVTDigitalSignDelegate {
     var presenter: BASANewBeneficiaryPresenterProtocol?
@@ -20,6 +21,7 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
     var beneficiaryData: BeneficiaryItem?
     var tableFields: Array<beneficiaryField> = []
     var cellsArray: Array<[UITableViewCell:CGFloat]> = []
+    var requestData: NewBeneficiaryBody?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +32,11 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
         table.delegate = self
         table.dataSource = self
         self.hideKeyboardWhenTappedAround()
+        initializeData()
+    }
+    
+    func initializeData(){
+        requestData = NewBeneficiaryBody.init(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.encryptAlnova(), beneficiarios: [Beneficiario.init(id: "", nombre: "", apellidoPaterno: "", apellidoMaterno: "", fechaNacimiento: "", idParentesco: "", porcentaje: "", domicilio: nil, contacto: nil)])
     }
     
     func registerCells(){
@@ -60,6 +67,7 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
         }else{
             addressSwitchCell.swtch.isOn = true
         }
+        
         addressSwitchCell.swtch.addTarget(self, action: #selector(switchChanged(sender:)), for: .valueChanged)
         addressSwitchCell.separatorView.isHidden = true
         cellsArray.append([addressSwitchCell:56.0])
@@ -91,18 +99,17 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
         cellsArray.append([cell:110.0])
         
         let buttonCell = table.dequeueReusableCell(withIdentifier: "BASAButtonCell") as! BASAButtonCell
-        buttonCell.btnNext.addTarget(self, action: #selector(showDigitalSign), for: .touchUpInside)
+        buttonCell.btnNext.addTarget(self, action: #selector(validateFields), for: .touchUpInside)
         cellsArray.append([buttonCell:119.0])
     }
     
     func setTextFields(){
         tableFields.append(beneficiaryField(title: "Nombre", image: nil, placeHolder: nil, pickerData: nil, text: beneficiaryData?.nombre))
-        
         tableFields.append(beneficiaryField(title: "Apellido paterno", image: nil, placeHolder: nil, pickerData: nil, text: beneficiaryData?.apellidoPaterno))
         tableFields.append(beneficiaryField(title: "Apellido materno", image: nil, placeHolder: "Opcional", pickerData: nil, text: beneficiaryData?.apellidoMaterno))
         if #available(iOS 13.0, *) {
             tableFields.append(beneficiaryField(title: "Fecha de nacimiento", image: UIImage(systemName: "calendar"), placeHolder: "DD/MM/AAAA", pickerData: pickerTextField.init(pickerOptions: nil, datePicker: true, dateFormat: "dd/mm/yyyy"), text: beneficiaryData?.fechaNacimiento))
-            tableFields.append(beneficiaryField(title: "Parentesco", image: UIImage(systemName: "chevron.down"), placeHolder: "Selecciona", pickerData: pickerTextField.init(pickerOptions: ["Tio","Padre","Madre","Primo","Amigo(a)"], datePicker: false, dateFormat: nil)))
+            tableFields.append(beneficiaryField(title: "Parentesco", image: UIImage(systemName: "chevron.down"), placeHolder: "Selecciona", pickerData: pickerTextField.init(pickerOptions: ["Hermano/a","Hijo-a","Padre/Madre","Abuelo/a","Conyuge","Nieto/a","Tio/a","Sobrino/a","Otro","Padre","Madre","Tutor","Empleado"], datePicker: false, dateFormat: nil)))
         }
         tableFields.append(beneficiaryField(title: "Número telefónico", image: nil, placeHolder: nil, pickerData: nil, keyboardType: .numberPad, text: beneficiaryData?.contacto?.numeroTelefono))
         tableFields.append(beneficiaryField(title: "Correo electrónico", image: nil, placeHolder: nil, pickerData: nil, keyboardType: .emailAddress, text: beneficiaryData?.contacto?.correoElectronico))
@@ -113,7 +120,7 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
     }
     
     func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
-        print("ok")
+        
     }
     
     @objc func switchChanged(sender: UISwitch){
@@ -146,8 +153,13 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
         }
     }
     
-    @objc func showDigitalSign(){
+    @objc func validateFields(){
+        
+    }
+    
+    func showDigitalSign(){
         let verification = GSVTDigitalSignViewController(delegate: self)
+        verification.needsTestSeed = true
         verification.modalPresentationStyle = .fullScreen
         present(verification, animated: true, completion: nil)
     }
@@ -188,7 +200,7 @@ extension BASANewBeneficiaryViewController: UITextFieldDelegate{
         textField.placeholder = ""
         
         UIView.animate(withDuration: 0.3, animations: { () -> Void in
-          self.view.frame.origin.y -= 100.0
+            self.view.frame.origin.y -= 100.0
         })
     }
     
@@ -200,12 +212,12 @@ extension BASANewBeneficiaryViewController: UITextFieldDelegate{
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let textFieldText = textField.text,
-               let rangeOfTextToReplace = Range(range, in: textFieldText) else {
-                   return false
-           }
-           let substringToReplace = textFieldText[rangeOfTextToReplace]
-           let count = textFieldText.count - substringToReplace.count + string.count
-           return count <= 3
+              let rangeOfTextToReplace = Range(range, in: textFieldText) else {
+            return false
+        }
+        let substringToReplace = textFieldText[rangeOfTextToReplace]
+        let count = textFieldText.count - substringToReplace.count + string.count
+        return count <= 3
     }
 }
 
@@ -222,7 +234,7 @@ struct beneficiaryField{
     var pickerData: pickerTextField?
     var size: cellSize?
     var keyboardType: UIKeyboardType?
-    var text: String? = ""
+    var text: String?
     var index: Int?
     var height: CGFloat?
     var tag: Int?

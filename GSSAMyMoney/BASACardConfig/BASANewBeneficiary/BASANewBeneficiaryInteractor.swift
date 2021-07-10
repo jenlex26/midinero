@@ -9,8 +9,28 @@
 //
 
 import UIKit
+import GSSAServiceCoordinator
+import GSSASecurityManager
+import GSSAFunctionalUtilities
+import GSSASessionInfo
 
-class BASANewBeneficiaryInteractor: BASANewBeneficiaryInteractorProtocol {
-
+class BASANewBeneficiaryInteractor: GSSAURLSessionTaskCoordinatorBridge, BASANewBeneficiaryInteractorProtocol {
     weak var presenter: BASANewBeneficiaryPresenterProtocol?
+    
+    func trySetNewBeneficiary(Body: NewBeneficiaryBody, method: EKTHTTPRequestMethod, DataCard: @escaping (DigitalCardResponse?) -> ())
+    {
+        self.urlPath = "https://apigateway.superappbaz.com/"
+        self.strPathEndpoint = "integracion/superapp/dinero/captacion/gestion-cuentas/v1/beneficiarios"
+        
+        sendRequest(strUrl: strPathEndpoint, method: method, objBody: Body, environment: GLOBAL_ENVIROMENT) { (objRes: DigitalCardResponse?, error) in
+            debugPrint(objRes as Any)
+            if error.code == 0 {
+                DataCard(objRes)
+            } else {
+                DataCard(nil)
+                debugPrint(error)
+            }
+        }
+    }
+    
 }

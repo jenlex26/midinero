@@ -35,7 +35,8 @@ class GSDigitalCardConfigViewController: UIViewController, GSDigitalCardConfigVi
         buttonsView.layer.borderWidth = 0.5
         containerView.backgroundColor = .GSVCBase200
         updateColors()
-        
+        cardStatus = UserDefaults.standard.value(forKey: "DigitalCardStatus") as? Bool
+        swtch.isOn = (cardStatus ?? false)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -76,17 +77,23 @@ class GSDigitalCardConfigViewController: UIViewController, GSDigitalCardConfigVi
     
     func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
         
-        presenter?.shutdownCardRequest(body: CardStateBody.init(transaccion: CardStateTransaccion.init(primerTokenVerificacion: GSSISessionInfo.sharedInstance.gsAccessToken, numeroTarjeta: GSSISessionInfo.sharedInstance.gsUser.account?.card?.encryptAlnova(), estatus: !cardStatus!)), DataCard: { [self] DataCard in
+        presenter?.shutdownCardRequest(body: CardStateBody.init(transaccion: CardStateTransaccion.init(primerTokenVerificacion: GSSISessionInfo.sharedInstance.gsAccessToken, numeroTarjeta: UserDefaults.standard.value(forKey: "DigitalCardNumber") as? String, estatus: !cardStatus!)), DataCard: { [self] DataCard in
             if DataCard != nil{
                 if cardStatus == true{
                     let alert = UIAlertController(title: "Apagaste tu tarjeta", message: "Las nuevas compras no serán procesadas. Puedes volver a encenderla cuando lo necesites. ", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Aceptar", style: .cancel, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
+                    self.present(alert, animated: true, completion: {
+                        UserDefaults.standard.setValue(true, forKey: "DigitalCardStatus")
+                    })
+                    
                 }else{
                     let alert = UIAlertController(title: "Encendiste tu tarjeta", message: "Las nuevas compras serán procesadas. Puedes volver a apagarla cuando lo necesites. ", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Aceptar", style: .cancel, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
+                    self.present(alert, animated: true, completion: {
+                        UserDefaults.standard.setValue(false, forKey: "DigitalCardStatus")
+                    })
                 }
+              
             }else{
                 swtch.isOn = !swtch.isOn
                 presentBottomAlertFullData(status: .error, message: "En este momento no podemos cambiar el estado de tu tarjeta, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)

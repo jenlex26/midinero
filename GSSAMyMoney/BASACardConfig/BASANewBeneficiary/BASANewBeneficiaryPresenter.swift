@@ -9,9 +9,12 @@
 //
 
 import UIKit
+import GSSAServiceCoordinator
+import GSSASecurityManager
+import GSSAFunctionalUtilities
+import GSSASessionInfo
 
 class BASANewBeneficiaryPresenter: BASANewBeneficiaryPresenterProtocol {
-
     weak private var view: BASANewBeneficiaryViewProtocol?
     var interactor: BASANewBeneficiaryInteractorProtocol?
     private let router: BASANewBeneficiaryWireframeProtocol
@@ -21,5 +24,8 @@ class BASANewBeneficiaryPresenter: BASANewBeneficiaryPresenterProtocol {
         self.interactor = interactor
         self.router = router
     }
-
+    
+    func requestSetNewBeneficiary(Body: NewBeneficiaryBody, method: EKTHTTPRequestMethod, DataCard: @escaping (DigitalCardResponse?) -> ()) {
+        interactor?.trySetNewBeneficiary(Body: Body, method: method, DataCard: DataCard)
+    }
 }

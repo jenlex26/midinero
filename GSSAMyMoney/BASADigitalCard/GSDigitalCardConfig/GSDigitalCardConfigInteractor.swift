@@ -21,9 +21,11 @@ class GSDigitalCardConfigInteractor: GSSAURLSessionTaskCoordinatorBridge, GSDigi
     {
         self.urlPath = "https://apigateway.superappbaz.com/"
         self.strPathEndpoint = "integracion/superapp/dinero/captacion/gestion-tarjetas/v1/tarjetas/bloqueos"
-      
-        sendRequest(strUrl: strPathEndpoint, method: .POST, objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: DigitalCardResponse?, error) in
+        
+        
+        sendRequest(strUrl: strPathEndpoint, method: .PUT, objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: DigitalCardResponse?, error) in
             debugPrint(objRes as Any)
+            
             if error.code == 0 {
                 DataCard(objRes)
             } else {
