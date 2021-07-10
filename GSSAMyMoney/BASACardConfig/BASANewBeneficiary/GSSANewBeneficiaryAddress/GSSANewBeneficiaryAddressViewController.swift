@@ -116,6 +116,20 @@ class GSSANewBeneficiaryAddressViewController: UIViewController, GSSANewBenefici
                     if (cell.textField.text?.characterCount())! == 0{
                         hasEmptyTextField = true
                     }
+                    switch cell.lblTitle.text{
+                     case "Calle":
+                        beneficiaryPublicData.shared.calle = cell.textField.text
+                    case "Número exterior":
+                        beneficiaryPublicData.shared.numeroExterior = cell.textField.text
+                    case "Número interior":
+                        beneficiaryPublicData.shared.numeroInterior = cell.textField.text
+                    case "Código postal":
+                        beneficiaryPublicData.shared.codigoPostal = cell.textField.text
+                    case .none:
+                        print("none case")
+                    case .some(_):
+                        print("unknowed case")
+                    }
                 }
             }
             if hasEmptyTextField == false{
@@ -124,6 +138,19 @@ class GSSANewBeneficiaryAddressViewController: UIViewController, GSSANewBenefici
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {[self] in
                     GSVCLoader.hide()
                     cellsArray.removeLast()
+                    
+                    
+                    
+                    if #available(iOS 13.0, *) {
+                        let postalCodePickerData = beneficiaryField(title: "Colonia", image: UIImage(systemName: "chevron.down"), placeHolder: "Selecciona", pickerData: pickerTextField.init(pickerOptions: ["Hermano/a","Hijo-a","Padre/Madre","Abuelo/a","Conyuge","Nieto/a","Tio/a","Sobrino/a","Otro","Padre","Madre","Tutor","Empleado"], datePicker: false, dateFormat: nil))
+                        
+                        let cell = table.dequeueReusableCell(withIdentifier: "BASATextFieldCell") as! BASATextFieldCell
+                        cell.configureCell(data: postalCodePickerData)
+                        cellsArray.append([cell:117.0])
+                    }
+                    
+                    
+                    
                     let section = table.dequeueReusableCell(withIdentifier: "SectionCell") as! SectionCell
                     section.lblTitle.text = "Alcaldía o municipio"
                     section.lblSubTitle.isHidden = false

@@ -67,6 +67,7 @@ class BASATextFieldCell: UITableViewCell {
         }
     }
 }
+
 extension BASATextFieldCell: GSVCPickerControllerDelegate, GSVCPickerControllerDataSource, UITextFieldDelegate{
     func numberOfComponents(in textField: UITextField) -> Int {
         1
@@ -74,6 +75,29 @@ extension BASATextFieldCell: GSVCPickerControllerDelegate, GSVCPickerControllerD
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "TextFieldDidEnd"), object: [textField.text!: index], userInfo: nil))
+        
+        
+        switch lblTitle?.text{
+        
+        case "Nombre":
+            beneficiaryPublicData.shared.nombre = textField.text
+        case "Apellido paterno":
+            beneficiaryPublicData.shared.apellidoPaterno = textField.text
+        case "Apellido materno":
+            beneficiaryPublicData.shared.apellidoMaterno = textField.text
+        case "Fecha de nacimiento":
+            beneficiaryPublicData.shared.fechaNacimiento = textField.text
+        case "Parentesco":
+            beneficiaryPublicData.shared.idParentesco = textField.text?.kinShipID()
+        case "Número telefónico":
+            beneficiaryPublicData.shared.numeroTelefono = textField.text
+        case "Correo electrónico":
+            beneficiaryPublicData.shared.correoElectronico = textField.text
+        case .none:
+            print("none Case")
+        case .some(_):
+            print("Unknowed case")
+        }
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {

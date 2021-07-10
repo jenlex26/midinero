@@ -21,10 +21,11 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
     var beneficiaryData: BeneficiaryItem?
     var tableFields: Array<beneficiaryField> = []
     var cellsArray: Array<[UITableViewCell:CGFloat]> = []
-    var requestData: NewBeneficiaryBody?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         registerCells()
         setTextFields()
         setOptions()
@@ -32,11 +33,6 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
         table.delegate = self
         table.dataSource = self
         self.hideKeyboardWhenTappedAround()
-        initializeData()
-    }
-    
-    func initializeData(){
-        requestData = NewBeneficiaryBody.init(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.encryptAlnova(), beneficiarios: [Beneficiario.init(id: "", nombre: "", apellidoPaterno: "", apellidoMaterno: "", fechaNacimiento: "", idParentesco: "", porcentaje: "", domicilio: nil, contacto: nil)])
     }
     
     func registerCells(){
@@ -118,7 +114,7 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
     func forgotDigitalSign(_ forgotSecurityCodeViewController: UIViewController?) {
         print("OK")
     }
-    
+
     func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
         
     }
@@ -154,7 +150,23 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
     }
     
     @objc func validateFields(){
+        self.view.endEditing(true)
         
+        var addressBody = BeneficiaryAddress.init(calle: beneficiaryPublicData.shared.calle, numeroExterior: beneficiaryPublicData.shared.numeroExterior, numeroInterior: beneficiaryPublicData.shared.numeroInterior, colonia: beneficiaryPublicData.shared.colonia, municipio: beneficiaryPublicData.shared.municipio, estado: beneficiaryPublicData.shared.estado, codigoPostal: beneficiaryPublicData.shared.codigoPostal)
+        
+        var contactBody = BeneficiaryContact.init(claveLada: "+52", numeroTelefono: beneficiaryPublicData.shared.numeroTelefono, numeroExtension: " ", correoElectronico: beneficiaryPublicData.shared.correoElectronico)
+        
+        if beneficiaryData?.domicilio != nil{
+            addressBody = (beneficiaryData?.domicilio)!
+        }
+        
+        if beneficiaryData?.contacto != nil{
+            contactBody = (beneficiaryData?.contacto)!
+        }
+        
+        let body = NewBeneficiaryBody.init(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.encryptAlnova(), beneficiarios: [Beneficiario.init(id: beneficiaryPublicData.shared.id, nombre: beneficiaryPublicData.shared.nombre, apellidoPaterno: beneficiaryPublicData.shared.apellidoPaterno, apellidoMaterno: beneficiaryPublicData.shared.apellidoMaterno, fechaNacimiento: beneficiaryPublicData.shared.fechaNacimiento, idParentesco: beneficiaryPublicData.shared.idParentesco, porcentaje: beneficiaryPublicData.shared.porcentaje, domicilio: addressBody, contacto: contactBody)])
+            
+           print("body")
     }
     
     func showDigitalSign(){
@@ -198,7 +210,6 @@ extension BASANewBeneficiaryViewController: UITableViewDelegate, UITableViewData
 extension BASANewBeneficiaryViewController: UITextFieldDelegate{
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.placeholder = ""
-        
         UIView.animate(withDuration: 0.3, animations: { () -> Void in
             self.view.frame.origin.y -= 100.0
         })
@@ -208,6 +219,7 @@ extension BASANewBeneficiaryViewController: UITextFieldDelegate{
         UIView.animate(withDuration: 0.3, animations: { () -> Void in
             self.view.frame.origin.y = 0.0
         })
+        beneficiaryPublicData.shared.porcentaje = textField.text
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -243,4 +255,36 @@ struct beneficiaryField{
 enum cellSize{
     case small
     case normal
+}
+
+public struct beneficiaryPublicData {
+    static var shared = beneficiaryPublicData()
+    var id: String?
+    var nombre  : String?
+    var apellidoPaterno: String?
+    var apellidoMaterno: String?
+    var fechaNacimiento: String?
+    var idParentesco: String?
+    var porcentaje: String?
+    var domicilio: Bool?
+    var calle: String?
+    var numeroExterior: String?
+    var numeroInterior: String?
+    var colonia: String?
+    var municipio: String?
+    var estado: String?
+    var codigoPostal: String?
+    var contacto: Bool?
+    var claveLada: String?
+    var numeroTelefono: String?
+    var numeroExtension: String?
+    var correoElectronico: String?
+    private init() { }
+}
+
+extension NewBeneficiaryBody {
+    func hasEmptyFields()-> Bool {
+        let mirror = Mirror(reflecting: self)
+        return mirror.children.contains(where: { $0.value as! String? != "" &&  $0.value as! String? != nil})
+    }
 }

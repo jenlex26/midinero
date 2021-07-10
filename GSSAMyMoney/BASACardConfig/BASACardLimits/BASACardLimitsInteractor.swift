@@ -29,6 +29,7 @@ class BASACardLimitsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASACardLim
         
         sendRequest(strUrl: strPathEndpoint, method: .PUT, arrHeaders: [], objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: CardLimitsResponse?, error) in
             debugPrint(objRes as Any)
+            
             if error.code == 0 {
                 DataCard(objRes)
             } else {
