@@ -204,6 +204,13 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="visaIcon" translatesAutoresizingMaskIntoConstraints="NO" id="ZwP-6k-MBp">
+                                                <rect key="frame" x="370.5" y="144" width="69.5" height="37"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="ZwP-6k-MBp" secondAttribute="height" multiplier="15:8" id="RPo-YL-6Sg"/>
+                                                    <constraint firstAttribute="height" constant="37" id="rKr-CS-gtC"/>
+                                                </constraints>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.95294117649999999" green="0.96862745100000003" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -224,7 +231,9 @@
                                             <constraint firstItem="FdO-wK-VyN" firstAttribute="top" secondItem="Ya1-ct-Igq" secondAttribute="top" constant="16" id="clh-VW-EoH"/>
                                             <constraint firstItem="FdO-wK-VyN" firstAttribute="leading" secondItem="Ya1-ct-Igq" secondAttribute="leading" constant="16" id="dND-sN-lyL"/>
                                             <constraint firstItem="B5R-we-V5S" firstAttribute="top" secondItem="eoH-yZ-cf6" secondAttribute="bottom" constant="6.5" id="fxz-jE-xzq"/>
+                                            <constraint firstAttribute="bottom" secondItem="ZwP-6k-MBp" secondAttribute="bottom" constant="19" id="h54-qg-fN4"/>
                                             <constraint firstAttribute="bottom" secondItem="zYg-HL-Lq6" secondAttribute="bottom" constant="17" id="j8Q-HA-JV7"/>
+                                            <constraint firstAttribute="trailing" secondItem="ZwP-6k-MBp" secondAttribute="trailing" constant="21" id="nvN-vk-SFf"/>
                                             <constraint firstItem="zYg-HL-Lq6" firstAttribute="leading" secondItem="Ya1-ct-Igq" secondAttribute="leading" constant="16" id="sIA-ko-ewZ"/>
                                             <constraint firstItem="t7Q-8d-r8v" firstAttribute="top" secondItem="Ya1-ct-Igq" secondAttribute="top" id="su9-Dl-dHy"/>
                                             <constraint firstAttribute="trailing" secondItem="t7Q-8d-r8v" secondAttribute="trailing" id="taJ-ed-jUC"/>
@@ -342,5 +351,6 @@
         <image name="debitCard3" width="288" height="180"/>
         <image name="ic_more_icon" width="151" height="151"/>
         <image name="logoBaz" width="68" height="31"/>
+        <image name="visaIcon" width="54" height="18"/>
     </resources>
 </document>
