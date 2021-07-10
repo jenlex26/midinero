@@ -274,6 +274,7 @@ public struct beneficiaryPublicData {
     var municipio: String?
     var estado: String?
     var codigoPostal: String?
+    var pais: String?
     var contacto: Bool?
     var claveLada: String?
     var numeroTelefono: String?

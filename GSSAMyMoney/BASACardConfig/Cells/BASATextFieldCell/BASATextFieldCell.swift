@@ -93,6 +93,16 @@ extension BASATextFieldCell: GSVCPickerControllerDelegate, GSVCPickerControllerD
             beneficiaryPublicData.shared.numeroTelefono = textField.text
         case "Correo electrónico":
             beneficiaryPublicData.shared.correoElectronico = textField.text
+        case "Código postal":
+            beneficiaryPublicData.shared.codigoPostal = textField.text
+        case "Calle":
+            beneficiaryPublicData.shared.calle = textField.text
+        case "Número exterior":
+            beneficiaryPublicData.shared.numeroExterior = textField.text
+        case "Número interior":
+            beneficiaryPublicData.shared.numeroInterior = textField.text
+        case "Colonia":
+            beneficiaryPublicData.shared.colonia = textField.text
         case .none:
             print("none Case")
         case .some(_):
