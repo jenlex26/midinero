@@ -17,17 +17,6 @@ struct NewBeneficiaryBody: Codable {
 struct Beneficiario: Codable {
     var id, nombre, apellidoPaterno, apellidoMaterno: String?
     var fechaNacimiento, idParentesco, porcentaje: String?
-    var domicilio: NewBeneficiaryBodyAddress?
-    var contacto: NewBeneficiaryBodyContact?
-}
-
-// MARK: - Contacto
-struct NewBeneficiaryBodyContact: Codable {
-    var claveLada, numeroTelefono, numeroExtension, correoElectronico: String?
-}
-
-// MARK: - Domicilio
-struct NewBeneficiaryBodyAddress: Codable {
-    var calle, numeroExterior, numeroInterior, colonia: String?
-    var municipio, estado, codigoPostal: String?
+    var domicilio: BeneficiaryAddress?
+    var contacto: BeneficiaryContact?
 }

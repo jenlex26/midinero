@@ -57,12 +57,12 @@ extension UIViewController{
 
 extension UITableView{
     func shake() {
-           let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
-           animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
-           animation.duration = 0.6
-           animation.values = [-20.0, 20.0, -20.0, 20.0, -10.0, 10.0, -5.0, 5.0, 0.0 ]
-           self.layer.add(animation, forKey: "shake")
-       }
+        let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
+        animation.duration = 0.6
+        animation.values = [-20.0, 20.0, -20.0, 20.0, -10.0, 10.0, -5.0, 5.0, 0.0 ]
+        self.layer.add(animation, forKey: "shake")
+    }
 }
 
 extension String{
@@ -83,10 +83,41 @@ extension String{
         
         return dateOut.capitalized
     }
+    
+    func kinShipID()-> String{
+        switch self.uppercased(){
+        case "HERMANO/A":
+            return "00"
+        case "HIJO-A":
+            return "01"
+        case "PADRE/MADRE":
+            return "02"
+        case "ABUELO/A":
+            return "03"
+        case "CONYUGE":
+            return "04"
+        case "NIETO/A":
+            return "05"
+        case "TIO/A":
+            return "06"
+        case "SOBRINO/A":
+            return "07"
+        case "OTRO":
+            return "08"
+        case "PADRE":
+            return "09"
+        case "MADRE":
+            return "10"
+        case "EMPLEADO":
+            return "99"
+        default:
+            return self
+        }
+    }
 }
 
 extension UIColor{
-   class func GSVCBase300() -> UIColor{
+    class func GSVCBase300() -> UIColor{
         return UIColor(red: 242/255, green: 242/255, blue: 242/255, alpha: 1.0)
     }
 }
