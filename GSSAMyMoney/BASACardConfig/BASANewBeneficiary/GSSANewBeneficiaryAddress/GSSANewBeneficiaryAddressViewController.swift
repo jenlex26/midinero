@@ -101,13 +101,9 @@ class GSSANewBeneficiaryAddressViewController: UIViewController, GSSANewBenefici
     
     @objc func continueButtonClick(sender: UIButton){
         self.view.endEditing(true)
-        if sender.tag == 1{
-            let alert = UIAlertController(title: "Baz", message: "Al continuar confirmas que todos los datos son correctos.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: {_ in
-                self.dismiss(animated: true, completion: nil)
-            }))
-            alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+        
+        if sender.tag == -1{
+            self.presentBottomAlertFullData(status: .error, message: "Ingrese un código postal valido", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
         }else{
             var hasEmptyTextField = false
             for item in cellsArray{
@@ -117,7 +113,7 @@ class GSSANewBeneficiaryAddressViewController: UIViewController, GSSANewBenefici
                         hasEmptyTextField = true
                     }
                     switch cell.lblTitle.text{
-                     case "Calle":
+                    case "Calle":
                         beneficiaryPublicData.shared.calle = cell.textField.text
                     case "Número exterior":
                         beneficiaryPublicData.shared.numeroExterior = cell.textField.text
@@ -133,51 +129,72 @@ class GSSANewBeneficiaryAddressViewController: UIViewController, GSSANewBenefici
                 }
             }
             if hasEmptyTextField == false{
+                if sender.tag == 1{
+                    let alert = UIAlertController(title: "Baz", message: "Al continuar confirmas que todos los datos son correctos.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: {_ in
+                        self.dismiss(animated: true, completion: nil)
+                    }))
+                    alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }else{
                 GSVCLoader.show(type: .native)
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {[self] in
+                presenter?.requestLocationInfo(CP: beneficiaryPublicData.shared.codigoPostal ?? "", LocationInfo: { [self] LocationInfo in
                     GSVCLoader.hide()
-                    cellsArray.removeLast()
-                    
-                    
-                    
-                    if #available(iOS 13.0, *) {
-                        let postalCodePickerData = beneficiaryField(title: "Colonia", image: UIImage(systemName: "chevron.down"), placeHolder: "Selecciona", pickerData: pickerTextField.init(pickerOptions: ["Hermano/a","Hijo-a","Padre/Madre","Abuelo/a","Conyuge","Nieto/a","Tio/a","Sobrino/a","Otro","Padre","Madre","Tutor","Empleado"], datePicker: false, dateFormat: nil))
+                    if LocationInfo != nil {
+                        cellsArray.removeLast()
                         
-                        let cell = table.dequeueReusableCell(withIdentifier: "BASATextFieldCell") as! BASATextFieldCell
-                        cell.configureCell(data: postalCodePickerData)
-                        cellsArray.append([cell:117.0])
+                        var colonias = [""]
+                         
+                        let serviceColonias = LocationInfo!.resultado!.colonias ?? []
+                        
+                        for item in serviceColonias{
+                            colonias.append(item.nombre ?? "")
+                        }
+                        
+                        if #available(iOS 13.0, *) {
+                            let postalCodePickerData = beneficiaryField(title: "Colonia", image: UIImage(systemName: "chevron.down"), placeHolder: "Selecciona", pickerData: pickerTextField.init(pickerOptions: colonias, datePicker: false, dateFormat: nil))
+                            
+                            let cell = table.dequeueReusableCell(withIdentifier: "BASATextFieldCell") as! BASATextFieldCell
+                            cell.configureCell(data: postalCodePickerData)
+                            cellsArray.append([cell:117.0])
+                        }
+                        
+                        let section = table.dequeueReusableCell(withIdentifier: "SectionCell") as! SectionCell
+                        section.lblTitle.text = "Alcaldía o municipio"
+                        section.lblSubTitle.isHidden = false
+                        section.lblSubTitle.text = LocationInfo?.resultado?.municipio
+                        beneficiaryPublicData.shared.municipio = LocationInfo?.resultado?.municipio
+                        cellsArray.append([section:80.0])
+                        
+                        let stateSection = table.dequeueReusableCell(withIdentifier: "SectionCell") as! SectionCell
+                        stateSection.lblTitle.text = "Estado o ciudad"
+                        stateSection.lblSubTitle.isHidden = false
+                        stateSection.lblSubTitle.text = LocationInfo?.resultado?.estado
+                        beneficiaryPublicData.shared.estado = LocationInfo?.resultado?.estado
+                        cellsArray.append([stateSection:80.0])
+                        
+                        let countrySection = table.dequeueReusableCell(withIdentifier: "SectionCell") as! SectionCell
+                        countrySection.lblTitle.text = "País"
+                        countrySection.lblSubTitle.isHidden = false
+                        countrySection.lblSubTitle.text = LocationInfo?.resultado?.pais
+                        beneficiaryPublicData.shared.pais = LocationInfo?.resultado?.pais
+                        cellsArray.append([countrySection:80.0])
+                        
+                        let button = table.dequeueReusableCell(withIdentifier: "BASAButtonCell") as! BASAButtonCell
+                        button.btnNext.setTitle("Continuar", for: .normal)
+                        button.btnNext.tag = 1
+                        button.btnNext.addTarget(self, action: #selector(continueButtonClick(sender:)), for: .touchUpInside)
+                        cellsArray.append([button:117.0])
+                        
+                        self.table.reloadData()
+                        
+                    }else{
+                        self.presentBottomAlertFullData(status: .error, message: "En este momento no es posible recuperar la información, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
                     }
                     
-                    
-                    
-                    let section = table.dequeueReusableCell(withIdentifier: "SectionCell") as! SectionCell
-                    section.lblTitle.text = "Alcaldía o municipio"
-                    section.lblSubTitle.isHidden = false
-                    section.lblSubTitle.text = "Álvaro Obregón"
-                    cellsArray.append([section:80.0])
-                    
-                    let stateSection = table.dequeueReusableCell(withIdentifier: "SectionCell") as! SectionCell
-                    stateSection.lblTitle.text = "Estado o ciudad"
-                    stateSection.lblSubTitle.isHidden = false
-                    stateSection.lblSubTitle.text = "CDMX"
-                    cellsArray.append([stateSection:80.0])
-                    
-                    let countrySection = table.dequeueReusableCell(withIdentifier: "SectionCell") as! SectionCell
-                    countrySection.lblTitle.text = "País"
-                    countrySection.lblSubTitle.isHidden = false
-                    countrySection.lblSubTitle.text = "México"
-                    cellsArray.append([countrySection:80.0])
-                    
-                    let button = table.dequeueReusableCell(withIdentifier: "BASAButtonCell") as! BASAButtonCell
-                    button.btnNext.setTitle("Continuar", for: .normal)
-                    button.btnNext.tag = 1
-                    button.btnNext.addTarget(self, action: #selector(continueButtonClick(sender:)), for: .touchUpInside)
-                    cellsArray.append([button:117.0])
-                    
-                    self.table.reloadData()
                 })
                 
+                }
             }else{
                 let generator = UINotificationFeedbackGenerator()
                 generator.notificationOccurred(.error)
@@ -188,6 +205,10 @@ class GSSANewBeneficiaryAddressViewController: UIViewController, GSSANewBenefici
     
     @objc func updateData(sender: Notification){
         print(sender.object as Any)
+    }
+    
+    @objc func handlePostalCodeChange(){
+        
     }
     
     @IBAction func close(_ sender: Any){
@@ -229,7 +250,7 @@ extension GSSANewBeneficiaryAddressViewController: UITextFieldDelegate{
             let currentText = textField.text ?? ""
             guard let stringRange = Range(range, in: currentText) else { return false }
             let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
-            return updatedText.count <= 6
+            return updatedText.count <= 5
         }else{
             return true
         }

@@ -22,4 +22,7 @@ class GSSANewBeneficiaryAddressPresenter: GSSANewBeneficiaryAddressPresenterProt
         self.router = router
     }
 
+    func requestLocationInfo(CP: String, LocationInfo: @escaping (zipResponse?) -> ()) {
+        interactor?.tryGetLocationInfo(CP: CP, LocationInfo: LocationInfo)
+    }
 }

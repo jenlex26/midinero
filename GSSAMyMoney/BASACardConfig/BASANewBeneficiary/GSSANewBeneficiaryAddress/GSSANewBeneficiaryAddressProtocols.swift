@@ -16,13 +16,13 @@ protocol GSSANewBeneficiaryAddressWireframeProtocol: class {
 }
 //MARK: Presenter -
 protocol GSSANewBeneficiaryAddressPresenterProtocol: class {
-
+    func requestLocationInfo(CP: String, LocationInfo: @escaping (zipResponse?) -> ())
 }
 
 //MARK: Interactor -
 protocol GSSANewBeneficiaryAddressInteractorProtocol: class {
-
-  var presenter: GSSANewBeneficiaryAddressPresenterProtocol?  { get set }
+    var presenter: GSSANewBeneficiaryAddressPresenterProtocol?  { get set }
+    func tryGetLocationInfo(CP: String, LocationInfo: @escaping (zipResponse?) -> ())
 }
 
 //MARK: View -
