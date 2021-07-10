@@ -20,11 +20,11 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Uc-bg-VVi">
                         <rect key="frame" x="30" y="0.0" width="386" height="237"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="creditCard" translatesAutoresizingMaskIntoConstraints="NO" id="b6M-28-8L6">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="creditCard2" translatesAutoresizingMaskIntoConstraints="NO" id="b6M-28-8L6">
                                 <rect key="frame" x="0.0" y="0.0" width="386" height="237"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-/-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pbN-Bb-cBg" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                <rect key="frame" x="79" y="203" width="19.5" height="17"/>
+                                <rect key="frame" x="68.5" y="205.5" width="12.5" height="16"/>
                                 <fontDescription key="fontDescription" name="GeezaPro-Bold" family="Geeza Pro" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -35,7 +35,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="$-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ckp-u2-ztP" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                <rect key="frame" x="321.5" y="53" width="44.5" height="50.5"/>
+                                <rect key="frame" x="333" y="53" width="33" height="45.5"/>
                                 <fontDescription key="fontDescription" name="GeezaPro-Bold" family="Geeza Pro" pointSize="37"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -46,7 +46,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vigencia" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GXj-fW-syT" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                <rect key="frame" x="21" y="203" width="53" height="17"/>
+                                <rect key="frame" x="21" y="206.5" width="42.5" height="13.5"/>
                                 <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="11"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -57,7 +57,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RgV-Cl-72H" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                <rect key="frame" x="16" y="165.5" width="354" height="31"/>
+                                <rect key="frame" x="16" y="168" width="354" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="hij-5z-t5J"/>
                                 </constraints>
@@ -71,7 +71,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Debes $-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CpU-GS-XIw" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                <rect key="frame" x="301.5" y="103.5" width="64.5" height="20"/>
+                                <rect key="frame" x="294.5" y="98.5" width="71.5" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -83,6 +83,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gAG-TV-emh">
                                 <rect key="frame" x="343" y="10" width="28" height="28"/>
+                                <color key="backgroundColor" red="0.062055605123366192" green="0.073936635761343572" blue="0.114489368556701" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="RI3-F3-jUE"/>
                                     <constraint firstAttribute="width" constant="28" id="WER-bJ-Mts"/>
@@ -147,23 +148,23 @@
     </objects>
     <designables>
         <designable name="CpU-GS-XIw">
-            <size key="intrinsicContentSize" width="64.5" height="20"/>
+            <size key="intrinsicContentSize" width="71.5" height="20.5"/>
         </designable>
         <designable name="GXj-fW-syT">
-            <size key="intrinsicContentSize" width="53" height="17"/>
+            <size key="intrinsicContentSize" width="42.5" height="13.5"/>
         </designable>
         <designable name="RgV-Cl-72H">
-            <size key="intrinsicContentSize" width="19" height="45"/>
+            <size key="intrinsicContentSize" width="6" height="21"/>
         </designable>
         <designable name="ckp-u2-ztP">
-            <size key="intrinsicContentSize" width="44.5" height="50.5"/>
+            <size key="intrinsicContentSize" width="33" height="45.5"/>
         </designable>
         <designable name="pbN-Bb-cBg">
-            <size key="intrinsicContentSize" width="19.5" height="17"/>
+            <size key="intrinsicContentSize" width="12.5" height="16"/>
         </designable>
     </designables>
     <resources>
-        <image name="creditCard" width="586" height="260"/>
+        <image name="creditCard2" width="288" height="180"/>
         <image name="ic_more_icon" width="151" height="151"/>
         <image name="logoBaz" width="68" height="31"/>
     </resources>

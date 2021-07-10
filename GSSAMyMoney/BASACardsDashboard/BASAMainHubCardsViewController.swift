@@ -89,8 +89,11 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     }
     
     func loadCreditCardInfo(){
+        
+        let numberCard = "4589090200115840"
+        
         GSVCLoader.show(type: .native)
-        presenter?.requestCreditCardData(Body: CreditCardBody.init(transaccion: CreditCardTransaccion.init(numeroCuenta: "", numeroTarjeta: GSSISessionInfo.sharedInstance.gsUser.encryptedCard?.alnovaDecrypt(), numeroContrato: "")), CreditCardData: { [self] CreditCardData in
+        presenter?.requestCreditCardData(Body: CreditCardBody.init(transaccion: CreditCardTransaccion.init(numeroCuenta: "", numeroTarjeta: numberCard, numeroContrato: "")), CreditCardData: { [self] CreditCardData in
             if let CreditCard = CreditCardData{
                 creditCardData = CreditCard
                 NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "reloadCreditCardData"), object: CreditCard, userInfo: nil))
@@ -103,7 +106,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     }
     
     func loadCreditCardBalance(){
-        presenter?.requestCreditCardBalance(Body: CreditCardBalanceBody.init(transaccion: CreditCardBalanceTransaccion.init(numeroTarjeta: GSSISessionInfo.sharedInstance.gsUser.encryptedCard?.alnovaDecrypt())), CreditCardBalance: { [self] CreditCardBalance in
+        presenter?.requestCreditCardBalance(Body: CreditCardBalanceBody.init(transaccion: CreditCardBalanceTransaccion.init(numeroTarjeta: "5165830500011341")), CreditCardBalance: { [self] CreditCardBalance in
             if let creditCardBalanceResponse = CreditCardBalance{
                 creditCardBalance = creditCardBalanceResponse
                 NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "reloadCreditCardBalance"), object: creditCardBalanceResponse, userInfo: nil))

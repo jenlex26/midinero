@@ -36,7 +36,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eqw-dX-W6a" userLabel="header">
                             <rect key="frame" x="0.0" y="0.0" width="434" height="300"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_header" translatesAutoresizingMaskIntoConstraints="NO" id="7zr-4F-7VY">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headerImage" translatesAutoresizingMaskIntoConstraints="NO" id="7zr-4F-7VY">
                                     <rect key="frame" x="0.0" y="-47" width="434" height="347"/>
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A9Z-o1-Doj">
@@ -380,7 +380,7 @@
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="E4Y-ec-TWw"/>
-            <color key="backgroundColor" red="0.18431372549019609" green="0.64727145429999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color key="backgroundColor" red="0.50588238240000005" green="0.2117646933" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="xyh-sB-vkc" secondAttribute="bottom" id="Edu-a0-RSW"/>
                 <constraint firstItem="xyh-sB-vkc" firstAttribute="top" secondItem="E4Y-ec-TWw" secondAttribute="top" id="RZG-Nk-7fi"/>
@@ -417,7 +417,7 @@
     <resources>
         <image name="VISAlogo" width="40" height="14"/>
         <image name="doc.on.doc.fill" catalog="system" width="116" height="128"/>
-        <image name="ic_header" width="375" height="273"/>
+        <image name="headerImage" width="375" height="275"/>
         <image name="ic_more_icon" width="151" height="151"/>
         <image name="lockIcon" width="24" height="24"/>
         <image name="logoBaz" width="68" height="31"/>

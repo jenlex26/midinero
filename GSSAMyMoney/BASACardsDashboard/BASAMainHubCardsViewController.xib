@@ -24,7 +24,7 @@
                     <rect key="frame" x="0.0" y="200" width="414" height="476.5"/>
                     <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_header" translatesAutoresizingMaskIntoConstraints="NO" id="tUK-I9-Gu6">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headerImage" translatesAutoresizingMaskIntoConstraints="NO" id="tUK-I9-Gu6">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="300" id="RQh-85-VUW"/>
@@ -41,7 +41,7 @@
                 </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="5xj-dk-3uS"/>
-            <color key="backgroundColor" red="0.1843137255" green="0.64727145429999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color key="backgroundColor" red="0.50980395079999996" green="0.2117646933" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <constraints>
                 <constraint firstItem="7UO-gW-Fp5" firstAttribute="top" secondItem="tUK-I9-Gu6" secondAttribute="bottom" constant="-100" id="8zn-sx-GB8"/>
                 <constraint firstItem="dhi-zf-36N" firstAttribute="top" secondItem="5xj-dk-3uS" secondAttribute="top" id="A1w-xR-WFA"/>
@@ -63,7 +63,7 @@
         </view>
     </objects>
     <resources>
-        <image name="ic_header" width="375" height="273"/>
+        <image name="headerImage" width="375" height="275"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
