@@ -41,6 +41,7 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
             beneficiaryPublicData.shared.apellidoPaterno = beneficiaryData?.apellidoPaterno?.alnovaDecrypt()
             beneficiaryPublicData.shared.apellidoMaterno = beneficiaryData?.apellidoMaterno?.alnovaDecrypt()
             beneficiaryPublicData.shared.idParentesco = beneficiaryData?.idParentesco
+            useSessionInfoAddress()
         }
         
         if beneficiaryData?.nombre?.alnovaDecrypt().nameFormatter().count ?? 0 > 0{
@@ -48,7 +49,6 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
         }else{
             letUserEdit = true
         }
-        useSessionInfoAddress()
         
         registerCells()
         setTextFields()

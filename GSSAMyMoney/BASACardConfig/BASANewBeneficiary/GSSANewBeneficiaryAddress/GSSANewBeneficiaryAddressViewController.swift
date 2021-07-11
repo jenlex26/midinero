@@ -72,6 +72,7 @@ class GSSANewBeneficiaryAddressViewController: UIViewController, GSSANewBenefici
         internalNumber.textField.text = beneficiaryData?.numeroInterior?.alnovaDecrypt()
         internalNumber.textField.placeholder = nil
         internalNumber.textField.returnKeyType = .next
+        internalNumber.textField.keyboardType = .numberPad
         internalNumber.textField.tag = 2
         internalNumber.textField.contentType(.streetAddressLine2)
         internalNumber.textField.delegate = self
@@ -246,12 +247,21 @@ extension GSSANewBeneficiaryAddressViewController: UITextFieldDelegate{
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textField.tag == 3{
+       
             let currentText = textField.text ?? ""
             guard let stringRange = Range(range, in: currentText) else { return false }
             let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+        
+        switch textField.tag{
+        case 3:
             return updatedText.count <= 5
-        }else{
+        case 0:
+            return updatedText.count <= 25
+        case 1:
+            return updatedText.count <= 5
+        case 2:
+            return updatedText.count <= 5
+        default:
             return true
         }
     }

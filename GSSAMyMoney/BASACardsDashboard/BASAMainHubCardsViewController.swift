@@ -40,7 +40,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         NotificationCenter.default.addObserver(self, selector: #selector(SwitchColors(notification:)), name: NSNotification.Name(rawValue: "HomeHeaderViewChange"), object: nil)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         loadDebitBalance()
-       // loadDebitMovements()
+        // loadDebitMovements()
         self.setTableForDebitCard()
     }
     
@@ -89,9 +89,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     }
     
     func loadCreditCardInfo(){
-        
         let numberCard = "4589090200115840"
-        
         GSVCLoader.show(type: .native)
         presenter?.requestCreditCardData(Body: CreditCardBody.init(transaccion: CreditCardTransaccion.init(numeroCuenta: "", numeroTarjeta: numberCard, numeroContrato: "")), CreditCardData: { [self] CreditCardData in
             if let CreditCard = CreditCardData{
@@ -181,7 +179,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         separator.lblTitle.text = "Movimientos"
         cellsArray.append([separator:60.0])
         
-       
+        
         if debitCardMovements != nil{
             for item in debitCardMovements!.resultado.movimientos{
                 if  item.descripcion?.alnovaDecrypt() != ""{
