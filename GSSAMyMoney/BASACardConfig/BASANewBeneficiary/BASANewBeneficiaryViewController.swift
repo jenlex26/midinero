@@ -12,20 +12,31 @@ import UIKit
 import GSSAVisualComponents
 import GSSAVisualTemplates
 import GSSASessionInfo
+import GSSAServiceCoordinator
 
-class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryViewProtocol, GSVTDigitalSignDelegate {
-    var presenter: BASANewBeneficiaryPresenterProtocol?
+class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryViewProtocol, GSVTDigitalSignDelegate, GSVCBottomAlertHandler{
     
     @IBOutlet weak var table: UITableView!
     
     var beneficiaryData: BeneficiaryItem?
     var tableFields: Array<beneficiaryField> = []
     var cellsArray: Array<[UITableViewCell:CGFloat]> = []
+    var bottomAlert: GSVCBottomAlert?
+    var presenter: BASANewBeneficiaryPresenterProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+        if beneficiaryData != nil{
+            beneficiaryPublicData.shared.id = String(beneficiaryData?.id ?? -1)
+            beneficiaryPublicData.shared.nombre = beneficiaryData?.nombre?.alnovaDecrypt()
+            beneficiaryPublicData.shared.fechaNacimiento = beneficiaryData?.fechaNacimiento?.alnovaDecrypt()
+            beneficiaryPublicData.shared.numeroTelefono = beneficiaryData?.contacto?.numeroTelefono?.alnovaDecrypt()
+            beneficiaryPublicData.shared.correoElectronico = beneficiaryData?.contacto?.correoElectronico?.alnovaDecrypt()
+            beneficiaryPublicData.shared.fechaNacimiento = beneficiaryData?.fechaNacimiento?.alnovaDecrypt()
+            beneficiaryPublicData.shared.porcentaje = beneficiaryData?.porcentaje?.alnovaDecrypt()
+            beneficiaryPublicData.shared.apellidoPaterno = beneficiaryData?.apellidoPaterno?.alnovaDecrypt()
+            beneficiaryPublicData.shared.apellidoMaterno = beneficiaryData?.apellidoMaterno?.alnovaDecrypt()
+        }
         registerCells()
         setTextFields()
         setOptions()
@@ -33,6 +44,10 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
         table.delegate = self
         table.dataSource = self
         self.hideKeyboardWhenTappedAround()
+    }
+    
+    func optionalAction() {
+        print("Ok")
     }
     
     func registerCells(){
@@ -75,6 +90,7 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
         }
         
         let percentCell = table.dequeueReusableCell(withIdentifier: "BASATextFieldCell") as! BASATextFieldCell
+        percentCell.textField.text = beneficiaryPublicData.shared.porcentaje
         percentCell.blankSpace.isHidden = false
         percentCell.textField.delegate = self
         percentCell.lblTitle.text = "Porcentaje otorgado"
@@ -151,10 +167,11 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
     
     @objc func validateFields(){
         self.view.endEditing(true)
+        var addressBody = BeneficiaryAddress.init(calle: beneficiaryPublicData.shared.calle?.encryptAlnova(), numeroExterior: beneficiaryPublicData.shared.numeroExterior?.encryptAlnova(), numeroInterior: beneficiaryPublicData.shared.numeroInterior?.encryptAlnova(), colonia: beneficiaryPublicData.shared.colonia?.encryptAlnova(), municipio: beneficiaryPublicData.shared.municipio?.encryptAlnova(), estado: beneficiaryPublicData.shared.estado?.encryptAlnova(), codigoPostal: beneficiaryPublicData.shared.codigoPostal?.encryptAlnova())
         
-        var addressBody = BeneficiaryAddress.init(calle: beneficiaryPublicData.shared.calle, numeroExterior: beneficiaryPublicData.shared.numeroExterior, numeroInterior: beneficiaryPublicData.shared.numeroInterior, colonia: beneficiaryPublicData.shared.colonia, municipio: beneficiaryPublicData.shared.municipio, estado: beneficiaryPublicData.shared.estado, codigoPostal: beneficiaryPublicData.shared.codigoPostal)
+        var contactBody = BeneficiaryContact.init(claveLada: "52".encryptAlnova(), numeroTelefono: beneficiaryPublicData.shared.numeroTelefono?.encryptAlnova(), numeroExtension: " ".encryptAlnova(), correoElectronico: beneficiaryPublicData.shared.correoElectronico?.encryptAlnova())
         
-        var contactBody = BeneficiaryContact.init(claveLada: "+52", numeroTelefono: beneficiaryPublicData.shared.numeroTelefono, numeroExtension: " ", correoElectronico: beneficiaryPublicData.shared.correoElectronico)
+        
         
         if beneficiaryData?.domicilio != nil{
             addressBody = (beneficiaryData?.domicilio)!
@@ -164,9 +181,30 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
             contactBody = (beneficiaryData?.contacto)!
         }
         
-        let body = NewBeneficiaryBody.init(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.encryptAlnova(), beneficiarios: [Beneficiario.init(id: beneficiaryPublicData.shared.id, nombre: beneficiaryPublicData.shared.nombre, apellidoPaterno: beneficiaryPublicData.shared.apellidoPaterno, apellidoMaterno: beneficiaryPublicData.shared.apellidoMaterno, fechaNacimiento: beneficiaryPublicData.shared.fechaNacimiento, idParentesco: beneficiaryPublicData.shared.idParentesco, porcentaje: beneficiaryPublicData.shared.porcentaje, domicilio: addressBody, contacto: contactBody)])
+        let body = NewBeneficiaryBody.init(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.replacingOccurrences(of: " ", with: "").encryptAlnova(), beneficiarios: [Beneficiario.init(id: beneficiaryPublicData.shared.id, nombre: beneficiaryPublicData.shared.nombre?.encryptAlnova(), apellidoPaterno: beneficiaryPublicData.shared.apellidoPaterno?.encryptAlnova(), apellidoMaterno: beneficiaryPublicData.shared.apellidoMaterno?.encryptAlnova(), fechaNacimiento: beneficiaryPublicData.shared.fechaNacimiento?.encryptAlnova(), idParentesco: beneficiaryPublicData.shared.idParentesco?.encryptAlnova(), porcentaje: beneficiaryPublicData.shared.porcentaje?.encryptAlnova(), domicilio: addressBody, contacto: contactBody)])
+        
+        
+//        let body = NewBeneficiaryBody.init(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.replacingOccurrences(of: " ", with: "").encryptAlnova(), beneficiarios: [Beneficiario.init(id: beneficiaryPublicData.shared.id, nombre: beneficiaryPublicData.shared.nombre, apellidoPaterno: beneficiaryPublicData.shared.apellidoPaterno, apellidoMaterno: beneficiaryPublicData.shared.apellidoMaterno, fechaNacimiento: beneficiaryPublicData.shared.fechaNacimiento, idParentesco: beneficiaryPublicData.shared.idParentesco, porcentaje: beneficiaryPublicData.shared.porcentaje, domicilio: addressBody, contacto: contactBody)])
+       
+        var method = EKTHTTPRequestMethod.POST
             
-           print("body")
+        if beneficiaryData != nil{
+            method = .PUT
+        }
+        
+        GSVCLoader.show()
+        presenter?.requestSetNewBeneficiary(Body: body, method: method, DataCard: {DataCard in
+            GSVCLoader.hide()
+            if DataCard != nil{
+                let alert = UIAlertController(title: "Operación exitosa", message: "Datos guardados", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: {_ in
+                    self.navigationController?.popViewController(animated: true)
+                }))
+                self.present(alert, animated: true, completion: nil)
+            }else{
+                self.presentBottomAlertFullData(status: .error, message: "No podemos guardar la información, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+            }
+        })
     }
     
     func showDigitalSign(){

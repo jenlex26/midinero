@@ -32,7 +32,12 @@ class BASATextFieldCell: UITableViewCell {
         textField.delegate = self
         
         lblTitle.text = data.title
-        textField.text = data.text?.alnovaDecrypt()
+        
+        if lblTitle.text == "Parentesco"{
+            textField.text = data.text?.alnovaDecrypt().removeWhiteSpaces().IDforKinship()
+        }else{
+            textField.text = data.text?.alnovaDecrypt().removeWhiteSpaces()
+        }
         
         textField.placeholder = data.placeHolder
         if data.image != nil{
@@ -145,7 +150,7 @@ extension BASATextFieldCell: GSVCPickerControllerDelegate, GSVCPickerControllerD
     }
     
     func didSelect(date: Date, from textField: UITextField) {
-        textField.text = GSFUDateConversor.getStringFrom(date, withFormat: "dd/MM/yyyy")
+        textField.text = GSFUDateConversor.getStringFrom(date, withFormat: "yyyy-MM-dd")
     }
     
     func didSelect(row: Int, key: String, value: Any?, from textField: UITextField) {

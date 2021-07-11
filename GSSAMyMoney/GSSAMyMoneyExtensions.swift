@@ -114,6 +114,41 @@ extension String{
             return self
         }
     }
+    
+    func IDforKinship() -> String{
+        switch self{
+        case "00":
+            return "HERMANO/A"
+        case "01":
+            return "HIJO-A"
+        case "02":
+            return "PADRE/MADRE"
+        case "03":
+            return "ABUELO/A"
+        case "04":
+            return "CONYUGE"
+        case "05":
+            return "NIETO/A"
+        case "06":
+            return "TIO/A"
+        case "07":
+            return "SOBRINO/A"
+        case "08":
+            return "OTRO"
+        case "09":
+            return "PADRE"
+        case "10":
+            return "MADRE"
+        case "99":
+            return "EMPLEADO"
+        default:
+            return self
+        }
+    }
+    
+    func removeWhiteSpaces() -> String{
+        return self.replacingOccurrences(of: " ", with: "")
+    }
 }
 
 extension UIColor{

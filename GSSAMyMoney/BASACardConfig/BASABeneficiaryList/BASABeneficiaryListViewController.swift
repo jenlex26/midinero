@@ -27,6 +27,12 @@ class BASABeneficiaryListViewController: UIViewController, BASABeneficiaryListVi
         table.dataSource = self
         table.alwaysBounceVertical = false
         registerCells()
+       
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        tableData.removeAll()
         loadBeneficiaries()
     }
     
