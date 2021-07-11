@@ -112,15 +112,4 @@
             <point key="canvasLocation" x="215.94202898550725" y="97.433035714285708"/>
         </tableViewCell>
     </objects>
-    <designables>
-        <designable name="1nX-FC-S3C">
-            <size key="intrinsicContentSize" width="111" height="20"/>
-        </designable>
-        <designable name="ARQ-jK-s9U">
-            <size key="intrinsicContentSize" width="40" height="30"/>
-        </designable>
-        <designable name="ghv-vV-48x">
-            <size key="intrinsicContentSize" width="126" height="22.5"/>
-        </designable>
-    </designables>
 </document>
