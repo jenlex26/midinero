@@ -27,7 +27,6 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
     @IBOutlet weak var DigitalCard: BASAShadowRadiusView!
     @IBOutlet weak var TopHeaderView     : UIView!
     @IBOutlet weak var CardBackgroundView: UIView!
-    @IBOutlet weak var cvvView           : UIView!
     @IBOutlet weak var CVVCodeLabel      : GSVCLabel!
     @IBOutlet weak var AvaibleMoneyLabel : GSVCLabel!
     @IBOutlet weak var CardNumberLabel   : GSVCLabel!
@@ -35,11 +34,16 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
     @IBOutlet weak var ExpDateLabel      : GSVCLabel!
     @IBOutlet weak var TimerView         : BASACircularProgressView!
     @IBOutlet weak var configButton      : UIButton!
+    @IBOutlet weak var viewContainerOn   : UIView!
+    @IBOutlet weak var cvvView           : UIView!
+    @IBOutlet weak var lockIcon          : UIImageView!
+    @IBOutlet weak var optionsView       : UIView!
     
     var userBalance: String! 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.ConfigureBlurCardView()
         GSVCLoader.show(type: .native)
         self.TimerView.delegate = self
@@ -69,17 +73,36 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
         requestCVV()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if (UserDefaults.standard.value(forKey: "DigitalCardStatus")) as! Int == 0{
+            unLockCard()
+        }else{
+            lockCard()
+        }
+    }
+    
     func requestCVV(){
         presenter?.makeDigitalDataRequest(Body: Transaction(transaccion: AccoutRequest.init(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.replacingOccurrences(of: " ", with: "").encryptAlnova(), sicu: GSSISessionInfo.sharedInstance.gsUser.SICU?.encryptAlnova(), latitud: GSPMLocationManager.shared.lastLocation?.coordinate.latitude.description.encryptAlnova(), longitud: GSPMLocationManager.shared.lastLocation?.coordinate.longitude.description.encryptAlnova())), DataCard: { [self] DataCard in
             GSVCLoader.hide()
             if DataCard != nil{
+                if (UserDefaults.standard.value(forKey: "DigitalCardStatus")) as! Int == 0{
+                    unLockCard()
+                }else{
+                    lockCard()
+                }
                 self.StartTimer()
                 UserDefaults.standard.set(DataCard!.resultado!.tarjeta?.numero ?? "0", forKey: "DigitalCardNumber")
                 CVVCodeLabel.text = DataCard!.resultado!.tarjeta?.cvv?.alnovaDecrypt()
                 CardNumberLabel.text = (DataCard!.resultado!.tarjeta?.numero?.alnovaDecrypt() ?? "0").tnuoccaFormat
                 ExpDateLabel.text = DataCard?.resultado?.tarjeta?.fechaExpiracion?.alnovaDecrypt().replacingOccurrences(of: "-", with: "/")
+                
+                optionsView.isHidden = false
             }else{
                 self.presentBottomAlertFullData(status: .error, message: "No podemos obtener tu tarjeta digital en este momento, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
+                
+                lockCard()
+                lockIcon.isHidden = true
+                optionsView.isHidden = true
             }
         })
     }
@@ -94,6 +117,18 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
     
     func StartTimer(){
         TimerView.start(beginingValue: 180)
+    }
+    
+    func lockCard(){
+        viewContainerOn.isHidden = true
+        cvvView.isHidden = true
+        lockIcon.isHidden = false
+    }
+    
+    func unLockCard(){
+        viewContainerOn.isHidden = false
+        cvvView.isHidden = false
+        lockIcon.isHidden = true
     }
     
     func SetGradient(){
@@ -163,8 +198,8 @@ extension BASADigitalCardViewController: TimerHandleDelegate {
     func didEndTimer(sender: BASACircularProgressView) {
         print("Se acabo el tiempo")
         if self.isOnScreen{
-           GSVCLoader.show(type: .native)
-           requestCVV()
+            GSVCLoader.show(type: .native)
+            requestCVV()
         }
     }
 }
