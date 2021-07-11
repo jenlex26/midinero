@@ -83,11 +83,12 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gAG-TV-emh">
                                 <rect key="frame" x="343" y="10" width="28" height="28"/>
-                                <color key="backgroundColor" red="0.062055605123366192" green="0.073936635761343572" blue="0.114489368556701" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.094117648900000003" green="0.109803915" blue="0.13333332540000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="RI3-F3-jUE"/>
                                     <constraint firstAttribute="width" constant="28" id="WER-bJ-Mts"/>
                                 </constraints>
+                                <color key="tintColor" red="0.83529412749999998" green="0.99607843159999998" blue="0.48235297199999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                 <state key="normal" image="ic_more_icon">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
