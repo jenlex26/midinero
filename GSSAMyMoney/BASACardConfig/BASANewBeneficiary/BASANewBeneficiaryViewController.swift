@@ -23,12 +23,16 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
     var cellsArray: Array<[UITableViewCell:CGFloat]> = []
     var bottomAlert: GSVCBottomAlert?
     var presenter: BASANewBeneficiaryPresenterProtocol?
+    var letUserEdit: Bool?
+    var listResponseData: [BeneficiaryItem]!
+    var canContinueProcess = false
+    var updatedBeneficiaryPercents: [beneficiaryPercents] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         if beneficiaryData != nil{
             beneficiaryPublicData.shared.id = String(beneficiaryData?.id ?? -1)
-            beneficiaryPublicData.shared.nombre = beneficiaryData?.nombre?.alnovaDecrypt()
+            beneficiaryPublicData.shared.nombre = beneficiaryData?.nombre?.alnovaDecrypt().nameFormatter()
             beneficiaryPublicData.shared.fechaNacimiento = beneficiaryData?.fechaNacimiento?.alnovaDecrypt()
             beneficiaryPublicData.shared.numeroTelefono = beneficiaryData?.contacto?.numeroTelefono?.alnovaDecrypt()
             beneficiaryPublicData.shared.correoElectronico = beneficiaryData?.contacto?.correoElectronico?.alnovaDecrypt()
@@ -36,7 +40,16 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
             beneficiaryPublicData.shared.porcentaje = beneficiaryData?.porcentaje?.alnovaDecrypt()
             beneficiaryPublicData.shared.apellidoPaterno = beneficiaryData?.apellidoPaterno?.alnovaDecrypt()
             beneficiaryPublicData.shared.apellidoMaterno = beneficiaryData?.apellidoMaterno?.alnovaDecrypt()
+            beneficiaryPublicData.shared.idParentesco = beneficiaryData?.idParentesco
         }
+        
+        if beneficiaryData?.nombre?.alnovaDecrypt().nameFormatter().count ?? 0 > 0{
+            letUserEdit = false
+        }else{
+            letUserEdit = true
+        }
+        
+        
         registerCells()
         setTextFields()
         setOptions()
@@ -116,12 +129,12 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
     }
     
     func setTextFields(){
-        tableFields.append(beneficiaryField(title: "Nombre", image: nil, placeHolder: nil, pickerData: nil, text: beneficiaryData?.nombre))
-        tableFields.append(beneficiaryField(title: "Apellido paterno", image: nil, placeHolder: nil, pickerData: nil, text: beneficiaryData?.apellidoPaterno))
-        tableFields.append(beneficiaryField(title: "Apellido materno", image: nil, placeHolder: "Opcional", pickerData: nil, text: beneficiaryData?.apellidoMaterno))
+        tableFields.append(beneficiaryField(title: "Nombre", image: nil, placeHolder: nil, pickerData: nil, text: beneficiaryData?.nombre, isEnabled: letUserEdit))
+        tableFields.append(beneficiaryField(title: "Apellido paterno", image: nil, placeHolder: nil, pickerData: nil, text: beneficiaryData?.apellidoPaterno, isEnabled: letUserEdit))
+        tableFields.append(beneficiaryField(title: "Apellido materno", image: nil, placeHolder: "Opcional", pickerData: nil, text: beneficiaryData?.apellidoMaterno, isEnabled: letUserEdit))
         if #available(iOS 13.0, *) {
-            tableFields.append(beneficiaryField(title: "Fecha de nacimiento", image: UIImage(systemName: "calendar"), placeHolder: "DD/MM/AAAA", pickerData: pickerTextField.init(pickerOptions: nil, datePicker: true, dateFormat: "dd/mm/yyyy"), text: beneficiaryData?.fechaNacimiento))
-            tableFields.append(beneficiaryField(title: "Parentesco", image: UIImage(systemName: "chevron.down"), placeHolder: "Selecciona", pickerData: pickerTextField.init(pickerOptions: ["Hermano/a","Hijo-a","Padre/Madre","Abuelo/a","Conyuge","Nieto/a","Tio/a","Sobrino/a","Otro","Padre","Madre","Tutor","Empleado"], datePicker: false, dateFormat: nil)))
+            tableFields.append(beneficiaryField(title: "Fecha de nacimiento", image: UIImage(systemName: "calendar"), placeHolder: "DD/MM/AAAA", pickerData: pickerTextField.init(pickerOptions: nil, datePicker: true, dateFormat: "dd/mm/yyyy"), text: beneficiaryData?.fechaNacimiento, isEnabled: letUserEdit))
+            tableFields.append(beneficiaryField(title: "Parentesco", image: UIImage(systemName: "chevron.down"), placeHolder: "Selecciona", pickerData: pickerTextField.init(pickerOptions: ["Hermano/a","Hijo-a","Padre/Madre","Abuelo/a","Conyuge","Nieto/a","Tio/a","Sobrino/a","Otro","Padre","Madre","Tutor","Empleado"], datePicker: false, dateFormat: nil), text: beneficiaryData?.idParentesco))
         }
         tableFields.append(beneficiaryField(title: "Número telefónico", image: nil, placeHolder: nil, pickerData: nil, keyboardType: .numberPad, text: beneficiaryData?.contacto?.numeroTelefono))
         tableFields.append(beneficiaryField(title: "Correo electrónico", image: nil, placeHolder: nil, pickerData: nil, keyboardType: .emailAddress, text: beneficiaryData?.contacto?.correoElectronico))
@@ -130,7 +143,7 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
     func forgotDigitalSign(_ forgotSecurityCodeViewController: UIViewController?) {
         print("OK")
     }
-
+    
     func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
         
     }
@@ -140,6 +153,7 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
             let alert = UIAlertController(title: "Baz", message: "¿Quieres que tu beneficiario utilice tu dirección?", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: {_ in
                 sender.isOn = true
+                self.useSessionInfoAddress()
             }))
             alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: {_ in
                 sender.isOn = false
@@ -169,42 +183,86 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
         self.view.endEditing(true)
         var addressBody = BeneficiaryAddress.init(calle: beneficiaryPublicData.shared.calle?.encryptAlnova(), numeroExterior: beneficiaryPublicData.shared.numeroExterior?.encryptAlnova(), numeroInterior: beneficiaryPublicData.shared.numeroInterior?.encryptAlnova(), colonia: beneficiaryPublicData.shared.colonia?.encryptAlnova(), municipio: beneficiaryPublicData.shared.municipio?.encryptAlnova(), estado: beneficiaryPublicData.shared.estado?.encryptAlnova(), codigoPostal: beneficiaryPublicData.shared.codigoPostal?.encryptAlnova())
         
-        var contactBody = BeneficiaryContact.init(claveLada: "52".encryptAlnova(), numeroTelefono: beneficiaryPublicData.shared.numeroTelefono?.encryptAlnova(), numeroExtension: " ".encryptAlnova(), correoElectronico: beneficiaryPublicData.shared.correoElectronico?.encryptAlnova())
-        
+        let contactBody = BeneficiaryContact.init(claveLada: "52".encryptAlnova(), numeroTelefono: beneficiaryPublicData.shared.numeroTelefono?.encryptAlnova(), numeroExtension: " ".encryptAlnova(), correoElectronico: beneficiaryPublicData.shared.correoElectronico?.encryptAlnova())
         
         
         if beneficiaryData?.domicilio != nil{
             addressBody = (beneficiaryData?.domicilio)!
         }
         
-        if beneficiaryData?.contacto != nil{
-            contactBody = (beneficiaryData?.contacto)!
-        }
         
-        let body = NewBeneficiaryBody.init(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.replacingOccurrences(of: " ", with: "").encryptAlnova(), beneficiarios: [Beneficiario.init(id: beneficiaryPublicData.shared.id, nombre: beneficiaryPublicData.shared.nombre?.encryptAlnova(), apellidoPaterno: beneficiaryPublicData.shared.apellidoPaterno?.encryptAlnova(), apellidoMaterno: beneficiaryPublicData.shared.apellidoMaterno?.encryptAlnova(), fechaNacimiento: beneficiaryPublicData.shared.fechaNacimiento?.encryptAlnova(), idParentesco: beneficiaryPublicData.shared.idParentesco?.encryptAlnova(), porcentaje: beneficiaryPublicData.shared.porcentaje?.encryptAlnova(), domicilio: addressBody, contacto: contactBody)])
+        let thisBeneficiary = Beneficiario.init(id: beneficiaryPublicData.shared.id, nombre: beneficiaryPublicData.shared.nombre?.encryptAlnova(), apellidoPaterno: beneficiaryPublicData.shared.apellidoPaterno?.encryptAlnova(), apellidoMaterno: beneficiaryPublicData.shared.apellidoMaterno?.encryptAlnova(), fechaNacimiento: beneficiaryPublicData.shared.fechaNacimiento?.encryptAlnova(), idParentesco: beneficiaryPublicData.shared.idParentesco, porcentaje: beneficiaryPublicData.shared.porcentaje?.encryptAlnova(), domicilio: addressBody, contacto: contactBody)
         
         
-//        let body = NewBeneficiaryBody.init(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.replacingOccurrences(of: " ", with: "").encryptAlnova(), beneficiarios: [Beneficiario.init(id: beneficiaryPublicData.shared.id, nombre: beneficiaryPublicData.shared.nombre, apellidoPaterno: beneficiaryPublicData.shared.apellidoPaterno, apellidoMaterno: beneficiaryPublicData.shared.apellidoMaterno, fechaNacimiento: beneficiaryPublicData.shared.fechaNacimiento, idParentesco: beneficiaryPublicData.shared.idParentesco, porcentaje: beneficiaryPublicData.shared.porcentaje, domicilio: addressBody, contacto: contactBody)])
-       
-        var method = EKTHTTPRequestMethod.POST
-            
-        if beneficiaryData != nil{
-            method = .PUT
-        }
-        
-        GSVCLoader.show()
-        presenter?.requestSetNewBeneficiary(Body: body, method: method, DataCard: {DataCard in
-            GSVCLoader.hide()
-            if DataCard != nil{
-                let alert = UIAlertController(title: "Operación exitosa", message: "Datos guardados", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: {_ in
-                    self.navigationController?.popViewController(animated: true)
-                }))
-                self.present(alert, animated: true, completion: nil)
-            }else{
-                self.presentBottomAlertFullData(status: .error, message: "No podemos guardar la información, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+        var hasEmptyTextField = false
+        for txt in cellsArray{
+            if txt.first?.key is BASATextFieldCell{
+                let cell = txt.first?.key as! BASATextFieldCell
+                if (cell.textField.text?.characterCount())! == 0{
+                    hasEmptyTextField = true
+                }
             }
-        })
+        }
+        
+        if hasEmptyTextField == false{
+        var beneficiariesArray = [thisBeneficiary]
+        
+        var notEmptyBeneficiaries: [beneficiaryPercents] = []
+        
+        for item in listResponseData{
+            if item.id != Int(thisBeneficiary.id ?? "-1") && item.nombre?.alnovaDecrypt().haveData() == true{
+                let listBeneficiary = Beneficiario.init(id: String(item.id ?? -1), nombre: item.nombre, apellidoPaterno: item.apellidoPaterno, apellidoMaterno: item.apellidoMaterno, fechaNacimiento: item.fechaNacimiento, idParentesco: item.idParentesco, porcentaje: item.porcentaje, domicilio: item.domicilio, contacto: item.contacto)
+                
+                beneficiariesArray.append(listBeneficiary)
+            }
+        }
+            
+        
+        for item in beneficiariesArray{
+            if item.nombre?.alnovaDecrypt().removeWhiteSpaces().count ?? 0 > 0{
+                notEmptyBeneficiaries.append(beneficiaryPercents.init(name: item.nombre?.nameFormatter() ?? "" + " " + (item.apellidoMaterno ?? ""), percent: item.porcentaje ?? "0", id: item.id ?? "-1"))
+            }
+        }
+        
+        if canContinueProcess == true{
+            for item in beneficiariesArray{
+                for insideItem in updatedBeneficiaryPercents{
+                    if item.id == insideItem.id{
+                        let newItem = Beneficiario.init(id: item.id, nombre: item.nombre, apellidoPaterno: item.apellidoPaterno, apellidoMaterno: item.apellidoMaterno, fechaNacimiento: item.fechaNacimiento, idParentesco: item.idParentesco, porcentaje: insideItem.percent, domicilio: item.domicilio, contacto: item.contacto)
+                        beneficiariesArray.removeAll(where: {$0.id == item.id})
+                        beneficiariesArray.append(newItem)
+                    }
+                }
+            }
+            
+            
+            let body = NewBeneficiaryBody.init(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.replacingOccurrences(of: " ", with: "").encryptAlnova(), beneficiarios: beneficiariesArray)
+            
+            var method = EKTHTTPRequestMethod.POST
+            
+            if beneficiaryData != nil{
+                method = .PUT
+            }
+            
+            GSVCLoader.show()
+            presenter?.requestSetNewBeneficiary(Body: body, method: method, DataCard: {DataCard in
+                GSVCLoader.hide()
+                if DataCard != nil{
+                    let alert = UIAlertController(title: "Operación exitosa", message: "Datos guardados", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: {_ in
+                        self.navigationController?.popViewController(animated: true)
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                }else{
+                    self.presentBottomAlertFullData(status: .error, message: "No podemos guardar la información, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+                }
+            })
+        }else{
+            evaluatePercents(Items: notEmptyBeneficiaries)
+        }
+        }else{
+            self.presentBottomAlertFullData(status: .caution, message: "Faltan campos por completar", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+        }
     }
     
     func showDigitalSign(){
@@ -212,6 +270,63 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
         verification.needsTestSeed = true
         verification.modalPresentationStyle = .fullScreen
         present(verification, animated: true, completion: nil)
+    }
+    
+    func useSessionInfoAddress(){
+        let sessionInfoAddress = GSSISessionInfo.sharedInstance.gsUser.address
+        
+        beneficiaryPublicData.shared.calle = sessionInfoAddress?.street
+        beneficiaryPublicData.shared.numeroExterior = sessionInfoAddress?.externalNumber
+        beneficiaryPublicData.shared.codigoPostal = sessionInfoAddress?.zipCode
+        beneficiaryPublicData.shared.colonia = sessionInfoAddress?.neighborhood
+        beneficiaryPublicData.shared.municipio = sessionInfoAddress?.city
+        beneficiaryPublicData.shared.estado = sessionInfoAddress?.state
+        beneficiaryPublicData.shared.pais = "México"
+    }
+    
+    func evaluatePercents(Items: [beneficiaryPercents]){
+        var total = 0
+        canContinueProcess = false
+        var outItems = Items
+        
+        let alert = UIAlertController(title: "Advertencia", message: "La suma de tus beneficiarios difiere del 100%, ajusta el porcentaje deseado para cada uno de ellos", preferredStyle: .alert)
+        
+        for item in Items{
+            alert.addTextField { (textField) in
+                textField.placeholder = item.name.alnovaDecrypt()
+                textField.keyboardType = .numberPad
+                textField.accessibilityLabel = item.id
+                textField.delegate = self
+            }
+        }
+        
+        alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: {_ in
+            self.canContinueProcess = false
+        }))
+        alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: { [self]_ in
+            for textfield in alert.textFields ?? []{
+                total = total + (Int(textfield.text ?? "0") ?? 0)
+            }
+            
+            if total != 100{
+                let errorAlert = UIAlertController(title: "Baz", message: "La suma de beneficiarios debe ser igual a 100%", preferredStyle: .alert)
+                errorAlert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: {[self]_ in
+                    canContinueProcess = false
+                }))
+                self.present(errorAlert, animated: false, completion: nil)
+            }else{
+                canContinueProcess = true
+                outItems.removeAll()
+                for textfield in alert.textFields ?? []{
+                    outItems.append(beneficiaryPercents.init(name: ((textfield.placeholder?.encryptAlnova()) ?? ""), percent: (textfield.text?.encryptAlnova() ?? ""), id: (textfield.accessibilityLabel ?? "")))
+                }
+                updatedBeneficiaryPercents = outItems
+                validateFields()
+            }
+            
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func close(_ sender: Any){
@@ -247,17 +362,21 @@ extension BASANewBeneficiaryViewController: UITableViewDelegate, UITableViewData
 
 extension BASANewBeneficiaryViewController: UITextFieldDelegate{
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.placeholder = ""
-        UIView.animate(withDuration: 0.3, animations: { () -> Void in
-            self.view.frame.origin.y -= 100.0
-        })
+        if textField.accessibilityLabel == nil{
+            textField.placeholder = ""
+            UIView.animate(withDuration: 0.3, animations: { () -> Void in
+                self.view.frame.origin.y -= 100.0
+            })
+        }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        UIView.animate(withDuration: 0.3, animations: { () -> Void in
-            self.view.frame.origin.y = 0.0
-        })
-        beneficiaryPublicData.shared.porcentaje = textField.text
+        if textField.accessibilityLabel == nil{
+            UIView.animate(withDuration: 0.3, animations: { () -> Void in
+                self.view.frame.origin.y = 0.0
+            })
+            beneficiaryPublicData.shared.porcentaje = textField.text
+        }
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -288,6 +407,13 @@ struct beneficiaryField{
     var index: Int?
     var height: CGFloat?
     var tag: Int?
+    var isEnabled: Bool?
+}
+
+struct beneficiaryPercents{
+    var name: String
+    var percent: String
+    var id: String
 }
 
 enum cellSize{

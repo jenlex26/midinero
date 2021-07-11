@@ -27,17 +27,12 @@ class BASABeneficiaryListInteractor: GSSAURLSessionTaskCoordinatorBridge, BASABe
             debugPrint(objRes as Any)
             
             if error.code == 0 {
-                
                 beneficiaryList(objRes)
             }else if error.code != 404{
                 beneficiaryList(BeneficiaryListResponse.init(mensaje: "", folio: "", resultado: nil))
             }else{
                 beneficiaryList(BeneficiaryListResponse.init(mensaje: "", folio: "", resultado: BeneficiaryListResult.init(numeroCuenta: "", beneficiarios: [])))
             }
-//            }else{
-//                beneficiaryList(nil)
-//                debugPrint(error)
-//            }
         }
     }
 }

@@ -18,21 +18,23 @@ class BASABeneficiaryListViewController: UIViewController, BASABeneficiaryListVi
     @IBOutlet weak var table: UITableView!
     
     var bottomAlert: GSVCBottomAlert?
-	var presenter: BASABeneficiaryListPresenterProtocol?
+    var presenter: BASABeneficiaryListPresenterProtocol?
     var tableData: [BeneficiaryItem] = []
+    var notFilteredResponseData: [BeneficiaryItem] = []
     
-	override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         table.delegate = self
         table.dataSource = self
         table.alwaysBounceVertical = false
         registerCells()
-       
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         tableData.removeAll()
+        notFilteredResponseData.removeAll()
         loadBeneficiaries()
     }
     
@@ -51,9 +53,12 @@ class BASABeneficiaryListViewController: UIViewController, BASABeneficiaryListVi
             GSVCLoader.hide()
             if beneficiaryList?.resultado?.beneficiarios != nil{
                 for item in beneficiaryList!.resultado!.beneficiarios!{
-                    tableData.append(item)
-                    self.table.reloadData()
+                    if item.nombre?.alnovaDecrypt().removeWhiteSpaces().count ?? 0 > 0{
+                        tableData.append(item)
+                    }
+                    notFilteredResponseData.append(item)
                 }
+                self.table.reloadData()
             }else{
                 self.presentBottomAlertFullData(status: .error, message: "No podemos cargar tus beneficiarios en este momento, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
             }
@@ -62,8 +67,10 @@ class BASABeneficiaryListViewController: UIViewController, BASABeneficiaryListVi
         
     }
     
-    @objc func newBeneficiary(_ sender: Any){
-        let view = BASANewBeneficiaryRouter.createModule()
+    @objc func newBeneficiary(sender: UIButton){
+        var emptyitem = BeneficiaryItem()
+        emptyitem.id = sender.tag
+        let view = BASANewBeneficiaryRouter.createModuleForActiveItem(data: emptyitem, beneficiaryList: notFilteredResponseData)
         self.navigationController?.pushViewController(view, animated: true)
     }
     
@@ -84,14 +91,21 @@ extension BASABeneficiaryListViewController: UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == tableData.count && tableData.count < 4{
             let cell = table.dequeueReusableCell(withIdentifier: "BeneficiaryButtonCell") as! BeneficiaryButtonCell
-            cell.button.addTarget(self, action: #selector(newBeneficiary(_:)), for: .touchUpInside)
+            cell.button.tag = indexPath.row + 1
+            cell.button.addTarget(self, action: #selector(newBeneficiary(sender:)), for: .touchUpInside)
             return cell
         }else{
             let cell = table.dequeueReusableCell(withIdentifier: "BASACardLimitCell") as! BASACardLimitCell
             let cellData = tableData[indexPath.row]
-            let userName = (cellData.nombre?.alnovaDecrypt().replacingOccurrences(of: " ", with: "") ?? "") + " " + (cellData.apellidoPaterno?.alnovaDecrypt().replacingOccurrences(of: " ", with: "") ?? "") + " " + (cellData.apellidoMaterno?.alnovaDecrypt().replacingOccurrences(of: " ", with: "") ?? "")
+            
+            let name = (cellData.nombre?.alnovaDecrypt().nameFormatter() ?? "")
+            let surname = (cellData.apellidoPaterno?.alnovaDecrypt().replacingOccurrences(of: " ", with: "") ?? "")
+            let lastname = (cellData.apellidoMaterno?.alnovaDecrypt().replacingOccurrences(of: " ", with: "") ?? "")
+            
+            let userName = name + " " + surname + " " + lastname
             cell.lblTitle.text = userName
-            cell.lblSubtitle.text = (cellData.porcentaje?.alnovaDecrypt() ?? "0") + "%"
+            let percent = Int(cellData.porcentaje?.alnovaDecrypt() ?? "0") ?? 0
+            cell.lblSubtitle.text = String(percent) + "%"
             cell.btnEdit.isEnabled = false
             
             return cell
@@ -109,7 +123,7 @@ extension BASABeneficiaryListViewController: UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = table.cellForRow(at: indexPath)
         if cell is BASACardLimitCell{
-            let view = BASANewBeneficiaryRouter.createModuleForActiveItem(data: tableData[indexPath.row])
+            let view = BASANewBeneficiaryRouter.createModuleForActiveItem(data: tableData[indexPath.row], beneficiaryList: notFilteredResponseData)
             self.navigationController?.pushViewController(view, animated: true)
         }
     }

@@ -34,9 +34,18 @@ class BASATextFieldCell: UITableViewCell {
         lblTitle.text = data.title
         
         if lblTitle.text == "Parentesco"{
-            textField.text = data.text?.alnovaDecrypt().removeWhiteSpaces().IDforKinship()
+            textField.text = data.text?.removeWhiteSpaces().IDforKinship()
+        }else if lblTitle.text == "Nombre"{
+            textField.text = data.text?.alnovaDecrypt().nameFormatter()
         }else{
             textField.text = data.text?.alnovaDecrypt().removeWhiteSpaces()
+        }
+        
+        
+        if data.isEnabled == false{
+            textField.isUserInteractionEnabled = false
+        }else{
+            textField.isUserInteractionEnabled = true
         }
         
         textField.placeholder = data.placeHolder
@@ -111,6 +120,7 @@ extension BASATextFieldCell: GSVCPickerControllerDelegate, GSVCPickerControllerD
         case .none:
             print("none Case")
         case .some(_):
+            
             print("Unknowed case")
         }
     }

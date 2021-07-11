@@ -149,6 +149,23 @@ extension String{
     func removeWhiteSpaces() -> String{
         return self.replacingOccurrences(of: " ", with: "")
     }
+    
+    func nameFormatter() -> String{
+        var formatterName = self
+        let itemArray = formatterName.components(separatedBy: " ")
+        if itemArray.count >= 2{
+            formatterName = itemArray[0] + " " + itemArray[1]
+        }
+        return formatterName
+    }
+    
+    func haveData() -> Bool{
+        if self.removeWhiteSpaces().count == 0{
+            return false
+        }else{
+            return true
+        }
+    }
 }
 
 extension UIColor{
