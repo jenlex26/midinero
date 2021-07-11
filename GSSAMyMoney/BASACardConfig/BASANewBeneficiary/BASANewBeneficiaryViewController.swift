@@ -48,7 +48,7 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
         }else{
             letUserEdit = true
         }
-        
+        useSessionInfoAddress()
         
         registerCells()
         setTextFields()
@@ -255,6 +255,7 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
                     self.present(alert, animated: true, completion: nil)
                 }else{
                     self.presentBottomAlertFullData(status: .error, message: "No podemos guardar la información, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+                    self.canContinueProcess = false
                 }
             })
         }else{
