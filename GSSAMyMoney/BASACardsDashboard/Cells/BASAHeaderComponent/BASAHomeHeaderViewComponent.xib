@@ -170,12 +170,12 @@
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YXc-po-Hfo">
                                                 <rect key="frame" x="418" y="10" width="28" height="28"/>
-                                                <color key="backgroundColor" red="0.60423491844171295" green="0.731676868556701" blue="0.35075575041544538" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="backgroundColor" red="0.39607840779999998" green="0.61176472900000001" blue="0.27843138579999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="28" id="BMG-dn-VJC"/>
                                                     <constraint firstAttribute="width" constant="28" id="tLv-Mm-g5F"/>
                                                 </constraints>
-                                                <color key="tintColor" red="0.792156862745098" green="1" blue="0.39215686274509803" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="tintColor" red="0.83529412749999998" green="0.99607843159999998" blue="0.48235297199999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                                 <state key="normal" image="ic_more_icon"/>
                                                 <connections>

@@ -7,9 +7,11 @@
 
 import UIKit
 import GSSAInterceptor
+import GSSAVisualComponents
+import GSSAVisualTemplates
 
-class BASAButtonsCell: UITableViewCell {
-    
+class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
+  
     @IBOutlet weak var cellButtonView: UIView!
     @IBOutlet weak var separatorView : UIView!
     @IBOutlet weak var cellContentView : UIView!
@@ -68,6 +70,19 @@ class BASAButtonsCell: UITableViewCell {
     }
     
     @IBAction func openDigitalCard(sender: Any){
+        let verification = GSVTDigitalSignViewController(delegate: self)
+        verification.modalPresentationStyle = .fullScreen
+        verification.needsTestSeed = true
+        if cellViewController != nil{
+        cellViewController.present(verification, animated: true, completion: nil)
+        }
+    }
+    
+    func forgotDigitalSign(_ forgotSecurityCodeViewController: UIViewController?) {
+        print("NIP INCORRECTO")
+    }
+    
+    func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
         if cellViewController != nil{
             let data = accountBalance?.resultado.cliente?.cuentas?.first?.saldoDisponible?.moneyFormat() ?? ""
             cellViewController.navigationController?.pushViewController(BASADigitalCardRouter.createModule(userBalance: data), animated: true)
