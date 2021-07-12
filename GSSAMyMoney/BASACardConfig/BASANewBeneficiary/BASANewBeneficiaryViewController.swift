@@ -44,6 +44,7 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
             useSessionInfoAddress()
         }
         
+        
         if beneficiaryData?.nombre?.alnovaDecrypt().nameFormatter().count ?? 0 > 0{
             letUserEdit = false
         }else{
@@ -103,7 +104,7 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
         }
         
         let percentCell = table.dequeueReusableCell(withIdentifier: "BASATextFieldCell") as! BASATextFieldCell
-        percentCell.textField.text = beneficiaryPublicData.shared.porcentaje
+        percentCell.textField.text = String(Int(beneficiaryPublicData.shared.porcentaje ?? "0") ?? 0)
         percentCell.blankSpace.isHidden = false
         percentCell.textField.delegate = self
         percentCell.lblTitle.text = "Porcentaje otorgado"
@@ -275,7 +276,6 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
     
     func useSessionInfoAddress(){
         let sessionInfoAddress = GSSISessionInfo.sharedInstance.gsUser.address
-        
         beneficiaryPublicData.shared.calle = sessionInfoAddress?.street
         beneficiaryPublicData.shared.numeroExterior = sessionInfoAddress?.externalNumber
         beneficiaryPublicData.shared.codigoPostal = sessionInfoAddress?.zipCode

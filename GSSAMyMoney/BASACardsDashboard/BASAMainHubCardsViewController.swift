@@ -17,6 +17,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     
     var bottomAlert: GSVCBottomAlert?
     var presenter: BASAMainHubCardsPresenterProtocol?
+    var viewMode = 0
     
     @IBOutlet weak var BasaMainHubTableView:UITableView!
     
@@ -87,6 +88,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                 GSVCLoader.hide()
                 self.presentBottomAlertFullData(status: .error, message: "No podemos cargar tus prestamos en este momento, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
             }
+            self.refreshControl.endRefreshing()
         })
     }
     
@@ -102,6 +104,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                 GSVCLoader.hide()
                 self.presentBottomAlertFullData(status: .error, message: "No podemos obtener los datos de la tarjeta de crédito en este momento, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
             }
+            self.refreshControl.endRefreshing()
         })
     }
     
@@ -110,6 +113,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
             if let creditCardBalanceResponse = CreditCardBalance{
                 creditCardBalance = creditCardBalanceResponse
                 NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "reloadCreditCardBalance"), object: creditCardBalanceResponse, userInfo: nil))
+                setTableForCreditCard()
                 loadCreditCardMovements()
             }else{
                 GSVCLoader.hide()
@@ -119,7 +123,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     }
     
     func loadCreditCardMovements(){
-        presenter?.requestCreditCardMovements(Body: CreditCardMovementsBody.init(transaccion: CreditCardMovementsTransaccion.init(fechaInicio: "2016-08-26", fechaFin: "2016-07-27")), CreditCardMovements: { [self] CreditCardMovements in
+        presenter?.requestCreditCardMovements(Body: CreditCardMovementsBody.init(transaccion: CreditCardMovementsTransaccion.init(fechaInicio: "2021-04-01", fechaFin: "2021-07-01")), CreditCardMovements: { [self] CreditCardMovements in
             GSVCLoader.hide()
             if let CreditCardMovements = CreditCardMovements{
                 creditCardMovements = CreditCardMovements
@@ -153,6 +157,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     }
     
     func setTableForDebitCard(){
+        viewMode = 0
         let header = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAHomeHeaderViewComponent") as! BASAHomeHeaderViewComponent
         header.cellViewController = self
         let accountData = accountBalance?.resultado.cliente?.cuentas
@@ -202,6 +207,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     }
     
     func setTableForCreditCard(){
+        viewMode = 1
         removeAllExceptFirst()
         
         if creditCardData == nil{
@@ -218,11 +224,13 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         if creditCardData != nil{
             infoCreditCell.lblCreditLimit.text = creditCardBalance?.resultado?.montoLimiteCredito?.moneyFormat()
             infoCreditCell.lblMinimumPayment.text = creditCardBalance?.resultado?.montoPagoMinimo?.moneyFormat()
-            infoCreditCell.lblCutOffDate.text = creditCardBalance?.resultado?.fechaCorte?.dateFormatter(format: "dd-MM-yyyy", outputFormat: "dd MMMM")
             
-            let date = "Próxima fecha de pago \(creditCardBalance?.resultado?.fechaPago?.dateFormatter(format: "dd-MM-yyyy", outputFormat: "dd") ?? "Desconocida") de \(creditCardBalance?.resultado?.fechaPago?.dateFormatter(format: "dd-MM-yyyy", outputFormat: "MMMM") ?? "")"
+            //infoCreditCell.lblCutOffDate.text = creditCardBalance?.resultado?.fechaCorte?.dateFormatter(format: "dd-MM-yyyy", outputFormat: "dd MMMM")
             
-            infoCreditCell.lblNextPaymentDate.text = date
+            
+            //let date = "Próxima fecha de pago \(creditCardBalance?.resultado?.fechaPago?.dateFormatter(format: "dd-MM-yyyy", outputFormat: "dd") ?? "Desconocida") de \(creditCardBalance?.resultado?.fechaPago?.dateFormatter(format: "dd-MM-yyyy", outputFormat: "MMMM") ?? "")"
+            
+            // infoCreditCell.lblNextPaymentDate.text = date
             infoCreditCell.lblPaymentToSettle.text = creditCardBalance?.resultado?.saldoDispuesto?.moneyFormat()
             infoCreditCell.lblNotInterestPayment.text = creditCardBalance?.resultado?.pagoSinInteres?.moneyFormat()
         }
@@ -251,6 +259,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     }
     
     func setTableForLends(){
+        viewMode = 2
         removeAllExceptFirst()
         
         let infoCell = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASALendInfoCell") as! BASALendInfoCell
@@ -339,8 +348,16 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     }
     
     @objc func refresh(_ sender: AnyObject) {
-        loadDebitBalance()
-        setTableForDebitCard()
+        switch viewMode{
+        case 0:
+            loadDebitBalance()
+        case 1:
+            loadCreditCardInfo()
+        case 2:
+            loadLends()
+        default:
+            print("Default case")
+        }
     }
 }
 

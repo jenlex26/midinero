@@ -121,7 +121,7 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
         self.strPathEndpoint = "integracion/superapp/prestamos/tarjeta-credito/v1/tarjetas/movimientos/busquedas"
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: Body, environment: GLOBAL_ENVIROMENT) { (objRes: CreditCardMovementsResponse?, error) in
-            debugPrint(objRes as Any)
+            debugPrint(objRes ?? "")
             
             if error.code == 0 {
                 CreditCardMovements(objRes)

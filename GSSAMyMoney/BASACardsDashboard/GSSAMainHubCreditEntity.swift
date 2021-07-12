@@ -50,12 +50,21 @@ struct CreditCardBalanceResponse: Codable {
     var resultado: CreditCardBalanceResult?
 }
 
-// MARK: - CreditCard Resultado
+// MARK: - Resultado
 struct CreditCardBalanceResult: Codable {
     var saldo, saldoActual, saldoDisponible, saldoDispuesto: String?
-    var saldoRetenido, fechaCorte, montoLimiteCredito, pagoSinInteres: String?
-    var montoPagoMinimo, fechaPago: String?
+    var saldoRetenido: String?
+    var fechaCorte: Fecha?
+    var montoLimiteCredito, pagoSinInteres, montoPagoMinimo: String?
+    var fechaPago: Fecha?
 }
+
+// MARK: - CreditCardBalance Fecha
+struct Fecha: Codable {
+}
+
+
+
 
 // MARK: - CreditCardMovementsBody
 struct CreditCardMovementsBody: Codable {

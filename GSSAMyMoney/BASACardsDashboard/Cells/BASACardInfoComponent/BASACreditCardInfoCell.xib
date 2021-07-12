@@ -39,7 +39,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="367" height="22.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fecha de corte" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kCL-x0-rPX" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                                <rect key="frame" x="0.0" y="0.0" width="314.5" height="22.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="340" height="22.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -49,8 +49,8 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1N-NV-VWX" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                                <rect key="frame" x="314.5" y="0.0" width="52.5" height="22.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1N-NV-VWX" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                                                <rect key="frame" x="340" y="0.0" width="27" height="22.5"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -175,8 +175,8 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Próxima fecha de pago: Cargando..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LFH-bp-ONh" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                                <rect key="frame" x="58" y="100.5" width="251" height="20"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Próxima fecha de pago: Desconocida" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LFH-bp-ONh" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                                                <rect key="frame" x="52.5" y="100.5" width="262.5" height="20"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -263,7 +263,7 @@
             <size key="intrinsicContentSize" width="149" height="22.5"/>
         </designable>
         <designable name="LFH-bp-ONh">
-            <size key="intrinsicContentSize" width="251" height="20"/>
+            <size key="intrinsicContentSize" width="262.5" height="20"/>
         </designable>
         <designable name="MLH-xb-dvU">
             <size key="intrinsicContentSize" width="50" height="35"/>
@@ -272,7 +272,7 @@
             <size key="intrinsicContentSize" width="140.5" height="22.5"/>
         </designable>
         <designable name="V1N-NV-VWX">
-            <size key="intrinsicContentSize" width="20" height="22.5"/>
+            <size key="intrinsicContentSize" width="9.5" height="22.5"/>
         </designable>
         <designable name="be5-MC-A62">
             <size key="intrinsicContentSize" width="123" height="28"/>
