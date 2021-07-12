@@ -38,10 +38,10 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="HkK-aB-b5p">
-                                <rect key="frame" x="30" y="75.5" width="240" height="50"/>
+                                <rect key="frame" x="30" y="75.5" width="125" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="98V-7A-Aa3" customClass="GSVCButton" customModule="GSSAVisualComponents">
-                                        <rect key="frame" x="0.0" y="0.0" width="115" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="125" height="50"/>
                                         <state key="normal" title="Débito"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="style">
@@ -52,8 +52,8 @@
                                             <action selector="debitCardClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="NlP-dG-fhG"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gko-4C-avx" customClass="GSVCButton" customModule="GSSAVisualComponents">
-                                        <rect key="frame" x="125" y="0.0" width="115" height="50"/>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gko-4C-avx" customClass="GSVCButton" customModule="GSSAVisualComponents">
+                                        <rect key="frame" x="125" y="0.0" width="0.0" height="50"/>
                                         <state key="normal" title="Crédito"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="style">
@@ -66,8 +66,8 @@
                                     </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="125" id="7oR-IM-yaf"/>
                                     <constraint firstAttribute="height" constant="50" id="kdD-gp-Z4F"/>
-                                    <constraint firstAttribute="width" constant="240" id="onT-fq-7au"/>
                                 </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dinero" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X7i-Rd-dT7" customClass="GSVCLabel" customModule="GSSAVisualComponents">
@@ -321,7 +321,7 @@
     </objects>
     <designables>
         <designable name="98V-7A-Aa3">
-            <size key="intrinsicContentSize" width="46" height="30"/>
+            <size key="intrinsicContentSize" width="51" height="33"/>
         </designable>
         <designable name="B5R-we-V5S">
             <size key="intrinsicContentSize" width="33" height="16"/>
@@ -337,7 +337,7 @@
         </designable>
         <designable name="eoH-yZ-cf6"/>
         <designable name="gko-4C-avx">
-            <size key="intrinsicContentSize" width="51" height="30"/>
+            <size key="intrinsicContentSize" width="56" height="33"/>
         </designable>
         <designable name="vlW-yv-wH9">
             <size key="intrinsicContentSize" width="23" height="20.5"/>

@@ -74,7 +74,7 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if (UserDefaults.standard.value(forKey: "DigitalCardStatus")) as! Int == 0{
+        if (UserDefaults.standard.value(forKey: "DigitalCardStatus")) as? Int == 0{
             unLockCard()
         }else{
             lockCard()
@@ -85,7 +85,7 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
         presenter?.makeDigitalDataRequest(Body: Transaction(transaccion: AccoutRequest.init(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.replacingOccurrences(of: " ", with: "").encryptAlnova(), sicu: GSSISessionInfo.sharedInstance.gsUser.SICU?.encryptAlnova(), latitud: GSPMLocationManager.shared.lastLocation?.coordinate.latitude.description.encryptAlnova(), longitud: GSPMLocationManager.shared.lastLocation?.coordinate.longitude.description.encryptAlnova())), DataCard: { [self] DataCard in
             GSVCLoader.hide()
             if DataCard != nil{
-                if (UserDefaults.standard.value(forKey: "DigitalCardStatus")) as! Int == 0{
+                if (UserDefaults.standard.value(forKey: "DigitalCardStatus")) as? Int == 0{
                     unLockCard()
                 }else{
                     lockCard()
