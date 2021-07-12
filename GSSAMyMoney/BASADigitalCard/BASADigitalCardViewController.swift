@@ -92,7 +92,7 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
 //                }
                 self.StartTimer()
                 UserDefaults.standard.set(DataCard!.resultado!.tarjeta?.numero ?? "0", forKey: "DigitalCardNumber")
-                CVVCodeLabel.text = DataCard!.resultado!.tarjeta?.cvv?.alnovaDecrypt()
+                CVVCodeLabel.text = DataCard!.resultado!.tarjeta?.cvv?.alnovaDecrypt().showOnlyNumbers
                 CardNumberLabel.text = (DataCard!.resultado!.tarjeta?.numero?.alnovaDecrypt() ?? "0").tnuoccaFormat
                 ExpDateLabel.text = DataCard?.resultado?.tarjeta?.fechaExpiracion?.alnovaDecrypt().replacingOccurrences(of: "-", with: "/")
                 

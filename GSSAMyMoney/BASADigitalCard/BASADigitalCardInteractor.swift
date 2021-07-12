@@ -24,7 +24,8 @@ class BASADigitalCardInteractor: GSSAURLSessionTaskCoordinatorBridge, BASADigita
         self.strPathEndpoint = "integracion/superapp/dinero/captacion/gestion-tarjetas-digitales/v1/tarjetas/busquedas"
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, objBody: Body, environment: GLOBAL_ENVIROMENT) { (objRes: DigitalCardResponse?, error) in
-            debugPrint(objRes as Any)
+            debugPrint(objRes as DigitalCardResponse?)
+            
             if error.code == 0 {
                 DataCard(objRes)
             } else {
