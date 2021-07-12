@@ -37,11 +37,14 @@
                                     <action selector="close:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="BeU-zX-AkY"/>
                                 </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="HkK-aB-b5p">
-                                <rect key="frame" x="30" y="75.5" width="125" height="50"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="HkK-aB-b5p">
+                                <rect key="frame" x="30" y="75.5" width="226" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="98V-7A-Aa3" customClass="GSVCButton" customModule="GSSAVisualComponents">
-                                        <rect key="frame" x="0.0" y="0.0" width="125" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="108" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="108" id="aYV-P5-T3D"/>
+                                        </constraints>
                                         <state key="normal" title="Débito"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="style">
@@ -52,8 +55,11 @@
                                             <action selector="debitCardClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="NlP-dG-fhG"/>
                                         </connections>
                                     </button>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gko-4C-avx" customClass="GSVCButton" customModule="GSSAVisualComponents">
-                                        <rect key="frame" x="125" y="0.0" width="0.0" height="50"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gko-4C-avx" customClass="GSVCButton" customModule="GSSAVisualComponents">
+                                        <rect key="frame" x="118" y="0.0" width="108" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="108" id="6kW-8G-Nwb"/>
+                                        </constraints>
                                         <state key="normal" title="Crédito"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="style">
@@ -66,7 +72,6 @@
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="125" id="7oR-IM-yaf"/>
                                     <constraint firstAttribute="height" constant="50" id="kdD-gp-Z4F"/>
                                 </constraints>
                             </stackView>
@@ -121,8 +126,8 @@
                                                     <constraint firstAttribute="height" constant="30" id="PMm-WL-dQh"/>
                                                 </constraints>
                                             </imageView>
-                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="05/22" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5R-we-V5S" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                                <rect key="frame" x="74" y="166" width="35" height="17"/>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-/-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5R-we-V5S" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                                                <rect key="frame" x="74" y="166" width="19.5" height="17"/>
                                                 <fontDescription key="fontDescription" name="GeezaPro-Bold" family="Geeza Pro" pointSize="13"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -132,7 +137,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="$9000.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tdv-ye-51P" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="$-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tdv-ye-51P" customClass="GSVCLabel" customModule="GSSAVisualComponents">
                                                 <rect key="frame" x="10" y="53" width="431" height="50.5"/>
                                                 <fontDescription key="fontDescription" name="GeezaPro-Bold" family="Geeza Pro" pointSize="37"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -324,10 +329,10 @@
             <size key="intrinsicContentSize" width="46" height="32"/>
         </designable>
         <designable name="B5R-we-V5S">
-            <size key="intrinsicContentSize" width="35" height="17"/>
+            <size key="intrinsicContentSize" width="19.5" height="17"/>
         </designable>
         <designable name="Tdv-ye-51P">
-            <size key="intrinsicContentSize" width="147.5" height="50.5"/>
+            <size key="intrinsicContentSize" width="44.5" height="50.5"/>
         </designable>
         <designable name="X7i-Rd-dT7">
             <size key="intrinsicContentSize" width="74.5" height="31"/>

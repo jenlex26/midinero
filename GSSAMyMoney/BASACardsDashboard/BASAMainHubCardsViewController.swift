@@ -28,19 +28,20 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     var creditCardData: CreditCardResponse?
     var creditCardBalance: CreditCardBalanceResponse?
     var creditCardMovements: CreditCardMovementsResponse?
-    
-    
     var accountNumber: [String:String]?
+    let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        refreshControl.tintColor = .white
+        refreshControl.attributedTitle = NSAttributedString(string: "")
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        BasaMainHubTableView.addSubview(refreshControl)
         self.ConfigureCollectionView()
         self.BasaMainHubTableView.alwaysBounceVertical = false
         NotificationCenter.default.addObserver(self, selector: #selector(SwitchColors(notification:)), name: NSNotification.Name(rawValue: "HomeHeaderViewChange"), object: nil)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         loadDebitBalance()
-        // loadDebitMovements()
         self.setTableForDebitCard()
     }
     
@@ -58,6 +59,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                 GSVCLoader.hide()
                 self.presentBottomAlertFullData(status: .error, message: "No podemos cargar tu saldo en este momento, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
             }
+            self.refreshControl.endRefreshing()
         })
     }
     
@@ -334,6 +336,11 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     
     @objc func showAlert(){
         presentBottomAlertFullData(status: .caution, message: "En este momento no cuentas con tarjeta digital", attributedString: .none, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+    }
+    
+    @objc func refresh(_ sender: AnyObject) {
+        loadDebitBalance()
+        setTableForDebitCard()
     }
 }
 

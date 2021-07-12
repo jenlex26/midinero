@@ -43,9 +43,7 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.ConfigureBlurCardView()
-        GSVCLoader.show(type: .native)
         self.TimerView.delegate = self
         
         configButton.backgroundColor = UIColor(hue: 100/360, saturation: 26/100, brightness: 62/100, alpha: 1.0)
@@ -70,7 +68,9 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
             self.AvaibleMoneyLabel.text = userBalance.alnovaDecrypt().moneyFormat()
         }
         
+        GSVCLoader.show(type: .native)
         requestCVV()
+        
     }
     
 //    override func viewWillAppear(_ animated: Bool) {
@@ -188,7 +188,7 @@ extension UIView {
 
 extension BASADigitalCardViewController: TimerHandleDelegate {
     func counterUpdateTimeValue(with sender: BASACircularProgressView, newValue: Int) {
-        print("Tiempo Actual \(newValue)")
+        print("Time \(newValue)")
     }
     
     func didStartTimer(sender: BASACircularProgressView) {
@@ -196,7 +196,6 @@ extension BASADigitalCardViewController: TimerHandleDelegate {
     }
     
     func didEndTimer(sender: BASACircularProgressView) {
-        print("Se acabo el tiempo")
         if self.isOnScreen{
             GSVCLoader.show(type: .native)
             requestCVV()
