@@ -172,6 +172,13 @@ extension String{
         return String(unicodeScalars
                         .compactMap { pattern ~= $0 ? Character($0) : nil })
     }
+    
+    func moneyToDoubleString() -> String{
+        var money = self
+        money = money.replacingOccurrences(of: "$", with: "")
+        money = money.replacingOccurrences(of: ",", with: "")
+        return money
+    }
 }
 
 extension UIColor{

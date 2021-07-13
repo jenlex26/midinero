@@ -11,26 +11,26 @@ import GSSAVisualComponents
 import GSSAVisualTemplates
 
 class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
-  
+    
     @IBOutlet weak var cellButtonView: UIView!
     @IBOutlet weak var separatorView : UIView!
     @IBOutlet weak var cellContentView : UIView!
     @IBOutlet weak var openDigitalCardButton: UIButton!
     @IBOutlet weak var stack: UIStackView!
-
+    
     var cellViewController: UIViewController!
     var accountBalance: BalanceResponse?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
-//        self.backgroundColor = UIColor.GSVCBase300()
-//        cellContentView.backgroundColor = UIColor.GSVCBase300()
+        //        self.backgroundColor = UIColor.GSVCBase300()
+        //        cellContentView.backgroundColor = UIColor.GSVCBase300()
         separatorView.backgroundColor = UIColor.GSVCBase300()
         // corner radius
         cellButtonView.layer.cornerRadius = 10
         cellButtonView.layer.masksToBounds = true
-     
+        
         NotificationCenter.default.addObserver(self, selector: #selector(updateData(notification:)), name: NSNotification.Name(rawValue: "reloadHeaderData"), object: nil)
     }
     
@@ -63,9 +63,8 @@ class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
     
     @IBAction func foundAccoun(sender: Any){
         if cellViewController != nil{
-            GSSAMMDefinition.registerActions()
-            GSINAdminNavigator.shared.startFlow(forAction: "Fondeo",
-                                                navigateDelegate: self)
+            let view = GSSALinkDePagoRouter.createModule()
+            cellViewController.navigationController?.pushViewController(view, animated: true)
         }
     }
     
@@ -74,7 +73,7 @@ class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
         verification.modalPresentationStyle = .fullScreen
         verification.needsTestSeed = true
         if cellViewController != nil{
-        cellViewController.present(verification, animated: true, completion: nil)
+            cellViewController.present(verification, animated: true, completion: nil)
         }
     }
     
