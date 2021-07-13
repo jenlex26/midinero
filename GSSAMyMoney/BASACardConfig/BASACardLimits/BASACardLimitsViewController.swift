@@ -44,7 +44,7 @@ class BASACardLimitsViewController: UIViewController, BASACardLimitsViewProtocol
         let savedATMLimit = UserDefaults.standard.value(forKey: "debitCardATMLimit") as? String
         let savedDebitCardLimit = UserDefaults.standard.value(forKey: "debitCardAmountLimit") as? String
         
-        LimitItems.append(LimitItem(title: "Retiro en cajero", subtitle: "Solo múltiplos de $50, hasta \(savedATMLimit?.moneyFormatWithoutSplit() ?? "$7,500.00")", height: 84.0, notificationID: "debitCardATMLimit", textLenght: 4))
+        LimitItems.append(LimitItem(title: "Retiro en cajero", subtitle: "Hasta \(savedATMLimit?.moneyFormatWithoutSplit() ?? "$7,500.00")", height: 84.0, notificationID: "debitCardATMLimit", textLenght: 4))
         
         LimitItems.append(LimitItem(title: "Límite de compra", subtitle: "Hasta \(savedDebitCardLimit?.moneyFormatWithoutSplit() ?? "$7,500.00")", height: 84.0, notificationID: "debitCardAmountLimit", textLenght: 9))
     }

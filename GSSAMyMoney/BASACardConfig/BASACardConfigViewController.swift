@@ -19,7 +19,7 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
     }
     
     func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
-        let view = BASABeneficiaryListRouter.createModule()
+        let view = BASACardLimitsRouter.createModule()
         self.navigationController?.pushViewController(view, animated: true)
     }
     
@@ -193,14 +193,18 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
             }
             self.navigationController?.pushViewController(view, animated: true)
         case 2:
-            let view = BASACardLimitsRouter.createModule()
-            self.navigationController?.pushViewController(view, animated: true)
+            let verification = GSVTDigitalSignViewController(delegate: self)
+            verification.needsTestSeed = true
+            verification.modalPresentationStyle = .fullScreen
+            present(verification, animated: true, completion: nil)
+//            let view = BASACardLimitsRouter.createModule()
+//            self.navigationController?.pushViewController(view, animated: true)
         case 3:
-             let view = BASABeneficiaryListRouter.createModule()
-             self.navigationController?.pushViewController(view, animated: true)
-//            let verification = GSVTDigitalSignViewController(delegate: self, dataSource: nil)
-//            verification.modalPresentationStyle = .fullScreen
-//            present(verification, animated: true, completion: nil)
+            let view = BASABeneficiaryListRouter.createModule()
+            self.navigationController?.pushViewController(view, animated: true)
+        //            let verification = GSVTDigitalSignViewController(delegate: self, dataSource: nil)
+        //            verification.modalPresentationStyle = .fullScreen
+        //            present(verification, animated: true, completion: nil)
         case 4:
             let text = "Mi número de cuenta CLABE para enviarme dinero desde otro banco (SPEI) es: \(CLABE ?? "") \nMi número de cuenta para enviarme dinero dentro de baz es: \(account) \nMi número de celular asociado para envíos es: \(phone)"
             let activityViewController = UIActivityViewController(activityItems: [text], applicationActivities: nil)

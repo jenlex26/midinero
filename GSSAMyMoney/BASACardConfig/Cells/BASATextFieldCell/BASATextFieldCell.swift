@@ -140,6 +140,13 @@ extension BASATextFieldCell: GSVCPickerControllerDelegate, GSVCPickerControllerD
         let typedCharacterSet = CharacterSet(charactersIn: string)
         let alphabet = allowedCharacterSet.isSuperset(of: typedCharacterSet)
         
+        let emailAllowedCharacters = "1234567890._&$-@ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz "
+        let emailAllowedCharacterSet = CharacterSet(charactersIn: emailAllowedCharacters)
+        let emailTypedCharacterSet = CharacterSet(charactersIn: string)
+        let emailAlphabet = emailAllowedCharacterSet.isSuperset(of: emailTypedCharacterSet)
+        
+        
+        
         let substringToReplace = textFieldText[rangeOfTextToReplace]
         let count = textFieldText.count - substringToReplace.count + string.count
         
@@ -147,6 +154,8 @@ extension BASATextFieldCell: GSVCPickerControllerDelegate, GSVCPickerControllerD
             return count <= 18 && alphabet
         }else if textField.keyboardType == .numberPad{
             return count <= 10
+        }else if textField.keyboardType == .emailAddress{
+            return count <= 30 && emailAlphabet
         }else{
             return count <= 25
         }

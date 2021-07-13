@@ -132,7 +132,7 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
     func setTextFields(){
         tableFields.append(beneficiaryField(title: "Nombre", image: nil, placeHolder: nil, pickerData: nil, text: beneficiaryData?.nombre, isEnabled: letUserEdit))
         tableFields.append(beneficiaryField(title: "Apellido paterno", image: nil, placeHolder: nil, pickerData: nil, text: beneficiaryData?.apellidoPaterno, isEnabled: letUserEdit))
-        tableFields.append(beneficiaryField(title: "Apellido materno", image: nil, placeHolder: "Opcional", pickerData: nil, text: beneficiaryData?.apellidoMaterno, isEnabled: letUserEdit))
+        tableFields.append(beneficiaryField(title: "Apellido materno", image: nil, placeHolder: nil, pickerData: nil, text: beneficiaryData?.apellidoMaterno, isEnabled: letUserEdit))
         if #available(iOS 13.0, *) {
             tableFields.append(beneficiaryField(title: "Fecha de nacimiento", image: UIImage(systemName: "calendar"), placeHolder: "DD/MM/AAAA", pickerData: pickerTextField.init(pickerOptions: nil, datePicker: true, dateFormat: "dd/mm/yyyy"), text: beneficiaryData?.fechaNacimiento, isEnabled: letUserEdit))
             tableFields.append(beneficiaryField(title: "Parentesco", image: UIImage(systemName: "chevron.down"), placeHolder: "Selecciona", pickerData: pickerTextField.init(pickerOptions: ["Hermano/a","Hijo-a","Padre/Madre","Abuelo/a","Conyuge","Nieto/a","Tio/a","Sobrino/a","Otro","Padre","Madre","Tutor","Empleado"], datePicker: false, dateFormat: nil), text: beneficiaryData?.idParentesco))
