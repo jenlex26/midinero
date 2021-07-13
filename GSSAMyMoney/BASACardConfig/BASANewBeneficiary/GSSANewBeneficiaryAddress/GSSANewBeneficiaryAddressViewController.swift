@@ -49,10 +49,10 @@ class GSSANewBeneficiaryAddressViewController: UIViewController, GSSANewBenefici
         var singletoneData =  beneficiaryPublicData.shared
         
         if beneficiaryData != nil{
-            singletoneData.calle = beneficiaryData?.calle?.alnovaDecrypt()
-            singletoneData.numeroExterior = beneficiaryData?.numeroExterior?.alnovaDecrypt()
-            singletoneData.numeroInterior = beneficiaryData?.numeroInterior?.alnovaDecrypt()
-            singletoneData.codigoPostal =  beneficiaryData?.codigoPostal?.alnovaDecrypt()
+            singletoneData.calle = beneficiaryData?.calle?.alnovaDecrypt().nameFormatter()
+            singletoneData.numeroExterior = beneficiaryData?.numeroExterior?.alnovaDecrypt().removeWhiteSpaces()
+            singletoneData.numeroInterior = beneficiaryData?.numeroInterior?.alnovaDecrypt().removeWhiteSpaces()
+            singletoneData.codigoPostal =  beneficiaryData?.codigoPostal?.alnovaDecrypt().removeWhiteSpaces()
         }else{
             if clearData == true{
                 singletoneData.calle = ""
