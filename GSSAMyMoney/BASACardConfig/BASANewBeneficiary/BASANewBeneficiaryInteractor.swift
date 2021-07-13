@@ -25,7 +25,9 @@ class BASANewBeneficiaryInteractor: GSSAURLSessionTaskCoordinatorBridge, BASANew
             debugPrint(objRes as Any)
             if error.code == 0 {
                 DataCard(objRes)
-            } else {
+            } else if error.code == 500{
+                DataCard(DigitalCardResponse.init(mensaje: "", folio: "", resultado: nil))
+            }else{
                 DataCard(nil)
                 debugPrint(error)
             }
