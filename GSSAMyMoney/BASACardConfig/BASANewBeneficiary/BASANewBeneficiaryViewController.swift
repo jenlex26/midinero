@@ -206,62 +206,62 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
         }
         
         if hasEmptyTextField == false{
-        var beneficiariesArray = [thisBeneficiary]
-        
-        var notEmptyBeneficiaries: [beneficiaryPercents] = []
-        
-        for item in listResponseData{
-            if item.id != Int(thisBeneficiary.id ?? "-1") && item.nombre?.alnovaDecrypt().haveData() == true{
-                let listBeneficiary = Beneficiario.init(id: String(item.id ?? -1), nombre: item.nombre, apellidoPaterno: item.apellidoPaterno, apellidoMaterno: item.apellidoMaterno, fechaNacimiento: item.fechaNacimiento, idParentesco: item.idParentesco, porcentaje: item.porcentaje, domicilio: item.domicilio, contacto: item.contacto)
-                
-                beneficiariesArray.append(listBeneficiary)
-            }
-        }
+            var beneficiariesArray = [thisBeneficiary]
             
-        
-        for item in beneficiariesArray{
-            if item.nombre?.alnovaDecrypt().removeWhiteSpaces().count ?? 0 > 0{
-                notEmptyBeneficiaries.append(beneficiaryPercents.init(name: item.nombre?.nameFormatter() ?? "" + " " + (item.apellidoMaterno ?? ""), percent: item.porcentaje ?? "0", id: item.id ?? "-1"))
+            var notEmptyBeneficiaries: [beneficiaryPercents] = []
+            
+            for item in listResponseData{
+                if item.id != Int(thisBeneficiary.id ?? "-1") && item.nombre?.alnovaDecrypt().haveData() == true{
+                    let listBeneficiary = Beneficiario.init(id: String(item.id ?? -1), nombre: item.nombre, apellidoPaterno: item.apellidoPaterno, apellidoMaterno: item.apellidoMaterno, fechaNacimiento: item.fechaNacimiento, idParentesco: item.idParentesco, porcentaje: item.porcentaje, domicilio: item.domicilio, contacto: item.contacto)
+                    
+                    beneficiariesArray.append(listBeneficiary)
+                }
             }
-        }
-        
-        if canContinueProcess == true{
+            
+            
             for item in beneficiariesArray{
-                for insideItem in updatedBeneficiaryPercents{
-                    if item.id == insideItem.id{
-                        let newItem = Beneficiario.init(id: item.id, nombre: item.nombre, apellidoPaterno: item.apellidoPaterno, apellidoMaterno: item.apellidoMaterno, fechaNacimiento: item.fechaNacimiento, idParentesco: item.idParentesco, porcentaje: insideItem.percent, domicilio: item.domicilio, contacto: item.contacto)
-                        beneficiariesArray.removeAll(where: {$0.id == item.id})
-                        beneficiariesArray.append(newItem)
+                if item.nombre?.alnovaDecrypt().removeWhiteSpaces().count ?? 0 > 0{
+                    notEmptyBeneficiaries.append(beneficiaryPercents.init(name: item.nombre?.nameFormatter() ?? "" + " " + (item.apellidoMaterno ?? ""), percent: item.porcentaje ?? "0", id: item.id ?? "-1"))
+                }
+            }
+            
+            if canContinueProcess == true{
+                for item in beneficiariesArray{
+                    for insideItem in updatedBeneficiaryPercents{
+                        if item.id == insideItem.id{
+                            let newItem = Beneficiario.init(id: item.id, nombre: item.nombre, apellidoPaterno: item.apellidoPaterno, apellidoMaterno: item.apellidoMaterno, fechaNacimiento: item.fechaNacimiento, idParentesco: item.idParentesco, porcentaje: insideItem.percent, domicilio: item.domicilio, contacto: item.contacto)
+                            beneficiariesArray.removeAll(where: {$0.id == item.id})
+                            beneficiariesArray.append(newItem)
+                        }
                     }
                 }
-            }
-            
-            
-            let body = NewBeneficiaryBody.init(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.replacingOccurrences(of: " ", with: "").encryptAlnova(), beneficiarios: beneficiariesArray)
-            
-            var method = EKTHTTPRequestMethod.POST
-            
-            if beneficiaryData != nil{
-                method = .PUT
-            }
-            
-            GSVCLoader.show()
-            presenter?.requestSetNewBeneficiary(Body: body, method: method, DataCard: {DataCard in
-                GSVCLoader.hide()
-                if DataCard != nil{
-                    let alert = UIAlertController(title: "Operación exitosa", message: "Datos guardados", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: {_ in
-                        self.navigationController?.popViewController(animated: true)
-                    }))
-                    self.present(alert, animated: true, completion: nil)
-                }else{
-                    self.presentBottomAlertFullData(status: .error, message: "No podemos guardar la información, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
-                    self.canContinueProcess = false
+                
+                
+                let body = NewBeneficiaryBody.init(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.replacingOccurrences(of: " ", with: "").encryptAlnova(), beneficiarios: beneficiariesArray)
+                
+                var method = EKTHTTPRequestMethod.POST
+                
+                if beneficiaryData != nil{
+                    method = .PUT
                 }
-            })
-        }else{
-            evaluatePercents(Items: notEmptyBeneficiaries)
-        }
+                
+                GSVCLoader.show()
+                presenter?.requestSetNewBeneficiary(Body: body, method: method, DataCard: {DataCard in
+                    GSVCLoader.hide()
+                    if DataCard != nil{
+                        let alert = UIAlertController(title: "Operación exitosa", message: "Datos guardados", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: {_ in
+                            self.navigationController?.popViewController(animated: true)
+                        }))
+                        self.present(alert, animated: true, completion: nil)
+                    }else{
+                        self.presentBottomAlertFullData(status: .error, message: "No podemos guardar la información, verifique que la suma de los beneficiarios sea 100% e intente más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+                        self.canContinueProcess = false
+                    }
+                })
+            }else{
+                evaluatePercents(Items: notEmptyBeneficiaries)
+            }
         }else{
             self.presentBottomAlertFullData(status: .caution, message: "Faltan campos por completar", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
         }
@@ -289,45 +289,51 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
         var total = 0
         canContinueProcess = false
         var outItems = Items
-        
-        let alert = UIAlertController(title: "Advertencia", message: "La suma de tus beneficiarios difiere del 100%, ajusta el porcentaje deseado para cada uno de ellos", preferredStyle: .alert)
-        
-        for item in Items{
-            alert.addTextField { (textField) in
-                textField.placeholder = item.name.alnovaDecrypt()
-                textField.keyboardType = .numberPad
-                textField.accessibilityLabel = item.id
-                textField.delegate = self
-            }
-        }
-        
-        alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: {_ in
-            self.canContinueProcess = false
-        }))
-        alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: { [self]_ in
-            for textfield in alert.textFields ?? []{
-                total = total + (Int(textfield.text ?? "0") ?? 0)
-            }
+        if outItems.count > 1{
             
-            if total != 100{
-                let errorAlert = UIAlertController(title: "Baz", message: "La suma de beneficiarios debe ser igual a 100%", preferredStyle: .alert)
-                errorAlert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: {[self]_ in
-                    canContinueProcess = false
-                }))
-                self.present(errorAlert, animated: false, completion: nil)
-            }else{
-                canContinueProcess = true
-                outItems.removeAll()
-                for textfield in alert.textFields ?? []{
-                    outItems.append(beneficiaryPercents.init(name: ((textfield.placeholder?.encryptAlnova()) ?? ""), percent: (textfield.text?.encryptAlnova() ?? ""), id: (textfield.accessibilityLabel ?? "")))
+            let alert = UIAlertController(title: "Advertencia", message: "La suma de tus beneficiarios difiere del 100%, ajusta el porcentaje deseado para cada uno de ellos", preferredStyle: .alert)
+            
+            for item in Items{
+                alert.addTextField { (textField) in
+                    textField.placeholder = item.name.alnovaDecrypt()
+                    textField.keyboardType = .numberPad
+                    textField.accessibilityLabel = item.id
+                    textField.delegate = self
                 }
-                updatedBeneficiaryPercents = outItems
-                validateFields()
             }
             
-        }))
-        
-        self.present(alert, animated: true, completion: nil)
+            alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: {_ in
+                self.canContinueProcess = false
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: { [self]_ in
+                for textfield in alert.textFields ?? []{
+                    total = total + (Int(textfield.text ?? "0") ?? 0)
+                }
+                
+                if total != 100{
+                    let errorAlert = UIAlertController(title: "Baz", message: "La suma de beneficiarios debe ser igual a 100%", preferredStyle: .alert)
+                    errorAlert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: {[self]_ in
+                        canContinueProcess = false
+                    }))
+                    self.present(errorAlert, animated: false, completion: nil)
+                }else{
+                    canContinueProcess = true
+                    outItems.removeAll()
+                    for textfield in alert.textFields ?? []{
+                        outItems.append(beneficiaryPercents.init(name: ((textfield.placeholder?.encryptAlnova()) ?? ""), percent: (textfield.text?.encryptAlnova() ?? ""), id: (textfield.accessibilityLabel ?? "")))
+                    }
+                    updatedBeneficiaryPercents = outItems
+                    validateFields()
+                }
+                
+            }))
+            
+            self.present(alert, animated: true, completion: nil)
+        }else{
+            canContinueProcess = true
+            validateFields()
+        }
     }
     
     @IBAction func close(_ sender: Any){
