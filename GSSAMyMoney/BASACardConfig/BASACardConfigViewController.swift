@@ -194,6 +194,7 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
             self.navigationController?.pushViewController(view, animated: true)
         case 2:
             let verification = GSVTDigitalSignViewController(delegate: self)
+            verification.needsTestSeed = true
             verification.modalPresentationStyle = .fullScreen
             present(verification, animated: true, completion: nil)
 //            let view = BASACardLimitsRouter.createModule()

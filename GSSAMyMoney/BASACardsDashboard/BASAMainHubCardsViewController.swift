@@ -32,13 +32,31 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     var creditCardMovements: CreditCardMovementsResponse?
     var accountNumber: [String:String]?
     let refreshControl = UIRefreshControl()
+    var startTime: Date?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         inicializeView()
         let verification = GSVTDigitalSignViewController(delegate: self)
+        verification.needsTestSeed = true
         verification.modalPresentationStyle = .fullScreen
         self.present(verification, animated: true, completion: nil)
+        startTime = Date()
+        checkTime()
+    }
+    
+    
+    func checkTime(){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 30, execute: {
+            if (self.startTime! + 300) < Date(){
+                print("Tiempo terminado")
+                self.dismiss(animated: true, completion: {
+                    self.navigationController?.popViewController(animated: true)
+                })
+            }else{
+                self.checkTime()
+            }
+        })
     }
     
     func inicializeView(){

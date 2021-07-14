@@ -110,6 +110,7 @@ class GSDigitalCardConfigViewController: UIViewController, GSDigitalCardConfigVi
     @objc func switchChanged(sender: UISwitch){
         cardStatus = sender.isOn
         let verification = GSVTDigitalSignViewController(delegate: self)
+        verification.needsTestSeed = true
         verification.modalPresentationStyle = .fullScreen
         present(verification, animated: true, completion: nil)
     }
