@@ -57,7 +57,7 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
         
         CLABE = GSSISessionInfo.sharedInstance.gsUser.account?.clabe?.tnuoccaFormat ?? ""
         phone = GSSISessionInfo.sharedInstance.gsUser.phone?.tryToAdCellphoneFormat ?? ""
-        account =  GSSISessionInfo.sharedInstance.gsUser.mainAccount?.tnuoccaFormat ?? ""
+        account = GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().tnuoccaFormat ?? ""
         
         registerCells()
         setOptions()
@@ -194,7 +194,6 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
             self.navigationController?.pushViewController(view, animated: true)
         case 2:
             let verification = GSVTDigitalSignViewController(delegate: self)
-            verification.needsTestSeed = true
             verification.modalPresentationStyle = .fullScreen
             present(verification, animated: true, completion: nil)
 //            let view = BASACardLimitsRouter.createModule()

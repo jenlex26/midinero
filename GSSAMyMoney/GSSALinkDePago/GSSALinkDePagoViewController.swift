@@ -91,7 +91,7 @@ class GSSALinkDePagoViewController: UIViewController, GSSALinkDePagoViewProtocol
         if mail?.haveData() == false || mail == nil{
             mail = txtMail.text
         }
-        let accountNumber = GSSISessionInfo.sharedInstance.gsUser.mainAccount?.encryptAlnova()
+        let accountNumber = GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().encryptAlnova()
         
         let parameters = [
             "amount": "\(quantity ?? "0.0")",
@@ -99,6 +99,8 @@ class GSSALinkDePagoViewController: UIViewController, GSSALinkDePagoViewProtocol
             "merchantDetail":"Abono Saldo", "correo": "\(mail ?? "")",
             "numeroAfiliacion": "8632464"
         ]
+        
+        
         let validado = GSSALinkDePagoViewController.validateStrings(parameters: parameters)
         let view = PB_HomeMain.createModule(loadingModel: validado!)
         view.modalPresentationStyle = .fullScreen
@@ -145,8 +147,12 @@ class GSSALinkDePagoViewController: UIViewController, GSSALinkDePagoViewProtocol
     @IBAction func next(sender: GSVCButton){
         if txtMail.isHidden == false && txtMail.text?.haveData() == true && txtMail.text?.isValidEmail ==  true{
             if isValidAmount() == true{
-                GSVCLoader.show()
-                presenter?.requestMailUpdate(body: UpdateMailBody.init(correoElectronico: txtMail.text?.encryptAlnova()), Response: { Response in
+                let quantity = Double(txtAmount.text?.moneyToDoubleString() ?? "0.0") ?? 0.0
+                if quantity > 2500.0{
+                    self.presentBottomAlertFullData(status: .error, message: "Ingrese una cantidad menor o igual a $2,500", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+                }else{
+                 GSVCLoader.show()
+                 presenter?.requestMailUpdate(body: UpdateMailBody.init(correoElectronico: txtMail.text?.encryptAlnova()), Response: { Response in
                     GSVCLoader.hide()
                     if Response != nil{
                         self.showFondeo()
@@ -154,6 +160,7 @@ class GSSALinkDePagoViewController: UIViewController, GSSALinkDePagoViewProtocol
                         self.showFondeo()
                     }
                 })
+                }
             }else{
                 self.presentBottomAlertFullData(status: .error, message: "Ingrese una cantidad válida", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
             }
