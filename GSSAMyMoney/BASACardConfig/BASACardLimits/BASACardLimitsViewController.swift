@@ -122,6 +122,7 @@ extension BASACardLimitsViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = table.dequeueReusableCell(withIdentifier: "BASACardLimitCell") as! BASACardLimitCell
+
         cell.btnEdit.tag = indexPath.row
         cell.notificationID = LimitItems[indexPath.row].notificationID
         cell.lblTitle.text = LimitItems[indexPath.row].title

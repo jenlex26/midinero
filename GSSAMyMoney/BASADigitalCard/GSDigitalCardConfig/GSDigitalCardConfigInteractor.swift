@@ -25,7 +25,6 @@ class GSDigitalCardConfigInteractor: GSSAURLSessionTaskCoordinatorBridge, GSDigi
         
         sendRequest(strUrl: strPathEndpoint, method: .PUT, objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: DigitalCardResponse?, error) in
             debugPrint(objRes as Any)
-            
             if error.code == 0 {
                 DataCard(objRes)
             } else {

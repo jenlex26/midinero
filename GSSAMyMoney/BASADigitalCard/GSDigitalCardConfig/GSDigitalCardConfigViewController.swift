@@ -76,8 +76,9 @@ class GSDigitalCardConfigViewController: UIViewController, GSDigitalCardConfigVi
     }
     
     func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
-        
+        GSVCLoader.show(type: .native)
         presenter?.shutdownCardRequest(body: CardStateBody.init(transaccion: CardStateTransaccion.init(primerTokenVerificacion: GSSISessionInfo.sharedInstance.gsAccessToken, numeroTarjeta: UserDefaults.standard.value(forKey: "DigitalCardNumber") as? String, estatus: !cardStatus!)), DataCard: { [self] DataCard in
+            GSVCLoader.hide()
             if DataCard != nil{
                 if cardStatus == true{
                     let alert = UIAlertController(title: "Apagaste tu tarjeta", message: "Las nuevas compras no serán procesadas. Puedes volver a encenderla cuando lo necesites. ", preferredStyle: .alert)

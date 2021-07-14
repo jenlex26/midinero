@@ -67,31 +67,26 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
         if userBalance != nil{
             self.AvaibleMoneyLabel.text = userBalance.alnovaDecrypt().moneyFormat()
         }
-        
-        GSVCLoader.show(type: .native)
-        requestCVV()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if (UserDefaults.standard.value(forKey: "DigitalCardStatus")) as? Int == 0{
-            unLockCard()
-        }else{
-            lockCard()
-        }
+        requestCVV()
     }
     
     func requestCVV(){
+        GSVCLoader.show(type: .native)
         presenter?.makeDigitalDataRequest(Body: Transaction(transaccion: AccoutRequest.init(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.replacingOccurrences(of: " ", with: "").encryptAlnova(), sicu: GSSISessionInfo.sharedInstance.gsUser.SICU?.encryptAlnova(), latitud: GSPMLocationManager.shared.lastLocation?.coordinate.latitude.description.encryptAlnova(), longitud: GSPMLocationManager.shared.lastLocation?.coordinate.longitude.description.encryptAlnova())), DataCard: { [self] DataCard in
             GSVCLoader.hide()
             if DataCard != nil{
-                if (UserDefaults.standard.value(forKey: "DigitalCardStatus")) as? Int == 0{
-                    unLockCard()
-                }else{
-                    lockCard()
-                }
                 self.StartTimer()
                 UserDefaults.standard.set(DataCard!.resultado!.tarjeta?.numero ?? "0", forKey: "DigitalCardNumber")
+                
+                if DataCard?.resultado?.tarjeta?.estatus == "BLOQUEADA"{
+                    lockCard()
+                }else{
+                    unLockCard()
+                }
+                
                 CVVCodeLabel.text = DataCard!.resultado!.tarjeta?.cvv?.alnovaDecrypt().showOnlyNumbers
                 CardNumberLabel.text = (DataCard!.resultado!.tarjeta?.numero?.alnovaDecrypt() ?? "0").tnuoccaFormat
                 ExpDateLabel.text = DataCard?.resultado?.tarjeta?.fechaExpiracion?.alnovaDecrypt().replacingOccurrences(of: "-", with: "/")
@@ -99,10 +94,6 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
                 optionsView.isHidden = false
             }else{
                 self.presentBottomAlertFullData(status: .error, message: "No podemos obtener tu tarjeta digital en este momento, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
-                
-//                lockCard()
-//                lockIcon.isHidden = true
-//                optionsView.isHidden = true
             }
         })
     }

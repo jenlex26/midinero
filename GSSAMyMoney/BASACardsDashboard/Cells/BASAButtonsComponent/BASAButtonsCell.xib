@@ -40,7 +40,7 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="idS-61-jKV">
                                                         <rect key="frame" x="67" y="12.5" width="326" height="35"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                                        <state key="normal" title="Tarjeta digital baz">
+                                                        <state key="normal" title="Tarjeta digital ">
                                                             <color key="titleColor" systemColor="labelColor"/>
                                                         </state>
                                                         <connections>
@@ -222,7 +222,7 @@
                                                                     <constraint firstAttribute="height" constant="50" id="m8H-Jq-I6M"/>
                                                                 </constraints>
                                                             </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recargar tarjeta" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cEY-tC-AX6" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recarga tu tarjeta" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cEY-tC-AX6" customClass="GSVCLabel" customModule="GSSAVisualComponents">
                                                                 <rect key="frame" x="5" y="55" width="93" height="29.5"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                                 <nil key="textColor"/>
@@ -402,16 +402,16 @@
     </objects>
     <designables>
         <designable name="6go-dx-BRI">
-            <size key="intrinsicContentSize" width="89.5" height="16"/>
+            <size key="intrinsicContentSize" width="103" height="20"/>
         </designable>
         <designable name="8gy-nS-1Md">
-            <size key="intrinsicContentSize" width="73" height="16"/>
+            <size key="intrinsicContentSize" width="83.5" height="20"/>
         </designable>
         <designable name="Zyf-a5-X5g">
-            <size key="intrinsicContentSize" width="86" height="16"/>
+            <size key="intrinsicContentSize" width="101" height="20"/>
         </designable>
         <designable name="cEY-tC-AX6">
-            <size key="intrinsicContentSize" width="97" height="16"/>
+            <size key="intrinsicContentSize" width="127.5" height="20"/>
         </designable>
     </designables>
     <resources>

@@ -15,6 +15,7 @@ class BASACardLimitCell: UITableViewCell, UITextFieldDelegate {
     @IBOutlet weak var lblTitle: GSVCLabel!
     @IBOutlet weak var lblSubtitle: GSVCLabel!
     @IBOutlet weak var txtAmount: GSVCTextField!
+    @IBOutlet weak var stack: UIStackView!
     
     var notificationID: String?
     var textLenght: Int? 

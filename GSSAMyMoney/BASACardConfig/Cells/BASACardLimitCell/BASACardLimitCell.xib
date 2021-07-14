@@ -20,11 +20,11 @@
                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5sK-WB-Mkw">
                         <rect key="frame" x="24" y="10" width="368" height="60"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="JTO-BM-Z9g">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="JTO-BM-Z9g">
                                 <rect key="frame" x="0.0" y="0.0" width="328" height="60"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Retiro en cajero" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ghv-vV-48x" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                        <rect key="frame" x="0.0" y="0.0" width="328" height="27.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="328" height="28.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -35,7 +35,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hasta $7,500.00" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1nX-FC-S3C" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                        <rect key="frame" x="0.0" y="32.5" width="328" height="27.5"/>
+                                        <rect key="frame" x="0.0" y="33.5" width="328" height="26.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -46,9 +46,9 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CZm-ZU-k9j" customClass="GSVCTextField" customModule="GSSAVisualComponents">
-                                        <rect key="frame" x="0.0" y="60" width="328" height="50"/>
+                                        <rect key="frame" x="0.0" y="60" width="328" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="jo5-fr-R5F"/>
+                                            <constraint firstAttribute="height" constant="40" id="PIK-me-VvV"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -82,11 +82,11 @@
                             </button>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="height" constant="60" id="otN-Zf-GV8"/>
+                            <constraint firstAttribute="height" constant="60" id="tSO-B4-NJi"/>
                         </constraints>
                     </stackView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JyQ-2z-mYd">
-                        <rect key="frame" x="16" y="75" width="396" height="1"/>
+                        <rect key="frame" x="16" y="87" width="396" height="1"/>
                         <color key="backgroundColor" red="0.81568627450980391" green="0.82352941176470584" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="fbx-D9-0g2"/>
@@ -95,8 +95,8 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="5sK-WB-Mkw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="23p-vm-dfL"/>
+                    <constraint firstAttribute="bottom" secondItem="JyQ-2z-mYd" secondAttribute="bottom" constant="5" id="702-SI-s9t"/>
                     <constraint firstAttribute="trailing" secondItem="JyQ-2z-mYd" secondAttribute="trailing" constant="16" id="Z68-dL-c0R"/>
-                    <constraint firstItem="JyQ-2z-mYd" firstAttribute="top" secondItem="5sK-WB-Mkw" secondAttribute="bottom" constant="5" id="Z9K-gF-N6Q"/>
                     <constraint firstAttribute="trailing" secondItem="5sK-WB-Mkw" secondAttribute="trailing" constant="36" id="b9C-Yq-HuO"/>
                     <constraint firstItem="5sK-WB-Mkw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="hnH-hx-lHQ"/>
                     <constraint firstItem="JyQ-2z-mYd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="ldt-6m-v7l"/>
@@ -107,9 +107,21 @@
                 <outlet property="btnEdit" destination="ARQ-jK-s9U" id="x3w-ON-33S"/>
                 <outlet property="lblSubtitle" destination="1nX-FC-S3C" id="nph-cs-4aL"/>
                 <outlet property="lblTitle" destination="ghv-vV-48x" id="1GX-nr-TqQ"/>
+                <outlet property="stack" destination="JTO-BM-Z9g" id="j0c-ca-gMN"/>
                 <outlet property="txtAmount" destination="CZm-ZU-k9j" id="nQU-Xd-VCA"/>
             </connections>
             <point key="canvasLocation" x="215.94202898550725" y="97.433035714285708"/>
         </tableViewCell>
     </objects>
+    <designables>
+        <designable name="1nX-FC-S3C">
+            <size key="intrinsicContentSize" width="111" height="20"/>
+        </designable>
+        <designable name="ARQ-jK-s9U">
+            <size key="intrinsicContentSize" width="40" height="30"/>
+        </designable>
+        <designable name="ghv-vV-48x">
+            <size key="intrinsicContentSize" width="126" height="22.5"/>
+        </designable>
+    </designables>
 </document>

@@ -82,7 +82,7 @@
                     <rect key="frame" x="29" y="94.000000000000014" width="332" height="149.33333333333337"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detalle de movimiento" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.65000000000000002" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tnc-nS-WIw" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                            <rect key="frame" x="0.0" y="0.0" width="332" height="26"/>
+                            <rect key="frame" x="0.0" y="0.0" width="332" height="35.333333333333336"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -93,7 +93,7 @@
                             </userDefinedRuntimeAttributes>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BPR-N6-9ve">
-                            <rect key="frame" x="0.0" y="31" width="332" height="40"/>
+                            <rect key="frame" x="0.0" y="40.333333333333343" width="332" height="40"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- $50.0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sb6-Mf-WF8" customClass="GSVCLabel" customModule="GSSAVisualComponents">
                                     <rect key="frame" x="0.0" y="0.0" width="292" height="40"/>
@@ -133,7 +133,7 @@
                             </constraints>
                         </stackView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transferencia Bancaria" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qfd-hU-t6A" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                            <rect key="frame" x="0.0" y="76" width="332" height="26.333333333333329"/>
+                            <rect key="frame" x="0.0" y="85.333333333333343" width="332" height="25.666666666666671"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -144,7 +144,7 @@
                             </userDefinedRuntimeAttributes>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15 Jun 2021 14:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vXl-TQ-k6g" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                            <rect key="frame" x="0.0" y="107.33333333333334" width="332" height="42"/>
+                            <rect key="frame" x="0.0" y="115.99999999999999" width="332" height="33.333333333333329"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -188,16 +188,16 @@
     <designables>
         <designable name="IgZ-T5-pxA"/>
         <designable name="qfd-hU-t6A">
-            <size key="intrinsicContentSize" width="173.66666666666666" height="20.333333333333332"/>
+            <size key="intrinsicContentSize" width="186.33333333333334" height="22.666666666666668"/>
         </designable>
         <designable name="sb6-Mf-WF8">
-            <size key="intrinsicContentSize" width="56.333333333333336" height="20.333333333333332"/>
+            <size key="intrinsicContentSize" width="117.33333333333333" height="45"/>
         </designable>
         <designable name="tnc-nS-WIw">
-            <size key="intrinsicContentSize" width="169.33333333333334" height="20.333333333333332"/>
+            <size key="intrinsicContentSize" width="256.66666666666669" height="31"/>
         </designable>
         <designable name="vXl-TQ-k6g">
-            <size key="intrinsicContentSize" width="139" height="20.333333333333332"/>
+            <size key="intrinsicContentSize" width="129.33333333333334" height="22.666666666666668"/>
         </designable>
     </designables>
     <resources>
