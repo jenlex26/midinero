@@ -15,6 +15,7 @@ import GSSASessionInfo
 import GSSAFunctionalUtilities
 import baz_ios_sdk_link_pago
 
+
 class GSSALinkDePagoViewController: UIViewController, GSSALinkDePagoViewProtocol, GSVCBottomAlertHandler {
     var bottomAlert: GSVCBottomAlert?
     var presenter: GSSALinkDePagoPresenterProtocol?
@@ -93,7 +94,7 @@ class GSSALinkDePagoViewController: UIViewController, GSSALinkDePagoViewProtocol
                     if Response != nil{
                         self.showFondeo()
                     }else{
-                        self.presentBottomAlertFullData(status: .error, message: "En este momento no podemos actualizar su correo, intente más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+                        self.showFondeo()
                     }
                 })
             }else{

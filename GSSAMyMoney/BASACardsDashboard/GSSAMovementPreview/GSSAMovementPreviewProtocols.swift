@@ -11,22 +11,22 @@
 import Foundation
 
 //MARK: Wireframe -
-protocol GSSAMovementPreviewWireframeProtocol: class {
+protocol GSSAMovementPreviewWireframeProtocol: AnyObject {
 
 }
 //MARK: Presenter -
-protocol GSSAMovementPreviewPresenterProtocol: class {
+protocol GSSAMovementPreviewPresenterProtocol: AnyObject {
 
 }
 
 //MARK: Interactor -
-protocol GSSAMovementPreviewInteractorProtocol: class {
+protocol GSSAMovementPreviewInteractorProtocol: AnyObject {
 
   var presenter: GSSAMovementPreviewPresenterProtocol?  { get set }
 }
 
 //MARK: View -
-protocol GSSAMovementPreviewViewProtocol: class {
+protocol GSSAMovementPreviewViewProtocol: AnyObject {
 
   var presenter: GSSAMovementPreviewPresenterProtocol?  { get set }
 }

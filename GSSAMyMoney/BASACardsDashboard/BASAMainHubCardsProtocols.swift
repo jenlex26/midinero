@@ -11,11 +11,11 @@
 import Foundation
 
 //MARK: Wireframe -
-protocol BASAMainHubCardsWireframeProtocol: class {
+protocol BASAMainHubCardsWireframeProtocol: AnyObject {
 
 }
 //MARK: Presenter -
-protocol BASAMainHubCardsPresenterProtocol: class {
+protocol BASAMainHubCardsPresenterProtocol: AnyObject {
     func requestBalance(Account:[String:String], Balance: @escaping (BalanceResponse?) -> ())
     func requestDebitCardMovements(Body: MovimientosBody, Movements: @escaping (DebitCardTransaction?) -> ())
     func requestUserLends(Lends: @escaping (LendsResponse?) -> ())
@@ -25,7 +25,7 @@ protocol BASAMainHubCardsPresenterProtocol: class {
 }
 
 //MARK: Interactor -
-protocol BASAMainHubCardsInteractorProtocol: class {
+protocol BASAMainHubCardsInteractorProtocol: AnyObject {
   var presenter: BASAMainHubCardsPresenterProtocol?  { get set }
     func TryGetDebitCardBalance(Account:[String:String], Balance: @escaping (BalanceResponse?) -> ())
     func TryGetDebitCardMovements(Body: MovimientosBody, Movements: @escaping (DebitCardTransaction?) -> ())
@@ -36,6 +36,6 @@ protocol BASAMainHubCardsInteractorProtocol: class {
 }
 
 //MARK: View -
-protocol BASAMainHubCardsViewProtocol: class {
+protocol BASAMainHubCardsViewProtocol: AnyObject {
   var presenter: BASAMainHubCardsPresenterProtocol?  { get set }
 }

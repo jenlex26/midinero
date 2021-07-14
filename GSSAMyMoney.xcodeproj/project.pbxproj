@@ -144,8 +144,8 @@
 		EED2CB9D269D0C4B00A1E129 /* GSSALinkDePagoInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED2CB97269D0C4B00A1E129 /* GSSALinkDePagoInteractor.swift */; };
 		EED2CB9E269D0C4B00A1E129 /* GSSALinkDePagoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EED2CB98269D0C4B00A1E129 /* GSSALinkDePagoViewController.xib */; };
 		EED2CBA0269D361100A1E129 /* GSSALinkDePagoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED2CB9F269D361100A1E129 /* GSSALinkDePagoEntity.swift */; };
-		EED2CBA5269D554A00A1E129 /* baz_ios_sdk_link_pago.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EED2CBA1269D498700A1E129 /* baz_ios_sdk_link_pago.framework */; };
 		EED3E3FD269E442B00BDF898 /* GSSAMovementPreviewEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED3E3FC269E442B00BDF898 /* GSSAMovementPreviewEntity.swift */; };
+		EED3E406269E7D1C00BDF898 /* baz_ios_sdk_link_pago.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EED2CBA1269D498700A1E129 /* baz_ios_sdk_link_pago.framework */; };
 		EEF2ED2A2698A4AA0009F771 /* GSDigitalCardEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF2ED292698A4AA0009F771 /* GSDigitalCardEntity.swift */; };
 		EEF728A72699382C0093F0DA /* GSSANewBeneficiaryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF728A62699382C0093F0DA /* GSSANewBeneficiaryEntity.swift */; };
 /* End PBXBuildFile section */
@@ -304,7 +304,7 @@
 				EEC1F5EF26916F0E006FB4CD /* GSSAVisualTemplates.framework in Frameworks */,
 				EEC1F5D926916ED0006FB4CD /* AWSMobileClientXCF.xcframework in Frameworks */,
 				EE1423B22697895000384207 /* GSSASecurityManager.xcframework in Frameworks */,
-				EED2CBA5269D554A00A1E129 /* baz_ios_sdk_link_pago.framework in Frameworks */,
+				EED3E406269E7D1C00BDF898 /* baz_ios_sdk_link_pago.framework in Frameworks */,
 				EEC1F5D326916ED0006FB4CD /* AWSCognitoIdentityProviderASF.xcframework in Frameworks */,
 				EEC1F5D126916ED0006FB4CD /* AWSCognitoIdentityProvider.xcframework in Frameworks */,
 				EEC1F5D726916ED0006FB4CD /* AWSLogs.xcframework in Frameworks */,
@@ -1109,7 +1109,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.1;
+				MARKETING_VERSION = 0.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = mx.com.gruposalinas.GSSAMyMoney;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1138,7 +1138,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.1;
+				MARKETING_VERSION = 0.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = mx.com.gruposalinas.GSSAMyMoney;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
