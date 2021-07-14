@@ -24,6 +24,8 @@ class GSSALinkDePagoViewController: UIViewController, GSSALinkDePagoViewProtocol
     @IBOutlet weak var txtAmount: GSVCTextField!
     @IBOutlet weak var lblMail: GSVCLabel!
     @IBOutlet weak var navBar: UIView!
+    var close: Bool? = false
+    var hasNav: Bool?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +35,8 @@ class GSSALinkDePagoViewController: UIViewController, GSSALinkDePagoViewProtocol
         txtMail.returnKeyType = .done
         txtAmount.returnKeyType = .next
         txtAmount.delegate = self
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         
         if GSSISessionInfo.sharedInstance.gsUser.email != nil && GSSISessionInfo.sharedInstance.gsUser.email?.count ?? 0 > 0{
             lblMail.isHidden = true
@@ -45,6 +49,13 @@ class GSSALinkDePagoViewController: UIViewController, GSSALinkDePagoViewProtocol
     
     override func viewDidAppear(_ animated: Bool) {
         txtAmount.becomeFirstResponder()
+        if close == true{
+            if hasNav == true{
+                self.navigationController?.popViewController(animated: false)
+            }else{
+                self.dismiss(animated: false, completion: nil)
+            }
+        }
     }
     
     func optionalAction() {
@@ -72,17 +83,41 @@ class GSSALinkDePagoViewController: UIViewController, GSSALinkDePagoViewProtocol
         }
         let accountNumber = GSSISessionInfo.sharedInstance.gsUser.mainAccount?.encryptAlnova()
         
-        let view = BASAAdquiriente.createModule(withInfo: [
+        let parameters = [
             "amount": "\(quantity ?? "0.0")",
             "numeroCuentaCliente": "\(accountNumber ?? "")",
             "merchantDetail":"Abono Saldo", "correo": "\(mail ?? "")",
                                                             "numeroAfiliacion": "8632464"
-                ])
-        self.navigationController?.pushViewController(view, animated: true)
+                ]
+        let validado = GSSALinkDePagoViewController.validateStrings(parameters: parameters)
+        let view = PB_HomeMain.createModule(loadingModel: validado!)
+        view.modalPresentationStyle = .fullScreen
+        close = true
+        self.present(view, animated: true, completion: nil)
+        //self.navigationController?.pushViewController(view, animated: true)
+    }
+    
+    public static func validateStrings(parameters: [String : Any]?) -> PB_HomeEntity? {
+        guard let amount: String = parameters?["amount"] as? String else { debugPrint("Falta Campo amount"); return nil }
+        guard let numeroCuentaCliente: String = parameters?["numeroCuentaCliente"] as? String else { debugPrint("Falta Campo numeroCuentaCliente"); return nil }
+        guard let merchantDetail: String = parameters?["merchantDetail"] as? String else { debugPrint("Falta Campo merchantDetail"); return nil }
+        guard let correo: String = parameters?["correo"] as? String else { debugPrint("Falta Campo correo"); return nil }
+        guard let numeroAfiliacion: String = parameters?["numeroAfiliacion"] as? String else { debugPrint("Falta Campo numeroAfiliacion"); return nil }
+        return PB_HomeEntity(
+            amount: amount,
+            numeroAfiliacion: numeroAfiliacion,
+            numeroCuentaCliente: numeroCuentaCliente,
+            merchantDetail: merchantDetail,
+            correo: correo,
+            idTransaccion: "")
     }
     
     @IBAction func close(sender: GSVCButton){
-        self.navigationController?.popViewController(animated: true)
+        if hasNav == true{
+            self.navigationController?.popViewController(animated: true)
+        }else{
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     @IBAction func next(sender: GSVCButton){

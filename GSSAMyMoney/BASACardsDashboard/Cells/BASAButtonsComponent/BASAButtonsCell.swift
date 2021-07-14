@@ -83,7 +83,7 @@ class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
     
     func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
         if cellViewController != nil{
-            let view = GSSALinkDePagoRouter.createModule()
+            let view = GSSALinkDePagoRouter.createModuleWithNavigation()
             cellViewController.navigationController?.pushViewController(view, animated: true)
         }
     }

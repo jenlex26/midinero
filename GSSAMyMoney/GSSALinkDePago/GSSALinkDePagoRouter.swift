@@ -27,4 +27,19 @@ open class GSSALinkDePagoRouter: GSSALinkDePagoWireframeProtocol {
         
         return view
     }
+    
+    public static func createModuleWithNavigation() -> UIViewController {
+        // Change to get view from storyboard if not using progammatic UI
+        let view = GSSALinkDePagoViewController(nibName: nil, bundle:  Bundle(for: GSSALinkDePagoRouter.self))
+        let interactor = GSSALinkDePagoInteractor()
+        let router = GSSALinkDePagoRouter()
+        let presenter = GSSALinkDePagoPresenter(interface: view, interactor: interactor, router: router)
+        
+        view.hasNav = true
+        view.presenter = presenter
+        interactor.presenter = presenter
+        router.viewController = view
+        
+        return view
+    }
 }
