@@ -11,7 +11,6 @@
 import UIKit
 
 public class BASAMainHubCardsRouter: BASAMainHubCardsWireframeProtocol {
-    
     weak var viewController: UIViewController?
     
     public static func createModule() -> UIViewController {

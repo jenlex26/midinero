@@ -53,7 +53,7 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
         super.viewDidLoad()
         if credit == true{
             CLABE = ""
-        } 
+        }
         
         CLABE = GSSISessionInfo.sharedInstance.gsUser.account?.clabe?.tnuoccaFormat ?? ""
         phone = GSSISessionInfo.sharedInstance.gsUser.phone?.tryToAdCellphoneFormat ?? ""

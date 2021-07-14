@@ -63,18 +63,18 @@ class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
     
     @IBAction func foundAccoun(sender: Any){
         if cellViewController != nil{
-            let view = GSSALinkDePagoRouter.createModule()
-            cellViewController.navigationController?.pushViewController(view, animated: true)
+            let verification = GSVTDigitalSignViewController(delegate: self)
+            verification.modalPresentationStyle = .fullScreen
+            verification.needsTestSeed = true
+            if cellViewController != nil{
+                cellViewController.present(verification, animated: true, completion: nil)
+            }
         }
     }
     
     @IBAction func openDigitalCard(sender: Any){
-        let verification = GSVTDigitalSignViewController(delegate: self)
-        verification.modalPresentationStyle = .fullScreen
-        verification.needsTestSeed = true
-        if cellViewController != nil{
-            cellViewController.present(verification, animated: true, completion: nil)
-        }
+        let data = accountBalance?.resultado.cliente?.cuentas?.first?.saldoDisponible?.moneyFormat() ?? ""
+        cellViewController.navigationController?.pushViewController(BASADigitalCardRouter.createModule(userBalance: data), animated: true)
     }
     
     func forgotDigitalSign(_ forgotSecurityCodeViewController: UIViewController?) {
@@ -83,8 +83,8 @@ class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
     
     func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
         if cellViewController != nil{
-            let data = accountBalance?.resultado.cliente?.cuentas?.first?.saldoDisponible?.moneyFormat() ?? ""
-            cellViewController.navigationController?.pushViewController(BASADigitalCardRouter.createModule(userBalance: data), animated: true)
+            let view = GSSALinkDePagoRouter.createModule()
+            cellViewController.navigationController?.pushViewController(view, animated: true)
         }
     }
 }

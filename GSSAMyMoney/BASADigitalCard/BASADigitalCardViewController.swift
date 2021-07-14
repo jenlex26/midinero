@@ -73,23 +73,23 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
         
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        if (UserDefaults.standard.value(forKey: "DigitalCardStatus")) as? Int == 0{
-//            unLockCard()
-//        }else{
-//            lockCard()
-//        }
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+        if (UserDefaults.standard.value(forKey: "DigitalCardStatus")) as? Int == 0{
+            unLockCard()
+        }else{
+            lockCard()
+        }
+    }
     
     func requestCVV(){
         presenter?.makeDigitalDataRequest(Body: Transaction(transaccion: AccoutRequest.init(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.replacingOccurrences(of: " ", with: "").encryptAlnova(), sicu: GSSISessionInfo.sharedInstance.gsUser.SICU?.encryptAlnova(), latitud: GSPMLocationManager.shared.lastLocation?.coordinate.latitude.description.encryptAlnova(), longitud: GSPMLocationManager.shared.lastLocation?.coordinate.longitude.description.encryptAlnova())), DataCard: { [self] DataCard in
             GSVCLoader.hide()
             if DataCard != nil{
-//                if (UserDefaults.standard.value(forKey: "DigitalCardStatus")) as? Int == 0{
-//                    unLockCard()
-//                }else{
-//                    lockCard()
-//                }
+                if (UserDefaults.standard.value(forKey: "DigitalCardStatus")) as? Int == 0{
+                    unLockCard()
+                }else{
+                    lockCard()
+                }
                 self.StartTimer()
                 UserDefaults.standard.set(DataCard!.resultado!.tarjeta?.numero ?? "0", forKey: "DigitalCardNumber")
                 CVVCodeLabel.text = DataCard!.resultado!.tarjeta?.cvv?.alnovaDecrypt().showOnlyNumbers
@@ -119,17 +119,17 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
         TimerView.start(beginingValue: 180)
     }
     
-//    func lockCard(){
-//        viewContainerOn.isHidden = true
-//        cvvView.isHidden = true
-//        lockIcon.isHidden = false
-//    }
-//
-//    func unLockCard(){
-//        viewContainerOn.isHidden = false
-//        cvvView.isHidden = false
-//        lockIcon.isHidden = true
-//    }
+    func lockCard(){
+        viewContainerOn.isHidden = true
+        cvvView.isHidden = true
+        lockIcon.isHidden = false
+    }
+
+    func unLockCard(){
+        viewContainerOn.isHidden = false
+        cvvView.isHidden = false
+        lockIcon.isHidden = true
+    }
     
     func SetGradient(){
         let view = UIView(frame: CGRect(x: 0, y: 0, width: TopHeaderView.bounds.width, height: TopHeaderView.bounds.height))

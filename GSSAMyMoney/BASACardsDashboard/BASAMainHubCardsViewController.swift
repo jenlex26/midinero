@@ -20,6 +20,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     var viewMode = 0
     
     @IBOutlet weak var BasaMainHubTableView:UITableView!
+    @IBOutlet weak var headerImage: UIImageView!
     
     var cellsArray: Array<[UITableViewCell:CGFloat]> = []
     
@@ -34,16 +35,25 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        inicializeView()
+        let verification = GSVTDigitalSignViewController(delegate: self)
+        verification.modalPresentationStyle = .fullScreen
+        verification.needsTestSeed = true
+        self.present(verification, animated: true, completion: nil)
+    }
+    
+    func inicializeView(){
+      //  BasaMainHubTableView.alpha = 0
+      //  headerImage.alpha = 0
         refreshControl.tintColor = .white
         refreshControl.attributedTitle = NSAttributedString(string: "")
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         BasaMainHubTableView.addSubview(refreshControl)
-        self.ConfigureCollectionView()
+        ConfigureCollectionView()
         self.BasaMainHubTableView.alwaysBounceVertical = false
         NotificationCenter.default.addObserver(self, selector: #selector(SwitchColors(notification:)), name: NSNotification.Name(rawValue: "HomeHeaderViewChange"), object: nil)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-        loadDebitBalance()
-        self.setTableForDebitCard()
+        setTableForDebitCard()
     }
     
     func loadDebitBalance(){
@@ -373,5 +383,39 @@ extension BASAMainHubCardsViewController:UITableViewDelegate,UITableViewDataSour
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return cellsArray[indexPath.row].first!.value
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = BasaMainHubTableView.cellForRow(at: indexPath)
+        if cell is BASAMovementTableViewCell{
+            let item = cell as! BASAMovementTableViewCell
+            let data = DebitCardTransactionItem.init(importe: item.lblAmount.text, saldo: "", descripcion: item.lblTitle.text, fechaOperacion: item.lblDate.text, numeroMovimiento: "", codigoDivisa: "")
+            let view = GSSAMovementPreviewRouter.createModule(item: data)
+            self.navigationController?.pushViewController(view, animated: true)
+        }
+    }
 }
 
+extension BASAMainHubCardsViewController: GSVTDigitalSignDelegate{
+    func forgotDigitalSign(_ forgotSecurityCodeViewController: UIViewController?) {}
+    
+    func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
+        UIView.animate(
+            withDuration: 0.5,
+            delay: 0,
+            usingSpringWithDamping: 0.9,
+            initialSpringVelocity: 1,
+            options: [],
+            animations: {
+                self.view.backgroundColor = UIColor(red: 130/255, green: 54/255, blue: 255/255, alpha: 1.0)
+               // self.headerImage.alpha = 1
+               // self.BasaMainHubTableView.alpha = 1
+            })
+        loadDebitBalance()
+    }
+    
+    func cancelDigitalSing(_ isUserBlocked: Bool) {
+        self.dismiss(animated: true, completion: {
+            self.navigationController?.popViewController(animated: true)
+        })
+    }
+}

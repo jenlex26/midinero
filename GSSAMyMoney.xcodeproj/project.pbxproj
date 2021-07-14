@@ -111,6 +111,13 @@
 		EE97BB022683FBB1000AE34C /* BASACardStatementsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE97BB012683FBB1000AE34C /* BASACardStatementsEntity.swift */; };
 		EE97BB062684DF30000AE34C /* GSNoMovementsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE97BB042684DF2F000AE34C /* GSNoMovementsCell.swift */; };
 		EE97BB072684DF30000AE34C /* GSNoMovementsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE97BB052684DF2F000AE34C /* GSNoMovementsCell.xib */; };
+		EEAEFB0C269E08BD00F97E4D /* GSSAMovementPreviewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAEFB06269E08BD00F97E4D /* GSSAMovementPreviewPresenter.swift */; };
+		EEAEFB0D269E08BD00F97E4D /* GSSAMovementPreviewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAEFB07269E08BD00F97E4D /* GSSAMovementPreviewRouter.swift */; };
+		EEAEFB0E269E08BD00F97E4D /* GSSAMovementPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAEFB08269E08BD00F97E4D /* GSSAMovementPreviewViewController.swift */; };
+		EEAEFB0F269E08BD00F97E4D /* GSSAMovementPreviewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAEFB09269E08BD00F97E4D /* GSSAMovementPreviewProtocols.swift */; };
+		EEAEFB10269E08BD00F97E4D /* GSSAMovementPreviewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAEFB0A269E08BD00F97E4D /* GSSAMovementPreviewInteractor.swift */; };
+		EEAEFB11269E08BD00F97E4D /* GSSAMovementPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEAEFB0B269E08BD00F97E4D /* GSSAMovementPreviewViewController.xib */; };
+		EEAEFB13269E0F5400F97E4D /* GSSAGradientController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAEFB12269E0F5400F97E4D /* GSSAGradientController.swift */; };
 		EEAFA792268CD17A00DBC192 /* BASABeneficiaryListEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAFA791268CD17A00DBC192 /* BASABeneficiaryListEntity.swift */; };
 		EEAFA796268CD75200DBC192 /* BeneficiaryButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAFA794268CD75200DBC192 /* BeneficiaryButtonCell.swift */; };
 		EEAFA797268CD75200DBC192 /* BeneficiaryButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEAFA795268CD75200DBC192 /* BeneficiaryButtonCell.xib */; };
@@ -138,6 +145,7 @@
 		EED2CB9E269D0C4B00A1E129 /* GSSALinkDePagoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EED2CB98269D0C4B00A1E129 /* GSSALinkDePagoViewController.xib */; };
 		EED2CBA0269D361100A1E129 /* GSSALinkDePagoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED2CB9F269D361100A1E129 /* GSSALinkDePagoEntity.swift */; };
 		EED2CBA5269D554A00A1E129 /* baz_ios_sdk_link_pago.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EED2CBA1269D498700A1E129 /* baz_ios_sdk_link_pago.framework */; };
+		EED3E3FD269E442B00BDF898 /* GSSAMovementPreviewEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED3E3FC269E442B00BDF898 /* GSSAMovementPreviewEntity.swift */; };
 		EEF2ED2A2698A4AA0009F771 /* GSDigitalCardEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF2ED292698A4AA0009F771 /* GSDigitalCardEntity.swift */; };
 		EEF728A72699382C0093F0DA /* GSSANewBeneficiaryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF728A62699382C0093F0DA /* GSSANewBeneficiaryEntity.swift */; };
 /* End PBXBuildFile section */
@@ -249,6 +257,13 @@
 		EE97BB012683FBB1000AE34C /* BASACardStatementsEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BASACardStatementsEntity.swift; sourceTree = "<group>"; };
 		EE97BB042684DF2F000AE34C /* GSNoMovementsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSNoMovementsCell.swift; sourceTree = "<group>"; };
 		EE97BB052684DF2F000AE34C /* GSNoMovementsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GSNoMovementsCell.xib; sourceTree = "<group>"; };
+		EEAEFB06269E08BD00F97E4D /* GSSAMovementPreviewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAMovementPreviewPresenter.swift; sourceTree = "<group>"; };
+		EEAEFB07269E08BD00F97E4D /* GSSAMovementPreviewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAMovementPreviewRouter.swift; sourceTree = "<group>"; };
+		EEAEFB08269E08BD00F97E4D /* GSSAMovementPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAMovementPreviewViewController.swift; sourceTree = "<group>"; };
+		EEAEFB09269E08BD00F97E4D /* GSSAMovementPreviewProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAMovementPreviewProtocols.swift; sourceTree = "<group>"; };
+		EEAEFB0A269E08BD00F97E4D /* GSSAMovementPreviewInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAMovementPreviewInteractor.swift; sourceTree = "<group>"; };
+		EEAEFB0B269E08BD00F97E4D /* GSSAMovementPreviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GSSAMovementPreviewViewController.xib; sourceTree = "<group>"; };
+		EEAEFB12269E0F5400F97E4D /* GSSAGradientController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAGradientController.swift; sourceTree = "<group>"; };
 		EEAFA791268CD17A00DBC192 /* BASABeneficiaryListEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BASABeneficiaryListEntity.swift; sourceTree = "<group>"; };
 		EEAFA794268CD75200DBC192 /* BeneficiaryButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeneficiaryButtonCell.swift; sourceTree = "<group>"; };
 		EEAFA795268CD75200DBC192 /* BeneficiaryButtonCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BeneficiaryButtonCell.xib; sourceTree = "<group>"; };
@@ -276,6 +291,7 @@
 		EED2CB98269D0C4B00A1E129 /* GSSALinkDePagoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GSSALinkDePagoViewController.xib; sourceTree = "<group>"; };
 		EED2CB9F269D361100A1E129 /* GSSALinkDePagoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSALinkDePagoEntity.swift; sourceTree = "<group>"; };
 		EED2CBA1269D498700A1E129 /* baz_ios_sdk_link_pago.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = baz_ios_sdk_link_pago.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EED3E3FC269E442B00BDF898 /* GSSAMovementPreviewEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAMovementPreviewEntity.swift; sourceTree = "<group>"; };
 		EEF2ED292698A4AA0009F771 /* GSDigitalCardEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSDigitalCardEntity.swift; sourceTree = "<group>"; };
 		EEF728A62699382C0093F0DA /* GSSANewBeneficiaryEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSANewBeneficiaryEntity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -345,6 +361,7 @@
 			isa = PBXGroup;
 			children = (
 				EE01F6BD268B76A10010C485 /* GSSAMyMoneyExtensions.swift */,
+				EEAEFB12269E0F5400F97E4D /* GSSAGradientController.swift */,
 				EE36C43026878F11001AD9F2 /* GSSASecurityController.swift */,
 				EED2CB92269D0C3000A1E129 /* GSSALinkDePago */,
 				10E9ED3C267D6BA400F45640 /* BASACardConfig */,
@@ -535,6 +552,7 @@
 		10E9ED7B267D6BA400F45640 /* BASACardsDashboard */ = {
 			isa = PBXGroup;
 			children = (
+				EEAEFB05269E089800F97E4D /* GSSAMovementPreview */,
 				10E9ED7C267D6BA400F45640 /* Cells */,
 				10E9ED99267D6BA400F45640 /* BASAMainHubCardsProtocols.swift */,
 				10E9ED9A267D6BA400F45640 /* BASAMainHubCardsInteractor.swift */,
@@ -688,6 +706,20 @@
 			path = GSNoMovementsCell;
 			sourceTree = "<group>";
 		};
+		EEAEFB05269E089800F97E4D /* GSSAMovementPreview */ = {
+			isa = PBXGroup;
+			children = (
+				EED3E3FC269E442B00BDF898 /* GSSAMovementPreviewEntity.swift */,
+				EEAEFB06269E08BD00F97E4D /* GSSAMovementPreviewPresenter.swift */,
+				EEAEFB07269E08BD00F97E4D /* GSSAMovementPreviewRouter.swift */,
+				EEAEFB08269E08BD00F97E4D /* GSSAMovementPreviewViewController.swift */,
+				EEAEFB09269E08BD00F97E4D /* GSSAMovementPreviewProtocols.swift */,
+				EEAEFB0A269E08BD00F97E4D /* GSSAMovementPreviewInteractor.swift */,
+				EEAEFB0B269E08BD00F97E4D /* GSSAMovementPreviewViewController.xib */,
+			);
+			path = GSSAMovementPreview;
+			sourceTree = "<group>";
+		};
 		EEAFA793268CD72E00DBC192 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -809,6 +841,7 @@
 				10E9EDB9267D6BA400F45640 /* BASAButtonCell.xib in Resources */,
 				10E9EDE8267D6BA400F45640 /* BASAButtonsCell.xib in Resources */,
 				10E9EDBB267D6BA400F45640 /* BASACardControl.xib in Resources */,
+				EEAEFB11269E08BD00F97E4D /* GSSAMovementPreviewViewController.xib in Resources */,
 				10E9EDC1267D6BA400F45640 /* SectionCell.xib in Resources */,
 				10E9EDE0267D6BA400F45640 /* BASAHomeHeaderViewComponent.xib in Resources */,
 				10E9EDC8267D6BA400F45640 /* BASACardLimitsViewController.xib in Resources */,
@@ -840,6 +873,7 @@
 				EEAFA7A2268CF3DD00DBC192 /* GSSANewBeneficiaryAddressProtocols.swift in Sources */,
 				10E9EDFE267D6BA400F45640 /* BASACircularProgressView.swift in Sources */,
 				10E9EDE4267D6BA400F45640 /* BASALendViewCVC.swift in Sources */,
+				EEAEFB0C269E08BD00F97E4D /* GSSAMovementPreviewPresenter.swift in Sources */,
 				10E9EDBA267D6BA400F45640 /* BASACardControl.swift in Sources */,
 				EE0655D92682AE6600F7C73D /* GSDigitalCardConfigRouter.swift in Sources */,
 				10E9EDFC267D6BA400F45640 /* BASAShadowRadiusView.swift in Sources */,
@@ -857,6 +891,7 @@
 				10E9EDEB267D6BA400F45640 /* BASAMovementTableViewCell.swift in Sources */,
 				10E9EDE6267D6BA400F45640 /* BASAMyCreditItem.swift in Sources */,
 				EEF2ED2A2698A4AA0009F771 /* GSDigitalCardEntity.swift in Sources */,
+				EEAEFB0D269E08BD00F97E4D /* GSSAMovementPreviewRouter.swift in Sources */,
 				10E9EDCB267D6BA400F45640 /* BASACardLimitsPresenter.swift in Sources */,
 				10E9EDF2267D6BA400F45640 /* BASAMainHubCardsPresenter.swift in Sources */,
 				EE0655DB2682AE6600F7C73D /* GSDigitalCardConfigProtocols.swift in Sources */,
@@ -869,9 +904,11 @@
 				10E9EDFB267D6BA400F45640 /* BASARadiusButtonView.swift in Sources */,
 				10E9EDC9267D6BA400F45640 /* BASACardLimitsViewController.swift in Sources */,
 				10E9EDC0267D6BA400F45640 /* SectionCell.swift in Sources */,
+				EEAEFB10269E08BD00F97E4D /* GSSAMovementPreviewInteractor.swift in Sources */,
 				10E9EDCF267D6BA400F45640 /* BASANewBeneficiaryProtocols.swift in Sources */,
 				10E9EDDF267D6BA400F45640 /* BASAHomeHeaderViewComponent.swift in Sources */,
 				10E9EDB8267D6BA400F45640 /* BASAButtonCell.swift in Sources */,
+				EED3E3FD269E442B00BDF898 /* GSSAMovementPreviewEntity.swift in Sources */,
 				10E9EDC6267D6BA400F45640 /* BASACardConfigPresenter.swift in Sources */,
 				EEAFA796268CD75200DBC192 /* BeneficiaryButtonCell.swift in Sources */,
 				10E9EDDA267D6BA400F45640 /* BASABeneficiaryListProtocols.swift in Sources */,
@@ -905,6 +942,7 @@
 				EE97BB022683FBB1000AE34C /* BASACardStatementsEntity.swift in Sources */,
 				EE0655DC2682AE6600F7C73D /* GSDigitalCardConfigInteractor.swift in Sources */,
 				EED2CBA0269D361100A1E129 /* GSSALinkDePagoEntity.swift in Sources */,
+				EEAEFB0F269E08BD00F97E4D /* GSSAMovementPreviewProtocols.swift in Sources */,
 				10E9EDCE267D6BA400F45640 /* BASACardConfigRouter.swift in Sources */,
 				10E9EE01267D6BA400F45640 /* BASADigitalCardInteractor.swift in Sources */,
 				10E9EDF1267D6BA400F45640 /* BASAMainHubCardsInteractor.swift in Sources */,
@@ -912,6 +950,7 @@
 				10E9EDF9267D6BA400F45640 /* BASADigitalCardViewController.swift in Sources */,
 				106E8DA9267D6D3D000182DC /* GSSAMMDefinition.swift in Sources */,
 				10E9EDD0267D6BA400F45640 /* BASANewBeneficiaryPresenter.swift in Sources */,
+				EEAEFB0E269E08BD00F97E4D /* GSSAMovementPreviewViewController.swift in Sources */,
 				10E9EDF6267D6BA400F45640 /* BASAMainHubCardsRouter.swift in Sources */,
 				10E9EDB4267D6BA400F45640 /* BASATextFieldCell.swift in Sources */,
 				10E9EDB0267D6BA400F45640 /* BASACardStatementsRouter.swift in Sources */,
@@ -922,6 +961,7 @@
 				EE477BF426937F7D00DC5CF9 /* GSSAMainHubCreditEntity.swift in Sources */,
 				10E9EDC5267D6BA400F45640 /* BASAInfoCardCell.swift in Sources */,
 				EEF728A72699382C0093F0DA /* GSSANewBeneficiaryEntity.swift in Sources */,
+				EEAEFB13269E0F5400F97E4D /* GSSAGradientController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1069,7 +1109,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = mx.com.gruposalinas.GSSAMyMoney;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1098,7 +1138,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = mx.com.gruposalinas.GSSAMyMoney;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;

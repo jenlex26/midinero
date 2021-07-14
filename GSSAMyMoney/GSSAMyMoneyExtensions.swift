@@ -21,6 +21,11 @@ extension UIButton {
         let edgeOffset = abs(titleSize.height - imageSize.height) / 2.0;
         self.contentEdgeInsets = UIEdgeInsets(top: edgeOffset, left: 0.0, bottom: edgeOffset, right: 0.0)
     }
+    
+    func makeCircular(){
+        self.layer.cornerRadius = self.frame.size.width/2
+        self.clipsToBounds = true
+    }
 }
 
 extension UIView{
@@ -47,6 +52,13 @@ extension UIView{
         shapeLayer.masksToBounds = true
         self.layer.mask = shapeLayer
     }
+    
+    func roundCorners(corners: UIRectCorner, radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        layer.mask = mask
+    }
 }
 
 extension UIViewController{
@@ -62,6 +74,23 @@ extension UITableView{
         animation.duration = 0.6
         animation.values = [-20.0, 20.0, -20.0, 20.0, -10.0, 10.0, -5.0, 5.0, 0.0 ]
         self.layer.add(animation, forKey: "shake")
+    }
+    
+    func renderTable() ->UIImage{
+        UIGraphicsBeginImageContext(self.contentSize);
+        self.scrollToRow(at: [0,0], at: UITableView.ScrollPosition.top, animated: false)
+        self.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let row = self.numberOfRows(inSection: 0)
+        let numberofRowthatShowinscreen = 4
+        let scrollCount = row / numberofRowthatShowinscreen
+        for i in 0..<scrollCount {
+            self.scrollToRow(at: [0, (i+1)*numberofRowthatShowinscreen], at: UITableView.ScrollPosition.top, animated: false)
+            self.layer.render(in: UIGraphicsGetCurrentContext()!)
+        }
+        
+        let image:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext();
+        return image;
     }
 }
 

@@ -21,7 +21,7 @@ public class GSSAMMItemMyMoney: GSINNavigateItem {
     public static var moduleName: String { "GSIFMn" }
 
     public static func createModule(withInfo parameters: [String : Any]?) -> UIViewController {
-        return BASAMainHubCardsRouter.createModule()
+       return BASAMainHubCardsRouter.createModule()
     }
 }
 

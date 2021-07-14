@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BASAMainHubCardsViewController" customModule="GSSAMyMoney" customModuleProvider="target">
             <connections>
                 <outlet property="BasaMainHubTableView" destination="dhi-zf-36N" id="isv-Ax-Saj"/>
+                <outlet property="headerImage" destination="tUK-I9-Gu6" id="3s3-EG-uru"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -41,7 +42,7 @@
                 </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="5xj-dk-3uS"/>
-            <color key="backgroundColor" red="0.50980395079999996" green="0.2117646933" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color key="backgroundColor" red="0.50980392156862742" green="0.21176470588235294" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <constraints>
                 <constraint firstItem="7UO-gW-Fp5" firstAttribute="top" secondItem="tUK-I9-Gu6" secondAttribute="bottom" constant="-100" id="8zn-sx-GB8"/>
                 <constraint firstItem="dhi-zf-36N" firstAttribute="top" secondItem="5xj-dk-3uS" secondAttribute="top" id="A1w-xR-WFA"/>
