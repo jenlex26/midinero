@@ -82,6 +82,7 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
         self.urlPath = "https://apigateway.superappbaz.com/"
         self.strPathEndpoint = "integracion/superapp/prestamos/tarjeta-credito/v1/tarjetas/busquedas"
         
+        
         sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: Body, environment: GLOBAL_ENVIROMENT) { (objRes: CreditCardResponse?, error) in
             
             print(Body)

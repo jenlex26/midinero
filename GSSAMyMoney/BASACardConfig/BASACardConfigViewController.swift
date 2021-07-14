@@ -58,7 +58,7 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
         CLABE = GSSISessionInfo.sharedInstance.gsUser.account?.clabe?.tnuoccaFormat ?? ""
         phone = GSSISessionInfo.sharedInstance.gsUser.phone?.tryToAdCellphoneFormat ?? ""
         account = GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().tnuoccaFormat ?? ""
-        
+         
         registerCells()
         setOptions()
         table.delegate = self
