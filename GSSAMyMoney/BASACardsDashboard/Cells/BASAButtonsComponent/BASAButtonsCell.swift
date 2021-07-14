@@ -46,9 +46,8 @@ class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
             "opConciliation" : "tZY4ngD7DXn4igPXo_Z1Ug", "idType" : "",
             "packageName" : "MP"
             ]
-            
             GSINAdminNavigator.shared.startFlow(forAction: "GSIFTr_SendCel",
-                                                navigateDelegate: self)
+                                                navigateDelegate: self, withInfo: parameters)
         }
     }
     
