@@ -16,7 +16,8 @@ import GSSAFunctionalUtilities
 import baz_ios_sdk_link_pago
 
 
-class GSSALinkDePagoViewController: UIViewController, GSSALinkDePagoViewProtocol, GSVCBottomAlertHandler {
+class GSSALinkDePagoViewController: UIViewController, GSSALinkDePagoViewProtocol, GSVCBottomAlertHandler, GSVTDigitalSignDelegate {
+    
     var bottomAlert: GSVCBottomAlert?
     var presenter: GSSALinkDePagoPresenterProtocol?
     
@@ -45,6 +46,14 @@ class GSSALinkDePagoViewController: UIViewController, GSSALinkDePagoViewProtocol
             lblMail.isHidden = false
             txtMail.isHidden = false
         }
+        
+        
+        if hasNav != true && close == false{
+            let verification = GSVTDigitalSignViewController(delegate: self)
+            verification.modalPresentationStyle = .fullScreen
+            present(verification, animated: true, completion: nil)
+        }
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -87,14 +96,26 @@ class GSSALinkDePagoViewController: UIViewController, GSSALinkDePagoViewProtocol
             "amount": "\(quantity ?? "0.0")",
             "numeroCuentaCliente": "\(accountNumber ?? "")",
             "merchantDetail":"Abono Saldo", "correo": "\(mail ?? "")",
-                                                            "numeroAfiliacion": "8632464"
-                ]
+            "numeroAfiliacion": "8632464"
+        ]
         let validado = GSSALinkDePagoViewController.validateStrings(parameters: parameters)
         let view = PB_HomeMain.createModule(loadingModel: validado!)
         view.modalPresentationStyle = .fullScreen
         close = true
         self.present(view, animated: true, completion: nil)
         //self.navigationController?.pushViewController(view, animated: true)
+    }
+    
+    func forgotDigitalSign(_ forgotSecurityCodeViewController: UIViewController?) {
+        print("forgot")
+    }
+    
+    func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
+        print("Ok")
+    }
+    
+    func cancelDigitalSing(_ isUserBlocked: Bool) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     public static func validateStrings(parameters: [String : Any]?) -> PB_HomeEntity? {

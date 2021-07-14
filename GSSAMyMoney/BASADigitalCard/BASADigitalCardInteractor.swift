@@ -30,7 +30,7 @@ class BASADigitalCardInteractor: GSSAURLSessionTaskCoordinatorBridge, BASADigita
                 DataCard(objRes)
             } else {
                 DataCard(nil)
-                debugPrint(error)
+                debugPrint(error)                                                             
             }
         }
     }

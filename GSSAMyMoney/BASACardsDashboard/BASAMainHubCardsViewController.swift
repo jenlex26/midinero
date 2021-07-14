@@ -38,7 +38,6 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         inicializeView()
         let verification = GSVTDigitalSignViewController(delegate: self)
         verification.modalPresentationStyle = .fullScreen
-        verification.needsTestSeed = true
         self.present(verification, animated: true, completion: nil)
     }
     
