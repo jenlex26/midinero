@@ -18,6 +18,26 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
     
     weak var presenter: BASAMainHubCardsPresenterProtocol?
     
+    func tryGetUserActivations(UserActivationsResponse: @escaping () -> ()){
+        self.urlPath = "https://apigateway.superappbaz.com/"
+        self.strPathEndpoint = "integracion/superapp/prestamos/tarjeta-credito/v1/tarjetas/activaciones/busquedas"
+        
+        struct userLendsBody: Codable {}
+        let body = userLendsBody.init()
+        
+        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: BalanceResponse?, error) in
+            
+            if error.code == 0 {
+                
+             //   UserActivationsResponse(objRes)
+            } else {
+                //UserActivationsResponse(nil)
+                debugPrint(error)
+            }
+        }
+        
+    }
+    
     func TryGetDebitCardBalance(Account:[String:String], Balance: @escaping (BalanceResponse?) -> ()){
         
         let requestBody = TransationBalanceRequest(transaccion: TransationItem(folio: (GSSISessionInfo.sharedInstance.gsUser.SICU?.encryptAlnova() ?? "")))
@@ -26,8 +46,10 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
         self.strPathEndpoint = "integracion/superapp/dinero/captacion/cuentas/v1/busquedas"
         
         
-        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: requestBody, environment: GLOBAL_ENVIROMENT) { (objRes: BalanceResponse?, error) in
-            
+        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: requestBody, environment: GLOBAL_ENVIROMENT) { [self] (objRes: BalanceResponse?, error) in
+//            self.tryGetUserActivations {
+//                print("OK")
+//            }
             if error.code == 0 {
                 if (objRes?.resultado.cliente?.cuentas?.first?.saldoDisponible) != nil{
                     Balance(objRes)
@@ -68,7 +90,6 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: LendsResponse?, error) in
             debugPrint(objRes as Any)
-            
             if error.code == 0 {
                 Lends(objRes)
             } else {

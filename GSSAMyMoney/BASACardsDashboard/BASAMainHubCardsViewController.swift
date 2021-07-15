@@ -40,15 +40,13 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         let verification = GSVTDigitalSignViewController(delegate: self)
         verification.modalPresentationStyle = .fullScreen
         self.present(verification, animated: true, completion: nil)
-        startTime = Date()
-        checkTime()
+        //startTime = Date()
     }
     
     
-    func checkTime(){
+    /*func checkTime(){
         DispatchQueue.main.asyncAfter(deadline: .now() + 30, execute: {
             if (self.startTime! + 300) < Date(){
-                print("Tiempo terminado")
                 self.dismiss(animated: true, completion: {
                     self.navigationController?.popViewController(animated: true)
                 })
@@ -56,7 +54,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                 self.checkTime()
             }
         })
-    }
+    } */
     
     func inicializeView(){
         refreshControl.tintColor = .white
@@ -404,7 +402,7 @@ extension BASAMainHubCardsViewController:UITableViewDelegate,UITableViewDataSour
             let item = cell as! BASAMovementTableViewCell
             let data = DebitCardTransactionItem.init(importe: item.lblAmount.text, saldo: "", descripcion: item.lblTitle.text, fechaOperacion: item.lblDate.text, numeroMovimiento: "", codigoDivisa: "")
             let view = GSSAMovementPreviewRouter.createModule(item: data)
-            self.navigationController?.pushViewController(view, animated: true)
+           // self.navigationController?.pushViewController(view, animated: true)
         }
     }
 }

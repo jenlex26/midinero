@@ -68,7 +68,6 @@ class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
     @IBAction func foundAccoun(sender: Any){
         if cellViewController != nil{
             let verification = GSVTDigitalSignViewController(delegate: self)
-            verification.needsTestSeed = true
             verification.modalPresentationStyle = .fullScreen
             if cellViewController != nil{
                 cellViewController.present(verification, animated: true, completion: nil)

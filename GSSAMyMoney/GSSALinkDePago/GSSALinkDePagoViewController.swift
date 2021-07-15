@@ -50,7 +50,6 @@ class GSSALinkDePagoViewController: UIViewController, GSSALinkDePagoViewProtocol
         
         if hasNav != true && close == false{
             let verification = GSVTDigitalSignViewController(delegate: self)
-            verification.needsTestSeed = true
             verification.modalPresentationStyle = .fullScreen
             present(verification, animated: true, completion: nil)
         }
@@ -99,7 +98,6 @@ class GSSALinkDePagoViewController: UIViewController, GSSALinkDePagoViewProtocol
             "merchantDetail":"Abono Saldo", "correo": "\(mail ?? "")",
             "numeroAfiliacion": "8632464"
         ]
-        
         
         let validado = GSSALinkDePagoViewController.validateStrings(parameters: parameters)
         let view = PB_HomeMain.createModule(loadingModel: validado!)
