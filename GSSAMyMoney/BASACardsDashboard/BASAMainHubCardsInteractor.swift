@@ -46,7 +46,7 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
         self.strPathEndpoint = "integracion/superapp/dinero/captacion/cuentas/v1/busquedas"
         
         
-        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: requestBody, environment: GLOBAL_ENVIROMENT) { [self] (objRes: BalanceResponse?, error) in
+        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: requestBody, environment: GLOBAL_ENVIROMENT) { (objRes: BalanceResponse?, error) in
 //            self.tryGetUserActivations {
 //                print("OK")
 //            }
@@ -90,6 +90,7 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: LendsResponse?, error) in
             debugPrint(objRes as Any)
+            
             if error.code == 0 {
                 Lends(objRes)
             } else {
