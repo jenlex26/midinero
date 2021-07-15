@@ -170,8 +170,6 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         presenter?.requestCreditCardBalance(Body: CreditCardBalanceBody.init(transaccion: CreditCardBalanceTransaccion.init(numeroTarjeta: "5165830500011341")), CreditCardBalance: { [self] CreditCardBalance in
             if let creditCardBalanceResponse = CreditCardBalance{
                 creditCardBalance = creditCardBalanceResponse
-                NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "reloadCreditCardBalance"), object: creditCardBalanceResponse, userInfo: nil))
-                
             }else{
                 GSVCLoader.hide()
                 NotificationCenter.default.post(name: Notification.Name("noCreditCardAvailable"), object: nil)
