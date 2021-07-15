@@ -18,10 +18,10 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Uc-bg-VVi">
-                        <rect key="frame" x="30" y="0.0" width="386" height="237"/>
+                        <rect key="frame" x="20" y="0.0" width="406" height="237"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="creditCard2" translatesAutoresizingMaskIntoConstraints="NO" id="b6M-28-8L6">
-                                <rect key="frame" x="0.0" y="0.0" width="386" height="237"/>
+                                <rect key="frame" x="0.0" y="0.0" width="406" height="237"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-/-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pbN-Bb-cBg" customClass="GSVCLabel" customModule="GSSAVisualComponents">
                                 <rect key="frame" x="68.5" y="205.5" width="12.5" height="16"/>
@@ -35,7 +35,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="$-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ckp-u2-ztP" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                <rect key="frame" x="333" y="53" width="33" height="45.5"/>
+                                <rect key="frame" x="353" y="53" width="33" height="45.5"/>
                                 <fontDescription key="fontDescription" name="GeezaPro-Bold" family="Geeza Pro" pointSize="37"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -57,7 +57,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RgV-Cl-72H" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                <rect key="frame" x="16" y="168" width="354" height="31"/>
+                                <rect key="frame" x="16" y="168" width="374" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="hij-5z-t5J"/>
                                 </constraints>
@@ -71,7 +71,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Debes $-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CpU-GS-XIw" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                <rect key="frame" x="294.5" y="98.5" width="71.5" height="20"/>
+                                <rect key="frame" x="314.5" y="98.5" width="71.5" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -82,7 +82,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gAG-TV-emh">
-                                <rect key="frame" x="343" y="10" width="28" height="28"/>
+                                <rect key="frame" x="363" y="10" width="28" height="28"/>
                                 <color key="backgroundColor" red="0.094117648900000003" green="0.109803915" blue="0.13333332540000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="RI3-F3-jUE"/>
@@ -102,7 +102,7 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.95294117649999999" green="0.96862745100000003" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="pbN-Bb-cBg" firstAttribute="top" secondItem="RgV-Cl-72H" secondAttribute="bottom" constant="6.5" id="0gz-9E-cfS"/>
                             <constraint firstAttribute="trailing" secondItem="gAG-TV-emh" secondAttribute="trailing" constant="15" id="3M1-hM-oh7"/>
@@ -131,8 +131,8 @@
             <constraints>
                 <constraint firstItem="8Uc-bg-VVi" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="UI3-O2-ObU"/>
                 <constraint firstAttribute="bottom" secondItem="8Uc-bg-VVi" secondAttribute="bottom" id="jU0-jd-tfx"/>
-                <constraint firstItem="8Uc-bg-VVi" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="30" id="kda-2i-1Z8"/>
-                <constraint firstAttribute="trailing" secondItem="8Uc-bg-VVi" secondAttribute="trailing" constant="30" id="xBj-G3-bWN"/>
+                <constraint firstItem="8Uc-bg-VVi" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="kda-2i-1Z8"/>
+                <constraint firstAttribute="trailing" secondItem="8Uc-bg-VVi" secondAttribute="trailing" constant="20" id="xBj-G3-bWN"/>
             </constraints>
             <size key="customSize" width="446" height="237"/>
             <connections>

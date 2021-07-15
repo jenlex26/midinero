@@ -370,8 +370,9 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     @objc func updateHeaderSize(sender: Notification){
         if cellsArray.count > 0{
             let cell = (cellsArray[0].first?.key)!
+            BasaMainHubTableView.beginUpdates()
             cellsArray[0].updateValue(300.0, forKey: cell)
-            BasaMainHubTableView.reloadRows(at: [[0,0]], with: .left)
+            BasaMainHubTableView.endUpdates()
             refreshControl.endRefreshing()
             setUpRefreshControl()
         }

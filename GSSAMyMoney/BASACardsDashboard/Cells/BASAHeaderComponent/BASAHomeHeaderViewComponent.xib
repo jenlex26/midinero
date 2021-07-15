@@ -119,10 +119,10 @@
                                         <rect key="frame" x="0.0" y="0.0" width="481" height="200"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ya1-ct-Igq">
-                                                <rect key="frame" x="30" y="0.0" width="421" height="200"/>
+                                                <rect key="frame" x="20" y="0.0" width="441" height="200"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="debitCard3" translatesAutoresizingMaskIntoConstraints="NO" id="t7Q-8d-r8v">
-                                                        <rect key="frame" x="0.0" y="0.0" width="421" height="200"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="441" height="200"/>
                                                     </imageView>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoBaz" translatesAutoresizingMaskIntoConstraints="NO" id="FdO-wK-VyN">
                                                         <rect key="frame" x="16" y="16" width="68" height="30"/>
@@ -143,7 +143,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="$-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tdv-ye-51P" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                                        <rect key="frame" x="10" y="53" width="391" height="45.5"/>
+                                                        <rect key="frame" x="10" y="53" width="411" height="45.5"/>
                                                         <fontDescription key="fontDescription" name="GeezaPro-Bold" family="Geeza Pro" pointSize="37"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -165,7 +165,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
                                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eoH-yZ-cf6" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                                        <rect key="frame" x="16" y="131" width="389" height="31"/>
+                                                        <rect key="frame" x="16" y="131" width="409" height="31"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="31" id="HgX-H6-Mfp"/>
                                                         </constraints>
@@ -179,7 +179,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YXc-po-Hfo">
-                                                        <rect key="frame" x="378" y="10" width="28" height="28"/>
+                                                        <rect key="frame" x="398" y="10" width="28" height="28"/>
                                                         <color key="backgroundColor" red="0.39607840779999998" green="0.61176472900000001" blue="0.27843138579999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="28" id="BMG-dn-VJC"/>
@@ -193,7 +193,7 @@
                                                         </connections>
                                                     </button>
                                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CVV" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCi-lk-A6V" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                                        <rect key="frame" x="338" y="174" width="34" height="20.5"/>
+                                                        <rect key="frame" x="358" y="174" width="34" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -204,7 +204,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
                                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="---" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vlW-yv-wH9" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                                        <rect key="frame" x="382" y="174" width="23" height="20.5"/>
+                                                        <rect key="frame" x="402" y="174" width="23" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -215,14 +215,14 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="visaIcon" translatesAutoresizingMaskIntoConstraints="NO" id="ZwP-6k-MBp">
-                                                        <rect key="frame" x="330.5" y="144" width="69.5" height="37"/>
+                                                        <rect key="frame" x="350.5" y="144" width="69.5" height="37"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="ZwP-6k-MBp" secondAttribute="height" multiplier="15:8" id="RPo-YL-6Sg"/>
                                                             <constraint firstAttribute="height" constant="37" id="rKr-CS-gtC"/>
                                                         </constraints>
                                                     </imageView>
                                                 </subviews>
-                                                <color key="backgroundColor" red="0.95294117649999999" green="0.96862745100000003" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="vlW-yv-wH9" firstAttribute="trailing" secondItem="eoH-yZ-cf6" secondAttribute="trailing" id="7yN-3C-7uA"/>
                                                     <constraint firstAttribute="bottom" secondItem="t7Q-8d-r8v" secondAttribute="bottom" id="8fO-QF-6hc"/>
@@ -253,10 +253,10 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="Ya1-ct-Igq" secondAttribute="trailing" constant="30" id="Fb5-Y2-63E"/>
+                                            <constraint firstAttribute="trailing" secondItem="Ya1-ct-Igq" secondAttribute="trailing" constant="20" id="Fb5-Y2-63E"/>
                                             <constraint firstAttribute="bottom" secondItem="Ya1-ct-Igq" secondAttribute="bottom" id="MR1-Ti-Bb3"/>
                                             <constraint firstItem="Ya1-ct-Igq" firstAttribute="top" secondItem="2YR-3f-FL6" secondAttribute="top" id="PNB-Dv-Kqb"/>
-                                            <constraint firstItem="Ya1-ct-Igq" firstAttribute="leading" secondItem="2YR-3f-FL6" secondAttribute="leading" constant="30" id="XNT-cg-o55"/>
+                                            <constraint firstItem="Ya1-ct-Igq" firstAttribute="leading" secondItem="2YR-3f-FL6" secondAttribute="leading" constant="20" id="XNT-cg-o55"/>
                                         </constraints>
                                     </view>
                                     <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="qwJ-hh-yRt">
