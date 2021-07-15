@@ -44,11 +44,12 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateHeaderSize(sender:)), name: Notification.Name("noCreditCardAvailable"), object: nil)
         setUpRefreshControl()
-        //startTime = Date()
+        startTime = Date()
+        checkTime()
     }
     
     
-    /*func checkTime(){
+    func checkTime(){
         DispatchQueue.main.asyncAfter(deadline: .now() + 30, execute: {
             if (self.startTime! + 300) < Date(){
                 self.dismiss(animated: true, completion: {
@@ -58,7 +59,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                 self.checkTime()
             }
         })
-    } */
+    }
     
     func inicializeView(){
         setUpRefreshControl()
@@ -170,6 +171,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         presenter?.requestCreditCardBalance(Body: CreditCardBalanceBody.init(transaccion: CreditCardBalanceTransaccion.init(numeroTarjeta: "5165830500011341")), CreditCardBalance: { [self] CreditCardBalance in
             if let creditCardBalanceResponse = CreditCardBalance{
                 creditCardBalance = creditCardBalanceResponse
+                
             }else{
                 GSVCLoader.hide()
                 NotificationCenter.default.post(name: Notification.Name("noCreditCardAvailable"), object: nil)

@@ -73,8 +73,8 @@ class GSSALinkDePagoViewController: UIViewController, GSSALinkDePagoViewProtocol
     
     func isValidAmount() -> Bool{
         if txtAmount.text?.haveData() == true{
-            let quantity = Int(txtAmount.text?.showOnlyNumbers ?? "0") ?? 0
-            if quantity > 0{
+            let quantity = Double(txtAmount.text?.moneyToDoubleString() ?? "0") ?? 0
+            if quantity > 0.0 && quantity <= 2500.0{
                 return true
             }else{
                 return false
@@ -143,11 +143,11 @@ class GSSALinkDePagoViewController: UIViewController, GSSALinkDePagoViewProtocol
     }
     
     @IBAction func next(sender: GSVCButton){
-        if txtMail.isHidden == false && txtMail.text?.haveData() == true && txtMail.text?.isValidEmail ==  true{
+        if txtMail.isHidden == false && txtMail.text?.isValidEmail ==  true{
             if isValidAmount() == true{
                 let quantity = Double(txtAmount.text?.moneyToDoubleString() ?? "0.0") ?? 0.0
                 if quantity > 2500.0{
-                    self.presentBottomAlertFullData(status: .error, message: "Ingrese una cantidad menor o igual a $2,500", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+                    self.presentBottomAlertFullData(status: .error, message: "Ingrese una cantidad menor o igual a $2,500.00", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
                 }else{
                  GSVCLoader.show()
                  presenter?.requestMailUpdate(body: UpdateMailBody.init(correoElectronico: txtMail.text?.encryptAlnova()), Response: { Response in
@@ -160,12 +160,14 @@ class GSSALinkDePagoViewController: UIViewController, GSSALinkDePagoViewProtocol
                 })
                 }
             }else{
-                self.presentBottomAlertFullData(status: .error, message: "Ingrese una cantidad válida", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+                self.presentBottomAlertFullData(status: .error, message: "Ingrese una cantidad menor o igual a $2,500", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
             }
         }else if isValidAmount() == true && txtMail.isHidden == true{
             showFondeo()
-        }else{
+        }else if txtMail.isHidden == false{
             self.presentBottomAlertFullData(status: .error, message: "Ingrese un correo electrónico válido", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+        }else{
+            self.presentBottomAlertFullData(status: .error, message: "Ingrese una cantidad menor o igual a $2,500", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
         }
     }
 }
