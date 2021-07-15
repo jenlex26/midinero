@@ -34,6 +34,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     let refreshControl = UIRefreshControl()
     var startTime: Date?
     var headerSize: CGFloat = 380.0
+    var time: TimeInterval = 15.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,12 +47,13 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         setUpRefreshControl()
         startTime = Date()
         checkTime()
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(activityObserve))
+        self.view.addGestureRecognizer(tapGesture)
     }
     
-    
     func checkTime(){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 30, execute: {
-            if (self.startTime! + 300) < Date(){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [self] in
+            if (self.startTime! + time) < Date(){
                 self.dismiss(animated: true, completion: {
                     self.navigationController?.popViewController(animated: true)
                 })
@@ -369,12 +371,19 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         print("OK")
     }
     
+    @objc func activityObserve(){
+        startTime = Date()
+        time = 15.0
+    }
+    
     @objc func updateHeaderSize(sender: Notification){
         if cellsArray.count > 0{
             let cell = (cellsArray[0].first?.key)!
-            BasaMainHubTableView.beginUpdates()
-            cellsArray[0].updateValue(300.0, forKey: cell)
-            BasaMainHubTableView.endUpdates()
+            UIView.animate(withDuration: 0.5) { [self] in
+                BasaMainHubTableView.beginUpdates()
+                cellsArray[0].updateValue(300.0, forKey: cell)
+                BasaMainHubTableView.endUpdates()
+            }
             refreshControl.endRefreshing()
             setUpRefreshControl()
         }
@@ -435,7 +444,7 @@ extension BASAMainHubCardsViewController:UITableViewDelegate,UITableViewDataSour
             let item = cell as! BASAMovementTableViewCell
             let data = DebitCardTransactionItem.init(importe: item.lblAmount.text, saldo: "", descripcion: item.lblTitle.text, fechaOperacion: item.lblDate.text, numeroMovimiento: "", codigoDivisa: "")
             let view = GSSAMovementPreviewRouter.createModule(item: data)
-           // self.navigationController?.pushViewController(view, animated: true)
+            // self.navigationController?.pushViewController(view, animated: true)
         }
     }
 }
