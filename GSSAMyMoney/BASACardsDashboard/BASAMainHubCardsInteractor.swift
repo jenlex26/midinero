@@ -27,6 +27,10 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: BalanceResponse?, error) in
             
+            print(body)
+            
+            print(objRes)
+            
             if error.code == 0 {
                 
              //   UserActivationsResponse(objRes)
@@ -89,6 +93,9 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
         let body = userLendsBody.init()
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: LendsResponse?, error) in
+            
+            print(body)
+            
             debugPrint(objRes as Any)
             
             if error.code == 0 {

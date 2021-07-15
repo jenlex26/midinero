@@ -33,6 +33,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     var accountNumber: [String:String]?
     let refreshControl = UIRefreshControl()
     var startTime: Date?
+    var headerSize: CGFloat = 380.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +41,9 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         let verification = GSVTDigitalSignViewController(delegate: self)
         verification.modalPresentationStyle = .fullScreen
         self.present(verification, animated: true, completion: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateHeaderSize(sender:)), name: Notification.Name("noCreditCardAvailable"), object: nil)
+        setUpRefreshControl()
         //startTime = Date()
     }
     
@@ -57,15 +61,19 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     } */
     
     func inicializeView(){
-        refreshControl.tintColor = .white
-        refreshControl.attributedTitle = NSAttributedString(string: "")
-        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
-        BasaMainHubTableView.addSubview(refreshControl)
+        setUpRefreshControl()
         ConfigureCollectionView()
         self.BasaMainHubTableView.alwaysBounceVertical = false
         NotificationCenter.default.addObserver(self, selector: #selector(SwitchColors(notification:)), name: NSNotification.Name(rawValue: "HomeHeaderViewChange"), object: nil)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         setTableForDebitCard()
+    }
+    
+    func setUpRefreshControl(){
+        refreshControl.tintColor = .white
+        refreshControl.attributedTitle = NSAttributedString(string: "")
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        BasaMainHubTableView.addSubview(refreshControl)
     }
     
     func loadDebitBalance(){
@@ -92,6 +100,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
             if Movements != nil{
                 debitCardMovements = Movements
                 setTableForDebitCard()
+                loadActivateCard()
             }else{
                 self.presentBottomAlertFullData(status: .error, message: "No podemos cargar tus movimientos en este momento, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
             }
@@ -157,6 +166,19 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         })
     }
     
+    func loadActivateCard(){
+        presenter?.requestCreditCardBalance(Body: CreditCardBalanceBody.init(transaccion: CreditCardBalanceTransaccion.init(numeroTarjeta: "5165830500011341")), CreditCardBalance: { [self] CreditCardBalance in
+            if let creditCardBalanceResponse = CreditCardBalance{
+                creditCardBalance = creditCardBalanceResponse
+                NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "reloadCreditCardBalance"), object: creditCardBalanceResponse, userInfo: nil))
+                
+            }else{
+                GSVCLoader.hide()
+                NotificationCenter.default.post(name: Notification.Name("noCreditCardAvailable"), object: nil)
+            }
+        })
+    }
+    
     func ConfigureCollectionView(){
         self.RegisterCells()
         self.BasaMainHubTableView.delegate = self
@@ -194,7 +216,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         header.debitButton.backgroundColor = UIColor(red: 130/255, green: 0/255, blue: 255/255, alpha: 1.0)
         header.debitButton.setTitleColor(.white, for: .normal)
         if cellsArray.count == 0{
-            cellsArray.append([header:380.0])
+            cellsArray.append([header:headerSize])
         }else{
             removeAllExceptFirst()
         }
@@ -345,6 +367,16 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     
     func optionalAction() {
         print("OK")
+    }
+    
+    @objc func updateHeaderSize(sender: Notification){
+        if cellsArray.count > 0{
+            let cell = (cellsArray[0].first?.key)!
+            cellsArray[0].updateValue(300.0, forKey: cell)
+            BasaMainHubTableView.reloadRows(at: [[0,0]], with: .left)
+            refreshControl.endRefreshing()
+            setUpRefreshControl()
+        }
     }
     
     @objc func SwitchColors(notification: Notification){

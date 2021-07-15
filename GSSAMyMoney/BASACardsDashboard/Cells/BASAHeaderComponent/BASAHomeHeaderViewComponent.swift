@@ -29,6 +29,7 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
     @IBOutlet weak var expDateLabel             : GSVCLabel!
     @IBOutlet weak var CVVTitle                 : GSVCLabel!
     @IBOutlet weak var CVVLabel                 : GSVCLabel!
+    @IBOutlet weak var btnSelect                : UIStackView!
     
     
     var gradient = CAGradientLayer()
@@ -69,6 +70,9 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
     }
     
     func setUpDebitCard(){
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: Notification.Name("noCreditCardAvailable"), object: nil)
+        
         debitCardlblBalance.textColor = .black
         debitCardlblCardNumber.textColor = .black
         debitCardlblCardNumber.isHidden = true
@@ -202,6 +206,10 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
                 cellViewController.navigationController?.pushViewController(view, animated: true)
             }
         }
+    }
+    
+    @objc func methodOfReceivedNotification(notification: NSNotification){
+        btnSelect.isHidden = true
     }
 }
 
