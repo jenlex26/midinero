@@ -34,7 +34,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     let refreshControl = UIRefreshControl()
     var startTime: Date?
     var headerSize: CGFloat = 380.0
-    var time: TimeInterval = 15.0
+    var time: TimeInterval = 300.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,8 +47,6 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         setUpRefreshControl()
         startTime = Date()
         checkTime()
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(activityObserve))
-        self.view.addGestureRecognizer(tapGesture)
     }
     
     func checkTime(){
@@ -373,7 +371,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     
     @objc func activityObserve(){
         startTime = Date()
-        time = 15.0
+        time = 300.0
     }
     
     @objc func updateHeaderSize(sender: Notification){
@@ -446,6 +444,10 @@ extension BASAMainHubCardsViewController:UITableViewDelegate,UITableViewDataSour
             let view = GSSAMovementPreviewRouter.createModule(item: data)
             // self.navigationController?.pushViewController(view, animated: true)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        activityObserve()
     }
 }
 

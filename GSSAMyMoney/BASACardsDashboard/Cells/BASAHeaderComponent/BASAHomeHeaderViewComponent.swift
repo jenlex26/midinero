@@ -209,7 +209,16 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
     }
     
     @objc func methodOfReceivedNotification(notification: NSNotification){
-        btnSelect.isHidden = true
+        UIView.animate(withDuration: 0.2,
+                       delay: 0.0,
+                       usingSpringWithDamping: 0.9,
+                       initialSpringVelocity: 1,
+                       options: [],
+                       animations: {
+                        self.btnSelect.alpha = 0
+                        self.btnSelect.isHidden = true
+                        self.layoutIfNeeded()
+                       })
     }
 }
 

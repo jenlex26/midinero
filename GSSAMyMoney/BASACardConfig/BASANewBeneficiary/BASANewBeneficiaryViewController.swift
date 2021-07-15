@@ -44,7 +44,6 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
             useSessionInfoAddress()
         }
         
-        
         if beneficiaryData?.nombre?.alnovaDecrypt().nameFormatter().count ?? 0 > 0{
             letUserEdit = false
         }else{
@@ -182,14 +181,15 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
     
     @objc func validateFields(){
         self.view.endEditing(true)
-        var addressBody = BeneficiaryAddress.init(calle: beneficiaryPublicData.shared.calle?.encryptAlnova(), numeroExterior: beneficiaryPublicData.shared.numeroExterior?.encryptAlnova(), numeroInterior: beneficiaryPublicData.shared.numeroInterior?.encryptAlnova(), colonia: beneficiaryPublicData.shared.colonia?.encryptAlnova(), municipio: beneficiaryPublicData.shared.municipio?.encryptAlnova(), estado: beneficiaryPublicData.shared.estado?.encryptAlnova(), codigoPostal: beneficiaryPublicData.shared.codigoPostal?.encryptAlnova())
+        
+        let addressBody = BeneficiaryAddress.init(calle: beneficiaryPublicData.shared.calle?.encryptAlnova(), numeroExterior: beneficiaryPublicData.shared.numeroExterior?.encryptAlnova(), numeroInterior: beneficiaryPublicData.shared.numeroInterior?.encryptAlnova(), colonia: beneficiaryPublicData.shared.colonia?.encryptAlnova(), municipio: beneficiaryPublicData.shared.municipio?.encryptAlnova(), estado: beneficiaryPublicData.shared.estado?.encryptAlnova(), codigoPostal: beneficiaryPublicData.shared.codigoPostal?.encryptAlnova())
         
         let contactBody = BeneficiaryContact.init(claveLada: "52".encryptAlnova(), numeroTelefono: beneficiaryPublicData.shared.numeroTelefono?.encryptAlnova(), numeroExtension: " ".encryptAlnova(), correoElectronico: beneficiaryPublicData.shared.correoElectronico?.encryptAlnova())
         
         
-        if beneficiaryData?.domicilio != nil{
-            addressBody = (beneficiaryData?.domicilio)!
-        }
+//        if beneficiaryData?.domicilio != nil{
+//            addressBody = (beneficiaryData?.domicilio)!
+//        }
         
         
         let thisBeneficiary = Beneficiario.init(id: beneficiaryPublicData.shared.id, nombre: beneficiaryPublicData.shared.nombre?.encryptAlnova(), apellidoPaterno: beneficiaryPublicData.shared.apellidoPaterno?.encryptAlnova(), apellidoMaterno: beneficiaryPublicData.shared.apellidoMaterno?.encryptAlnova(), fechaNacimiento: beneficiaryPublicData.shared.fechaNacimiento?.encryptAlnova(), idParentesco: beneficiaryPublicData.shared.idParentesco, porcentaje: beneficiaryPublicData.shared.porcentaje?.encryptAlnova(), domicilio: addressBody, contacto: contactBody)

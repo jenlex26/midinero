@@ -148,6 +148,7 @@ class GSSANewBeneficiaryAddressViewController: UIViewController, GSSANewBenefici
                     }
                 }
             }
+            
             if hasEmptyTextField == false{
                 if sender.tag == 1{
                     let alert = UIAlertController(title: "Baz", message: "Al continuar confirmas que todos los datos son correctos.", preferredStyle: .alert)
@@ -282,7 +283,6 @@ extension GSSANewBeneficiaryAddressViewController: UITextFieldDelegate{
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField.tag == 3{
             table.setContentOffset(CGPoint(x: 0.0, y: 0.0), animated: true)
-            
         }
     }
     
