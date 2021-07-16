@@ -109,7 +109,7 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
         self.urlPath = "https://apigateway.superappbaz.com/"
         self.strPathEndpoint = "integracion/superapp/prestamos/tarjeta-credito/v1/tarjetas/busquedas"
         
-        let body = CreditCardBody.init(transaccion: CreditCardTransaccion.init(numeroCuenta: nil, numeroTarjeta: "4589090600000345".dynamicEncrypt(), numeroContrato: nil))
+        let body = CreditCardBody.init(transaccion: CreditCardTransaccion.init(numeroCuenta: nil, numeroTarjeta: GSSISessionInfo.sharedInstance.gsUser.card?.dynamicEncrypt(), numeroContrato: nil))
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: CreditCardResponse?, error) in
             print(Body)
