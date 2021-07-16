@@ -125,8 +125,9 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     }
     
     func loadCreditCardInfo(){
-        let numberCard = GSSISessionInfo.sharedInstance.gsUser.card?.dynamicEncrypt()
+       //let numberCard = GSSISessionInfo.sharedInstance.gsUser.card?.dynamicEncrypt()
         
+        let numberCard = String(4589090600000345).dynamicEncrypt()
         GSVCLoader.show(type: .native)
         presenter?.requestCreditCardData(Body: CreditCardBody.init(transaccion: CreditCardTransaccion.init(numeroCuenta: "", numeroTarjeta: numberCard, numeroContrato: "")), CreditCardData: { [self] CreditCardData in
             if let CreditCard = CreditCardData{
@@ -142,7 +143,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     }
     
     func loadCreditCardBalance(){
-        presenter?.requestCreditCardBalance(Body: CreditCardBalanceBody.init(transaccion: CreditCardBalanceTransaccion.init(numeroTarjeta: GSSISessionInfo.sharedInstance.gsUser.card?.dynamicEncrypt())), CreditCardBalance: { [self] CreditCardBalance in
+        presenter?.requestCreditCardBalance(Body: CreditCardBalanceBody.init(transaccion: CreditCardBalanceTransaccion.init(numeroTarjeta: "4589090600000345".dynamicEncrypt())), CreditCardBalance: { [self] CreditCardBalance in
             if let creditCardBalanceResponse = CreditCardBalance{
                 creditCardBalance = creditCardBalanceResponse
                 NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "reloadCreditCardBalance"), object: creditCardBalanceResponse, userInfo: nil))
@@ -279,8 +280,8 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
             infoCreditCell.lblPaymentToSettle.text = creditCardBalance?.resultado?.saldoDispuesto?.moneyFormat()
             infoCreditCell.lblNotInterestPayment.text = creditCardBalance?.resultado?.pagoSinInteres?.moneyFormat()
         }
-        
-        cellsArray.append([infoCreditCell:380.0])
+        //TAMAÑO ANTERIOR 380.0
+        cellsArray.append([infoCreditCell:320.0])
         
         let separator = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "SectionCell") as! SectionCell
         separator.lblTitle.text = "Movimientos"

@@ -17,6 +17,14 @@ struct CreditCardTransaccion: Codable {
     var numeroCuenta, numeroTarjeta, numeroContrato: String?
 }
 
+// MARK: - GenericRawResponse
+struct GenericRawCreditCardResponse: Codable {
+    var body: CreditCardResponse?
+    var statusCode: String?
+    var statusCodeValue: Int?
+}
+
+
 // MARK: - CreditCardResponse
 struct CreditCardResponse: Codable {
     var mensaje, folio: String?
@@ -42,6 +50,14 @@ struct CreditCardBalanceBody: Codable {
 // MARK: - CreditCardBalanceTransaccion
 struct CreditCardBalanceTransaccion: Codable {
     var numeroTarjeta: String?
+}
+
+
+// MARK: - GenericRawResponse
+struct GenericRawCreditCardBalanceResponse: Codable {
+    var body: CreditCardBalanceResponse?
+    var statusCode: String?
+    var statusCodeValue: Int?
 }
 
 // MARK: - CreditCardBalanceResponse
@@ -74,6 +90,15 @@ struct CreditCardMovementsBody: Codable {
 // MARK: - CreditCardMovementsTransaccion
 struct CreditCardMovementsTransaccion: Codable {
     var fechaInicio, fechaFin: String?
+}
+
+
+
+// MARK: - GenericRawResponse
+struct GenericRawCreditCardMovementsResponse: Codable {
+    var body: CreditCardMovementsResponse?
+    var statusCode: String?
+    var statusCodeValue: Int?
 }
 
 // MARK: - CreditCardMovementsResponse

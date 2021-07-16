@@ -8,6 +8,13 @@
 import Foundation
 
 
+// MARK: - GenericRawResponse
+struct GenericRawLendsResponse: Codable {
+    var body: LendsResponse?
+    var statusCode: String?
+    var statusCodeValue: Int?
+}
+
 // MARK: - LendsResponse
 struct LendsResponse: Codable {
     var mensaje, folio: String?

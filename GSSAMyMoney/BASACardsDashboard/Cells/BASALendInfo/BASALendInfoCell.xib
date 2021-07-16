@@ -66,7 +66,7 @@
                                 <rect key="frame" x="0.0" y="30.5" width="318" height="30.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pago con descuento" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8MW-3a-RyU" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                        <rect key="frame" x="0.0" y="0.0" width="283.5" height="30.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="285" height="30.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -77,7 +77,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N6m-au-GrB" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                        <rect key="frame" x="283.5" y="0.0" width="34.5" height="30.5"/>
+                                        <rect key="frame" x="285" y="0.0" width="33" height="30.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -134,7 +134,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qKW-Jy-6DM">
-                                        <rect key="frame" x="116" y="0.0" width="41" height="30.5"/>
+                                        <rect key="frame" x="116" y="0.0" width="43" height="30.5"/>
                                         <color key="tintColor" red="0.41162583229999999" green="0.1316206157" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" image="info.circle.fill" catalog="system"/>
                                         <connections>
@@ -142,7 +142,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4iM-yo-ucc" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                        <rect key="frame" x="157" y="0.0" width="161" height="30.5"/>
+                                        <rect key="frame" x="159" y="0.0" width="159" height="30.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -203,19 +203,29 @@
                             <constraint firstAttribute="height" constant="8" id="AVt-D3-tGm"/>
                         </constraints>
                     </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ICz-LY-sM9">
+                        <rect key="frame" x="0.0" y="0.0" width="398" height="13"/>
+                        <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="13" id="daC-gE-kvX"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="k1Q-Bd-0ZT" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="6HB-ts-1YD"/>
                     <constraint firstAttribute="trailingMargin" secondItem="kIp-aG-KNE" secondAttribute="trailing" constant="20" id="8Or-dp-npd"/>
                     <constraint firstItem="xmM-gg-BLJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="8Th-Ob-hjv"/>
+                    <constraint firstItem="ICz-LY-sM9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="B6H-KB-2wH"/>
                     <constraint firstAttribute="trailing" secondItem="xmM-gg-BLJ" secondAttribute="trailing" constant="10" id="ML9-b6-IrK"/>
                     <constraint firstAttribute="bottom" secondItem="Zor-EM-mBk" secondAttribute="bottom" id="N3l-M2-JAK"/>
                     <constraint firstAttribute="bottomMargin" secondItem="k1Q-Bd-0ZT" secondAttribute="bottom" constant="15" id="QCh-CI-d9P"/>
                     <constraint firstItem="xmM-gg-BLJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="Upb-0f-ARI"/>
+                    <constraint firstAttribute="trailing" secondItem="ICz-LY-sM9" secondAttribute="trailing" id="VaL-kk-TQd"/>
                     <constraint firstItem="kIp-aG-KNE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="ZRZ-zY-eJ1"/>
                     <constraint firstAttribute="trailing" secondItem="Zor-EM-mBk" secondAttribute="trailing" id="bNb-qb-CUW"/>
                     <constraint firstItem="k1Q-Bd-0ZT" firstAttribute="top" secondItem="kIp-aG-KNE" secondAttribute="bottom" constant="15" id="n4J-33-HTg"/>
                     <constraint firstItem="kIp-aG-KNE" firstAttribute="top" secondItem="xmM-gg-BLJ" secondAttribute="bottom" constant="10" id="tNz-ma-741"/>
+                    <constraint firstItem="ICz-LY-sM9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="y1S-aR-LFQ"/>
                     <constraint firstItem="Zor-EM-mBk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="zcR-5l-DXD"/>
                 </constraints>
             </tableViewCellContentView>
@@ -234,40 +244,40 @@
     </objects>
     <designables>
         <designable name="4iM-yo-ucc">
-            <size key="intrinsicContentSize" width="20" height="22.5"/>
+            <size key="intrinsicContentSize" width="18" height="20.5"/>
         </designable>
         <designable name="8MW-3a-RyU">
-            <size key="intrinsicContentSize" width="165.5" height="22.5"/>
+            <size key="intrinsicContentSize" width="156" height="20.5"/>
         </designable>
         <designable name="IQT-mD-3rc">
-            <size key="intrinsicContentSize" width="102.5" height="22.5"/>
+            <size key="intrinsicContentSize" width="95.5" height="20.5"/>
         </designable>
         <designable name="N6m-au-GrB">
-            <size key="intrinsicContentSize" width="20" height="22.5"/>
+            <size key="intrinsicContentSize" width="18" height="20.5"/>
         </designable>
         <designable name="P3x-sw-Gbh">
-            <size key="intrinsicContentSize" width="187" height="22.5"/>
+            <size key="intrinsicContentSize" width="174" height="20.5"/>
         </designable>
         <designable name="UHd-Df-KNH">
-            <size key="intrinsicContentSize" width="20" height="22.5"/>
+            <size key="intrinsicContentSize" width="18" height="20.5"/>
         </designable>
         <designable name="aTU-cD-VLj">
-            <size key="intrinsicContentSize" width="9.5" height="22.5"/>
+            <size key="intrinsicContentSize" width="8" height="20.5"/>
         </designable>
         <designable name="fHT-kL-Xlw">
-            <size key="intrinsicContentSize" width="9.5" height="22.5"/>
+            <size key="intrinsicContentSize" width="8" height="20.5"/>
         </designable>
         <designable name="g5a-mf-BDn">
-            <size key="intrinsicContentSize" width="116" height="22.5"/>
+            <size key="intrinsicContentSize" width="106.5" height="20.5"/>
         </designable>
         <designable name="ghR-vN-u8w">
-            <size key="intrinsicContentSize" width="116" height="22.5"/>
+            <size key="intrinsicContentSize" width="109.5" height="20.5"/>
         </designable>
         <designable name="k1Q-Bd-0ZT">
-            <size key="intrinsicContentSize" width="50" height="35"/>
+            <size key="intrinsicContentSize" width="40" height="30"/>
         </designable>
         <designable name="xmM-gg-BLJ">
-            <size key="intrinsicContentSize" width="123" height="28"/>
+            <size key="intrinsicContentSize" width="90.5" height="20.5"/>
         </designable>
     </designables>
     <resources>

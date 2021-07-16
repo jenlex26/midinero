@@ -22,7 +22,10 @@
                         <rect key="frame" x="0.0" y="10" width="434" height="360"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Información" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="be5-MC-A62" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                <rect key="frame" x="24" y="20" width="386" height="25"/>
+                                <rect key="frame" x="24" y="20" width="386" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="n9A-fc-AVY"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -33,7 +36,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="ssA-RF-ceJ">
-                                <rect key="frame" x="35" y="51" width="367" height="304"/>
+                                <rect key="frame" x="35" y="54" width="367" height="254"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="hWJ-x1-MlD">
                                         <rect key="frame" x="0.0" y="0.0" width="367" height="22.5"/>
@@ -148,7 +151,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7oS-Jj-z0s">
-                                        <rect key="frame" x="0.0" y="114" width="367" height="190"/>
+                                        <rect key="frame" x="0.0" y="114" width="367" height="140"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pago para no generar intereses" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i0O-Ll-ava" customClass="GSVCLabel" customModule="GSSAVisualComponents">
                                                 <rect key="frame" x="10" y="10" width="347" height="20"/>
@@ -186,8 +189,24 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="i0O-Ll-ava" firstAttribute="top" secondItem="7oS-Jj-z0s" secondAttribute="top" constant="10" id="6uT-xS-rHs"/>
+                                            <constraint firstItem="i0O-Ll-ava" firstAttribute="leading" secondItem="7oS-Jj-z0s" secondAttribute="leading" constant="10" id="FE9-zi-Dro"/>
+                                            <constraint firstItem="LFH-bp-ONh" firstAttribute="centerX" secondItem="xVB-J5-1gT" secondAttribute="centerX" id="JLb-fX-uiL"/>
+                                            <constraint firstAttribute="trailing" secondItem="i0O-Ll-ava" secondAttribute="trailing" constant="10" id="T9c-vm-iB5"/>
+                                            <constraint firstAttribute="height" constant="140" id="Uev-tc-iis"/>
+                                            <constraint firstItem="LFH-bp-ONh" firstAttribute="top" secondItem="xVB-J5-1gT" secondAttribute="bottom" constant="10" id="cMg-ZH-8Ff"/>
+                                            <constraint firstItem="xVB-J5-1gT" firstAttribute="centerX" secondItem="7oS-Jj-z0s" secondAttribute="centerX" id="fs7-yP-d36"/>
+                                            <constraint firstItem="xVB-J5-1gT" firstAttribute="top" secondItem="i0O-Ll-ava" secondAttribute="bottom" constant="10" id="yLi-dU-3Vs"/>
+                                        </constraints>
+                                    </view>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e3N-A7-EZb">
+                                        <rect key="frame" x="0.0" y="254" width="367" height="50"/>
+                                        <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MLH-xb-dvU" customClass="GSVCButton" customModule="GSSAVisualComponents">
-                                                <rect key="frame" x="83.5" y="135.5" width="200" height="50"/>
+                                                <rect key="frame" x="83.5" y="0.0" width="200" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="KKJ-HX-JvG"/>
                                                     <constraint firstAttribute="width" constant="200" id="LZg-KH-juo"/>
@@ -205,16 +224,9 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstItem="i0O-Ll-ava" firstAttribute="top" secondItem="7oS-Jj-z0s" secondAttribute="top" constant="10" id="6uT-xS-rHs"/>
-                                            <constraint firstItem="i0O-Ll-ava" firstAttribute="leading" secondItem="7oS-Jj-z0s" secondAttribute="leading" constant="10" id="FE9-zi-Dro"/>
-                                            <constraint firstItem="LFH-bp-ONh" firstAttribute="centerX" secondItem="xVB-J5-1gT" secondAttribute="centerX" id="JLb-fX-uiL"/>
-                                            <constraint firstAttribute="trailing" secondItem="i0O-Ll-ava" secondAttribute="trailing" constant="10" id="T9c-vm-iB5"/>
-                                            <constraint firstAttribute="height" constant="190" id="Uev-tc-iis"/>
-                                            <constraint firstItem="MLH-xb-dvU" firstAttribute="top" secondItem="LFH-bp-ONh" secondAttribute="bottom" constant="15" id="Vrz-mW-jQL"/>
-                                            <constraint firstItem="LFH-bp-ONh" firstAttribute="top" secondItem="xVB-J5-1gT" secondAttribute="bottom" constant="10" id="cMg-ZH-8Ff"/>
-                                            <constraint firstItem="MLH-xb-dvU" firstAttribute="centerX" secondItem="7oS-Jj-z0s" secondAttribute="centerX" id="e0a-bD-rz5"/>
-                                            <constraint firstItem="xVB-J5-1gT" firstAttribute="centerX" secondItem="7oS-Jj-z0s" secondAttribute="centerX" id="fs7-yP-d36"/>
-                                            <constraint firstItem="xVB-J5-1gT" firstAttribute="top" secondItem="i0O-Ll-ava" secondAttribute="bottom" constant="10" id="yLi-dU-3Vs"/>
+                                            <constraint firstItem="MLH-xb-dvU" firstAttribute="centerX" secondItem="e3N-A7-EZb" secondAttribute="centerX" id="74Q-iN-NYn"/>
+                                            <constraint firstItem="MLH-xb-dvU" firstAttribute="centerY" secondItem="e3N-A7-EZb" secondAttribute="centerY" id="Hwu-5v-5AN"/>
+                                            <constraint firstAttribute="height" constant="50" id="rb9-E2-tdO"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -235,13 +247,14 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="Jfb-KC-gFk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="TpV-gw-OWa"/>
+                    <constraint firstAttribute="bottom" secondItem="Jfb-KC-gFk" secondAttribute="bottom" constant="4" id="VMk-8I-38h"/>
                     <constraint firstAttribute="trailing" secondItem="Jfb-KC-gFk" secondAttribute="trailing" id="iyG-vs-9Ty"/>
                     <constraint firstItem="Jfb-KC-gFk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="mD8-3D-vkM"/>
-                    <constraint firstAttribute="bottom" secondItem="Jfb-KC-gFk" secondAttribute="bottom" constant="4" id="qWT-qI-qYB"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="buttonView" destination="e3N-A7-EZb" id="0A3-Ma-yRZ"/>
                 <outlet property="lblCreditLimit" destination="3tS-ox-k9A" id="sny-UD-ls2"/>
                 <outlet property="lblCutOffDate" destination="V1N-NV-VWX" id="S5a-l3-DgC"/>
                 <outlet property="lblMinimumPayment" destination="reb-o0-hCD" id="5pw-3y-4xR"/>

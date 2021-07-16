@@ -20,15 +20,13 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
     
     func tryGetUserActivations(UserActivationsResponse: @escaping () -> ()){
         self.urlPath = "https://apigateway.superappbaz.com/"
-        self.strPathEndpoint = "integracion/superapp/prestamos/tarjeta-credito/v1/tarjetas/activaciones/busquedas"
+        self.strPathEndpoint = "integracion/superapp/prestamos/tarjeta-credito/v1/tarjetas/busquedas/cu"
         
         struct userLendsBody: Codable {}
         let body = userLendsBody.init()
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: BalanceResponse?, error) in
-            
             print(body)
-            
             print(objRes)
             
             if error.code == 0 {
@@ -49,9 +47,9 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
         self.strPathEndpoint = "integracion/superapp/dinero/captacion/cuentas/v1/busquedas"
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: requestBody, environment: GLOBAL_ENVIROMENT) { (objRes: BalanceResponse?, error) in
-//            self.tryGetUserActivations {
-//                print("OK")
-//            }
+            self.tryGetUserActivations {
+                print("OK")
+            }
             if error.code == 0 {
                 if (objRes?.resultado.cliente?.cuentas?.first?.saldoDisponible) != nil{
                     Balance(objRes)
@@ -90,14 +88,14 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
         struct userLendsBody: Codable {}
         let body = userLendsBody.init()
         
-        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: LendsResponse?, error) in
-            
+        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: GenericRawLendsResponse?, error) in
             print(body)
-            
             debugPrint(objRes as Any)
             
+            let response = objRes?.body
+            
             if error.code == 0 {
-                Lends(objRes)
+                Lends(response)
             } else {
                 Lends(nil)
                 debugPrint(error)
@@ -109,49 +107,49 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
         self.urlPath = "https://apigateway.superappbaz.com/"
         self.strPathEndpoint = "integracion/superapp/prestamos/tarjeta-credito/v1/tarjetas/busquedas"
         
-        let body = CreditCardBody.init(transaccion: CreditCardTransaccion.init(numeroCuenta: nil, numeroTarjeta: GSSISessionInfo.sharedInstance.gsUser.card?.dynamicEncrypt(), numeroContrato: nil))
+        let body = CreditCardBody.init(transaccion: CreditCardTransaccion.init(numeroCuenta: nil, numeroTarjeta: "4589090600000345".dynamicEncrypt(), numeroContrato: nil))
         
-        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: CreditCardResponse?, error) in
+        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: GenericRawCreditCardResponse?, error) in
             print(Body)
             debugPrint(objRes as Any)
-            
+            let response = objRes?.body
             if error.code == 0 {
-                CreditCardData(objRes)
+                CreditCardData(response)
             } else {
                 CreditCardData(nil)
                 debugPrint(error)
             }
         }
-        
     }
     
     func tryGetCreditCardBalance(Body: CreditCardBalanceBody, CreditCardBalance: @escaping (CreditCardBalanceResponse?) -> ()){
         self.urlPath = "https://apigateway.superappbaz.com/"
         self.strPathEndpoint = "integracion/superapp/prestamos/tarjeta-credito/v1/tarjetas/saldos/busquedas"
         
-        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: Body, environment: GLOBAL_ENVIROMENT) { (objRes: CreditCardBalanceResponse?, error) in
+        let body = CreditCardBalanceBody.init(transaccion: CreditCardBalanceTransaccion.init(numeroTarjeta: "4589090600000345".dynamicEncrypt()))
+        
+        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: GenericRawCreditCardBalanceResponse?, error) in
             debugPrint(objRes as Any)
+            let response = objRes?.body
             
             if error.code == 0 {
-                CreditCardBalance(objRes)
+                CreditCardBalance(response)
             } else {
                 CreditCardBalance(nil)
                 debugPrint(error)
             }
         }
-        
-        
     }
     
     func tryGetCreditCardMovements(Body: CreditCardMovementsBody, CreditCardMovements: @escaping (CreditCardMovementsResponse?) -> ()){
         self.urlPath = "https://apigateway.superappbaz.com/"
         self.strPathEndpoint = "integracion/superapp/prestamos/tarjeta-credito/v1/tarjetas/movimientos/busquedas"
         
-        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: Body, environment: GLOBAL_ENVIROMENT) { (objRes: CreditCardMovementsResponse?, error) in
+        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: Body, environment: GLOBAL_ENVIROMENT) { (objRes: GenericRawCreditCardMovementsResponse?, error) in
             debugPrint(objRes ?? "")
-            
+            let response = objRes?.body
             if error.code == 0 {
-                CreditCardMovements(objRes)
+                CreditCardMovements(response)
             } else {
                 CreditCardMovements(nil)
                 debugPrint(error)
@@ -160,3 +158,4 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
     }
 }
 
+    

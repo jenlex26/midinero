@@ -18,10 +18,10 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ucz-A1-DY2">
-                        <rect key="frame" x="30" y="0.0" width="453" height="286"/>
+                        <rect key="frame" x="20" y="0.0" width="473" height="286"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="$-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XJo-5q-9k4" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                <rect key="frame" x="400" y="34" width="33" height="50.5"/>
+                                <rect key="frame" x="420" y="34" width="33" height="50.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50.5" id="I8Z-v0-5JE"/>
                                 </constraints>
@@ -35,7 +35,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="De tus préstamos en Efectivo, en Elektra y otros" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sV5-k0-0Th" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                <rect key="frame" x="10" y="115" width="423" height="21"/>
+                                <rect key="frame" x="10" y="115" width="443" height="21"/>
                                 <fontDescription key="fontDescription" name="GeezaPro-Bold" family="Geeza Pro" pointSize="17"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -46,7 +46,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deuda total" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FpU-QQ-rB5" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                <rect key="frame" x="345" y="89.5" width="88" height="20.5"/>
+                                <rect key="frame" x="365" y="89.5" width="88" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -57,7 +57,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kt5-1K-d29">
-                                <rect key="frame" x="414" y="10" width="24" height="24"/>
+                                <rect key="frame" x="434" y="10" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="J5s-ag-e9Z"/>
                                     <constraint firstAttribute="width" constant="24" id="jK0-n6-uFw"/>
@@ -89,9 +89,9 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="ucz-A1-DY2" secondAttribute="bottom" constant="10" id="7Ia-z9-t2O"/>
-                <constraint firstItem="ucz-A1-DY2" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="30" id="HNo-Dp-0WA"/>
+                <constraint firstItem="ucz-A1-DY2" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="HNo-Dp-0WA"/>
                 <constraint firstItem="ucz-A1-DY2" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="kvK-y9-SJz"/>
-                <constraint firstAttribute="trailing" secondItem="ucz-A1-DY2" secondAttribute="trailing" constant="30" id="qRN-KG-jDH"/>
+                <constraint firstAttribute="trailing" secondItem="ucz-A1-DY2" secondAttribute="trailing" constant="20" id="qRN-KG-jDH"/>
             </constraints>
             <size key="customSize" width="513" height="296"/>
             <connections>

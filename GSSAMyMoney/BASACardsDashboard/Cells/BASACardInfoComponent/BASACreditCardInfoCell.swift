@@ -16,6 +16,7 @@ class BASACreditCardInfoCell: UITableViewCell {
     @IBOutlet weak var lblCreditLimit       : GSVCLabel!
     @IBOutlet weak var lblNotInterestPayment: GSVCLabel!
     @IBOutlet weak var lblNextPaymentDate   : GSVCLabel!
+    @IBOutlet weak var buttonView           : UIView! 
 
     override func awakeFromNib() {
         super.awakeFromNib()
