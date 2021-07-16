@@ -27,7 +27,7 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: BalanceResponse?, error) in
             print(body)
-            print(objRes)
+            print(objRes ?? "null")
             
             if error.code == 0 {
                 
