@@ -39,7 +39,7 @@ class GSSALinkDePagoViewController: UIViewController, GSSALinkDePagoViewProtocol
         
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         
-        if GSSISessionInfo.sharedInstance.gsUser.email != nil && GSSISessionInfo.sharedInstance.gsUser.email?.count ?? 0 > 0{
+        if GSSISessionInfo.sharedInstance.gsUser.email?.isValidEmail == true{
             lblMail.isHidden = true
             txtMail.isHidden = true
         }else{

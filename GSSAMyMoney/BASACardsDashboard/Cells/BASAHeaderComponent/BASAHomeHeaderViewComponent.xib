@@ -214,7 +214,7 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="visaIcon" translatesAutoresizingMaskIntoConstraints="NO" id="ZwP-6k-MBp">
+                                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="visaIcon" translatesAutoresizingMaskIntoConstraints="NO" id="ZwP-6k-MBp">
                                                         <rect key="frame" x="350.5" y="144" width="69.5" height="37"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="ZwP-6k-MBp" secondAttribute="height" multiplier="15:8" id="RPo-YL-6Sg"/>
@@ -334,7 +334,7 @@
     </objects>
     <designables>
         <designable name="98V-7A-Aa3">
-            <size key="intrinsicContentSize" width="46" height="30"/>
+            <size key="intrinsicContentSize" width="51" height="33"/>
         </designable>
         <designable name="B5R-we-V5S">
             <size key="intrinsicContentSize" width="12.5" height="16"/>
@@ -350,7 +350,7 @@
         </designable>
         <designable name="eoH-yZ-cf6"/>
         <designable name="gko-4C-avx">
-            <size key="intrinsicContentSize" width="51" height="30"/>
+            <size key="intrinsicContentSize" width="56" height="33"/>
         </designable>
         <designable name="vlW-yv-wH9">
             <size key="intrinsicContentSize" width="23" height="20.5"/>

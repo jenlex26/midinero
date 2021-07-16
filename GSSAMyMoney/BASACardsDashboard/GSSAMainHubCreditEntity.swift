@@ -25,7 +25,7 @@ struct CreditCardResponse: Codable {
 
 // MARK: - CreditCard Resultado
 struct CreditCardResult: Codable {
-    var tarjetas: [ CreditCardItem]?
+    var tarjetas: [CreditCardItem]?
 }
 
 // MARK: - Tarjeta de Credito

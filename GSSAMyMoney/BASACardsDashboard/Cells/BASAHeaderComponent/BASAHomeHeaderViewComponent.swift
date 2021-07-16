@@ -130,7 +130,8 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
             guard let cell = cardCollection.cellForItem(at: [0,0]) as? BASACardCell else{
                 return
             }
-            cell.lblCardNumber.text = data.resultado?.tarjetas?.first?.numero?.tnuoccaFormat
+            //MARKKK
+           // cell.lblCardNumber.text = data.resultado?.tarjetas?.first?.numero?.tnuoccaFormat
             cell.lblExpDate.text = data.resultado?.tarjetas?.first?.expiracion?.replacingOccurrences(of: "-", with: "/")
         }
     }
@@ -248,7 +249,8 @@ extension BASAHomeHeaderViewComponent: UICollectionViewDelegate, UICollectionVie
             cell.CardBackgroundView.blurBackground(style: .dark, fallbackColor: .white)
             
             if creditCardData != nil{
-                cell.lblCardNumber.text = creditCardData?.resultado?.tarjetas?.first?.numero?.tnuoccaFormat
+                //MARKKK
+               // cell.lblCardNumber.text = creditCardData?.resultado?.tarjetas?.first?.numero?.tnuoccaFormat
                 cell.lblExpDate.text = creditCardData?.resultado?.tarjetas?.first?.expiracion?.replacingOccurrences(of: "-", with: "/")
             }
             
