@@ -109,6 +109,7 @@
 		EE36C43126878F11001AD9F2 /* GSSASecurityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE36C43026878F11001AD9F2 /* GSSASecurityController.swift */; };
 		EE477BF226937F2E00DC5CF9 /* GSSAMainHubDebitEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE477BF126937F2E00DC5CF9 /* GSSAMainHubDebitEntity.swift */; };
 		EE477BF426937F7D00DC5CF9 /* GSSAMainHubCreditEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE477BF326937F7D00DC5CF9 /* GSSAMainHubCreditEntity.swift */; };
+		EE5DB5AD26A785EC0004E487 /* GSSAFirebaseManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE5DB5AC26A785EC0004E487 /* GSSAFirebaseManager.framework */; };
 		EE97BB022683FBB1000AE34C /* BASACardStatementsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE97BB012683FBB1000AE34C /* BASACardStatementsEntity.swift */; };
 		EE97BB062684DF30000AE34C /* GSNoMovementsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE97BB042684DF2F000AE34C /* GSNoMovementsCell.swift */; };
 		EE97BB072684DF30000AE34C /* GSNoMovementsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE97BB052684DF2F000AE34C /* GSNoMovementsCell.xib */; };
@@ -255,6 +256,7 @@
 		EE36C43026878F11001AD9F2 /* GSSASecurityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSASecurityController.swift; sourceTree = "<group>"; };
 		EE477BF126937F2E00DC5CF9 /* GSSAMainHubDebitEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAMainHubDebitEntity.swift; sourceTree = "<group>"; };
 		EE477BF326937F7D00DC5CF9 /* GSSAMainHubCreditEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAMainHubCreditEntity.swift; sourceTree = "<group>"; };
+		EE5DB5AC26A785EC0004E487 /* GSSAFirebaseManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GSSAFirebaseManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE97BB012683FBB1000AE34C /* BASACardStatementsEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BASACardStatementsEntity.swift; sourceTree = "<group>"; };
 		EE97BB042684DF2F000AE34C /* GSNoMovementsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSNoMovementsCell.swift; sourceTree = "<group>"; };
 		EE97BB052684DF2F000AE34C /* GSNoMovementsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GSNoMovementsCell.xib; sourceTree = "<group>"; };
@@ -314,6 +316,7 @@
 				EE1423AC2697894100384207 /* GSSASessionInfo.xcframework in Frameworks */,
 				EEC1F5CF26916ED0006FB4CD /* AWSAuthCore.xcframework in Frameworks */,
 				EE1423AF2697894A00384207 /* GSSAServiceCoordinator.xcframework in Frameworks */,
+				EE5DB5AD26A785EC0004E487 /* GSSAFirebaseManager.framework in Frameworks */,
 				EEC1F5EC26916F07006FB4CD /* GSSAVisualComponents.framework in Frameworks */,
 				EE1423B52697895B00384207 /* GSSAFunctionalUtilities.xcframework in Frameworks */,
 			);
@@ -325,6 +328,7 @@
 		106E8DA0267D6CB2000182DC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EE5DB5AC26A785EC0004E487 /* GSSAFirebaseManager.framework */,
 				EED2CBA1269D498700A1E129 /* baz_ios_sdk_link_pago.framework */,
 				EE1423B42697895B00384207 /* GSSAFunctionalUtilities.xcframework */,
 				EE1423B12697895000384207 /* GSSASecurityManager.xcframework */,
@@ -1113,7 +1117,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.5;
+				MARKETING_VERSION = 0.1.7;
 				PRODUCT_BUNDLE_IDENTIFIER = mx.com.gruposalinas.GSSAMyMoney;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1143,7 +1147,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.5;
+				MARKETING_VERSION = 0.1.7;
 				PRODUCT_BUNDLE_IDENTIFIER = mx.com.gruposalinas.GSSAMyMoney;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

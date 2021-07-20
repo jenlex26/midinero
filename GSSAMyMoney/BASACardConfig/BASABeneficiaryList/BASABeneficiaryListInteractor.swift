@@ -20,6 +20,9 @@ class BASABeneficiaryListInteractor: GSSAURLSessionTaskCoordinatorBridge, BASABe
     public func tryGetBeneficiaries(account: String, beneficiaryList: @escaping (BeneficiaryListResponse?) -> ()){
         self.urlPath = "https://apigateway.superappbaz.com/"
         self.strPathEndpoint = "integracion/superapp/dinero/captacion/gestion-cuentas/v1/beneficiarios/busquedas"
+        
+//        self.urlPath = "https://api.baz.app"
+//        self.strPathEndpoint = "/superapp/dinero/captacion/gestion-cuentas/v1/beneficiarios/busquedas"
 
         let body = BeneficiaryListBody(numeroCuenta: account.replacingOccurrences(of: " ", with: "").encryptAlnova())
         
@@ -28,8 +31,6 @@ class BASABeneficiaryListInteractor: GSSAURLSessionTaskCoordinatorBridge, BASABe
             
             if error.code == 0 {
                 beneficiaryList(objRes)
-            }else if error.code != 404{
-                beneficiaryList(BeneficiaryListResponse.init(mensaje: "", folio: "", resultado: nil))
             }else{
                 beneficiaryList(BeneficiaryListResponse.init(mensaje: "", folio: "", resultado: BeneficiaryListResult.init(numeroCuenta: "", beneficiarios: [])))
             }

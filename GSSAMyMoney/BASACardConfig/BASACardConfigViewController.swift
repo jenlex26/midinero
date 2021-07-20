@@ -45,7 +45,7 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
     
     var configurations: Array<userOptions> = []
     
-    var CLABE = UserDefaults.standard.value(forKey: "DebitCardCLABE") as? String
+    var CLABE = ""
     var phone = ""
     var account = ""
     
@@ -205,7 +205,7 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
         //            verification.modalPresentationStyle = .fullScreen
         //            present(verification, animated: true, completion: nil)
         case 4:
-            let text = "Mi número de cuenta CLABE para enviarme dinero desde otro banco (SPEI) es: \(CLABE ?? "") \nMi número de cuenta para enviarme dinero dentro de baz es: \(account) \nMi número de celular asociado para envíos es: \(phone)"
+            let text = "Mi número de cuenta CLABE para enviarme dinero desde otro banco (SPEI) es: \(CLABE) \nMi número de cuenta para enviarme dinero dentro de baz es: \(account) \nMi número de celular asociado para envíos es: \(phone)"
             let activityViewController = UIActivityViewController(activityItems: [text], applicationActivities: nil)
             activityViewController.popoverPresentationController?.sourceView = self.view
             self.present(activityViewController, animated: true, completion: nil)

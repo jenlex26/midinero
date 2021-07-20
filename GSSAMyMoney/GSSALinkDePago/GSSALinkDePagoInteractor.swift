@@ -19,8 +19,8 @@ class GSSALinkDePagoInteractor: GSSAURLSessionTaskCoordinatorBridge, GSSALinkDeP
     
     func tryMailUpdate(body: UpdateMailBody, Response: @escaping (DigitalCardResponse?) -> ())
     {
-        self.urlPath = "https://apigateway.superappbaz.com/"
-        self.strPathEndpoint = "integracion/superapp/enrolamiento/gestion-usuarios/v1/usuarios/correo"
+        self.urlPath = "https://api.baz.app"
+        self.strPathEndpoint = "/superapp/enrolamiento/gestion-usuarios/v1/usuarios/correo"
         
         sendRequest(strUrl: strPathEndpoint, method: .PUT, objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: DigitalCardResponse?, error) in
             debugPrint(objRes ?? "NiL")

@@ -111,12 +111,14 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
     }
     
     func lockCard(){
+        UserDefaults.standard.setValue(true, forKey: "DigitalCardStatus")
         viewContainerOn.isHidden = true
         cvvView.isHidden = true
         lockIcon.isHidden = false
     }
 
     func unLockCard(){
+        UserDefaults.standard.setValue(false, forKey: "DigitalCardStatus")
         viewContainerOn.isHidden = false
         cvvView.isHidden = false
         lockIcon.isHidden = true

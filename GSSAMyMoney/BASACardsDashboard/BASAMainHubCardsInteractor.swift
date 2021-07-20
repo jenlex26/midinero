@@ -25,7 +25,7 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
         struct userLendsBody: Codable {}
         let body = userLendsBody.init()
         
-        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: BalanceResponse?, error) in
+        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], environment: GLOBAL_ENVIROMENT) { (objRes: BalanceResponse?, error) in
             print(body)
             print(objRes ?? "null")
             
@@ -43,13 +43,15 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
     func TryGetDebitCardBalance(Account:[String:String], Balance: @escaping (BalanceResponse?) -> ()){
         let requestBody = TransationBalanceRequest(transaccion: TransationItem(folio: (GSSISessionInfo.sharedInstance.gsUser.SICU?.encryptAlnova() ?? "")))
         
+//        self.urlPath = "https://api.baz.app"
+//        self.strPathEndpoint = "/superapp/dinero/captacion/cuentas/v1/busquedas"
+        
         self.urlPath = "https://apigateway.superappbaz.com/"
         self.strPathEndpoint = "integracion/superapp/dinero/captacion/cuentas/v1/busquedas"
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: requestBody, environment: GLOBAL_ENVIROMENT) { (objRes: BalanceResponse?, error) in
-            self.tryGetUserActivations {
-                print("OK")
-            }
+           
+            
             if error.code == 0 {
                 if (objRes?.resultado.cliente?.cuentas?.first?.saldoDisponible) != nil{
                     Balance(objRes)
@@ -65,14 +67,19 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
     
     func TryGetDebitCardMovements(Body: MovimientosBody, Movements: @escaping (DebitCardTransaction?) -> ()){
         
+//        self.urlPath = "https://api.baz.app"
+//        self.strPathEndpoint = "/superapp/dinero/captacion/cuentas/v1/movimientos/busquedas"
+
         self.urlPath = "https://apigateway.superappbaz.com/"
-        self.strPathEndpoint = "integracion/superapp/dinero/captacion/cuentas/v1/movimientos/busquedas"
-        
+        self.strPathEndpoint = "integracion/superapp/dinero/captacion/cuentas/v1/busquedas"
+
         sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: Body, environment: GLOBAL_ENVIROMENT) { (objRes: DebitCardTransaction?, error) in
             
-            if error.code == 0 {
+            if error.code == 0{
                 Movements(objRes)
-            } else {
+            } else if error.code == 400{
+                Movements(DebitCardTransaction.init(mensaje: "", folio: "", resultado: DebitCardTransactionResult(numeroCuenta: "", producto: "", titularCuenta: "", fechaConsulta: "", horaConsulta: "", movimientos: [])))
+            }else{
                 Movements(nil)
                 debugPrint(error)
             }

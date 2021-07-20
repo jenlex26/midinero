@@ -81,7 +81,7 @@ class GSSANewBeneficiaryAddressViewController: UIViewController, GSSANewBenefici
         streetNumber.textField.placeholder = nil
         streetNumber.textField.returnKeyType = .next
         streetNumber.textField.tag = 1
-        streetNumber.textField.keyboardType = .numberPad
+        streetNumber.textField.keyboardType = .default
         streetNumber.textField.delegate = self
         cellsArray.append([streetNumber:117.0])
         
@@ -91,7 +91,7 @@ class GSSANewBeneficiaryAddressViewController: UIViewController, GSSANewBenefici
         internalNumber.textField.text = singletoneData.numeroInterior
         internalNumber.textField.placeholder = nil
         internalNumber.textField.returnKeyType = .next
-        internalNumber.textField.keyboardType = .numberPad
+        internalNumber.textField.keyboardType = .default
         internalNumber.textField.tag = 2
         internalNumber.textField.contentType(.streetAddressLine2)
         internalNumber.textField.delegate = self
@@ -129,7 +129,7 @@ class GSSANewBeneficiaryAddressViewController: UIViewController, GSSANewBenefici
             for item in cellsArray{
                 if item.first?.key is BASATextFieldCell{
                     let cell = item.first?.key as! BASATextFieldCell
-                    if (cell.textField.text?.characterCount())! == 0{
+                    if (cell.textField.text?.characterCount())! == 0 && cell.lblTitle.text != "Número interior"{
                         hasEmptyTextField = true
                     }
                     switch cell.lblTitle.text{
@@ -287,19 +287,24 @@ extension GSSANewBeneficiaryAddressViewController: UITextFieldDelegate{
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let ACCEPTABLE_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzñÑ0123456789"
         let currentText = textField.text ?? ""
         guard let stringRange = Range(range, in: currentText) else { return false }
         let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
         
+        let cs = NSCharacterSet(charactersIn: ACCEPTABLE_CHARACTERS).inverted
+        let filtered = string.components(separatedBy: cs).joined(separator: "")
+
+        
         switch textField.tag{
         case 3:
-            return updatedText.count <= 5
+            return updatedText.count <= 5 && (string == filtered)
         case 0:
-            return updatedText.count <= 25
+            return updatedText.count <= 30 && (string == filtered)
         case 1:
-            return updatedText.count <= 5
+            return updatedText.count <= 5 && (string == filtered)
         case 2:
-            return updatedText.count <= 5
+            return updatedText.count <= 5 && (string == filtered)
         default:
             return true
         }

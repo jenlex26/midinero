@@ -103,7 +103,12 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
         }
         
         let percentCell = table.dequeueReusableCell(withIdentifier: "BASATextFieldCell") as! BASATextFieldCell
-        percentCell.textField.text = String(Int(beneficiaryPublicData.shared.porcentaje ?? "0") ?? 0)
+        let percent = String(Int(beneficiaryPublicData.shared.porcentaje ?? "0") ?? 0)
+        if percent == "0"{
+            percentCell.textField.text = ""
+        }else{
+            percentCell.textField.text = percent
+        }
         percentCell.blankSpace.isHidden = false
         percentCell.textField.delegate = self
         percentCell.lblTitle.text = "Porcentaje otorgado"
@@ -255,7 +260,7 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
                         }))
                         self.present(alert, animated: true, completion: nil)
                     }else{
-                        self.presentBottomAlertFullData(status: .error, message: "No podemos guardar la información, verifique que la suma de los beneficiarios sea 100% e intente más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+                        self.presentBottomAlertFullData(status: .error, message: "No podemos guardar la información, en este momento, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
                         self.canContinueProcess = false
                     }
                 })

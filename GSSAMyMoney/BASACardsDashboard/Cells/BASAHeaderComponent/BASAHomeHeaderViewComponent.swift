@@ -80,12 +80,13 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
         
         debitCardbtnConfig.tag = 0
         
-        debitCardlblBalance.text = UserDefaults.standard.value(forKey: "debitAccountBalance") as? String
+       // debitCardlblBalance.text = UserDefaults.standard.value(forKey: "debitAccountBalance") as? String
         
         if data != nil{
+            
             debitCardlblBalance.text = data!.resultado.cliente?.cuentas?.first?.saldoDisponible?.alnovaDecrypt().moneyFormat()
         }else{
-            debitCardlblBalance.text = UserDefaults.standard.value(forKey: "debitAccountBalance") as? String
+         //   debitCardlblBalance.text = UserDefaults.standard.value(forKey: "debitAccountBalance") as? String
         }
     }
     

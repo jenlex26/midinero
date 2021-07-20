@@ -8,6 +8,6 @@
 import Foundation
 
 // MARK: - UpdateMailBody
-struct UpdateMailBody: Codable {
+@frozen public struct UpdateMailBody: Codable {
     var correoElectronico: String?
 }

@@ -13,8 +13,8 @@ import GSSAVisualTemplates
 import GSSAVisualComponents
 import GSSASessionInfo
 import GSSAFunctionalUtilities
+import GSSAFirebaseManager
 import baz_ios_sdk_link_pago
-
 
 class GSSALinkDePagoViewController: UIViewController, GSSALinkDePagoViewProtocol, GSVCBottomAlertHandler, GSVTDigitalSignDelegate {
     
@@ -57,6 +57,7 @@ class GSSALinkDePagoViewController: UIViewController, GSSALinkDePagoViewProtocol
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        tagView()
         txtAmount.becomeFirstResponder()
         if close == true{
             if hasNav == true{
@@ -65,6 +66,16 @@ class GSSALinkDePagoViewController: UIViewController, GSSALinkDePagoViewProtocol
                 self.dismiss(animated: false, completion: nil)
             }
         }
+    }
+    
+    private func tagView(){
+        let tagEvent = GSSAFirebaseEvent(.custom("pageview")).set(section: "mi_dinero").set(flow: "fondear_cuenta").set(screenName: "monto")
+        GSSAAnalytics.firebase.tracking(event: tagEvent)
+    }
+    
+    private func tagEndEditing(){
+        let tagEvent = GSSAFirebaseEvent(.custom("ui_interaction")).set(section: "mi_dinero").set(flow: "fondear_cuenta").set(screenName: "monto")
+        GSSAAnalytics.firebase.tracking(event: tagEvent)
     }
     
     func optionalAction() {
@@ -149,15 +160,15 @@ class GSSALinkDePagoViewController: UIViewController, GSSALinkDePagoViewProtocol
                 if quantity > 2500.0{
                     self.presentBottomAlertFullData(status: .error, message: "Ingrese una cantidad menor o igual a $2,500.00", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
                 }else{
-                 GSVCLoader.show()
-                 presenter?.requestMailUpdate(body: UpdateMailBody.init(correoElectronico: txtMail.text?.encryptAlnova()), Response: { Response in
-                    GSVCLoader.hide()
-                    if Response != nil{
-                        self.showFondeo()
-                    }else{
-                        self.showFondeo()
-                    }
-                })
+                    GSVCLoader.show()
+                    presenter?.requestMailUpdate(body: UpdateMailBody.init(correoElectronico: txtMail.text?.encryptAlnova()), Response: { Response in
+                        GSVCLoader.hide()
+                        if Response != nil{
+                            self.showFondeo()
+                        }else{
+                            self.showFondeo()
+                        }
+                    })
                 }
             }else{
                 self.presentBottomAlertFullData(status: .error, message: "Ingrese una cantidad menor o igual a $2,500", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
@@ -175,6 +186,7 @@ class GSSALinkDePagoViewController: UIViewController, GSSALinkDePagoViewProtocol
 extension GSSALinkDePagoViewController: UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == txtMail{
+            
             self.view.endEditing(true)
         }
         if textField == txtAmount{
@@ -193,7 +205,6 @@ extension GSSALinkDePagoViewController: UITextFieldDelegate{
             let hasLittleCoin = false
             
             if string.count == 0, txtAmount.text?.dValue ?? 0 < 0.1 {
-                
                 textField.resetAmount(withLittleCoin: hasLittleCoin)
             } else {
                 let bHideCents = GSSISessionInfo.sharedInstance.bHideCents

@@ -32,8 +32,8 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     var creditCardMovements: CreditCardMovementsResponse?
     var accountNumber: [String:String]?
     let refreshControl = UIRefreshControl()
-    var startTime: Date?
     var headerSize: CGFloat = 380.0
+    var startTime: Date?
     var time: TimeInterval = 300.0
     
     override func viewDidLoad() {
@@ -41,8 +41,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         inicializeView()
         let verification = GSVTDigitalSignViewController(delegate: self)
         verification.modalPresentationStyle = .fullScreen
-        self.present(verification, animated: true, completion: nil)
-        
+        self.present(verification, animated: false, completion: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateHeaderSize(sender:)), name: Notification.Name("noCreditCardAvailable"), object: nil)
         setUpRefreshControl()
         startTime = Date()
@@ -125,7 +124,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     }
     
     func loadCreditCardInfo(){
-       //let numberCard = GSSISessionInfo.sharedInstance.gsUser.card?.dynamicEncrypt()
+        //let numberCard = GSSISessionInfo.sharedInstance.gsUser.card?.dynamicEncrypt()
         
         let numberCard = String(4589090600000345).dynamicEncrypt()
         GSVCLoader.show(type: .native)
@@ -210,7 +209,6 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         
         
         header.debitCardlblBalance.textColor = .white
-        header.debitCardlblBalance.text = UserDefaults.standard.value(forKey: "debitAccountBalance") as? String
         
         header.debitCardlblCardNumber.text = accountData?.first?.numero?.alnovaDecrypt()
         
@@ -234,6 +232,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         
         
         if debitCardMovements != nil{
+            if  debitCardMovements!.resultado.movimientos.count > 0{
             for item in debitCardMovements!.resultado.movimientos{
                 if  item.descripcion?.alnovaDecrypt() != ""{
                     let movementCell = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAMovementCell") as! BASAMovementTableViewCell
@@ -243,6 +242,10 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                     movementCell.setArrow(amount: item.importe?.alnovaDecrypt() ?? "")
                     cellsArray.append([movementCell:88.0])
                 }
+            }
+            }else{
+                let emptyMovements = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "GSNoMovementsCell")!
+                cellsArray.append([emptyMovements:321])
             }
         }else{
             let emptyMovements = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "GSNoMovementsCell")!

@@ -155,7 +155,7 @@ extension BASATextFieldCell: GSVCPickerControllerDelegate, GSVCPickerControllerD
         }else if textField.keyboardType == .numberPad{
             return count <= 10
         }else if textField.keyboardType == .emailAddress{
-            return count <= 30 && emailAlphabet
+            return count <= 50 && emailAlphabet
         }else{
             return count <= 25
         }

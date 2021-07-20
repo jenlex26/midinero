@@ -20,6 +20,9 @@ class BASADigitalCardInteractor: GSSAURLSessionTaskCoordinatorBridge, BASADigita
     
     public func TryGetCardDigitalCardData(Body: Transaction,  DataCard: @escaping (DigitalCardResponse?) -> ())
     {
+//        self.urlPath = "https://api.baz.app"
+//        self.strPathEndpoint = "/superapp/dinero/captacion/gestion-tarjetas-digitales/v1/tarjetas/busquedas"
+        
         self.urlPath = "https://apigateway.superappbaz.com/"
         self.strPathEndpoint = "integracion/superapp/dinero/captacion/gestion-tarjetas-digitales/v1/tarjetas/busquedas"
         

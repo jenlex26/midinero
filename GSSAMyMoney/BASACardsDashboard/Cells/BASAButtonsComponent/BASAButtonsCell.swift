@@ -42,12 +42,8 @@ class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
     
     @IBAction func sendAndPay(sender: Any){
         if cellViewController != nil{
-            let parameters : [String : Any] = [ "idShop" : "",
-            "opConciliation" : "tZY4ngD7DXn4igPXo_Z1Ug", "idType" : "",
-            "packageName" : "MP"
-            ]
-            GSINAdminNavigator.shared.startFlow(forAction: "GSIFTr_SendCel",
-                                                navigateDelegate: self, withInfo: parameters)
+            GSINAdminNavigator.shared.startFlow(forAction: "GSIFTr",
+                                                navigateDelegate: self)
         }
     }
     
