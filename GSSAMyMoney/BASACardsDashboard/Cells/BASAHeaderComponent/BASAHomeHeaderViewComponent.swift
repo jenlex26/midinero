@@ -185,6 +185,7 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
     }
     
     @IBAction func openDebitConfig(){
+        self.tagDebitCardConfigClick()
         let view = BASACardConfigRouter.createModule(credit: false)
         cellViewController.navigationController?.pushViewController(view, animated: true)
     }

@@ -46,6 +46,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         setUpRefreshControl()
         startTime = Date()
         checkTime()
+        
     }
     
     func checkTime(){

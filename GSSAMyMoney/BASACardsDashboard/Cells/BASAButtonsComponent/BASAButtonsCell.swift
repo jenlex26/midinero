@@ -9,6 +9,7 @@ import UIKit
 import GSSAInterceptor
 import GSSAVisualComponents
 import GSSAVisualTemplates
+import GSSAFirebaseManager
 
 class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
     
@@ -24,10 +25,7 @@ class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
-        //        self.backgroundColor = UIColor.GSVCBase300()
-        //        cellContentView.backgroundColor = UIColor.GSVCBase300()
         separatorView.backgroundColor = UIColor.GSVCBase300()
-        // corner radius
         cellButtonView.layer.cornerRadius = 10
         cellButtonView.layer.masksToBounds = true
         
@@ -42,6 +40,7 @@ class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
     
     @IBAction func sendAndPay(sender: Any){
         if cellViewController != nil{
+            tagSendMoneyFlow()
             GSINAdminNavigator.shared.startFlow(forAction: "GSIFTr",
                                                 navigateDelegate: self)
         }
@@ -49,6 +48,7 @@ class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
     
     @IBAction func payWithQR(sender: Any){
         if cellViewController != nil{
+            tagReceiveAndPayFlow()
             GSINAdminNavigator.shared.startFlow(forAction: "GSIFCqr",
                                                 navigateDelegate: self)
         }
@@ -56,6 +56,7 @@ class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
     
     @IBAction func tiempoAire(sender: Any){
         if cellViewController != nil{
+            tagPhoneMinutesFlow()
             GSINAdminNavigator.shared.startFlow(forAction: "GSIFAt",
                                                 navigateDelegate: self)
         }
@@ -63,6 +64,7 @@ class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
     
     @IBAction func foundAccoun(sender: Any){
         if cellViewController != nil{
+            tagFundAccount()
             let verification = GSVTDigitalSignViewController(delegate: self)
             verification.modalPresentationStyle = .fullScreen
             if cellViewController != nil{
@@ -72,6 +74,7 @@ class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
     }
     
     @IBAction func openDigitalCard(sender: Any){
+        tagShowDebitDigitalCard()
         let data = accountBalance?.resultado.cliente?.cuentas?.first?.saldoDisponible?.moneyFormat() ?? ""
         cellViewController.navigationController?.pushViewController(BASADigitalCardRouter.createModule(userBalance: data), animated: true)
     }
