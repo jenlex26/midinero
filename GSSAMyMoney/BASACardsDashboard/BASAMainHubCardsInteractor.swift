@@ -43,11 +43,11 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
     func TryGetDebitCardBalance(Account:[String:String], Balance: @escaping (BalanceResponse?) -> ()){
         let requestBody = TransationBalanceRequest(transaccion: TransationItem(folio: (GSSISessionInfo.sharedInstance.gsUser.SICU?.encryptAlnova() ?? "")))
         
-//        self.urlPath = "https://api.baz.app"
-//        self.strPathEndpoint = "/superapp/dinero/captacion/cuentas/v1/busquedas"
+        self.urlPath = "https://api.baz.app"
+        self.strPathEndpoint = "/superapp/dinero/captacion/cuentas/v1/busquedas"
         
-        self.urlPath = "https://apigateway.superappbaz.com/"
-        self.strPathEndpoint = "integracion/superapp/dinero/captacion/cuentas/v1/busquedas"
+//        self.urlPath = "https://apigateway.superappbaz.com/"
+//        self.strPathEndpoint = "integracion/superapp/dinero/captacion/cuentas/v1/busquedas"
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: requestBody, environment: GLOBAL_ENVIROMENT) { (objRes: BalanceResponse?, error) in
            
@@ -67,11 +67,11 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
     
     func TryGetDebitCardMovements(Body: MovimientosBody, Movements: @escaping (DebitCardTransaction?) -> ()){
         
-//        self.urlPath = "https://api.baz.app"
-//        self.strPathEndpoint = "/superapp/dinero/captacion/cuentas/v1/movimientos/busquedas"
+        self.urlPath = "https://api.baz.app"
+        self.strPathEndpoint = "/superapp/dinero/captacion/cuentas/v1/movimientos/busquedas"
 
-        self.urlPath = "https://apigateway.superappbaz.com/"
-        self.strPathEndpoint = "integracion/superapp/dinero/captacion/cuentas/v1/busquedas"
+//        self.urlPath = "https://apigateway.superappbaz.com/"
+//        self.strPathEndpoint = "integracion/superapp/dinero/captacion/cuentas/v1/busquedas"
 
         sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: Body, environment: GLOBAL_ENVIROMENT) { (objRes: DebitCardTransaction?, error) in
             

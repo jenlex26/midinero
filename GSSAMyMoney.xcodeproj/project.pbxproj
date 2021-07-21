@@ -109,11 +109,13 @@
 		EE36C43126878F11001AD9F2 /* GSSASecurityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE36C43026878F11001AD9F2 /* GSSASecurityController.swift */; };
 		EE477BF226937F2E00DC5CF9 /* GSSAMainHubDebitEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE477BF126937F2E00DC5CF9 /* GSSAMainHubDebitEntity.swift */; };
 		EE477BF426937F7D00DC5CF9 /* GSSAMainHubCreditEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE477BF326937F7D00DC5CF9 /* GSSAMainHubCreditEntity.swift */; };
-		EE5DB5AD26A785EC0004E487 /* GSSAFirebaseManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE5DB5AC26A785EC0004E487 /* GSSAFirebaseManager.framework */; };
 		EE5DB5B126A798650004E487 /* GSSAMainHubCardsTagging.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5DB5B026A798650004E487 /* GSSAMainHubCardsTagging.swift */; };
 		EE5DB5B326A7998A0004E487 /* GSSAHomeHeaderViewTagging.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5DB5B226A7998A0004E487 /* GSSAHomeHeaderViewTagging.swift */; };
 		EE5DB5B526A79C480004E487 /* GSSAButtonsCellTagging.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5DB5B426A79C480004E487 /* GSSAButtonsCellTagging.swift */; };
 		EE5DB5B726A79FC70004E487 /* GSSADigitalCardTagging.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5DB5B626A79FC70004E487 /* GSSADigitalCardTagging.swift */; };
+		EE5DB5C526A7ABFB0004E487 /* GSSAFirebaseManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE5DB5AC26A785EC0004E487 /* GSSAFirebaseManager.framework */; };
+		EE5DB5CE26A884410004E487 /* GSDigitalCardConfigTagging.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5DB5CD26A884410004E487 /* GSDigitalCardConfigTagging.swift */; };
+		EE5DB5D026A886E80004E487 /* GSSACardConfigTagging.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5DB5CF26A886E80004E487 /* GSSACardConfigTagging.swift */; };
 		EE97BB022683FBB1000AE34C /* BASACardStatementsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE97BB012683FBB1000AE34C /* BASACardStatementsEntity.swift */; };
 		EE97BB062684DF30000AE34C /* GSNoMovementsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE97BB042684DF2F000AE34C /* GSNoMovementsCell.swift */; };
 		EE97BB072684DF30000AE34C /* GSNoMovementsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE97BB052684DF2F000AE34C /* GSNoMovementsCell.xib */; };
@@ -265,6 +267,8 @@
 		EE5DB5B226A7998A0004E487 /* GSSAHomeHeaderViewTagging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAHomeHeaderViewTagging.swift; sourceTree = "<group>"; };
 		EE5DB5B426A79C480004E487 /* GSSAButtonsCellTagging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAButtonsCellTagging.swift; sourceTree = "<group>"; };
 		EE5DB5B626A79FC70004E487 /* GSSADigitalCardTagging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSADigitalCardTagging.swift; sourceTree = "<group>"; };
+		EE5DB5CD26A884410004E487 /* GSDigitalCardConfigTagging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSDigitalCardConfigTagging.swift; sourceTree = "<group>"; };
+		EE5DB5CF26A886E80004E487 /* GSSACardConfigTagging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSACardConfigTagging.swift; sourceTree = "<group>"; };
 		EE97BB012683FBB1000AE34C /* BASACardStatementsEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BASACardStatementsEntity.swift; sourceTree = "<group>"; };
 		EE97BB042684DF2F000AE34C /* GSNoMovementsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSNoMovementsCell.swift; sourceTree = "<group>"; };
 		EE97BB052684DF2F000AE34C /* GSNoMovementsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GSNoMovementsCell.xib; sourceTree = "<group>"; };
@@ -324,7 +328,7 @@
 				EE1423AC2697894100384207 /* GSSASessionInfo.xcframework in Frameworks */,
 				EEC1F5CF26916ED0006FB4CD /* AWSAuthCore.xcframework in Frameworks */,
 				EE1423AF2697894A00384207 /* GSSAServiceCoordinator.xcframework in Frameworks */,
-				EE5DB5AD26A785EC0004E487 /* GSSAFirebaseManager.framework in Frameworks */,
+				EE5DB5C526A7ABFB0004E487 /* GSSAFirebaseManager.framework in Frameworks */,
 				EEC1F5EC26916F07006FB4CD /* GSSAVisualComponents.framework in Frameworks */,
 				EE1423B52697895B00384207 /* GSSAFunctionalUtilities.xcframework in Frameworks */,
 			);
@@ -403,6 +407,7 @@
 				10E9ED62267D6BA400F45640 /* BASACardConfigViewController.swift */,
 				10E9ED6A267D6BA400F45640 /* BASACardConfigRouter.swift */,
 				10E9ED72267D6BA400F45640 /* BASACardConfigInteractor.swift */,
+				EE5DB5CF26A886E80004E487 /* GSSACardConfigTagging.swift */,
 				10E9ED73267D6BA400F45640 /* BASACardConfigViewController.xib */,
 			);
 			path = BASACardConfig;
@@ -712,6 +717,7 @@
 				EE0655D62682AE6600F7C73D /* GSDigitalCardConfigInteractor.swift */,
 				EE0655D72682AE6600F7C73D /* GSDigitalCardConfigViewController.xib */,
 				EEF2ED292698A4AA0009F771 /* GSDigitalCardEntity.swift */,
+				EE5DB5CD26A884410004E487 /* GSDigitalCardConfigTagging.swift */,
 			);
 			path = GSDigitalCardConfig;
 			sourceTree = "<group>";
@@ -899,6 +905,7 @@
 				10E9EDFC267D6BA400F45640 /* BASAShadowRadiusView.swift in Sources */,
 				EED2CB99269D0C4B00A1E129 /* GSSALinkDePagoPresenter.swift in Sources */,
 				EED2CB9A269D0C4B00A1E129 /* GSSALinkDePagoRouter.swift in Sources */,
+				EE5DB5D026A886E80004E487 /* GSSACardConfigTagging.swift in Sources */,
 				10E9EDD5267D6BA400F45640 /* BASACardConfigInteractor.swift in Sources */,
 				EEAFA792268CD17A00DBC192 /* BASABeneficiaryListEntity.swift in Sources */,
 				10E9EDF7267D6BA400F45640 /* BASADigitalCardProtocols.swift in Sources */,
@@ -942,6 +949,7 @@
 				10E9EDAF267D6BA400F45640 /* BASACardStatementsInteractor.swift in Sources */,
 				10E9EDF8267D6BA400F45640 /* BASADigitalCardPresenter.swift in Sources */,
 				EE2CA7522696D7D20023BE1D /* GSSACardLimitsEntity.swift in Sources */,
+				EE5DB5CE26A884410004E487 /* GSDigitalCardConfigTagging.swift in Sources */,
 				10E9EDFF267D6BA400F45640 /* BASADigitalCardRouter.swift in Sources */,
 				10E9EDC7267D6BA400F45640 /* BASACardConfigViewController.swift in Sources */,
 				EEAFA7A0268CF3DD00DBC192 /* GSSANewBeneficiaryAddressRouter.swift in Sources */,

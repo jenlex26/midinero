@@ -39,6 +39,10 @@ class GSDigitalCardConfigViewController: UIViewController, GSDigitalCardConfigVi
         swtch.isOn = (cardStatus ?? false)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        tagDebitDigitalCardConfigViewDidAppear()
+    }
+    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         updateColors()
     }
@@ -69,7 +73,6 @@ class GSDigitalCardConfigViewController: UIViewController, GSDigitalCardConfigVi
     func optionalAction() {
         print("Ok")
     }
-    
     
     func forgotDigitalSign(_ forgotSecurityCodeViewController: UIViewController?) {
         print("ok")
@@ -109,6 +112,7 @@ class GSDigitalCardConfigViewController: UIViewController, GSDigitalCardConfigVi
     
     @objc func switchChanged(sender: UISwitch){
         cardStatus = sender.isOn
+        tagDebitDigitalCardSwitchClick(isOn: sender.isOn)
         let verification = GSVTDigitalSignViewController(delegate: self)
         verification.modalPresentationStyle = .fullScreen
         present(verification, animated: true, completion: nil)

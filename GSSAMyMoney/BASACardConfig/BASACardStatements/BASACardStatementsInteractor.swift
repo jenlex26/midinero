@@ -19,11 +19,11 @@ class BASACardStatementsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASACar
     weak var presenter: BASACardStatementsPresenterProtocol?
     
     func getStatements(body: DebitCardStatementBody, StatementsResultData: @escaping (DebitCardStatementData?) -> ()){     
-//        self.urlPath = "https://api.baz.app"
-//        self.strPathEndpoint = "/superapp/dinero/captacion/estados-cuenta/v1/periodos/busquedas"
+        self.urlPath = "https://api.baz.app"
+        self.strPathEndpoint = "/superapp/dinero/captacion/estados-cuenta/v1/periodos/busquedas"
         
-        self.urlPath = "https://apigateway.superappbaz.com/"
-        self.strPathEndpoint = "desarrollo/superapp/dinero/captacion/estados-cuenta/v1/periodos/busquedas"
+//        self.urlPath = "https://apigateway.superappbaz.com/"
+//        self.strPathEndpoint = "desarrollo/superapp/dinero/captacion/estados-cuenta/v1/periodos/busquedas"
         
         let bodyTest = DebitCardStatementBody(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.encryptAlnova(), fechaInicio: "10-10-2020", fechaFin: "10-10-2020")
         

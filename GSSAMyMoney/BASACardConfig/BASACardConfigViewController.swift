@@ -14,24 +14,6 @@ import GSSAVisualTemplates
 import GSSASessionInfo
 
 class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol, GSVCBottomAlertHandler, GSVTDigitalSignDelegate {
-    func forgotDigitalSign(_ forgotSecurityCodeViewController: UIViewController?) {
-        print("forgott")
-    }
-    
-    func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
-        let view = BASACardLimitsRouter.createModule()
-        self.navigationController?.pushViewController(view, animated: true)
-    }
-    
-    var bottomAlert: GSVCBottomAlert?
-    
-    func optionalAction() {
-        print("OK")
-    }
-    
-    
-    var presenter: BASACardConfigPresenterProtocol?
-    var credit: Bool!
     
     @IBOutlet weak var table: UITableView!
     
@@ -44,7 +26,9 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
     }
     
     var configurations: Array<userOptions> = []
-    
+    var bottomAlert: GSVCBottomAlert?
+    var presenter: BASACardConfigPresenterProtocol?
+    var credit: Bool!
     var CLABE = ""
     var phone = ""
     var account = ""
@@ -85,6 +69,10 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
         }
     }
     
+    func optionalAction() {
+        print("OK")
+    }
+    
     func registerCells(){
         let bundle = Bundle.init(for: BASACardConfigViewController.self)
         table.register(UINib(nibName: "RequestCardCell", bundle: bundle), forCellReuseIdentifier: "RequestCardCell")
@@ -93,17 +81,29 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
         table.register(UINib(nibName: "BASACardControl", bundle: bundle), forCellReuseIdentifier: "BASACardControl")
     }
     
+    func forgotDigitalSign(_ forgotSecurityCodeViewController: UIViewController?) {
+        print("forgott")
+    }
+    
+    func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
+        tagCardConfigLimitsClick(origin: "{debito}")
+        let view = BASACardLimitsRouter.createModule()
+        self.navigationController?.pushViewController(view, animated: true)
+    }
+    
     @objc func turnOnCard(sender: UISwitch){
         if sender.isOn{
             GSVCLoader.show(type: .native)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                 GSVCLoader.hide()
+                self.tagCardSwitchClick(isOn: true)
                 let alert = UIAlertController(title: "Apagaste tu tarjeta", message: "Las nuevas compras no serán procesadas. Puedes volver a encenderla cuando lo necesites. ", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             })
         }else{
             GSVCLoader.show(type: .native)
+            tagCardSwitchClick(isOn: false)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                 GSVCLoader.hide()
                 let alert = UIAlertController(title: "Encendiste tu tarjeta", message: "Las nuevas compras serán procesadas. Puedes volver a apagarla cuando lo necesites. ", preferredStyle: .alert)
@@ -111,6 +111,10 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
                 self.present(alert, animated: true, completion: nil)
             })
         }
+    }
+    
+    @objc func activateCard(sender: UIButton){
+       tagCardConfigActivateCard()
     }
     
     @IBAction func close(_ sender: Any){
@@ -132,6 +136,8 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
             switch indexPath.row{
             case 0:
                 let cell = table.dequeueReusableCell(withIdentifier: "BASACardControl") as! BASACardControl
+                cell.btnActivateCard.addTarget(self, action: #selector(activateCard(sender:)), for: .touchUpInside)
+                cell.turnOfSwitch.addTarget(self, action: #selector(turnOnCard(sender:)), for: .valueChanged)
                 cell.reportCardView.isHidden = true
                 return cell
             case 1:
@@ -187,8 +193,10 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
         case 1:
             var view = UIViewController()
             if credit == true{
+                tagCardConfigStatementClick(origin: "{credito}")
                 view = BASACardStatementsRouter.createModule(type: .credit)
             }else{
+                tagCardConfigStatementClick(origin: "{debito}")
                 view = BASACardStatementsRouter.createModule(type: .debit)
             }
             self.navigationController?.pushViewController(view, animated: true)
@@ -196,15 +204,12 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
             let verification = GSVTDigitalSignViewController(delegate: self)
             verification.modalPresentationStyle = .fullScreen
             present(verification, animated: true, completion: nil)
-//            let view = BASACardLimitsRouter.createModule()
-//            self.navigationController?.pushViewController(view, animated: true)
         case 3:
+            tagCardConfigBeneficiaryClick(origin: "{debito}")
             let view = BASABeneficiaryListRouter.createModule()
             self.navigationController?.pushViewController(view, animated: true)
-        //            let verification = GSVTDigitalSignViewController(delegate: self, dataSource: nil)
-        //            verification.modalPresentationStyle = .fullScreen
-        //            present(verification, animated: true, completion: nil)
         case 4:
+            tagCardConfigShareInfo()
             let text = "Mi número de cuenta CLABE para enviarme dinero desde otro banco (SPEI) es: \(CLABE) \nMi número de cuenta para enviarme dinero dentro de baz es: \(account) \nMi número de celular asociado para envíos es: \(phone)"
             let activityViewController = UIActivityViewController(activityItems: [text], applicationActivities: nil)
             activityViewController.popoverPresentationController?.sourceView = self.view

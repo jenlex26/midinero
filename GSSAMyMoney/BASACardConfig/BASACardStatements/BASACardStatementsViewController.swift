@@ -13,7 +13,7 @@ import GSSAVisualComponents
 import GSSAVisualTemplates
 import GSSASessionInfo
 
-class BASACardStatementsViewController: UIViewController, BASACardStatementsViewProtocol, GSVTGenericResultDelegate, GSVCBottomAlertHandler, GSVTDigitalSignDelegate {
+class BASACardStatementsViewController: UIViewController, BASACardStatementsViewProtocol, GSVCBottomAlertHandler, GSVTDigitalSignDelegate {
     
     var bottomAlert: GSVCBottomAlert?
     var presenter: BASACardStatementsPresenterProtocol?
@@ -37,8 +37,9 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
         table.delegate = self
         table.dataSource = self
         table.alwaysBounceVertical = false
-        
+      
         if type == .debit{
+            tagCardStatementsViewDidAppear(credit: false)
             GSVCLoader.show(type: .native)
             let requestBody = DebitCardStatementBody(numeroCuenta: "", fechaInicio: "", fechaFin: "")
             presenter?.requestStatements(body: requestBody, StatementsResultData: { [self] StatementsResultData in
@@ -53,7 +54,8 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
         }
         
         if type == .credit{
-            print("NOS IMPLEMENTED...")
+            tagCardStatementsViewDidAppear(credit: true)
+            print("NOT IMPLEMENTED...")
             setStatements()
         }
     }
@@ -84,17 +86,23 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
         table.register(UINib(nibName: "BASAButtonCell", bundle: bundle), forCellReuseIdentifier: "BASAButtonCell")
     }
     
-    func genericResultStaticButtonAction(style: GSVTGenericResultStyle) {
-        self.dismiss(animated: true, completion: {
-            self.navigationController?.popViewController(animated: true)
-        })
-    }
+//    func genericResultStaticButtonAction(style: GSVTGenericResultStyle) {
+//        self.dismiss(animated: true, completion: {
+//            self.navigationController?.popViewController(animated: true)
+//        })
+//    }
     
     func optionalAction() {
         print("OK")
     }
     
     func sendStatements(){
+        if type == .credit{
+            tagSendStatementsButtonClick(origin: "{credito}")
+        }else{
+            tagSendStatementsButtonClick(origin: "{debito}")
+        }
+       
         let success = GSVTOperationStatusViewController(status: .success(title: "Operación completada", message: "Estados de cuenta envíados", views: []), plainButtonAction: {
             self.dismiss(animated: true, completion: {
                 GSVCLoader.hide()

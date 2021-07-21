@@ -19,15 +19,13 @@ class GSSANewBeneficiaryAddressInteractor: GSSAURLSessionTaskCoordinatorBridge, 
     weak var presenter: GSSANewBeneficiaryAddressPresenterProtocol?
     
     func tryGetLocationInfo(CP: String, LocationInfo: @escaping (zipResponse?) -> ()){
-        self.urlPath = "https://apigateway.superappbaz.com/integracion/superapp/enrolamiento/cartografia/catalogos/v1"
+        self.urlPath = "https://api.baz.app/superapp/enrolamiento/cartografia/catalogos/v1"
         self.sendRequest(strUrl: "/colonias/detalles?codigoPostal=\(CP)", method: .GET){ (objRes : zipResponse?, error) in
             if error.code == 0{
                 LocationInfo(objRes)
             }else{
                 LocationInfo(nil)
             }
-
         }
     }
-    
 }

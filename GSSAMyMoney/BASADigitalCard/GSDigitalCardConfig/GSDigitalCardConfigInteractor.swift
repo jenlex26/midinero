@@ -19,11 +19,11 @@ class GSDigitalCardConfigInteractor: GSSAURLSessionTaskCoordinatorBridge, GSDigi
     
     func tryShutdownCard(body: CardStateBody,DataCard: @escaping (DigitalCardResponse?) -> ())
     {
-//        self.urlPath = "https://api.baz.app"
-//        self.strPathEndpoint = "/superapp/dinero/captacion/gestion-tarjetas/v1/tarjetas/bloqueos"
+        self.urlPath = "https://api.baz.app"
+        self.strPathEndpoint = "/superapp/dinero/captacion/gestion-tarjetas/v1/tarjetas/bloqueos"
         
-        self.urlPath = "https://apigateway.superappbaz.com/"
-        self.strPathEndpoint = "integracion/superapp/dinero/captacion/gestion-tarjetas/v1/tarjetas/bloqueos"
+//        self.urlPath = "https://apigateway.superappbaz.com/"
+//        self.strPathEndpoint = "integracion/superapp/dinero/captacion/gestion-tarjetas/v1/tarjetas/bloqueos"
         
         sendRequest(strUrl: strPathEndpoint, method: .PUT, objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: DigitalCardResponse?, error) in
             debugPrint(objRes as Any)

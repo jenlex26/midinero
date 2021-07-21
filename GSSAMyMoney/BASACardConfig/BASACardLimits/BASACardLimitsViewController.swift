@@ -78,8 +78,10 @@ class BASACardLimitsViewController: UIViewController, BASACardLimitsViewProtocol
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {  [self] in
                         var indicador = ""
                         if text?.first?.key == "debitCardAmountLimit"{
+                            tagCardLimitButtonClick(element: "editar_limte_compra")
                             indicador = "01"
                         }else{
+                            tagCardLimitButtonClick(element: "editar_retiro_cajero")
                             indicador = "02"
                         }
                         presenter?.requestCardLimitUpdate(ammount: text?.first?.value ?? "0", indicador: indicador, DataCard: {DataCard in

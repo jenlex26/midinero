@@ -36,7 +36,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Apagar tarjeta" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ghv-VI-RE3" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                                <rect key="frame" x="48" y="22" width="150" height="20.5"/>
+                                                <rect key="frame" x="48" y="21" width="150" height="22.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -87,7 +87,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reportar tarjeta" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQV-Dk-iSj" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                                <rect key="frame" x="48" y="22" width="150" height="20.5"/>
+                                                <rect key="frame" x="48" y="21" width="150" height="22.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -139,7 +139,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activa tu tarjeta física" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xul-6a-bhu" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                                <rect key="frame" x="48" y="12" width="162.5" height="41"/>
+                                                <rect key="frame" x="48" y="10" width="162.5" height="45"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -157,13 +157,21 @@
                                                     <constraint firstAttribute="height" constant="24" id="SdJ-oG-6Ir"/>
                                                 </constraints>
                                             </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sye-f6-UqY">
+                                                <rect key="frame" x="0.0" y="0.0" width="281" height="64.5"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="0Gc-M4-FxG" firstAttribute="leading" secondItem="vei-zf-Q3b" secondAttribute="leading" constant="16" id="GYs-Tm-ArR"/>
                                             <constraint firstItem="Xul-6a-bhu" firstAttribute="leading" secondItem="0Gc-M4-FxG" secondAttribute="trailing" constant="8" id="JIW-BB-dVt"/>
+                                            <constraint firstAttribute="bottom" secondItem="Sye-f6-UqY" secondAttribute="bottom" id="Oya-3f-Vm5"/>
+                                            <constraint firstItem="Sye-f6-UqY" firstAttribute="leading" secondItem="vei-zf-Q3b" secondAttribute="leading" id="Zaa-9K-jzW"/>
                                             <constraint firstItem="0Gc-M4-FxG" firstAttribute="centerY" secondItem="vei-zf-Q3b" secondAttribute="centerY" id="bpm-jf-deV"/>
                                             <constraint firstItem="ceK-s2-caw" firstAttribute="leading" secondItem="Xul-6a-bhu" secondAttribute="trailing" constant="10" id="gDR-3B-fOY"/>
+                                            <constraint firstItem="Sye-f6-UqY" firstAttribute="top" secondItem="vei-zf-Q3b" secondAttribute="top" id="kiT-7I-tz6"/>
+                                            <constraint firstAttribute="trailing" secondItem="Sye-f6-UqY" secondAttribute="trailing" id="l9e-qq-Vrx"/>
                                             <constraint firstItem="ceK-s2-caw" firstAttribute="centerY" secondItem="vei-zf-Q3b" secondAttribute="centerY" id="nRn-H8-aGG"/>
                                             <constraint firstItem="Xul-6a-bhu" firstAttribute="centerY" secondItem="0Gc-M4-FxG" secondAttribute="centerY" id="yT6-CV-V7w"/>
                                         </constraints>
@@ -197,6 +205,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="btnActivateCard" destination="Sye-f6-UqY" id="9jb-iN-gTJ"/>
                 <outlet property="cardControlView" destination="wyh-xA-QEb" id="CTy-zM-HaY"/>
                 <outlet property="nipCardView" destination="vei-zf-Q3b" id="3EX-0x-4js"/>
                 <outlet property="reportCardView" destination="JNd-xh-jAJ" id="BQ0-a4-esc"/>
@@ -208,13 +217,13 @@
     </objects>
     <designables>
         <designable name="LQV-Dk-iSj">
-            <size key="intrinsicContentSize" width="119.5" height="20.5"/>
+            <size key="intrinsicContentSize" width="127" height="22.5"/>
         </designable>
         <designable name="Xul-6a-bhu">
-            <size key="intrinsicContentSize" width="163.5" height="20.5"/>
+            <size key="intrinsicContentSize" width="174.5" height="22.5"/>
         </designable>
         <designable name="ghv-VI-RE3">
-            <size key="intrinsicContentSize" width="108" height="20.5"/>
+            <size key="intrinsicContentSize" width="117.5" height="22.5"/>
         </designable>
     </designables>
     <resources>

@@ -71,6 +71,7 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
     
     override func viewWillAppear(_ animated: Bool) {
         requestCVV()
+        tagDebitDigitalCardViewDidAppear()
     }
     
     func requestCVV(){
@@ -134,6 +135,7 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
     
     @IBAction func copyCardNumber(_ sender: Any){
         if CardNumberLabel.text?.count ?? 0 > 0{
+            tagCopyDebitDigitalCardNumber()
             UIPasteboard.general.string = CardNumberLabel.text
             self.presentBottomAlertFullData(status: .success, message: "Número de tarjeta copiado al portapapeles", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
         }
@@ -145,6 +147,7 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
     }
     
     @IBAction func openConfig(_ sender: Any){
+        tagDebitDigitalCardConfigClick()
         let view = GSDigitalCardConfigRouter.createModule()
         self.navigationController?.pushViewController(view, animated: true)
     }

@@ -20,11 +20,11 @@ class BASANewBeneficiaryInteractor: GSSAURLSessionTaskCoordinatorBridge, BASANew
     func trySetNewBeneficiary(Body: NewBeneficiaryBody, method: EKTHTTPRequestMethod, DataCard: @escaping (DigitalCardResponse?) -> ())
     {
         
-//        self.urlPath = "https://api.baz.app"
-//        self.strPathEndpoint = "/superapp/dinero/captacion/gestion-cuentas/v1/beneficiarios"
+        self.urlPath = "https://api.baz.app"
+        self.strPathEndpoint = "/superapp/dinero/captacion/gestion-cuentas/v1/beneficiarios"
         
-        self.urlPath = "https://apigateway.superappbaz.com/"
-        self.strPathEndpoint = "integracion/superapp/dinero/captacion/gestion-cuentas/v1/beneficiarios"
+//        self.urlPath = "https://apigateway.superappbaz.com/"
+//        self.strPathEndpoint = "integracion/superapp/dinero/captacion/gestion-cuentas/v1/beneficiarios"
         
         sendRequest(strUrl: strPathEndpoint, method: method, objBody: Body, environment: GLOBAL_ENVIROMENT) { (objRes: DigitalCardResponse?, error) in
             debugPrint(objRes as Any)
