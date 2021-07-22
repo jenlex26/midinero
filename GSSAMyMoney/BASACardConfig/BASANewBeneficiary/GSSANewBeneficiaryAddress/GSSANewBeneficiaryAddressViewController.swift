@@ -35,6 +35,10 @@ class GSSANewBeneficiaryAddressViewController: UIViewController, GSSANewBenefici
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        createTag(eventName: .pageView, section: "mi_dinero", flow: "dashboard", screenName: "direccion_beneficiarios", origin: "{debito}")
+    }
+    
     func registerCells(){
         let bundle = Bundle(for: GSSANewBeneficiaryAddressViewController.self)
         table.register(UINib(nibName: "BASASwitchItemCell", bundle: bundle), forCellReuseIdentifier: "BASASwitchItemCell")
@@ -122,6 +126,7 @@ class GSSANewBeneficiaryAddressViewController: UIViewController, GSSANewBenefici
     
     @objc func continueButtonClick(sender: UIButton){
         self.view.endEditing(true)
+        createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "dashboard", screenName: "direccion_beneficiarios", type: "click", element: "continuar", origin: "{debito}")
         if sender.tag == -1{
             self.presentBottomAlertFullData(status: .error, message: "Ingrese un código postal valido", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
         }else{

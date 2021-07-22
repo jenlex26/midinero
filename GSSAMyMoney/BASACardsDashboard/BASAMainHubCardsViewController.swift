@@ -257,6 +257,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     }
     
     func setTableForCreditCard(){
+        createTag(eventName: .pageView, section: "mi_dinero", flow: "dashboard", screenName: "movimientos", origin: "{credito}")
         viewMode = 1
         removeAllExceptFirst()
         
@@ -309,6 +310,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     }
     
     func setTableForLends(){
+        createTag(eventName: .pageView, section: "mi_dinero", flow: "dashboard", screenName: "movimientos", origin: "{debito}")
         viewMode = 2
         removeAllExceptFirst()
         
@@ -412,6 +414,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     }
     
     @objc func showAlert(){
+        createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "dashboard", screenName: "movimientos", type: "click", element: "tarjeta_digital", origin: "{credito}")
         presentBottomAlertFullData(status: .caution, message: "En este momento no cuentas con tarjeta digital", attributedString: .none, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
     }
     

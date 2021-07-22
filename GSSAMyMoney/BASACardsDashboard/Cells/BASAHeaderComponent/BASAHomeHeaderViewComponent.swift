@@ -77,16 +77,9 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
         debitCardlblCardNumber.textColor = .black
         debitCardlblCardNumber.isHidden = true
         debitCardbtnConfig.setImage(UIImage(named: "ic_more_icon", in: Bundle(for: BASAHomeHeaderViewComponent.self), compatibleWith: nil), for: .normal)
-        
         debitCardbtnConfig.tag = 0
-        
-       // debitCardlblBalance.text = UserDefaults.standard.value(forKey: "debitAccountBalance") as? String
-        
         if data != nil{
-            
             debitCardlblBalance.text = data!.resultado.cliente?.cuentas?.first?.saldoDisponible?.alnovaDecrypt().moneyFormat()
-        }else{
-         //   debitCardlblBalance.text = UserDefaults.standard.value(forKey: "debitAccountBalance") as? String
         }
     }
     
@@ -131,8 +124,6 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
             guard let cell = cardCollection.cellForItem(at: [0,0]) as? BASACardCell else{
                 return
             }
-            //MARKKK
-           // cell.lblCardNumber.text = data.resultado?.tarjetas?.first?.numero?.tnuoccaFormat
             cell.lblExpDate.text = data.resultado?.tarjetas?.first?.expiracion?.replacingOccurrences(of: "-", with: "/")
         }
     }
@@ -195,7 +186,6 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
             cellViewController.dismiss(animated: true, completion: {
                 self.cellViewController.navigationController?.popViewController(animated: true)
             })
-            //cellViewController.navigationController?.popViewController(animated: true)
         }
     }
     
@@ -205,6 +195,7 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
                 let view = BASACardConfigRouter.createModule(credit: false)
                 cellViewController.navigationController?.pushViewController(view, animated: true)
             }else{
+                createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "dashboard", screenName: "movimientos", type: "click", element: "configuracion_tarjeta", origin: "{debito}")
                 let view = BASACardConfigRouter.createModule(credit: true)
                 cellViewController.navigationController?.pushViewController(view, animated: true)
             }
@@ -251,8 +242,6 @@ extension BASAHomeHeaderViewComponent: UICollectionViewDelegate, UICollectionVie
             cell.CardBackgroundView.blurBackground(style: .dark, fallbackColor: .white)
             
             if creditCardData != nil{
-                //MARKKK
-               // cell.lblCardNumber.text = creditCardData?.resultado?.tarjetas?.first?.numero?.tnuoccaFormat
                 cell.lblExpDate.text = creditCardData?.resultado?.tarjetas?.first?.expiracion?.replacingOccurrences(of: "-", with: "/")
             }
             
@@ -280,6 +269,7 @@ extension BASAHomeHeaderViewComponent: UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "dashboard", screenName: "movimientos", type: "click", element: "carrusel", origin: "{credito}")
         switch indexPath.row{
         case 1:
             pageController.currentPage = 0

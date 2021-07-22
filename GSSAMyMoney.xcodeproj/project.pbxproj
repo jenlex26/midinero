@@ -105,7 +105,6 @@
 		EE1423B22697895000384207 /* GSSASecurityManager.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE1423B12697895000384207 /* GSSASecurityManager.xcframework */; };
 		EE1423B52697895B00384207 /* GSSAFunctionalUtilities.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE1423B42697895B00384207 /* GSSAFunctionalUtilities.xcframework */; };
 		EE2CA7522696D7D20023BE1D /* GSSACardLimitsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2CA7512696D7D20023BE1D /* GSSACardLimitsEntity.swift */; };
-		EE309E81269FEFBD007054EB /* baz_ios_sdk_link_pago.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EED2CBA1269D498700A1E129 /* baz_ios_sdk_link_pago.framework */; };
 		EE36C43126878F11001AD9F2 /* GSSASecurityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE36C43026878F11001AD9F2 /* GSSASecurityController.swift */; };
 		EE477BF226937F2E00DC5CF9 /* GSSAMainHubDebitEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE477BF126937F2E00DC5CF9 /* GSSAMainHubDebitEntity.swift */; };
 		EE477BF426937F7D00DC5CF9 /* GSSAMainHubCreditEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE477BF326937F7D00DC5CF9 /* GSSAMainHubCreditEntity.swift */; };
@@ -113,7 +112,6 @@
 		EE5DB5B326A7998A0004E487 /* GSSAHomeHeaderViewTagging.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5DB5B226A7998A0004E487 /* GSSAHomeHeaderViewTagging.swift */; };
 		EE5DB5B526A79C480004E487 /* GSSAButtonsCellTagging.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5DB5B426A79C480004E487 /* GSSAButtonsCellTagging.swift */; };
 		EE5DB5B726A79FC70004E487 /* GSSADigitalCardTagging.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5DB5B626A79FC70004E487 /* GSSADigitalCardTagging.swift */; };
-		EE5DB5C526A7ABFB0004E487 /* GSSAFirebaseManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE5DB5AC26A785EC0004E487 /* GSSAFirebaseManager.framework */; };
 		EE5DB5CE26A884410004E487 /* GSDigitalCardConfigTagging.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5DB5CD26A884410004E487 /* GSDigitalCardConfigTagging.swift */; };
 		EE5DB5D026A886E80004E487 /* GSSACardConfigTagging.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5DB5CF26A886E80004E487 /* GSSACardConfigTagging.swift */; };
 		EE97BB022683FBB1000AE34C /* BASACardStatementsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE97BB012683FBB1000AE34C /* BASACardStatementsEntity.swift */; };
@@ -137,14 +135,6 @@
 		EEAFA7A4268CF3DD00DBC192 /* GSSANewBeneficiaryAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEAFA79E268CF3DD00DBC192 /* GSSANewBeneficiaryAddressViewController.xib */; };
 		EEAFA7E6268E377F00DBC192 /* GSSAEmptyStatements.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEAFA7E5268E377F00DBC192 /* GSSAEmptyStatements.xib */; };
 		EEB850B5269A517500767673 /* GSSANewBeneficiaryAddressEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB850B4269A517400767673 /* GSSANewBeneficiaryAddressEntity.swift */; };
-		EEC1F5CF26916ED0006FB4CD /* AWSAuthCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC1F5C926916ED0006FB4CD /* AWSAuthCore.xcframework */; };
-		EEC1F5D126916ED0006FB4CD /* AWSCognitoIdentityProvider.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC1F5CA26916ED0006FB4CD /* AWSCognitoIdentityProvider.xcframework */; };
-		EEC1F5D326916ED0006FB4CD /* AWSCognitoIdentityProviderASF.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC1F5CB26916ED0006FB4CD /* AWSCognitoIdentityProviderASF.xcframework */; };
-		EEC1F5D526916ED0006FB4CD /* AWSCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC1F5CC26916ED0006FB4CD /* AWSCore.xcframework */; };
-		EEC1F5D726916ED0006FB4CD /* AWSLogs.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC1F5CD26916ED0006FB4CD /* AWSLogs.xcframework */; };
-		EEC1F5D926916ED0006FB4CD /* AWSMobileClientXCF.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC1F5CE26916ED0006FB4CD /* AWSMobileClientXCF.xcframework */; };
-		EEC1F5EC26916F07006FB4CD /* GSSAVisualComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC1F5EB26916F07006FB4CD /* GSSAVisualComponents.framework */; };
-		EEC1F5EF26916F0E006FB4CD /* GSSAVisualTemplates.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC1F5EE26916F0E006FB4CD /* GSSAVisualTemplates.framework */; };
 		EED2CB99269D0C4B00A1E129 /* GSSALinkDePagoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED2CB93269D0C4B00A1E129 /* GSSALinkDePagoPresenter.swift */; };
 		EED2CB9A269D0C4B00A1E129 /* GSSALinkDePagoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED2CB94269D0C4B00A1E129 /* GSSALinkDePagoRouter.swift */; };
 		EED2CB9B269D0C4B00A1E129 /* GSSALinkDePagoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED2CB95269D0C4B00A1E129 /* GSSALinkDePagoViewController.swift */; };
@@ -154,6 +144,20 @@
 		EED2CBA0269D361100A1E129 /* GSSALinkDePagoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED2CB9F269D361100A1E129 /* GSSALinkDePagoEntity.swift */; };
 		EED3E3FD269E442B00BDF898 /* GSSAMovementPreviewEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED3E3FC269E442B00BDF898 /* GSSAMovementPreviewEntity.swift */; };
 		EED3E40C269E88BF00BDF898 /* BASAA.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED3E40B269E88BF00BDF898 /* BASAA.swift */; };
+		EEEFA75C26A8DE270050BB0D /* AWSAuthCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC1F5C926916ED0006FB4CD /* AWSAuthCore.xcframework */; };
+		EEEFA75E26A8DE270050BB0D /* AWSCognitoIdentityProvider.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC1F5CA26916ED0006FB4CD /* AWSCognitoIdentityProvider.xcframework */; };
+		EEEFA76026A8DE270050BB0D /* AWSCognitoIdentityProviderASF.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC1F5CB26916ED0006FB4CD /* AWSCognitoIdentityProviderASF.xcframework */; };
+		EEEFA76226A8DE270050BB0D /* AWSCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC1F5CC26916ED0006FB4CD /* AWSCore.xcframework */; };
+		EEEFA76426A8DE270050BB0D /* AWSLogs.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC1F5CD26916ED0006FB4CD /* AWSLogs.xcframework */; };
+		EEEFA76626A8DE270050BB0D /* AWSMobileClientXCF.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC1F5CE26916ED0006FB4CD /* AWSMobileClientXCF.xcframework */; };
+		EEEFA77426A8DEDD0050BB0D /* GSSAVisualComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEEFA77326A8DEDD0050BB0D /* GSSAVisualComponents.framework */; };
+		EEEFA77726A8DEE20050BB0D /* GSSAVisualTemplates.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEEFA77626A8DEE20050BB0D /* GSSAVisualTemplates.framework */; };
+		EEEFA77A26A8DEF60050BB0D /* GSSAFirebaseManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEEFA77926A8DEF60050BB0D /* GSSAFirebaseManager.framework */; };
+		EEEFA77F26A8DF0A0050BB0D /* GSSAFunctionalUtilities.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE1423B42697895B00384207 /* GSSAFunctionalUtilities.xcframework */; };
+		EEEFA78126A8DF0A0050BB0D /* GSSAInterceptor.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEEFA77D26A8DF0A0050BB0D /* GSSAInterceptor.xcframework */; };
+		EEEFA78326A8DF0B0050BB0D /* GSSALoads.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEEFA77E26A8DF0A0050BB0D /* GSSALoads.xcframework */; };
+		EEEFA78726A8DF120050BB0D /* GSSAPermissionsManager.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEEFA78626A8DF120050BB0D /* GSSAPermissionsManager.xcframework */; };
+		EEEFA78A26A8DF7E0050BB0D /* baz_ios_sdk_link_pago.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEEFA78926A8DF7E0050BB0D /* baz_ios_sdk_link_pago.framework */; };
 		EEF2ED2A2698A4AA0009F771 /* GSDigitalCardEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF2ED292698A4AA0009F771 /* GSDigitalCardEntity.swift */; };
 		EEF728A72699382C0093F0DA /* GSSANewBeneficiaryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF728A62699382C0093F0DA /* GSSANewBeneficiaryEntity.swift */; };
 /* End PBXBuildFile section */
@@ -262,7 +266,6 @@
 		EE36C43026878F11001AD9F2 /* GSSASecurityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSASecurityController.swift; sourceTree = "<group>"; };
 		EE477BF126937F2E00DC5CF9 /* GSSAMainHubDebitEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAMainHubDebitEntity.swift; sourceTree = "<group>"; };
 		EE477BF326937F7D00DC5CF9 /* GSSAMainHubCreditEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAMainHubCreditEntity.swift; sourceTree = "<group>"; };
-		EE5DB5AC26A785EC0004E487 /* GSSAFirebaseManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GSSAFirebaseManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE5DB5B026A798650004E487 /* GSSAMainHubCardsTagging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAMainHubCardsTagging.swift; sourceTree = "<group>"; };
 		EE5DB5B226A7998A0004E487 /* GSSAHomeHeaderViewTagging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAHomeHeaderViewTagging.swift; sourceTree = "<group>"; };
 		EE5DB5B426A79C480004E487 /* GSSAButtonsCellTagging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAButtonsCellTagging.swift; sourceTree = "<group>"; };
@@ -296,8 +299,6 @@
 		EEC1F5CC26916ED0006FB4CD /* AWSCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AWSCore.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/AWS/AWSCore.xcframework; sourceTree = "<group>"; };
 		EEC1F5CD26916ED0006FB4CD /* AWSLogs.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AWSLogs.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/AWS/AWSLogs.xcframework; sourceTree = "<group>"; };
 		EEC1F5CE26916ED0006FB4CD /* AWSMobileClientXCF.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AWSMobileClientXCF.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/AWS/AWSMobileClientXCF.xcframework; sourceTree = "<group>"; };
-		EEC1F5EB26916F07006FB4CD /* GSSAVisualComponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GSSAVisualComponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EEC1F5EE26916F0E006FB4CD /* GSSAVisualTemplates.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GSSAVisualTemplates.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EED2CB93269D0C4B00A1E129 /* GSSALinkDePagoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSALinkDePagoPresenter.swift; sourceTree = "<group>"; };
 		EED2CB94269D0C4B00A1E129 /* GSSALinkDePagoRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSALinkDePagoRouter.swift; sourceTree = "<group>"; };
 		EED2CB95269D0C4B00A1E129 /* GSSALinkDePagoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSALinkDePagoViewController.swift; sourceTree = "<group>"; };
@@ -305,9 +306,16 @@
 		EED2CB97269D0C4B00A1E129 /* GSSALinkDePagoInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSALinkDePagoInteractor.swift; sourceTree = "<group>"; };
 		EED2CB98269D0C4B00A1E129 /* GSSALinkDePagoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GSSALinkDePagoViewController.xib; sourceTree = "<group>"; };
 		EED2CB9F269D361100A1E129 /* GSSALinkDePagoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSALinkDePagoEntity.swift; sourceTree = "<group>"; };
-		EED2CBA1269D498700A1E129 /* baz_ios_sdk_link_pago.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = baz_ios_sdk_link_pago.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EED3E3FC269E442B00BDF898 /* GSSAMovementPreviewEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAMovementPreviewEntity.swift; sourceTree = "<group>"; };
 		EED3E40B269E88BF00BDF898 /* BASAA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BASAA.swift; sourceTree = "<group>"; };
+		EEEFA77326A8DEDD0050BB0D /* GSSAVisualComponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GSSAVisualComponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EEEFA77626A8DEE20050BB0D /* GSSAVisualTemplates.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GSSAVisualTemplates.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EEEFA77926A8DEF60050BB0D /* GSSAFirebaseManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GSSAFirebaseManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EEEFA77D26A8DF0A0050BB0D /* GSSAInterceptor.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GSSAInterceptor.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/BaseSuperApp/GSSAInterceptor.xcframework; sourceTree = "<group>"; };
+		EEEFA77E26A8DF0A0050BB0D /* GSSALoads.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GSSALoads.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/SuperApp/GSSALoads.xcframework; sourceTree = "<group>"; };
+		EEEFA78626A8DF120050BB0D /* GSSAPermissionsManager.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GSSAPermissionsManager.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/BaseSuperApp/GSSAPermissionsManager.xcframework; sourceTree = "<group>"; };
+		EEEFA78926A8DF7E0050BB0D /* baz_ios_sdk_link_pago.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = baz_ios_sdk_link_pago.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EEEFA78D26A8E2710050BB0D /* AppsFlyerLib.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AppsFlyerLib.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/AppsFlyer/AppsFlyerLib.xcframework; sourceTree = "<group>"; };
 		EEF2ED292698A4AA0009F771 /* GSDigitalCardEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSDigitalCardEntity.swift; sourceTree = "<group>"; };
 		EEF728A62699382C0093F0DA /* GSSANewBeneficiaryEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSANewBeneficiaryEntity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -317,20 +325,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EEC1F5EF26916F0E006FB4CD /* GSSAVisualTemplates.framework in Frameworks */,
-				EEC1F5D926916ED0006FB4CD /* AWSMobileClientXCF.xcframework in Frameworks */,
+				EEEFA76626A8DE270050BB0D /* AWSMobileClientXCF.xcframework in Frameworks */,
+				EEEFA77F26A8DF0A0050BB0D /* GSSAFunctionalUtilities.xcframework in Frameworks */,
+				EEEFA78726A8DF120050BB0D /* GSSAPermissionsManager.xcframework in Frameworks */,
 				EE1423B22697895000384207 /* GSSASecurityManager.xcframework in Frameworks */,
-				EE309E81269FEFBD007054EB /* baz_ios_sdk_link_pago.framework in Frameworks */,
-				EEC1F5D326916ED0006FB4CD /* AWSCognitoIdentityProviderASF.xcframework in Frameworks */,
-				EEC1F5D126916ED0006FB4CD /* AWSCognitoIdentityProvider.xcframework in Frameworks */,
-				EEC1F5D726916ED0006FB4CD /* AWSLogs.xcframework in Frameworks */,
-				EEC1F5D526916ED0006FB4CD /* AWSCore.xcframework in Frameworks */,
+				EEEFA76226A8DE270050BB0D /* AWSCore.xcframework in Frameworks */,
 				EE1423AC2697894100384207 /* GSSASessionInfo.xcframework in Frameworks */,
-				EEC1F5CF26916ED0006FB4CD /* AWSAuthCore.xcframework in Frameworks */,
+				EEEFA77426A8DEDD0050BB0D /* GSSAVisualComponents.framework in Frameworks */,
+				EEEFA75E26A8DE270050BB0D /* AWSCognitoIdentityProvider.xcframework in Frameworks */,
+				EEEFA78A26A8DF7E0050BB0D /* baz_ios_sdk_link_pago.framework in Frameworks */,
 				EE1423AF2697894A00384207 /* GSSAServiceCoordinator.xcframework in Frameworks */,
-				EE5DB5C526A7ABFB0004E487 /* GSSAFirebaseManager.framework in Frameworks */,
-				EEC1F5EC26916F07006FB4CD /* GSSAVisualComponents.framework in Frameworks */,
+				EEEFA75C26A8DE270050BB0D /* AWSAuthCore.xcframework in Frameworks */,
 				EE1423B52697895B00384207 /* GSSAFunctionalUtilities.xcframework in Frameworks */,
+				EEEFA76426A8DE270050BB0D /* AWSLogs.xcframework in Frameworks */,
+				EEEFA77726A8DEE20050BB0D /* GSSAVisualTemplates.framework in Frameworks */,
+				EEEFA77A26A8DEF60050BB0D /* GSSAFirebaseManager.framework in Frameworks */,
+				EEEFA78326A8DF0B0050BB0D /* GSSALoads.xcframework in Frameworks */,
+				EEEFA78126A8DF0A0050BB0D /* GSSAInterceptor.xcframework in Frameworks */,
+				EEEFA76026A8DE270050BB0D /* AWSCognitoIdentityProviderASF.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,14 +352,18 @@
 		106E8DA0267D6CB2000182DC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EE5DB5AC26A785EC0004E487 /* GSSAFirebaseManager.framework */,
-				EED2CBA1269D498700A1E129 /* baz_ios_sdk_link_pago.framework */,
+				EEEFA78D26A8E2710050BB0D /* AppsFlyerLib.xcframework */,
+				EEEFA78926A8DF7E0050BB0D /* baz_ios_sdk_link_pago.framework */,
+				EEEFA78626A8DF120050BB0D /* GSSAPermissionsManager.xcframework */,
+				EEEFA77D26A8DF0A0050BB0D /* GSSAInterceptor.xcframework */,
+				EEEFA77E26A8DF0A0050BB0D /* GSSALoads.xcframework */,
+				EEEFA77926A8DEF60050BB0D /* GSSAFirebaseManager.framework */,
+				EEEFA77626A8DEE20050BB0D /* GSSAVisualTemplates.framework */,
+				EEEFA77326A8DEDD0050BB0D /* GSSAVisualComponents.framework */,
 				EE1423B42697895B00384207 /* GSSAFunctionalUtilities.xcframework */,
 				EE1423B12697895000384207 /* GSSASecurityManager.xcframework */,
 				EE1423AE2697894A00384207 /* GSSAServiceCoordinator.xcframework */,
 				EE1423AB2697894100384207 /* GSSASessionInfo.xcframework */,
-				EEC1F5EE26916F0E006FB4CD /* GSSAVisualTemplates.framework */,
-				EEC1F5EB26916F07006FB4CD /* GSSAVisualComponents.framework */,
 				EEC1F5C926916ED0006FB4CD /* AWSAuthCore.xcframework */,
 				EEC1F5CA26916ED0006FB4CD /* AWSCognitoIdentityProvider.xcframework */,
 				EEC1F5CB26916ED0006FB4CD /* AWSCognitoIdentityProviderASF.xcframework */,
@@ -1141,7 +1157,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.7;
+				MARKETING_VERSION = 0.1.8;
 				PRODUCT_BUNDLE_IDENTIFIER = mx.com.gruposalinas.GSSAMyMoney;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1171,7 +1187,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.7;
+				MARKETING_VERSION = 0.1.8;
 				PRODUCT_BUNDLE_IDENTIFIER = mx.com.gruposalinas.GSSAMyMoney;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

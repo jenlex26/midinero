@@ -91,6 +91,32 @@ extension UIViewController{
     }
 }
 
+extension UITableViewCell{
+    enum eventNames{
+        case UIInteraction
+        case pageView
+    }
+    
+    func createTag(eventName: eventNames, section: String, flow: String, screenName: String, type: String? = nil, element: String? = nil, origin: String){
+        var name = ""
+        switch eventName{
+        case .pageView:
+            name = "pageview"
+        case .UIInteraction:
+            name = "ui_interaction"
+        }
+        
+        if type != nil && element != nil{
+            let tagEvent = GSSAFirebaseEvent(.custom(name)).set(section: section).set(flow: flow).set(screenName: screenName).set(paramaters: ["type":type!]).set(paramaters: ["element" : element!]).set(origin: origin)
+            GSSAAnalytics.firebase.tracking(event: tagEvent)
+        }else{
+            let tagEvent = GSSAFirebaseEvent(.custom(name)).set(section: section).set(flow: flow).set(screenName: screenName).set(origin: origin)
+            GSSAAnalytics.firebase.tracking(event: tagEvent)
+        }
+    }
+}
+
+
 extension UITableView{
     func shake() {
         let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
