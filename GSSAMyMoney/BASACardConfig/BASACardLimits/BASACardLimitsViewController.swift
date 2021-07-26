@@ -37,6 +37,7 @@ class BASACardLimitsViewController: UIViewController, BASACardLimitsViewProtocol
         table.dataSource = self
         table.alwaysBounceVertical = false
         NotificationCenter.default.addObserver(self, selector: #selector(handleFinishEditAction(notification:)), name: NSNotification.Name(rawValue: "BASALimitCellEditFinished"), object: nil)
+        createTag(eventName: .pageView, section: "mi_dinero", flow: "dashboard", screenName: "limites_tarjeta", origin: "debito")
     }
     
     func setCells(){

@@ -13,16 +13,16 @@ extension BASACardConfigViewController{
     func tagCardConfigViewDidAppear(credit: Bool){
         var origin = ""
         if credit == true{
-            origin = "{credito}"
+            origin = "credito"
         }else{
-            origin = "{debito}"
+            origin = "debito"
         }
         let tagEvent = GSSAFirebaseEvent(.custom("pageview")).set(section: "mi_dinero").set(flow: "dashboard").set(screenName: "configuracion_tarjeta").set(origin: origin)
         GSSAAnalytics.firebase.tracking(event: tagEvent)
     }
     
     func tagCardConfigShareInfo(){
-        let tagEvent = GSSAFirebaseEvent(.custom("ui_interaction")).set(section: "mi_dinero").set(flow: "dashboard").set(screenName: "configuracion_tarjeta").set(paramaters: ["type":"click"]).set(paramaters: ["element" : "compartir_informacion_tarjeta"]).set(origin: "{debito}")
+        let tagEvent = GSSAFirebaseEvent(.custom("ui_interaction")).set(section: "mi_dinero").set(flow: "dashboard").set(screenName: "configuracion_tarjeta").set(paramaters: ["type":"click"]).set(paramaters: ["element" : "compartir_informacion_tarjeta"]).set(origin: "debito")
         GSSAAnalytics.firebase.tracking(event: tagEvent)
     }
     
@@ -42,18 +42,18 @@ extension BASACardConfigViewController{
     }
     
     func tagCardConfigActivateCard(){
-        let tagEvent = GSSAFirebaseEvent(.custom("ui_interaction")).set(section: "mi_dinero").set(flow: "dashboard").set(screenName: "configuracion_tarjeta").set(paramaters: ["type":"click"]).set(paramaters: ["element" : "activa_tu_tarjeta"]).set(origin: "{credito}")
+        let tagEvent = GSSAFirebaseEvent(.custom("ui_interaction")).set(section: "mi_dinero").set(flow: "dashboard").set(screenName: "configuracion_tarjeta").set(paramaters: ["type":"click"]).set(paramaters: ["element" : "activa_tu_tarjeta"]).set(origin: "credito")
         GSSAAnalytics.firebase.tracking(event: tagEvent)
     }
     
     func tagCardSwitchClick(isOn: Bool){
         var type = ""
         if isOn == true{
-            type = "{switch_on}"
+            type = "switch_on"
         }else{
-            type = "{switch_off}"
+            type = "switch_off"
         }
-        let tagEvent = GSSAFirebaseEvent(.custom("ui_interaction")).set(section: "mi_dinero").set(flow: "dashboard").set(screenName: "configuracion_tarjeta").set(paramaters: ["type":type]).set(paramaters: ["element" : "apagar_tarjeta"]).set(origin: "{credito}")
+        let tagEvent = GSSAFirebaseEvent(.custom("ui_interaction")).set(section: "mi_dinero").set(flow: "dashboard").set(screenName: "configuracion_tarjeta").set(paramaters: ["type":type]).set(paramaters: ["element" : "apagar_tarjeta"]).set(origin: "credito")
         GSSAAnalytics.firebase.tracking(event: tagEvent)
     }
 }
@@ -62,9 +62,9 @@ extension BASACardStatementsViewController{
     func tagCardStatementsViewDidAppear(credit: Bool){
         var origin = ""
         if credit == true{
-            origin = "{credito}"
+            origin = "credito"
         }else{
-            origin = "{debito}"
+            origin = "debito"
         }
         let tagEvent = GSSAFirebaseEvent(.custom("pageview")).set(section: "mi_dinero").set(flow: "dashboard").set(screenName: "estado_cuenta").set(origin: origin)
         GSSAAnalytics.firebase.tracking(event: tagEvent)
@@ -78,19 +78,19 @@ extension BASACardStatementsViewController{
 //MARK: Card Limits Screen
 extension BASACardLimitsViewController{
     func tagCardLimitsDidAppear(){
-        let tagEvent = GSSAFirebaseEvent(.custom("pageview")).set(section: "mi_dinero").set(flow: "dashboard").set(screenName: "limites_tarjeta").set(origin: "{debito}")
+        let tagEvent = GSSAFirebaseEvent(.custom("pageview")).set(section: "mi_dinero").set(flow: "dashboard").set(screenName: "limites_tarjeta").set(origin: "debito")
         GSSAAnalytics.firebase.tracking(event: tagEvent)
     }
     
     func tagCardLimitButtonClick(element: String){
-        let tagEvent = GSSAFirebaseEvent(.custom("ui_interaction")).set(section: "mi_dinero").set(flow: "dashboard").set(screenName: "limites_tarjeta").set(paramaters: ["type":"click"]).set(paramaters: ["element" : element]).set(origin: "{debito}")
+        let tagEvent = GSSAFirebaseEvent(.custom("ui_interaction")).set(section: "mi_dinero").set(flow: "dashboard").set(screenName: "limites_tarjeta").set(paramaters: ["type":"click"]).set(paramaters: ["element" : element]).set(origin: "debito")
         GSSAAnalytics.firebase.tracking(event: tagEvent)
     }
 }
 //MARK: Card Beneficiaries Screens
 extension BASABeneficiaryListViewController{
     func tagCardLimitsDidAppear(){
-        let tagEvent = GSSAFirebaseEvent(.custom("pageview")).set(section: "mi_dinero").set(flow: "dashboard").set(screenName: "beneficiarios").set(origin: "{debito}")
+        let tagEvent = GSSAFirebaseEvent(.custom("pageview")).set(section: "mi_dinero").set(flow: "dashboard").set(screenName: "beneficiarios").set(origin: "debito")
         GSSAAnalytics.firebase.tracking(event: tagEvent)
     }
 }

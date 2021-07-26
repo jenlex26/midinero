@@ -195,7 +195,7 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
                 let view = BASACardConfigRouter.createModule(credit: false)
                 cellViewController.navigationController?.pushViewController(view, animated: true)
             }else{
-                createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "dashboard", screenName: "movimientos", type: "click", element: "configuracion_tarjeta", origin: "{debito}")
+                createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "dashboard", screenName: "movimientos", type: "click", element: "configuracion_tarjeta", origin: "debito")
                 let view = BASACardConfigRouter.createModule(credit: true)
                 cellViewController.navigationController?.pushViewController(view, animated: true)
             }
@@ -269,7 +269,7 @@ extension BASAHomeHeaderViewComponent: UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "dashboard", screenName: "movimientos", type: "click", element: "carrusel", origin: "{credito}")
+        createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "dashboard", screenName: "movimientos", type: "click", element: "carrusel", origin: "credito")
         switch indexPath.row{
         case 1:
             pageController.currentPage = 0

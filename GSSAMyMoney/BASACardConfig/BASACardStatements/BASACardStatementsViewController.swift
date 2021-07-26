@@ -98,9 +98,9 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
     
     func sendStatements(){
         if type == .credit{
-            tagSendStatementsButtonClick(origin: "{credito}")
+            tagSendStatementsButtonClick(origin: "credito")
         }else{
-            tagSendStatementsButtonClick(origin: "{debito}")
+            tagSendStatementsButtonClick(origin: "debito")
         }
        
         let success = GSVTOperationStatusViewController(status: .success(title: "Operación completada", message: "Estados de cuenta envíados", views: []), plainButtonAction: {

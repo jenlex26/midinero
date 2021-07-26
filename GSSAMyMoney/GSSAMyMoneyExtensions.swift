@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import GSSAFirebaseManager
+import GSSASessionInfo
 
 extension UIButton {
     func alignVertical(spacing: CGFloat = 6.0) {
@@ -145,6 +146,44 @@ extension UITableView{
 }
 
 extension String{
+    func moneyFormat() -> String{
+        var stringAmount = ""
+        
+        guard var formatedAmount = Double(self) else{
+            return self
+        }
+        formatedAmount = formatedAmount / 100
+        
+        stringAmount = String(formatedAmount)
+        
+        let amountFormat = NSMutableAttributedString.setFormattedText(withStringAmmount: stringAmount,
+                                                                      withNumberOfDecimals: GSSISessionInfo.sharedInstance.bHideCents ? 0 : 2,
+                                                                      withFontSize: 36,
+                                                                      withFontWeight: .bold,
+                                                                      withFontColor: .GSVCText100,
+                                                                      withLittleCoin: false)
+        
+        return amountFormat.mutableString.description
+    }
+    
+    func moneyFormatWithoutSplit() -> String{
+        var stringAmount = ""
+        guard let formatedAmount = Double(self) else{
+            return self
+        }
+        stringAmount = String(formatedAmount)
+        
+        let amountFormat = NSMutableAttributedString.setFormattedText(withStringAmmount: stringAmount,
+                                                                      withNumberOfDecimals: GSSISessionInfo.sharedInstance.bHideCents ? 0 : 2,
+                                                                      withFontSize: 36,
+                                                                      withFontWeight: .bold,
+                                                                      withFontColor: .GSVCText100,
+                                                                      withLittleCoin: false)
+        
+        return amountFormat.mutableString.description
+        
+    }
+    
     func characterCount() -> Int{
         return self.replacingOccurrences(of: " ", with: "").count
     }
@@ -266,3 +305,22 @@ extension UIColor{
     }
 }
 
+extension Int{
+    func moneyFormat() -> String{
+        
+        var doubleAmount = Double(self)
+        
+        doubleAmount = doubleAmount / 100
+        
+        let stringAmount = String(doubleAmount)
+        
+        let amountFormat = NSMutableAttributedString.setFormattedText(withStringAmmount: stringAmount,
+                                                                      withNumberOfDecimals: GSSISessionInfo.sharedInstance.bHideCents ? 0 : 2,
+                                                                      withFontSize: 36,
+                                                                      withFontWeight: .bold,
+                                                                      withFontColor: .GSVCText100,
+                                                                      withLittleCoin: false)
+        
+        return amountFormat.mutableString.description
+    }
+}

@@ -68,7 +68,7 @@ class BASABeneficiaryListViewController: UIViewController, BASABeneficiaryListVi
     }
     
     @objc func newBeneficiary(sender: UIButton){
-        self.createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "dashboard", screenName: "beneficiarios", type: "click", element: "agregar_beneficiarios", origin: "{debito}")
+        self.createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "dashboard", screenName: "beneficiarios", type: "click", element: "agregar_beneficiarios", origin: "debito")
         var emptyitem = BeneficiaryItem()
         emptyitem.id = sender.tag
         let view = BASANewBeneficiaryRouter.createModuleForActiveItem(data: emptyitem, beneficiaryList: notFilteredResponseData)
@@ -122,7 +122,7 @@ extension BASABeneficiaryListViewController: UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "dashboard", screenName: "beneficiarios", type: "click", element: "editar", origin: "{debito}")
+        self.createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "dashboard", screenName: "beneficiarios", type: "click", element: "editar", origin: "debito")
         let cell = table.cellForRow(at: indexPath)
         if cell is BASACardLimitCell{
             let view = BASANewBeneficiaryRouter.createModuleForActiveItem(data: tableData[indexPath.row], beneficiaryList: notFilteredResponseData)

@@ -86,7 +86,7 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
     }
     
     func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
-        tagCardConfigLimitsClick(origin: "{debito}")
+        tagCardConfigLimitsClick(origin: "debito")
         let view = BASACardLimitsRouter.createModule()
         self.navigationController?.pushViewController(view, animated: true)
     }
@@ -193,10 +193,10 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
         case 1:
             var view = UIViewController()
             if credit == true{
-                tagCardConfigStatementClick(origin: "{credito}")
+                tagCardConfigStatementClick(origin: "credito")
                 view = BASACardStatementsRouter.createModule(type: .credit)
             }else{
-                tagCardConfigStatementClick(origin: "{debito}")
+                tagCardConfigStatementClick(origin: "debito")
                 view = BASACardStatementsRouter.createModule(type: .debit)
             }
             self.navigationController?.pushViewController(view, animated: true)
@@ -205,7 +205,7 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
             verification.modalPresentationStyle = .fullScreen
             present(verification, animated: true, completion: nil)
         case 3:
-            tagCardConfigBeneficiaryClick(origin: "{debito}")
+            tagCardConfigBeneficiaryClick(origin: "debito")
             let view = BASABeneficiaryListRouter.createModule()
             self.navigationController?.pushViewController(view, animated: true)
         case 4:

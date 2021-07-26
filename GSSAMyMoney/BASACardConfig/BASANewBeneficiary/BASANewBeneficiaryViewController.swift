@@ -60,7 +60,7 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        createTag(eventName: .pageView, section: "mi_dinero", flow: "dashboard", screenName: "datos_beneficiarios", origin: "{debito}")
+        createTag(eventName: .pageView, section: "mi_dinero", flow: "dashboard", screenName: "datos_beneficiarios", origin: "debito")
     }
     
     func optionalAction() {
@@ -159,7 +159,7 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
     
     @objc func switchChanged(sender: UISwitch){
         if sender.isOn == true{
-            createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "dashboard", screenName: "datos_beneficiarios", type: "{switch_on}", element: "utilizar_direccion", origin: "{debito}")
+            createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "dashboard", screenName: "datos_beneficiarios", type: "switch_on", element: "utilizar_direccion", origin: "debito")
             let alert = UIAlertController(title: "Baz", message: "¿Quieres que tu beneficiario utilice tu dirección?", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: {_ in
                 sender.isOn = true
@@ -170,7 +170,7 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
             }))
             self.present(alert, animated: true, completion: nil)
         }else{
-            createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "dashboard", screenName: "datos_beneficiarios", type: "{switch_off}", element: "utilizar_direccion", origin: "{debito}")
+            createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "dashboard", screenName: "datos_beneficiarios", type: "switch_off", element: "utilizar_direccion", origin: "debito")
             if beneficiaryData?.domicilio != nil {
                 let view = GSSANewBeneficiaryAddressRouter.createModuleWithParams(data: beneficiaryData!.domicilio!)
                 self.present(view, animated: true, completion: nil)
@@ -296,7 +296,7 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
     }
     
     func evaluatePercents(Items: [beneficiaryPercents]){
-        createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "dashboard", screenName: "datos_beneficiarios", type: "click", element: "continuar", origin: "{debito}")
+        createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "dashboard", screenName: "datos_beneficiarios", type: "click", element: "continuar", origin: "debito")
         var total = 0
         canContinueProcess = false
         var outItems = Items
