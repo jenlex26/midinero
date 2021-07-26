@@ -106,7 +106,6 @@ class GSDigitalCardConfigViewController: UIViewController, GSDigitalCardConfigVi
     }
     
     func cancelDigitalSing(_ isUserBlocked: Bool) {
-        
         swtch.isOn = !swtch.isOn
     }
     

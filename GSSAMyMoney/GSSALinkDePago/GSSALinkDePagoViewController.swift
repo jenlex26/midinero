@@ -47,7 +47,6 @@ class GSSALinkDePagoViewController: UIViewController, GSSALinkDePagoViewProtocol
             txtMail.isHidden = false
         }
         
-        
         if hasNav != true && close == false{
             let verification = GSVTDigitalSignViewController(delegate: self)
             verification.modalPresentationStyle = .fullScreen
@@ -57,8 +56,8 @@ class GSSALinkDePagoViewController: UIViewController, GSSALinkDePagoViewProtocol
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        tagView()
         txtAmount.becomeFirstResponder()
+        createTag(eventName: .pageView, section: "mi_dinero", flow: "fondear_cuenta", screenName: "monto", origin: "")
         if close == true{
             if hasNav == true{
                 self.navigationController?.popViewController(animated: false)
@@ -66,16 +65,6 @@ class GSSALinkDePagoViewController: UIViewController, GSSALinkDePagoViewProtocol
                 self.dismiss(animated: false, completion: nil)
             }
         }
-    }
-    
-    private func tagView(){
-        let tagEvent = GSSAFirebaseEvent(.custom("pageview")).set(section: "mi_dinero").set(flow: "fondear_cuenta").set(screenName: "monto")
-        GSSAAnalytics.firebase.tracking(event: tagEvent)
-    }
-    
-    private func tagEndEditing(){
-        let tagEvent = GSSAFirebaseEvent(.custom("ui_interaction")).set(section: "mi_dinero").set(flow: "fondear_cuenta").set(screenName: "monto")
-        GSSAAnalytics.firebase.tracking(event: tagEvent)
     }
     
     func optionalAction() {
@@ -186,7 +175,6 @@ class GSSALinkDePagoViewController: UIViewController, GSSALinkDePagoViewProtocol
 extension GSSALinkDePagoViewController: UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == txtMail{
-            
             self.view.endEditing(true)
         }
         if textField == txtAmount{
@@ -208,8 +196,9 @@ extension GSSALinkDePagoViewController: UITextFieldDelegate{
                 textField.resetAmount(withLittleCoin: hasLittleCoin)
             } else {
                 let bHideCents = GSSISessionInfo.sharedInstance.bHideCents
+                
                 textField.addText(newText: string,
-                                  withMaxFontSize: 80,
+                                  withMaxFontSize: 38,
                                   withLittleCoin: hasLittleCoin, withFontWeight: .bold,
                                   withNoDecimals: bHideCents)
             }

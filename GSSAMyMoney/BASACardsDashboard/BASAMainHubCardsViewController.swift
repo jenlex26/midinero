@@ -39,14 +39,14 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     override func viewDidLoad() {
         super.viewDidLoad()
         inicializeView()
-        let verification = GSVTDigitalSignViewController(delegate: self)
-        verification.modalPresentationStyle = .fullScreen
-        self.present(verification, animated: false, completion: nil)
+//        let verification = GSVTDigitalSignViewController(delegate: self)
+//        verification.modalPresentationStyle = .fullScreen
+//        self.present(verification, animated: false, completion: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateHeaderSize(sender:)), name: Notification.Name("noCreditCardAvailable"), object: nil)
         setUpRefreshControl()
         startTime = Date()
         checkTime()
-        
+        loadDebitBalance()
     }
     
     func checkTime(){
