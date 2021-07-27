@@ -50,6 +50,7 @@ class GSSALinkDePagoViewController: UIViewController, GSSALinkDePagoViewProtocol
         if hasNav != true && close == false{
             let verification = GSVTDigitalSignViewController(delegate: self)
             verification.modalPresentationStyle = .fullScreen
+            verification.bShouldWaitForNewToken = false
             present(verification, animated: true, completion: nil)
         }
         

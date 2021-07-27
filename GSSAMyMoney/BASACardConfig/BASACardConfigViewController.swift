@@ -202,6 +202,7 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
             self.navigationController?.pushViewController(view, animated: true)
         case 2:
             let verification = GSVTDigitalSignViewController(delegate: self)
+            verification.bShouldWaitForNewToken = false
             verification.modalPresentationStyle = .fullScreen
             present(verification, animated: true, completion: nil)
         case 3:

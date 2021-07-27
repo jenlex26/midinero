@@ -33,7 +33,7 @@ protocol TimerHandleDelegate {
 
     //Public vars
     public var isMinutesAndSecondsShow = true
-    public var isMovingClockWise = false
+    public var isMovingClockWise = true
     
     //Private vars
     private var timer: Timer?

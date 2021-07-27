@@ -39,9 +39,6 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     override func viewDidLoad() {
         super.viewDidLoad()
         inicializeView()
-//        let verification = GSVTDigitalSignViewController(delegate: self)
-//        verification.modalPresentationStyle = .fullScreen
-//        self.present(verification, animated: false, completion: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateHeaderSize(sender:)), name: Notification.Name("noCreditCardAvailable"), object: nil)
         setUpRefreshControl()
         startTime = Date()
@@ -461,16 +458,16 @@ extension BASAMainHubCardsViewController:UITableViewDelegate,UITableViewDataSour
     }
 }
 
-extension BASAMainHubCardsViewController: GSVTDigitalSignDelegate{
-    func forgotDigitalSign(_ forgotSecurityCodeViewController: UIViewController?) {}
-    
-    func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
-        loadDebitBalance()
-    }
-    
-    func cancelDigitalSing(_ isUserBlocked: Bool) {
-        self.dismiss(animated: true, completion: {
-            self.navigationController?.popViewController(animated: true)
-        })
-    }
-}
+//extension BASAMainHubCardsViewController: GSVTDigitalSignDelegate{
+//    func forgotDigitalSign(_ forgotSecurityCodeViewController: UIViewController?) {}
+//
+//    func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
+//        loadDebitBalance()
+//    }
+//
+//    func cancelDigitalSing(_ isUserBlocked: Bool) {
+//        self.dismiss(animated: true, completion: {
+//            self.navigationController?.popViewController(animated: true)
+//        })
+//    }
+//}
