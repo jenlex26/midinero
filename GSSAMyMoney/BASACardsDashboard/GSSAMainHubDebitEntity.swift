@@ -78,6 +78,6 @@ struct DebitCardTransactionResult: Codable {
 
 // MARK: - DebitCardTransactionItem
 struct DebitCardTransactionItem: Codable {
-    let importe, saldo, descripcion, fechaOperacion: String?
-    let numeroMovimiento, codigoDivisa: String?
+    var importe, saldo, descripcion, fechaOperacion: String?
+    var numeroMovimiento, codigoDivisa: String?
 }

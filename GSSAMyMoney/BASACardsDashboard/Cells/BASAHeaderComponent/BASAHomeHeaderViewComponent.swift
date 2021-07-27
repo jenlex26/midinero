@@ -66,12 +66,13 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadLends(notification:)), name: NSNotification.Name(rawValue: "reloadLendsData"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadCreditCard(notification:)), name: NSNotification.Name(rawValue: "reloadCreditCardData"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadCreditCardBalance(notification:)), name: NSNotification.Name(rawValue: "reloadCreditCardBalance"), object: nil)
+        self.btnSelect.isHidden = true
         setUpDebitCard()
     }
     
     func setUpDebitCard(){
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: Notification.Name("noCreditCardAvailable"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: Notification.Name("creditCardAvailable"), object: nil)
         
         debitCardlblBalance.textColor = .black
         debitCardlblCardNumber.textColor = .black
@@ -209,8 +210,7 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
                        initialSpringVelocity: 1,
                        options: [],
                        animations: {
-                        self.btnSelect.alpha = 0
-                        self.btnSelect.isHidden = true
+                        self.btnSelect.isHidden = false
                         self.layoutIfNeeded()
                        })
     }

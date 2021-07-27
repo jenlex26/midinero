@@ -32,19 +32,23 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     var creditCardMovements: CreditCardMovementsResponse?
     var accountNumber: [String:String]?
     let refreshControl = UIRefreshControl()
-    var headerSize: CGFloat = 380.0
+    var headerSize: CGFloat = 300.0 //380.0 Valor predeterminado para cuando el usuario tiene crédito o prestamos, en caso contrario 300.0
     var startTime: Date?
     var time: TimeInterval = 300.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         inicializeView()
-        NotificationCenter.default.addObserver(self, selector: #selector(updateHeaderSize(sender:)), name: Notification.Name("noCreditCardAvailable"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateHeaderSize(sender:)), name: Notification.Name("creditCardAvailable"), object: nil)
         setUpRefreshControl()
         startTime = Date()
         checkTime()
-        loadDebitBalance()
+        //loadDebitBalance()
         createTag(eventName: .pageView, section: "mi_dinero", flow: "dashboard", screenName: "movimientos", origin: "debito")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        loadDebitBalance()
     }
     
     func checkTime(){
@@ -171,10 +175,9 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         presenter?.requestCreditCardBalance(Body: CreditCardBalanceBody.init(transaccion: CreditCardBalanceTransaccion.init(numeroTarjeta: GSSISessionInfo.sharedInstance.gsUser.card?.dynamicEncrypt())), CreditCardBalance: { [self] CreditCardBalance in
             if let creditCardBalanceResponse = CreditCardBalance{
                 creditCardBalance = creditCardBalanceResponse
-                
+                NotificationCenter.default.post(name: Notification.Name("creditCardAvailable"), object: nil)
             }else{
                 GSVCLoader.hide()
-                NotificationCenter.default.post(name: Notification.Name("noCreditCardAvailable"), object: nil)
             }
         })
     }
@@ -231,11 +234,15 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         
         
         if debitCardMovements != nil{
+            
             if  debitCardMovements!.resultado.movimientos.count > 0{
+                
             for item in debitCardMovements!.resultado.movimientos{
+                
                 if  item.descripcion?.alnovaDecrypt() != ""{
+                    print("fecha: \(item.fechaOperacion?.alnovaDecrypt())")
                     let movementCell = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAMovementCell") as! BASAMovementTableViewCell
-                    movementCell.lblDate.text = item.fechaOperacion?.dateFormatter(format: "yyyy/MM/dd", outputFormat: "dd MMM yyyy")
+                    movementCell.lblDate.text = item.fechaOperacion?.alnovaDecrypt().dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy")
                     movementCell.lblTitle.text = item.descripcion?.alnovaDecrypt()
                     movementCell.lblAmount.text = item.importe?.alnovaDecrypt().moneyFormat()
                     movementCell.setArrow(amount: item.importe?.alnovaDecrypt() ?? "")
@@ -385,7 +392,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
             let cell = (cellsArray[0].first?.key)!
             UIView.animate(withDuration: 0.5) { [self] in
                 BasaMainHubTableView.beginUpdates()
-                cellsArray[0].updateValue(300.0, forKey: cell)
+                cellsArray[0].updateValue(380.0, forKey: cell)
                 BasaMainHubTableView.endUpdates()
             }
             refreshControl.endRefreshing()
