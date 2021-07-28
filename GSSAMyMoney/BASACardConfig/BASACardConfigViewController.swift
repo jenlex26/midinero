@@ -211,7 +211,7 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
             self.navigationController?.pushViewController(view, animated: true)
         case 4:
             tagCardConfigShareInfo()
-            let text = "Mi número de cuenta CLABE para enviarme dinero desde otro banco (SPEI) es: \(CLABE) \nMi número de cuenta para enviarme dinero dentro de baz es: \(account) \nMi número de celular asociado para envíos es: \(phone)"
+            let text = "Mi número de cuenta CLABE para enviarme dinero desde otro banco (SPEI) es:\n\(CLABE)\n\nMi número de cuenta para enviarme dinero dentro de baz es:\n\(account)\n\nMi número de celular asociado para envíos es:\n\(phone)"
             let activityViewController = UIActivityViewController(activityItems: [text], applicationActivities: nil)
             activityViewController.popoverPresentationController?.sourceView = self.view
             self.present(activityViewController, animated: true, completion: nil)
