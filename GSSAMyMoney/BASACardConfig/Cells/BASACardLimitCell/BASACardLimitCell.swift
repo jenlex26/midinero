@@ -14,6 +14,7 @@ class BASACardLimitCell: UITableViewCell, UITextFieldDelegate {
     @IBOutlet weak var btnEdit: GSVCButton!
     @IBOutlet weak var lblTitle: GSVCLabel!
     @IBOutlet weak var lblSubtitle: GSVCLabel!
+    @IBOutlet weak var helperText: GSVCLabel!
     @IBOutlet weak var txtAmount: GSVCTextField!
     @IBOutlet weak var stack: UIStackView!
     
@@ -35,7 +36,6 @@ class BASACardLimitCell: UITableViewCell, UITextFieldDelegate {
         txtAmount.leftViewMode = .whileEditing
     }
     
-    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let textFieldText = textField.text,
               let rangeOfTextToReplace = Range(range, in: textFieldText) else {
@@ -44,6 +44,10 @@ class BASACardLimitCell: UITableViewCell, UITextFieldDelegate {
         let substringToReplace = textFieldText[rangeOfTextToReplace]
         let count = textFieldText.count - substringToReplace.count + string.count
         return count <= textLenght ?? 4
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        cancelEdit()
     }
     
     func setUpToolBar(){
@@ -63,12 +67,17 @@ class BASACardLimitCell: UITableViewCell, UITextFieldDelegate {
         txtAmount.inputAccessoryView = numberToolbar
     }
     
-    @objc func cancelNumberPad() {
+    func cancelEdit(){
         btnEdit.isHidden = false
         lblSubtitle.isHidden = false
         txtAmount.isHidden = true
+        helperText.isHidden = true
         self.endEditing(true)
-        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "BASALimitCellEditFinished"), object: nil, userInfo: nil))
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "BASALimitCellEditFinished"), object: nil, userInfo: ["id":notificationID ?? "-1"]))
+    }
+    
+    @objc func cancelNumberPad() {
+        cancelEdit()
     }
     
     @objc func doneWithNumberPad() {
@@ -76,6 +85,7 @@ class BASACardLimitCell: UITableViewCell, UITextFieldDelegate {
         btnEdit.isHidden = false
         lblSubtitle.isHidden = false
         txtAmount.isHidden = true
+        helperText.isHidden = true
         lblSubtitle.text = "Hasta " + txtAmount.text!.moneyFormatWithoutSplit()
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "BASALimitCellEditFinished"), object: [notificationID:txtAmount.text], userInfo: nil))
     }
@@ -85,5 +95,7 @@ class BASACardLimitCell: UITableViewCell, UITextFieldDelegate {
         btnEdit.isHidden = true
         setUpToolBar()
         txtAmount.isHidden = false
+        helperText.isHidden = false
+        txtAmount.becomeFirstResponder()
     }
 }

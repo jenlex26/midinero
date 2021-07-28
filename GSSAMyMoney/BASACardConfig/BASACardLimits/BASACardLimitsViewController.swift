@@ -47,7 +47,7 @@ class BASACardLimitsViewController: UIViewController, BASACardLimitsViewProtocol
         
         LimitItems.append(LimitItem(title: "Retiro en cajero", subtitle: "Hasta \(savedATMLimit?.moneyFormatWithoutSplit() ?? "$7,500.00")", height: 84.0, notificationID: "debitCardATMLimit", textLenght: 4))
         
-        LimitItems.append(LimitItem(title: "Límite de compra", subtitle: "Hasta \(savedDebitCardLimit?.moneyFormatWithoutSplit() ?? "$7,500.00")", height: 84.0, notificationID: "debitCardAmountLimit", textLenght: 9))
+        LimitItems.append(LimitItem(title: "Límite de compra", subtitle: "Hasta \(savedDebitCardLimit?.moneyFormatWithoutSplit() ?? "$9,999,999.00")", height: 84.0, notificationID: "debitCardAmountLimit", textLenght: 9))
     }
     
     func registerCells(){
@@ -66,7 +66,6 @@ class BASACardLimitsViewController: UIViewController, BASACardLimitsViewProtocol
     
     @objc func handleFinishEditAction(notification: Notification){
         let text = notification.object as? [String:String]
-        
         if notification.object != nil{
             if text?.first?.value.replacingOccurrences(of: " ", with: "").count ?? 0 < 1{
                 self.presentBottomAlertFullData(status: .error, message: "Ingrese una cantidad para continuar", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
@@ -75,7 +74,7 @@ class BASACardLimitsViewController: UIViewController, BASACardLimitsViewProtocol
             }else{
                 let amountInt = Int(text?.first?.value ?? "0")!
                 if amountInt.isMultiple(of: 50) && amountInt <= 7500 || text?.first?.key == "debitCardAmountLimit"{
-                    GSVCLoader.show(type: .native)
+                    GSVCLoader.show()
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {  [self] in
                         var indicador = ""
                         if text?.first?.key == "debitCardAmountLimit"{
@@ -109,6 +108,19 @@ class BASACardLimitsViewController: UIViewController, BASACardLimitsViewProtocol
                     self.table.reloadData()
                 }
             }
+        }else{
+            if notification.userInfo != nil{
+                table.beginUpdates()
+                switch (notification.userInfo?.first?.value as! String){
+                case "debitCardATMLimit":
+                    LimitItems[0].height = 84.0
+                case "debitCardAmountLimit":
+                    LimitItems[1].height = 84.0
+                default:
+                    print("Default case")
+                }
+                table.endUpdates()
+            }
         }
     }
     
@@ -125,11 +137,11 @@ extension BASACardLimitsViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = table.dequeueReusableCell(withIdentifier: "BASACardLimitCell") as! BASACardLimitCell
-
         cell.btnEdit.tag = indexPath.row
         cell.notificationID = LimitItems[indexPath.row].notificationID
         cell.lblTitle.text = LimitItems[indexPath.row].title
         cell.lblSubtitle.text = LimitItems[indexPath.row].subtitle
+        cell.helperText.text = LimitItems[indexPath.row].subtitle
         cell.textLenght = LimitItems[indexPath.row].textLenght
         cell.btnEdit.addTarget(self, action: #selector(handleEditAction(sender:)), for: .touchUpInside)
         return cell
