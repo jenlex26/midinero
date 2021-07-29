@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="actualLocationView" destination="2vA-D6-Mj4" id="YAZ-fC-C9v"/>
                 <outlet property="btnPostalCode" destination="gAs-5a-Uuh" id="Mux-hs-crH"/>
+                <outlet property="btnTxtPostalCode" destination="hot-a2-0SS" id="yIT-t7-HMv"/>
                 <outlet property="txtPostalCode" destination="ZnE-fN-Dnr" id="mpD-f1-t5j"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -142,16 +143,26 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" keyboardType="numberPad" textContentType="postal-code"/>
                                         </textField>
+                                        <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hot-a2-0SS">
+                                            <rect key="frame" x="0.0" y="30.5" width="375" height="69.5"/>
+                                            <connections>
+                                                <action selector="changePostalCode:" destination="-1" eventType="touchUpInside" id="wgF-SV-aY2"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstItem="0a3-fx-wVt" firstAttribute="leading" secondItem="XGQ-wO-zZu" secondAttribute="leading" constant="24" id="Dij-fM-lpa"/>
                                         <constraint firstItem="ZnE-fN-Dnr" firstAttribute="top" secondItem="0a3-fx-wVt" secondAttribute="bottom" constant="11" id="IF9-dT-q4f"/>
+                                        <constraint firstItem="hot-a2-0SS" firstAttribute="leading" secondItem="XGQ-wO-zZu" secondAttribute="leading" id="Oue-gE-Nyj"/>
+                                        <constraint firstAttribute="trailing" secondItem="hot-a2-0SS" secondAttribute="trailing" id="R0T-jm-NYp"/>
                                         <constraint firstAttribute="trailing" secondItem="0a3-fx-wVt" secondAttribute="trailing" constant="24" id="T0Q-wL-IJx"/>
                                         <constraint firstItem="ZnE-fN-Dnr" firstAttribute="leading" secondItem="XGQ-wO-zZu" secondAttribute="leading" constant="24" id="Vvb-rX-6is"/>
+                                        <constraint firstItem="hot-a2-0SS" firstAttribute="top" secondItem="0a3-fx-wVt" secondAttribute="bottom" id="dI0-G4-XvA"/>
                                         <constraint firstAttribute="trailing" secondItem="ZnE-fN-Dnr" secondAttribute="trailing" constant="24" id="dfd-WK-gk3"/>
                                         <constraint firstItem="0a3-fx-wVt" firstAttribute="top" secondItem="XGQ-wO-zZu" secondAttribute="top" constant="10" id="eNl-5c-84e"/>
                                         <constraint firstAttribute="height" constant="100" id="oS2-7a-9FP"/>
+                                        <constraint firstAttribute="bottom" secondItem="hot-a2-0SS" secondAttribute="bottom" id="upI-o0-ycA"/>
                                     </constraints>
                                 </view>
                                 <view hidden="YES" tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pNt-Sw-uGs">
@@ -416,9 +427,6 @@
                                                     <integer key="value" value="1"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
-                                            <connections>
-                                                <action selector="postalCodeButtonClick:" destination="-1" eventType="touchUpInside" id="j4d-g9-0Kl"/>
-                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -452,7 +460,7 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <action selector="postalCodeButtonClick:" destination="-1" eventType="touchUpInside" id="VNN-st-NRF"/>
+                        <action selector="postalCodeButtonClick:" destination="-1" eventType="touchUpInside" id="Aas-Bs-fXN"/>
                     </connections>
                 </button>
             </subviews>

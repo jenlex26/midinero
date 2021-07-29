@@ -12,24 +12,95 @@ import UIKit
 import GSSAVisualTemplates
 import GSSAVisualComponents
 
-class GSSAPhysicalCardRequestAddressViewController: UIViewController, GSSAPhysicalCardRequestAddressViewProtocol, UITextFieldDelegate, GSVCBottomAlertHandler {
-    
+class GSSAPhysicalCardRequestAddressViewController: UIViewController, GSSAPhysicalCardRequestAddressViewProtocol, GSVCBottomAlertHandler, GSVCPickerControllerDelegate, GSVCPickerControllerDataSource{
+
     var bottomAlert: GSVCBottomAlert?
     var presenter: GSSAPhysicalCardRequestAddressPresenterProtocol?
     
     @IBOutlet weak var actualLocationView: UIView!
     @IBOutlet weak var txtPostalCode     : GSVCTextField!
+    @IBOutlet weak var btnTxtPostalCode  : UIButton!
+    @IBOutlet weak var txtColonia        : GSVCTextField!
     @IBOutlet weak var btnPostalCode     : GSVCButton!
+    
+    var pickerData: [String] = []
+    var picker: GSVCPickerController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         actualLocationView.backgroundColor = UIColor.GSVCBase300()
         txtPostalCode.delegate = self
         txtPostalCode.tag = 1
+        picker = GSVCPickerController(type: .data, textField: txtColonia)
+        picker.delegate = self
+        picker.dataSource = self
     }
     
     func optionalAction() {}
     
+    func changeFieldsVisibility(hidden: Bool){
+        for item in self.view.subviews[1].subviews[0].subviews{
+            if item.tag == 1{
+                UIView.animate(withDuration: 0.5,
+                               delay: 0.0,
+                               usingSpringWithDamping: 0.9,
+                               initialSpringVelocity: 1,
+                               options: [],
+                               animations: {
+                                item.isHidden = hidden
+                               })
+            }
+        }
+    }
+    
+    func numberOfComponents(in textField: UITextField) -> Int {
+        return 1
+    }
+    
+    func getElements(component: Int, textField: UITextField) -> [DataPicker]? {
+        let dataPicker = pickerData.map { element -> DataPicker in
+            return DataPicker(element, nil)
+        }
+        return dataPicker
+    }
+    
+    @IBAction func changePostalCode(_ sender: Any){
+        let alert = UIAlertController(title: "Baz", message: "¿Desea actualizar el código postal?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: { [self]_ in
+            changeFieldsVisibility(hidden: true)
+            txtPostalCode.isUserInteractionEnabled = true
+            btnPostalCode.isHidden = false
+            btnTxtPostalCode.isUserInteractionEnabled = false
+        }))
+        alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    @IBAction func postalCodeButtonClick(_ sender: Any){
+        if txtPostalCode.text?.count == 5{
+            GSVCLoader.show()
+            presenter?.requestLocationInfo(CP: txtPostalCode.text ?? "", LocationInfo: { [self] LocationInfo in
+                GSVCLoader.hide()
+                if LocationInfo != nil{
+                    changeFieldsVisibility(hidden: false)
+                    btnPostalCode.isHidden = true
+                    txtPostalCode.isUserInteractionEnabled = false
+                    btnTxtPostalCode.isUserInteractionEnabled = true
+                }else{
+                    self.presentBottomAlertFullData(status: .error, message: "Verifique que el código postal sea válido", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+                }
+            })
+        }else{
+            self.presentBottomAlertFullData(status: .error, message: "Ingrese un código postal válido", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+        }
+    }
+    
+    @IBAction func close(_ sender: Any){
+        self.navigationController?.popViewController(animated: true)
+    }
+}
+
+extension GSSAPhysicalCardRequestAddressViewController: UITextFieldDelegate{
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let ACCEPTABLE_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzñÑ0123456789 "
         let currentText = textField.text ?? ""
@@ -45,42 +116,5 @@ class GSSAPhysicalCardRequestAddressViewController: UIViewController, GSSAPhysic
         default:
             return true
         }
-    }
-    
-    func showFields(){
-        for item in self.view.subviews[1].subviews[0].subviews{
-            if item.tag == 1{
-                UIView.animate(withDuration: 0.5,
-                               delay: 0.0,
-                               usingSpringWithDamping: 0.9,
-                               initialSpringVelocity: 1,
-                               options: [],
-                               animations: {
-                                item.isHidden = false
-                               })
-            }
-        }
-    }
-    
-    @IBAction func postalCodeButtonClick(_ sender: Any){
-        
-        if txtPostalCode.text?.count == 5{
-            GSVCLoader.show()
-            presenter?.requestLocationInfo(CP: txtPostalCode.text ?? "", LocationInfo: { [self] LocationInfo in
-                GSVCLoader.hide()
-                if LocationInfo != nil{
-                    showFields()
-                    btnPostalCode.isHidden = true
-                }else{
-                    self.presentBottomAlertFullData(status: .error, message: "Verifique que el código postal sea válido", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
-                }
-            })
-        }else{
-            self.presentBottomAlertFullData(status: .error, message: "Ingrese un código postal válido", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
-        }
-    }
-    
-    @IBAction func close(_ sender: Any){
-        self.navigationController?.popViewController(animated: true)
     }
 }
