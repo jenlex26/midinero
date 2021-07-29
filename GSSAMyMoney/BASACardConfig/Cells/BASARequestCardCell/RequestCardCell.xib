@@ -33,7 +33,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tarjeta digital" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dtM-yd-udu" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                <rect key="frame" x="67" y="27" width="146" height="22.5"/>
+                                <rect key="frame" x="67" y="28" width="146" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -90,13 +90,14 @@
             <connections>
                 <outlet property="buttonView" destination="oMf-6b-twD" id="O7b-CH-aAf"/>
                 <outlet property="cellButton" destination="ZeO-at-1xG" id="wdL-ml-ned"/>
+                <outlet property="lblTitle" destination="dtM-yd-udu" id="3p5-0v-scj"/>
             </connections>
             <point key="canvasLocation" x="131.15942028985509" y="92.745535714285708"/>
         </tableViewCell>
     </objects>
     <designables>
         <designable name="dtM-yd-udu">
-            <size key="intrinsicContentSize" width="110.5" height="22.5"/>
+            <size key="intrinsicContentSize" width="102" height="20.5"/>
         </designable>
     </designables>
     <resources>

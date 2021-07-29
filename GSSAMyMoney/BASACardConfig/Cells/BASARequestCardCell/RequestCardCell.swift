@@ -11,6 +11,7 @@ import GSSAVisualComponents
 class RequestCardCell: UITableViewCell{
   
     @IBOutlet weak var buttonView: UIView!
+    @IBOutlet weak var lblTitle  : GSVCLabel! 
     @IBOutlet weak var cellButton: UIButton!
     
     var cellViewController: UIViewController!

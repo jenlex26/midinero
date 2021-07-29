@@ -334,7 +334,7 @@
     </objects>
     <designables>
         <designable name="98V-7A-Aa3">
-            <size key="intrinsicContentSize" width="51" height="33"/>
+            <size key="intrinsicContentSize" width="46" height="30"/>
         </designable>
         <designable name="B5R-we-V5S">
             <size key="intrinsicContentSize" width="12.5" height="16"/>
@@ -350,7 +350,7 @@
         </designable>
         <designable name="eoH-yZ-cf6"/>
         <designable name="gko-4C-avx">
-            <size key="intrinsicContentSize" width="56" height="33"/>
+            <size key="intrinsicContentSize" width="51" height="30"/>
         </designable>
         <designable name="vlW-yv-wH9">
             <size key="intrinsicContentSize" width="23" height="20.5"/>

@@ -100,6 +100,12 @@
 		EE0655DB2682AE6600F7C73D /* GSDigitalCardConfigProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0655D52682AE6600F7C73D /* GSDigitalCardConfigProtocols.swift */; };
 		EE0655DC2682AE6600F7C73D /* GSDigitalCardConfigInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0655D62682AE6600F7C73D /* GSDigitalCardConfigInteractor.swift */; };
 		EE0655DD2682AE6600F7C73D /* GSDigitalCardConfigViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE0655D72682AE6600F7C73D /* GSDigitalCardConfigViewController.xib */; };
+		EE2A25EC26B2142900E1C2C5 /* GSSARequestDebitCardPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2A25E626B2142900E1C2C5 /* GSSARequestDebitCardPresenter.swift */; };
+		EE2A25ED26B2142900E1C2C5 /* GSSARequestDebitCardRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2A25E726B2142900E1C2C5 /* GSSARequestDebitCardRouter.swift */; };
+		EE2A25EE26B2142900E1C2C5 /* GSSARequestDebitCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2A25E826B2142900E1C2C5 /* GSSARequestDebitCardViewController.swift */; };
+		EE2A25EF26B2142900E1C2C5 /* GSSARequestDebitCardProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2A25E926B2142900E1C2C5 /* GSSARequestDebitCardProtocols.swift */; };
+		EE2A25F026B2142900E1C2C5 /* GSSARequestDebitCardInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2A25EA26B2142900E1C2C5 /* GSSARequestDebitCardInteractor.swift */; };
+		EE2A25F126B2142900E1C2C5 /* GSSARequestDebitCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE2A25EB26B2142900E1C2C5 /* GSSARequestDebitCardViewController.xib */; };
 		EE2CA7522696D7D20023BE1D /* GSSACardLimitsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2CA7512696D7D20023BE1D /* GSSACardLimitsEntity.swift */; };
 		EE36C43126878F11001AD9F2 /* GSSASecurityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE36C43026878F11001AD9F2 /* GSSASecurityController.swift */; };
 		EE477BF226937F2E00DC5CF9 /* GSSAMainHubDebitEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE477BF126937F2E00DC5CF9 /* GSSAMainHubDebitEntity.swift */; };
@@ -257,6 +263,12 @@
 		EE0655D52682AE6600F7C73D /* GSDigitalCardConfigProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSDigitalCardConfigProtocols.swift; sourceTree = "<group>"; };
 		EE0655D62682AE6600F7C73D /* GSDigitalCardConfigInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSDigitalCardConfigInteractor.swift; sourceTree = "<group>"; };
 		EE0655D72682AE6600F7C73D /* GSDigitalCardConfigViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GSDigitalCardConfigViewController.xib; sourceTree = "<group>"; };
+		EE2A25E626B2142900E1C2C5 /* GSSARequestDebitCardPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSARequestDebitCardPresenter.swift; sourceTree = "<group>"; };
+		EE2A25E726B2142900E1C2C5 /* GSSARequestDebitCardRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSARequestDebitCardRouter.swift; sourceTree = "<group>"; };
+		EE2A25E826B2142900E1C2C5 /* GSSARequestDebitCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSARequestDebitCardViewController.swift; sourceTree = "<group>"; };
+		EE2A25E926B2142900E1C2C5 /* GSSARequestDebitCardProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSARequestDebitCardProtocols.swift; sourceTree = "<group>"; };
+		EE2A25EA26B2142900E1C2C5 /* GSSARequestDebitCardInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSARequestDebitCardInteractor.swift; sourceTree = "<group>"; };
+		EE2A25EB26B2142900E1C2C5 /* GSSARequestDebitCardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GSSARequestDebitCardViewController.xib; sourceTree = "<group>"; };
 		EE2CA7512696D7D20023BE1D /* GSSACardLimitsEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSACardLimitsEntity.swift; sourceTree = "<group>"; };
 		EE36C43026878F11001AD9F2 /* GSSASecurityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSASecurityController.swift; sourceTree = "<group>"; };
 		EE477BF126937F2E00DC5CF9 /* GSSAMainHubDebitEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAMainHubDebitEntity.swift; sourceTree = "<group>"; };
@@ -410,6 +422,7 @@
 			isa = PBXGroup;
 			children = (
 				10E9ED45267D6BA400F45640 /* Cells */,
+				EE2A25E526B2140300E1C2C5 /* GSSARequestDebitCard */,
 				10E9ED3D267D6BA400F45640 /* BASACardStatements */,
 				10E9ED74267D6BA400F45640 /* BASABeneficiaryList */,
 				10E9ED63267D6BA400F45640 /* BASACardLimits */,
@@ -734,6 +747,19 @@
 			path = GSDigitalCardConfig;
 			sourceTree = "<group>";
 		};
+		EE2A25E526B2140300E1C2C5 /* GSSARequestDebitCard */ = {
+			isa = PBXGroup;
+			children = (
+				EE2A25E626B2142900E1C2C5 /* GSSARequestDebitCardPresenter.swift */,
+				EE2A25E726B2142900E1C2C5 /* GSSARequestDebitCardRouter.swift */,
+				EE2A25E826B2142900E1C2C5 /* GSSARequestDebitCardViewController.swift */,
+				EE2A25E926B2142900E1C2C5 /* GSSARequestDebitCardProtocols.swift */,
+				EE2A25EA26B2142900E1C2C5 /* GSSARequestDebitCardInteractor.swift */,
+				EE2A25EB26B2142900E1C2C5 /* GSSARequestDebitCardViewController.xib */,
+			);
+			path = GSSARequestDebitCard;
+			sourceTree = "<group>";
+		};
 		EE97BB032684DF08000AE34C /* GSNoMovementsCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -885,6 +911,7 @@
 				10E9EDB2267D6BA400F45640 /* BASACardStatementsViewController.xib in Resources */,
 				EE97BB072684DF30000AE34C /* GSNoMovementsCell.xib in Resources */,
 				EEAFA7A4268CF3DD00DBC192 /* GSSANewBeneficiaryAddressViewController.xib in Resources */,
+				EE2A25F126B2142900E1C2C5 /* GSSARequestDebitCardViewController.xib in Resources */,
 				10E9EDC4267D6BA400F45640 /* BASAInfoCardCell.xib in Resources */,
 				10E9EDDD267D6BA400F45640 /* BASACreditCardInfoCell.xib in Resources */,
 				10E9EDD2267D6BA400F45640 /* BASANewBeneficiaryViewController.xib in Resources */,
@@ -944,6 +971,7 @@
 				10E9EDC9267D6BA400F45640 /* BASACardLimitsViewController.swift in Sources */,
 				10E9EDC0267D6BA400F45640 /* SectionCell.swift in Sources */,
 				EEAEFB10269E08BD00F97E4D /* GSSAMovementPreviewInteractor.swift in Sources */,
+				EE2A25EF26B2142900E1C2C5 /* GSSARequestDebitCardProtocols.swift in Sources */,
 				10E9EDCF267D6BA400F45640 /* BASANewBeneficiaryProtocols.swift in Sources */,
 				10E9EDDF267D6BA400F45640 /* BASAHomeHeaderViewComponent.swift in Sources */,
 				10E9EDB8267D6BA400F45640 /* BASAButtonCell.swift in Sources */,
@@ -952,10 +980,12 @@
 				EEAFA796268CD75200DBC192 /* BeneficiaryButtonCell.swift in Sources */,
 				10E9EDDA267D6BA400F45640 /* BASABeneficiaryListProtocols.swift in Sources */,
 				10E9EDCD267D6BA400F45640 /* BASACardLimitsInteractor.swift in Sources */,
+				EE2A25EE26B2142900E1C2C5 /* GSSARequestDebitCardViewController.swift in Sources */,
 				10E9EDF0267D6BA400F45640 /* BASAMainHubCardsProtocols.swift in Sources */,
 				10E9EDB6267D6BA400F45640 /* RequestCardCell.swift in Sources */,
 				EED2CB9D269D0C4B00A1E129 /* GSSALinkDePagoInteractor.swift in Sources */,
 				10E9EDD9267D6BA400F45640 /* BASABeneficiaryListPresenter.swift in Sources */,
+				EE2A25EC26B2142900E1C2C5 /* GSSARequestDebitCardPresenter.swift in Sources */,
 				EE037483268291FC00BE681D /* BASADigitalCardEntity.swift in Sources */,
 				10E9EDBE267D6BA400F45640 /* BASACardLimitCell.swift in Sources */,
 				10E9EDAF267D6BA400F45640 /* BASACardStatementsInteractor.swift in Sources */,
@@ -978,6 +1008,7 @@
 				10E9EDD4267D6BA400F45640 /* BASANewBeneficiaryViewController.swift in Sources */,
 				10E9EDE7267D6BA400F45640 /* BASAButtonsCell.swift in Sources */,
 				10E9EDFA267D6BA400F45640 /* BASAShadowRadiusImage.swift in Sources */,
+				EE2A25F026B2142900E1C2C5 /* GSSARequestDebitCardInteractor.swift in Sources */,
 				10E9EDD1267D6BA400F45640 /* BASANewBeneficiaryRouter.swift in Sources */,
 				10E9EDB3267D6BA400F45640 /* BASACardConfigProtocols.swift in Sources */,
 				EE97BB022683FBB1000AE34C /* BASACardStatementsEntity.swift in Sources */,
@@ -985,6 +1016,7 @@
 				EED2CBA0269D361100A1E129 /* GSSALinkDePagoEntity.swift in Sources */,
 				EEAEFB0F269E08BD00F97E4D /* GSSAMovementPreviewProtocols.swift in Sources */,
 				10E9EDCE267D6BA400F45640 /* BASACardConfigRouter.swift in Sources */,
+				EE2A25ED26B2142900E1C2C5 /* GSSARequestDebitCardRouter.swift in Sources */,
 				10E9EE01267D6BA400F45640 /* BASADigitalCardInteractor.swift in Sources */,
 				10E9EDF1267D6BA400F45640 /* BASAMainHubCardsInteractor.swift in Sources */,
 				EEB850B5269A517500767673 /* GSSANewBeneficiaryAddressEntity.swift in Sources */,

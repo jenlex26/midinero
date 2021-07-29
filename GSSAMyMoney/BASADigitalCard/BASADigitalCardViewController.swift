@@ -63,6 +63,7 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
         cvvView.layer.borderWidth = 0.2
         cvvView.layer.borderColor = UIColor.lightGray.cgColor
         
+        trygetLocation()
         
         if userBalance != nil{
             self.AvaibleMoneyLabel.text = userBalance.alnovaDecrypt().moneyFormat()
@@ -117,7 +118,7 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
         cvvView.isHidden = true
         lockIcon.isHidden = false
     }
-
+    
     func unLockCard(){
         UserDefaults.standard.setValue(false, forKey: "DigitalCardStatus")
         viewContainerOn.isHidden = false
@@ -131,6 +132,16 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
         gradient.frame = view.bounds
         gradient.colors = [UIColor.GSVCPrincipal100.cgColor, UIColor.GSVCPrincipal100.cgColor]
         TopHeaderView.layer.insertSublayer(gradient, at: 0)
+    }
+    
+    func trygetLocation(){
+        GSPMAdminAccess.request(for: .location) { access, error in
+            if !access {
+                UIAlertController.sendToSettings(cancelAction: {
+                    self.navigationController?.popViewController(animated: true)
+                })
+            }
+        }
     }
     
     @IBAction func copyCardNumber(_ sender: Any){
