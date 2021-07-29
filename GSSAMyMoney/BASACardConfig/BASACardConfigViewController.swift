@@ -38,7 +38,6 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
         if credit == true{
             CLABE = ""
         }
-        
         CLABE = GSSISessionInfo.sharedInstance.gsUser.account?.clabe?.tnuoccaFormat ?? ""
         phone = GSSISessionInfo.sharedInstance.gsUser.phone?.tryToAdCellphoneFormat ?? ""
         account = GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().tnuoccaFormat ?? ""
@@ -53,6 +52,10 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
     func setOptions(){
         if #available(iOS 13.0, *) {
             if credit == false{
@@ -62,6 +65,7 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
                 configurations.append(userOptions.init(title: "Estados de cuenta", subTitle: nil, image: UIImage(systemName: "chevron.right"), tag: 1))
                 configurations.append(userOptions.init(title: "Límites", subTitle: nil, image: UIImage(systemName: "chevron.right"), tag: 2))
                 configurations.append(userOptions.init(title: "Beneficiarios", subTitle: nil, image: UIImage(systemName: "chevron.right"), tag: 3))
+                configurations.append(userOptions.init(title: "Activar tarjeta fisica", subTitle: nil, image: UIImage(systemName: "chevron.right"), tag: 7))
             }else{
                 configurations.append(userOptions(title: "Número de tarjeta física", subTitle: CLABE, image: UIImage(systemName: "doc.fill"), tag: 5))
                 configurations.append(userOptions.init(title: "Estado de cuenta", subTitle: nil, image: UIImage(systemName: "chevron.right"), tag: 1))
@@ -218,6 +222,9 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
             UIPasteboard.general.string = CLABE
         case 6:
             let view = GSSARequestDebitCardRouter.createModule()
+            self.navigationController?.pushViewController(view, animated: true)
+        case 7:
+            let view = GSSActivateDebitCardRouter.createModule()
             self.navigationController?.pushViewController(view, animated: true)
         default:
             print("default case...")
