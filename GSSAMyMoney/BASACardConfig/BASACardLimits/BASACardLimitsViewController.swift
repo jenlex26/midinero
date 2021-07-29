@@ -47,7 +47,7 @@ class BASACardLimitsViewController: UIViewController, BASACardLimitsViewProtocol
         
         LimitItems.append(LimitItem(title: "Retiro en cajero", subtitle: "Hasta \(savedATMLimit?.moneyFormatWithoutSplit() ?? "$7,500.00")", height: 84.0, notificationID: "debitCardATMLimit", textLenght: 4))
         
-        LimitItems.append(LimitItem(title: "Límite de compra", subtitle: "Hasta \(savedDebitCardLimit?.moneyFormatWithoutSplit() ?? "$9,999,999.00")", height: 84.0, notificationID: "debitCardAmountLimit", textLenght: 9))
+        LimitItems.append(LimitItem(title: "Límite de compra", subtitle: "Hasta \(savedDebitCardLimit?.moneyFormatWithoutSplit() ?? "$999,9999,999.00")", height: 84.0, notificationID: "debitCardAmountLimit", textLenght: 9))
     }
     
     func registerCells(){

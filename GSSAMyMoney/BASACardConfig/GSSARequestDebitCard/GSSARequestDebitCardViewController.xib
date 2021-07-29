@@ -14,6 +14,7 @@
                 <outlet property="containerView" destination="AF6-73-jBW" id="3Qc-lN-mIl"/>
                 <outlet property="gradientView" destination="4gv-Sc-jQP" id="UcP-rZ-ifp"/>
                 <outlet property="headerView" destination="CgQ-a7-uiE" id="fwu-ye-7ZG"/>
+                <outlet property="lblAddress" destination="tp7-Ew-YJ0" id="C21-y8-iGZ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -38,7 +39,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Solicitar tarjeta física" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AzU-ZC-uNx" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                            <rect key="frame" x="75" y="14" width="170" height="22.5"/>
+                            <rect key="frame" x="81" y="15" width="158.5" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -87,14 +88,23 @@
                                                         <constraint firstAttribute="width" constant="53" id="S1G-QX-Tvs"/>
                                                     </constraints>
                                                 </imageView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="contactLess" translatesAutoresizingMaskIntoConstraints="NO" id="YBc-0F-zf5">
+                                                    <rect key="frame" x="15" y="57" width="16" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="nC0-Ul-EtQ"/>
+                                                        <constraint firstAttribute="width" constant="16" id="uPO-Fm-Gug"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="jDO-Ie-psL" firstAttribute="height" secondItem="noF-9g-8jl" secondAttribute="height" multiplier="0.35" id="5gl-hg-OHd"/>
                                                 <constraint firstItem="noF-9g-8jl" firstAttribute="leading" secondItem="aQR-er-Zr7" secondAttribute="leading" id="5h0-Hx-ld7"/>
+                                                <constraint firstItem="YBc-0F-zf5" firstAttribute="leading" secondItem="aQR-er-Zr7" secondAttribute="leading" constant="15" id="EQk-0e-OB2"/>
                                                 <constraint firstAttribute="trailing" secondItem="noF-9g-8jl" secondAttribute="trailing" id="IfW-tX-83q"/>
                                                 <constraint firstItem="noF-9g-8jl" firstAttribute="top" secondItem="aQR-er-Zr7" secondAttribute="top" id="MzV-rO-l31"/>
                                                 <constraint firstItem="jDO-Ie-psL" firstAttribute="centerY" secondItem="noF-9g-8jl" secondAttribute="centerY" id="NTm-pi-zeB"/>
+                                                <constraint firstItem="YBc-0F-zf5" firstAttribute="centerY" secondItem="noF-9g-8jl" secondAttribute="centerY" id="R0U-nO-TNV"/>
                                                 <constraint firstAttribute="bottom" secondItem="FC0-2C-2NR" secondAttribute="bottom" constant="10" id="dfy-3z-wSb"/>
                                                 <constraint firstAttribute="bottom" secondItem="noF-9g-8jl" secondAttribute="bottom" id="eGo-HD-mRC"/>
                                                 <constraint firstItem="jDO-Ie-psL" firstAttribute="centerX" secondItem="noF-9g-8jl" secondAttribute="centerX" id="hkI-Jy-F12"/>
@@ -176,7 +186,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Solicítala con un costo de $90.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MZs-uJ-Nvl" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                    <rect key="frame" x="32" y="20" width="213" height="20"/>
+                                    <rect key="frame" x="32" y="20" width="213" height="20.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
@@ -200,6 +210,9 @@
                                             <integer key="value" value="11"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="editAddress:" destination="-1" eventType="touchUpInside" id="cOk-Dv-Gbw"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -295,15 +308,16 @@
     </objects>
     <designables>
         <designable name="AzU-ZC-uNx">
-            <size key="intrinsicContentSize" width="170" height="22.5"/>
+            <size key="intrinsicContentSize" width="158.5" height="20.5"/>
         </designable>
         <designable name="MZs-uJ-Nvl">
-            <size key="intrinsicContentSize" width="230.5" height="20"/>
+            <size key="intrinsicContentSize" width="253.5" height="20.5"/>
         </designable>
         <designable name="bg1-hv-dWQ"/>
     </designables>
     <resources>
         <image name="arrow.backward" catalog="system" width="128" height="98"/>
+        <image name="contactLess" width="16" height="20"/>
         <image name="debitCard3" width="288" height="180"/>
         <image name="logoBaz" width="68" height="31"/>
         <image name="visaIcon" width="54" height="18"/>

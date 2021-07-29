@@ -28,7 +28,7 @@ class BASACardLimitsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASACardLim
         self.strPathEndpoint = "/superapp/dinero/captacion/gestion-tarjetas/v1/tarjetas/montos/limites"
         
 //        self.urlPath = "https://apigateway.superappbaz.com/"
-//        self.strPathEndpoint = "integracion/superapp/dinero/captacion/gestion-tarjetas/v1/tarjetas/montos/limites"
+//        self.strPathEndpoint =      "integracion/superapp/dinero/captacion/gestion-tarjetas/v1/tarjetas/montos/limites"
         
         sendRequest(strUrl: strPathEndpoint, method: .PUT, arrHeaders: [], objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: CardLimitsResponse?, error) in
             

@@ -13,7 +13,7 @@ import GSSAVisualComponents
 import GSSAVisualTemplates
 import GSSASessionInfo
 
-class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol, GSVCBottomAlertHandler, GSVTDigitalSignDelegate {
+class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol, GSVCBottomAlertHandler{
     
     @IBOutlet weak var table: UITableView!
     
@@ -81,19 +81,9 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
         table.register(UINib(nibName: "BASACardControl", bundle: bundle), forCellReuseIdentifier: "BASACardControl")
     }
     
-    func forgotDigitalSign(_ forgotSecurityCodeViewController: UIViewController?) {
-        print("forgott")
-    }
-    
-    func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
-        tagCardConfigLimitsClick(origin: "debito")
-        let view = BASACardLimitsRouter.createModule()
-        self.navigationController?.pushViewController(view, animated: true)
-    }
-    
     @objc func turnOnCard(sender: UISwitch){
         if sender.isOn{
-            GSVCLoader.show(type: .native)
+            GSVCLoader.show()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                 GSVCLoader.hide()
                 self.tagCardSwitchClick(isOn: true)
@@ -102,7 +92,7 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
                 self.present(alert, animated: true, completion: nil)
             })
         }else{
-            GSVCLoader.show(type: .native)
+            GSVCLoader.show()
             tagCardSwitchClick(isOn: false)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                 GSVCLoader.hide()
@@ -210,10 +200,9 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
             }
             self.navigationController?.pushViewController(view, animated: true)
         case 2:
-            let verification = GSVTDigitalSignViewController(delegate: self)
-            verification.bShouldWaitForNewToken = false
-            verification.modalPresentationStyle = .fullScreen
-            present(verification, animated: true, completion: nil)
+            tagCardConfigLimitsClick(origin: "debito")
+            let view = BASACardLimitsRouter.createModule()
+            self.navigationController?.pushViewController(view, animated: true)
         case 3:
             tagCardConfigBeneficiaryClick(origin: "debito")
             let view = BASABeneficiaryListRouter.createModule()

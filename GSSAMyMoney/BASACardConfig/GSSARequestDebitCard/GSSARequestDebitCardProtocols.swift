@@ -11,22 +11,20 @@
 import Foundation
 
 //MARK: Wireframe -
-protocol GSSARequestDebitCardWireframeProtocol: class {
+protocol GSSARequestDebitCardWireframeProtocol: AnyObject {
 
 }
 //MARK: Presenter -
-protocol GSSARequestDebitCardPresenterProtocol: class {
-
+protocol GSSARequestDebitCardPresenterProtocol: AnyObject {
+ 
 }
 
 //MARK: Interactor -
-protocol GSSARequestDebitCardInteractorProtocol: class {
-
+protocol GSSARequestDebitCardInteractorProtocol: AnyObject {
   var presenter: GSSARequestDebitCardPresenterProtocol?  { get set }
 }
 
 //MARK: View -
-protocol GSSARequestDebitCardViewProtocol: class {
-
+protocol GSSARequestDebitCardViewProtocol: AnyObject {
   var presenter: GSSARequestDebitCardPresenterProtocol?  { get set }
 }

@@ -13,7 +13,7 @@ import GSSAVisualComponents
 import GSSAVisualTemplates
 import GSSASessionInfo
 
-class GSDigitalCardConfigViewController: UIViewController, GSDigitalCardConfigViewProtocol, GSVTDigitalSignDelegate, GSVCBottomAlertHandler {
+class GSDigitalCardConfigViewController: UIViewController, GSDigitalCardConfigViewProtocol, GSVCBottomAlertHandler {
    
     
     var presenter: GSDigitalCardConfigPresenterProtocol?
@@ -34,7 +34,8 @@ class GSDigitalCardConfigViewController: UIViewController, GSDigitalCardConfigVi
         swtch.addTarget(self, action: #selector(switchChanged(sender:)), for: .valueChanged)
         buttonsView.layer.borderWidth = 0.5
         containerView.backgroundColor = .GSVCBase200
-        updateColors()
+        buttonsView.layer.borderWidth = 0
+        containerView.backgroundColor = .GSVCBase200
         cardStatus = UserDefaults.standard.value(forKey: "DigitalCardStatus") as? Bool
         swtch.isOn = (cardStatus ?? false)
     }
@@ -43,43 +44,12 @@ class GSDigitalCardConfigViewController: UIViewController, GSDigitalCardConfigVi
         tagDebitDigitalCardConfigViewDidAppear()
     }
     
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        updateColors()
-    }
-    
-    func updateColors(){
-        if #available(iOS 13.0, *) {
-            if overrideUserInterfaceStyle == .dark{
-                setDarkColors()
-            }else{
-                setLightColors()
-            }
-        } else {
-            setLightColors()
-        }
-    }
-    
-    func setLightColors(){
-        buttonsView.layer.borderWidth = 0
-        containerView.backgroundColor = .GSVCBase200
-    }
-    
-    func setDarkColors(){
-        buttonsView.layer.borderWidth = 0.5
-        buttonsView.layer.borderColor = UIColor.white.cgColor
-        containerView.backgroundColor = .black
-    }
-    
     func optionalAction() {
         print("Ok")
     }
     
-    func forgotDigitalSign(_ forgotSecurityCodeViewController: UIViewController?) {
-        print("ok")
-    }
-    
-    func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
-        GSVCLoader.show(type: .native)
+    func requestCardStatusChange(){
+        GSVCLoader.show()
         presenter?.shutdownCardRequest(body: CardStateBody.init(transaccion: CardStateTransaccion.init(primerTokenVerificacion: GSSISessionInfo.sharedInstance.gsAccessToken, numeroTarjeta: UserDefaults.standard.value(forKey: "DigitalCardNumber") as? String, estatus: !cardStatus!)), DataCard: { [self] DataCard in
             GSVCLoader.hide()
             if DataCard != nil{
@@ -112,9 +82,7 @@ class GSDigitalCardConfigViewController: UIViewController, GSDigitalCardConfigVi
     @objc func switchChanged(sender: UISwitch){
         cardStatus = sender.isOn
         tagDebitDigitalCardSwitchClick(isOn: sender.isOn)
-        let verification = GSVTDigitalSignViewController(delegate: self)
-        verification.modalPresentationStyle = .fullScreen
-        present(verification, animated: true, completion: nil)
+        requestCardStatusChange()
     }
     
     @IBAction func close(_ sender: Any){

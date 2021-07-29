@@ -14,7 +14,7 @@ import GSSAVisualTemplates
 import GSSASessionInfo
 import GSSAServiceCoordinator
 
-class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryViewProtocol, GSVTDigitalSignDelegate, GSVCBottomAlertHandler{
+class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryViewProtocol, GSVCBottomAlertHandler{
     
     @IBOutlet weak var table: UITableView!
     
@@ -149,14 +149,6 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
         tableFields.append(beneficiaryField(title: "Correo electrónico", image: nil, placeHolder: nil, pickerData: nil, keyboardType: .emailAddress, text: beneficiaryData?.contacto?.correoElectronico))
     }
     
-    func forgotDigitalSign(_ forgotSecurityCodeViewController: UIViewController?) {
-        print("OK")
-    }
-    
-    func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
-        
-    }
-    
     @objc func switchChanged(sender: UISwitch){
         if sender.isOn == true{
             createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "dashboard", screenName: "datos_beneficiarios", type: "switch_on", element: "utilizar_direccion", origin: "debito")
@@ -276,13 +268,6 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
         }else{
             self.presentBottomAlertFullData(status: .caution, message: "Faltan campos por completar", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
         }
-    }
-    
-    func showDigitalSign(){
-        let verification = GSVTDigitalSignViewController(delegate: self)
-        verification.bShouldWaitForNewToken = false
-        verification.modalPresentationStyle = .fullScreen
-        present(verification, animated: true, completion: nil)
     }
     
     func useSessionInfoAddress(){

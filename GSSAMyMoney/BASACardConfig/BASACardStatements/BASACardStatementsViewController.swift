@@ -13,7 +13,7 @@ import GSSAVisualComponents
 import GSSAVisualTemplates
 import GSSASessionInfo
 
-class BASACardStatementsViewController: UIViewController, BASACardStatementsViewProtocol, GSVCBottomAlertHandler, GSVTDigitalSignDelegate {
+class BASACardStatementsViewController: UIViewController, BASACardStatementsViewProtocol, GSVCBottomAlertHandler{
     
     var bottomAlert: GSVCBottomAlert?
     var presenter: BASACardStatementsPresenterProtocol?
@@ -86,12 +86,6 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
         table.register(UINib(nibName: "BASAButtonCell", bundle: bundle), forCellReuseIdentifier: "BASAButtonCell")
     }
     
-//    func genericResultStaticButtonAction(style: GSVTGenericResultStyle) {
-//        self.dismiss(animated: true, completion: {
-//            self.navigationController?.popViewController(animated: true)
-//        })
-//    }
-    
     func optionalAction() {
         print("OK")
     }
@@ -111,14 +105,6 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
         })
         success.modalPresentationStyle = .fullScreen
         self.present(success, animated: true, completion: nil)
-    }
-    
-    func forgotDigitalSign(_ forgotSecurityCodeViewController: UIViewController?) {
-        print("forgott")
-    }
-    
-    func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
-        sendStatements()
     }
     
     func cerraBottomAlert() {
@@ -164,9 +150,7 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
         }
         
         if statementsSelected == true{
-            let verification = GSVTDigitalSignViewController(delegate: self)
-            verification.modalPresentationStyle = .fullScreen
-            present(verification, animated: true, completion: nil)
+              sendStatements()
         }else{
             self.presentBottomAlertFullData(status: .caution, message: "Debe seleccionar al menos un estado de cuenta", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
         }

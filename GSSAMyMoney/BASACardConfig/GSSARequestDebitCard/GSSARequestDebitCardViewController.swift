@@ -11,6 +11,7 @@
 import UIKit
 import GSSAVisualComponents
 import GSSAVisualTemplates
+import GSSASessionInfo
 
 class GSSARequestDebitCardViewController: UIViewController, GSSARequestDebitCardViewProtocol {
 
@@ -19,12 +20,25 @@ class GSSARequestDebitCardViewController: UIViewController, GSSARequestDebitCard
     @IBOutlet weak var headerView   : UIView!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var gradientView : Gradient!
-
+    @IBOutlet weak var lblAddress   : UILabel!
+    
 	override func viewDidLoad() {
         super.viewDidLoad()
         headerView.backgroundColor = UIColor.GSVCBase300()
         containerView.layer.cornerRadius = 10.0
         gradientView.layer.cornerRadius = 10.0
+        setAddress()
+    }
+    
+    func setAddress(){
+        let address = GSSISessionInfo.sharedInstance.gsUser.address
+        lblAddress.text = "\((address?.street ?? "").capitalized) \((address?.externalNumber ?? "").capitalized) \((address?.neighborhood ?? "").capitalized) \((address?.city ?? "").capitalized) \(address?.zipCode ?? "")"
+    }
+    
+    
+    @IBAction func editAddress(_ sender: Any){
+        let view = GSSAPhysicalCardRequestAddressRouter.createModule()
+        self.navigationController?.pushViewController(view, animated: true)
     }
     
     @IBAction func close(_ sender: Any){

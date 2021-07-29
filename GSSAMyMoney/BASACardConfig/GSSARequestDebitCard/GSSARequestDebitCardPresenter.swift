@@ -11,7 +11,6 @@
 import UIKit
 
 class GSSARequestDebitCardPresenter: GSSARequestDebitCardPresenterProtocol {
-
     weak private var view: GSSARequestDebitCardViewProtocol?
     var interactor: GSSARequestDebitCardInteractorProtocol?
     private let router: GSSARequestDebitCardWireframeProtocol
@@ -21,5 +20,7 @@ class GSSARequestDebitCardPresenter: GSSARequestDebitCardPresenterProtocol {
         self.interactor = interactor
         self.router = router
     }
-
+    
+   
+    
 }

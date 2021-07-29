@@ -209,9 +209,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         header.cellViewController = self
         let accountData = accountBalance?.resultado.cliente?.cuentas
         
-        
         header.debitCardlblBalance.textColor = .white
-        
         header.debitCardlblCardNumber.text = accountData?.first?.numero?.alnovaDecrypt()
         
         header.data = accountBalance
@@ -464,17 +462,3 @@ extension BASAMainHubCardsViewController:UITableViewDelegate,UITableViewDataSour
         activityObserve()
     }
 }
-
-//extension BASAMainHubCardsViewController: GSVTDigitalSignDelegate{
-//    func forgotDigitalSign(_ forgotSecurityCodeViewController: UIViewController?) {}
-//
-//    func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
-//        loadDebitBalance()
-//    }
-//
-//    func cancelDigitalSing(_ isUserBlocked: Bool) {
-//        self.dismiss(animated: true, completion: {
-//            self.navigationController?.popViewController(animated: true)
-//        })
-//    }
-//}
