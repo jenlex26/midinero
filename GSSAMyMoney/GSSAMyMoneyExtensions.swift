@@ -324,3 +324,10 @@ extension Int{
         return amountFormat.mutableString.description
     }
 }
+
+
+extension Character{
+    func toString() -> String{
+        return String(self)
+    }
+}

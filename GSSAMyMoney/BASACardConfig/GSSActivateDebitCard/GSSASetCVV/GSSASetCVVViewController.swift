@@ -60,11 +60,13 @@ class GSSASetCVVViewController: GSSAMasterViewController, GSSASetCVVViewProtocol
             }
             let success = GSVTOperationStatusViewController(status: .success(title: "¡Listo!", message: "Tu tarjeta baz ya está activa", views: [spaceView, info!, card!]),
                                                             roundButtonAction: {
-                                                                print("MANDAR A LA OTRA PANTALLA")
+                                                                self.dismiss(animated: false, completion: {
+                                                                    let view = GSSACardNIPRouter.createModule()
+                                                                    self.navigationController?.pushViewController(view, animated: true)
+                                                                })
                                                             },
                                                             plainButtonAction: {
-                                                                self.dismiss(animated: true, completion: {
-                                                                    GSVCLoader.hide()
+                                                                self.dismiss(animated: false, completion: {
                                                                     let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
                                                                     for VC in viewControllers{
                                                                         if VC is BASACardConfigViewController{

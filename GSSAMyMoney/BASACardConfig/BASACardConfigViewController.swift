@@ -121,7 +121,7 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
         if credit == true{
             return configurations.count + 2
         }else{
-            return  configurations.count + 2
+            return  configurations.count + 1
         }
     }
     
@@ -147,20 +147,20 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
             }
         }else{
             switch indexPath.row{
-            case 0:
+            case -1:
                 let cell = table.dequeueReusableCell(withIdentifier: "RequestCardCell") as! RequestCardCell
                 cell.lblTitle.text = "Solicita tu tarjeta"
                 cell.buttonView.isUserInteractionEnabled = false
                 cell.backgroundColor = UIColor.GSVCBase300()
                 cell.tag = 6
                 return cell
-            case 1:
+            case 0:
                 let cell = table.dequeueReusableCell(withIdentifier: "SectionCell") as! SectionCell
                 cell.lblTitle.text = "Información"
                 return cell
             default:
                 let cell = table.dequeueReusableCell(withIdentifier: "ConfigItemCell") as! ConfigItemCell
-                let data = configurations[indexPath.row - 2]
+                let data = configurations[indexPath.row - 1]
                 cell.tag = data.tag ?? -1
                 cell.configureCell(title: data.title, subtitle: data.subTitle, image: data.image)
                 return cell
@@ -180,9 +180,9 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
             }
         }else{
             switch indexPath.row{
-            case 0:
+            case -1:
                 return 111.0
-            case 1:
+            case 0:
                 return 60.0
             default:
                 return 75.0

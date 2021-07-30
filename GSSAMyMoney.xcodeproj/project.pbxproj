@@ -182,6 +182,12 @@
 		EED2CBA0269D361100A1E129 /* GSSALinkDePagoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED2CB9F269D361100A1E129 /* GSSALinkDePagoEntity.swift */; };
 		EED3E3FD269E442B00BDF898 /* GSSAMovementPreviewEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED3E3FC269E442B00BDF898 /* GSSAMovementPreviewEntity.swift */; };
 		EED3E40C269E88BF00BDF898 /* BASAA.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED3E40B269E88BF00BDF898 /* BASAA.swift */; };
+		EEE84F6C26B4B37400C5CACE /* GSSACardNIPPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE84F6626B4B37400C5CACE /* GSSACardNIPPresenter.swift */; };
+		EEE84F6D26B4B37400C5CACE /* GSSACardNIPRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE84F6726B4B37400C5CACE /* GSSACardNIPRouter.swift */; };
+		EEE84F6E26B4B37400C5CACE /* GSSACardNIPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE84F6826B4B37400C5CACE /* GSSACardNIPViewController.swift */; };
+		EEE84F6F26B4B37400C5CACE /* GSSACardNIPProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE84F6926B4B37400C5CACE /* GSSACardNIPProtocols.swift */; };
+		EEE84F7026B4B37400C5CACE /* GSSACardNIPInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE84F6A26B4B37400C5CACE /* GSSACardNIPInteractor.swift */; };
+		EEE84F7126B4B37400C5CACE /* GSSACardNIPViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEE84F6B26B4B37400C5CACE /* GSSACardNIPViewController.xib */; };
 		EEF2ED2A2698A4AA0009F771 /* GSDigitalCardEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF2ED292698A4AA0009F771 /* GSDigitalCardEntity.swift */; };
 		EEF728A72699382C0093F0DA /* GSSANewBeneficiaryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF728A62699382C0093F0DA /* GSSANewBeneficiaryEntity.swift */; };
 /* End PBXBuildFile section */
@@ -364,6 +370,12 @@
 		EED2CB9F269D361100A1E129 /* GSSALinkDePagoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSALinkDePagoEntity.swift; sourceTree = "<group>"; };
 		EED3E3FC269E442B00BDF898 /* GSSAMovementPreviewEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAMovementPreviewEntity.swift; sourceTree = "<group>"; };
 		EED3E40B269E88BF00BDF898 /* BASAA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BASAA.swift; sourceTree = "<group>"; };
+		EEE84F6626B4B37400C5CACE /* GSSACardNIPPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSACardNIPPresenter.swift; sourceTree = "<group>"; };
+		EEE84F6726B4B37400C5CACE /* GSSACardNIPRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSACardNIPRouter.swift; sourceTree = "<group>"; };
+		EEE84F6826B4B37400C5CACE /* GSSACardNIPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSACardNIPViewController.swift; sourceTree = "<group>"; };
+		EEE84F6926B4B37400C5CACE /* GSSACardNIPProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSACardNIPProtocols.swift; sourceTree = "<group>"; };
+		EEE84F6A26B4B37400C5CACE /* GSSACardNIPInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSACardNIPInteractor.swift; sourceTree = "<group>"; };
+		EEE84F6B26B4B37400C5CACE /* GSSACardNIPViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GSSACardNIPViewController.xib; sourceTree = "<group>"; };
 		EEF2ED292698A4AA0009F771 /* GSDigitalCardEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSDigitalCardEntity.swift; sourceTree = "<group>"; };
 		EEF728A62699382C0093F0DA /* GSSANewBeneficiaryEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSANewBeneficiaryEntity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -845,6 +857,12 @@
 		EE47192126B4785000443BE2 /* GSSACardNIP */ = {
 			isa = PBXGroup;
 			children = (
+				EEE84F6626B4B37400C5CACE /* GSSACardNIPPresenter.swift */,
+				EEE84F6726B4B37400C5CACE /* GSSACardNIPRouter.swift */,
+				EEE84F6826B4B37400C5CACE /* GSSACardNIPViewController.swift */,
+				EEE84F6926B4B37400C5CACE /* GSSACardNIPProtocols.swift */,
+				EEE84F6A26B4B37400C5CACE /* GSSACardNIPInteractor.swift */,
+				EEE84F6B26B4B37400C5CACE /* GSSACardNIPViewController.xib */,
 			);
 			path = GSSACardNIP;
 			sourceTree = "<group>";
@@ -987,6 +1005,7 @@
 				10E9EDBF267D6BA400F45640 /* BASACardLimitCell.xib in Resources */,
 				10E9EDB7267D6BA400F45640 /* RequestCardCell.xib in Resources */,
 				EEAFA7E6268E377F00DBC192 /* GSSAEmptyStatements.xib in Resources */,
+				EEE84F7126B4B37400C5CACE /* GSSACardNIPViewController.xib in Resources */,
 				10E9EDB5267D6BA400F45640 /* BASATextFieldCell.xib in Resources */,
 				10E9EDC2267D6BA400F45640 /* ConfigItemCell.xib in Resources */,
 				10E9EDE9267D6BA400F45640 /* BASACardCell.xib in Resources */,
@@ -1055,10 +1074,12 @@
 				10E9EDCB267D6BA400F45640 /* BASACardLimitsPresenter.swift in Sources */,
 				10E9EDF2267D6BA400F45640 /* BASAMainHubCardsPresenter.swift in Sources */,
 				EE0655DB2682AE6600F7C73D /* GSDigitalCardConfigProtocols.swift in Sources */,
+				EEE84F7026B4B37400C5CACE /* GSSACardNIPInteractor.swift in Sources */,
 				10E9EDC3267D6BA400F45640 /* ConfigItemCell.swift in Sources */,
 				10E9EDB1267D6BA400F45640 /* BASACardStatementsViewController.swift in Sources */,
 				10E9EDFD267D6BA400F45640 /* BASAShadowRadiusBaseControl.swift in Sources */,
 				10E9EDD8267D6BA400F45640 /* BASABeneficiaryListViewController.swift in Sources */,
+				EEE84F6E26B4B37400C5CACE /* GSSACardNIPViewController.swift in Sources */,
 				10E9EDAE267D6BA400F45640 /* BASACardStatementsPresenter.swift in Sources */,
 				EE2A260E26B366D200E1C2C5 /* GSSActivateDebitCardViewController.swift in Sources */,
 				10E9EDE2267D6BA400F45640 /* BASALendInfoCell.swift in Sources */,
@@ -1107,11 +1128,13 @@
 				10E9EDE7267D6BA400F45640 /* BASAButtonsCell.swift in Sources */,
 				EE2A25FB26B300CE00E1C2C5 /* GSSAPhysicalCardRequestAddressViewController.swift in Sources */,
 				10E9EDFA267D6BA400F45640 /* BASAShadowRadiusImage.swift in Sources */,
+				EEE84F6C26B4B37400C5CACE /* GSSACardNIPPresenter.swift in Sources */,
 				EE2A25F026B2142900E1C2C5 /* GSSARequestDebitCardInteractor.swift in Sources */,
 				10E9EDD1267D6BA400F45640 /* BASANewBeneficiaryRouter.swift in Sources */,
 				EE2A261326B369DA00E1C2C5 /* GSSAMasterViewController.swift in Sources */,
 				10E9EDB3267D6BA400F45640 /* BASACardConfigProtocols.swift in Sources */,
 				EE97BB022683FBB1000AE34C /* BASACardStatementsEntity.swift in Sources */,
+				EEE84F6D26B4B37400C5CACE /* GSSACardNIPRouter.swift in Sources */,
 				EE2A260C26B366D200E1C2C5 /* GSSActivateDebitCardPresenter.swift in Sources */,
 				EE0655DC2682AE6600F7C73D /* GSDigitalCardConfigInteractor.swift in Sources */,
 				EED2CBA0269D361100A1E129 /* GSSALinkDePagoEntity.swift in Sources */,
@@ -1146,6 +1169,7 @@
 				EE5DB5B526A79C480004E487 /* GSSAButtonsCellTagging.swift in Sources */,
 				EED3E40C269E88BF00BDF898 /* BASAA.swift in Sources */,
 				EEAEFB13269E0F5400F97E4D /* GSSAGradientController.swift in Sources */,
+				EEE84F6F26B4B37400C5CACE /* GSSACardNIPProtocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
