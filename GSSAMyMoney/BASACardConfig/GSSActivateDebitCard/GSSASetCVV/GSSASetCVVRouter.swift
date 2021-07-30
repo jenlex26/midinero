@@ -16,7 +16,7 @@ class GSSASetCVVRouter: GSSASetCVVWireframeProtocol {
     
     static func createModule() -> UIViewController {
         // Change to get view from storyboard if not using progammatic UI
-        let view = GSSASetCVVViewController(nibName: nil, bundle: nil)
+        let view = GSSASetCVVViewController(nibName: nil, bundle: Bundle.init(for: GSSASetCVVRouter.self))
         let interactor = GSSASetCVVInteractor()
         let router = GSSASetCVVRouter()
         let presenter = GSSASetCVVPresenter(interface: view, interactor: interactor, router: router)

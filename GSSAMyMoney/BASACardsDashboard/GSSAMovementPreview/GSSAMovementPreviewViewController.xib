@@ -161,13 +161,13 @@
             <color key="backgroundColor" red="0.41162583229999999" green="0.1316206157" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <constraints>
                 <constraint firstItem="4YT-6R-dGx" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.7" id="3Fr-Xf-PgW"/>
-                <constraint firstAttribute="bottom" secondItem="4YT-6R-dGx" secondAttribute="bottom" id="4Ic-Nm-Dry"/>
                 <constraint firstAttribute="trailing" secondItem="IgZ-T5-pxA" secondAttribute="trailing" id="7Qy-tl-cRZ"/>
                 <constraint firstItem="IgZ-T5-pxA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="FLG-4k-XSk"/>
-                <constraint firstItem="1k8-RG-8el" firstAttribute="trailing" secondItem="4YT-6R-dGx" secondAttribute="trailing" id="I3J-7L-eO0"/>
+                <constraint firstAttribute="trailing" secondItem="4YT-6R-dGx" secondAttribute="trailing" id="HNB-da-Eaf"/>
                 <constraint firstItem="4YT-6R-dGx" firstAttribute="top" secondItem="DPw-OI-Is3" secondAttribute="bottom" constant="10" id="Kko-ba-dHV"/>
                 <constraint firstItem="1k8-RG-8el" firstAttribute="trailing" secondItem="DPw-OI-Is3" secondAttribute="trailing" constant="29" id="LN9-W8-pBZ"/>
                 <constraint firstItem="DPw-OI-Is3" firstAttribute="top" secondItem="IgZ-T5-pxA" secondAttribute="bottom" id="TSO-pu-Zcd"/>
+                <constraint firstAttribute="bottom" secondItem="4YT-6R-dGx" secondAttribute="bottom" id="ab6-ZR-BR7"/>
                 <constraint firstItem="DPw-OI-Is3" firstAttribute="leading" secondItem="1k8-RG-8el" secondAttribute="leading" constant="29" id="d0b-a4-425"/>
                 <constraint firstItem="4YT-6R-dGx" firstAttribute="leading" secondItem="1k8-RG-8el" secondAttribute="leading" id="fD7-PX-qsh"/>
                 <constraint firstItem="IgZ-T5-pxA" firstAttribute="top" secondItem="1k8-RG-8el" secondAttribute="top" id="xZH-pj-Zy6"/>

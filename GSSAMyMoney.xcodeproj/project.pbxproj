@@ -461,6 +461,7 @@
 			isa = PBXGroup;
 			children = (
 				10E9ED45267D6BA400F45640 /* Cells */,
+				EE47192126B4785000443BE2 /* GSSACardNIP */,
 				EE2A260526B3669F00E1C2C5 /* GSSActivateDebitCard */,
 				EE2A25E526B2140300E1C2C5 /* GSSARequestDebitCard */,
 				10E9ED3D267D6BA400F45640 /* BASACardStatements */,
@@ -839,6 +840,13 @@
 				EE2A261A26B36DF200E1C2C5 /* GSSASetCVVViewController.xib */,
 			);
 			path = GSSASetCVV;
+			sourceTree = "<group>";
+		};
+		EE47192126B4785000443BE2 /* GSSACardNIP */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = GSSACardNIP;
 			sourceTree = "<group>";
 		};
 		EE97BB032684DF08000AE34C /* GSNoMovementsCell */ = {

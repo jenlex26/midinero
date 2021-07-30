@@ -19,7 +19,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Busca el código QR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DQH-2Z-qE5" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                    <rect key="frame" x="24" y="25" width="327" height="21"/>
+                    <rect key="frame" x="24" y="25" width="327" height="28"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -30,7 +30,7 @@
                     </userDefinedRuntimeAttributes>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Para activar tu tarjeta escanea el código QR que se encuentra en tu empaque." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C1v-0q-ygG" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                    <rect key="frame" x="24" y="54" width="327" height="41"/>
+                    <rect key="frame" x="24" y="61" width="327" height="67.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -41,27 +41,27 @@
                     </userDefinedRuntimeAttributes>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hDB-7b-H2E">
-                    <rect key="frame" x="42" y="136" width="291" height="178"/>
+                    <rect key="frame" x="40" y="169.5" width="295" height="200"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="debitCard3" translatesAutoresizingMaskIntoConstraints="NO" id="LjD-v3-EH4">
-                            <rect key="frame" x="0.0" y="0.0" width="291" height="178"/>
+                            <rect key="frame" x="0.0" y="0.0" width="295" height="200"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </imageView>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoBaz" translatesAutoresizingMaskIntoConstraints="NO" id="tPU-kW-ZuZ">
-                            <rect key="frame" x="85.5" y="58" width="120" height="62"/>
+                            <rect key="frame" x="87.5" y="65" width="120" height="70"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="120" id="bFP-W2-ujp"/>
                             </constraints>
                         </imageView>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="visaIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Mut-PX-5qX">
-                            <rect key="frame" x="228" y="151" width="53" height="17"/>
+                            <rect key="frame" x="232" y="173" width="53" height="17"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="53" id="MbD-V8-Teu"/>
                                 <constraint firstAttribute="height" constant="17" id="czU-bV-heA"/>
                             </constraints>
                         </imageView>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="contactLess" translatesAutoresizingMaskIntoConstraints="NO" id="8QN-sp-scL">
-                            <rect key="frame" x="15" y="79" width="16" height="20"/>
+                            <rect key="frame" x="15" y="90" width="16" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="16" id="bxB-A8-Axk"/>
                                 <constraint firstAttribute="height" constant="20" id="n5b-tW-az4"/>
@@ -80,7 +80,7 @@
                         <constraint firstItem="LjD-v3-EH4" firstAttribute="top" secondItem="hDB-7b-H2E" secondAttribute="top" id="h6h-9U-3rx"/>
                         <constraint firstAttribute="trailing" secondItem="Mut-PX-5qX" secondAttribute="trailing" constant="10" id="jlA-YA-4uf"/>
                         <constraint firstAttribute="bottom" secondItem="LjD-v3-EH4" secondAttribute="bottom" id="jmu-nv-qNw"/>
-                        <constraint firstAttribute="height" constant="178" id="pFQ-yP-X1e"/>
+                        <constraint firstAttribute="height" constant="200" id="pFQ-yP-X1e"/>
                         <constraint firstItem="LjD-v3-EH4" firstAttribute="leading" secondItem="hDB-7b-H2E" secondAttribute="leading" id="pKQ-Kj-Znq"/>
                     </constraints>
                 </view>
@@ -96,13 +96,16 @@
                             <integer key="value" value="1"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="next:" destination="-1" eventType="touchUpInside" id="Cu7-Gr-vRv"/>
+                    </connections>
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="kzA-SB-iI7"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="hDB-7b-H2E" firstAttribute="leading" secondItem="kzA-SB-iI7" secondAttribute="leading" constant="42" id="4Ux-Hb-2Ky"/>
-                <constraint firstItem="kzA-SB-iI7" firstAttribute="trailing" secondItem="hDB-7b-H2E" secondAttribute="trailing" constant="42" id="5ll-fY-MAT"/>
+                <constraint firstItem="hDB-7b-H2E" firstAttribute="leading" secondItem="kzA-SB-iI7" secondAttribute="leading" constant="40" id="4Ux-Hb-2Ky"/>
+                <constraint firstItem="kzA-SB-iI7" firstAttribute="trailing" secondItem="hDB-7b-H2E" secondAttribute="trailing" constant="40" id="5ll-fY-MAT"/>
                 <constraint firstItem="DQH-2Z-qE5" firstAttribute="leading" secondItem="kzA-SB-iI7" secondAttribute="leading" constant="24" id="5mP-d6-tlb"/>
                 <constraint firstItem="hDB-7b-H2E" firstAttribute="top" secondItem="C1v-0q-ygG" secondAttribute="bottom" constant="41" id="6de-nH-fhJ"/>
                 <constraint firstItem="kzA-SB-iI7" firstAttribute="trailing" secondItem="DQH-2Z-qE5" secondAttribute="trailing" constant="24" id="E76-8y-WMH"/>
@@ -116,6 +119,17 @@
             <point key="canvasLocation" x="89" y="82"/>
         </view>
     </objects>
+    <designables>
+        <designable name="BEL-f8-2Fo">
+            <size key="intrinsicContentSize" width="163" height="35"/>
+        </designable>
+        <designable name="C1v-0q-ygG">
+            <size key="intrinsicContentSize" width="630.5" height="22.5"/>
+        </designable>
+        <designable name="DQH-2Z-qE5">
+            <size key="intrinsicContentSize" width="193.5" height="28"/>
+        </designable>
+    </designables>
     <resources>
         <image name="contactLess" width="16" height="20"/>
         <image name="debitCard3" width="288" height="180"/>

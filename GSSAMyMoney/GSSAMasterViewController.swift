@@ -23,28 +23,6 @@ open class GSSAMasterViewController: GSVTMasterViewController {
         super.viewDidLoad()
         showProgressLine(value: 0.0, animated: true)
     }
-    
-    open override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        guard let number = navigationController?.viewControllers.count else{
-            return
-        }
-        setProgressLine(value: CGFloat(Float(number - 1) / GSSAMasterViewController.totalOfPages), animated: true)
-        if !isMainFlowVC {
-            trygetLocation()
-        }
-    }
-    
-    func trygetLocation()
-    {
-        GSPMAdminAccess.request(for: .location) { access, error in
-            if !access {
-                UIAlertController.sendToSettings(cancelAction: {
-                    GSINAdminNavigator.shared.releaseFlows()
-                })
-            }
-        }
-    }
 }
 
 extension GSSAMasterViewController {

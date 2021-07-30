@@ -18,13 +18,15 @@ class GSSActivateDebitCardViewController: GSSAMasterViewController, GSSActivateD
         super.viewDidLoad()
         self.title = "Activa tu tarjeta"
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-        GSSAMasterViewController.totalOfPages = 6
     }
     
-    @IBAction func close(_ sender: Any){
-        self.navigationController?.popViewController(animated: true)
+    override func viewDidAppear(_ animated: Bool) {
+        setProgressLine(value: 0.25, animated: true)
     }
     
-    
+    @IBAction func next(_ sender: Any){
+        let view = GSSASetCVVRouter.createModule()
+        self.navigationController?.pushViewController(view, animated: true)
+    }
 }
 

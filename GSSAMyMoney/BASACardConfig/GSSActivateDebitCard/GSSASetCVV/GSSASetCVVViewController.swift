@@ -9,13 +9,73 @@
 //
 
 import UIKit
+import GSSAVisualComponents
+import GSSAVisualTemplates
 
-class GSSASetCVVViewController: UIViewController, GSSASetCVVViewProtocol {
-
-	var presenter: GSSASetCVVPresenterProtocol?
-
-	override func viewDidLoad() {
+class GSSASetCVVViewController: GSSAMasterViewController, GSSASetCVVViewProtocol, UITextFieldDelegate{
+    
+    var presenter: GSSASetCVVPresenterProtocol?
+    
+    @IBOutlet weak var txtCVV       : GSVCTextField!
+    @IBOutlet weak var infoView     : UIView!
+    @IBOutlet weak var cardInfoView : UIView!
+    
+    override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Activa tu tarjeta"
+        txtCVV.delegate = self
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setProgressLine(value: 0.5, animated: true)
+        txtCVV.becomeFirstResponder()
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let textFieldText = textField.text,
+              let rangeOfTextToReplace = Range(range, in: textFieldText) else {
+            return false
+        }
+        let substringToReplace = textFieldText[rangeOfTextToReplace]
+        let count = textFieldText.count - substringToReplace.count + string.count
+        return count <= 3
+    }
+    
+    @IBAction func next(_ sender: Any){
+        UIWindow.addSuccess {
+            let spaceView = UIView()
+            spaceView.bounds = self.infoView.bounds
+            
+            let info = self.infoView
+            info?.isHidden = false
+            
+            let card = self.cardInfoView
+            card?.isHidden = false
+            
+            let button = GSVCButton()
+            button.setTitle("Ver NIP", for: .normal)
+            button.style = 10
+            if #available(iOS 13.0, *) {
+                button.setImage(UIImage(named: "ic_card"), for: .normal)
+            }
+            let success = GSVTOperationStatusViewController(status: .success(title: "¡Listo!", message: "Tu tarjeta baz ya está activa", views: [spaceView, info!, card!]),
+                                                            roundButtonAction: {
+                                                                print("MANDAR A LA OTRA PANTALLA")
+                                                            },
+                                                            plainButtonAction: {
+                                                                self.dismiss(animated: true, completion: {
+                                                                    GSVCLoader.hide()
+                                                                    let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+                                                                    for VC in viewControllers{
+                                                                        if VC is BASACardConfigViewController{
+                                                                            self.navigationController?.popToViewController(VC, animated: true)
+                                                                        }
+                                                                    }
+                                                                })
+                                                            },
+                                                            roundButton: button)
+            success.modalPresentationStyle = .fullScreen
+            self.present(success, animated: true, completion: nil)
+        }
+    }
 }

@@ -43,7 +43,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         setUpRefreshControl()
         startTime = Date()
         checkTime()
-        //loadDebitBalance()
+        self.BasaMainHubTableView.isHidden = true
         createTag(eventName: .pageView, section: "mi_dinero", flow: "dashboard", screenName: "movimientos", origin: "debito")
     }
     
@@ -90,6 +90,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                     self.loadDebitMovements()
                 }
             }else{
+                self.BasaMainHubTableView.isHidden = false
                 GSVCLoader.hide()
                 self.presentBottomAlertFullData(status: .error, message: "No podemos cargar tu saldo en este momento, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
             }
@@ -100,6 +101,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     func loadDebitMovements(){
         self.presenter?.requestDebitCardMovements(Body: MovimientosBody(transaccion: MovementsBodyData(numeroCuenta: accountNumber?.first?.key ?? (GSSISessionInfo.sharedInstance.gsUser.mainAccount?.encryptAlnova()), fechaInicial: "01/01/0001", fechaFinal: "01/01/0001")), Movements: { [self] Movements in
             GSVCLoader.hide()
+            self.BasaMainHubTableView.isHidden = false
             if Movements != nil{
                 debitCardMovements = Movements
                 setTableForDebitCard()

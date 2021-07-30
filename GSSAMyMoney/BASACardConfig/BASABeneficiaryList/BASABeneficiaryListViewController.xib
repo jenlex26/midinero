@@ -36,7 +36,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Beneficiarios" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Y3-QL-gb1" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                            <rect key="frame" x="138.5" y="15" width="98" height="20"/>
+                            <rect key="frame" x="135.5" y="14" width="104" height="22.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -57,7 +57,7 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Podrás agregar hasta cuatro beneficiarios" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RTO-wI-NEZ" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                    <rect key="frame" x="24" y="78" width="327" height="20.5"/>
+                    <rect key="frame" x="24" y="78" width="327" height="45"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -68,7 +68,7 @@
                     </userDefinedRuntimeAttributes>
                 </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VrR-6i-RZu">
-                    <rect key="frame" x="0.0" y="118.5" width="375" height="448.5"/>
+                    <rect key="frame" x="0.0" y="143" width="375" height="424"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="00n-9a-ZKl">
@@ -136,13 +136,14 @@
     </objects>
     <designables>
         <designable name="0Y3-QL-gb1">
-            <size key="intrinsicContentSize" width="98" height="20.5"/>
+            <size key="intrinsicContentSize" width="104" height="22.5"/>
         </designable>
+        <designable name="Gfp-ld-NcX"/>
         <designable name="RTO-wI-NEZ">
-            <size key="intrinsicContentSize" width="317" height="20.5"/>
+            <size key="intrinsicContentSize" width="340" height="22.5"/>
         </designable>
         <designable name="W4c-HV-G3z">
-            <size key="intrinsicContentSize" width="464.5" height="20.5"/>
+            <size key="intrinsicContentSize" width="423.5" height="20"/>
         </designable>
     </designables>
     <resources>

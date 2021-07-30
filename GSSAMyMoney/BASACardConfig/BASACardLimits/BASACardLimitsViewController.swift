@@ -25,6 +25,7 @@ class BASACardLimitsViewController: UIViewController, BASACardLimitsViewProtocol
         var height: CGFloat
         var notificationID: String
         var textLenght: Int
+        var helperText: String
     }
     
     var LimitItems: Array<LimitItem> = []
@@ -45,9 +46,9 @@ class BASACardLimitsViewController: UIViewController, BASACardLimitsViewProtocol
         let savedATMLimit = UserDefaults.standard.value(forKey: "debitCardATMLimit") as? String
         let savedDebitCardLimit = UserDefaults.standard.value(forKey: "debitCardAmountLimit") as? String
         
-        LimitItems.append(LimitItem(title: "Retiro en cajero", subtitle: "Hasta \(savedATMLimit?.moneyFormatWithoutSplit() ?? "$7,500.00")", height: 84.0, notificationID: "debitCardATMLimit", textLenght: 4))
+        LimitItems.append(LimitItem(title: "Retiro en cajero", subtitle: "Solo multiplos de $50, hasta \(savedATMLimit?.moneyFormatWithoutSplit() ?? "$7,500.00")", height: 84.0, notificationID: "debitCardATMLimit", textLenght: 4, helperText: "Solo multiplos de $50, hasta $7,500 "))
         
-        LimitItems.append(LimitItem(title: "Límite de compra", subtitle: "Hasta \(savedDebitCardLimit?.moneyFormatWithoutSplit() ?? "$999,9999,999.00")", height: 84.0, notificationID: "debitCardAmountLimit", textLenght: 9))
+        LimitItems.append(LimitItem(title: "Límite de compra", subtitle: "Hasta \(savedDebitCardLimit?.moneyFormatWithoutSplit() ?? "$999,9999,999.00")", height: 84.0, notificationID: "debitCardAmountLimit", textLenght: 9, helperText: "Hasta $999,9999,999.00"))
     }
     
     func registerCells(){
@@ -141,7 +142,7 @@ extension BASACardLimitsViewController: UITableViewDelegate, UITableViewDataSour
         cell.notificationID = LimitItems[indexPath.row].notificationID
         cell.lblTitle.text = LimitItems[indexPath.row].title
         cell.lblSubtitle.text = LimitItems[indexPath.row].subtitle
-        cell.helperText.text = LimitItems[indexPath.row].subtitle
+        cell.helperText.text = LimitItems[indexPath.row].helperText
         cell.textLenght = LimitItems[indexPath.row].textLenght
         cell.btnEdit.addTarget(self, action: #selector(handleEditAction(sender:)), for: .touchUpInside)
         return cell
