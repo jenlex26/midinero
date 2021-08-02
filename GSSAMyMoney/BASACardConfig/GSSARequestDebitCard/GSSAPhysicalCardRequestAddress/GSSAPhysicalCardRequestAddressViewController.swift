@@ -18,22 +18,33 @@ class GSSAPhysicalCardRequestAddressViewController: UIViewController, GSSAPhysic
     var presenter: GSSAPhysicalCardRequestAddressPresenterProtocol?
     
     @IBOutlet weak var actualLocationView: UIView!
-    @IBOutlet weak var txtPostalCode     : GSVCTextField!
     @IBOutlet weak var btnTxtPostalCode  : UIButton!
+    @IBOutlet weak var txtPostalCode     : GSVCTextField!
     @IBOutlet weak var txtColonia        : GSVCTextField!
+    @IBOutlet weak var txtStreet         : GSVCTextField!
+    @IBOutlet weak var txtExternalNumber : GSVCTextField!
+    @IBOutlet weak var txtInternalNumber : GSVCTextField!
+    @IBOutlet weak var txtCity           : GSVCLabel!
+    @IBOutlet weak var txtState          : GSVCLabel!
+    @IBOutlet weak var txtCountry        : GSVCLabel!
     @IBOutlet weak var btnPostalCode     : GSVCButton!
     
-    var pickerData: [String] = []
+    var pickerData: [String:Int] = [:]
     var picker: GSVCPickerController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        changeFieldsVisibility(hidden: true)
         actualLocationView.backgroundColor = UIColor.GSVCBase300()
         txtPostalCode.delegate = self
         txtPostalCode.tag = 1
         picker = GSVCPickerController(type: .data, textField: txtColonia)
         picker.delegate = self
         picker.dataSource = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        txtPostalCode.becomeFirstResponder()
     }
     
     func optionalAction() {}
@@ -58,7 +69,7 @@ class GSSAPhysicalCardRequestAddressViewController: UIViewController, GSSAPhysic
     }
     
     func getElements(component: Int, textField: UITextField) -> [DataPicker]? {
-        let dataPicker = pickerData.map { element -> DataPicker in
+        let dataPicker = pickerData.keys.map { element -> DataPicker in
             return DataPicker(element, nil)
         }
         return dataPicker
@@ -82,10 +93,17 @@ class GSSAPhysicalCardRequestAddressViewController: UIViewController, GSSAPhysic
             presenter?.requestLocationInfo(CP: txtPostalCode.text ?? "", LocationInfo: { [self] LocationInfo in
                 GSVCLoader.hide()
                 if LocationInfo != nil{
+                    pickerData.removeAll()
                     changeFieldsVisibility(hidden: false)
                     btnPostalCode.isHidden = true
                     txtPostalCode.isUserInteractionEnabled = false
                     btnTxtPostalCode.isUserInteractionEnabled = true
+                    txtCity.text = LocationInfo?.resultado?.municipio
+                    txtState.text = LocationInfo?.resultado?.estado
+                    txtCountry.text = LocationInfo?.resultado?.pais
+                    for item in LocationInfo!.resultado!.colonias!{
+                        pickerData.updateValue(item.id ?? -1, forKey: item.nombre ?? "")
+                    }
                 }else{
                     self.presentBottomAlertFullData(status: .error, message: "Verifique que el código postal sea válido", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
                 }

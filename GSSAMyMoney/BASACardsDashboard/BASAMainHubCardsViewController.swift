@@ -140,7 +140,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                 loadCreditCardBalance()
             }else{
                 GSVCLoader.hide()
-                self.presentBottomAlertFullData(status: .error, message: "No podemos obtener los datos de la tarjeta de crédito en este momento, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
+                self.presentBottomAlertFullData(status: .error, message: "No podemos obtener los datos de la tarjeta en este momento, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
             }
             self.refreshControl.endRefreshing()
         })
@@ -456,7 +456,7 @@ extension BASAMainHubCardsViewController:UITableViewDelegate,UITableViewDataSour
             let item = cell as! BASAMovementTableViewCell
             let data = DebitCardTransactionItem.init(importe: item.lblAmount.text, saldo: "", descripcion: item.lblTitle.text, fechaOperacion: item.lblDate.text, numeroMovimiento: "", codigoDivisa: "")
             let view = GSSAMovementPreviewRouter.createModule(item: data)
-            // self.navigationController?.pushViewController(view, animated: true)
+           // self.navigationController?.pushViewController(view, animated: true)
         }
     }
     

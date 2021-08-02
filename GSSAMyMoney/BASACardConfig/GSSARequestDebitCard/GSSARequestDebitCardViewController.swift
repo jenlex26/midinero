@@ -12,9 +12,9 @@ import UIKit
 import GSSAVisualComponents
 import GSSAVisualTemplates
 import GSSASessionInfo
+import GSSAInterceptor
 
-class GSSARequestDebitCardViewController: UIViewController, GSSARequestDebitCardViewProtocol {
-
+class GSSARequestDebitCardViewController: UIViewController, GSSARequestDebitCardViewProtocol, GSINNavigateDelegate {
 	var presenter: GSSARequestDebitCardPresenterProtocol?
     
     @IBOutlet weak var headerView   : UIView!
@@ -35,6 +35,41 @@ class GSSARequestDebitCardViewController: UIViewController, GSSARequestDebitCard
         lblAddress.text = "\((address?.street ?? "").capitalized) \((address?.externalNumber ?? "").capitalized) \((address?.neighborhood ?? "").capitalized) \((address?.city ?? "").capitalized) \(address?.zipCode ?? "")"
     }
     
+    @IBAction func next(_ sender: Any){
+        let parameters:[String:Any] =
+                                    [
+                                        "paymentConfig":
+                                            [
+                                            "productQuantity":"1",
+                                            "commission":"0",
+                                            "concept":"Donación",
+                                            "idCompany":"",
+                                            "idReferencePay":"",
+                                            "iva":"0",
+                                            "amount":"90",
+                                            "requieredBill" : true,
+                                            "shippingAmount": "90",
+                                            "x-idOperacionConciliacion": ""
+                                            ],
+                                            "viewConfig" :
+                                            [
+                                            "txtTitle":"Envío de tarjeta física",
+                                            "txtSubtitle":"90",
+                                            "txtHelper":"Desde qué cuenta compras",
+                                            "txtSlideButton": "Desliza para pagar",
+                                            ]
+                                    ]
+                    
+                                GSINAdminNavigator.shared.startFlow(forAction: "GSIFTr_PaymentBTN", navigateDelegate: self, withInfo: parameters)
+    }
+    
+    func didFailToEnterFlow(error: NSError) {
+        print("Error...")
+    }
+    
+    func willFinishFlow(withInfo info: [String : Any]?) {
+        print("MANDAR A RESUMEN...")
+    }
     
     @IBAction func editAddress(_ sender: Any){
         let view = GSSAPhysicalCardRequestAddressRouter.createModule()

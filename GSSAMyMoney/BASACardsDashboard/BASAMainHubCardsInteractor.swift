@@ -43,7 +43,7 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
     func TryGetDebitCardBalance(Account:[String:String], Balance: @escaping (BalanceResponse?) -> ()){
         let requestBody = TransationBalanceRequest(transaccion: TransationItem(folio: (GSSISessionInfo.sharedInstance.gsUser.SICU?.encryptAlnova() ?? "")))
         
-        self.urlPath = "https://api.baz.app"
+       // self.urlPath = "https://api.baz.app"
         self.strPathEndpoint = "/superapp/dinero/captacion/cuentas/v1/busquedas"
         
 //        self.urlPath = "https://apigateway.superappbaz.com/"
@@ -67,7 +67,7 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
     
     func TryGetDebitCardMovements(Body: MovimientosBody, Movements: @escaping (DebitCardTransaction?) -> ()){
         
-        self.urlPath = "https://api.baz.app"
+       // self.urlPath = "https://api.baz.app"
         self.strPathEndpoint = "/superapp/dinero/captacion/cuentas/v1/movimientos/busquedas"
 
 //        self.urlPath = "https://apigateway.superappbaz.com/"
@@ -89,7 +89,7 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
     }
     
     func tryGetUserLends(Lends: @escaping (LendsResponse?) -> ()){
-        self.urlPath = "https://apigateway.superappbaz.com/"
+      //  self.urlPath = "https://apigateway.superappbaz.com/"
         self.strPathEndpoint = "integracion/superapp/pagos/creditos/agenda-pagos/v1/credimax/pagos-pendientes"
         
         struct userLendsBody: Codable {}
@@ -111,7 +111,7 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
     }
     
     func tryGetCreditCardData(Body: CreditCardBody, CreditCardData: @escaping (CreditCardResponse?) -> ()){
-        self.urlPath = "https://apigateway.superappbaz.com/"
+        //self.urlPath = "https://apigateway.superappbaz.com/"
         self.strPathEndpoint = "integracion/superapp/prestamos/tarjeta-credito/v1/tarjetas/busquedas"
         
         let body = CreditCardBody.init(transaccion: CreditCardTransaccion.init(numeroCuenta: nil, numeroTarjeta: "4589090600000345".dynamicEncrypt(), numeroContrato: nil))
@@ -130,7 +130,7 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
     }
     
     func tryGetCreditCardBalance(Body: CreditCardBalanceBody, CreditCardBalance: @escaping (CreditCardBalanceResponse?) -> ()){
-        self.urlPath = "https://apigateway.superappbaz.com/"
+      //  self.urlPath = "https://apigateway.superappbaz.com/"
         self.strPathEndpoint = "integracion/superapp/prestamos/tarjeta-credito/v1/tarjetas/saldos/busquedas"
         
         let body = CreditCardBalanceBody.init(transaccion: CreditCardBalanceTransaccion.init(numeroTarjeta: "4589090600000345".dynamicEncrypt()))
@@ -149,7 +149,7 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
     }
     
     func tryGetCreditCardMovements(Body: CreditCardMovementsBody, CreditCardMovements: @escaping (CreditCardMovementsResponse?) -> ()){
-        self.urlPath = "https://apigateway.superappbaz.com/"
+       // self.urlPath = "https://apigateway.superappbaz.com/"
         self.strPathEndpoint = "integracion/superapp/prestamos/tarjeta-credito/v1/tarjetas/movimientos/busquedas"
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: Body, environment: GLOBAL_ENVIROMENT) { (objRes: GenericRawCreditCardMovementsResponse?, error) in

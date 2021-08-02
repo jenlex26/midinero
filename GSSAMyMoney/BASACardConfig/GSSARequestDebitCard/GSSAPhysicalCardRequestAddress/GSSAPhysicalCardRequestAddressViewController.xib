@@ -14,8 +14,14 @@
                 <outlet property="actualLocationView" destination="2vA-D6-Mj4" id="YAZ-fC-C9v"/>
                 <outlet property="btnPostalCode" destination="gAs-5a-Uuh" id="Mux-hs-crH"/>
                 <outlet property="btnTxtPostalCode" destination="hot-a2-0SS" id="yIT-t7-HMv"/>
+                <outlet property="txtCity" destination="KrK-Y1-opG" id="5D5-j6-12S"/>
                 <outlet property="txtColonia" destination="vew-l6-Ogl" id="3FS-qR-nTc"/>
+                <outlet property="txtCountry" destination="rY4-yB-Pwa" id="bWe-Pn-1ht"/>
+                <outlet property="txtExternalNumber" destination="AGV-97-wxh" id="eIT-cG-SD1"/>
+                <outlet property="txtInternalNumber" destination="907-fd-cao" id="b15-Uo-7rs"/>
                 <outlet property="txtPostalCode" destination="ZnE-fN-Dnr" id="mpD-f1-t5j"/>
+                <outlet property="txtState" destination="Qqg-AM-EDW" id="uMS-l4-r97"/>
+                <outlet property="txtStreet" destination="31a-k6-9qG" id="MVE-Gk-bRd"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

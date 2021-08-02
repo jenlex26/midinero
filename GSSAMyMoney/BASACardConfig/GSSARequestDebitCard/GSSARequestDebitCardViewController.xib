@@ -273,6 +273,9 @@
                                             <integer key="value" value="1"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="next:" destination="-1" eventType="touchUpInside" id="gcK-Ve-ar9"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
