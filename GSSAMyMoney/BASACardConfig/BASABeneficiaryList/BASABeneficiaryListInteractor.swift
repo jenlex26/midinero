@@ -21,7 +21,6 @@ class BASABeneficiaryListInteractor: GSSAURLSessionTaskCoordinatorBridge, BASABe
 //        self.urlPath = "https://apigateway.superappbaz.com/"
 //        self.strPathEndpoint = "integracion/superapp/dinero/captacion/gestion-cuentas/v1/beneficiarios/busquedas"
         
-        self.urlPath = "https://api.baz.app"
         self.strPathEndpoint = "/superapp/dinero/captacion/gestion-cuentas/v1/beneficiarios/busquedas"
 
         let body = BeneficiaryListBody(numeroCuenta: account.replacingOccurrences(of: " ", with: "").encryptAlnova())

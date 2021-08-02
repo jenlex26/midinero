@@ -94,7 +94,7 @@ class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
 
 extension BASAButtonsCell: GSINNavigateDelegate{
     func willFinishFlow(withInfo info: [String : Any]?) {
-        
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "externalFlowFinished"), object: nil, userInfo: nil))
     }
     
     func didFailToEnterFlow(error: NSError) {

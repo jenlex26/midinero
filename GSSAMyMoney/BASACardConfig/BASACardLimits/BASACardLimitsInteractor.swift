@@ -24,7 +24,6 @@ class BASACardLimitsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASACardLim
         
         let body = CardLimitsBody.init(transaccion: CardLimitsTransaccion.init(primerTokenVerificacion: GSSISessionInfo.sharedInstance.gsUserToken, numeroTarjeta: GSSISessionInfo.sharedInstance.gsUser.account?.card?.encryptAlnova(), monto: integerAmmount.encryptAlnova(), indicadorLimite: indicador))
         
-        self.urlPath = "https://api.baz.app"
         self.strPathEndpoint = "/superapp/dinero/captacion/gestion-tarjetas/v1/tarjetas/montos/limites"
         
 //        self.urlPath = "https://apigateway.superappbaz.com/"

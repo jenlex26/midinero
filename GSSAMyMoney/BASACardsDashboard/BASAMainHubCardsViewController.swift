@@ -32,7 +32,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     var creditCardMovements: CreditCardMovementsResponse?
     var accountNumber: [String:String]?
     let refreshControl = UIRefreshControl()
-    var headerSize: CGFloat = 300.0 //380.0 Valor predeterminado para cuando el usuario tiene crédito o prestamos, en caso contrario 300.0
+    var headerSize: CGFloat = 300.0 //380.0 Valor para cuando el usuario tiene crédito o prestamos, en caso contrario el predeterminado debería ser 300.0
     var startTime: Date?
     var time: TimeInterval = 300.0
     
@@ -40,6 +40,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         super.viewDidLoad()
         inicializeView()
         NotificationCenter.default.addObserver(self, selector: #selector(updateHeaderSize(sender:)), name: Notification.Name("creditCardAvailable"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadView), name: NSNotification.Name(rawValue: "externalFlowFinished"), object: nil)
         setUpRefreshControl()
         startTime = Date()
         checkTime()
@@ -48,6 +49,10 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        loadDebitBalance()
+    }
+    
+    @objc func reloadView(){
         loadDebitBalance()
     }
     
@@ -80,7 +85,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     }
     
     func loadDebitBalance(){
-        GSVCLoader.show(type: .native)
+        GSVCLoader.show()
         presenter?.requestBalance(Account: [accountNumber?.first?.key.encryptAlnova() ?? (GSSISessionInfo.sharedInstance.gsUser.mainAccount?.encryptAlnova() ?? ""): accountNumber?.first?.value ?? (GSSISessionInfo.sharedInstance.gsUser.SICU?.encryptAlnova() ?? "")], Balance: { Balance in
             if let NewBalance = Balance{
                 DispatchQueue.main.async {
@@ -113,7 +118,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     }
     
     func loadLends(){
-        GSVCLoader.show(type: .native)
+        GSVCLoader.show()
         presenter?.requestUserLends(Lends: { [self]Lends in
             GSVCLoader.hide()
             if let LendsData = Lends{
@@ -132,7 +137,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         //let numberCard = GSSISessionInfo.sharedInstance.gsUser.card?.dynamicEncrypt()
         
         let numberCard = String(4589090600000345).dynamicEncrypt()
-        GSVCLoader.show(type: .native)
+        GSVCLoader.show()
         presenter?.requestCreditCardData(Body: CreditCardBody.init(transaccion: CreditCardTransaccion.init(numeroCuenta: "", numeroTarjeta: numberCard, numeroContrato: "")), CreditCardData: { [self] CreditCardData in
             if let CreditCard = CreditCardData{
                 creditCardData = CreditCard
@@ -240,7 +245,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
             for item in debitCardMovements!.resultado.movimientos{
                 
                 if  item.descripcion?.alnovaDecrypt() != ""{
-                    print("fecha: \(item.fechaOperacion?.alnovaDecrypt())")
+                    print("fecha: \(item.fechaOperacion?.alnovaDecrypt() ?? "")")
                     let movementCell = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAMovementCell") as! BASAMovementTableViewCell
                     movementCell.lblDate.text = item.fechaOperacion?.alnovaDecrypt().dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy")
                     movementCell.lblTitle.text = item.descripcion?.alnovaDecrypt()

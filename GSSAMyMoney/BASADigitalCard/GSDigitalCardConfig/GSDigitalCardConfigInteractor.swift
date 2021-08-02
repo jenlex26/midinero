@@ -19,7 +19,6 @@ class GSDigitalCardConfigInteractor: GSSAURLSessionTaskCoordinatorBridge, GSDigi
     
     func tryShutdownCard(body: CardStateBody,DataCard: @escaping (DigitalCardResponse?) -> ())
     {
-        self.urlPath = "https://api.baz.app"
         self.strPathEndpoint = "/superapp/dinero/captacion/gestion-tarjetas/v1/tarjetas/bloqueos"
         
 //        self.urlPath = "https://apigateway.superappbaz.com/"
