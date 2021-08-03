@@ -111,7 +111,6 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
         view.modalPresentationStyle = .fullScreen
         close = true
         self.present(view, animated: true, completion: nil)
-        //self.navigationController?.pushViewController(view, animated: true)
     }
     
     func forgotDigitalSign(_ forgotSecurityCodeViewController: UIViewController?) {
