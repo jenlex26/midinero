@@ -297,6 +297,14 @@ extension String{
         money = money.replacingOccurrences(of: ",", with: "")
         return money
     }
+    
+    func moneyToDouble() -> Double{
+        var money = self
+        money = money.replacingOccurrences(of: "$", with: "")
+        money = money.replacingOccurrences(of: ",", with: "")
+        let doubleValue = Double(money) ?? 0.0
+        return doubleValue
+    }
 }
 
 extension UIColor{

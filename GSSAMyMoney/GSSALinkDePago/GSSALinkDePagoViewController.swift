@@ -16,7 +16,7 @@ import GSSAFunctionalUtilities
 import GSSAFirebaseManager
 import baz_ios_sdk_link_pago
 
-class GSSALinkDePagoViewController: UIViewController, GSSALinkDePagoViewProtocol, GSVCBottomAlertHandler, GSVTDigitalSignDelegate {
+class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoViewProtocol, GSVCBottomAlertHandler, GSVTDigitalSignDelegate {
     
     var bottomAlert: GSVCBottomAlert?
     var presenter: GSSALinkDePagoPresenterProtocol?
@@ -24,20 +24,19 @@ class GSSALinkDePagoViewController: UIViewController, GSSALinkDePagoViewProtocol
     @IBOutlet weak var txtMail: GSVCTextField!
     @IBOutlet weak var txtAmount: GSVCTextField!
     @IBOutlet weak var lblMail: GSVCLabel!
-    @IBOutlet weak var navBar: UIView!
+    
     var close: Bool? = false
     var hasNav: Bool?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.GSVCPrincipal100
-        self.navBar.backgroundColor = UIColor.GSVCPrincipal100
         txtMail.delegate = self
         txtMail.returnKeyType = .done
         txtAmount.returnKeyType = .next
         txtAmount.delegate = self
         
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.title = "Recarga tu tarjeta"
         
         if GSSISessionInfo.sharedInstance.gsUser.email?.isValidEmail == true{
             lblMail.isHidden = true
@@ -59,13 +58,11 @@ class GSSALinkDePagoViewController: UIViewController, GSSALinkDePagoViewProtocol
     override func viewDidAppear(_ animated: Bool) {
         txtAmount.becomeFirstResponder()
         createTag(eventName: .pageView, section: "mi_dinero", flow: "fondear_cuenta", screenName: "monto", origin: "")
-        if close == true{
-            if hasNav == true{
-                self.navigationController?.popViewController(animated: false)
-            }else{
-                self.dismiss(animated: false, completion: nil)
-            }
-        }
+        setProgressLine(value: 0.25, animated: true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        GSVCLoader.hide()
     }
     
     func optionalAction() {
@@ -86,6 +83,15 @@ class GSSALinkDePagoViewController: UIViewController, GSSALinkDePagoViewProtocol
     }
     
     func showFondeo(){
+        
+        let alert = UIAlertController(title: "Comisión", message: "Se cobrará una comisión de $5.00 MXN por esta transacción. \n¿Deseas continuar?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: {_ in
+            self.navigationController?.pushViewController(GSSAFundSelectCardRouter.createModule(), animated: true)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+        
+        //self.present(alert, animated: true)
+        
         let quantity = txtAmount.text?.moneyToDoubleString()
         var mail = GSSISessionInfo.sharedInstance.gsUser.email
         if mail?.haveData() == false || mail == nil{

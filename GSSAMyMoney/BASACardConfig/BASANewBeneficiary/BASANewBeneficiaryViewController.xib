@@ -36,7 +36,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Beneficiarios" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P7s-r8-8u6" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                            <rect key="frame" x="158" y="15" width="98" height="20.5"/>
+                            <rect key="frame" x="155" y="14" width="104" height="22.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -76,8 +76,9 @@
         </view>
     </objects>
     <designables>
+        <designable name="FOU-BO-b3d"/>
         <designable name="P7s-r8-8u6">
-            <size key="intrinsicContentSize" width="98" height="20.5"/>
+            <size key="intrinsicContentSize" width="104" height="22.5"/>
         </designable>
     </designables>
     <resources>

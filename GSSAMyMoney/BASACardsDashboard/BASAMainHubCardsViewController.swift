@@ -52,6 +52,10 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         loadDebitBalance()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
     @objc func reloadView(){
         loadDebitBalance()
     }
