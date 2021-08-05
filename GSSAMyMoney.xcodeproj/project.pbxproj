@@ -138,6 +138,7 @@
 		EE2A261F26B36DF300E1C2C5 /* GSSASetCVVInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2A261926B36DF200E1C2C5 /* GSSASetCVVInteractor.swift */; };
 		EE2A262026B36DF300E1C2C5 /* GSSASetCVVViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE2A261A26B36DF200E1C2C5 /* GSSASetCVVViewController.xib */; };
 		EE2CA7522696D7D20023BE1D /* GSSACardLimitsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2CA7512696D7D20023BE1D /* GSSACardLimitsEntity.swift */; };
+		EE344CC626BCA583001727B4 /* GSSARockaletaCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE344CC526BCA583001727B4 /* GSSARockaletaCustom.swift */; };
 		EE36C43126878F11001AD9F2 /* GSSASecurityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE36C43026878F11001AD9F2 /* GSSASecurityController.swift */; };
 		EE477BF226937F2E00DC5CF9 /* GSSAMainHubDebitEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE477BF126937F2E00DC5CF9 /* GSSAMainHubDebitEntity.swift */; };
 		EE477BF426937F7D00DC5CF9 /* GSSAMainHubCreditEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE477BF326937F7D00DC5CF9 /* GSSAMainHubCreditEntity.swift */; };
@@ -375,6 +376,7 @@
 		EE2A261926B36DF200E1C2C5 /* GSSASetCVVInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSASetCVVInteractor.swift; sourceTree = "<group>"; };
 		EE2A261A26B36DF200E1C2C5 /* GSSASetCVVViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GSSASetCVVViewController.xib; sourceTree = "<group>"; };
 		EE2CA7512696D7D20023BE1D /* GSSACardLimitsEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSACardLimitsEntity.swift; sourceTree = "<group>"; };
+		EE344CC526BCA583001727B4 /* GSSARockaletaCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSARockaletaCustom.swift; sourceTree = "<group>"; };
 		EE36C43026878F11001AD9F2 /* GSSASecurityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSASecurityController.swift; sourceTree = "<group>"; };
 		EE477BF126937F2E00DC5CF9 /* GSSAMainHubDebitEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAMainHubDebitEntity.swift; sourceTree = "<group>"; };
 		EE477BF326937F7D00DC5CF9 /* GSSAMainHubCreditEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAMainHubCreditEntity.swift; sourceTree = "<group>"; };
@@ -553,6 +555,7 @@
 				EE25EE1E26B898E200D5BE4C /* GSSAFund */,
 				EED3E40B269E88BF00BDF898 /* BASAA.swift */,
 				EE2A261226B369DA00E1C2C5 /* GSSAMasterViewController.swift */,
+				EE344CC526BCA583001727B4 /* GSSARockaletaCustom.swift */,
 				EE01F6BD268B76A10010C485 /* GSSAMyMoneyExtensions.swift */,
 				EEAEFB12269E0F5400F97E4D /* GSSAGradientController.swift */,
 				EE36C43026878F11001AD9F2 /* GSSASecurityController.swift */,
@@ -1444,6 +1447,7 @@
 				EEF728A72699382C0093F0DA /* GSSANewBeneficiaryEntity.swift in Sources */,
 				EE5DB5B526A79C480004E487 /* GSSAButtonsCellTagging.swift in Sources */,
 				EED3E40C269E88BF00BDF898 /* BASAA.swift in Sources */,
+				EE344CC626BCA583001727B4 /* GSSARockaletaCustom.swift in Sources */,
 				EEAEFB13269E0F5400F97E4D /* GSSAGradientController.swift in Sources */,
 				EEE84F6F26B4B37400C5CACE /* GSSACardNIPProtocols.swift in Sources */,
 			);

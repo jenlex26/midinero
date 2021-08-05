@@ -31,7 +31,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     var creditCardBalance: CreditCardBalanceResponse?
     var creditCardMovements: CreditCardMovementsResponse?
     var accountNumber: [String:String]?
-    let refreshControl = UIRefreshControl()
+    let refreshControl = GSFMoneyRockaletaControl()
     var headerSize: CGFloat = 300.0 //380.0 Valor para cuando el usuario tiene crédito o prestamos, en caso contrario el predeterminado debería ser 300.0
     var startTime: Date?
     var time: TimeInterval = 300.0
@@ -82,8 +82,6 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     }
     
     func setUpRefreshControl(){
-        refreshControl.tintColor = .white
-        refreshControl.attributedTitle = NSAttributedString(string: "")
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         BasaMainHubTableView.addSubview(refreshControl)
     }
