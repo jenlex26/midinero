@@ -10,17 +10,21 @@ import GSSAInterceptor
 import GSSAVisualComponents
 import GSSAVisualTemplates
 import GSSAFirebaseManager
+import FirebaseRemoteConfig
 
 class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
     
-    @IBOutlet weak var cellButtonView: UIView!
-    @IBOutlet weak var separatorView : UIView!
-    @IBOutlet weak var cellContentView : UIView!
+    @IBOutlet weak var cellButtonView       : UIView!
+    @IBOutlet weak var separatorView        : UIView!
+    @IBOutlet weak var cellContentView      : UIView!
+    @IBOutlet weak var cashWithdrawalView   : UIView!
+    @IBOutlet weak var sendWithQRView       : UIView!
     @IBOutlet weak var openDigitalCardButton: UIButton!
     @IBOutlet weak var stack: UIStackView!
     
     var cellViewController: UIViewController!
     var accountBalance: BalanceResponse?
+    var sendToFund = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,6 +34,18 @@ class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
         cellButtonView.layer.masksToBounds = true
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateData(notification:)), name: NSNotification.Name(rawValue: "reloadHeaderData"), object: nil)
+        
+        if let podcastsStr = RemoteConfig.remoteConfig().remoteString(forKey: "MOB_SA_QRStore"){
+            if podcastsStr == "false"{
+                sendWithQRView.isHidden = false
+                cashWithdrawalView.isHidden = true
+            }else{
+                sendWithQRView.isHidden = true
+                cashWithdrawalView.isHidden = false
+            }
+        }
+        
+        
     }
     
     @objc func updateData(notification: Notification){
@@ -64,6 +80,7 @@ class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
     
     @IBAction func foundAccoun(sender: Any){
         if cellViewController != nil{
+            sendToFund = true
             tagFundAccount()
             let verification = GSVTDigitalSignViewController(delegate: self)
             verification.bShouldWaitForNewToken = false
@@ -71,6 +88,16 @@ class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
             if cellViewController != nil{
                 cellViewController.present(verification, animated: true, completion: nil)
             }
+        }
+    }
+    
+    @IBAction func cashWithdrawal(sender: Any){
+        sendToFund = false
+        let verification = GSVTDigitalSignViewController(delegate: self)
+        verification.bShouldWaitForNewToken = false
+        verification.modalPresentationStyle = .fullScreen
+        if cellViewController != nil{
+            cellViewController.present(verification, animated: true, completion: nil)
         }
     }
     
@@ -86,8 +113,13 @@ class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
     
     func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
         if cellViewController != nil{
-            let view = GSSALinkDePagoRouter.createModuleWithNavigation()
-            cellViewController.navigationController?.pushViewController(view, animated: true)
+            if sendToFund == true{
+                let view = GSSALinkDePagoRouter.createModuleWithNavigation()
+                cellViewController.navigationController?.pushViewController(view, animated: true)
+            }else{
+                GSINAdminNavigator.shared.startFlow(forAction: "GSIFPqr_CashPickup",
+                                                    navigateDelegate: self)
+            }
         }
     }
 }

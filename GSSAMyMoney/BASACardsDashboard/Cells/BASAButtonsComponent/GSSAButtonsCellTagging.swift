@@ -10,27 +10,22 @@ import GSSAFirebaseManager
 
 extension BASAButtonsCell{
     func tagShowDebitDigitalCard(){
-        let tagEvent = GSSAFirebaseEvent(.custom("ui_interaction")).set(section: "mi_dinero").set(flow: "dashboard").set(screenName: "movimientos").set(paramaters: ["type":"click"]).set(paramaters: ["element" : "tarjeta_digital"]).set(origin: "debito")
-        GSSAAnalytics.firebase.tracking(event: tagEvent)
+        createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "dashboard", screenName: "movimientos", type: "click", element: "tarjeta_digital", origin: "debito")
     }
     
     func tagSendMoneyFlow(){
-        let tagEvent = GSSAFirebaseEvent(.custom("ui_interaction")).set(section: "mi_dinero").set(flow: "dashboard").set(screenName: "movimientos").set(paramaters: ["type":"click"]).set(paramaters: ["element" : "enviar_y_pagar"]).set(origin: "debito")
-        GSSAAnalytics.firebase.tracking(event: tagEvent)
+        createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "dashboard", screenName: "movimientos", type: "click", element: "enviar_y_pagar", origin: "debito")
     }
     
     func tagReceiveAndPayFlow(){
-        let tagEvent = GSSAFirebaseEvent(.custom("ui_interaction")).set(section: "mi_dinero").set(flow: "dashboard").set(screenName: "movimientos").set(paramaters: ["type":"click"]).set(paramaters: ["element" : "recibir_y_cobrar"]).set(origin: "debito")
-        GSSAAnalytics.firebase.tracking(event: tagEvent)
+        createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "dashboard", screenName: "movimientos", type: "click", element: "recibir_y_cobrar", origin: "debito")
     }
     
     func tagPhoneMinutesFlow(){
-        let tagEvent = GSSAFirebaseEvent(.custom("ui_interaction")).set(section: "mi_dinero").set(flow: "dashboard").set(screenName: "movimientos").set(paramaters: ["type":"click"]).set(paramaters: ["element" : "tiempo_aire"]).set(origin: "debito")
-        GSSAAnalytics.firebase.tracking(event: tagEvent)
+        createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "dashboard", screenName: "movimientos", type: "click", element: "tiempo_aire", origin: "debito")
     }
     
     func tagFundAccount(){
-        let tagEvent = GSSAFirebaseEvent(.custom("ui_interaction")).set(section: "mi_dinero").set(flow: "dashboard").set(screenName: "movimientos").set(paramaters: ["type":"click"]).set(paramaters: ["element" : "fondear_cuenta"]).set(origin: "debito")
-        GSSAAnalytics.firebase.tracking(event: tagEvent)
+        createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "dashboard", screenName: "movimientos", type: "click", element: "fondear_cuenta", origin: "debito")
     }
 }
