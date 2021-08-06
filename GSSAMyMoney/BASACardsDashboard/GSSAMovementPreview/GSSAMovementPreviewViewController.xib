@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GSSAMovementPreviewViewController" customModule="GSSAMyMoney" customModuleProvider="target">
             <connections>
                 <outlet property="btnArrow" destination="zk6-nS-gfP" id="URi-0j-Yf3"/>
+                <outlet property="btnArrowLeft" destination="UiH-Yi-zen" id="1mt-Mq-haT"/>
                 <outlet property="lblAmount" destination="sb6-Mf-WF8" id="dJM-Fx-PEj"/>
                 <outlet property="lblDate" destination="vXl-TQ-k6g" id="Vza-5U-hMj"/>
                 <outlet property="lblTitle" destination="qfd-hU-t6A" id="KaN-2K-Oih"/>
@@ -62,7 +63,7 @@
                         <constraint firstItem="0wx-Bw-EFS" firstAttribute="leading" secondItem="IgZ-T5-pxA" secondAttribute="leading" constant="20" id="wjU-xw-XG2"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4YT-6R-dGx">
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4YT-6R-dGx">
                     <rect key="frame" x="0.0" y="269" width="414" height="627"/>
                     <subviews>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hnM-og-5To">
@@ -81,8 +82,8 @@
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="DPw-OI-Is3">
                     <rect key="frame" x="29" y="94" width="356" height="165"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detalle de movimiento" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.65000000000000002" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tnc-nS-WIw" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                            <rect key="frame" x="0.0" y="0.0" width="356" height="29"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detalle de movimiento" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.65000000000000002" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tnc-nS-WIw" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                            <rect key="frame" x="0.0" y="0.0" width="356" height="39"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -93,10 +94,34 @@
                             </userDefinedRuntimeAttributes>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BPR-N6-9ve">
-                            <rect key="frame" x="0.0" y="34" width="356" height="40"/>
+                            <rect key="frame" x="0.0" y="44" width="356" height="40"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- $50.0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sb6-Mf-WF8" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                    <rect key="frame" x="0.0" y="0.0" width="316" height="40"/>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zje-0A-qH6">
+                                    <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UiH-Yi-zen">
+                                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                            <color key="backgroundColor" red="0.79215686269999996" green="0.65490196079999996" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="H0Z-vv-mp5"/>
+                                                <constraint firstAttribute="width" constant="40" id="PN1-YY-IdA"/>
+                                            </constraints>
+                                            <state key="normal" image="chevron.left" catalog="system"/>
+                                            <connections>
+                                                <action selector="previousMovement:" destination="-1" eventType="touchUpInside" id="6fC-bk-CJb"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="UiH-Yi-zen" firstAttribute="leading" secondItem="zje-0A-qH6" secondAttribute="leading" id="UwB-rw-H6O"/>
+                                        <constraint firstItem="UiH-Yi-zen" firstAttribute="centerY" secondItem="zje-0A-qH6" secondAttribute="centerY" id="gSs-Ue-bup"/>
+                                        <constraint firstAttribute="trailing" secondItem="UiH-Yi-zen" secondAttribute="trailing" id="q2F-KF-mjV"/>
+                                    </constraints>
+                                </view>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- $50.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sb6-Mf-WF8" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                                    <rect key="frame" x="40" y="0.0" width="276" height="40"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
@@ -135,8 +160,8 @@
                                 <constraint firstAttribute="height" constant="40" id="Cfx-M3-ig1"/>
                             </constraints>
                         </stackView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transferencia Bancaria" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qfd-hU-t6A" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                            <rect key="frame" x="0.0" y="79" width="356" height="29"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transferencia Bancaria" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qfd-hU-t6A" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                            <rect key="frame" x="0.0" y="89" width="356" height="28.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -146,8 +171,8 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15 Jun 2021 14:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vXl-TQ-k6g" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                            <rect key="frame" x="0.0" y="113" width="356" height="52"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15 Jun 2021 14:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vXl-TQ-k6g" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                            <rect key="frame" x="0.0" y="122.5" width="356" height="42.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -191,19 +216,20 @@
     <designables>
         <designable name="IgZ-T5-pxA"/>
         <designable name="qfd-hU-t6A">
-            <size key="intrinsicContentSize" width="173.5" height="20.5"/>
+            <size key="intrinsicContentSize" width="186.5" height="22.5"/>
         </designable>
         <designable name="sb6-Mf-WF8">
-            <size key="intrinsicContentSize" width="56.5" height="20.5"/>
+            <size key="intrinsicContentSize" width="117.5" height="45"/>
         </designable>
         <designable name="tnc-nS-WIw">
-            <size key="intrinsicContentSize" width="169.5" height="20.5"/>
+            <size key="intrinsicContentSize" width="256.5" height="31"/>
         </designable>
         <designable name="vXl-TQ-k6g">
-            <size key="intrinsicContentSize" width="139" height="20.5"/>
+            <size key="intrinsicContentSize" width="129.5" height="22.5"/>
         </designable>
     </designables>
     <resources>
+        <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="chevron.right" catalog="system" width="96" height="128"/>
         <image name="multiply" catalog="system" width="128" height="111"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>

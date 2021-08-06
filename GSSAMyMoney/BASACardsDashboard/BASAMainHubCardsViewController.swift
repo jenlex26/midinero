@@ -95,7 +95,8 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                     self.accountBalance = NewBalance
                     UserDefaults.standard.setValue(NewBalance.resultado.cliente?.cuentas?.first?.clabe?.alnovaDecrypt().tnuoccaFormat, forKey: "DebitCardCLABE")
                     NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "reloadHeaderData"), object: NewBalance, userInfo: nil))
-                    self.loadDebitMovements()
+                   // self.loadDebitMovements()
+                    self.loadDebitMovementsV2()
                 }
             }else{
                 self.BasaMainHubTableView.isHidden = false
@@ -121,11 +122,9 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     }
     
     func loadDebitMovementsV2(){
-        let bodyProd = MovimientosBody(transaccion: MovementsBodyData(numeroCuenta: accountNumber?.first?.key ?? (GSSISessionInfo.sharedInstance.gsUser.mainAccount?.encryptAlnova()), fechaInicial: "01/01/0001", fechaFinal: "01/01/0001"))
+        let BodyProdV2 =  MovimientosBodyv2.init(transaccion: MovementsBodyDataV2.init(sicu: GSSISessionInfo.sharedInstance.gsUser.SICU, numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().encryptAlnova(), geolocalizacion: Geolocalizacion.init(latitud: "", longitud: "")))
         
-        let BodyDevelop =  MovimientosBodyv2.init(transaccion: MovementsBodyDataV2.init(sicu: GSSISessionInfo.sharedInstance.gsUser.SICU, numeroCuenta: "01271156141200001956".formatToTnuocca14Digits().encryptAlnova(), geolocalizacion: Geolocalizacion.init(latitud: "", longitud: "")))
-        
-        self.presenter?.requestDebitCardMovementsV2(Body: BodyDevelop, Movements: { [self] Movements in
+        self.presenter?.requestDebitCardMovementsV2(Body: BodyProdV2, Movements: { [self] Movements in
             GSVCLoader.hide()
             self.BasaMainHubTableView.isHidden = false
             if Movements != nil{
@@ -259,18 +258,18 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         cellsArray.append([separator:60.0])
         
         
-        if debitCardMovements != nil{
-            
-            if  debitCardMovements!.resultado.movimientos.count > 0{
-                
-                for item in debitCardMovements!.resultado.movimientos{
-                    
+        if debitCardMovementsV2 != nil{
+            if  debitCardMovementsV2?.resultado?.movimientos?.count ?? 0 > 0{
+                var index = -1
+                for item in debitCardMovementsV2!.resultado!.movimientos!{
+                    index += 1
                     if  item.descripcion?.alnovaDecrypt() != ""{
-                        print("fecha: \(item.fechaOperacion?.alnovaDecrypt() ?? "")")
+                        print("fecha: \(item.fecha?.alnovaDecrypt() ?? "")")
                         let movementCell = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAMovementCell") as! BASAMovementTableViewCell
-                        movementCell.lblDate.text = item.fechaOperacion?.alnovaDecrypt().dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy")
-                        movementCell.lblTitle.text = item.descripcion?.alnovaDecrypt()
-                        movementCell.lblAmount.text = item.importe?.alnovaDecrypt().moneyFormat()
+                        movementCell.lblDate.text = item.fecha?.alnovaDecrypt().dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy")
+                        movementCell.tag = index
+                        movementCell.lblTitle.text = item.concepto?.alnovaDecrypt()
+                        movementCell.lblAmount.text = item.importe?.alnovaDecrypt().moneyFormat().replacingOccurrences(of: "+", with: "$").replacingOccurrences(of: "-", with: "-$")
                         movementCell.setArrow(amount: item.importe?.alnovaDecrypt() ?? "")
                         cellsArray.append([movementCell:88.0])
                     }

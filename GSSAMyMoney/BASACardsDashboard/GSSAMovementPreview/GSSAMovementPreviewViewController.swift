@@ -20,6 +20,7 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
     @IBOutlet weak var lblAmount     : GSVCLabel!
     @IBOutlet weak var lblDate       : GSVCLabel!
     @IBOutlet weak var btnArrow      : UIButton!
+    @IBOutlet weak var btnArrowLeft  : UIButton!
     @IBOutlet weak var table         : UITableView!
     
     var cellsArray:  Array<[UITableViewCell:CGFloat]> = []
@@ -32,11 +33,11 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.clear
         btnArrow.makeCircular()
+        btnArrowLeft.makeCircular()
         tableContainer.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
         table.delegate = self
         table.dataSource = self
         registerCells()
-        print("INDEX RECIBIDO \(index)")
         readData(transaction: data)
     }
     
@@ -93,13 +94,28 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
         cellsArray.removeAll()
         details.removeAll()
         
-        lblAmount.text = transaction.importe?.moneyFormat()
-        lblDate.text = transaction.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy")
-        if transaction.descripcion?.isNumeric == true{
-            lblTitle.text = transaction.concepto
+        if index == 0{
+            btnArrowLeft.isHidden = true
         }else{
-            lblTitle.text = transaction.descripcion
+            btnArrowLeft.isHidden = false
         }
+        
+        if index >= movementsArray.resultado?.movimientos?.count ?? 0{
+            print("No es el último")
+        }else{
+            print("último")
+        }
+        
+        if ((movementsArray.resultado?.movimientos?.count ?? 0) - (index ?? 0)) == 1{
+            btnArrow.isHidden = true
+        }else{
+            btnArrow.isHidden = false
+        }
+        
+        lblAmount.text = transaction.importe?.alnovaDecrypt().moneyFormat().removeWhiteSpaces().replacingOccurrences(of: "+", with: "$").replacingOccurrences(of: "-", with: "-$")
+        lblDate.text = transaction.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy")
+    
+        lblTitle.text = transaction.concepto?.alnovaDecrypt()
         
         details.updateValue("Realizado", forKey: transaction.nombreOrdenante ?? "")
         details.updateValue("Para", forKey:  transaction.descripcionBeneficiario ?? "")
@@ -146,10 +162,20 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
         self.present(activityViewController, animated: true, completion: nil)
     }
     
-    @IBAction func nextMovement(_ sender: Any){
-        index += 1
+    @IBAction func previousMovement(_ sender: Any){
         let array = movementsArray.resultado?.movimientos
-        if index < array?.count ?? 0{
+        if index < array?.count ?? 0 && index >= 0{
+            print("INDEX \(index ?? -29) CONTEO \(array?.count ?? -3) <")
+            index -= 1
+            readData(transaction: (array?[index])!)
+        }
+    }
+    
+    @IBAction func nextMovement(_ sender: Any){
+        let array = movementsArray.resultado?.movimientos
+        print("INDEX \(index ?? -29) CONTEO \(array?.count ?? -3) >")
+        if index < array?.count ?? 0 || index > array?.count ?? 0{
+            index += 1
             readData(transaction: (array?[index])!)
         }
     }

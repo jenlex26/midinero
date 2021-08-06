@@ -178,6 +178,8 @@ extension String{
                                                                       withFontColor: .GSVCText100,
                                                                       withLittleCoin: false)
         
+     
+        
         return amountFormat.mutableString.description
     }
     
