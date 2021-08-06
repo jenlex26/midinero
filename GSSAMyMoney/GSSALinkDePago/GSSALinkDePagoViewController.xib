@@ -48,7 +48,7 @@
                                     <real key="value" value="0.0"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="number" keyPath="maxLength">
-                                    <integer key="value" value="8"/>
+                                    <integer key="value" value="12"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </textField>

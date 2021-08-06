@@ -27,13 +27,17 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
     
     var close: Bool? = false
     var hasNav: Bool?
+    let textTest = UITextField()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         txtMail.delegate = self
         txtMail.returnKeyType = .done
         txtAmount.returnKeyType = .next
-        txtAmount.delegate = self
+        //txtAmount.delegate = self
+        
+        
+        txtAmount.addTarget(self, action: #selector(ammountFormatter(sender:)), for: .editingChanged)
         
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.title = "Recarga tu tarjeta"
@@ -52,7 +56,6 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
             verification.bShouldWaitForNewToken = false
             present(verification, animated: true, completion: nil)
         }
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -63,6 +66,31 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
     
     override func viewWillAppear(_ animated: Bool) {
         GSVCLoader.hide()
+    }
+    
+    @objc func ammountFormatter(sender: UITextField){
+        if sender.text!.count < 9{
+            var number: NSNumber!
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .currencyAccounting
+            formatter.currencySymbol = "$"
+            formatter.maximumFractionDigits = 2
+            formatter.minimumFractionDigits = 2
+            
+            var amountWithPrefix = sender.text
+            let regex = try! NSRegularExpression(pattern: "[^0-9]", options: .caseInsensitive)
+            amountWithPrefix = regex.stringByReplacingMatches(in: amountWithPrefix!, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0,  sender.text!.count), withTemplate: "")
+            
+            let double = (amountWithPrefix! as NSString).doubleValue
+            number = NSNumber(value: (double / 100))
+            guard number != 0 as NSNumber else {
+                sender.text = ""
+                return
+            }
+            sender.text = formatter.string(from: number)!
+        }else{
+            sender.text?.removeLast()
+        }
     }
     
     func optionalAction() {
@@ -202,7 +230,6 @@ extension GSSALinkDePagoViewController: UITextFieldDelegate{
                 textField.resetAmount(withLittleCoin: hasLittleCoin)
             } else {
                 let bHideCents = GSSISessionInfo.sharedInstance.bHideCents
-                
                 textField.addText(newText: string,
                                   withMaxFontSize: 38,
                                   withLittleCoin: hasLittleCoin, withFontWeight: .bold,
