@@ -34,10 +34,9 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
         txtMail.delegate = self
         txtMail.returnKeyType = .done
         txtAmount.returnKeyType = .next
-        //txtAmount.delegate = self
-        
-        
+        txtAmount.text = "$0.00"
         txtAmount.addTarget(self, action: #selector(ammountFormatter(sender:)), for: .editingChanged)
+        setUpToolBar()
         
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.title = "Recarga tu tarjeta"
@@ -91,6 +90,23 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
         }else{
             sender.text?.removeLast()
         }
+    }
+    
+    @objc func doneButtonClick(){
+        self.view.endEditing(true)
+    }
+    
+    func setUpToolBar(){
+        let buttonTwo =  UIBarButtonItem(title: "Listo", style: .done, target: self, action: #selector(doneButtonClick))
+        buttonTwo.tintColor = .white
+        let numberToolbar = UIToolbar(frame:CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
+        numberToolbar.barStyle = .default
+        numberToolbar.backgroundColor = UIColor(red: 19/255, green: 49/255, blue: 219/255, alpha: 1.0)
+        numberToolbar.barTintColor = UIColor.GSVCPrincipal100
+        numberToolbar.items = [
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil), buttonTwo]
+        numberToolbar.sizeToFit()
+        txtAmount.inputAccessoryView = numberToolbar
     }
     
     func optionalAction() {
@@ -220,25 +236,6 @@ extension GSSALinkDePagoViewController: UITextFieldDelegate{
             }
         }
         return true
-    }
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textField == txtAmount{
-            let hasLittleCoin = false
-            
-            if string.count == 0, txtAmount.text?.dValue ?? 0 < 0.1 {
-                textField.resetAmount(withLittleCoin: hasLittleCoin)
-            } else {
-                let bHideCents = GSSISessionInfo.sharedInstance.bHideCents
-                textField.addText(newText: string,
-                                  withMaxFontSize: 38,
-                                  withLittleCoin: hasLittleCoin, withFontWeight: .bold,
-                                  withNoDecimals: bHideCents)
-            }
-            return false
-        }else{
-            return true
-        }
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
