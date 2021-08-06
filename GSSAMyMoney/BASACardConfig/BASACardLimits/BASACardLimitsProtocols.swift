@@ -11,23 +11,23 @@
 import Foundation
 
 //MARK: Wireframe -
-protocol BASACardLimitsWireframeProtocol: class {
+protocol BASACardLimitsWireframeProtocol: AnyObject {
 
 }
 //MARK: Presenter -
-protocol BASACardLimitsPresenterProtocol: class {
+protocol BASACardLimitsPresenterProtocol: AnyObject {
     func requestCardLimitUpdate(ammount: String, indicador: String, DataCard: @escaping (CardLimitsResponse?) -> ())
 }
 
 //MARK: Interactor -
-protocol BASACardLimitsInteractorProtocol: class {
+protocol BASACardLimitsInteractorProtocol: AnyObject {
 
   var presenter: BASACardLimitsPresenterProtocol?  { get set }
     func tryUpdateCardLimit(ammount: String, indicador: String, DataCard: @escaping (CardLimitsResponse?) -> ())
 }
 
 //MARK: View -
-protocol BASACardLimitsViewProtocol: class {
+protocol BASACardLimitsViewProtocol: AnyObject {
 
   var presenter: BASACardLimitsPresenterProtocol?  { get set }
 }
