@@ -65,6 +65,7 @@ class BASACardLimitsViewController: UIViewController, BASACardLimitsViewProtocol
     }
     
     @objc func handleEditAction(sender: UIButton){
+        bottomAlert?.animateDismissal()
         table.beginUpdates()
         LimitItems[sender.tag].height = 130.0
         table.endUpdates()
