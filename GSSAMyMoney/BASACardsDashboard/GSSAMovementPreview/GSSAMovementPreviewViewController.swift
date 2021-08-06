@@ -24,7 +24,9 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
     
     var cellsArray:  Array<[UITableViewCell:CGFloat]> = []
     var details: [String:String] = [:]
-    var data: DebitCardTransactionItem! 
+    var data: DebitCardTransactionItemV2!
+    var movementsArray: DebitCardTransactionV2!
+    var index: Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,9 +36,8 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
         table.delegate = self
         table.dataSource = self
         registerCells()
-        setDetails()
-        setOptions()
-        readData()
+        print("INDEX RECIBIDO \(index)")
+        readData(transaction: data)
     }
     
     func registerCells(){
@@ -46,18 +47,7 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
         table.register(UINib(nibName: "SectionCell", bundle: bundle), forCellReuseIdentifier: "SectionCell")
     }
     
-    func setDetails(){
-        details.updateValue("Realizado con", forKey: "baz ****2290")
-        details.updateValue("Para", forKey: "Liliana González López \nBBVA Bancomer ***1234")
-        details.updateValue("Concepto", forKey: data.descripcion ?? "")
-        details.updateValue("No. de referencia", forKey: "00489944")
-        details.updateValue("Folio", forKey: "099")
-        details.updateValue("Clave de rastreo", forKey: "123456678909876I")
-        details.updateValue("Estatus de transferencia", forKey: "Liquidada")
-        details.updateValue("Fecha y hora de registro", forKey: data.fechaOperacion ?? "")
-    }
-    
-    func setOptions(){
+    func setOptions(SPEI: Bool){
         for element in details{
             let cell = table.dequeueReusableCell(withIdentifier: "BASAMovementCell") as! BASAMovementTableViewCell
             cell.imgView.isHidden = true
@@ -67,39 +57,69 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
             cell.lblDate.text = element.key
             cell.lblDate.numberOfLines = 2
             cell.lblDate.styleType = 6
-            if element.value == "Para"{
-                cellsArray.append([cell:85.0])
-            }else{
-                cellsArray.append([cell:75.0])
+            if element.key.removeWhiteSpaces() != ""{
+                if element.value == "Para"{
+                    cellsArray.append([cell:85.0])
+                }else{
+                    cellsArray.append([cell:75.0])
+                }
             }
         }
         
-        let sectionCell =  table.dequeueReusableCell(withIdentifier: "SectionCell")!
-        sectionCell.isHidden = true
-        cellsArray.append([sectionCell:30.0])
         
-        let cardInfo = table.dequeueReusableCell(withIdentifier: "BASAInfoCardCell") as! BASAInfoCardCell
-        cardInfo.lblText.text = "Consulta el estatus en: \nhttps://www.banxico.org.mx/cep/"
-        cardInfo.tag = 1
-        cellsArray.append([cardInfo:81.0])
+        cellsArray = cellsArray.sorted(by: { ($0.first?.key as! BASAMovementTableViewCell).lblTitle.text!  < ($1.first?.key as! BASAMovementTableViewCell).lblTitle.text! })
         
-        
-        let secondCard = table.dequeueReusableCell(withIdentifier: "BASAInfoCardCell") as! BASAInfoCardCell
-        secondCard.lblText.text = "Este vínculo se activará a más tardar dentro de los primeros 5 minutos siguientes de la aceptación de la operación."
-        cellsArray.append([secondCard:121.0])
-        
+        if SPEI == true{
+            
+            let sectionCell =  table.dequeueReusableCell(withIdentifier: "SectionCell")!
+            sectionCell.isHidden = true
+            cellsArray.append([sectionCell:30.0])
+            
+            let cardInfo = table.dequeueReusableCell(withIdentifier: "BASAInfoCardCell") as! BASAInfoCardCell
+            cardInfo.lblText.text = "Consulta el estatus en: \nhttps://www.banxico.org.mx/cep/"
+            cardInfo.tag = 1
+            cellsArray.append([cardInfo:81.0])
+            
+            
+            let secondCard = table.dequeueReusableCell(withIdentifier: "BASAInfoCardCell") as! BASAInfoCardCell
+            secondCard.lblText.text = "Este vínculo se activará a más tardar dentro de los primeros 5 minutos siguientes de la aceptación de la operación."
+            cellsArray.append([secondCard:121.0])
+            
+        }
         self.table.reloadData()
     }
     
-    func readData(){
-        lblAmount.text = data.importe
-        lblDate.text = data.fechaOperacion
+    func readData(transaction: DebitCardTransactionItemV2){
+        cellsArray.removeAll()
+        details.removeAll()
+        
+        lblAmount.text = transaction.importe?.moneyFormat()
+        lblDate.text = transaction.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy")
+        if transaction.descripcion?.isNumeric == true{
+            lblTitle.text = transaction.concepto
+        }else{
+            lblTitle.text = transaction.descripcion
+        }
+        
+        details.updateValue("Realizado", forKey: transaction.nombreOrdenante ?? "")
+        details.updateValue("Para", forKey:  transaction.descripcionBeneficiario ?? "")
+        details.updateValue("Concepto", forKey: transaction.descripcion ?? "")
+       // details.updateValue("Id de operación", forKey: transaction.idOperacion ?? "")
+        details.updateValue("Folio", forKey: transaction.folio ?? "")
+        details.updateValue("Número de operación", forKey: transaction.numeroOperacion ?? "")
+        // details.updateValue("Clave de rastreo", forKey: "123456678909876I")
+        // details.updateValue("Estatus de transferencia", forKey: "Liquidada")
+        details.updateValue("Fecha y hora de registro", forKey: (transaction.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy") ?? "") + " " + (data.hora?.timeFormatter() ?? ""))
+        
+        if (transaction.descripcionBeneficiario ?? "") != ""{
+            setOptions(SPEI: true)
+        }else{
+            setOptions(SPEI: false)
+        }
     }
     
     func share(_ shouldSave: Bool = false) -> UIImage? {
-        
         let tableImage = table.renderTable()
-        
         var screenshotImage :UIImage?
         let layer = UIApplication.shared.keyWindow!.layer
         let scale = UIScreen.main.scale
@@ -126,6 +146,13 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
         self.present(activityViewController, animated: true, completion: nil)
     }
     
+    @IBAction func nextMovement(_ sender: Any){
+        index += 1
+        let array = movementsArray.resultado?.movimientos
+        if index < array?.count ?? 0{
+            readData(transaction: (array?[index])!)
+        }
+    }
 }
 
 extension GSSAMovementPreviewViewController: UITableViewDelegate, UITableViewDataSource{

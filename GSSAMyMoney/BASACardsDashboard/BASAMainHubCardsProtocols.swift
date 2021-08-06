@@ -18,6 +18,7 @@ protocol BASAMainHubCardsWireframeProtocol: AnyObject {
 protocol BASAMainHubCardsPresenterProtocol: AnyObject {
     func requestBalance(Account:[String:String], Balance: @escaping (BalanceResponse?) -> ())
     func requestDebitCardMovements(Body: MovimientosBody, Movements: @escaping (DebitCardTransaction?) -> ())
+    func requestDebitCardMovementsV2(Body: MovimientosBodyv2, Movements: @escaping (DebitCardTransactionV2?) -> ()) 
     func requestUserLends(Lends: @escaping (LendsResponse?) -> ())
     func requestCreditCardData(Body: CreditCardBody, CreditCardData: @escaping (CreditCardResponse?) -> ())
     func requestCreditCardBalance(Body: CreditCardBalanceBody, CreditCardBalance: @escaping (CreditCardBalanceResponse?) -> ())
@@ -29,6 +30,7 @@ protocol BASAMainHubCardsInteractorProtocol: AnyObject {
   var presenter: BASAMainHubCardsPresenterProtocol?  { get set }
     func TryGetDebitCardBalance(Account:[String:String], Balance: @escaping (BalanceResponse?) -> ())
     func TryGetDebitCardMovements(Body: MovimientosBody, Movements: @escaping (DebitCardTransaction?) -> ())
+    func TryGetDebitCardMovementsV2(Body: MovimientosBodyv2, Movements: @escaping (DebitCardTransactionV2?) -> ())
     func tryGetUserLends(Lends: @escaping (LendsResponse?) -> ())
     func tryGetCreditCardData(Body: CreditCardBody, CreditCardData: @escaping (CreditCardResponse?) -> ())
     func tryGetCreditCardBalance(Body: CreditCardBalanceBody, CreditCardBalance: @escaping (CreditCardBalanceResponse?) -> ())

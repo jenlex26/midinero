@@ -29,6 +29,10 @@ class BASAMainHubCardsPresenter: BASAMainHubCardsPresenterProtocol {
         interactor?.TryGetDebitCardMovements(Body: Body, Movements: Movements)
     }
     
+    func requestDebitCardMovementsV2(Body: MovimientosBodyv2, Movements: @escaping (DebitCardTransactionV2?) -> ()) {
+        interactor?.TryGetDebitCardMovementsV2(Body: Body, Movements: Movements)
+    }
+    
     func requestUserLends(Lends: @escaping (LendsResponse?) -> ()){
         interactor?.tryGetUserLends(Lends: Lends)
     }
@@ -40,7 +44,6 @@ class BASAMainHubCardsPresenter: BASAMainHubCardsPresenterProtocol {
     func requestCreditCardBalance(Body: CreditCardBalanceBody, CreditCardBalance: @escaping (CreditCardBalanceResponse?) -> ()){
         interactor?.tryGetCreditCardBalance(Body: Body, CreditCardBalance: CreditCardBalance)
     }
-    
     
     func requestCreditCardMovements(Body: CreditCardMovementsBody, CreditCardMovements: @escaping (CreditCardMovementsResponse?) -> ()){
         interactor?.tryGetCreditCardMovements(Body: Body, CreditCardMovements: CreditCardMovements)

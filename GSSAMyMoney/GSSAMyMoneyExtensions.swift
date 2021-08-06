@@ -146,6 +146,21 @@ extension UITableView{
 }
 
 extension String{
+    
+    var isNumeric: Bool {
+        return !(self.isEmpty) && self.allSatisfy { $0.isNumber }
+    }
+    
+    func timeFormatter() -> String{
+        if count == 4{
+            let hour = self.prefix(2)
+            let time = self.suffix(2)
+            return hour + ":" + time
+        }else{
+            return self
+        }
+    }
+    
     func moneyFormat() -> String{
         var stringAmount = ""
         

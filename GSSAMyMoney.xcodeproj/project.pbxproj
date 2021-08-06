@@ -100,6 +100,7 @@
 		EE0655DB2682AE6600F7C73D /* GSDigitalCardConfigProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0655D52682AE6600F7C73D /* GSDigitalCardConfigProtocols.swift */; };
 		EE0655DC2682AE6600F7C73D /* GSDigitalCardConfigInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0655D62682AE6600F7C73D /* GSDigitalCardConfigInteractor.swift */; };
 		EE0655DD2682AE6600F7C73D /* GSDigitalCardConfigViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE0655D72682AE6600F7C73D /* GSDigitalCardConfigViewController.xib */; };
+		EE0766DE26BDD0A2005C7A8B /* GSSAMovementPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE0766DD26BDD0A2005C7A8B /* GSSAMovementPreviewViewController.xib */; };
 		EE25EE2626B8A0C300D5BE4C /* GSSAFundSelectCardPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE25EE2026B8A0C300D5BE4C /* GSSAFundSelectCardPresenter.swift */; };
 		EE25EE2726B8A0C300D5BE4C /* GSSAFundSelectCardRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE25EE2126B8A0C300D5BE4C /* GSSAFundSelectCardRouter.swift */; };
 		EE25EE2826B8A0C300D5BE4C /* GSSAFundSelectCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE25EE2226B8A0C300D5BE4C /* GSSAFundSelectCardViewController.swift */; };
@@ -193,7 +194,6 @@
 		EEAEFB0E269E08BD00F97E4D /* GSSAMovementPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAEFB08269E08BD00F97E4D /* GSSAMovementPreviewViewController.swift */; };
 		EEAEFB0F269E08BD00F97E4D /* GSSAMovementPreviewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAEFB09269E08BD00F97E4D /* GSSAMovementPreviewProtocols.swift */; };
 		EEAEFB10269E08BD00F97E4D /* GSSAMovementPreviewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAEFB0A269E08BD00F97E4D /* GSSAMovementPreviewInteractor.swift */; };
-		EEAEFB11269E08BD00F97E4D /* GSSAMovementPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEAEFB0B269E08BD00F97E4D /* GSSAMovementPreviewViewController.xib */; };
 		EEAEFB13269E0F5400F97E4D /* GSSAGradientController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAEFB12269E0F5400F97E4D /* GSSAGradientController.swift */; };
 		EEAFA792268CD17A00DBC192 /* BASABeneficiaryListEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAFA791268CD17A00DBC192 /* BASABeneficiaryListEntity.swift */; };
 		EEAFA796268CD75200DBC192 /* BeneficiaryButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAFA794268CD75200DBC192 /* BeneficiaryButtonCell.swift */; };
@@ -338,6 +338,7 @@
 		EE0655D52682AE6600F7C73D /* GSDigitalCardConfigProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSDigitalCardConfigProtocols.swift; sourceTree = "<group>"; };
 		EE0655D62682AE6600F7C73D /* GSDigitalCardConfigInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSDigitalCardConfigInteractor.swift; sourceTree = "<group>"; };
 		EE0655D72682AE6600F7C73D /* GSDigitalCardConfigViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GSDigitalCardConfigViewController.xib; sourceTree = "<group>"; };
+		EE0766DD26BDD0A2005C7A8B /* GSSAMovementPreviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GSSAMovementPreviewViewController.xib; sourceTree = "<group>"; };
 		EE25EE2026B8A0C300D5BE4C /* GSSAFundSelectCardPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAFundSelectCardPresenter.swift; sourceTree = "<group>"; };
 		EE25EE2126B8A0C300D5BE4C /* GSSAFundSelectCardRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAFundSelectCardRouter.swift; sourceTree = "<group>"; };
 		EE25EE2226B8A0C300D5BE4C /* GSSAFundSelectCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAFundSelectCardViewController.swift; sourceTree = "<group>"; };
@@ -431,7 +432,6 @@
 		EEAEFB08269E08BD00F97E4D /* GSSAMovementPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAMovementPreviewViewController.swift; sourceTree = "<group>"; };
 		EEAEFB09269E08BD00F97E4D /* GSSAMovementPreviewProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAMovementPreviewProtocols.swift; sourceTree = "<group>"; };
 		EEAEFB0A269E08BD00F97E4D /* GSSAMovementPreviewInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAMovementPreviewInteractor.swift; sourceTree = "<group>"; };
-		EEAEFB0B269E08BD00F97E4D /* GSSAMovementPreviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GSSAMovementPreviewViewController.xib; sourceTree = "<group>"; };
 		EEAEFB12269E0F5400F97E4D /* GSSAGradientController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAGradientController.swift; sourceTree = "<group>"; };
 		EEAFA791268CD17A00DBC192 /* BASABeneficiaryListEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BASABeneficiaryListEntity.swift; sourceTree = "<group>"; };
 		EEAFA794268CD75200DBC192 /* BeneficiaryButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeneficiaryButtonCell.swift; sourceTree = "<group>"; };
@@ -1115,7 +1115,7 @@
 				EEAEFB08269E08BD00F97E4D /* GSSAMovementPreviewViewController.swift */,
 				EEAEFB09269E08BD00F97E4D /* GSSAMovementPreviewProtocols.swift */,
 				EEAEFB0A269E08BD00F97E4D /* GSSAMovementPreviewInteractor.swift */,
-				EEAEFB0B269E08BD00F97E4D /* GSSAMovementPreviewViewController.xib */,
+				EE0766DD26BDD0A2005C7A8B /* GSSAMovementPreviewViewController.xib */,
 			);
 			path = GSSAMovementPreview;
 			sourceTree = "<group>";
@@ -1232,6 +1232,7 @@
 				10E9EDEC267D6BA400F45640 /* BASAMovementTableViewCell.xib in Resources */,
 				EE6DF84026B8546D0067066A /* GSSACardScannerViewController.xib in Resources */,
 				EEAFA797268CD75200DBC192 /* BeneficiaryButtonCell.xib in Resources */,
+				EE0766DE26BDD0A2005C7A8B /* GSSAMovementPreviewViewController.xib in Resources */,
 				10E9EE03267D6BC200F45640 /* MyMoneyAssets.xcassets in Resources */,
 				10E9EDBF267D6BA400F45640 /* BASACardLimitCell.xib in Resources */,
 				10E9EDB7267D6BA400F45640 /* RequestCardCell.xib in Resources */,
@@ -1247,7 +1248,6 @@
 				10E9EDE8267D6BA400F45640 /* BASAButtonsCell.xib in Resources */,
 				10E9EDBB267D6BA400F45640 /* BASACardControl.xib in Resources */,
 				EE80361226B9A67800631E8E /* GSSAFundSetCVVViewController.xib in Resources */,
-				EEAEFB11269E08BD00F97E4D /* GSSAMovementPreviewViewController.xib in Resources */,
 				10E9EDC1267D6BA400F45640 /* SectionCell.xib in Resources */,
 				10E9EDE0267D6BA400F45640 /* BASAHomeHeaderViewComponent.xib in Resources */,
 				10E9EDC8267D6BA400F45640 /* BASACardLimitsViewController.xib in Resources */,

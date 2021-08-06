@@ -14,13 +14,15 @@ class GSSAMovementPreviewRouter: GSSAMovementPreviewWireframeProtocol {
     
     weak var viewController: UIViewController?
     
-    static func createModule(item: DebitCardTransactionItem) -> UIViewController {
+    static func createModule(index: Int, item: DebitCardTransactionItemV2, array: DebitCardTransactionV2) -> UIViewController {
         let view = GSSAMovementPreviewViewController(nibName: "GSSAMovementPreviewViewController", bundle: Bundle(for: GSSAMovementPreviewRouter.self))
         let interactor = GSSAMovementPreviewInteractor()
         let router = GSSAMovementPreviewRouter()
         let presenter = GSSAMovementPreviewPresenter(interface: view, interactor: interactor, router: router)
         
-        view.data = item 
+        view.index = index
+        view.movementsArray = array
+        view.data = item
         view.presenter = presenter
         interactor.presenter = presenter
         router.viewController = view

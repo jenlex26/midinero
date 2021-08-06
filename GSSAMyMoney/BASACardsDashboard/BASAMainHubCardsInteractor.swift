@@ -155,6 +155,23 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
             }
         }
     }
+    
+    func TryGetDebitCardMovementsV2(Body: MovimientosBodyv2, Movements: @escaping (DebitCardTransactionV2?) -> ()) {
+        self.urlPath = "https://apigateway.superappbaz.com/"
+        self.strPathEndpoint = "integracion/superapp/dinero/captacion/cuentas/v2/movimientos/busquedas"
+        
+        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: Body, environment: GLOBAL_ENVIROMENT) { (objRes: DebitCardTransactionV2?, error) in
+            
+            if error.code == 0{
+                Movements(objRes)
+            } else if error.code == 400{
+                Movements(DebitCardTransactionV2.init(mensaje: "", folio: "", resultado: DebitCardTransactionResultV2.init(movimientos:[])))
+            }else{
+                Movements(nil)
+                debugPrint(error)
+            }
+        }
+    }
 }
 
     

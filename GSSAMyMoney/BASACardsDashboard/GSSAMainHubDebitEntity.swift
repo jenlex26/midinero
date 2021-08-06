@@ -81,3 +81,40 @@ struct DebitCardTransactionItem: Codable {
     var importe, saldo, descripcion, fechaOperacion: String?
     var numeroMovimiento, codigoDivisa: String?
 }
+
+// MARK: - MovimientosBodyv2
+struct MovimientosBodyv2: Codable {
+    var transaccion: MovementsBodyDataV2?
+}
+
+struct MovementsBodyDataV2: Codable {
+    var sicu, numeroCuenta: String?
+    var geolocalizacion: Geolocalizacion?
+}
+
+// MARK: - Geolocalizacion
+struct Geolocalizacion: Codable {
+    var latitud, longitud: String?
+}
+
+// MARK: - DebitCardTransactionV2
+struct DebitCardTransactionV2: Codable {
+    var mensaje, folio: String?
+    var resultado: DebitCardTransactionResultV2?
+}
+
+// MARK: - Resultado
+struct DebitCardTransactionResultV2: Codable {
+    var movimientos: [DebitCardTransactionItemV2]?
+}
+
+// MARK: - Movimiento
+struct DebitCardTransactionItemV2: Codable {
+    var idOperacion, idCodigo, idClasificacionProducto, folio: String?
+    var fecha, hora, concepto, descripcion: String?
+    var importe, indicadorNomina, numeroOperacion: String?
+    var descripcionOperacion: String?
+    var urlFoto: String?
+    var descripcionBeneficiario: String?
+    var nombreOrdenante: String?
+}

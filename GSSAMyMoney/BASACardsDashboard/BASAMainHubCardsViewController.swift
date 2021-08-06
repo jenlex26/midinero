@@ -26,6 +26,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     
     var accountBalance: BalanceResponse?
     var debitCardMovements: DebitCardTransaction?
+    var debitCardMovementsV2: DebitCardTransactionV2?
     var lendsData: LendsResponse?
     var creditCardData: CreditCardResponse?
     var creditCardBalance: CreditCardBalanceResponse?
@@ -111,6 +112,24 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
             self.BasaMainHubTableView.isHidden = false
             if Movements != nil{
                 debitCardMovements = Movements
+                setTableForDebitCard()
+                loadActivateCard()
+            }else{
+                self.presentBottomAlertFullData(status: .error, message: "No podemos cargar tus movimientos en este momento, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
+            }
+        })
+    }
+    
+    func loadDebitMovementsV2(){
+        let bodyProd = MovimientosBody(transaccion: MovementsBodyData(numeroCuenta: accountNumber?.first?.key ?? (GSSISessionInfo.sharedInstance.gsUser.mainAccount?.encryptAlnova()), fechaInicial: "01/01/0001", fechaFinal: "01/01/0001"))
+        
+        let BodyDevelop =  MovimientosBodyv2.init(transaccion: MovementsBodyDataV2.init(sicu: GSSISessionInfo.sharedInstance.gsUser.SICU, numeroCuenta: "01271156141200001956".formatToTnuocca14Digits().encryptAlnova(), geolocalizacion: Geolocalizacion.init(latitud: "", longitud: "")))
+        
+        self.presenter?.requestDebitCardMovementsV2(Body: BodyDevelop, Movements: { [self] Movements in
+            GSVCLoader.hide()
+            self.BasaMainHubTableView.isHidden = false
+            if Movements != nil{
+                debitCardMovementsV2 = Movements
                 setTableForDebitCard()
                 loadActivateCard()
             }else{
@@ -244,18 +263,18 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
             
             if  debitCardMovements!.resultado.movimientos.count > 0{
                 
-            for item in debitCardMovements!.resultado.movimientos{
-                
-                if  item.descripcion?.alnovaDecrypt() != ""{
-                    print("fecha: \(item.fechaOperacion?.alnovaDecrypt() ?? "")")
-                    let movementCell = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAMovementCell") as! BASAMovementTableViewCell
-                    movementCell.lblDate.text = item.fechaOperacion?.alnovaDecrypt().dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy")
-                    movementCell.lblTitle.text = item.descripcion?.alnovaDecrypt()
-                    movementCell.lblAmount.text = item.importe?.alnovaDecrypt().moneyFormat()
-                    movementCell.setArrow(amount: item.importe?.alnovaDecrypt() ?? "")
-                    cellsArray.append([movementCell:88.0])
+                for item in debitCardMovements!.resultado.movimientos{
+                    
+                    if  item.descripcion?.alnovaDecrypt() != ""{
+                        print("fecha: \(item.fechaOperacion?.alnovaDecrypt() ?? "")")
+                        let movementCell = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAMovementCell") as! BASAMovementTableViewCell
+                        movementCell.lblDate.text = item.fechaOperacion?.alnovaDecrypt().dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy")
+                        movementCell.lblTitle.text = item.descripcion?.alnovaDecrypt()
+                        movementCell.lblAmount.text = item.importe?.alnovaDecrypt().moneyFormat()
+                        movementCell.setArrow(amount: item.importe?.alnovaDecrypt() ?? "")
+                        cellsArray.append([movementCell:88.0])
+                    }
                 }
-            }
             }else{
                 let emptyMovements = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "GSNoMovementsCell")!
                 cellsArray.append([emptyMovements:321])
@@ -460,10 +479,12 @@ extension BASAMainHubCardsViewController:UITableViewDelegate,UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = BasaMainHubTableView.cellForRow(at: indexPath)
         if cell is BASAMovementTableViewCell{
-            let item = cell as! BASAMovementTableViewCell
-            let data = DebitCardTransactionItem.init(importe: item.lblAmount.text, saldo: "", descripcion: item.lblTitle.text, fechaOperacion: item.lblDate.text, numeroMovimiento: "", codigoDivisa: "")
-            let view = GSSAMovementPreviewRouter.createModule(item: data)
-           // self.navigationController?.pushViewController(view, animated: true)
+            if debitCardMovementsV2?.resultado?.movimientos?.count ?? 0 > 0{
+                let item = cell as! BASAMovementTableViewCell
+                let data = debitCardMovementsV2?.resultado?.movimientos![item.tag]
+                let view = GSSAMovementPreviewRouter.createModule(index: item.tag, item: data!, array: debitCardMovementsV2!)
+                self.navigationController?.pushViewController(view, animated: true)
+            }
         }
     }
     
