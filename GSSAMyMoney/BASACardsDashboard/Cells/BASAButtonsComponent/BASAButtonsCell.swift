@@ -44,8 +44,6 @@ class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
                 cashWithdrawalView.isHidden = false
             }
         }
-        
-        
     }
     
     @objc func updateData(notification: Notification){

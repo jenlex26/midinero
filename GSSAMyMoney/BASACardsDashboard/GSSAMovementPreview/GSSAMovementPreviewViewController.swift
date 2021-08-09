@@ -35,8 +35,10 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
         btnArrow.makeCircular()
         btnArrowLeft.makeCircular()
         tableContainer.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
+        tableContainer.layoutIfNeeded()
         table.delegate = self
         table.dataSource = self
+        table.alwaysBounceVertical = false
         registerCells()
         readData(transaction: data)
     }
@@ -145,7 +147,8 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
     }
     
     @IBAction func close(_ sender: Any){
-        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true, completion: nil)
+       // self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func share(_ sender: Any){

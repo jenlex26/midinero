@@ -481,7 +481,9 @@ extension BASAMainHubCardsViewController:UITableViewDelegate,UITableViewDataSour
                 let item = cell as! BASAMovementTableViewCell
                 let data = debitCardMovementsV2?.resultado?.movimientos![item.tag]
                 let view = GSSAMovementPreviewRouter.createModule(index: item.tag, item: data!, array: debitCardMovementsV2!)
-                self.navigationController?.pushViewController(view, animated: true)
+                //self.navigationController?.pushViewController(view, animated: true)
+                view.modalPresentationStyle = .overCurrentContext
+                self.present(view, animated: true, completion: nil)
             }
         }
     }
