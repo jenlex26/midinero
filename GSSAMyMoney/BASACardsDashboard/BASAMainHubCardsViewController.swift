@@ -266,7 +266,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                     if  item.descripcion?.alnovaDecrypt() != ""{
                         print("fecha: \(item.fecha?.alnovaDecrypt() ?? "")")
                         let movementCell = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAMovementCell") as! BASAMovementTableViewCell
-                        movementCell.lblDate.text = item.fecha?.alnovaDecrypt().dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy")
+                        movementCell.lblDate.text = item.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy")
                         movementCell.tag = index
                         movementCell.lblTitle.text = item.concepto?.alnovaDecrypt()
                         movementCell.lblAmount.text = item.importe?.alnovaDecrypt().moneyFormat().replacingOccurrences(of: "+", with: "$").replacingOccurrences(of: "-", with: "-$")
@@ -282,7 +282,6 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
             let emptyMovements = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "GSNoMovementsCell")!
             cellsArray.append([emptyMovements:321])
         }
-        
         addTableComponents()
     }
     

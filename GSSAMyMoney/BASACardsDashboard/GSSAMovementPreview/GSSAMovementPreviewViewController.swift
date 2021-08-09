@@ -100,12 +100,6 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
             btnArrowLeft.isHidden = false
         }
         
-        if index >= movementsArray.resultado?.movimientos?.count ?? 0{
-            print("No es el último")
-        }else{
-            print("último")
-        }
-        
         if ((movementsArray.resultado?.movimientos?.count ?? 0) - (index ?? 0)) == 1{
             btnArrow.isHidden = true
         }else{
