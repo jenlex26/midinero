@@ -21,6 +21,8 @@ class GSSARequestDebitCardPresenter: GSSARequestDebitCardPresenterProtocol {
         self.router = router
     }
     
-   
+    func requestGetShippingCost(Response: @escaping (PhysicalCardShippingAmountResponse?) -> ()){
+        interactor?.tryGetShippingCost(Response: Response)
+    }
     
 }

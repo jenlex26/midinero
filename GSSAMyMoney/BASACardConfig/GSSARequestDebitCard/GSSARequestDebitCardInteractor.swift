@@ -9,8 +9,70 @@
 //
 
 import UIKit
+import GSSAServiceCoordinator
+import GSSASecurityManager
+import GSSAFunctionalUtilities
+import GSSASessionInfo
+import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
-class GSSARequestDebitCardInteractor: GSSARequestDebitCardInteractorProtocol {
-
+class GSSARequestDebitCardInteractor: GSSAURLSessionTaskCoordinatorBridge, GSSARequestDebitCardInteractorProtocol {
     weak var presenter: GSSARequestDebitCardPresenterProtocol?
+    
+    func tryGetShippingCost(Response: @escaping (PhysicalCardShippingAmountResponse?) -> ()){
+        self.urlPath = "https://apigateway.superappbaz.com/"
+        self.strPathEndpoint = "desarrollo/superapp/dinero/captacion/gestion-tarjetas-fisicas/v1/tarjetas/busquedas/comision"
+        sendRequest(strUrl: strPathEndpoint, method: .GET, arrHeaders: [], environment: .none) { (objRes: PhysicalCardShippingAmountResponse?, error) in
+            if error.code == 0 {
+                Response(objRes)
+            } else {
+                self.customRequest()
+                Response(nil)
+                debugPrint(error)
+            }
+        }
+    }
+    
+    func customRequest(){
+        let semaphore = DispatchSemaphore (value: 0)
+        var request = URLRequest(url: URL(string: "https://apigateway.superappbaz.com/desarrollo/superapp/dinero/captacion/gestion-tarjetas-fisicas/v1/tarjetas/busquedas/comision")!,timeoutInterval: Double.infinity)
+        request.addValue("3bad1290ac4600a569162efaa09117ea", forHTTPHeaderField: "x-sicu")
+        request.addValue("123e4567-e89b-12d3-a456-426655440000", forHTTPHeaderField: "x-id-interaccion")
+        request.addValue("Super movil", forHTTPHeaderField: "x-nombre-dispositivo")
+        request.addValue("3bad1290ac4600a569162efaa09117ea", forHTTPHeaderField: "x-id-dispositivo")
+        request.addValue("Android", forHTTPHeaderField: "x-sistema-dispositivo")
+        request.addValue("6.0", forHTTPHeaderField: "x-version-dispositivo")
+        request.addValue("2.1.1", forHTTPHeaderField: "x-version-aplicacion")
+        request.addValue("P40", forHTTPHeaderField: "x-modelo-dispositivo")
+        request.addValue("Huawei", forHTTPHeaderField: "x-fabricante-dispositivo")
+        request.addValue("mt6735", forHTTPHeaderField: "x-serie-procesador")
+        request.addValue("Telcel", forHTTPHeaderField: "x-operador-telefonia")
+        request.addValue("19.49781290", forHTTPHeaderField: "x-latitud")
+        request.addValue("-99.12698712", forHTTPHeaderField: "x-longitud")
+        request.addValue("SRfVZrTYvdm7mzzZmcuiDViACkAx", forHTTPHeaderField: "x-token-usuario")
+        request.addValue("99553877", forHTTPHeaderField: "x-id-lealtad")
+        //request.addValue("Bearer eyJraWQiOiJkczdRNlBTbE9ZNStuMnJjXC9PdjJqTGp5eWZRS2VJdmFjRXcwWHlNQm80cz0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxOGg4dmFudnJoNHB1aTFscm50YzFuaWxqZiIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiVXN1YXJpb1wvZGVsZXRlIFVzdWFyaW9cL3JlYWQgVXN1YXJpb1wvdXBkYXRlIiwiYXV0aF90aW1lIjoxNjI4NTQzOTI5LCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9FaEZuSU9JRzAiLCJleHAiOjE2Mjg1NDc1MjksImlhdCI6MTYyODU0MzkyOSwidmVyc2lvbiI6MiwianRpIjoiMjU5YmMxMGQtZGI5Ny00YmU4LTk3OTMtNTA0ODM3M2UyYTI0IiwiY2xpZW50X2lkIjoiMThoOHZhbnZyaDRwdWkxbHJudGMxbmlsamYifQ.jNjWb1Ocl72L6svbyREPH1d303lRip5mrEiCmwVo-iW5_aVgcXegZZqvMsznxh-Gvf0u1SqrCOXO4K-Jf897inLT3UVHv05mItAkmJKZ39a39V3tLbR5IYzE0Qy1xQKJG9z05uXiqMTVQO6SBFU89r8qbmJoC19zYOjZ0ZC7fnI47ymMpd5n9urcbnxccikUtAAHiEQZSHtZ80xMzyg_F_M-O-bhaXo0-KBJF_pOtuNr5f7pYLRU_jmsLBRisgymOJwVhwHCPLJSgY2uEiNOVBItvK-Qz03WqxYoj3ICHt8nhBVhrPygf9FdQt4fVtKFjHLUKH6hR-n_JuD7mwu7kQ", forHTTPHeaderField: "Authorization")
+        request.addValue("XSRF-TOKEN=abd6f7dc-7383-4150-aabd-544647e7d0b3", forHTTPHeaderField: "Cookie")
+        
+        request.httpMethod = "GET"
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data else {
+                print(String(describing: error))
+                semaphore.signal()
+                return
+            }
+            
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "PhysicalCardShippingAmountResponse"), object: data, userInfo: nil))
+            }
+            semaphore.signal()
+        }
+        
+        task.resume()
+        semaphore.wait()
+        
+    }
 }
