@@ -9,8 +9,30 @@
 //
 
 import UIKit
+import GSSAServiceCoordinator
+import GSSASecurityManager
+import GSSASessionInfo
+import GSSAFunctionalUtilities
 
-class BASACardConfigInteractor: BASACardConfigInteractorProtocol {
-
+class BASACardConfigInteractor:  GSSAURLSessionTaskCoordinatorBridge,  BASACardConfigInteractorProtocol {
     weak var presenter: BASACardConfigPresenterProtocol?
+    
+    func tryGetRequestedCardStatus(CardSearchResponse: @escaping () -> ()){
+        self.urlPath = "https://apigateway.superappbaz.com/"
+        self.strPathEndpoint = "integracion/superapp/dinero/captacion/gestion-tarjetas-fisicas/v1/tarjetas/solicitudes/busquedas/estatus"
+  
+        let bodyTest = CardConfigCardSearchBody.init(transaccion: CardConfigCardSearchTransaccion.init(primerTokenVerificacion: "fac2ac44565db5312fb407c3c9482d04", sicu: GSSISessionInfo.sharedInstance.gsUser.SICU, numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount, idTipoTarjeta: "CP"))
+        
+        sendRequest(strUrl: strPathEndpoint, method: .POST, objBody: bodyTest, environment: GLOBAL_ENVIROMENT) { (objRes: DebitCardStatementData?, error) in
+            debugPrint(objRes as Any)
+            if error.code == 0 {
+                print("correcto")
+                debugPrint(objRes as Any)
+            } else {
+                debugPrint(error)
+            }
+        }
+    }
+    
+    
 }

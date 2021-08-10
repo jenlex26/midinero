@@ -21,5 +21,33 @@ class GSSAFundSetCardNumberPresenter: GSSAFundSetCardNumberPresenterProtocol {
         self.interactor = interactor
         self.router = router
     }
+    
+    func checkTextFields(cardNumber: String?, expiration: String?, cvv: String?) {
+        interactor?.checkTextFields(cardNumber: cardNumber, expiration: expiration, cvv: cvv)
+    }
+    
+    func areTextFieldsCorrect(cardNumber: String, expiration: String, cvv: String) {
+        view?.areTextFieldsCorrect(cardNumber: cardNumber, expiration: expiration, cvv: cvv)
+    }
+    
+    func cardNumberIsEmpty(_ isEmpty: Bool) {
+        view?.cardNumberIsEmpty(isEmpty)
+    }
+    
+    func expirationIsEmpty(_ isEmpty: Bool) {
+        view?.expirationIsEmpty(isEmpty)
+    }
+    
+    func cvvIsEmpty(_ isEmpty: Bool) {
+        view?.cvvIsEmpty(isEmpty)
+    }
+    
+    func goToAddAddress(_ view: UIViewController) {
+        router.goToAddAddress(view)
+    }
+    
+    func goBack() {
+        router.goBack()
+    }
 
 }

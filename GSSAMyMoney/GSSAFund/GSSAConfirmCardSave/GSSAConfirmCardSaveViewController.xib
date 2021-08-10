@@ -9,10 +9,12 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GSSAConfirmCardSaveViewController" customModule="GSSAMyMoney" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GSSAConfirmCardSaveViewController" customModule="GSSAFund" customModuleProvider="target">
             <connections>
+                <outlet property="aliasTextField" destination="TO7-nl-JrC" id="2Ss-ZB-ARa"/>
                 <outlet property="cardInfoView" destination="F1L-Qf-AGp" id="Jvb-ft-8FO"/>
                 <outlet property="editBtn" destination="Qb6-LW-Bud" id="uDx-XW-kcm"/>
+                <outlet property="saveCardSwitch" destination="UTC-VX-2O7" id="NBv-BX-Uig"/>
                 <outlet property="saveView" destination="pzp-vz-yRb" id="9pC-c6-3qB"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="xzo-I3-Tap"/>
             </connections>
@@ -38,7 +40,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nueva tarjeta" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5UY-Gu-i9w" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                            <rect key="frame" x="105" y="14" width="110" height="22.5"/>
+                            <rect key="frame" x="109.5" y="15" width="101.5" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -68,35 +70,13 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="IKr-R1-AbG">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="228"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mst-Fn-kPl">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¡Todo Listo!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="69g-JX-m3z" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                                            <rect key="frame" x="20" y="10" width="300" height="28"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="styleType">
-                                                                    <integer key="value" value="5"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                            </userDefinedRuntimeAttributes>
-                                                        </label>
-                                                    </subviews>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="40" id="1VF-lM-zsJ"/>
-                                                        <constraint firstItem="69g-JX-m3z" firstAttribute="top" secondItem="Mst-Fn-kPl" secondAttribute="top" constant="10" id="2i6-LZ-tK7"/>
-                                                        <constraint firstAttribute="trailing" secondItem="69g-JX-m3z" secondAttribute="trailing" id="qcH-1j-kNI"/>
-                                                    </constraints>
-                                                </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sDK-cr-8oX">
-                                                    <rect key="frame" x="0.0" y="40" width="320" height="128"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tarjeta agregada" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qqk-KG-FUV" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                                            <rect key="frame" x="20" y="10" width="123.5" height="20"/>
+                                                            <rect key="frame" x="20" y="10" width="127.5" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -107,7 +87,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qb6-LW-Bud" customClass="GSVCButton" customModule="GSSAVisualComponents">
-                                                            <rect key="frame" x="268" y="5.5" width="42" height="29"/>
+                                                            <rect key="frame" x="258" y="6" width="42" height="29"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                             <color key="tintColor" red="0.1017127519" green="0.36301024790000003" blue="0.53162484219999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <state key="normal" title="Editar">
@@ -118,9 +98,12 @@
                                                                     <integer key="value" value="11"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
+                                                            <connections>
+                                                                <action selector="editAction:" destination="-1" eventType="touchUpInside" id="cgc-Zu-Qbd"/>
+                                                            </connections>
                                                         </button>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F1L-Qf-AGp" customClass="GSSACardInfoView" customModule="GSSAMyMoney" customModuleProvider="target">
-                                                            <rect key="frame" x="20" y="40" width="290" height="60"/>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F1L-Qf-AGp" customClass="GSSACardInfoView" customModule="GSSAFund" customModuleProvider="target">
+                                                            <rect key="frame" x="20" y="40.5" width="290" height="60"/>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="60" id="Xna-kW-uhr"/>
@@ -129,18 +112,18 @@
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="trailing" secondItem="Qb6-LW-Bud" secondAttribute="trailing" constant="10" id="8Te-zN-pK7"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Qb6-LW-Bud" secondAttribute="trailing" constant="20" id="8Te-zN-pK7"/>
                                                         <constraint firstItem="Qqk-KG-FUV" firstAttribute="top" secondItem="sDK-cr-8oX" secondAttribute="top" constant="10" id="KRL-DV-khX"/>
                                                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="F1L-Qf-AGp" secondAttribute="bottom" constant="10" id="OW4-CG-Ppp"/>
                                                         <constraint firstItem="F1L-Qf-AGp" firstAttribute="leading" secondItem="Qqk-KG-FUV" secondAttribute="leading" id="OmA-WK-5dn"/>
                                                         <constraint firstAttribute="trailing" secondItem="F1L-Qf-AGp" secondAttribute="trailing" constant="10" id="YN2-FX-kFp"/>
                                                         <constraint firstItem="Qb6-LW-Bud" firstAttribute="centerY" secondItem="Qqk-KG-FUV" secondAttribute="centerY" id="ksu-iT-vjl"/>
-                                                        <constraint firstAttribute="height" constant="128" id="qFD-ai-eqB"/>
+                                                        <constraint firstAttribute="height" constant="130" id="qFD-ai-eqB"/>
                                                         <constraint firstItem="F1L-Qf-AGp" firstAttribute="top" secondItem="Qqk-KG-FUV" secondAttribute="bottom" constant="10" id="rsa-8v-QSg"/>
                                                     </constraints>
                                                 </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pzp-vz-yRb">
-                                                    <rect key="frame" x="0.0" y="168" width="320" height="60"/>
+                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pzp-vz-yRb">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Guardar Tarjeta" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9kA-hC-p6Q">
                                                             <rect key="frame" x="20" y="20" width="223" height="20.5"/>
@@ -162,10 +145,10 @@
                                                     </constraints>
                                                 </view>
                                                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C34-hY-coP">
-                                                    <rect key="frame" x="0.0" y="228" width="320" height="140"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alias (opcional)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="see-8A-XZa" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                                            <rect key="frame" x="24" y="20" width="272" height="22.5"/>
+                                                            <rect key="frame" x="24" y="20" width="272" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -176,15 +159,19 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TO7-nl-JrC" customClass="GSVCTextField" customModule="GSSAVisualComponents">
-                                                            <rect key="frame" x="24" y="53.5" width="272" height="50"/>
+                                                            <rect key="frame" x="24" y="51.5" width="272" height="50"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="50" id="442-c6-8kY"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="name"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="image" keyPath="image" value="xmark" catalog="system"/>
+                                                                <userDefinedRuntimeAttribute type="image" keyPath="imageTyped" value="xmark" catalog="system"/>
+                                                            </userDefinedRuntimeAttributes>
                                                         </textField>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="El nombre con el que se identificará la cuenta." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QF0-PN-9pw" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                                            <rect key="frame" x="24" y="108.5" width="272" height="39.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="El nombre con el que se identificará la tarjeta." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QF0-PN-9pw" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                                                            <rect key="frame" x="24" y="106.5" width="272" height="13.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -212,7 +199,7 @@
                                             </subviews>
                                         </stackView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bs7-28-5kl" customClass="GSVCButton" customModule="GSSAVisualComponents">
-                                            <rect key="frame" x="44" y="422" width="232" height="48"/>
+                                            <rect key="frame" x="44" y="430" width="232" height="48"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="48" id="EsB-7L-Qc5"/>
                                                 <constraint firstAttribute="width" constant="232" id="c1N-eR-8E4"/>
@@ -233,7 +220,7 @@
                                         <constraint firstItem="bs7-28-5kl" firstAttribute="centerX" secondItem="XS5-Or-rp1" secondAttribute="centerX" id="DtJ-Sg-v5V"/>
                                         <constraint firstItem="bs7-28-5kl" firstAttribute="top" relation="greaterThanOrEqual" secondItem="IKr-R1-AbG" secondAttribute="bottom" constant="24" id="Qte-K5-WYG"/>
                                         <constraint firstItem="IKr-R1-AbG" firstAttribute="top" secondItem="XS5-Or-rp1" secondAttribute="top" id="TFn-yE-eAx"/>
-                                        <constraint firstAttribute="bottom" secondItem="bs7-28-5kl" secondAttribute="bottom" constant="48" id="gHV-xC-lUb"/>
+                                        <constraint firstAttribute="bottom" secondItem="bs7-28-5kl" secondAttribute="bottom" constant="40" id="gHV-xC-lUb"/>
                                         <constraint firstItem="IKr-R1-AbG" firstAttribute="leading" secondItem="XS5-Or-rp1" secondAttribute="leading" id="gdl-Pn-5J9"/>
                                         <constraint firstAttribute="trailing" secondItem="IKr-R1-AbG" secondAttribute="trailing" id="xhh-zY-464"/>
                                     </constraints>
@@ -264,7 +251,6 @@
                 <constraint firstItem="ELe-vA-Wfe" firstAttribute="top" secondItem="FMX-Rh-bSw" secondAttribute="bottom" id="52e-M1-Tvk"/>
                 <constraint firstItem="ELe-vA-Wfe" firstAttribute="leading" secondItem="Ti0-Eb-JsU" secondAttribute="leading" id="BGT-Bd-Kpv"/>
                 <constraint firstItem="Qqk-KG-FUV" firstAttribute="leading" secondItem="7tz-bx-H61" secondAttribute="leading" id="Jlm-Zu-fuZ"/>
-                <constraint firstItem="69g-JX-m3z" firstAttribute="leading" secondItem="7tz-bx-H61" secondAttribute="leading" id="O1q-Aw-vGM"/>
                 <constraint firstItem="Ti0-Eb-JsU" firstAttribute="bottom" secondItem="ELe-vA-Wfe" secondAttribute="bottom" id="QRe-ew-6Lb"/>
                 <constraint firstItem="FMX-Rh-bSw" firstAttribute="top" secondItem="Ti0-Eb-JsU" secondAttribute="top" id="bKW-1W-hB2"/>
                 <constraint firstItem="Ti0-Eb-JsU" firstAttribute="trailing" secondItem="ELe-vA-Wfe" secondAttribute="trailing" id="cmq-B0-jlW"/>
@@ -277,30 +263,27 @@
     </objects>
     <designables>
         <designable name="5UY-Gu-i9w">
-            <size key="intrinsicContentSize" width="110" height="22.5"/>
+            <size key="intrinsicContentSize" width="101.5" height="20.5"/>
         </designable>
-        <designable name="69g-JX-m3z">
-            <size key="intrinsicContentSize" width="113.5" height="28"/>
-        </designable>
-        <designable name="FMX-Rh-bSw"/>
         <designable name="QF0-PN-9pw">
-            <size key="intrinsicContentSize" width="323.5" height="20"/>
+            <size key="intrinsicContentSize" width="240" height="13.5"/>
         </designable>
         <designable name="Qb6-LW-Bud">
             <size key="intrinsicContentSize" width="42" height="29"/>
         </designable>
         <designable name="Qqk-KG-FUV">
-            <size key="intrinsicContentSize" width="123.5" height="20"/>
+            <size key="intrinsicContentSize" width="127.5" height="20.5"/>
         </designable>
         <designable name="bs7-28-5kl">
-            <size key="intrinsicContentSize" width="84" height="35"/>
+            <size key="intrinsicContentSize" width="67" height="30"/>
         </designable>
         <designable name="see-8A-XZa">
-            <size key="intrinsicContentSize" width="127" height="22.5"/>
+            <size key="intrinsicContentSize" width="117" height="20.5"/>
         </designable>
     </designables>
     <resources>
         <image name="arrow.backward" catalog="system" width="128" height="98"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

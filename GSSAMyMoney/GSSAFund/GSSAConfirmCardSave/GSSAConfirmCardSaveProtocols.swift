@@ -9,24 +9,40 @@
 //
 
 import Foundation
+import baz_ios_sdk_link_pago
 
 //MARK: Wireframe -
 protocol GSSAConfirmCardSaveWireframeProtocol: class {
-
+    func goToNextFlow()
+    func returnTo(vc: AnyClass, animated: Bool)
+    func goToError(message: String, isDouble: Bool)
 }
+
 //MARK: Presenter -
 protocol GSSAConfirmCardSavePresenterProtocol: class {
-
+    
+    func requestSaveCard(tokenCardRequest: LNKPG_TokenCardRequestFacade)
+    func onSuccess(_ response: LNKPG_TokenCardResponseFacade)
+    func onError()
+    
+    func goToNextFlow()
+    func returnTo(vc: AnyClass, animated: Bool)
+    func goToError(message: String, isDouble: Bool)
 }
 
 //MARK: Interactor -
 protocol GSSAConfirmCardSaveInteractorProtocol: class {
-
-  var presenter: GSSAConfirmCardSavePresenterProtocol?  { get set }
+    
+    var presenter: GSSAConfirmCardSavePresenterProtocol?  { get set }
+    
+    func requestSaveCard(tokenCardRequest: LNKPG_TokenCardRequestFacade)
 }
 
 //MARK: View -
 protocol GSSAConfirmCardSaveViewProtocol: class {
 
   var presenter: GSSAConfirmCardSavePresenterProtocol?  { get set }
+    
+    func onSuccess(_ response: LNKPG_TokenCardResponseFacade)
+    func onError()
 }

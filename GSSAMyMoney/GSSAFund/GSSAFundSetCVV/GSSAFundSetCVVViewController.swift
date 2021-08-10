@@ -11,28 +11,109 @@
 import UIKit
 import GSSAVisualTemplates
 import GSSAVisualComponents
+import baz_ios_sdk_link_pago
 
-class GSSAFundSetCVVViewController: GSSAMasterViewController, GSSAFundSetCVVViewProtocol, UITextFieldDelegate {
-    
-    @IBOutlet weak var txtCVV: GSVCTextField!
-    @IBOutlet weak var cardInfoView: GSSACardInfoView!
+class GSSAFundSetCVVViewController: GSSAMasterViewController, UITextFieldDelegate {
     
     var presenter: GSSAFundSetCVVPresenterProtocol?
     
+    //MARK: - @IBOutlets
+    @IBOutlet weak var cardInfoView: GSSACardInfoView!
+    @IBOutlet weak var txtCVV: GSVCTextField!
+    @IBOutlet weak var cvcInfoLabel: GSVCLabel!
+    
+    //MARK: - Properties
+    var token: String = ""
+    
+    //MARK: - Life cycle
 	override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-        self.title = "Recarga tu tarjeta"
-        txtCVV.delegate = self
-        cardInfoView.setupInfo(name: "Elena Padilla López", bankName: "BBVA", accountNumber: "5678 8901 2345 6789")
+
+        setView()
+        searchAccount()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        setProgressLine(value: 0.25, animated: true)
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        setProgressLine(value: 0.50, animated: true)
     }
+    
+    //MARK: - Methods
 
-    @IBAction func next(_ sender: Any){
-        let view = GSSACardFundResumeRouter.createModule()
-        self.navigationController?.pushViewController(view, animated: true)
+
+    //MARK: - @IBActions
+    @IBAction func next(_ sender: Any) {
+        txtCVV.setAppearance(.active)
+        cvcInfoLabel.isHidden = false
+        
+        guard let cvv = txtCVV.text,
+              cvv.count == 3,
+              let responseCard = GSSAFundSharedVariables.shared.cardInformationResponse,
+              let accountNumber = responseCard.card?.number,
+              let expirationMonth = responseCard.card?.expirationMonth,
+              let expirationYear = responseCard.card?.expirationYear else {
+            
+            cvcInfoLabel.isHidden = true
+            txtCVV.setAppearance(.error(message: "CVV invalido"))
+            return
+        }
+        
+        GSSAFundSharedVariables.shared.cvv = cvv
+        GSSAFundSharedVariables.shared.enrollmentRequest = LNKPG_EnrollmentRequestFacade(merchantID: GSSAFundSharedVariables.shared.ecommerceResponse?.comerciosCybs?.id ?? "", merchantReference: GSSAFundSharedVariables.shared.idTransaccionSuperApp ?? "", amount: GSSAFundSharedVariables.shared.amount ?? "", transactionCurrencyCode: GSSAFundSharedVariables.shared.currencyCode, card: LNKPG_EnrollmentRequestFacade.__card(number: accountNumber, expirationMonth: expirationMonth, expirationYear: expirationYear, type: GSSAFundSharedVariables.shared.getCardType(cardNumer: accountNumber)))
+        
+        presenter?.goToNextFlow()
+    }
+}
+
+//MARK: - View Methods
+extension GSSAFundSetCVVViewController: GSSAFundSetCVVViewProtocol {
+    func searchAccountSuccess(response: LNKPG_CardInformationResponseFacade) {
+        GSVCLoader.hide()
+        
+        guard let firstName = response.payer?.firstName,
+              let lastName = response.payer?.lastName,
+              let type = response.card?.type,
+              let accountNumber = response.card?.number else {
+
+           showError()
+            return 
+        }
+        
+        GSSAFundSharedVariables.shared.account = accountNumber
+        GSSAFundSharedVariables.shared.cardInformationResponse = response
+        cardInfoView.setupInfo(name: firstName + " " + lastName, bankName: type, accountNumber: accountNumber)
+    }
+    
+    func searchAccountError() {
+        GSVCLoader.hide()
+        
+       showError()
+    }
+}
+
+
+//MARK: - Private functions
+
+extension GSSAFundSetCVVViewController {
+    private func setView() {
+        self.title = "Recarga tu tarjeta"
+        
+        txtCVV.delegate = self
+        txtCVV.contentFormat(.drowssap)
+        txtCVV.rightButtonAction({ [weak self] selected in
+            guard let self = self else { return }
+            self.txtCVV.isSecureTextEntry = !selected
+        })
+    }
+    
+    private func searchAccount(){
+        GSVCLoader.show()
+        presenter?.searchAccount(token: token)
+    }
+    
+    private func showError(){
+        let message = "Ocurrio un error intentelo más tarde"
+        
+        presenter?.goToError(message: message, isDouble: false)
     }
 }

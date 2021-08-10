@@ -21,5 +21,8 @@ class BASACardConfigPresenter: BASACardConfigPresenterProtocol {
         self.interactor = interactor
         self.router = router
     }
-
+    
+    func requestCardStatus(CardSearchResponse: @escaping () -> ()){
+        interactor?.tryGetRequestedCardStatus(CardSearchResponse: CardSearchResponse)
+    }
 }

@@ -46,7 +46,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Configuración" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m6G-Cy-gDJ" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                            <rect key="frame" x="130" y="14" width="115.5" height="22.5"/>
+                            <rect key="frame" x="134" y="15" width="107" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -86,7 +86,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Usar ubicación actual" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ePR-46-zVL" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                                    <rect key="frame" x="58" y="24.5" width="243" height="22.5"/>
+                                                    <rect key="frame" x="58" y="25.5" width="243" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -98,6 +98,9 @@
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uBn-pp-3Lr">
                                                     <rect key="frame" x="0.0" y="0.0" width="311" height="71"/>
+                                                    <connections>
+                                                        <action selector="useCurrentLocation:" destination="-1" eventType="touchUpInside" id="mUo-cR-XFW"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -132,7 +135,7 @@
                                     <rect key="frame" x="0.0" y="90" width="375" height="100"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Código postal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0a3-fx-wVt" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                            <rect key="frame" x="24" y="10" width="327" height="22.5"/>
+                                            <rect key="frame" x="24" y="10" width="327" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -143,7 +146,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZnE-fN-Dnr" customClass="GSVCTextField" customModule="GSSAVisualComponents">
-                                            <rect key="frame" x="24" y="43.5" width="327" height="50"/>
+                                            <rect key="frame" x="24" y="41.5" width="327" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="l9N-pp-odC"/>
                                             </constraints>
@@ -151,7 +154,7 @@
                                             <textInputTraits key="textInputTraits" keyboardType="numberPad" textContentType="postal-code"/>
                                         </textField>
                                         <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hot-a2-0SS">
-                                            <rect key="frame" x="0.0" y="32.5" width="375" height="67.5"/>
+                                            <rect key="frame" x="0.0" y="30.5" width="375" height="69.5"/>
                                             <connections>
                                                 <action selector="changePostalCode:" destination="-1" eventType="touchUpInside" id="wgF-SV-aY2"/>
                                             </connections>
@@ -176,7 +179,7 @@
                                     <rect key="frame" x="0.0" y="190" width="375" height="100"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Colonia" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZVN-7X-BZX" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                            <rect key="frame" x="24" y="10" width="327" height="22.5"/>
+                                            <rect key="frame" x="24" y="10" width="327" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -187,7 +190,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vew-l6-Ogl" customClass="GSVCTextField" customModule="GSSAVisualComponents">
-                                            <rect key="frame" x="24" y="43.5" width="327" height="50"/>
+                                            <rect key="frame" x="24" y="41.5" width="327" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="Qap-Sy-hDi"/>
                                             </constraints>
@@ -210,7 +213,7 @@
                                     <rect key="frame" x="0.0" y="190" width="375" height="100"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Jf-B6-oBs" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                            <rect key="frame" x="24" y="10" width="327" height="22.5"/>
+                                            <rect key="frame" x="24" y="10" width="327" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -221,12 +224,12 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="31a-k6-9qG" customClass="GSVCTextField" customModule="GSSAVisualComponents">
-                                            <rect key="frame" x="24" y="43.5" width="327" height="50"/>
+                                            <rect key="frame" x="24" y="41.5" width="327" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="JlC-hb-kH2"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" keyboardType="numberPad" textContentType="postal-code"/>
+                                            <textInputTraits key="textInputTraits" textContentType="address-line1"/>
                                         </textField>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -244,7 +247,7 @@
                                     <rect key="frame" x="0.0" y="190" width="375" height="100"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Número exterior" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZfI-cL-u84" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                            <rect key="frame" x="24" y="10" width="327" height="22.5"/>
+                                            <rect key="frame" x="24" y="10" width="327" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -255,7 +258,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AGV-97-wxh" customClass="GSVCTextField" customModule="GSSAVisualComponents">
-                                            <rect key="frame" x="24" y="43.5" width="327" height="50"/>
+                                            <rect key="frame" x="24" y="41.5" width="327" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="knD-Km-L7o"/>
                                             </constraints>
@@ -278,7 +281,7 @@
                                     <rect key="frame" x="0.0" y="190" width="375" height="100"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Número interior" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2gO-BJ-o8y" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                            <rect key="frame" x="24" y="10" width="327" height="22.5"/>
+                                            <rect key="frame" x="24" y="10" width="327" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -289,12 +292,12 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="907-fd-cao" customClass="GSVCTextField" customModule="GSSAVisualComponents">
-                                            <rect key="frame" x="24" y="43.5" width="327" height="50"/>
+                                            <rect key="frame" x="24" y="41.5" width="327" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="J2L-ZB-dGl"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" keyboardType="numberPad" textContentType="postal-code"/>
+                                            <textInputTraits key="textInputTraits" textContentType="address-level3"/>
                                         </textField>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -312,7 +315,7 @@
                                     <rect key="frame" x="0.0" y="190" width="375" height="80"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alcaldía o municipio" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o7D-a6-KPG" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                            <rect key="frame" x="24" y="10" width="327" height="22.5"/>
+                                            <rect key="frame" x="24" y="10" width="327" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -322,8 +325,8 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coyacán" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KrK-Y1-opG" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                            <rect key="frame" x="24" y="40.5" width="341" height="22.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KrK-Y1-opG" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                                            <rect key="frame" x="24" y="38.5" width="341" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
@@ -349,7 +352,7 @@
                                     <rect key="frame" x="0.0" y="190" width="375" height="80"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Estado o ciudad" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8KV-QJ-7pu" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                            <rect key="frame" x="24" y="10" width="327" height="22.5"/>
+                                            <rect key="frame" x="24" y="10" width="327" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -359,8 +362,8 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coyacán" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qqg-AM-EDW" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                            <rect key="frame" x="24" y="40.5" width="341" height="22.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qqg-AM-EDW" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                                            <rect key="frame" x="24" y="38.5" width="341" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
@@ -386,7 +389,7 @@
                                     <rect key="frame" x="0.0" y="190" width="375" height="80"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="País" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dzn-AL-lDG" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                            <rect key="frame" x="24" y="10" width="327" height="22.5"/>
+                                            <rect key="frame" x="24" y="10" width="327" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -397,7 +400,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="México" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rY4-yB-Pwa" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                            <rect key="frame" x="24" y="40.5" width="341" height="22.5"/>
+                                            <rect key="frame" x="24" y="38.5" width="341" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
@@ -434,6 +437,9 @@
                                                     <integer key="value" value="1"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="next:" destination="-1" eventType="touchUpInside" id="HRD-de-Nqu"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -489,50 +495,49 @@
     </objects>
     <designables>
         <designable name="0a3-fx-wVt">
-            <size key="intrinsicContentSize" width="113" height="22.5"/>
+            <size key="intrinsicContentSize" width="106" height="20.5"/>
         </designable>
         <designable name="2Jf-B6-oBs">
-            <size key="intrinsicContentSize" width="41" height="22.5"/>
+            <size key="intrinsicContentSize" width="38" height="20.5"/>
         </designable>
         <designable name="2gO-BJ-o8y">
-            <size key="intrinsicContentSize" width="124.5" height="22.5"/>
+            <size key="intrinsicContentSize" width="119" height="20.5"/>
         </designable>
         <designable name="8KV-QJ-7pu">
-            <size key="intrinsicContentSize" width="130.5" height="22.5"/>
+            <size key="intrinsicContentSize" width="122.5" height="20.5"/>
         </designable>
         <designable name="KrK-Y1-opG">
-            <size key="intrinsicContentSize" width="73.5" height="22.5"/>
+            <size key="intrinsicContentSize" width="8" height="20.5"/>
         </designable>
         <designable name="Qqg-AM-EDW">
-            <size key="intrinsicContentSize" width="73.5" height="22.5"/>
+            <size key="intrinsicContentSize" width="8" height="20.5"/>
         </designable>
         <designable name="ZVN-7X-BZX">
-            <size key="intrinsicContentSize" width="62" height="22.5"/>
+            <size key="intrinsicContentSize" width="57.5" height="20.5"/>
         </designable>
         <designable name="ZfI-cL-u84">
-            <size key="intrinsicContentSize" width="128" height="22.5"/>
+            <size key="intrinsicContentSize" width="123" height="20.5"/>
         </designable>
         <designable name="ciW-yy-dhf">
-            <size key="intrinsicContentSize" width="84" height="35"/>
+            <size key="intrinsicContentSize" width="67" height="30"/>
         </designable>
         <designable name="dzn-AL-lDG">
-            <size key="intrinsicContentSize" width="33.5" height="22.5"/>
+            <size key="intrinsicContentSize" width="31.5" height="20.5"/>
         </designable>
         <designable name="ePR-46-zVL">
-            <size key="intrinsicContentSize" width="175.5" height="22.5"/>
+            <size key="intrinsicContentSize" width="164" height="20.5"/>
         </designable>
         <designable name="gAs-5a-Uuh">
-            <size key="intrinsicContentSize" width="84" height="35"/>
+            <size key="intrinsicContentSize" width="67" height="30"/>
         </designable>
         <designable name="m6G-Cy-gDJ">
-            <size key="intrinsicContentSize" width="115.5" height="22.5"/>
+            <size key="intrinsicContentSize" width="107" height="20.5"/>
         </designable>
-        <designable name="nPr-7P-fdT"/>
         <designable name="o7D-a6-KPG">
-            <size key="intrinsicContentSize" width="165.5" height="22.5"/>
+            <size key="intrinsicContentSize" width="151.5" height="20.5"/>
         </designable>
         <designable name="rY4-yB-Pwa">
-            <size key="intrinsicContentSize" width="55.5" height="22.5"/>
+            <size key="intrinsicContentSize" width="55" height="20.5"/>
         </designable>
     </designables>
     <resources>

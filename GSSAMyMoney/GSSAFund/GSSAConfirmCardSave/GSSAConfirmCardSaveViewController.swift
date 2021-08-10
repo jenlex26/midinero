@@ -10,29 +10,48 @@
 
 import UIKit
 import GSSAVisualComponents
+import baz_ios_sdk_link_pago
 
-class GSSAConfirmCardSaveViewController: UIViewController, GSSAConfirmCardSaveViewProtocol {
-
+class GSSAConfirmCardSaveViewController: GSSAMasterViewController, GSSAConfirmCardSaveViewProtocol {
+    
+    var presenter: GSSAConfirmCardSavePresenterProtocol?
+    
+    //MARK: - @IBOutlets
+    @IBOutlet weak var aliasTextField: GSVCTextField!
     @IBOutlet weak var cardInfoView: GSSACardInfoView!
     @IBOutlet weak var saveView: UIView!
     @IBOutlet weak var editBtn: GSVCButton!
+    @IBOutlet weak var saveCardSwitch: UISwitch!
     
-    var presenter: GSSAConfirmCardSavePresenterProtocol?
+    //MARK: - Properties
+    var tokenCardRequest: LNKPG_TokenCardRequestFacade?
 
-    //MARK: Life Cycle Methods
+    //MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupFakeData()
-        setupUI()
+        
+        setView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
-    
+    //MARK: - @IBActions
     @IBAction func next(_ sender: Any) {
-        let view = GSSAFundSetCVVRouter.createModule()
-        self.navigationController?.pushViewController(view, animated: true)
+        if let tokenCardRequest = tokenCardRequest {
+            guard let accountNunmber = tokenCardRequest.card?.number else { return }
+            
+            GSSAFundSharedVariables.shared.account =  accountNunmber
+            
+            GSVCLoader.show()
+            presenter?.requestSaveCard(tokenCardRequest: tokenCardRequest)
+        }
+    }
+    
+    @IBAction func editAction(_ sender: Any) {
+        presenter?.returnTo(vc: GSSAFundSetCardNumberViewController.self, animated: false)
     }
     
     @IBAction func close(_ sender: Any) {
@@ -40,14 +59,64 @@ class GSSAConfirmCardSaveViewController: UIViewController, GSSAConfirmCardSaveVi
     }
 }
 
-//MARK: - Private functions
+//MARK: - UITextFieldDelegate
+extension GSSAConfirmCardSaveViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return true
+    }
+}
+
+//MARK: - Presenter Methods
 extension GSSAConfirmCardSaveViewController {
-    private func setupUI(){
-        editBtn.setTitleColor(.GSVCPrincipal100, for: .normal)
-        saveView.backgroundColor = .GSVCBase200
+    func onSuccess(_ response: LNKPG_TokenCardResponseFacade) {
+        GSVCLoader.hide()
+        GSSAFundSharedVariables.shared.tokenCardResponse = response
+        
+        presenter?.goToNextFlow()
     }
     
-    private func setupFakeData(){
-        cardInfoView.setupInfo(name: "Elena Padilla López", bankName: "BBVA", accountNumber: "5678 8901 2345 6789")
+    func onError() {
+        showError()
+    }
+}
+
+//MARK: - Private functions
+extension GSSAConfirmCardSaveViewController {
+    private func setView() {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        aliasTextField.allowActions(.allowAll)
+        aliasTextField.delegate = self
+        aliasTextField.contentFormat(.uppercasedLettersAndNumbers)
+        aliasTextField.rightButtonAction({ [weak self] selected in
+            guard let self = self else { return }
+            self.aliasTextField.text = ""
+        })
+        
+        editBtn.setTitleColor(.GSVCPrincipal100, for: .normal)
+        saveView.backgroundColor = .GSVCBase200
+        
+       setupInfo()
+    }
+    
+    private func setupInfo(){
+        guard let tokenCardRequest = tokenCardRequest,
+              let firstName = tokenCardRequest.payer?.firstName,
+              let lastName = tokenCardRequest.payer?.lastName,
+              let card = tokenCardRequest.card?.number,
+              let type = tokenCardRequest.card?.type else {
+            showError()
+            return
+        }
+        
+        let name = "\(firstName) \(lastName)"
+        cardInfoView.setupInfo(name: name, bankName: type, accountNumber: card)
+    }
+    
+    private func showError() {
+        GSVCLoader.hide()
+        let message = "Ocurrio un error intentelo más tarde"
+        
+        presenter?.goToError(message: message, isDouble: false)
     }
 }

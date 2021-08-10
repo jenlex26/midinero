@@ -9,12 +9,13 @@
 //
 
 import UIKit
+import baz_ios_sdk_link_pago
 
 class GSSAConfirmCardSaveRouter: GSSAConfirmCardSaveWireframeProtocol {
     
     weak var viewController: UIViewController?
     
-    static func createModule() -> UIViewController {
+    static func createModule(tokenCardRequest: LNKPG_TokenCardRequestFacade) -> UIViewController {
         // Change to get view from storyboard if not using progammatic UI
         let view = GSSAConfirmCardSaveViewController(nibName: nil, bundle: Bundle.init(for: GSSAConfirmCardSaveRouter.self))
         let interactor = GSSAConfirmCardSaveInteractor()
@@ -22,9 +23,32 @@ class GSSAConfirmCardSaveRouter: GSSAConfirmCardSaveWireframeProtocol {
         let presenter = GSSAConfirmCardSavePresenter(interface: view, interactor: interactor, router: router)
         
         view.presenter = presenter
+        view.tokenCardRequest = tokenCardRequest
+        
         interactor.presenter = presenter
         router.viewController = view
         
         return view
+    }
+    
+    func goToNextFlow() {
+        let view = GSSACardFundResumeRouter.createModule()
+        
+        viewController?.navigationController?.pushViewController(view, animated: true)
+        
+    }
+    
+    func goToError(message: String, isDouble: Bool) {
+        guard let errorVC = viewController?.getErrorMPViewController(message: message, isDouble: isDouble) else { return }
+        
+        viewController?.navigationController?.pushViewController(errorVC, animated: true)
+    }
+    
+    func returnTo(vc: AnyClass, animated: Bool) {
+        if  let nav = viewController?.navigationController,
+            let lastVC = nav.viewControllers.last(where: { $0.isKind(of: vc) }) {
+            
+            nav.popToViewController(lastVC, animated: animated)
+        }
     }
 }

@@ -9,24 +9,37 @@
 //
 
 import Foundation
+import baz_ios_sdk_link_pago
 
 //MARK: Wireframe -
 protocol GSSAFundSetCVVWireframeProtocol: class {
-
+    func goToError(message: String, isDouble: Bool)
+    func goToNextFlow()
 }
 //MARK: Presenter -
 protocol GSSAFundSetCVVPresenterProtocol: class {
-
+    func searchAccount(token: String)
+    
+    func searchAccountSuccess(response: LNKPG_CardInformationResponseFacade)
+    func searchAccountError()
+    
+    func goToError(message: String, isDouble: Bool)
+    func goToNextFlow()
 }
 
 //MARK: Interactor -
 protocol GSSAFundSetCVVInteractorProtocol: class {
 
   var presenter: GSSAFundSetCVVPresenterProtocol?  { get set }
+    
+    func searchAccount(token: String)
 }
 
 //MARK: View -
 protocol GSSAFundSetCVVViewProtocol: class {
 
   var presenter: GSSAFundSetCVVPresenterProtocol?  { get set }
+    
+    func searchAccountSuccess(response: LNKPG_CardInformationResponseFacade)
+    func searchAccountError()
 }

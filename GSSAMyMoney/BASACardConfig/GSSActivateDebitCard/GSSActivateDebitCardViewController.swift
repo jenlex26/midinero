@@ -20,7 +20,8 @@ class GSSActivateDebitCardViewController: GSSAMasterViewController, GSSActivateD
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
         setProgressLine(value: 0.25, animated: true)
     }
     

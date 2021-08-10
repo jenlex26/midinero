@@ -9,6 +9,7 @@
 //
 
 import UIKit
+import  baz_ios_sdk_link_pago
 
 class GSSAFundSetCardNumberRouter: GSSAFundSetCardNumberWireframeProtocol {
     
@@ -26,5 +27,13 @@ class GSSAFundSetCardNumberRouter: GSSAFundSetCardNumberWireframeProtocol {
         router.viewController = view
         
         return view
+    }
+    
+    func goToAddAddress(_ view: UIViewController) {
+        viewController?.navigationController?.pushViewController(view, animated: true)
+    }
+    
+    func goBack() {
+        viewController?.navigationController?.popViewController(animated: true)
     }
 }

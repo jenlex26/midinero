@@ -9,6 +9,7 @@
 //
 
 import UIKit
+import baz_ios_sdk_link_pago
 
 class GSSAConfirmCardSavePresenter: GSSAConfirmCardSavePresenterProtocol {
 
@@ -21,5 +22,28 @@ class GSSAConfirmCardSavePresenter: GSSAConfirmCardSavePresenterProtocol {
         self.interactor = interactor
         self.router = router
     }
+    
+    func requestSaveCard(tokenCardRequest: LNKPG_TokenCardRequestFacade) {
+        interactor?.requestSaveCard(tokenCardRequest: tokenCardRequest)
+    }
+    
+    func onSuccess(_ response: LNKPG_TokenCardResponseFacade) {
+        view?.onSuccess(response)
+    }
+    
+    func onError() {
+        view?.onError()
+    }
 
+    func goToNextFlow() {
+        router.goToNextFlow()
+    }
+    
+    func goToError(message: String, isDouble: Bool) {
+        router.goToError(message: message, isDouble: isDouble)
+    }
+    
+    func returnTo(vc: AnyClass, animated: Bool) {
+        router.returnTo(vc: vc, animated: animated)
+    }
 }

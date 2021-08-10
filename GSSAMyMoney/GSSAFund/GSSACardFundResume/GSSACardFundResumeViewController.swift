@@ -12,14 +12,14 @@ import UIKit
 import GSSAVisualComponents
 import GSSAVisualTemplates
 import GSSAInterceptor
+import baz_ios_sdk_link_pago
+import GSSASessionInfo
 
-class GSSACardFundResumeViewController: GSVTGenericResumeViewController, GSSACardFundResumeViewProtocol, GSVTDigitalSignDelegate {
+class GSSACardFundResumeViewController: GSVTGenericResumeViewController {
 
 	var presenter: GSSACardFundResumePresenterProtocol?
-    var digitalSign : GSVTDigitalSignViewController?
-    var ticket : GSVTTicketOperationController?
     
-    //MARK: - Life Cycle Methods
+    //MARK: - Life cycle
 	override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Recarga tu tarjeta"
@@ -28,75 +28,105 @@ class GSSACardFundResumeViewController: GSVTGenericResumeViewController, GSSACar
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
+        self.navigationController?.isNavigationBarHidden = false
+        setProgressLine(value: 0.75, animated: true)
     }
-    
-    func forgotDigitalSign(_ forgotSecurityCodeViewController: UIViewController?) {
-        print("forgot")
-    }
-    
-    func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
-        let view = GSSAFundWebViewRouter.createModule()
-        self.navigationController?.pushViewController(view, animated: true)
-    }
-    
-    func configureCells(){
-    var cells:[GSVTResumeCellInfo] = []
-    
-    let origin = GSVTResumeCellInfo(sectionTitle: "Desde qué tarjeta recibes",
-                                mainInfo: "BBVA****1234",
-                                iconImage: UIImage(named: "paypalCardSAIcon")) {
-        
-        self.popToViewController(ofClass: GSSAFundSelectCardRouter.self, animated: false)
-    }
-    cells.append(origin)
-    
-    let amount = GSVTResumeCellInfo(sectionTitle: "Cuánto quieres enviar",
-                                        mainInfo: "$600.00",
-                                        iconImage: UIImage(named: "profileSAIcon")) {
-        self.popToViewController(ofClass: GSSAFundAddCardRouter.self, animated: false)
-    }
-    cells.append(amount)
-    
-    let extraData = GSVTResumeCellInfo(sectionTitle: "Datos de tu envío",
-                                        subTitle: "Comisión",
-                                    mainInfo: "$5.00",
-                                    iconImage: UIImage(named: "legalInfoSAIcon"))
-    
-    cells.append(extraData)
-    
+}
 
-    tableView.data = cells
+//MARK: - Presenter Methods
+extension GSSACardFundResumeViewController: GSSACardFundResumeViewProtocol {
+    func enrollSuccess(responseEnroll: LNKPG_EnrollmentResponseFacade, responseOtp: LNKPG_SessionOTPResponseFacade?, responseCargo: LNKPG_CargoEcommerceResponseFacade?, responseFondeo: LNKPG_FondeoAccountResponseFacade?) {
+        GSVCLoader.hide()
+
+        GSSAFundSharedVariables.shared.enrollmentResponse = responseEnroll
+        
+        if let responseOtp = responseOtp {
+            GSSAFundSharedVariables.shared.sessionOTPResponse = responseOtp
+            
+            presenter?.goToNextFlow()
+            return
+        }
+        
+        if responseCargo != nil || responseFondeo != nil {
+            GSSAFundSharedVariables.shared.cargoEcommerceResponse = responseCargo
+            GSSAFundSharedVariables.shared.fondeoAccountResponse = responseFondeo
+
+            let folio = responseCargo?.folioOperacion ?? responseFondeo?.folioOperacion ?? ""
+            
+            presenter?.goToTicket(folio: folio)
+        }
+    }
+    
+    func enrollError() {
+        GSVCLoader.hide()
+        showError()
+    }
+    
 }
-}
+
 //MARK: - GSVCSliderButtonDelegate
 extension GSSACardFundResumeViewController: GSVCSliderButtonDelegate {
     func slideDidFinish(_ sender: GSVCSliderButton) {
         sender.resetSliderState(animated: true)
-        let verification = GSVTDigitalSignViewController(delegate: self)
-        verification.modalPresentationStyle = .fullScreen
-        verification.bShouldWaitForNewToken = false
-        present(verification, animated: true, completion: nil)
+        guard let enrollRequest = GSSAFundSharedVariables.shared.enrollmentRequest else { return }
+        GSVCLoader.show()
+        presenter?.enroll(request: enrollRequest)
+    }
+}
+
+//MARK: - GSVTTicketOperationDelegate
+extension GSSACardFundResumeViewController: GSVTTicketOperationDelegate {
+    func operationSuccessActionClosed() {
+        GSINAdminNavigator.shared.releaseLastFlow()
     }
 }
 
 //MARK: - Private functions
 extension GSSACardFundResumeViewController {
-    private func configureComponents(){
+    private func showError() {
+        let message = "Ocurrio un error intentelo más tarde"
+        
+        presenter?.goToError(message: message, isDouble: false)
+    }
+    
+    private func configureCells() {
+        var cells:[GSVTResumeCellInfo] = []
+        let account: String = GSSAFundSharedVariables.shared.account ?? ""
+        
+        let origin = GSVTResumeCellInfo(sectionTitle: "Desde qué tarjeta recargas", mainInfo: account.maskedAccount, iconImage: UIImage(named: "paypalCardSAIcon"), nameAction: "Editar") {
+            
+            self.presenter?.returnTo(vc: GSSAFundSelectCardViewController.self, animated: false)
+        }
+        
+        let amount = GSVTResumeCellInfo(sectionTitle: "Cuánto quieres recargar",
+                                        mainInfo: "$\(GSSAFundSharedVariables.shared.amount ?? "")",
+                                        iconImage: UIImage(named: "ic_pay", in: Bundle(for: GSSACardFundResumeViewController.self), compatibleWith: nil), nameAction: "Editar") {
+            self.presenter?.returnTo(vc: GSSALinkDePagoViewController.self, animated: false)
+        }
+        
+        let extraData = GSVTResumeCellInfo(sectionTitle: "Datos de tu recarga",
+                                           subTitle: "Comisión",
+                                           mainInfo: "$0.00",
+                                           iconImage: UIImage(named: "legalInfoSAIcon"))
+        
+        cells.append(origin)
+        cells.append(amount)
+        cells.append(extraData)
+        
+        tableView.data = cells
+    }
+    
+    private func configureComponents() {
         btnContinue = GSVCSliderButton(
             delegate: self,
-            strInstruction: "Desliza para enviar",
+            strInstruction: "Desliza para recargar",
             withSuccesText: true,
             thumbnailImage: UIImage(named: "arrastrar3"),
             frame: CGRect(x: 0,y: 0, width: self.view.frame.width, height: 64)
         )
     }
-    
-    private func popToViewController(ofClass: AnyClass, animated: Bool = true){
-        if  let nav = self.navigationController,
-            let vc = nav.viewControllers.last(where: { $0.isKind(of: ofClass) }) {
-            nav.popToViewController(vc, animated: animated)
-      }
-    }
-    
 }
+
+

@@ -5,11 +5,13 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GSSAFundSelectCardViewController" customModule="GSSAMyMoney" customModuleProvider="target">
             <connections>
+                <outlet property="cardsTable" destination="Occ-cf-qgc" id="Aey-DX-JOv"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2. ¿Desde qué tarjeta recibes?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="55D-bn-jia" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                    <rect key="frame" x="25" y="40" width="330" height="21"/>
+                    <rect key="frame" x="25" y="40" width="330" height="28"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -30,7 +32,7 @@
                     </userDefinedRuntimeAttributes>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H0C-kB-Ntn" customClass="GSVCButton" customModule="GSSAVisualComponents">
-                    <rect key="frame" x="20" y="81" width="140" height="35"/>
+                    <rect key="frame" x="20" y="88" width="140" height="35"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="140" id="lvw-eQ-Nk4"/>
                         <constraint firstAttribute="height" constant="35" id="pB3-sk-Vrm"/>
@@ -50,20 +52,39 @@
                         <action selector="addCard:" destination="-1" eventType="touchUpInside" id="Iom-Wo-Oda"/>
                     </connections>
                 </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Occ-cf-qgc">
+                    <rect key="frame" x="25" y="143" width="330" height="504"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="don-y9-jGb"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="Occ-cf-qgc" firstAttribute="leading" secondItem="55D-bn-jia" secondAttribute="leading" id="0sw-wA-cjf"/>
+                <constraint firstItem="Occ-cf-qgc" firstAttribute="top" secondItem="H0C-kB-Ntn" secondAttribute="bottom" constant="20" id="1jt-aX-yqM"/>
                 <constraint firstItem="H0C-kB-Ntn" firstAttribute="top" secondItem="55D-bn-jia" secondAttribute="bottom" constant="20" id="7Ui-1n-G63"/>
                 <constraint firstItem="H0C-kB-Ntn" firstAttribute="leading" secondItem="don-y9-jGb" secondAttribute="leading" constant="20" id="ENR-pF-zIb"/>
                 <constraint firstItem="55D-bn-jia" firstAttribute="top" secondItem="don-y9-jGb" secondAttribute="top" constant="40" id="SI7-YZ-nq8"/>
                 <constraint firstItem="55D-bn-jia" firstAttribute="leading" secondItem="don-y9-jGb" secondAttribute="leading" constant="25" id="VLx-HE-Fdj"/>
+                <constraint firstItem="don-y9-jGb" firstAttribute="bottom" secondItem="Occ-cf-qgc" secondAttribute="bottom" constant="20" id="W42-WP-3ob"/>
+                <constraint firstItem="don-y9-jGb" firstAttribute="trailing" secondItem="Occ-cf-qgc" secondAttribute="trailing" constant="20" id="Yac-N6-AZJ"/>
                 <constraint firstItem="don-y9-jGb" firstAttribute="trailing" secondItem="55D-bn-jia" secondAttribute="trailing" constant="20" id="jsE-7b-CFK"/>
             </constraints>
             <point key="canvasLocation" x="138" y="92"/>
         </view>
     </objects>
+    <designables>
+        <designable name="55D-bn-jia">
+            <size key="intrinsicContentSize" width="302" height="28"/>
+        </designable>
+        <designable name="H0C-kB-Ntn">
+            <size key="intrinsicContentSize" width="115" height="20"/>
+        </designable>
+    </designables>
     <resources>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

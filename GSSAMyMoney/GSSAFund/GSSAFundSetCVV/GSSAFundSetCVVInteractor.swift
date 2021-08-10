@@ -9,8 +9,34 @@
 //
 
 import UIKit
+import baz_ios_sdk_link_pago
 
 class GSSAFundSetCVVInteractor: GSSAFundSetCVVInteractorProtocol {
-
+    
     weak var presenter: GSSAFundSetCVVPresenterProtocol?
+    
+    func searchAccount(token: String) {
+        guard let merchantID = GSSAFundSharedVariables.shared.ecommerceResponse?.comerciosCybs?.id,
+              let idTransaction = GSSAFundSharedVariables.shared.idTransaccionSuperApp else {
+            presenter?.searchAccountError()
+            return
+        }
+        
+        LNKPG_Facade.shared.getCardInformation(merchantID:  merchantID, merchantReference: idTransaction, paySubscriptionId: token, success: { [weak self] response in
+            
+            guard let self = self else { return }
+            guard let response = response else {
+                self.presenter?.searchAccountError()
+                return
+            }
+            
+            self.presenter?.searchAccountSuccess(response: response)
+            
+        }, failure: { [weak self] message in
+            guard let self = self else { return }
+            
+            self.presenter?.searchAccountError()
+        })
+        
+    }
 }

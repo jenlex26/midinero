@@ -11,7 +11,19 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GSSAFundAddCardViewController" customModule="GSSAMyMoney" customModuleProvider="target">
             <connections>
+                <outlet property="apInfoLabel" destination="bGL-wB-atJ" id="HtD-ub-eTm"/>
+                <outlet property="cityField" destination="XMC-Wr-btR" id="H7J-1h-iNb"/>
+                <outlet property="countryField" destination="1bg-PA-iZS" id="7B6-Ca-N7S"/>
+                <outlet property="emailField" destination="bXO-ME-KQ2" id="91N-cT-20B"/>
+                <outlet property="lastNameField" destination="kiP-48-Jm3" id="EzG-Od-mOA"/>
+                <outlet property="nameField" destination="T9k-bF-XY4" id="yCa-DT-tat"/>
+                <outlet property="nameInfoLabel" destination="dC3-3W-m5m" id="hXz-mF-uTK"/>
+                <outlet property="phoneField" destination="aTd-M1-GYB" id="otA-by-yOV"/>
+                <outlet property="scrollView" destination="PYf-Tc-zRs" id="Gny-aC-o93"/>
+                <outlet property="stateField" destination="eB6-6Z-qcp" id="Pwj-ky-Ej2"/>
+                <outlet property="streetField" destination="1AO-I1-Bye" id="LUw-F0-DzC"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="zipCodeField" destination="6zy-XF-keU" id="ZFW-ij-nrU"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -59,7 +71,7 @@
                     <rect key="frame" x="0.0" y="50" width="320" height="518"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="jeN-Rc-4W3">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="1150"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="1290"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F1z-iU-EKX">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
@@ -110,13 +122,20 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </label>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T9k-bF-XY4" customClass="GSVCTextField" customModule="GSSAVisualComponents">
+                                        <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T9k-bF-XY4" customClass="GSVCTextField" customModule="GSSAVisualComponents">
                                             <rect key="frame" x="24" y="41.5" width="272" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="QAG-Yk-khw"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="name"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="image" keyPath="image" value="xmark" catalog="system"/>
+                                                <userDefinedRuntimeAttribute type="image" keyPath="imageTyped" value="xmark" catalog="system"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="maxLength">
+                                                    <integer key="value" value="50"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                         </textField>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Como aparecen en tu tarjeta." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dC3-3W-m5m" customClass="GSVCLabel" customModule="GSSAVisualComponents">
                                             <rect key="frame" x="24" y="96.5" width="152.5" height="13.5"/>
@@ -157,13 +176,20 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </label>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kiP-48-Jm3" customClass="GSVCTextField" customModule="GSSAVisualComponents">
+                                        <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kiP-48-Jm3" customClass="GSVCTextField" customModule="GSSAVisualComponents">
                                             <rect key="frame" x="24" y="41.5" width="272" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="JK4-03-w8y"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="family-name"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="image" keyPath="image" value="xmark" catalog="system"/>
+                                                <userDefinedRuntimeAttribute type="image" keyPath="imageTyped" value="xmark" catalog="system"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="maxLength">
+                                                    <integer key="value" value="50"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                         </textField>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Como aparecen en tu tarjeta." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bGL-wB-atJ" customClass="GSVCLabel" customModule="GSSAVisualComponents">
                                             <rect key="frame" x="24" y="96.5" width="152.5" height="13.5"/>
@@ -191,7 +217,7 @@
                                     </constraints>
                                 </view>
                                 <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fs7-1B-hod">
-                                    <rect key="frame" x="0.0" y="340" width="320" height="100"/>
+                                    <rect key="frame" x="0.0" y="340" width="320" height="120"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Correo electrónico (opcional)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zKI-Gz-g7m" customClass="GSVCLabel" customModule="GSSAVisualComponents">
                                             <rect key="frame" x="24" y="10" width="272" height="20.5"/>
@@ -204,13 +230,20 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </label>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bXO-ME-KQ2" customClass="GSVCTextField" customModule="GSSAVisualComponents">
+                                        <textField opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bXO-ME-KQ2" customClass="GSVCTextField" customModule="GSSAVisualComponents">
                                             <rect key="frame" x="24" y="41.5" width="272" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="wwj-i4-GUv"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="image" keyPath="image" value="xmark" catalog="system"/>
+                                                <userDefinedRuntimeAttribute type="image" keyPath="imageTyped" value="xmark" catalog="system"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="maxLength">
+                                                    <integer key="value" value="50"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                         </textField>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -221,11 +254,11 @@
                                         <constraint firstItem="zKI-Gz-g7m" firstAttribute="top" secondItem="fs7-1B-hod" secondAttribute="top" constant="10" id="IgA-Yr-OhN"/>
                                         <constraint firstItem="zKI-Gz-g7m" firstAttribute="leading" secondItem="fs7-1B-hod" secondAttribute="leading" constant="24" id="Jzl-3q-6dF"/>
                                         <constraint firstItem="bXO-ME-KQ2" firstAttribute="leading" secondItem="fs7-1B-hod" secondAttribute="leading" constant="24" id="OhW-31-qtC"/>
-                                        <constraint firstAttribute="height" constant="100" id="meM-jm-HAL"/>
+                                        <constraint firstAttribute="height" constant="120" id="meM-jm-HAL"/>
                                     </constraints>
                                 </view>
                                 <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xw7-KL-8sM">
-                                    <rect key="frame" x="0.0" y="440" width="320" height="100"/>
+                                    <rect key="frame" x="0.0" y="460" width="320" height="120"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Número de celular" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VjM-Ra-Sjl" customClass="GSVCLabel" customModule="GSSAVisualComponents">
                                             <rect key="frame" x="24" y="10" width="272" height="20.5"/>
@@ -238,13 +271,20 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </label>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aTd-M1-GYB" customClass="GSVCTextField" customModule="GSSAVisualComponents">
+                                        <textField opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aTd-M1-GYB" customClass="GSVCTextField" customModule="GSSAVisualComponents">
                                             <rect key="frame" x="24" y="41.5" width="272" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="kE2-UB-5b0"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" keyboardType="phonePad" textContentType="tel"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="image" keyPath="image" value="xmark" catalog="system"/>
+                                                <userDefinedRuntimeAttribute type="image" keyPath="imageTyped" value="xmark" catalog="system"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="maxLength">
+                                                    <integer key="value" value="10"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                         </textField>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -255,11 +295,11 @@
                                         <constraint firstItem="VjM-Ra-Sjl" firstAttribute="leading" secondItem="xw7-KL-8sM" secondAttribute="leading" constant="24" id="QIA-yo-bSF"/>
                                         <constraint firstItem="VjM-Ra-Sjl" firstAttribute="top" secondItem="xw7-KL-8sM" secondAttribute="top" constant="10" id="Z33-eu-RO6"/>
                                         <constraint firstAttribute="trailing" secondItem="aTd-M1-GYB" secondAttribute="trailing" constant="24" id="dok-mp-OnQ"/>
-                                        <constraint firstAttribute="height" constant="100" id="uBl-vI-o3O"/>
+                                        <constraint firstAttribute="height" constant="120" id="uBl-vI-o3O"/>
                                     </constraints>
                                 </view>
                                 <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BVV-8d-vfY">
-                                    <rect key="frame" x="0.0" y="540" width="320" height="100"/>
+                                    <rect key="frame" x="0.0" y="580" width="320" height="120"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HDj-Ml-4C2" customClass="GSVCLabel" customModule="GSSAVisualComponents">
                                             <rect key="frame" x="24" y="10" width="272" height="20.5"/>
@@ -272,13 +312,20 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </label>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1AO-I1-Bye" customClass="GSVCTextField" customModule="GSSAVisualComponents">
+                                        <textField opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1AO-I1-Bye" customClass="GSVCTextField" customModule="GSSAVisualComponents">
                                             <rect key="frame" x="24" y="41.5" width="272" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="my0-C9-hoy"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" keyboardType="numberPad" textContentType="postal-code"/>
+                                            <textInputTraits key="textInputTraits" textContentType="postal-code"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="image" keyPath="image" value="xmark" catalog="system"/>
+                                                <userDefinedRuntimeAttribute type="image" keyPath="imageTyped" value="xmark" catalog="system"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="maxLength">
+                                                    <integer key="value" value="50"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                         </textField>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -288,12 +335,12 @@
                                         <constraint firstAttribute="trailing" secondItem="1AO-I1-Bye" secondAttribute="trailing" constant="24" id="alz-I4-c65"/>
                                         <constraint firstItem="HDj-Ml-4C2" firstAttribute="top" secondItem="BVV-8d-vfY" secondAttribute="top" constant="10" id="d7s-dl-ZHQ"/>
                                         <constraint firstItem="1AO-I1-Bye" firstAttribute="leading" secondItem="BVV-8d-vfY" secondAttribute="leading" constant="24" id="fTi-J6-Hwq"/>
-                                        <constraint firstAttribute="height" constant="100" id="hl7-Cz-sUa"/>
+                                        <constraint firstAttribute="height" constant="120" id="hl7-Cz-sUa"/>
                                         <constraint firstItem="HDj-Ml-4C2" firstAttribute="leading" secondItem="BVV-8d-vfY" secondAttribute="leading" constant="24" id="seh-Lz-aS3"/>
                                     </constraints>
                                 </view>
                                 <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pOV-TU-7Ra">
-                                    <rect key="frame" x="0.0" y="640" width="320" height="100"/>
+                                    <rect key="frame" x="0.0" y="700" width="320" height="120"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Código postal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dMK-2J-WmH" customClass="GSVCLabel" customModule="GSSAVisualComponents">
                                             <rect key="frame" x="24" y="10" width="272" height="20.5"/>
@@ -306,13 +353,20 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </label>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6zy-XF-keU" customClass="GSVCTextField" customModule="GSSAVisualComponents">
+                                        <textField opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6zy-XF-keU" customClass="GSVCTextField" customModule="GSSAVisualComponents">
                                             <rect key="frame" x="24" y="41.5" width="272" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="bsZ-iW-V5U"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" keyboardType="numberPad" textContentType="postal-code"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="image" keyPath="image" value="xmark" catalog="system"/>
+                                                <userDefinedRuntimeAttribute type="image" keyPath="imageTyped" value="xmark" catalog="system"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="maxLength">
+                                                    <integer key="value" value="5"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                         </textField>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -320,82 +374,14 @@
                                         <constraint firstItem="dMK-2J-WmH" firstAttribute="leading" secondItem="pOV-TU-7Ra" secondAttribute="leading" constant="24" id="33p-UW-aR2"/>
                                         <constraint firstItem="dMK-2J-WmH" firstAttribute="top" secondItem="pOV-TU-7Ra" secondAttribute="top" constant="10" id="552-Xw-zfA"/>
                                         <constraint firstAttribute="trailing" secondItem="6zy-XF-keU" secondAttribute="trailing" constant="24" id="8Zq-TD-JbO"/>
-                                        <constraint firstAttribute="height" constant="100" id="BLL-6K-Ahy"/>
+                                        <constraint firstAttribute="height" constant="120" id="BLL-6K-Ahy"/>
                                         <constraint firstAttribute="trailing" secondItem="dMK-2J-WmH" secondAttribute="trailing" constant="24" id="RYH-zj-Xuz"/>
                                         <constraint firstItem="6zy-XF-keU" firstAttribute="top" secondItem="dMK-2J-WmH" secondAttribute="bottom" constant="11" id="cJu-jv-Hta"/>
                                         <constraint firstItem="6zy-XF-keU" firstAttribute="leading" secondItem="pOV-TU-7Ra" secondAttribute="leading" constant="24" id="pFM-Oc-0Q0"/>
                                     </constraints>
                                 </view>
-                                <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LPy-dP-Rqm">
-                                    <rect key="frame" x="0.0" y="740" width="320" height="100"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ciudad" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JRU-5W-Wyp" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                            <rect key="frame" x="24" y="10" width="272" height="20.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="styleType">
-                                                    <integer key="value" value="6"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                        </label>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XMC-Wr-btR" customClass="GSVCTextField" customModule="GSSAVisualComponents">
-                                            <rect key="frame" x="24" y="41.5" width="272" height="50"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="50" id="aWV-Mq-fMG"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" keyboardType="numberPad" textContentType="postal-code"/>
-                                        </textField>
-                                    </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    <constraints>
-                                        <constraint firstItem="XMC-Wr-btR" firstAttribute="top" secondItem="JRU-5W-Wyp" secondAttribute="bottom" constant="11" id="3q1-My-U6H"/>
-                                        <constraint firstAttribute="trailing" secondItem="JRU-5W-Wyp" secondAttribute="trailing" constant="24" id="7e4-y6-KfK"/>
-                                        <constraint firstItem="JRU-5W-Wyp" firstAttribute="top" secondItem="LPy-dP-Rqm" secondAttribute="top" constant="10" id="RjH-Q8-gEh"/>
-                                        <constraint firstItem="JRU-5W-Wyp" firstAttribute="leading" secondItem="LPy-dP-Rqm" secondAttribute="leading" constant="24" id="Zdd-Da-oN5"/>
-                                        <constraint firstAttribute="height" constant="100" id="mfl-vc-WZd"/>
-                                        <constraint firstItem="XMC-Wr-btR" firstAttribute="leading" secondItem="LPy-dP-Rqm" secondAttribute="leading" constant="24" id="t9j-G7-z47"/>
-                                        <constraint firstAttribute="trailing" secondItem="XMC-Wr-btR" secondAttribute="trailing" constant="24" id="wNs-8b-mWe"/>
-                                    </constraints>
-                                </view>
-                                <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7X8-si-Y6C">
-                                    <rect key="frame" x="0.0" y="840" width="320" height="100"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Estado" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TAC-p8-UAB" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                            <rect key="frame" x="24" y="10" width="272" height="20.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="styleType">
-                                                    <integer key="value" value="6"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                        </label>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aHs-qC-vzK" customClass="GSVCTextField" customModule="GSSAVisualComponents">
-                                            <rect key="frame" x="24" y="41.5" width="272" height="50"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="50" id="s9a-bm-3Gs"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" keyboardType="numberPad" textContentType="postal-code"/>
-                                        </textField>
-                                    </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="100" id="9fS-T9-sJc"/>
-                                        <constraint firstItem="aHs-qC-vzK" firstAttribute="leading" secondItem="7X8-si-Y6C" secondAttribute="leading" constant="24" id="9q0-3F-1P2"/>
-                                        <constraint firstItem="TAC-p8-UAB" firstAttribute="leading" secondItem="7X8-si-Y6C" secondAttribute="leading" constant="24" id="ALM-KD-tm2"/>
-                                        <constraint firstItem="aHs-qC-vzK" firstAttribute="top" secondItem="TAC-p8-UAB" secondAttribute="bottom" constant="11" id="JJY-Qj-C4J"/>
-                                        <constraint firstAttribute="trailing" secondItem="TAC-p8-UAB" secondAttribute="trailing" constant="24" id="Tih-XP-9gz"/>
-                                        <constraint firstAttribute="trailing" secondItem="aHs-qC-vzK" secondAttribute="trailing" constant="24" id="VOE-Gz-uPA"/>
-                                        <constraint firstItem="TAC-p8-UAB" firstAttribute="top" secondItem="7X8-si-Y6C" secondAttribute="top" constant="10" id="bND-Hz-J3E"/>
-                                    </constraints>
-                                </view>
                                 <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qfu-8v-92I">
-                                    <rect key="frame" x="0.0" y="940" width="320" height="100"/>
+                                    <rect key="frame" x="0.0" y="820" width="320" height="120"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="País" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yf3-zz-5V9" customClass="GSVCLabel" customModule="GSSAVisualComponents">
                                             <rect key="frame" x="24" y="10" width="272" height="20.5"/>
@@ -408,31 +394,118 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </label>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="40K-P1-rUG" customClass="GSVCTextField" customModule="GSSAVisualComponents">
+                                        <textField opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1bg-PA-iZS" customClass="GSVCTextField" customModule="GSSAVisualComponents">
                                             <rect key="frame" x="24" y="41.5" width="272" height="50"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="50" id="8Bz-Lm-WMm"/>
+                                                <constraint firstAttribute="height" constant="50" id="XI0-H2-9h6"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" keyboardType="numberPad" textContentType="postal-code"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="image" keyPath="image" value="chevron.down" catalog="system"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="maxLength">
+                                                    <integer key="value" value="50"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                         </textField>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
-                                        <constraint firstItem="40K-P1-rUG" firstAttribute="top" secondItem="yf3-zz-5V9" secondAttribute="bottom" constant="11" id="9JF-gm-UTn"/>
-                                        <constraint firstItem="40K-P1-rUG" firstAttribute="leading" secondItem="qfu-8v-92I" secondAttribute="leading" constant="24" id="CHy-Vq-CGW"/>
+                                        <constraint firstAttribute="trailing" secondItem="1bg-PA-iZS" secondAttribute="trailing" constant="24" id="482-uP-H2D"/>
+                                        <constraint firstItem="1bg-PA-iZS" firstAttribute="leading" secondItem="qfu-8v-92I" secondAttribute="leading" constant="24" id="F89-Ur-9jA"/>
                                         <constraint firstAttribute="trailing" secondItem="yf3-zz-5V9" secondAttribute="trailing" constant="24" id="Mn2-Bb-8nw"/>
                                         <constraint firstItem="yf3-zz-5V9" firstAttribute="leading" secondItem="qfu-8v-92I" secondAttribute="leading" constant="24" id="d02-j8-f7j"/>
-                                        <constraint firstAttribute="height" constant="100" id="fF6-A0-cKz"/>
+                                        <constraint firstAttribute="height" constant="120" id="fF6-A0-cKz"/>
                                         <constraint firstItem="yf3-zz-5V9" firstAttribute="top" secondItem="qfu-8v-92I" secondAttribute="top" constant="10" id="fkz-uZ-hTU"/>
-                                        <constraint firstAttribute="trailing" secondItem="40K-P1-rUG" secondAttribute="trailing" constant="24" id="sCm-hV-qQC"/>
+                                        <constraint firstItem="1bg-PA-iZS" firstAttribute="top" secondItem="yf3-zz-5V9" secondAttribute="bottom" constant="11" id="rpr-Z6-Nmw"/>
+                                    </constraints>
+                                </view>
+                                <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7X8-si-Y6C">
+                                    <rect key="frame" x="0.0" y="940" width="320" height="120"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Estado" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TAC-p8-UAB" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                                            <rect key="frame" x="24" y="10" width="272" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="styleType">
+                                                    <integer key="value" value="6"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </label>
+                                        <textField opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eB6-6Z-qcp" customClass="GSVCTextField" customModule="GSSAVisualComponents">
+                                            <rect key="frame" x="24" y="31.5" width="272" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="Ulc-b1-Gp4"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="image" keyPath="image" value="chevron.down" catalog="system"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="maxLength">
+                                                    <integer key="value" value="50"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </textField>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="120" id="9fS-T9-sJc"/>
+                                        <constraint firstItem="TAC-p8-UAB" firstAttribute="leading" secondItem="7X8-si-Y6C" secondAttribute="leading" constant="24" id="ALM-KD-tm2"/>
+                                        <constraint firstAttribute="trailing" secondItem="eB6-6Z-qcp" secondAttribute="trailing" constant="24" id="B5d-pd-yzh"/>
+                                        <constraint firstItem="eB6-6Z-qcp" firstAttribute="leading" secondItem="7X8-si-Y6C" secondAttribute="leading" constant="24" id="Lei-XT-rbc"/>
+                                        <constraint firstItem="eB6-6Z-qcp" firstAttribute="top" secondItem="TAC-p8-UAB" secondAttribute="bottom" constant="1" id="NwG-am-3bD"/>
+                                        <constraint firstAttribute="trailing" secondItem="TAC-p8-UAB" secondAttribute="trailing" constant="24" id="Tih-XP-9gz"/>
+                                        <constraint firstItem="TAC-p8-UAB" firstAttribute="top" secondItem="7X8-si-Y6C" secondAttribute="top" constant="10" id="bND-Hz-J3E"/>
+                                    </constraints>
+                                </view>
+                                <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LPy-dP-Rqm">
+                                    <rect key="frame" x="0.0" y="1060" width="320" height="120"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ciudad" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JRU-5W-Wyp" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                                            <rect key="frame" x="24" y="10" width="272" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="styleType">
+                                                    <integer key="value" value="6"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </label>
+                                        <textField opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XMC-Wr-btR" customClass="GSVCTextField" customModule="GSSAVisualComponents">
+                                            <rect key="frame" x="24" y="41.5" width="272" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="aWV-Mq-fMG"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" textContentType="postal-code"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="image" keyPath="image" value="xmark" catalog="system"/>
+                                                <userDefinedRuntimeAttribute type="image" keyPath="imageTyped" value="xmark" catalog="system"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="maxLength">
+                                                    <integer key="value" value="50"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </textField>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstItem="XMC-Wr-btR" firstAttribute="top" secondItem="JRU-5W-Wyp" secondAttribute="bottom" constant="11" id="3q1-My-U6H"/>
+                                        <constraint firstAttribute="trailing" secondItem="JRU-5W-Wyp" secondAttribute="trailing" constant="24" id="7e4-y6-KfK"/>
+                                        <constraint firstItem="JRU-5W-Wyp" firstAttribute="top" secondItem="LPy-dP-Rqm" secondAttribute="top" constant="10" id="RjH-Q8-gEh"/>
+                                        <constraint firstItem="JRU-5W-Wyp" firstAttribute="leading" secondItem="LPy-dP-Rqm" secondAttribute="leading" constant="24" id="Zdd-Da-oN5"/>
+                                        <constraint firstAttribute="height" constant="120" id="mfl-vc-WZd"/>
+                                        <constraint firstItem="XMC-Wr-btR" firstAttribute="leading" secondItem="LPy-dP-Rqm" secondAttribute="leading" constant="24" id="t9j-G7-z47"/>
+                                        <constraint firstAttribute="trailing" secondItem="XMC-Wr-btR" secondAttribute="trailing" constant="24" id="wNs-8b-mWe"/>
                                     </constraints>
                                 </view>
                                 <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eoL-3G-rdw">
-                                    <rect key="frame" x="0.0" y="1040" width="320" height="110"/>
+                                    <rect key="frame" x="0.0" y="1180" width="320" height="110"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ic8-nC-GJS" customClass="GSVCButton" customModule="GSSAVisualComponents">
-                                            <rect key="frame" x="44" y="19" width="232" height="48"/>
+                                            <rect key="frame" x="44" y="22" width="232" height="48"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="232" id="g0K-VG-x0R"/>
                                                 <constraint firstAttribute="height" constant="48" id="nYG-cf-Azx"/>
@@ -450,7 +523,7 @@
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="ic8-nC-GJS" secondAttribute="bottom" constant="43" id="W5p-LR-u0X"/>
+                                        <constraint firstAttribute="bottom" secondItem="ic8-nC-GJS" secondAttribute="bottom" constant="40" id="W5p-LR-u0X"/>
                                         <constraint firstAttribute="height" constant="110" id="YLN-q8-udq"/>
                                         <constraint firstItem="ic8-nC-GJS" firstAttribute="centerX" secondItem="eoL-3G-rdw" secondAttribute="centerX" id="kPC-Av-rhP"/>
                                     </constraints>
@@ -479,14 +552,13 @@
                 <constraint firstItem="LXT-Am-ZLs" firstAttribute="bottom" secondItem="PYf-Tc-zRs" secondAttribute="bottom" id="qok-LM-9Zz"/>
                 <constraint firstItem="LXT-Am-ZLs" firstAttribute="trailing" secondItem="PYf-Tc-zRs" secondAttribute="trailing" id="v8U-YD-O9a"/>
             </constraints>
-            <point key="canvasLocation" x="140" y="91.304347826086968"/>
+            <point key="canvasLocation" x="138.75" y="90.845070422535215"/>
         </view>
     </objects>
     <designables>
         <designable name="2bn-bJ-tJr">
             <size key="intrinsicContentSize" width="74.5" height="20.5"/>
         </designable>
-        <designable name="4Ex-Va-3Ik"/>
         <designable name="Bqm-dY-vgK">
             <size key="intrinsicContentSize" width="167.5" height="20.5"/>
         </designable>
@@ -515,7 +587,7 @@
             <size key="intrinsicContentSize" width="106" height="20.5"/>
         </designable>
         <designable name="ic8-nC-GJS">
-            <size key="intrinsicContentSize" width="75" height="33"/>
+            <size key="intrinsicContentSize" width="67" height="30"/>
         </designable>
         <designable name="mcH-rN-cNm">
             <size key="intrinsicContentSize" width="379.5" height="20.5"/>
@@ -532,6 +604,8 @@
     </designables>
     <resources>
         <image name="arrow.backward" catalog="system" width="128" height="98"/>
+        <image name="chevron.down" catalog="system" width="128" height="72"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

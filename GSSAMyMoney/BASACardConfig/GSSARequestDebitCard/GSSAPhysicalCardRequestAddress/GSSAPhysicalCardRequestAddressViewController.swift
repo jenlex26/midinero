@@ -11,6 +11,7 @@
 import UIKit
 import GSSAVisualTemplates
 import GSSAVisualComponents
+import GSSASessionInfo
 
 class GSSAPhysicalCardRequestAddressViewController: UIViewController, GSSAPhysicalCardRequestAddressViewProtocol, GSVCBottomAlertHandler, GSVCPickerControllerDelegate, GSVCPickerControllerDataSource{
 
@@ -35,9 +36,13 @@ class GSSAPhysicalCardRequestAddressViewController: UIViewController, GSSAPhysic
     override func viewDidLoad() {
         super.viewDidLoad()
         changeFieldsVisibility(hidden: true)
+        hideKeyboardWhenTappedAround()
         actualLocationView.backgroundColor = UIColor.GSVCBase300()
         txtPostalCode.delegate = self
         txtPostalCode.tag = 1
+        txtStreet.delegate = self
+        txtInternalNumber.delegate = self
+        txtExternalNumber.delegate = self
         picker = GSVCPickerController(type: .data, textField: txtColonia)
         picker.delegate = self
         picker.dataSource = self
@@ -98,9 +103,9 @@ class GSSAPhysicalCardRequestAddressViewController: UIViewController, GSSAPhysic
                     btnPostalCode.isHidden = true
                     txtPostalCode.isUserInteractionEnabled = false
                     btnTxtPostalCode.isUserInteractionEnabled = true
-                    txtCity.text = LocationInfo?.resultado?.municipio
-                    txtState.text = LocationInfo?.resultado?.estado
-                    txtCountry.text = LocationInfo?.resultado?.pais
+                    txtCity.text = LocationInfo?.resultado?.municipio?.capitalized
+                    txtState.text = LocationInfo?.resultado?.estado?.capitalized
+                    txtCountry.text = LocationInfo?.resultado?.pais?.capitalized
                     for item in LocationInfo!.resultado!.colonias!{
                         pickerData.updateValue(item.id ?? -1, forKey: item.nombre ?? "")
                     }
@@ -110,6 +115,34 @@ class GSSAPhysicalCardRequestAddressViewController: UIViewController, GSSAPhysic
             })
         }else{
             self.presentBottomAlertFullData(status: .error, message: "Ingrese un código postal válido", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+        }
+    }
+    
+    @IBAction func useCurrentLocation(_ sender: Any){
+        let savedAddress = GSSISessionInfo.sharedInstance.gsUser.address
+        requestedAddress.shared.city = savedAddress?.city
+        requestedAddress.shared.country = "México"
+        requestedAddress.shared.externalNumber = savedAddress?.externalNumber
+        requestedAddress.shared.postalCode = savedAddress?.zipCode
+        requestedAddress.shared.state = savedAddress?.state
+        requestedAddress.shared.street = savedAddress?.street
+        requestedAddress.shared.suburb = savedAddress?.neighborhood
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func next(_ sender: Any){
+        if txtCity.text?.haveData() == true && txtStreet.text?.haveData() == true && txtExternalNumber.text?.haveData() == true{
+            requestedAddress.shared.street = txtStreet.text
+            requestedAddress.shared.postalCode = txtPostalCode.text
+            requestedAddress.shared.suburb = txtColonia.text
+            requestedAddress.shared.externalNumber = txtExternalNumber.text
+            requestedAddress.shared.internalNumber = txtInternalNumber.text
+            requestedAddress.shared.city = txtCity.text
+            requestedAddress.shared.state = txtState.text
+            requestedAddress.shared.country = txtCountry.text
+            self.navigationController?.popViewController(animated: true)
+        }else{
+            self.presentBottomAlertFullData(status: .error, message: "Faltan campos por completar", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
         }
     }
     
@@ -132,7 +165,20 @@ extension GSSAPhysicalCardRequestAddressViewController: UITextFieldDelegate{
         case 1:
             return updatedText.count <= 5 && (string == filtered)
         default:
-            return true
+            return updatedText.count <= 40 && (string == filtered)
         }
     }
+}
+
+public struct requestedAddress{
+    static var shared = requestedAddress()
+    var postalCode          : String?
+    var suburb              : String? //Colonia
+    var street              : String?
+    var externalNumber      : String?
+    var internalNumber      : String?
+    var city                : String? //Municipio-Alcaldia
+    var state               : String?
+    var country             : String?
+    private init() { }
 }

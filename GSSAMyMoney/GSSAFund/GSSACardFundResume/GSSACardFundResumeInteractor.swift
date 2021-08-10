@@ -9,8 +9,153 @@
 //
 
 import UIKit
+import baz_ios_sdk_link_pago
+import GSSASessionInfo
 
 class GSSACardFundResumeInteractor: GSSACardFundResumeInteractorProtocol {
 
     weak var presenter: GSSACardFundResumePresenterProtocol?
+    
+    func enroll(request: LNKPG_EnrollmentRequestFacade) {
+        LNKPG_PaymentFacade.shared.displayServiceWithWebPage(merchantID: GSSAFundSharedVariables.shared.ecommerceResponse?.comerciosCybs?.id ?? "", merchantReference: GSSAFundSharedVariables.shared.idTransaccionSuperApp ?? "", amount: GSSAFundSharedVariables.shared.amount ?? "", success: {
+            [weak self] response in
+            
+            guard let self = self else { return }
+            
+            self.payServices(enrollmentRequest: request)
+        }, failure: {
+            [weak self] error in
+            
+            guard let self = self else { return }
+            
+            self.presenter?.enrollError()
+        })
+    }
 }
+
+//MARK: - private functions
+extension GSSACardFundResumeInteractor {
+    private func payServices(enrollmentRequest: LNKPG_EnrollmentRequestFacade){
+        guard let ecommerceResponse = GSSAFundSharedVariables.shared.ecommerceResponse,
+              let accountNumber = GSSAFundSharedVariables.shared.account else {
+            
+            self.presenter?.enrollError()
+            return
+        }
+        
+        LNKPG_PaymentFacade.shared.requestPayService(cardNumer: accountNumber, ecommerceResponse: ecommerceResponse, success: {
+            [weak self] response in
+            
+            guard let self = self else { return }
+            
+            self.enrollment(enrollmentRequest: enrollmentRequest)
+        }, failure: {
+            [weak self] error in
+            
+            guard let self = self else { return }
+            
+            self.presenter?.enrollError()
+        })
+    }
+    
+    private func enrollment(enrollmentRequest: LNKPG_EnrollmentRequestFacade){
+        LNKPG_Facade.shared.postEnrollment(enrollment: enrollmentRequest, success: {
+            [weak self] response in
+            
+            guard let self = self else { return }
+            
+            guard let response = response else {
+                self.presenter?.enrollError()
+                return
+            }
+            
+            self.notifyEnrollment(response: response)
+
+        }, failure: {
+            [weak self] error in
+            
+            guard let self = self else { return }
+            
+            self.presenter?.enrollError()
+            print(error)
+        })
+    }
+    
+    private func notifyEnrollment(response: LNKPG_EnrollmentResponseFacade){
+        guard let appEmail = GSSISessionInfo.sharedInstance.gsUser.email?.lowercased() else {
+            
+            presenter?.enrollError()
+            return
+        }
+        
+        guard let cardInformation = GSSAFundSharedVariables.shared.cardInformationResponse else {
+            
+            searchInformation(enrollResponse: response)
+            return
+        }
+        
+        LNKPG_PaymentFacade.shared.notifyEnrollment(enrollment: response, ecommerceResponse: GSSAFundSharedVariables.shared.ecommerceResponse, cardInformationResponse: cardInformation, cvv: GSSAFundSharedVariables.shared.cvv ?? "", idTransaccionSuperApp: GSSAFundSharedVariables.shared.idTransaccionSuperApp ?? "", numeroCuentaCliente: GSSAFundSharedVariables.shared.clientAccountNumber ?? "", numeroAfiliacion: GSSAFundSharedVariables.shared.numeroAfiliacion ?? "", correo: GSSAFundSharedVariables.shared.createTokenRequest?.email ?? appEmail, amount: GSSAFundSharedVariables.shared.amount ?? "", successFondeoAccountResponse: {
+            [weak self] fondeoAccountResponse in
+            guard let self = self else { return }
+            
+            guard let fondeoAccountResponse = fondeoAccountResponse else {
+                self.presenter?.enrollError()
+                return
+            }
+            
+            self.presenter?.enrollSuccess(responseEnroll: response, responseOtp: nil, responseCargo: nil, responseFondeo: fondeoAccountResponse)
+            
+        }, successCargoEcommerceResponse: {
+            [weak self] cargoEccomerceResponse in
+            guard let self = self else { return }
+            
+            guard let cargoEccomerceResponse = cargoEccomerceResponse else {
+                self.presenter?.enrollError()
+                return
+            }
+       
+            self.presenter?.enrollSuccess(responseEnroll: response, responseOtp: nil, responseCargo: cargoEccomerceResponse, responseFondeo: nil)
+            
+        }, successSessionOTPResponse: {
+            [weak self] sessionOtpResponse in
+            guard let self = self else { return }
+            
+            guard let sessionOtpResponse = sessionOtpResponse else {
+                self.presenter?.enrollError()
+                return
+            }
+            
+            self.presenter?.enrollSuccess(responseEnroll: response, responseOtp: sessionOtpResponse, responseCargo: nil, responseFondeo: nil)
+        }, failure: {
+            [weak self] error in
+            
+            guard let self = self else { return }
+            
+            print(error)
+            
+            self.presenter?.enrollError()
+        })
+    }
+    
+    private func searchInformation(enrollResponse: LNKPG_EnrollmentResponseFacade){
+        LNKPG_Facade.shared.getCardInformation(merchantID: GSSAFundSharedVariables.shared.ecommerceResponse?.comerciosCybs?.id ?? "", merchantReference: GSSAFundSharedVariables.shared.idTransaccionSuperApp ?? "", paySubscriptionId: GSSAFundSharedVariables.shared.tokenCardResponse?.paySubscriptionId ?? "", success: {
+            [weak self] response in
+            guard let self = self else { return }
+            
+            guard let response = response else {
+                self.presenter?.enrollError()
+                return
+            }
+            
+            GSSAFundSharedVariables.shared.cardInformationResponse = response
+            self.notifyEnrollment(response: enrollResponse)
+        }, failure: {
+            [weak self] error in
+            
+            guard let self = self else { return }
+            
+            self.presenter?.enrollError()
+        })
+    }
+}
+

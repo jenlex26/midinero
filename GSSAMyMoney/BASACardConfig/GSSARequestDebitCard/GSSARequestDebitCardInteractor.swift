@@ -53,7 +53,7 @@ class GSSARequestDebitCardInteractor: GSSAURLSessionTaskCoordinatorBridge, GSSAR
         request.addValue("-99.12698712", forHTTPHeaderField: "x-longitud")
         request.addValue("SRfVZrTYvdm7mzzZmcuiDViACkAx", forHTTPHeaderField: "x-token-usuario")
         request.addValue("99553877", forHTTPHeaderField: "x-id-lealtad")
-        //request.addValue("Bearer eyJraWQiOiJkczdRNlBTbE9ZNStuMnJjXC9PdjJqTGp5eWZRS2VJdmFjRXcwWHlNQm80cz0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxOGg4dmFudnJoNHB1aTFscm50YzFuaWxqZiIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiVXN1YXJpb1wvZGVsZXRlIFVzdWFyaW9cL3JlYWQgVXN1YXJpb1wvdXBkYXRlIiwiYXV0aF90aW1lIjoxNjI4NTQzOTI5LCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9FaEZuSU9JRzAiLCJleHAiOjE2Mjg1NDc1MjksImlhdCI6MTYyODU0MzkyOSwidmVyc2lvbiI6MiwianRpIjoiMjU5YmMxMGQtZGI5Ny00YmU4LTk3OTMtNTA0ODM3M2UyYTI0IiwiY2xpZW50X2lkIjoiMThoOHZhbnZyaDRwdWkxbHJudGMxbmlsamYifQ.jNjWb1Ocl72L6svbyREPH1d303lRip5mrEiCmwVo-iW5_aVgcXegZZqvMsznxh-Gvf0u1SqrCOXO4K-Jf897inLT3UVHv05mItAkmJKZ39a39V3tLbR5IYzE0Qy1xQKJG9z05uXiqMTVQO6SBFU89r8qbmJoC19zYOjZ0ZC7fnI47ymMpd5n9urcbnxccikUtAAHiEQZSHtZ80xMzyg_F_M-O-bhaXo0-KBJF_pOtuNr5f7pYLRU_jmsLBRisgymOJwVhwHCPLJSgY2uEiNOVBItvK-Qz03WqxYoj3ICHt8nhBVhrPygf9FdQt4fVtKFjHLUKH6hR-n_JuD7mwu7kQ", forHTTPHeaderField: "Authorization")
+        request.addValue("Bearer eyJraWQiOiJkczdRNlBTbE9ZNStuMnJjXC9PdjJqTGp5eWZRS2VJdmFjRXcwWHlNQm80cz0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxOGg4dmFudnJoNHB1aTFscm50YzFuaWxqZiIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiVXN1YXJpb1wvZGVsZXRlIFVzdWFyaW9cL3JlYWQgVXN1YXJpb1wvdXBkYXRlIiwiYXV0aF90aW1lIjoxNjI4NjIwMTkxLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9FaEZuSU9JRzAiLCJleHAiOjE2Mjg2MjM3OTEsImlhdCI6MTYyODYyMDE5MSwidmVyc2lvbiI6MiwianRpIjoiNzY5ZjMxZjUtNWI0YS00NGY1LTk2NjktYTZhMDQyOGM2MWM2IiwiY2xpZW50X2lkIjoiMThoOHZhbnZyaDRwdWkxbHJudGMxbmlsamYifQ.HiUurok09pFe7Qj55dAC6HnxbuzBEvc8ClAlP5OImnKxoplF6VnVJmmNZsR1J6vetYMWLWH_xrlvx_7FT9T09OQd-kDWnI7SalB-AFMDfBYHw13pkECFzCZGhUeXVZ1T4amvIiCmL5PxcxawGHJnS_qD7r1R6CDWAQQa5NYZX18e9KnhGBjjjrglYVvjIbktKYrYH1ShRfYhzOEF81Aanyt4mkCtYmD-WeEf-KyjPrQmE3pRLh4JNQTI3IG-zx74g4IkuvRz-kWUMI9cVVomlYKKV-pkTzxJEQobNDDV2mknbE00pAfrtXkz7Ze3BG58MV12QjLBxPxmfYheG1zgoA", forHTTPHeaderField: "Authorization")
         request.addValue("XSRF-TOKEN=abd6f7dc-7383-4150-aabd-544647e7d0b3", forHTTPHeaderField: "Cookie")
         
         request.httpMethod = "GET"
@@ -73,6 +73,5 @@ class GSSARequestDebitCardInteractor: GSSAURLSessionTaskCoordinatorBridge, GSSAR
         
         task.resume()
         semaphore.wait()
-        
     }
 }

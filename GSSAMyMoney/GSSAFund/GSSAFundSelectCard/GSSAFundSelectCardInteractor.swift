@@ -9,8 +9,73 @@
 //
 
 import UIKit
+import baz_ios_sdk_link_pago
+import GSSASessionInfo
 
 class GSSAFundSelectCardInteractor: GSSAFundSelectCardInteractorProtocol {
 
     weak var presenter: GSSAFundSelectCardPresenterProtocol?
+    
+    //MARK: - Properties
+    private let afiliationNumber: String = "8632464"
+    
+    func getCards() {
+        guard let email = GSSISessionInfo.sharedInstance.gsUser.email?.lowercased() else {
+            presenter?.getCardsError()
+            return
+        }
+        
+        LNKPG_Facade.shared.getListCard(numeroAfiliacion: afiliationNumber, email: email, success: { [weak self] cards in
+            guard let self = self else { return }
+            
+            guard let cards = cards else {
+                self.presenter?.getCardsError()
+                return
+            }
+            
+            self.presenter?.getCardsSuccess(cards: cards)
+            
+        }, failure: { [weak self] message in
+            guard let self = self else { return }
+            self.presenter?.getCardsError()
+        })
+    }
+    
+    func deleteCard(body request: LNKPG_TokenCardDeleteRequestFacade) {
+        LNKPG_Facade.shared.postDeleteCard(card: request, success:{ [weak self] response in
+            guard let self = self else { return }
+            
+            guard let response = response else {
+                self.presenter?.deleteCardError()
+                return
+            }
+            
+            self.presenter?.deleteCardSuccess(response: response)
+            
+        }, failure: { [weak self] error in
+            guard let self = self else { return }
+            self.presenter?.deleteCardError()
+        })
+    }
+    
+    func getEccomerceInformation() {
+        LNKPG_Facade.shared.Initialize(environment: .release)
+        LNKPG_Facade.shared.getEcommerceInformation(numeroAfiliacion: afiliationNumber, success: { [weak self] response in
+            guard let self = self else { return }
+            
+            guard let response = response else {
+                self.presenter?.getEccomerceInformationError()
+                return
+            }
+            
+            GSSAFundSharedVariables.shared.ecommerceResponse = response
+            GSSAFundSharedVariables.shared.getIdTransactionSuperApp()
+            
+            self.presenter?.getEccomerceInformationSuccess(response: response)
+            
+        }, failure: { [weak self] message in
+            guard let self = self else { return }
+            self.presenter?.getEccomerceInformationError()
+        })
+    }
 }

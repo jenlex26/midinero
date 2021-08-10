@@ -9,9 +9,9 @@
 //
 
 import UIKit
+import baz_ios_sdk_link_pago
 
 class GSSAFundSelectCardPresenter: GSSAFundSelectCardPresenterProtocol {
-
     weak private var view: GSSAFundSelectCardViewProtocol?
     var interactor: GSSAFundSelectCardInteractorProtocol?
     private let router: GSSAFundSelectCardWireframeProtocol
@@ -21,5 +21,57 @@ class GSSAFundSelectCardPresenter: GSSAFundSelectCardPresenterProtocol {
         self.interactor = interactor
         self.router = router
     }
-
+    
+    func getCards() {
+        interactor?.getCards()
+    }
+    
+    func getCardsSuccess(cards: [LNKPG_ListCardResponseFacade.__Tokens]) {
+        view?.getCardsSuccess(cards: cards)
+    }
+    
+    func getCardsError() {
+        view?.getCardsError()
+    }
+    
+    func deleteCard(body request: LNKPG_TokenCardDeleteRequestFacade) {
+        interactor?.deleteCard(body: request)
+    }
+    
+    func deleteCardSuccess(response: LNKPG_TokenCardDeleteResponseFacade) {
+        view?.deleteCardSuccess(response: response)
+    }
+    
+    func deleteCardError() {
+        view?.deleteCardError()
+    }
+    
+    func getEccomerceInformation() {
+        interactor?.getEccomerceInformation()
+    }
+    
+    func getEccomerceInformationSuccess(response: LNKPG_EcommerceResponseFacade) {
+        view?.getEccomerceInformationSuccess(response: response)
+    }
+    
+    func getEccomerceInformationError() {
+        view?.getEccomerceInformationError()
+    }
+    
+    func goToValidateCVV(_ view: UIViewController) {
+        router.goToValidateCVV(view)
+    }
+    
+    func goToAddNewCard(_ view: UIViewController) {
+        router.goToAddNewCard(view)
+    }
+    
+    func showError(_ view: UIViewController) {
+        router.showError(view)
+    }
+    
+    func showAlert(_ view: UIViewController) {
+        router.showAlert(view)
+    }
+    
 }

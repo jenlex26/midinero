@@ -9,8 +9,54 @@
 //
 
 import UIKit
+import GSSASessionInfo
+import baz_ios_sdk_link_pago
 
-class GSSAFundAddCardInteractor: GSSAFundAddCardInteractorProtocol {
-
+class GSSAFundAddCardInteractor: GSSAFundAddCardInteractorProtocol{
+    
     weak var presenter: GSSAFundAddCardPresenterProtocol?
+    
+    func getCountries() {
+        LNKPG_Facade.shared.getCountries(success: {
+            [weak self] response in
+            guard let self = self else { return }
+            
+            guard let response = response else {
+                
+                self.presenter?.getCountriesError()
+                return
+            }
+            
+            self.presenter?.getCountriesSuccess(response: response)
+            
+        }, failure: {
+            [weak self] error in
+            
+            guard let self = self else { return }
+            
+            self.presenter?.getCountriesError()
+        })
+    }
+    
+    func getStates(request: LNKPG_CountryStatesRequestFacade) {
+        LNKPG_Facade.shared.getStates(model: request, success: {
+            [weak self] response in
+            guard let self = self else { return }
+            
+            guard let response = response else {
+                
+                self.presenter?.getStatesError()
+                return
+            }
+            
+            self.presenter?.getStatesSuccess(response: response)
+            
+        }, failure: {
+            [weak self] error in
+            
+            guard let self = self else { return }
+            
+            self.presenter?.getStatesError()
+        })
+    }
 }

@@ -9,22 +9,45 @@
 //
 
 import UIKit
+import baz_ios_sdk_link_pago
 
-class GSSAFundSelectCardRouter: GSSAFundSelectCardWireframeProtocol {
+open class GSSAFundSelectCardRouter: GSSAFundSelectCardWireframeProtocol {
     
     weak var viewController: UIViewController?
     
-    static func createModule() -> UIViewController {
+    static public func createModule(loadingModel: PB_HomeEntity) -> UIViewController {
         // Change to get view from storyboard if not using progammatic UI
         let view = GSSAFundSelectCardViewController(nibName: nil, bundle: Bundle.init(for: GSSAFundSelectCardRouter.self))
         let interactor = GSSAFundSelectCardInteractor()
         let router = GSSAFundSelectCardRouter()
         let presenter = GSSAFundSelectCardPresenter(interface: view, interactor: interactor, router: router)
         
+        GSSAFundSharedVariables.shared.amount = loadingModel.amount
+        GSSAFundSharedVariables.shared.clientAccountNumber = loadingModel.numeroCuentaCliente
+        GSSAFundSharedVariables.shared.numeroAfiliacion = loadingModel.numeroAfiliacion
+        GSSAFundSharedVariables.shared.merchantDetail = loadingModel.merchantDetail
+        GSSAFundSharedVariables.shared.idTransaccionSuperApp = loadingModel.idTransaccion
+        
         view.presenter = presenter
         interactor.presenter = presenter
         router.viewController = view
         
         return view
+    }
+    
+    func goToValidateCVV(_ view: UIViewController) {
+        viewController?.navigationController?.pushViewController(view, animated: true)
+    }
+    
+    func goToAddNewCard(_ view: UIViewController) {
+        viewController?.navigationController?.pushViewController(view, animated: true)
+    }
+    
+    func showError(_ view: UIViewController) {
+        viewController?.navigationController?.pushViewController(view, animated: true)
+    }
+    
+    func showAlert(_ view: UIViewController) {
+        viewController?.present(view, animated: true, completion: nil)
     }
 }

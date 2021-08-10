@@ -28,4 +28,36 @@ class GSSACardFundResumeRouter: GSSACardFundResumeWireframeProtocol {
         
         return view
     }
+    
+    func goToError(message: String, isDouble: Bool) {
+        guard let errorVC = viewController?.getErrorMPViewController(message: message, isDouble: isDouble) else { return }
+        
+        viewController?.navigationController?.pushViewController(errorVC, animated: true)
+    }
+    
+    func goToTicket(folio: String) {
+        guard let vc = viewController as? GSSACardFundResumeViewController else { return }
+        
+        let ticket = GSSAFundTicket.createTicket(folio: folio, delegate: vc)
+        
+       
+        ticket.modalPresentationStyle = .fullScreen
+
+        vc.navigationController?.isNavigationBarHidden = true
+        vc.navigationController?.pushViewController(ticket, animated: false)
+    }
+    
+    func goToNextFlow() {
+        let view = GSSAFundWebViewRouter.createModule()
+        
+        viewController?.navigationController?.pushViewController(view, animated: true)
+    }
+    
+    func returnTo(vc: AnyClass, animated: Bool) {
+        if  let nav = viewController?.navigationController,
+            let lastVC = nav.viewControllers.last(where: { $0.isKind(of: vc) }) {
+            
+            nav.popToViewController(lastVC, animated: animated)
+        }
+    }
 }

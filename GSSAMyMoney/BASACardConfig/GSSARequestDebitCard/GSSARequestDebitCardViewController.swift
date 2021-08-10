@@ -26,15 +26,32 @@ class GSSARequestDebitCardViewController: UIViewController, GSSARequestDebitCard
     
     var bottomAlert: GSVCBottomAlert?
     var presenter: GSSARequestDebitCardPresenterProtocol?
+    var isViewDidLoad = false
+    var amount = ""
     
-	override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         headerView.backgroundColor = UIColor.GSVCBase300()
         containerView.layer.cornerRadius = 10.0
         gradientView.layer.cornerRadius = 10.0
-        getShippingAmount()
         setAddress()
+        getShippingAmount()
+        isViewDidLoad = true
         NotificationCenter.default.addObserver(self, selector: #selector(parseCustomRequest(notification:)), name: NSNotification.Name(rawValue: "PhysicalCardShippingAmountResponse"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(retryRequest), name: NSNotification.Name(rawValue: "RetryRequest"), object: nil)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if isViewDidLoad == true{
+            isViewDidLoad = false
+        }else{
+            let address = requestedAddress.shared
+            lblAddress.text = "\((address.street ?? "").capitalized) \((address.externalNumber ?? "").capitalized) \((address.suburb ?? "").capitalized) \((address.city ?? "").capitalized) \(address.postalCode ?? "")"
+        }
+    }
+    
+    @objc func retryRequest(){
+        getShippingAmount()
     }
     
     @objc func parseCustomRequest(notification: Notification){
@@ -45,10 +62,13 @@ class GSSARequestDebitCardViewController: UIViewController, GSSARequestDebitCard
             let model = try! JSONDecoder().decode(PhysicalCardShippingAmountResponse.self, from: data)
             if model.resultado?.monto == nil{
                 self.btnNext.isEnabled = false
-                self.presentBottomAlertFullData(status: .error, message: "Ocurrió un problema al obtener la información, intente más tarde", attributedString: nil, canBeClosed: false, animated: true, showOptionalButton: true, optionalButtonText:nil)
+                let view = self.showErrorViewController(message: "Intente más tarde")
+                view.modalPresentationStyle = .fullScreen
+                self.present(view, animated: true, completion: nil)
             }else{
-            self.lblShippingCost.text = "Solicítala con un costo de \(model.resultado?.monto?.moneyFormatWithoutSplit() ?? "")"
-            self.lblShippingCostSubtitle.text = "Solicítala con un costo de \(model.resultado?.monto?.moneyFormatWithoutSplit() ?? "")"
+                self.amount = model.resultado?.monto ?? ""
+                self.lblShippingCost.text = "Solicítala con un costo de \(model.resultado?.monto?.moneyFormatWithoutSplit() ?? "")"
+                self.lblShippingCostSubtitle.text = "Solicítala con un costo de \(model.resultado?.monto?.moneyFormatWithoutSplit() ?? "")"
             }
         }
     }
@@ -58,6 +78,7 @@ class GSSARequestDebitCardViewController: UIViewController, GSSARequestDebitCard
         presenter?.requestGetShippingCost(Response: { [self] Response in
             if Response != nil{
                 GSVCLoader.hide()
+                amount = Response?.resultado?.monto ?? ""
                 lblShippingCost.text = "Solicítala con un costo de \(Response?.resultado?.monto?.moneyFormatWithoutSplit() ?? "")"
                 self.lblShippingCostSubtitle.text = "Solicítala con un costo de \(Response?.resultado?.monto?.moneyFormatWithoutSplit() ?? "")"
             }
@@ -81,30 +102,30 @@ class GSSARequestDebitCardViewController: UIViewController, GSSARequestDebitCard
     
     @IBAction func next(_ sender: Any){
         let parameters:[String:Any] =
-                                    [
-                                        "paymentConfig":
-                                            [
-                                            "productQuantity":"1",
-                                            "commission":"0",
-                                            "concept":"Donación",
-                                            "idCompany":"",
-                                            "idReferencePay":"",
-                                            "iva":"0",
-                                            "amount":"90",
-                                            "requieredBill" : true,
-                                            "shippingAmount": "90",
-                                            "x-idOperacionConciliacion": ""
-                                            ],
-                                            "viewConfig" :
-                                            [
-                                            "txtTitle":"Envío de tarjeta física",
-                                            "txtSubtitle":"90",
-                                            "txtHelper":"Desde qué cuenta compras",
-                                            "txtSlideButton": "Desliza para pagar",
-                                            ]
-                                    ]
-                    
-                                GSINAdminNavigator.shared.startFlow(forAction: "GSIFTr_PaymentBTN", navigateDelegate: self, withInfo: parameters)
+            [
+                "paymentConfig":
+                    [
+                        "productQuantity":"1",
+                        "commission":"0",
+                        "concept":"Donación",
+                        "idCompany":"",
+                        "idReferencePay":"",
+                        "iva":"0",
+                        "amount":"\(amount)",
+                        "requieredBill" : true,
+                        "shippingAmount": "\(amount)",
+                        "x-idOperacionConciliacion": ""
+                    ],
+                "viewConfig" :
+                    [
+                        "txtTitle":"Envío de tarjeta física",
+                        "txtSubtitle":"",
+                        "txtHelper":"\(amount)",
+                        "txtSlideButton": "Desliza para pagar",
+                    ]
+            ]
+        
+        GSINAdminNavigator.shared.startFlow(forAction: "GSIFTr_PaymentBTN", navigateDelegate: self, withInfo: parameters)
     }
     
     @IBAction func editAddress(_ sender: Any){
@@ -115,5 +136,4 @@ class GSSARequestDebitCardViewController: UIViewController, GSSARequestDebitCard
     @IBAction func close(_ sender: Any){
         self.navigationController?.popViewController(animated: true)
     }
-
 }

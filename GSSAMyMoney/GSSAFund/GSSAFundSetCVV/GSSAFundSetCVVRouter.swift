@@ -14,17 +14,30 @@ class GSSAFundSetCVVRouter: GSSAFundSetCVVWireframeProtocol {
     
     weak var viewController: UIViewController?
     
-    static func createModule() -> UIViewController {
+    static func createModule(token: String) -> UIViewController {
         // Change to get view from storyboard if not using progammatic UI
-        let view = GSSAFundSetCVVViewController(nibName: nil, bundle: Bundle.init(for: GSSAFundSetCVVRouter.self))
+        let view = GSSAFundSetCVVViewController(nibName: "GSSAFundSetCVVViewController", bundle: Bundle.init(for: GSSAFundAddCardRouter.self))
         let interactor = GSSAFundSetCVVInteractor()
         let router = GSSAFundSetCVVRouter()
         let presenter = GSSAFundSetCVVPresenter(interface: view, interactor: interactor, router: router)
         
         view.presenter = presenter
+        view.token = token
         interactor.presenter = presenter
         router.viewController = view
         
         return view
+    }
+    
+    func goToNextFlow() {
+        let view = GSSACardFundResumeRouter.createModule()
+        
+        viewController?.navigationController?.pushViewController(view, animated: true)
+    }
+    
+    func goToError(message: String, isDouble: Bool) {
+        guard let errorVC = viewController?.getErrorMPViewController(message: message, isDouble: isDouble) else { return }
+        
+        viewController?.navigationController?.pushViewController(errorVC, animated: true)
     }
 }

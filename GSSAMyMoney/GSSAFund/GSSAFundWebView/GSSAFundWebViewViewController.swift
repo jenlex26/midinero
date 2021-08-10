@@ -9,14 +9,109 @@
 //
 
 import UIKit
+import WebKit
+import GSSAVisualComponents
+import GSSAVisualTemplates
+import GSSAInterceptor
+import baz_ios_sdk_link_pago
 
 class GSSAFundWebViewViewController: UIViewController, GSSAFundWebViewViewProtocol {
 
-	var presenter: GSSAFundWebViewPresenterProtocol?
+    var presenter: GSSAFundWebViewPresenterProtocol?
+    
+    //MARK: - @IBOutlets
+    @IBOutlet weak var webViewContainer: UIView!
+    
+    //MARK: - Properties
+    lazy var webview: LNKPG_WebViewFacade = {
+        let view = LNKPG_WebViewFacade()
+        
+        view.alpha = 0
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
 
+    //MARK: - Life cylce
 	override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Recarga tu tarjeta"
+        
+        setView()
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
 }
+
+//MARK: - Presenter Methods
+extension GSSAFundWebViewViewController {
+    func onSucess(folio: String) {
+        GSVCLoader.hide()
+        
+        presenter?.goToTicket(folio: folio)
+    }
+    
+    func onError(content: String?) {
+        GSVCLoader.hide()
+        
+        let message = content ?? "Ocurrio un error intentelo más tarde"
+        
+        presenter?.goToError(message: message, isDouble: true)
+    }
+}
+
+//MARK: - GSVTTicketOperationDelegate
+extension GSSAFundWebViewViewController: GSVTTicketOperationDelegate {
+    func operationSuccessActionClosed() {
+        GSINAdminNavigator.shared.releaseLastFlow()
+    }
+}
+
+//MARK: - LNKPG_WebViewFacadeDelegate
+extension GSSAFundWebViewViewController: LNKPG_WebViewFacadeDelegate {
+    func notifySuccess() {
+        GSVCLoader.show()
+        presenter?.checkFund()
+    }
+    
+    func notifyFailure() {
+
+    }
+}
+
+//MARK: - Private functions
+extension GSSAFundWebViewViewController {
+    private func setView() {
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        guard let enrollResponse = GSSAFundSharedVariables.shared.enrollmentResponse else { return }
+        
+        setupWebView(enrollmentResponse: enrollResponse)
+    }
+    
+    private func setupWebView(enrollmentResponse: LNKPG_EnrollmentResponseFacade) {
+        
+        webViewContainer.addSubview(webview)
+        webview.delegate = self
+        
+        NSLayoutConstraint.activate([
+            webview.topAnchor.constraint(equalTo: webViewContainer.topAnchor),
+            webview.leadingAnchor.constraint(equalTo: webViewContainer.trailingAnchor),
+            webview.bottomAnchor.constraint(equalTo: webViewContainer.bottomAnchor),
+            webview.heightAnchor.constraint(equalTo: webViewContainer.heightAnchor),
+            webview.widthAnchor.constraint(equalTo: webViewContainer.widthAnchor),
+            webview.trailingAnchor.constraint(equalTo: webViewContainer.trailingAnchor),
+        ])
+        
+        webview.alpha = 1
+        webview.openURL(enrollmentResponse: enrollmentResponse)
+        
+        
+    }
+}
+

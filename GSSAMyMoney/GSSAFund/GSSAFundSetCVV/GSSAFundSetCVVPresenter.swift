@@ -9,9 +9,10 @@
 //
 
 import UIKit
+import baz_ios_sdk_link_pago
 
 class GSSAFundSetCVVPresenter: GSSAFundSetCVVPresenterProtocol {
-
+    
     weak private var view: GSSAFundSetCVVViewProtocol?
     var interactor: GSSAFundSetCVVInteractorProtocol?
     private let router: GSSAFundSetCVVWireframeProtocol
@@ -22,4 +23,23 @@ class GSSAFundSetCVVPresenter: GSSAFundSetCVVPresenterProtocol {
         self.router = router
     }
 
+    func searchAccount(token: String) {
+        interactor?.searchAccount(token: token)
+    }
+    
+    func searchAccountError() {
+        view?.searchAccountError()
+    }
+    
+    func searchAccountSuccess(response: LNKPG_CardInformationResponseFacade) {
+        view?.searchAccountSuccess(response: response)
+    }
+    
+    func goToNextFlow() {
+        router.goToNextFlow()
+    }
+    
+    func goToError(message: String, isDouble: Bool) {
+        router.goToError(message: message, isDouble: isDouble)
+    }
 }

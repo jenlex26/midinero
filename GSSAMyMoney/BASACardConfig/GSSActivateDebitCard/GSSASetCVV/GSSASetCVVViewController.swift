@@ -27,6 +27,7 @@ class GSSASetCVVViewController: GSSAMasterViewController, GSSASetCVVViewProtocol
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
         setProgressLine(value: 0.5, animated: true)
         txtCVV.becomeFirstResponder()
     }

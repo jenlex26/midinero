@@ -72,8 +72,8 @@ class GSSACardInfoView: UIView {
     //MARK: - Methods
     func setupInfo(name: String, bankName: String, accountNumber: String){
         nameLabel.text = name
-        bankLabel.text = bankName
-        accountLabel.text = accountNumber
+        bankLabel.text = accountNumber.first == "4" ? "Visa" : accountNumber.first == "5" ? "Mastercard" : "000"
+        accountLabel.text = accountNumber.maskedAccount
         acronymLabel.text = getAcronymFromName(name: name)
     }
 }

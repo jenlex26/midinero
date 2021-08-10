@@ -21,5 +21,24 @@ class GSSAFundWebViewPresenter: GSSAFundWebViewPresenterProtocol {
         self.interactor = interactor
         self.router = router
     }
+    
+    func checkFund() {
+        interactor?.checkFund()
+    }
+    
+    func onSucess(folio: String) {
+        view?.onSucess(folio: folio)
+    }
+    
+    func onError(content: String?) {
+        view?.onError(content: content)
+    }
 
+    func goToTicket(folio: String) {
+        router.goToTicket(folio: folio)
+    }
+    
+    func goToError(message: String, isDouble: Bool) {
+        router.goToError(message: message, isDouble: isDouble)
+    }
 }

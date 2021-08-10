@@ -13,8 +13,8 @@ import UIKit
 class GSSAFundAddCardRouter: GSSAFundAddCardWireframeProtocol {
     
     weak var viewController: UIViewController?
-    
-    static func createModule() -> UIViewController {
+
+    static func createModule(expirationMonth: String, expirationYear: String, number: String) -> UIViewController {
         // Change to get view from storyboard if not using progammatic UI
         let view = GSSAFundAddCardViewController(nibName: nil, bundle: Bundle.init(for: GSSAFundAddCardRouter.self))
         let interactor = GSSAFundAddCardInteractor()
@@ -22,6 +22,10 @@ class GSSAFundAddCardRouter: GSSAFundAddCardWireframeProtocol {
         let presenter = GSSAFundAddCardPresenter(interface: view, interactor: interactor, router: router)
         
         view.presenter = presenter
+        view.expirationMonth = expirationMonth
+        view.expirationYear = expirationYear
+        view.number = number
+        
         interactor.presenter = presenter
         router.viewController = view
         

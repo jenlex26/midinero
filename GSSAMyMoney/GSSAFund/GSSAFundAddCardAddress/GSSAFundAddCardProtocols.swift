@@ -9,6 +9,7 @@
 //
 
 import Foundation
+import baz_ios_sdk_link_pago
 
 //MARK: Wireframe -
 protocol GSSAFundAddCardWireframeProtocol: class {
@@ -16,12 +17,22 @@ protocol GSSAFundAddCardWireframeProtocol: class {
 }
 //MARK: Presenter -
 protocol GSSAFundAddCardPresenterProtocol: class {
-
+    func getCountries()
+    func getStates(request: LNKPG_CountryStatesRequestFacade)
+    
+    func getCountriesSuccess(response: LNKPG_CountriesResponseFacade)
+    func getCountriesError()
+    
+    func getStatesSuccess(response: LNKPG_CountryStatesResponseFacade)
+    func getStatesError()
 }
 
 //MARK: Interactor -
 protocol GSSAFundAddCardInteractorProtocol: class {
 
+    func getCountries()
+    func getStates(request: LNKPG_CountryStatesRequestFacade)
+    
   var presenter: GSSAFundAddCardPresenterProtocol?  { get set }
 }
 
@@ -29,4 +40,10 @@ protocol GSSAFundAddCardInteractorProtocol: class {
 protocol GSSAFundAddCardViewProtocol: class {
 
   var presenter: GSSAFundAddCardPresenterProtocol?  { get set }
+    
+    func getCountriesSuccess(response: LNKPG_CountriesResponseFacade)
+    func getCountriesError()
+    
+    func getStatesSuccess(response: LNKPG_CountryStatesResponseFacade)
+    func getStatesError()
 }

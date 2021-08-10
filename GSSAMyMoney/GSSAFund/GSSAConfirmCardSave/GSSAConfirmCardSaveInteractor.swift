@@ -9,8 +9,29 @@
 //
 
 import UIKit
+import baz_ios_sdk_link_pago
 
 class GSSAConfirmCardSaveInteractor: GSSAConfirmCardSaveInteractorProtocol {
 
     weak var presenter: GSSAConfirmCardSavePresenterProtocol?
+    
+    func requestSaveCard(tokenCardRequest: LNKPG_TokenCardRequestFacade) {
+        print(tokenCardRequest)
+        LNKPG_Facade.shared.postCreateToken(token: tokenCardRequest) {[weak self] response in
+            guard let self = self else  { return }
+            
+            if let response = response {
+                self.presenter?.onSuccess(response)
+            } else {
+                self.presenter?.onError()
+            }
+            
+        } failure: { [weak self] error in
+            guard let self = self else  { return }
+            
+            print(error)
+            self.presenter?.onError()
+        }
+
+    }
 }

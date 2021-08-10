@@ -10,28 +10,132 @@
 
 import UIKit
 import GSSAVisualComponents
+import baz_ios_sdk_link_pago
 
-class GSSAFundSelectCardViewController: GSSAMasterViewController, GSSAFundSelectCardViewProtocol {
-
-    @IBOutlet weak var lblSubtitle: GSVCLabel!
+class GSSAFundSelectCardViewController: GSSAMasterViewController {
     
-	var presenter: GSSAFundSelectCardPresenterProtocol?
-
+    var presenter: GSSAFundSelectCardPresenterProtocol?
+    
+    //MARK: - @IBOutlets
+    @IBOutlet weak var cardsTable: UITableView!
+    
+    //MARK: - Properties
+    var cards: [LNKPG_ListCardResponseFacade.__Tokens] = []
+    
+    //MARK: Life cycle methods
 	override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Recarga tu tarjeta"
+        
+        setView()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
         setProgressLine(value: 0.25, animated: true)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
+    //MARK: - Methods
+    private func setView() {
+        self.title = "Recarga tu tarjeta"
+        
+        cardsTable.dataSource = self
+        cardsTable.separatorStyle = .none
+        cardsTable.register(GSSACardTableViewCell.nib, forCellReuseIdentifier: GSSACardTableViewCell.cellIdentifier)
+        
+        GSVCLoader.show()
+        presenter?.getEccomerceInformation()
     }
     
-    @IBAction func addCard(_ sender: Any){
+    private func showAlert(token: String) {
+        let alert = UIAlertController(title: "Eliminar tarjeta",
+                                      message: "¿Estás seguro que quieres eliminar la tarjeta guardada?",
+                                      preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Aceptar", style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            GSVCLoader.show()
+            
+            let merchantID = GSSAFundSharedVariables.shared.ecommerceResponse?.comerciosCybs?.id ?? ""
+            let merchantReference = GSSAFundSharedVariables.shared.getIdTransactionSuperApp()
+            self.presenter?.deleteCard(body: LNKPG_TokenCardDeleteRequestFacade(merchantID: merchantID,
+                                                                                merchantReference: merchantReference,
+                                                                                paySubscriptionId: token))
+        })
+        
+        alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+        presenter?.showAlert(alert)
+    }
+    
+    private func showError() {
+        GSVCLoader.hide()
+        let message = "Ocurrio un error intentelo más tarde"
+        let view = getErrorMPViewController(message: message)
+        self.presenter?.showError(view)
+    }
+    
+    //MARK: - Actions
+    @IBAction func addCard(_ sender: Any) {
         let view = GSSAFundSetCardNumberRouter.createModule()
-        self.navigationController?.pushViewController(view, animated: true)
+        self.presenter?.goToAddNewCard(view)
+    }
+}
+
+//MARK: - UITableViewDataSource
+extension GSSAFundSelectCardViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return cards.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let identifier = GSSACardTableViewCell.cellIdentifier
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! GSSACardTableViewCell
+        let card = cards[indexPath.row]
+        let token = card.token ?? ""
+        let bankType = GSSAFundSharedVariables.shared.getCardName(cardNumer: card.numeroTarjeta ?? "")
+        let accountNumber = card.numeroTarjeta ?? ""
+        
+        cell.setupData(token: token, bankType: bankType, accountNumber: accountNumber,
+                       onSelect: { [weak self] token in
+                        guard let self = self else { return }
+                        self.presenter?.goToValidateCVV(GSSAFundSetCVVRouter.createModule(token: token))
+                       },
+                       
+                       onDelete: { [weak self] token in
+                        guard let self = self else { return }
+                        self.showAlert(token: token)
+        })
+        
+        return cell
+    }
+}
+
+//MARK: - GSSAFundSelectCardViewProtocol
+extension GSSAFundSelectCardViewController: GSSAFundSelectCardViewProtocol {
+    func getEccomerceInformationSuccess(response: LNKPG_EcommerceResponseFacade) {
+        presenter?.getCards()
+    }
+    
+    func getEccomerceInformationError() {
+        showError()
+    }
+    
+    func deleteCardSuccess(response: LNKPG_TokenCardDeleteResponseFacade) {
+        presenter?.getCards()
+    }
+    
+    func deleteCardError() {
+        showError()
+    }
+    
+    func getCardsSuccess(cards: [LNKPG_ListCardResponseFacade.__Tokens]) {
+        self.cards = cards
+        cardsTable.reloadData()
+        GSVCLoader.hide()
+    }
+    
+    func getCardsError() {
+        showError()
     }
 }

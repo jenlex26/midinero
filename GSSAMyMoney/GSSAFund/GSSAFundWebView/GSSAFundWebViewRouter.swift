@@ -27,4 +27,22 @@ class GSSAFundWebViewRouter: GSSAFundWebViewWireframeProtocol {
         
         return view
     }
+    
+    func goToError(message: String, isDouble: Bool) {
+        guard let errorVC = viewController?.getErrorMPViewController(message: message, isDouble: isDouble) else { return }
+        
+        viewController?.navigationController?.pushViewController(errorVC, animated: true)
+    }
+    
+    func goToTicket(folio: String) {
+        guard let vc = viewController as? GSSAFundWebViewViewController else { return }
+        
+        let ticket = GSSAFundTicket.createTicket(folio: folio, delegate: vc)
+        
+       
+        ticket.modalPresentationStyle = .fullScreen
+
+        vc.navigationController?.isNavigationBarHidden = true
+        vc.navigationController?.pushViewController(ticket, animated: false)
+    }
 }

@@ -57,14 +57,11 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
+        GSVCLoader.hide()
         txtAmount.becomeFirstResponder()
         createTag(eventName: .pageView, section: "mi_dinero", flow: "fondear_cuenta", screenName: "monto", origin: "")
         setProgressLine(value: 0.25, animated: true)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        GSVCLoader.hide()
     }
     
     @objc func ammountFormatter(sender: UITextField){
@@ -127,35 +124,30 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
     }
     
     func showFondeo(){
+            let quantity = txtAmount.text?.moneyToDoubleString()
+            var mail = GSSISessionInfo.sharedInstance.gsUser.email
+            if mail?.haveData() == false || mail == nil{
+                mail = txtMail.text
+            }
+            let accountNumber = GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().encryptAlnova()
+            
+            let parameters = [
+                "amount": "\(quantity ?? "0.0")",
+                "numeroCuentaCliente": "\(accountNumber ?? "")",
+                "merchantDetail":"Abono Saldo", "correo": "\(mail ?? "")",
+                "numeroAfiliacion": "8632464"
+            ]
+            
+            let validado = GSSALinkDePagoViewController.validateStrings(parameters: parameters)
+            let view = PB_HomeMain.createModule(loadingModel: validado!)
+            view.modalPresentationStyle = .fullScreen
+            close = true
+            
+        self.navigationController?.pushViewController(GSSAFundSelectCardRouter.createModule(loadingModel: validado!), animated: true)
         
-        let alert = UIAlertController(title: "Comisión", message: "Se cobrará una comisión de $5.00 MXN por esta transacción. \n¿Deseas continuar?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: {_ in
-            self.navigationController?.pushViewController(GSSAFundSelectCardRouter.createModule(), animated: true)
-        }))
-        alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
-        
-        //self.present(alert, animated: true)
-        
-        let quantity = txtAmount.text?.moneyToDoubleString()
-        var mail = GSSISessionInfo.sharedInstance.gsUser.email
-        if mail?.haveData() == false || mail == nil{
-            mail = txtMail.text
+    //        self.present(view, animated: true, completion: nil)
+    //        self.navigationController?.pushViewController(view, animated: true)
         }
-        let accountNumber = GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().encryptAlnova()
-        
-        let parameters = [
-            "amount": "\(quantity ?? "0.0")",
-            "numeroCuentaCliente": "\(accountNumber ?? "")",
-            "merchantDetail":"Abono Saldo", "correo": "\(mail ?? "")",
-            "numeroAfiliacion": "8632464"
-        ]
-        
-        let validado = GSSALinkDePagoViewController.validateStrings(parameters: parameters)
-        let view = PB_HomeMain.createModule(loadingModel: validado!)
-        view.modalPresentationStyle = .fullScreen
-        close = true
-        self.present(view, animated: true, completion: nil)
-    }
     
     func forgotDigitalSign(_ forgotSecurityCodeViewController: UIViewController?) {
         print("forgot")

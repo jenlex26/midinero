@@ -13,4 +13,46 @@ import UIKit
 class GSSAFundSetCardNumberInteractor: GSSAFundSetCardNumberInteractorProtocol {
 
     weak var presenter: GSSAFundSetCardNumberPresenterProtocol?
+    
+    //MARK: - Properties
+    private var isCardNumberEmpty: Bool = false {
+        didSet { presenter?.cardNumberIsEmpty(isCardNumberEmpty) }
+    }
+    
+    private var isExpirationEmpty: Bool = false {
+        didSet { presenter?.expirationIsEmpty(isExpirationEmpty) }
+    }
+    
+    private var isCvvEmpty: Bool = false {
+        didSet { presenter?.cvvIsEmpty(isCvvEmpty) }
+    }
+    
+    //MARK: - Methods
+    func checkTextFields(cardNumber: String?, expiration: String?, cvv: String?) {
+
+        if let cardNumber = cardNumber,
+            cardNumber != "",
+            cardNumber.replacingOccurrences(of: " ", with: "").count == 16 {
+            isCardNumberEmpty = false
+        } else {
+            isCardNumberEmpty = true
+        }
+        
+        if let expiration = expiration, expiration != "", expiration.count == 5 {
+            isExpirationEmpty = false
+        } else {
+            isExpirationEmpty = true
+        }
+        
+        if let cvv = cvv, cvv != "", cvv.count == 3 {
+            isCvvEmpty = false
+        } else {
+            isCvvEmpty = true
+        }
+        
+        if !isCardNumberEmpty && !isExpirationEmpty && !isCvvEmpty {
+            presenter?.areTextFieldsCorrect(cardNumber: cardNumber!, expiration: expiration!, cvv: cvv!)
+        }            
+    }
+    
 }

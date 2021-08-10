@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="118" id="KGk-i7-Jjw" customClass="GSSACardTableViewCell" customModule="GSSAMyMoney" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="435" height="118"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="435" height="118"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hgN-ZS-64Y">
+                        <rect key="frame" x="8" y="8" width="419" height="102"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="6pu-5M-xgI">
+                                <rect key="frame" x="8" y="8" width="371" height="86"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Isv-9Q-5hQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="371" height="43"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jaS-1Z-jh1" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                                        <rect key="frame" x="0.0" y="43" width="371" height="43"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="styleType">
+                                                <integer key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sF5-2B-why">
+                                <rect key="frame" x="387" y="4" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="sF5-2B-why" secondAttribute="height" multiplier="1:1" id="Z5T-Cu-5a6"/>
+                                    <constraint firstAttribute="height" constant="24" id="o8o-jG-Sso"/>
+                                </constraints>
+                                <state key="normal" image="iconosSistemaAccionEliminar"/>
+                                <connections>
+                                    <action selector="onClickDelete:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="MsK-hP-XRm"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="sF5-2B-why" firstAttribute="leading" secondItem="6pu-5M-xgI" secondAttribute="trailing" constant="8" id="C59-BE-UHe"/>
+                            <constraint firstItem="6pu-5M-xgI" firstAttribute="top" secondItem="hgN-ZS-64Y" secondAttribute="top" constant="8" id="L1Q-Sj-xLz"/>
+                            <constraint firstItem="6pu-5M-xgI" firstAttribute="leading" secondItem="hgN-ZS-64Y" secondAttribute="leading" constant="8" id="OJP-Nv-9bp"/>
+                            <constraint firstAttribute="bottom" secondItem="6pu-5M-xgI" secondAttribute="bottom" constant="8" id="bUd-iA-SFR"/>
+                            <constraint firstAttribute="trailing" secondItem="sF5-2B-why" secondAttribute="trailing" constant="8" id="rgg-6V-GuK"/>
+                            <constraint firstItem="sF5-2B-why" firstAttribute="top" secondItem="hgN-ZS-64Y" secondAttribute="top" constant="4" id="uLj-9G-hX5"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="hgN-ZS-64Y" secondAttribute="trailing" constant="8" id="P3l-me-5AM"/>
+                    <constraint firstItem="hgN-ZS-64Y" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="P7A-Ez-nOY"/>
+                    <constraint firstAttribute="bottom" secondItem="hgN-ZS-64Y" secondAttribute="bottom" constant="8" id="aY2-Nh-8W3"/>
+                    <constraint firstItem="hgN-ZS-64Y" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="aYG-Ol-jar"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="accountLabel" destination="jaS-1Z-jh1" id="7vR-kc-ffj"/>
+                <outlet property="cardContainer" destination="hgN-ZS-64Y" id="AW3-Ic-zRU"/>
+                <outlet property="cardTypeLabel" destination="Isv-9Q-5hQ" id="Xzz-gC-z54"/>
+            </connections>
+            <point key="canvasLocation" x="96.376811594202906" y="128.57142857142856"/>
+        </tableViewCell>
+    </objects>
+    <designables>
+        <designable name="jaS-1Z-jh1"/>
+    </designables>
+    <resources>
+        <image name="iconosSistemaAccionEliminar" width="24" height="24"/>
+    </resources>
+</document>

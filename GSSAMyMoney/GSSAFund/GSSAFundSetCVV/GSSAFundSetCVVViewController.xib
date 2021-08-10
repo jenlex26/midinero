@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GSSAFundSetCVVViewController" customModule="GSSAMyMoney" customModuleProvider="target">
             <connections>
                 <outlet property="cardInfoView" destination="Hom-m4-13U" id="1Mg-rY-lMf"/>
+                <outlet property="cvcInfoLabel" destination="CuX-9n-IZQ" id="QD0-7o-EAU"/>
                 <outlet property="txtCVV" destination="BX4-EV-rvK" id="uMU-ad-EAx"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -22,7 +23,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Valida la tarjeta" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rqk-7s-uuu" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                    <rect key="frame" x="24" y="20" width="327" height="21"/>
+                    <rect key="frame" x="20" y="20" width="335" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -33,7 +34,7 @@
                     </userDefinedRuntimeAttributes>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tarjeta de la que recibes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fLG-ts-rbG" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                    <rect key="frame" x="24" y="51" width="341" height="21"/>
+                    <rect key="frame" x="20" y="51" width="335" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -44,17 +45,17 @@
                     </userDefinedRuntimeAttributes>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hom-m4-13U" customClass="GSSACardInfoView" customModule="GSSAMyMoney" customModuleProvider="target">
-                    <rect key="frame" x="24" y="87" width="327" height="60"/>
+                    <rect key="frame" x="20" y="92" width="335" height="60"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="kmK-De-aSA"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IYP-CW-z36">
-                    <rect key="frame" x="0.0" y="172" width="375" height="120"/>
+                    <rect key="frame" x="0.0" y="193" width="375" height="120"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CVV " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h7P-R7-s3p" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                            <rect key="frame" x="24" y="10" width="327" height="20.5"/>
+                            <rect key="frame" x="20" y="10" width="335" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -65,15 +66,22 @@
                             </userDefinedRuntimeAttributes>
                         </label>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BX4-EV-rvK" customClass="GSVCTextField" customModule="GSSAVisualComponents">
-                            <rect key="frame" x="24" y="41.5" width="327" height="50"/>
+                            <rect key="frame" x="20" y="41.5" width="335" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="P04-rf-htJ"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" keyboardType="numberPad" textContentType="family-name"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="image" keyPath="image" value="eye.fill" catalog="system"/>
+                                <userDefinedRuntimeAttribute type="image" keyPath="imageTyped" value="eye.slash.fill" catalog="system"/>
+                                <userDefinedRuntimeAttribute type="number" keyPath="maxLength">
+                                    <integer key="value" value="3"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                         </textField>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Son 3 números." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CuX-9n-IZQ" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                            <rect key="frame" x="24" y="96.5" width="82.5" height="13.5"/>
+                            <rect key="frame" x="20" y="96.5" width="82.5" height="13.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -87,13 +95,13 @@
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstItem="CuX-9n-IZQ" firstAttribute="leading" secondItem="BX4-EV-rvK" secondAttribute="leading" id="01d-B2-lE0"/>
-                        <constraint firstAttribute="trailing" secondItem="BX4-EV-rvK" secondAttribute="trailing" constant="24" id="0l7-aQ-nz3"/>
+                        <constraint firstAttribute="trailing" secondItem="BX4-EV-rvK" secondAttribute="trailing" constant="20" id="0l7-aQ-nz3"/>
                         <constraint firstAttribute="height" constant="120" id="7f6-2m-r1c"/>
                         <constraint firstItem="CuX-9n-IZQ" firstAttribute="top" secondItem="BX4-EV-rvK" secondAttribute="bottom" constant="5" id="ErJ-C8-IBw"/>
-                        <constraint firstItem="BX4-EV-rvK" firstAttribute="leading" secondItem="IYP-CW-z36" secondAttribute="leading" constant="24" id="LKK-VR-0Wd"/>
-                        <constraint firstAttribute="trailing" secondItem="h7P-R7-s3p" secondAttribute="trailing" constant="24" id="M6w-Lw-M9v"/>
+                        <constraint firstItem="BX4-EV-rvK" firstAttribute="leading" secondItem="IYP-CW-z36" secondAttribute="leading" constant="20" id="LKK-VR-0Wd"/>
+                        <constraint firstAttribute="trailing" secondItem="h7P-R7-s3p" secondAttribute="trailing" constant="20" id="M6w-Lw-M9v"/>
                         <constraint firstItem="h7P-R7-s3p" firstAttribute="top" secondItem="IYP-CW-z36" secondAttribute="top" constant="10" id="izb-sf-iLo"/>
-                        <constraint firstItem="h7P-R7-s3p" firstAttribute="leading" secondItem="IYP-CW-z36" secondAttribute="leading" constant="24" id="sMy-Uj-NBB"/>
+                        <constraint firstItem="h7P-R7-s3p" firstAttribute="leading" secondItem="IYP-CW-z36" secondAttribute="leading" constant="20" id="sMy-Uj-NBB"/>
                         <constraint firstItem="BX4-EV-rvK" firstAttribute="top" secondItem="h7P-R7-s3p" secondAttribute="bottom" constant="11" id="v1b-q3-lEe"/>
                     </constraints>
                 </view>
@@ -113,42 +121,63 @@
                         <action selector="next:" destination="-1" eventType="touchUpInside" id="AZx-LX-Kop"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dVt-ch-8iu">
+                    <rect key="frame" x="20" y="172" width="335" height="1"/>
+                    <color key="backgroundColor" systemColor="systemGray5Color"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="2fY-le-gvA"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="Jye-u9-bfH"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="IYP-CW-z36" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="3yT-sB-jeB"/>
-                <constraint firstItem="IYP-CW-z36" firstAttribute="top" secondItem="Hom-m4-13U" secondAttribute="bottom" constant="25" id="4ne-9M-l2g"/>
+                <constraint firstAttribute="trailing" secondItem="dVt-ch-8iu" secondAttribute="trailing" constant="20" id="Djg-4g-1Mh"/>
                 <constraint firstItem="fLG-ts-rbG" firstAttribute="leading" secondItem="Rqk-7s-uuu" secondAttribute="leading" id="KK0-zQ-keK"/>
-                <constraint firstItem="Hom-m4-13U" firstAttribute="top" secondItem="fLG-ts-rbG" secondAttribute="bottom" constant="15" id="VI0-HK-2Jv"/>
+                <constraint firstItem="IYP-CW-z36" firstAttribute="top" secondItem="dVt-ch-8iu" secondAttribute="bottom" constant="20" id="Lnt-XW-7ku"/>
+                <constraint firstItem="Hom-m4-13U" firstAttribute="top" secondItem="fLG-ts-rbG" secondAttribute="bottom" constant="20" id="VI0-HK-2Jv"/>
                 <constraint firstItem="88d-jF-sZv" firstAttribute="centerX" secondItem="Jye-u9-bfH" secondAttribute="centerX" id="dsT-6d-3Ro"/>
                 <constraint firstItem="Jye-u9-bfH" firstAttribute="trailing" secondItem="IYP-CW-z36" secondAttribute="trailing" id="eTD-Bo-WnM"/>
-                <constraint firstItem="Rqk-7s-uuu" firstAttribute="leading" secondItem="Jye-u9-bfH" secondAttribute="leading" constant="24" id="eWg-tY-SFq"/>
-                <constraint firstItem="Jye-u9-bfH" firstAttribute="trailing" secondItem="fLG-ts-rbG" secondAttribute="trailing" constant="10" id="ftf-eG-lRE"/>
-                <constraint firstItem="Jye-u9-bfH" firstAttribute="trailing" secondItem="Hom-m4-13U" secondAttribute="trailing" constant="24" id="kZK-IT-hvo"/>
+                <constraint firstItem="Rqk-7s-uuu" firstAttribute="leading" secondItem="Jye-u9-bfH" secondAttribute="leading" constant="20" id="eWg-tY-SFq"/>
+                <constraint firstItem="dVt-ch-8iu" firstAttribute="top" secondItem="Hom-m4-13U" secondAttribute="bottom" constant="20" id="fQ3-Mn-NyA"/>
+                <constraint firstItem="Jye-u9-bfH" firstAttribute="trailing" secondItem="fLG-ts-rbG" secondAttribute="trailing" constant="20" id="ftf-eG-lRE"/>
+                <constraint firstItem="Jye-u9-bfH" firstAttribute="trailing" secondItem="Hom-m4-13U" secondAttribute="trailing" constant="20" id="kZK-IT-hvo"/>
+                <constraint firstItem="dVt-ch-8iu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="knu-9L-Q9B"/>
                 <constraint firstItem="fLG-ts-rbG" firstAttribute="top" secondItem="Rqk-7s-uuu" secondAttribute="bottom" constant="10" id="mxI-4i-IFo"/>
                 <constraint firstItem="Jye-u9-bfH" firstAttribute="bottom" secondItem="88d-jF-sZv" secondAttribute="bottom" constant="40" id="rJe-xH-eZw"/>
-                <constraint firstItem="Jye-u9-bfH" firstAttribute="trailing" secondItem="Rqk-7s-uuu" secondAttribute="trailing" constant="24" id="rs9-TD-EGt"/>
+                <constraint firstItem="Jye-u9-bfH" firstAttribute="trailing" secondItem="Rqk-7s-uuu" secondAttribute="trailing" constant="20" id="rs9-TD-EGt"/>
                 <constraint firstItem="Rqk-7s-uuu" firstAttribute="top" secondItem="Jye-u9-bfH" secondAttribute="top" constant="20" id="tHA-Rh-ovu"/>
-                <constraint firstItem="Hom-m4-13U" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="24" id="zXV-VL-a0X"/>
+                <constraint firstItem="Hom-m4-13U" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="zXV-VL-a0X"/>
             </constraints>
-            <point key="canvasLocation" x="106" y="92"/>
+            <point key="canvasLocation" x="104.8" y="91.304347826086968"/>
         </view>
     </objects>
     <designables>
         <designable name="88d-jF-sZv">
-            <size key="intrinsicContentSize" width="75" height="33"/>
+            <size key="intrinsicContentSize" width="67" height="30"/>
         </designable>
         <designable name="CuX-9n-IZQ">
             <size key="intrinsicContentSize" width="82.5" height="13.5"/>
+        </designable>
+        <designable name="Rqk-7s-uuu">
+            <size key="intrinsicContentSize" width="116" height="20.5"/>
+        </designable>
+        <designable name="fLG-ts-rbG">
+            <size key="intrinsicContentSize" width="185.5" height="20.5"/>
         </designable>
         <designable name="h7P-R7-s3p">
             <size key="intrinsicContentSize" width="38.5" height="20.5"/>
         </designable>
     </designables>
     <resources>
+        <image name="eye.fill" catalog="system" width="128" height="78"/>
+        <image name="eye.slash.fill" catalog="system" width="128" height="82"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
