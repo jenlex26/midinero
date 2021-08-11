@@ -48,13 +48,36 @@ class GSSAFundAddCardViewController: UIViewController {
         super.viewDidLoad()
         
         setView()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     //MARK: - Methods
+    @objc func keyboardWillShow(notification:NSNotification) {
+
+        guard let userInfo = notification.userInfo else { return }
+        var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+
+        var contentInset:UIEdgeInsets = self.scrollView.contentInset
+        contentInset.bottom = keyboardFrame.size.height + 80
+        scrollView.contentInset = contentInset
+    }
+
+    @objc func keyboardWillHide(notification:NSNotification) {
+
+        let contentInset:UIEdgeInsets = UIEdgeInsets.zero
+        scrollView.contentInset = contentInset
+    }
     
     
     func requestCountries() {
@@ -182,7 +205,6 @@ extension GSSAFundAddCardViewController: GSSAFundAddCardViewProtocol {
             return
         }
         
-        
         self.countries.append(contentsOf: paises)
         
         if self.countries.count > 0 {
@@ -239,7 +261,33 @@ extension GSSAFundAddCardViewController: GSSAFundAddCardViewProtocol {
 
 //MARK: - UITextFieldDelegate
 extension GSSAFundAddCardViewController: UITextFieldDelegate {
-
+//    func textFieldDidBeginEditing(_ textField: UITextField) {
+//        if textField.tag == 9 ||
+//           textField.tag == 6 ||
+//           textField.tag == 5 ||
+//           textField.tag == 4 ||
+//           textField.tag == 3{
+//
+//            UIView.animate(withDuration: 0.3, animations: { () -> Void in
+//                            self.view.frame.origin.y -= 320.0
+//                        })
+//            scrollView.smo
+//        }
+//    }
+//
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//        if textField.tag == 9 ||
+//           textField.tag == 6 ||
+//           textField.tag == 5 ||
+//           textField.tag == 4 ||
+//           textField.tag == 3{
+//
+//            UIView.animate(withDuration: 0.1, animations: { () -> Void in
+//                self.view.frame.origin.y = 0.0
+//            })
+//        }
+//    }
+    
 }
 
 //MARK: - GSVCPickerControllerDelegate

@@ -25,4 +25,7 @@ class GSSARequestDebitCardPresenter: GSSARequestDebitCardPresenterProtocol {
         interactor?.tryGetShippingCost(Response: Response)
     }
     
+    func requestCard(commission: String,  Response: @escaping () -> ()){
+        interactor?.tryRequestCard(commission: commission, Response: Response)
+    }
 }

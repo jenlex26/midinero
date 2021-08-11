@@ -38,6 +38,7 @@ class GSSAFundSetCardNumberViewController: UIViewController, GSSAFundSetCardNumb
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
         cardNumberTextField.delegate = self
+        cardNumberTextField.allowActions(.allowAll)
         cardNumberTextField.contentFormat(.numeric)
         
         expirationTextField.delegate = self

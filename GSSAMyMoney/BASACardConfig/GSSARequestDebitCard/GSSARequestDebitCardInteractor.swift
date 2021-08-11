@@ -35,6 +35,23 @@ class GSSARequestDebitCardInteractor: GSSAURLSessionTaskCoordinatorBridge, GSSAR
         }
     }
     
+    func tryRequestCard(commission: String,  Response: @escaping () -> ()){
+        self.urlPath = "https://apigateway.superappbaz.com/"
+        self.strPathEndpoint = "integracion/superapp/dinero/captacion/gestion-tarjetas-fisicas/v1/tarjetas/solicitudes"
+        
+        let address = Envio.init(comision: commission, idTipoTarjeta: "CP", cliente: ConfirmCardRequestTransaccionClient.init(nombre: (GSSISessionInfo.sharedInstance.gsUser.name ?? "") + " " + (GSSISessionInfo.sharedInstance.gsUser.lastName ?? ""), numeroTelefonico: GSSISessionInfo.sharedInstance.gsUser.phone), domicilio: Domicilio.init(ciudad: requestedAddress.shared.city, calle: requestedAddress.shared.street, colonia: requestedAddress.shared.suburb, codigoPostal: requestedAddress.shared.postalCode, numeroExterior: requestedAddress.shared.externalNumber, numeroInterior: requestedAddress.shared.internalNumber))
+        
+        let body = ConfirmCardRequestBody.init(transaccion: ConfirmCardRequestTransaccion.init(primerTokenVerificacion: GSSISessionInfo.sharedInstance.gsUserToken, sicu: GSSISessionInfo.sharedInstance.gsUser.SICU, numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount, envio: address))
+        
+        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: body, environment: .none) { (objRes: PhysicalCardShippingAmountResponse?, error) in
+            if error.code == 0 {
+            } else {
+                self.customRequest()
+                debugPrint(error)
+            }
+        }
+    }
+    
     func customRequest(){
         let semaphore = DispatchSemaphore (value: 0)
         var request = URLRequest(url: URL(string: "https://apigateway.superappbaz.com/desarrollo/superapp/dinero/captacion/gestion-tarjetas-fisicas/v1/tarjetas/busquedas/comision")!,timeoutInterval: Double.infinity)
@@ -53,7 +70,7 @@ class GSSARequestDebitCardInteractor: GSSAURLSessionTaskCoordinatorBridge, GSSAR
         request.addValue("-99.12698712", forHTTPHeaderField: "x-longitud")
         request.addValue("SRfVZrTYvdm7mzzZmcuiDViACkAx", forHTTPHeaderField: "x-token-usuario")
         request.addValue("99553877", forHTTPHeaderField: "x-id-lealtad")
-        request.addValue("Bearer eyJraWQiOiJkczdRNlBTbE9ZNStuMnJjXC9PdjJqTGp5eWZRS2VJdmFjRXcwWHlNQm80cz0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxOGg4dmFudnJoNHB1aTFscm50YzFuaWxqZiIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiVXN1YXJpb1wvZGVsZXRlIFVzdWFyaW9cL3JlYWQgVXN1YXJpb1wvdXBkYXRlIiwiYXV0aF90aW1lIjoxNjI4NjIwMTkxLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9FaEZuSU9JRzAiLCJleHAiOjE2Mjg2MjM3OTEsImlhdCI6MTYyODYyMDE5MSwidmVyc2lvbiI6MiwianRpIjoiNzY5ZjMxZjUtNWI0YS00NGY1LTk2NjktYTZhMDQyOGM2MWM2IiwiY2xpZW50X2lkIjoiMThoOHZhbnZyaDRwdWkxbHJudGMxbmlsamYifQ.HiUurok09pFe7Qj55dAC6HnxbuzBEvc8ClAlP5OImnKxoplF6VnVJmmNZsR1J6vetYMWLWH_xrlvx_7FT9T09OQd-kDWnI7SalB-AFMDfBYHw13pkECFzCZGhUeXVZ1T4amvIiCmL5PxcxawGHJnS_qD7r1R6CDWAQQa5NYZX18e9KnhGBjjjrglYVvjIbktKYrYH1ShRfYhzOEF81Aanyt4mkCtYmD-WeEf-KyjPrQmE3pRLh4JNQTI3IG-zx74g4IkuvRz-kWUMI9cVVomlYKKV-pkTzxJEQobNDDV2mknbE00pAfrtXkz7Ze3BG58MV12QjLBxPxmfYheG1zgoA", forHTTPHeaderField: "Authorization")
+        request.addValue("Bearer yJraWQiOiJkczdRNlBTbE9ZNStuMnJjXC9PdjJqTGp5eWZRS2VJdmFjRXcwWHlNQm80cz0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxOGg4dmFudnJoNHB1aTFscm50YzFuaWxqZiIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiVXN1YXJpb1wvZGVsZXRlIFVzdWFyaW9cL3JlYWQgVXN1YXJpb1wvdXBkYXRlIiwiYXV0aF90aW1lIjoxNjI4NjM5MjUzLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9FaEZuSU9JRzAiLCJleHAiOjE2Mjg2NDI4NTMsImlhdCI6MTYyODYzOTI1MywidmVyc2lvbiI6MiwianRpIjoiOWNjY2UwN2MtMWNjYS00ZmIwLTkzODAtNDVhMDY3NWQ2NTdiIiwiY2xpZW50X2lkIjoiMThoOHZhbnZyaDRwdWkxbHJudGMxbmlsamYifQ.DY59RdZeZDWCG1mhRYJDTnLdiKn_7Lxz8pIYDvadGRcvsP3-BOcWTPsng5ATpG4e8FwXnLXw1izXAOr8Zl6c6nj9H5IfFSiMiBIJf93_6sGGJ85NjP2pGLTJziLfv-G9nak0oR4NjxSXGyzFnZvDXIGcJX5DeD4WUH8f-ZZlZzAfos9gTzeGLAfP_Zx0S_eyYbueZgzTMbURRaPvs76bFkeH4U96494_SnrAU5hoMhti3jmdCnomOMBOd9T5jHwgLdIKMQ29geuDVOags9Aka2bQOQkp4Qpw4Y86dRGMM8rl86hqN1dfAS7_h9_rsS9dvzaf1WWYOvvJIy_3f_stLw", forHTTPHeaderField: "Authorization")
         request.addValue("XSRF-TOKEN=abd6f7dc-7383-4150-aabd-544647e7d0b3", forHTTPHeaderField: "Cookie")
         
         request.httpMethod = "GET"

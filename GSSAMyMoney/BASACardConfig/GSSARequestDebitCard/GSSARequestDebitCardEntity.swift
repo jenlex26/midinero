@@ -17,3 +17,32 @@ struct PhysicalCardShippingAmountResponse: Codable {
 struct PhysicalCardShippingAmountResult: Codable {
     var monto: String?
 }
+
+// MARK: - ConfirmCardRequestBody
+struct ConfirmCardRequestBody: Codable {
+    var transaccion: ConfirmCardRequestTransaccion?
+}
+
+// MARK: - Transaccion
+struct ConfirmCardRequestTransaccion: Codable {
+    var primerTokenVerificacion, sicu, numeroCuenta: String?
+    var envio: Envio?
+}
+
+// MARK: - Envio
+struct Envio: Codable {
+    var comision, idTipoTarjeta: String?
+    var cliente: ConfirmCardRequestTransaccionClient?
+    var domicilio: Domicilio?
+}
+
+// MARK: - Cliente
+struct ConfirmCardRequestTransaccionClient: Codable {
+    var nombre, numeroTelefonico: String?
+}
+
+// MARK: - Domicilio
+struct Domicilio: Codable {
+    var ciudad, calle, colonia, codigoPostal: String?
+    var numeroExterior, numeroInterior: String?
+}

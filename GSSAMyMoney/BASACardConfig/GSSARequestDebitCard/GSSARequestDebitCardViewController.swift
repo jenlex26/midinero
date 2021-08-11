@@ -35,7 +35,7 @@ class GSSARequestDebitCardViewController: UIViewController, GSSARequestDebitCard
         containerView.layer.cornerRadius = 10.0
         gradientView.layer.cornerRadius = 10.0
         setAddress()
-        getShippingAmount()
+      //  getShippingAmount()
         isViewDidLoad = true
         NotificationCenter.default.addObserver(self, selector: #selector(parseCustomRequest(notification:)), name: NSNotification.Name(rawValue: "PhysicalCardShippingAmountResponse"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(retryRequest), name: NSNotification.Name(rawValue: "RetryRequest"), object: nil)
@@ -118,8 +118,8 @@ class GSSARequestDebitCardViewController: UIViewController, GSSARequestDebitCard
                     ],
                 "viewConfig" :
                     [
-                        "txtTitle":"Envío de tarjeta física",
-                        "txtSubtitle":"",
+                        "txtTitle":"Cualquier persona puede recibir tu tarjeta pero solo tú podrás activarla desde la App.",
+                        "txtSubtitle":"Realizado con:",
                         "txtHelper":"\(amount)",
                         "txtSlideButton": "Desliza para pagar",
                     ]
