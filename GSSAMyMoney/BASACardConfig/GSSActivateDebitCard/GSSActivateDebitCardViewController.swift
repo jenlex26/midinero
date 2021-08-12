@@ -10,7 +10,8 @@
 
 import UIKit
 
-class GSSActivateDebitCardViewController: GSSAMasterViewController, GSSActivateDebitCardViewProtocol {
+class GSSActivateDebitCardViewController: GSSAMasterViewController, GSSActivateDebitCardViewProtocol
+  {
 
 	var presenter: GSSActivateDebitCardPresenterProtocol?
 
@@ -26,8 +27,21 @@ class GSSActivateDebitCardViewController: GSSAMasterViewController, GSSActivateD
     }
     
     @IBAction func next(_ sender: Any){
-        let view = GSSASetCVVRouter.createModule()
-        self.navigationController?.pushViewController(view, animated: true)
+        let scanScreen = BASAScanCodeRouter.createModule(secuence: .scanCarCode, delegate: self)
+        if let nav = self.navigationController{
+            nav.present(scanScreen, animated: true, completion: nil)
+        }
     }
 }
 
+
+extension GSSActivateDebitCardViewController : BASAScanCodeWireframeProtocol {
+    func codeDetectedRouter(sCode: String) {
+        let view = GSSASetCVVRouter.createModule()
+        self.navigationController?.pushViewController(view, animated: true)
+    }
+    
+    func cancelCodeScanner() {
+        
+    }
+}

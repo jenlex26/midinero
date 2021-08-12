@@ -14,7 +14,18 @@ import GSSAVisualTemplates
 import GSSASessionInfo
 import GSSAInterceptor
 
-class GSSARequestDebitCardViewController: UIViewController, GSSARequestDebitCardViewProtocol, GSINNavigateDelegate, GSVCBottomAlertHandler {
+
+class GSSARequestDebitCardViewController: GSSAMasterViewController, GSSARequestDebitCardViewProtocol, GSINNavigateDelegate, GSVCBottomAlertHandler, BASAScanCodeWireframeProtocol {
+    func codeDetectedRouter(sCode: String) {
+        let view = GSSASetCVVRouter.createModule()
+        self.navigationController?.pushViewController(view, animated: true)
+    }
+    
+    func cancelCodeScanner() {
+        
+    }
+ 
+    
     
     @IBOutlet weak var headerView               : UIView!
     @IBOutlet weak var containerView            : UIView!
@@ -35,7 +46,7 @@ class GSSARequestDebitCardViewController: UIViewController, GSSARequestDebitCard
         containerView.layer.cornerRadius = 10.0
         gradientView.layer.cornerRadius = 10.0
         setAddress()
-      //  getShippingAmount()
+        getShippingAmount()
         isViewDidLoad = true
         NotificationCenter.default.addObserver(self, selector: #selector(parseCustomRequest(notification:)), name: NSNotification.Name(rawValue: "PhysicalCardShippingAmountResponse"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(retryRequest), name: NSNotification.Name(rawValue: "RetryRequest"), object: nil)
@@ -60,6 +71,7 @@ class GSSARequestDebitCardViewController: UIViewController, GSSARequestDebitCard
             print("USANDO CUSTOM REQUEST...")
             let data = notification.object as! Data
             let model = try! JSONDecoder().decode(PhysicalCardShippingAmountResponse.self, from: data)
+            debugPrint(model)
             if model.resultado?.monto == nil{
                 self.btnNext.isEnabled = false
                 let view = self.showErrorViewController(message: "Intente más tarde")
@@ -97,7 +109,8 @@ class GSSARequestDebitCardViewController: UIViewController, GSSARequestDebitCard
     }
     
     func willFinishFlow(withInfo info: [String : Any]?) {
-        print("MANDAR A RESUMEN...")
+        let generatedTicket = GSSARequestDebitCardGenericTicket.getGenericTicket(delegate: self)
+        self.navigationController?.pushViewController(generatedTicket, animated: true)
     }
     
     @IBAction func next(_ sender: Any){
@@ -136,4 +149,13 @@ class GSSARequestDebitCardViewController: UIViewController, GSSARequestDebitCard
     @IBAction func close(_ sender: Any){
         self.navigationController?.popViewController(animated: true)
     }
+}
+
+extension GSSARequestDebitCardViewController : GSVTTicketOperationDelegate
+{
+    func operationSuccessActionClosed() {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
+
 }
