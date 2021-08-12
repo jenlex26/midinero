@@ -21,7 +21,7 @@ class BASACardConfigInteractor:  GSSAURLSessionTaskCoordinatorBridge,  BASACardC
         self.urlPath = "https://apigateway.superappbaz.com/"
         self.strPathEndpoint = "integracion/superapp/dinero/captacion/gestion-tarjetas-fisicas/v1/tarjetas/solicitudes/busquedas/estatus"
   
-        let bodyTest = CardConfigCardSearchBody.init(transaccion: CardConfigCardSearchTransaccion.init(primerTokenVerificacion: "fac2ac44565db5312fb407c3c9482d04", sicu: GSSISessionInfo.sharedInstance.gsUser.SICU, numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount, idTipoTarjeta: "CP"))
+        let bodyTest = CardConfigCardSearchBody.init(transaccion: CardConfigCardSearchTransaccion.init(primerTokenVerificacion: "fac2ac44565db5312fb407c3c9482d04", sicu: GSSISessionInfo.sharedInstance.gsUser.SICU?.encryptAlnova(), numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.encryptAlnova(), idTipoTarjeta: "CP".encryptAlnova()))
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, objBody: bodyTest, environment: GLOBAL_ENVIROMENT) { (objRes: DebitCardStatementData?, error) in
             debugPrint(objRes as Any)

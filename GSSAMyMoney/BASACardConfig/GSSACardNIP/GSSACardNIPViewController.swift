@@ -10,6 +10,7 @@
 
 import UIKit
 import GSSAVisualComponents
+import GSSASessionInfo
 
 class GSSACardNIPViewController: UIViewController, GSSACardNIPViewProtocol {
     
@@ -25,7 +26,15 @@ class GSSACardNIPViewController: UIViewController, GSSACardNIPViewProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        requestNIP()
         setNIP()
+    }
+    
+    func requestNIP(){
+        let body = RequestNIPBody.init(transaccion: RequestNIPTransaccion.init(primerTokenVerificacion: GSSISessionInfo.sharedInstance.gsUser.account?.number, tarjeta: RequestNIPCard.init(numero: "", numeroContrato: "", codigoSeguridad: "", idCliente: ""), clienteUnico: ClienteUnico.init(idPais: "001", idCanal: "033", idSucursal: "7760", folio: "88582")))
+        presenter?.requestCardNIP(body: body, Response: {
+            print("OK")
+        })
     }
     
     func setNIP(){
@@ -37,7 +46,6 @@ class GSSACardNIPViewController: UIViewController, GSSACardNIPViewProtocol {
             txtNIP4.text = characters[3].toString()
         }
     }
-    
     
     @IBAction func close(_ sender: Any){
         let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]

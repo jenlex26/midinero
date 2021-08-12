@@ -11,22 +11,22 @@
 import Foundation
 
 //MARK: Wireframe -
-protocol GSSACardNIPWireframeProtocol: class {
+protocol GSSACardNIPWireframeProtocol: AnyObject {
 
 }
 //MARK: Presenter -
-protocol GSSACardNIPPresenterProtocol: class {
-
+protocol GSSACardNIPPresenterProtocol: AnyObject {
+    func requestCardNIP(body: RequestNIPBody,  Response: @escaping () -> ())
 }
 
 //MARK: Interactor -
-protocol GSSACardNIPInteractorProtocol: class {
-
-  var presenter: GSSACardNIPPresenterProtocol?  { get set }
+protocol GSSACardNIPInteractorProtocol: AnyObject {
+    var presenter: GSSACardNIPPresenterProtocol?  { get set }
+    func tryRequestCardNIP(body: RequestNIPBody,  Response: @escaping () -> ())
 }
 
 //MARK: View -
-protocol GSSACardNIPViewProtocol: class {
+protocol GSSACardNIPViewProtocol: AnyObject {
 
   var presenter: GSSACardNIPPresenterProtocol?  { get set }
 }

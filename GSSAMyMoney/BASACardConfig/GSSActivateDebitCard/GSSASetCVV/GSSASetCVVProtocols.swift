@@ -16,13 +16,13 @@ protocol GSSASetCVVWireframeProtocol: class {
 }
 //MARK: Presenter -
 protocol GSSASetCVVPresenterProtocol: class {
-
+    func requestSetCardCVV(body: SetCVVBody, CardSearchResponse: @escaping () -> ())
 }
 
 //MARK: Interactor -
 protocol GSSASetCVVInteractorProtocol: class {
-
-  var presenter: GSSASetCVVPresenterProtocol?  { get set }
+   var presenter: GSSASetCVVPresenterProtocol?  { get set }
+    func trySetCardCVV(body: SetCVVBody, CardSearchResponse: @escaping () -> ())
 }
 
 //MARK: View -

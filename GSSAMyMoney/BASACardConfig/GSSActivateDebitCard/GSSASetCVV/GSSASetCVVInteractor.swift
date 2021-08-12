@@ -9,8 +9,28 @@
 //
 
 import UIKit
+import GSSAServiceCoordinator
+import GSSASecurityManager
+import GSSASessionInfo
+import GSSAFunctionalUtilities
 
-class GSSASetCVVInteractor: GSSASetCVVInteractorProtocol {
-
+class GSSASetCVVInteractor: GSSAURLSessionTaskCoordinatorBridge, GSSASetCVVInteractorProtocol {
     weak var presenter: GSSASetCVVPresenterProtocol?
+    
+    func trySetCardCVV(body: SetCVVBody, CardSearchResponse: @escaping () -> ()){
+        self.urlPath = "https://apigateway.superappbaz.com/"
+        self.strPathEndpoint = "integracion/superapp/dinero/captacion/gestion-tarjetas-fisicas/v1/tarjetas"
+        
+        sendRequest(strUrl: strPathEndpoint, method: .POST, objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: DebitCardStatementData?, error) in
+            debugPrint(objRes as Any)
+            if error.code == 0 {
+                print("correcto")
+                debugPrint(objRes as Any)
+                CardSearchResponse()
+            } else {
+                debugPrint(error)
+                CardSearchResponse()
+            }
+        }
+    }
 }

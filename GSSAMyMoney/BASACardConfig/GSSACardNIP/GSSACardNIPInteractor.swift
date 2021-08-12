@@ -9,8 +9,24 @@
 //
 
 import UIKit
+import GSSAServiceCoordinator
+import GSSASecurityManager
+import GSSAFunctionalUtilities
+import GSSASessionInfo
+import Foundation
 
-class GSSACardNIPInteractor: GSSACardNIPInteractorProtocol {
-
+class GSSACardNIPInteractor: GSSAURLSessionTaskCoordinatorBridge, GSSACardNIPInteractorProtocol {
     weak var presenter: GSSACardNIPPresenterProtocol?
+    
+    func tryRequestCardNIP(body: RequestNIPBody,  Response: @escaping () -> ()){
+        self.urlPath = "https://apigateway.superappbaz.com/"
+        self.strPathEndpoint = "integracion/superapp/dinero/captacion/gestion-tarjetas-fisicas/v1/tarjetas/busquedas/nip"
+    
+        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: body, environment: .develop) { (objRes: PhysicalCardShippingAmountResponse?, error) in
+            if error.code == 0 {
+            } else {
+                debugPrint(error)
+            }
+        }
+    }
 }

@@ -46,3 +46,17 @@ struct Domicilio: Codable {
     var ciudad, calle, colonia, codigoPostal: String?
     var numeroExterior, numeroInterior: String?
 }
+
+
+// MARK: - BearerTokenResponse
+struct BearerTokenResponse: Codable {
+    var accessToken: String?
+    var expiresIn: Int?
+    var tokenType: String?
+
+    enum CodingKeys: String, CodingKey {
+        case accessToken = "access_token"
+        case expiresIn = "expires_in"
+        case tokenType = "token_type"
+    }
+}

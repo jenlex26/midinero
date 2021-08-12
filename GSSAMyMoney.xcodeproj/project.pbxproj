@@ -92,19 +92,7 @@
 		10E9EE00267D6BA400F45640 /* BASADigitalCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10E9EDAB267D6BA400F45640 /* BASADigitalCardViewController.xib */; };
 		10E9EE01267D6BA400F45640 /* BASADigitalCardInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E9EDAC267D6BA400F45640 /* BASADigitalCardInteractor.swift */; };
 		10E9EE03267D6BC200F45640 /* MyMoneyAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10E9EE02267D6BC200F45640 /* MyMoneyAssets.xcassets */; };
-		5844FE5526C488170078A728 /* AWSAuthCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5844FE4F26C488170078A728 /* AWSAuthCore.xcframework */; };
-		5844FE5726C488170078A728 /* AWSCognitoIdentityProvider.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5844FE5026C488170078A728 /* AWSCognitoIdentityProvider.xcframework */; };
-		5844FE5926C488170078A728 /* AWSCognitoIdentityProviderASF.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5844FE5126C488170078A728 /* AWSCognitoIdentityProviderASF.xcframework */; };
-		5844FE5B26C488170078A728 /* AWSCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5844FE5226C488170078A728 /* AWSCore.xcframework */; };
-		5844FE5D26C488170078A728 /* AWSLogs.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5844FE5326C488170078A728 /* AWSLogs.xcframework */; };
-		5844FE5F26C488170078A728 /* AWSMobileClientXCF.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5844FE5426C488170078A728 /* AWSMobileClientXCF.xcframework */; };
 		5844FE6B26C488330078A728 /* GSSAFirebaseManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5844FE6226C488330078A728 /* GSSAFirebaseManager.framework */; };
-		5844FE6D26C488330078A728 /* GSSAFunctionalUtilities.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5844FE6326C488330078A728 /* GSSAFunctionalUtilities.xcframework */; };
-		5844FE6F26C488330078A728 /* GSSAInterceptor.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5844FE6426C488330078A728 /* GSSAInterceptor.xcframework */; };
-		5844FE7126C488330078A728 /* GSSAPermissionsManager.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5844FE6526C488330078A728 /* GSSAPermissionsManager.xcframework */; };
-		5844FE7326C488330078A728 /* GSSASecurityManager.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5844FE6626C488330078A728 /* GSSASecurityManager.xcframework */; };
-		5844FE7526C488330078A728 /* GSSAServiceCoordinator.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5844FE6726C488330078A728 /* GSSAServiceCoordinator.xcframework */; };
-		5844FE7726C488330078A728 /* GSSASessionInfo.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5844FE6826C488330078A728 /* GSSASessionInfo.xcframework */; };
 		5844FE7926C488330078A728 /* GSSAVisualComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5844FE6926C488330078A728 /* GSSAVisualComponents.framework */; };
 		5844FE7B26C488330078A728 /* GSSAVisualTemplates.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5844FE6A26C488330078A728 /* GSSAVisualTemplates.framework */; };
 		585081AF26C3B61700630834 /* BASAScanCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585081A726C3B61700630834 /* BASAScanCodeViewController.swift */; };
@@ -173,6 +161,7 @@
 		EE97BB062684DF30000AE34C /* GSNoMovementsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE97BB042684DF2F000AE34C /* GSNoMovementsCell.swift */; };
 		EE97BB072684DF30000AE34C /* GSNoMovementsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE97BB052684DF2F000AE34C /* GSNoMovementsCell.xib */; };
 		EE9B040126C19BCD0034A81F /* GSSARequestDebitCardEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9B040026C19BCD0034A81F /* GSSARequestDebitCardEntity.swift */; };
+		EEAA129126C5E79800F57C97 /* GSSACardNIPEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAA129026C5E79800F57C97 /* GSSACardNIPEntity.swift */; };
 		EEAD105426C20792000E5BEF /* GSSACardFundResumeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAD101826C20792000E5BEF /* GSSACardFundResumeViewController.swift */; };
 		EEAD105526C20792000E5BEF /* GSSACardFundResumeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEAD101926C20792000E5BEF /* GSSACardFundResumeViewController.xib */; };
 		EEAD105626C20792000E5BEF /* GSSACardFundResumePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAD101A26C20792000E5BEF /* GSSACardFundResumePresenter.swift */; };
@@ -238,6 +227,9 @@
 		EEAFA7A3268CF3DD00DBC192 /* GSSANewBeneficiaryAddressInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAFA79D268CF3DD00DBC192 /* GSSANewBeneficiaryAddressInteractor.swift */; };
 		EEAFA7A4268CF3DD00DBC192 /* GSSANewBeneficiaryAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEAFA79E268CF3DD00DBC192 /* GSSANewBeneficiaryAddressViewController.xib */; };
 		EEAFA7E6268E377F00DBC192 /* GSSAEmptyStatements.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEAFA7E5268E377F00DBC192 /* GSSAEmptyStatements.xib */; };
+		EEB44B9F26C5CB390076D383 /* GSSAInterceptor.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEB44B9E26C5CB380076D383 /* GSSAInterceptor.xcframework */; };
+		EEB44BA226C5CBA60076D383 /* baz_ios_sdk_link_pago.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EED8CAFB26C56D7500F40534 /* baz_ios_sdk_link_pago.framework */; };
+		EEB44BA626C5CF470076D383 /* GSSASetCVVEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB44BA526C5CF470076D383 /* GSSASetCVVEntity.swift */; };
 		EEB850B5269A517500767673 /* GSSANewBeneficiaryAddressEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB850B4269A517400767673 /* GSSANewBeneficiaryAddressEntity.swift */; };
 		EEC54C2226C32F7100D54B0D /* GSSAFundTicket.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC54C2126C32F7100D54B0D /* GSSAFundTicket.swift */; };
 		EED2CB99269D0C4B00A1E129 /* GSSALinkDePagoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED2CB93269D0C4B00A1E129 /* GSSALinkDePagoPresenter.swift */; };
@@ -249,6 +241,18 @@
 		EED2CBA0269D361100A1E129 /* GSSALinkDePagoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED2CB9F269D361100A1E129 /* GSSALinkDePagoEntity.swift */; };
 		EED3E3FD269E442B00BDF898 /* GSSAMovementPreviewEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED3E3FC269E442B00BDF898 /* GSSAMovementPreviewEntity.swift */; };
 		EED3E40C269E88BF00BDF898 /* BASAA.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED3E40B269E88BF00BDF898 /* BASAA.swift */; };
+		EED8CAD126C56D1F00F40534 /* GSSAFunctionalUtilities.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EED8CAD026C56D1F00F40534 /* GSSAFunctionalUtilities.xcframework */; };
+		EED8CAD526C56D2800F40534 /* GSSASessionInfo.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EED8CAD426C56D2800F40534 /* GSSASessionInfo.xcframework */; };
+		EED8CADE26C56D3900F40534 /* AWSAuthCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EED8CAD826C56D3900F40534 /* AWSAuthCore.xcframework */; };
+		EED8CAE026C56D3900F40534 /* AWSCognitoIdentityProvider.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EED8CAD926C56D3900F40534 /* AWSCognitoIdentityProvider.xcframework */; };
+		EED8CAE226C56D3900F40534 /* AWSCognitoIdentityProviderASF.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EED8CADA26C56D3900F40534 /* AWSCognitoIdentityProviderASF.xcframework */; };
+		EED8CAE426C56D3900F40534 /* AWSCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EED8CADB26C56D3900F40534 /* AWSCore.xcframework */; };
+		EED8CAE626C56D3900F40534 /* AWSLogs.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EED8CADC26C56D3900F40534 /* AWSLogs.xcframework */; };
+		EED8CAE826C56D3900F40534 /* AWSMobileClientXCF.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EED8CADD26C56D3900F40534 /* AWSMobileClientXCF.xcframework */; };
+		EED8CAEC26C56D4D00F40534 /* GSSALoads.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EED8CAEB26C56D4D00F40534 /* GSSALoads.xcframework */; };
+		EED8CAF026C56D5500F40534 /* GSSASecurityManager.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EED8CAEF26C56D5500F40534 /* GSSASecurityManager.xcframework */; };
+		EED8CAF426C56D6100F40534 /* GSSAServiceCoordinator.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EED8CAF326C56D6100F40534 /* GSSAServiceCoordinator.xcframework */; };
+		EED8CAF826C56D6F00F40534 /* GSSAPermissionsManager.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EED8CAF726C56D6F00F40534 /* GSSAPermissionsManager.xcframework */; };
 		EEE84F6C26B4B37400C5CACE /* GSSACardNIPPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE84F6626B4B37400C5CACE /* GSSACardNIPPresenter.swift */; };
 		EEE84F6D26B4B37400C5CACE /* GSSACardNIPRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE84F6726B4B37400C5CACE /* GSSACardNIPRouter.swift */; };
 		EEE84F6E26B4B37400C5CACE /* GSSACardNIPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE84F6826B4B37400C5CACE /* GSSACardNIPViewController.swift */; };
@@ -347,19 +351,7 @@
 		10E9EDAB267D6BA400F45640 /* BASADigitalCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BASADigitalCardViewController.xib; sourceTree = "<group>"; };
 		10E9EDAC267D6BA400F45640 /* BASADigitalCardInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BASADigitalCardInteractor.swift; sourceTree = "<group>"; };
 		10E9EE02267D6BC200F45640 /* MyMoneyAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = MyMoneyAssets.xcassets; sourceTree = "<group>"; };
-		5844FE4F26C488170078A728 /* AWSAuthCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AWSAuthCore.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/AWS/AWSAuthCore.xcframework; sourceTree = "<group>"; };
-		5844FE5026C488170078A728 /* AWSCognitoIdentityProvider.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AWSCognitoIdentityProvider.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/AWS/AWSCognitoIdentityProvider.xcframework; sourceTree = "<group>"; };
-		5844FE5126C488170078A728 /* AWSCognitoIdentityProviderASF.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AWSCognitoIdentityProviderASF.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/AWS/AWSCognitoIdentityProviderASF.xcframework; sourceTree = "<group>"; };
-		5844FE5226C488170078A728 /* AWSCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AWSCore.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/AWS/AWSCore.xcframework; sourceTree = "<group>"; };
-		5844FE5326C488170078A728 /* AWSLogs.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AWSLogs.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/AWS/AWSLogs.xcframework; sourceTree = "<group>"; };
-		5844FE5426C488170078A728 /* AWSMobileClientXCF.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AWSMobileClientXCF.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/AWS/AWSMobileClientXCF.xcframework; sourceTree = "<group>"; };
 		5844FE6226C488330078A728 /* GSSAFirebaseManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GSSAFirebaseManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5844FE6326C488330078A728 /* GSSAFunctionalUtilities.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GSSAFunctionalUtilities.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/BaseSuperApp/GSSAFunctionalUtilities.xcframework; sourceTree = "<group>"; };
-		5844FE6426C488330078A728 /* GSSAInterceptor.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GSSAInterceptor.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/BaseSuperApp/GSSAInterceptor.xcframework; sourceTree = "<group>"; };
-		5844FE6526C488330078A728 /* GSSAPermissionsManager.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GSSAPermissionsManager.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/BaseSuperApp/GSSAPermissionsManager.xcframework; sourceTree = "<group>"; };
-		5844FE6626C488330078A728 /* GSSASecurityManager.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GSSASecurityManager.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/BaseSuperApp/GSSASecurityManager.xcframework; sourceTree = "<group>"; };
-		5844FE6726C488330078A728 /* GSSAServiceCoordinator.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GSSAServiceCoordinator.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/BaseSuperApp/GSSAServiceCoordinator.xcframework; sourceTree = "<group>"; };
-		5844FE6826C488330078A728 /* GSSASessionInfo.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GSSASessionInfo.xcframework; path = ../GSSACoreFrameworks_iOS/GSSAFront/GSSAFront/GSSAFrameworks/BaseSuperApp/GSSASessionInfo.xcframework; sourceTree = "<group>"; };
 		5844FE6926C488330078A728 /* GSSAVisualComponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GSSAVisualComponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5844FE6A26C488330078A728 /* GSSAVisualTemplates.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GSSAVisualTemplates.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		585081A726C3B61700630834 /* BASAScanCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BASAScanCodeViewController.swift; sourceTree = "<group>"; };
@@ -428,6 +420,7 @@
 		EE97BB042684DF2F000AE34C /* GSNoMovementsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSNoMovementsCell.swift; sourceTree = "<group>"; };
 		EE97BB052684DF2F000AE34C /* GSNoMovementsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GSNoMovementsCell.xib; sourceTree = "<group>"; };
 		EE9B040026C19BCD0034A81F /* GSSARequestDebitCardEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSARequestDebitCardEntity.swift; sourceTree = "<group>"; };
+		EEAA129026C5E79800F57C97 /* GSSACardNIPEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSACardNIPEntity.swift; sourceTree = "<group>"; };
 		EEAD101826C20792000E5BEF /* GSSACardFundResumeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSSACardFundResumeViewController.swift; sourceTree = "<group>"; };
 		EEAD101926C20792000E5BEF /* GSSACardFundResumeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GSSACardFundResumeViewController.xib; sourceTree = "<group>"; };
 		EEAD101A26C20792000E5BEF /* GSSACardFundResumePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSSACardFundResumePresenter.swift; sourceTree = "<group>"; };
@@ -493,6 +486,8 @@
 		EEAFA79D268CF3DD00DBC192 /* GSSANewBeneficiaryAddressInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSANewBeneficiaryAddressInteractor.swift; sourceTree = "<group>"; };
 		EEAFA79E268CF3DD00DBC192 /* GSSANewBeneficiaryAddressViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GSSANewBeneficiaryAddressViewController.xib; sourceTree = "<group>"; };
 		EEAFA7E5268E377F00DBC192 /* GSSAEmptyStatements.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GSSAEmptyStatements.xib; sourceTree = "<group>"; };
+		EEB44B9E26C5CB380076D383 /* GSSAInterceptor.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GSSAInterceptor.xcframework; path = ../GSSAFront/GSSAFront/GSSAFrameworks/BaseSuperApp/GSSAInterceptor.xcframework; sourceTree = "<group>"; };
+		EEB44BA526C5CF470076D383 /* GSSASetCVVEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSASetCVVEntity.swift; sourceTree = "<group>"; };
 		EEB850B4269A517400767673 /* GSSANewBeneficiaryAddressEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSANewBeneficiaryAddressEntity.swift; sourceTree = "<group>"; };
 		EEC54C2126C32F7100D54B0D /* GSSAFundTicket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSSAFundTicket.swift; sourceTree = "<group>"; };
 		EED2CB93269D0C4B00A1E129 /* GSSALinkDePagoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSALinkDePagoPresenter.swift; sourceTree = "<group>"; };
@@ -504,6 +499,19 @@
 		EED2CB9F269D361100A1E129 /* GSSALinkDePagoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSALinkDePagoEntity.swift; sourceTree = "<group>"; };
 		EED3E3FC269E442B00BDF898 /* GSSAMovementPreviewEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAMovementPreviewEntity.swift; sourceTree = "<group>"; };
 		EED3E40B269E88BF00BDF898 /* BASAA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BASAA.swift; sourceTree = "<group>"; };
+		EED8CAD026C56D1F00F40534 /* GSSAFunctionalUtilities.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GSSAFunctionalUtilities.xcframework; path = ../GSSAFront/GSSAFront/GSSAFrameworks/BaseSuperApp/GSSAFunctionalUtilities.xcframework; sourceTree = "<group>"; };
+		EED8CAD426C56D2800F40534 /* GSSASessionInfo.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GSSASessionInfo.xcframework; path = ../GSSAFront/GSSAFront/GSSAFrameworks/BaseSuperApp/GSSASessionInfo.xcframework; sourceTree = "<group>"; };
+		EED8CAD826C56D3900F40534 /* AWSAuthCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AWSAuthCore.xcframework; path = ../GSSAFront/GSSAFront/GSSAFrameworks/AWS/AWSAuthCore.xcframework; sourceTree = "<group>"; };
+		EED8CAD926C56D3900F40534 /* AWSCognitoIdentityProvider.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AWSCognitoIdentityProvider.xcframework; path = ../GSSAFront/GSSAFront/GSSAFrameworks/AWS/AWSCognitoIdentityProvider.xcframework; sourceTree = "<group>"; };
+		EED8CADA26C56D3900F40534 /* AWSCognitoIdentityProviderASF.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AWSCognitoIdentityProviderASF.xcframework; path = ../GSSAFront/GSSAFront/GSSAFrameworks/AWS/AWSCognitoIdentityProviderASF.xcframework; sourceTree = "<group>"; };
+		EED8CADB26C56D3900F40534 /* AWSCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AWSCore.xcframework; path = ../GSSAFront/GSSAFront/GSSAFrameworks/AWS/AWSCore.xcframework; sourceTree = "<group>"; };
+		EED8CADC26C56D3900F40534 /* AWSLogs.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AWSLogs.xcframework; path = ../GSSAFront/GSSAFront/GSSAFrameworks/AWS/AWSLogs.xcframework; sourceTree = "<group>"; };
+		EED8CADD26C56D3900F40534 /* AWSMobileClientXCF.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AWSMobileClientXCF.xcframework; path = ../GSSAFront/GSSAFront/GSSAFrameworks/AWS/AWSMobileClientXCF.xcframework; sourceTree = "<group>"; };
+		EED8CAEB26C56D4D00F40534 /* GSSALoads.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GSSALoads.xcframework; path = ../GSSAFront/GSSAFront/GSSAFrameworks/SuperApp/GSSALoads.xcframework; sourceTree = "<group>"; };
+		EED8CAEF26C56D5500F40534 /* GSSASecurityManager.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GSSASecurityManager.xcframework; path = ../GSSAFront/GSSAFront/GSSAFrameworks/BaseSuperApp/GSSASecurityManager.xcframework; sourceTree = "<group>"; };
+		EED8CAF326C56D6100F40534 /* GSSAServiceCoordinator.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GSSAServiceCoordinator.xcframework; path = ../GSSAFront/GSSAFront/GSSAFrameworks/BaseSuperApp/GSSAServiceCoordinator.xcframework; sourceTree = "<group>"; };
+		EED8CAF726C56D6F00F40534 /* GSSAPermissionsManager.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GSSAPermissionsManager.xcframework; path = ../GSSAFront/GSSAFront/GSSAFrameworks/BaseSuperApp/GSSAPermissionsManager.xcframework; sourceTree = "<group>"; };
+		EED8CAFB26C56D7500F40534 /* baz_ios_sdk_link_pago.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = baz_ios_sdk_link_pago.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEE84F6626B4B37400C5CACE /* GSSACardNIPPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSACardNIPPresenter.swift; sourceTree = "<group>"; };
 		EEE84F6726B4B37400C5CACE /* GSSACardNIPRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSACardNIPRouter.swift; sourceTree = "<group>"; };
 		EEE84F6826B4B37400C5CACE /* GSSACardNIPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSACardNIPViewController.swift; sourceTree = "<group>"; };
@@ -519,21 +527,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EED8CAF026C56D5500F40534 /* GSSASecurityManager.xcframework in Frameworks */,
 				5844FE7926C488330078A728 /* GSSAVisualComponents.framework in Frameworks */,
-				5844FE5F26C488170078A728 /* AWSMobileClientXCF.xcframework in Frameworks */,
-				5844FE6F26C488330078A728 /* GSSAInterceptor.xcframework in Frameworks */,
-				5844FE7326C488330078A728 /* GSSASecurityManager.xcframework in Frameworks */,
+				EED8CAEC26C56D4D00F40534 /* GSSALoads.xcframework in Frameworks */,
 				5844FE7B26C488330078A728 /* GSSAVisualTemplates.framework in Frameworks */,
-				5844FE7126C488330078A728 /* GSSAPermissionsManager.xcframework in Frameworks */,
-				5844FE5926C488170078A728 /* AWSCognitoIdentityProviderASF.xcframework in Frameworks */,
-				5844FE5726C488170078A728 /* AWSCognitoIdentityProvider.xcframework in Frameworks */,
-				5844FE5D26C488170078A728 /* AWSLogs.xcframework in Frameworks */,
+				EED8CAE626C56D3900F40534 /* AWSLogs.xcframework in Frameworks */,
+				EED8CADE26C56D3900F40534 /* AWSAuthCore.xcframework in Frameworks */,
+				EED8CAD526C56D2800F40534 /* GSSASessionInfo.xcframework in Frameworks */,
+				EED8CAF826C56D6F00F40534 /* GSSAPermissionsManager.xcframework in Frameworks */,
+				EED8CAD126C56D1F00F40534 /* GSSAFunctionalUtilities.xcframework in Frameworks */,
+				EED8CAE826C56D3900F40534 /* AWSMobileClientXCF.xcframework in Frameworks */,
+				EED8CAE426C56D3900F40534 /* AWSCore.xcframework in Frameworks */,
+				EED8CAE226C56D3900F40534 /* AWSCognitoIdentityProviderASF.xcframework in Frameworks */,
+				EEB44BA226C5CBA60076D383 /* baz_ios_sdk_link_pago.framework in Frameworks */,
 				5844FE6B26C488330078A728 /* GSSAFirebaseManager.framework in Frameworks */,
-				5844FE7526C488330078A728 /* GSSAServiceCoordinator.xcframework in Frameworks */,
-				5844FE5B26C488170078A728 /* AWSCore.xcframework in Frameworks */,
-				5844FE7726C488330078A728 /* GSSASessionInfo.xcframework in Frameworks */,
-				5844FE5526C488170078A728 /* AWSAuthCore.xcframework in Frameworks */,
-				5844FE6D26C488330078A728 /* GSSAFunctionalUtilities.xcframework in Frameworks */,
+				EED8CAF426C56D6100F40534 /* GSSAServiceCoordinator.xcframework in Frameworks */,
+				EED8CAE026C56D3900F40534 /* AWSCognitoIdentityProvider.xcframework in Frameworks */,
+				EEB44B9F26C5CB390076D383 /* GSSAInterceptor.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -543,21 +553,23 @@
 		106E8DA0267D6CB2000182DC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EEB44B9E26C5CB380076D383 /* GSSAInterceptor.xcframework */,
+				EED8CAFB26C56D7500F40534 /* baz_ios_sdk_link_pago.framework */,
+				EED8CAF726C56D6F00F40534 /* GSSAPermissionsManager.xcframework */,
+				EED8CAF326C56D6100F40534 /* GSSAServiceCoordinator.xcframework */,
+				EED8CAEF26C56D5500F40534 /* GSSASecurityManager.xcframework */,
+				EED8CAEB26C56D4D00F40534 /* GSSALoads.xcframework */,
+				EED8CAD826C56D3900F40534 /* AWSAuthCore.xcframework */,
+				EED8CAD926C56D3900F40534 /* AWSCognitoIdentityProvider.xcframework */,
+				EED8CADA26C56D3900F40534 /* AWSCognitoIdentityProviderASF.xcframework */,
+				EED8CADB26C56D3900F40534 /* AWSCore.xcframework */,
+				EED8CADC26C56D3900F40534 /* AWSLogs.xcframework */,
+				EED8CADD26C56D3900F40534 /* AWSMobileClientXCF.xcframework */,
+				EED8CAD426C56D2800F40534 /* GSSASessionInfo.xcframework */,
+				EED8CAD026C56D1F00F40534 /* GSSAFunctionalUtilities.xcframework */,
 				5844FE6226C488330078A728 /* GSSAFirebaseManager.framework */,
-				5844FE6326C488330078A728 /* GSSAFunctionalUtilities.xcframework */,
-				5844FE6426C488330078A728 /* GSSAInterceptor.xcframework */,
-				5844FE6526C488330078A728 /* GSSAPermissionsManager.xcframework */,
-				5844FE6626C488330078A728 /* GSSASecurityManager.xcframework */,
-				5844FE6726C488330078A728 /* GSSAServiceCoordinator.xcframework */,
-				5844FE6826C488330078A728 /* GSSASessionInfo.xcframework */,
 				5844FE6926C488330078A728 /* GSSAVisualComponents.framework */,
 				5844FE6A26C488330078A728 /* GSSAVisualTemplates.framework */,
-				5844FE4F26C488170078A728 /* AWSAuthCore.xcframework */,
-				5844FE5026C488170078A728 /* AWSCognitoIdentityProvider.xcframework */,
-				5844FE5126C488170078A728 /* AWSCognitoIdentityProviderASF.xcframework */,
-				5844FE5226C488170078A728 /* AWSCore.xcframework */,
-				5844FE5326C488170078A728 /* AWSLogs.xcframework */,
-				5844FE5426C488170078A728 /* AWSMobileClientXCF.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1018,6 +1030,7 @@
 				EE2A261726B36DF200E1C2C5 /* GSSASetCVVViewController.swift */,
 				EE2A261826B36DF200E1C2C5 /* GSSASetCVVProtocols.swift */,
 				EE2A261926B36DF200E1C2C5 /* GSSASetCVVInteractor.swift */,
+				EEB44BA526C5CF470076D383 /* GSSASetCVVEntity.swift */,
 				EE2A261A26B36DF200E1C2C5 /* GSSASetCVVViewController.xib */,
 			);
 			path = GSSASetCVV;
@@ -1031,6 +1044,7 @@
 				EEE84F6826B4B37400C5CACE /* GSSACardNIPViewController.swift */,
 				EEE84F6926B4B37400C5CACE /* GSSACardNIPProtocols.swift */,
 				EEE84F6A26B4B37400C5CACE /* GSSACardNIPInteractor.swift */,
+				EEAA129026C5E79800F57C97 /* GSSACardNIPEntity.swift */,
 				EEE84F6B26B4B37400C5CACE /* GSSACardNIPViewController.xib */,
 			);
 			path = GSSACardNIP;
@@ -1481,6 +1495,7 @@
 				10E9EDF8267D6BA400F45640 /* BASADigitalCardPresenter.swift in Sources */,
 				EE6DF83F26B8546D0067066A /* GSSACardScannerInteractor.swift in Sources */,
 				EE2CA7522696D7D20023BE1D /* GSSACardLimitsEntity.swift in Sources */,
+				EEAA129126C5E79800F57C97 /* GSSACardNIPEntity.swift in Sources */,
 				EE2A25F926B300CE00E1C2C5 /* GSSAPhysicalCardRequestAddressPresenter.swift in Sources */,
 				EE2A261B26B36DF200E1C2C5 /* GSSASetCVVPresenter.swift in Sources */,
 				EEAD107A26C20792000E5BEF /* GSSAFundWebViewRouter.swift in Sources */,
@@ -1518,6 +1533,7 @@
 				10E9EDFA267D6BA400F45640 /* BASAShadowRadiusImage.swift in Sources */,
 				EEE84F6C26B4B37400C5CACE /* GSSACardNIPPresenter.swift in Sources */,
 				EE2A25F026B2142900E1C2C5 /* GSSARequestDebitCardInteractor.swift in Sources */,
+				EEB44BA626C5CF470076D383 /* GSSASetCVVEntity.swift in Sources */,
 				EE6DF83D26B8546D0067066A /* GSSACardScannerViewController.swift in Sources */,
 				EEAD105E26C20792000E5BEF /* GSSAFundSelectCardInteractor.swift in Sources */,
 				10E9EDD1267D6BA400F45640 /* BASANewBeneficiaryRouter.swift in Sources */,

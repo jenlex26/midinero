@@ -11,9 +11,11 @@
 import UIKit
 import GSSAVisualComponents
 import GSSAVisualTemplates
+import GSSASessionInfo
 
-class GSSASetCVVViewController: GSSAMasterViewController, GSSASetCVVViewProtocol, UITextFieldDelegate{
+class GSSASetCVVViewController: GSSAMasterViewController, GSSASetCVVViewProtocol, UITextFieldDelegate, GSVCBottomAlertHandler{
     
+    var bottomAlert: GSVCBottomAlert?
     var presenter: GSSASetCVVPresenterProtocol?
     
     @IBOutlet weak var txtCVV       : GSVCTextField!
@@ -32,6 +34,8 @@ class GSSASetCVVViewController: GSSAMasterViewController, GSSASetCVVViewProtocol
         txtCVV.becomeFirstResponder()
     }
     
+    func optionalAction() {}
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let textFieldText = textField.text,
               let rangeOfTextToReplace = Range(range, in: textFieldText) else {
@@ -42,43 +46,57 @@ class GSSASetCVVViewController: GSSAMasterViewController, GSSASetCVVViewProtocol
         return count <= 3
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        bottomAlert?.animateDismissal()
+    }
+    
     @IBAction func next(_ sender: Any){
-        UIWindow.addSuccess {
-            let spaceView = UIView()
-            spaceView.bounds = self.infoView.bounds
-            
-            let info = self.infoView
-            info?.isHidden = false
-            
-            let card = self.cardInfoView
-            card?.isHidden = false
-            
-            let button = GSVCButton()
-            button.setTitle("Ver NIP", for: .normal)
-            button.style = 10
-            if #available(iOS 13.0, *) {
-                button.setImage(UIImage(named: "ic_card"), for: .normal)
+        if txtCVV.text?.count == 3{
+            GSVCLoader.show()
+            let body = SetCVVBody.init(transaccion: SetCVVTransaccion.init(primerTokenVerificacion: GSSISessionInfo.sharedInstance.gsUserToken, numeroCliente: GSSISessionInfo.sharedInstance.gsUser.account?.number, idTipoParticipante: "1", cuenta: SetCVVAccount.init(numero: GSSISessionInfo.sharedInstance.gsUser.account?.number, idProducto: "01", idSubproducto: "0001"), tarjeta: Tarjeta.init(numero: "", cvv: txtCVV.text)))
+            presenter?.requestSetCardCVV(body: body, CardSearchResponse: {
+                GSVCLoader.hide()
+                UIWindow.addSuccess {
+                    let spaceView = UIView()
+                    spaceView.bounds = self.infoView.bounds
+                    
+                    let info = self.infoView
+                    info?.isHidden = false
+                    
+                    let card = self.cardInfoView
+                    card?.isHidden = false
+                    
+                    let button = GSVCButton()
+                    button.setTitle("Ver NIP", for: .normal)
+                    button.style = 10
+                    if #available(iOS 13.0, *) {
+                        button.setImage(UIImage(named: "ic_card"), for: .normal)
+                    }
+                    let success = GSVTOperationStatusViewController(status: .success(title: "¡Listo!", message: "Tu tarjeta baz ya está activa", views: [spaceView, info!, card!]),
+                                                                    roundButtonAction: {
+                                                                        self.dismiss(animated: false, completion: {
+                                                                            let view = GSSACardNIPRouter.createModule()
+                                                                            self.navigationController?.pushViewController(view, animated: true)
+                                                                        })
+                                                                    },
+                                                                    plainButtonAction: {
+                                                                        self.dismiss(animated: false, completion: {
+                                                                            let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+                                                                            for VC in viewControllers{
+                                                                                if VC is BASACardConfigViewController{
+                                                                                    self.navigationController?.popToViewController(VC, animated: true)
+                                                                                }
+                                                                            }
+                                                                        })
+                                                                    },
+                                                                    roundButton: button)
+                    success.modalPresentationStyle = .fullScreen
+                    self.present(success, animated: true, completion: nil)
+                }
+            })
+            }else{
+                self.presentBottomAlertFullData(status: .error, message: "Ingrese un CVV válido", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: "")
             }
-            let success = GSVTOperationStatusViewController(status: .success(title: "¡Listo!", message: "Tu tarjeta baz ya está activa", views: [spaceView, info!, card!]),
-                                                            roundButtonAction: {
-                                                                self.dismiss(animated: false, completion: {
-                                                                    let view = GSSACardNIPRouter.createModule()
-                                                                    self.navigationController?.pushViewController(view, animated: true)
-                                                                })
-                                                            },
-                                                            plainButtonAction: {
-                                                                self.dismiss(animated: false, completion: {
-                                                                    let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
-                                                                    for VC in viewControllers{
-                                                                        if VC is BASACardConfigViewController{
-                                                                            self.navigationController?.popToViewController(VC, animated: true)
-                                                                        }
-                                                                    }
-                                                                })
-                                                            },
-                                                            roundButton: button)
-            success.modalPresentationStyle = .fullScreen
-            self.present(success, animated: true, completion: nil)
-        }
     }
 }
+

@@ -29,7 +29,6 @@ class GSSARequestDebitCardInteractor: GSSAURLSessionTaskCoordinatorBridge, GSSAR
                 Response(objRes)
             } else {
                 self.customRequest()
-//                Response(nil)
                 debugPrint(error)
             }
         }
@@ -44,9 +43,9 @@ class GSSARequestDebitCardInteractor: GSSAURLSessionTaskCoordinatorBridge, GSSAR
         let body = ConfirmCardRequestBody(transaccion: ConfirmCardRequestTransaccion.init(primerTokenVerificacion: GSSISessionInfo.sharedInstance.gsUserToken, sicu: GSSISessionInfo.sharedInstance.gsUser.SICU, numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount, envio: address))
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: body, environment: .develop) { (objRes: PhysicalCardShippingAmountResponse?, error) in
+            
             if error.code == 0 {
             } else {
-                self.customRequest()
                 debugPrint(error)
             }
         }
@@ -70,7 +69,7 @@ class GSSARequestDebitCardInteractor: GSSAURLSessionTaskCoordinatorBridge, GSSAR
         request.addValue("-99.12698712", forHTTPHeaderField: "x-longitud")
         request.addValue("SRfVZrTYvdm7mzzZmcuiDViACkAx", forHTTPHeaderField: "x-token-usuario")
         request.addValue("99553877", forHTTPHeaderField: "x-id-lealtad")
-        request.addValue("Bearer eyJraWQiOiJkczdRNlBTbE9ZNStuMnJjXC9PdjJqTGp5eWZRS2VJdmFjRXcwWHlNQm80cz0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxOGg4dmFudnJoNHB1aTFscm50YzFuaWxqZiIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiVXN1YXJpb1wvZGVsZXRlIFVzdWFyaW9cL3JlYWQgVXN1YXJpb1wvdXBkYXRlIiwiYXV0aF90aW1lIjoxNjI4NzI1NTUyLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9FaEZuSU9JRzAiLCJleHAiOjE2Mjg3MjkxNTIsImlhdCI6MTYyODcyNTU1MiwidmVyc2lvbiI6MiwianRpIjoiZTZkNDc5MDAtMmZlMy00Zjk3LWIwNWYtM2UxYzEwZDk1YzhiIiwiY2xpZW50X2lkIjoiMThoOHZhbnZyaDRwdWkxbHJudGMxbmlsamYifQ.WXiO2c1j75itydi-fQm3drHr41BcCqBnGtmRR4cR49E8ubM6WHAGty2X3SHAdyQriDHFvKHnH3l3OIgZgJFPzmqIBocEUVw5lRyS6oEPhI13i1bXnEJ2lmvq_3-IkCpUGIg1Gj0ph0Jc-w-Mfh5JgGYjEpEPm454KfrCp9z2C3hzC6ln1CKggDLkrxMk_IJ_vg8mpZ4hIa-S1vedcfHlDK40P6V-VrZF6gTxBRr0RvpFa5nNneAyarGejpjScw-blF5Qi4OmsY3U4eehpgjNDe6Y5hXdhEMjj_IryfpeLO6IruUWHR4iaepu2NhuIDEJ9o6IeTNZ35AK0AJGzOr3_g", forHTTPHeaderField: "Authorization")
+        request.addValue("Bearer \(customToken.shared.bearer)", forHTTPHeaderField: "Authorization")
         request.addValue("XSRF-TOKEN=abd6f7dc-7383-4150-aabd-544647e7d0b3", forHTTPHeaderField: "Cookie")
         
         request.httpMethod = "GET"

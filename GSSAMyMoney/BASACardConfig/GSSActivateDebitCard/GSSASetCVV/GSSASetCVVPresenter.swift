@@ -22,4 +22,7 @@ class GSSASetCVVPresenter: GSSASetCVVPresenterProtocol {
         self.router = router
     }
 
+    func requestSetCardCVV(body: SetCVVBody, CardSearchResponse: @escaping () -> ()){
+        interactor?.trySetCardCVV(body: body, CardSearchResponse: CardSearchResponse)
+    }
 }
