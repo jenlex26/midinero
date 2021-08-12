@@ -28,6 +28,8 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
     var close: Bool? = false
     var hasNav: Bool?
     let textTest = UITextField()
+    var startTime: Date?
+    var time: TimeInterval = 300.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +52,9 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
         }
         
         if hasNav != true && close == false{
+            startTime = Date()
+            checkTime()
+            txtAmount.addTarget(self, action: #selector(activityObserve), for: .editingChanged)
             let verification = GSVTDigitalSignViewController(delegate: self)
             verification.modalPresentationStyle = .fullScreen
             verification.bShouldWaitForNewToken = false
@@ -59,9 +64,15 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
     
     override func viewWillAppear(_ animated: Bool) {
         GSVCLoader.hide()
-        txtAmount.becomeFirstResponder()
+        if hasNav == true{
+            txtAmount.becomeFirstResponder()
+        }
         createTag(eventName: .pageView, section: "mi_dinero", flow: "fondear_cuenta", screenName: "monto", origin: "")
         setProgressLine(value: 0.25, animated: true)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        activityObserve()
     }
     
     @objc func ammountFormatter(sender: UITextField){
@@ -91,6 +102,21 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
     
     @objc func doneButtonClick(){
         self.view.endEditing(true)
+    }
+    
+    func checkTime(){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [self] in
+            if (self.startTime! + time) < Date(){
+                self.dismiss(animated: true, completion: nil)
+            }else{
+                self.checkTime()
+            }
+        })
+    }
+    
+    @objc func activityObserve(){
+        startTime = Date()
+        time = 300.0
     }
     
     func setUpToolBar(){
@@ -154,7 +180,7 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
     }
     
     func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
-        print("Ok")
+        txtAmount.becomeFirstResponder()
     }
     
     func cancelDigitalSing(_ isUserBlocked: Bool) {

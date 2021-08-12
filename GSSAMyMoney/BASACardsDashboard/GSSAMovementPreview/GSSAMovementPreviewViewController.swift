@@ -113,9 +113,15 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
     
         lblTitle.text = transaction.concepto?.alnovaDecrypt()
         
+        if transaction.concepto?.alnovaDecrypt().contains("SPEI") == true{
+            details.updateValue("Concepto", forKey: transaction.descripcion ?? "")
+        }else{
+            details.updateValue("Concepto", forKey: transaction.concepto?.alnovaDecrypt() ?? "")
+        }
+        
         details.updateValue("Realizado", forKey: transaction.nombreOrdenante ?? "")
         details.updateValue("Para", forKey:  transaction.descripcionBeneficiario ?? "")
-        details.updateValue("Concepto", forKey: transaction.descripcion ?? "")
+       
        // details.updateValue("Id de operación", forKey: transaction.idOperacion ?? "")
         details.updateValue("Folio", forKey: transaction.folio ?? "")
         details.updateValue("Número de operación", forKey: transaction.numeroOperacion ?? "")
