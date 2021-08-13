@@ -28,3 +28,4 @@ struct ClienteUnico: Codable {
 struct RequestNIPCard: Codable {
     var numero, numeroContrato, codigoSeguridad, idCliente: String?
 }
+

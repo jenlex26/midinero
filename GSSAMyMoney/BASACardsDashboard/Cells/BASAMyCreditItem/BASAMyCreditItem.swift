@@ -22,6 +22,8 @@ class BASAMyCreditItem: UITableViewCell {
     func setTitle(id: Int){
         var title = ""
         switch id{
+        case 0:
+            title = "Todos mis créditos"
         case 1:
             title =  "Crédito Consumo"
         case 2:

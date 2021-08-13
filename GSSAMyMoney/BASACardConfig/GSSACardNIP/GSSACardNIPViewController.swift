@@ -12,8 +12,9 @@ import UIKit
 import GSSAVisualComponents
 import GSSASessionInfo
 
-class GSSACardNIPViewController: UIViewController, GSSACardNIPViewProtocol {
+class GSSACardNIPViewController: UIViewController, GSSACardNIPViewProtocol, GSVCBottomAlertHandler {
     
+    var bottomAlert: GSVCBottomAlert?
     var presenter: GSSACardNIPPresenterProtocol?
     
     @IBOutlet weak var txtNIP1: UITextField!
@@ -21,7 +22,7 @@ class GSSACardNIPViewController: UIViewController, GSSACardNIPViewProtocol {
     @IBOutlet weak var txtNIP3: UITextField!
     @IBOutlet weak var txtNIP4: UITextField!
     
-    var NIP = "9812"
+    var NIP = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +30,8 @@ class GSSACardNIPViewController: UIViewController, GSSACardNIPViewProtocol {
         requestNIP()
         setNIP()
     }
+    
+    func optionalAction() {}
     
     func requestNIP(){
         let body = RequestNIPBody.init(transaccion: RequestNIPTransaccion.init(primerTokenVerificacion: GSSISessionInfo.sharedInstance.gsUser.account?.number, tarjeta: RequestNIPCard.init(numero: "", numeroContrato: "", codigoSeguridad: "", idCliente: ""), clienteUnico: ClienteUnico.init(idPais: "001", idCanal: "033", idSucursal: "7760", folio: "88582")))

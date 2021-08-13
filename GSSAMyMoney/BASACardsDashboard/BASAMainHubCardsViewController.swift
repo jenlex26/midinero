@@ -41,6 +41,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         super.viewDidLoad()
         inicializeView()
         NotificationCenter.default.addObserver(self, selector: #selector(updateHeaderSize(sender:)), name: Notification.Name("creditCardAvailable"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateHeaderSize(sender:)), name: Notification.Name("onlyLendsAvaliable"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadView), name: NSNotification.Name(rawValue: "externalFlowFinished"), object: nil)
         setUpRefreshControl()
         startTime = Date()
@@ -204,7 +205,13 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                 creditCardBalance = creditCardBalanceResponse
                 NotificationCenter.default.post(name: Notification.Name("creditCardAvailable"), object: nil)
             }else{
-                GSVCLoader.hide()
+                presenter?.requestUserLends(Lends: {LendsResponse in
+                    if LendsResponse != nil{
+                        NotificationCenter.default.post(name: Notification.Name("onlyLendsAvaliable"), object: nil)
+                    }else{
+                        GSVCLoader.hide()
+                    }
+                })
             }
         })
     }

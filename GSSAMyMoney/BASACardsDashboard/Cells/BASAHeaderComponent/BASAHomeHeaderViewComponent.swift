@@ -38,6 +38,7 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
     var lendsData: LendsResponse?
     var creditCardData: CreditCardResponse?
     var creditCardBalance: CreditCardBalanceResponse?
+    var showOnlyLendsInCredit: Bool = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -66,6 +67,7 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadLends(notification:)), name: NSNotification.Name(rawValue: "reloadLendsData"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadCreditCard(notification:)), name: NSNotification.Name(rawValue: "reloadCreditCardData"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadCreditCardBalance(notification:)), name: NSNotification.Name(rawValue: "reloadCreditCardBalance"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setTableOnlyForLends(notification:)), name: NSNotification.Name(rawValue: "onlyLendsAvaliable"), object: nil)
         self.btnSelect.isHidden = true
         setUpDebitCard()
     }
@@ -153,6 +155,19 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
         }
     }
     
+    @objc func setTableOnlyForLends(notification: Notification){
+        UIView.animate(withDuration: 0.2,
+                       delay: 0.0,
+                       usingSpringWithDamping: 0.9,
+                       initialSpringVelocity: 1,
+                       options: [],
+                       animations: {
+                        self.btnSelect.isHidden = false
+                        self.layoutIfNeeded()
+                       })
+        showOnlyLendsInCredit = true
+    }
+    
     @IBAction func debitCardClick(_ sender: Any){
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "HomeHeaderViewChange"), object:  cardType.debit, userInfo: nil))
         debitCardView.isHidden = false
@@ -176,7 +191,13 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
             self.lblTitle.textColor = .white
             self.backButton.tintColor = .white
         })
-        handleCardChange(index: pageController.currentPage)
+        if showOnlyLendsInCredit == true{
+            self.cardCollection.scrollToItem(at: [0,1], at: .left, animated: false)
+            self.cardCollection.isUserInteractionEnabled = false
+            self.pageController.isHidden = true
+        }else{
+            handleCardChange(index: pageController.currentPage)
+        }
     }
     
     @IBAction func openDebitConfig(){
