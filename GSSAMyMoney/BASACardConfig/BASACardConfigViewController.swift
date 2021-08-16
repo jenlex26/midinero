@@ -32,31 +32,41 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
     var CLABE = ""
     var phone = ""
     var account = ""
+    var cellsArray: Array<[UITableViewCell:CGFloat]> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if credit == true{
-            CLABE = ""
-        }
         CLABE = GSSISessionInfo.sharedInstance.gsUser.account?.clabe?.tnuoccaFormat ?? ""
         phone = GSSISessionInfo.sharedInstance.gsUser.phone?.tryToAdCellphoneFormat ?? ""
         account = GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().tnuoccaFormat ?? ""
-         
         registerCells()
         setOptions()
+        NotificationCenter.default.addObserver(self, selector: #selector(handleCustomCardStatusResponse(notification:)), name: NSNotification.Name(rawValue: "customCardStatusRequestResponse"), object: nil)
         table.delegate = self
         table.dataSource = self
         table.alwaysBounceVertical = false
-        presenter?.requestCardStatus(CardSearchResponse: {
-            print("OK")
-        })
+        if credit == true{
+            CLABE = ""
+        }else{
+            setTableForDebitCard()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        GSVCLoader.show()
+        presenter?.requestCardStatus(CardSearchResponse: {})
+    }
+    
+    enum status{
+        case unknown
+        case request
+        case activate
+        case active
     }
     
     func setOptions(){
+        //Añade opciones genericas al menú de configuración
         if #available(iOS 13.0, *) {
             if credit == false{
                 configurations.append(userOptions(title: "CLABE Interbancaria", subTitle: CLABE, image: UIImage(systemName: "square.and.arrow.up"), tag: 4))
@@ -73,9 +83,7 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
         }
     }
     
-    func optionalAction() {
-        print("OK")
-    }
+    func optionalAction() {}
     
     func registerCells(){
         let bundle = Bundle.init(for: BASACardConfigViewController.self)
@@ -83,6 +91,67 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
         table.register(UINib(nibName: "SectionCell", bundle: bundle), forCellReuseIdentifier: "SectionCell")
         table.register(UINib(nibName: "ConfigItemCell", bundle: bundle), forCellReuseIdentifier: "ConfigItemCell")
         table.register(UINib(nibName: "BASACardControl", bundle: bundle), forCellReuseIdentifier: "BASACardControl")
+    }
+    
+    func setTableForDebitCard(){
+        //Crea las celdas de las opciones genericas y añade nuevas al arreglo
+        let cell = table.dequeueReusableCell(withIdentifier: "SectionCell") as! SectionCell
+        cell.lblTitle.text = "Información"
+        cellsArray.append([cell:50.0])
+        
+        for item in configurations{
+            let cell = table.dequeueReusableCell(withIdentifier: "ConfigItemCell") as! ConfigItemCell
+            let data = item
+            cell.tag = data.tag ?? -1
+            cell.configureCell(title: data.title, subtitle: data.subTitle, image: data.image)
+            cellsArray.append([cell:75.0])
+        }
+    }
+    
+    func configureDebitCard(forStatus: status){
+        //Cambia el estado de la pantalla de configuración dependiendo del estatus de la tarjeta física
+        DispatchQueue.main.async { [self] in
+            if cellsArray.first?.first?.key is BASACardControl || cellsArray.first?.first?.key is RequestCardCell{
+                cellsArray.removeFirst()
+            }
+            switch forStatus{
+            case .request:
+                let cell = table.dequeueReusableCell(withIdentifier: "RequestCardCell") as! RequestCardCell
+                cell.lblTitle.text = "Solicita tu tarjeta"
+                cell.buttonView.isUserInteractionEnabled = false
+                cell.backgroundColor = UIColor.GSVCBase300()
+                cell.tag = 6
+                cellsArray.insert([cell:111.0], at: 0)
+            case .activate:
+                let cell = table.dequeueReusableCell(withIdentifier: "RequestCardCell") as! RequestCardCell
+                cell.lblTitle.text = "Activa tu tarjeta"
+                cell.buttonView.isUserInteractionEnabled = false
+                cell.backgroundColor = UIColor.GSVCBase300()
+                cell.tag = 7
+                cellsArray.append([cell:111.0])
+            case .active:
+                let cell = table.dequeueReusableCell(withIdentifier: "BASACardControl") as! BASACardControl
+                 cell.nipCardView.isHidden = false
+                 cell.reportCardView.isHidden = false
+                 cell.btnCheckNIP.addTarget(self, action: #selector(checkNIP(sender:)), for: .touchUpInside)
+                 cell.turnOfSwitch.addTarget(self, action: #selector(turnOnCard(sender:)), for: .valueChanged)
+                cellsArray.insert([cell:220.0], at: 0)
+            case .unknown:
+                print("DESCONOCIDO")
+            }
+            self.table.reloadData()
+            GSVCLoader.hide()
+        }
+    }
+    
+    @objc func handleCustomCardStatusResponse(notification: Notification){
+        let statusCode = notification.object as! Int
+        switch statusCode{
+        case 404:
+            configureDebitCard(forStatus: .request)
+        default:
+            configureDebitCard(forStatus: .active)
+        }
     }
     
     @objc func turnOnCard(sender: UISwitch){
@@ -107,8 +176,9 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
         }
     }
     
-    @objc func activateCard(sender: UIButton){
-       tagCardConfigActivateCard()
+    @objc func checkNIP(sender: UIButton){
+        let view = GSSACardNIPRouter.createModule()
+        self.navigationController?.pushViewController(view, animated: true)
     }
     
     @IBAction func close(_ sender: Any){
@@ -121,7 +191,7 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
         if credit == true{
             return configurations.count + 2
         }else{
-            return  configurations.count + 1
+            return cellsArray.count
         }
     }
     
@@ -130,7 +200,7 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
             switch indexPath.row{
             case 0:
                 let cell = table.dequeueReusableCell(withIdentifier: "BASACardControl") as! BASACardControl
-                cell.btnActivateCard.addTarget(self, action: #selector(activateCard(sender:)), for: .touchUpInside)
+                //cell.btnCheckNIP.addTarget(self, action: #selector(checkNIP(sender:)), for: .touchUpInside)
                 cell.turnOfSwitch.addTarget(self, action: #selector(turnOnCard(sender:)), for: .valueChanged)
                 cell.reportCardView.isHidden = true
                 return cell
@@ -146,25 +216,7 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
                 return cell
             }
         }else{
-            switch indexPath.row{
-            case -1:
-                let cell = table.dequeueReusableCell(withIdentifier: "RequestCardCell") as! RequestCardCell
-                cell.lblTitle.text = "Solicita tu tarjeta"
-                cell.buttonView.isUserInteractionEnabled = false
-                cell.backgroundColor = UIColor.GSVCBase300()
-                cell.tag = 6
-                return cell
-            case 0:
-                let cell = table.dequeueReusableCell(withIdentifier: "SectionCell") as! SectionCell
-                cell.lblTitle.text = "Información"
-                return cell
-            default:
-                let cell = table.dequeueReusableCell(withIdentifier: "ConfigItemCell") as! ConfigItemCell
-                let data = configurations[indexPath.row - 1]
-                cell.tag = data.tag ?? -1
-                cell.configureCell(title: data.title, subtitle: data.subTitle, image: data.image)
-                return cell
-            }
+            return cellsArray[indexPath.row].first!.key
         }
     }
     
@@ -179,14 +231,7 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
                 return 75.0
             }
         }else{
-            switch indexPath.row{
-            case -1:
-                return 111.0
-            case 0:
-                return 60.0
-            default:
-                return 75.0
-            }
+            return cellsArray[indexPath.row].first?.value ?? 0.0
         }
     }
     
@@ -224,6 +269,7 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
             let view = GSSARequestDebitCardRouter.createModule()
             self.navigationController?.pushViewController(view, animated: true)
         case 7:
+            tagCardConfigActivateCard()
             let view = GSSActivateDebitCardRouter.createModule()
             self.navigationController?.pushViewController(view, animated: true)
         default:
@@ -231,4 +277,3 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
         }
     }
 }
-

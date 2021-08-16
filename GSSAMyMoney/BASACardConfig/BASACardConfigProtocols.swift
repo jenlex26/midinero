@@ -11,22 +11,22 @@
 import Foundation
 
 //MARK: Wireframe -
-protocol BASACardConfigWireframeProtocol: class {
+protocol BASACardConfigWireframeProtocol: AnyObject {
 
 }
 //MARK: Presenter -
-protocol BASACardConfigPresenterProtocol: class {
+protocol BASACardConfigPresenterProtocol: AnyObject {
     func requestCardStatus(CardSearchResponse: @escaping () -> ())
 }
 
 //MARK: Interactor -
-protocol BASACardConfigInteractorProtocol: class {
+protocol BASACardConfigInteractorProtocol: AnyObject {
   var presenter: BASACardConfigPresenterProtocol?  { get set }
     func tryGetRequestedCardStatus(CardSearchResponse: @escaping () -> ())
 }
 
 //MARK: View -
-protocol BASACardConfigViewProtocol: class {
+protocol BASACardConfigViewProtocol: AnyObject {
 
   var presenter: BASACardConfigPresenterProtocol?  { get set }
 }

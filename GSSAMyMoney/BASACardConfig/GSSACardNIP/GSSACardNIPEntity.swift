@@ -29,3 +29,13 @@ struct RequestNIPCard: Codable {
     var numero, numeroContrato, codigoSeguridad, idCliente: String?
 }
 
+// MARK: - RequestNIPResponse
+struct RequestNIPResponse: Codable {
+    var mensaje, folio: String?
+    var resultado: RequestNIPResponseResult?
+}
+
+// MARK: - Resultado
+struct RequestNIPResponseResult: Codable {
+    var nip: String?
+}

@@ -50,6 +50,7 @@ class GSSARequestDebitCardViewController: GSSAMasterViewController, GSSARequestD
         isViewDidLoad = true
         NotificationCenter.default.addObserver(self, selector: #selector(parseCustomRequest(notification:)), name: NSNotification.Name(rawValue: "PhysicalCardShippingAmountResponse"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(retryRequest), name: NSNotification.Name(rawValue: "RetryRequest"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(closeView), name: NSNotification.Name(rawValue: "ExitFlow"), object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -63,6 +64,10 @@ class GSSARequestDebitCardViewController: GSSAMasterViewController, GSSARequestD
     
     @objc func retryRequest(){
         getShippingAmount()
+    }
+    
+    @objc func closeView(){
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc func parseCustomRequest(notification: Notification){

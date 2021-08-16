@@ -22,25 +22,56 @@ class GSSACardNIPViewController: UIViewController, GSSACardNIPViewProtocol, GSVC
     @IBOutlet weak var txtNIP3: UITextField!
     @IBOutlet weak var txtNIP4: UITextField!
     
-    var NIP = ""
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        NotificationCenter.default.addObserver(self, selector: #selector(retryRequest), name: NSNotification.Name(rawValue: "RetryRequest"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(closeView), name: NSNotification.Name(rawValue: "ExitFlow"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleCustomRequest(notification:)), name: NSNotification.Name(rawValue: "NIPCustomRequest"), object: nil)
         requestNIP()
-        setNIP()
+    }
+    
+    @objc func handleCustomRequest(notification: Notification){
+        DispatchQueue.main.async { [self] in
+            let jsonData = notification.object as! Data
+            let model = try! JSONDecoder().decode(RequestNIPResponse.self, from: jsonData)
+            setNIP(NIP: model.resultado?.nip?.alnovaDecrypt() ?? "")
+            GSVCLoader.hide()
+        }
+    }
+    
+    @objc func retryRequest(){
+        requestNIP()
+    }
+    
+    @objc func closeView(){
+        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+        for VC in viewControllers{
+            if VC is BASACardConfigViewController{
+                self.navigationController?.popToViewController(VC, animated: true)
+            }
+        }
     }
     
     func optionalAction() {}
     
     func requestNIP(){
+        GSVCLoader.show()
         let body = RequestNIPBody.init(transaccion: RequestNIPTransaccion.init(primerTokenVerificacion: GSSISessionInfo.sharedInstance.gsUser.account?.number, tarjeta: RequestNIPCard.init(numero: "", numeroContrato: "", codigoSeguridad: "", idCliente: ""), clienteUnico: ClienteUnico.init(idPais: "001", idCanal: "033", idSucursal: "7760", folio: "88582")))
-        presenter?.requestCardNIP(body: body, Response: {
-            print("OK")
+        presenter?.requestCardNIP(body: body, Response: { [self] Response in
+            GSVCLoader.hide()
+            if Response != nil{
+                setNIP(NIP: Response?.resultado?.nip ?? "    ")
+            }else{
+                setNIP(NIP: "    ")
+                let view = self.showErrorViewController(message: "Intente más tarde")
+                view.modalPresentationStyle = .fullScreen
+                self.present(view, animated: true, completion: nil)
+            }
         })
     }
     
-    func setNIP(){
+    func setNIP(NIP: String){
         if NIP.count == 4{
             let characters = Array(NIP)
             txtNIP1.text = characters[0].toString()

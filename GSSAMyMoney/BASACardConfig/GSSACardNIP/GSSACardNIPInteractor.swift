@@ -18,15 +18,62 @@ import Foundation
 class GSSACardNIPInteractor: GSSAURLSessionTaskCoordinatorBridge, GSSACardNIPInteractorProtocol {
     weak var presenter: GSSACardNIPPresenterProtocol?
     
-    func tryRequestCardNIP(body: RequestNIPBody,  Response: @escaping () -> ()){
+    func tryRequestCardNIP(body: RequestNIPBody,  Response: @escaping (RequestNIPResponse?) -> ()){
         self.urlPath = "https://apigateway.superappbaz.com/"
         self.strPathEndpoint = "integracion/superapp/dinero/captacion/gestion-tarjetas-fisicas/v1/tarjetas/busquedas/nip"
-    
-        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: body, environment: .develop) { (objRes: PhysicalCardShippingAmountResponse?, error) in
+        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: body, environment: .develop) { (objRes: RequestNIPResponse?, error) in
             if error.code == 0 {
+                Response(objRes)
             } else {
+                //Response(nil)
+                self.customNIPRequest()
                 debugPrint(error)
             }
         }
+    }
+    
+    func customNIPRequest(){
+        let semaphore = DispatchSemaphore (value: 0)
+        let parameters = "{\r\n    \"transaccion\": {\r\n    \"primerTokenVerificacion\":\"D-LMbFYm8tC9vqrJaQl1tA\",\r\n    \"tarjeta\":{\r\n        \"numero\":\"nKBt1Opn7_vGKbdMnhz46qmFQXr1vHraCUQ5pkCMAf4\",\r\n        \"numeroContrato\":\"zaOG6cz2jekzVWbj5zyTyjGNldPQnfkjFhxNrx0eQzM\",\r\n        \"codigoSeguridad\":\"zlzVfjwYHVSyquaT1LyyxQ\",\r\n        \"idCliente\":\"CPdYSeZwblt2n-cPpSKlSw\"\r\n    },\r\n  \"clienteUnico\":{\r\n        \"idPais\":\"SUfrwzple9gH1dEWgHEP_g\",\r\n        \"idCanal\":\"SUfrwzple9gH1dEWgHEP_g\",\r\n        \"idSucursal\":\"MtaiyV-NZN6xvC9il_3fZQ\",\r\n        \"folio\":\"Jl-Q5x0VeZ-27GD8kllhiQ\"\r\n    }\r\n    }\r\n}"
+        let postData = parameters.data(using: .utf8)
+        
+        var request = URLRequest(url: URL(string: "https://apigateway.superappbaz.com/integracion/superapp/dinero/captacion/gestion-tarjetas-fisicas/v1/tarjetas/busquedas/nip")!,timeoutInterval: Double.infinity)
+        request.addValue("abc71b31f71a4303ae50c580613d814b", forHTTPHeaderField: "x-sicu")
+        request.addValue("123e4567-e89b-12d3-a456-426655440000", forHTTPHeaderField: "x-id-interaccion")
+        request.addValue("Super movil", forHTTPHeaderField: "x-nombre-dispositivo")
+        request.addValue("3bad1290ac4600a569162efaa09117ea", forHTTPHeaderField: "x-id-dispositivo")
+        request.addValue("Android", forHTTPHeaderField: "x-sistema-dispositivo")
+        request.addValue("6.0", forHTTPHeaderField: "x-version-dispositivo")
+        request.addValue("2.1.1", forHTTPHeaderField: "x-version-aplicacion")
+        request.addValue("P40", forHTTPHeaderField: "x-modelo-dispositivo")
+        request.addValue("Huawei", forHTTPHeaderField: "x-fabricante-dispositivo")
+        request.addValue("mt6735", forHTTPHeaderField: "x-serie-procesador")
+        request.addValue("Telcel", forHTTPHeaderField: "x-operador-telefonia")
+        request.addValue("19.49781290", forHTTPHeaderField: "x-latitud")
+        request.addValue("-99.12698712", forHTTPHeaderField: "x-longitud")
+        request.addValue("94a08da1fecbb6e8b46990538c7b50b2", forHTTPHeaderField: "x-token-usuario")
+        request.addValue("99553877", forHTTPHeaderField: "x-id-lealtad")
+        request.addValue("Bearer \(customToken.shared.bearer)", forHTTPHeaderField: "Authorization")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("XSRF-TOKEN=483d7698-424f-489b-ab2c-d2e96a3d55e9", forHTTPHeaderField: "Cookie")
+        
+        request.httpMethod = "POST"
+        request.httpBody = postData
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data else {
+                print(String(describing: error))
+                semaphore.signal()
+                return
+            }
+            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "NIPCustomRequest"), object: data, userInfo: nil))
+            print(String(data: data, encoding: .utf8)!)
+            
+            semaphore.signal()
+        }
+        
+        task.resume()
+        semaphore.wait()
+        
     }
 }

@@ -22,7 +22,7 @@ class GSSACardNIPPresenter: GSSACardNIPPresenterProtocol {
         self.router = router
     }
     
-    func requestCardNIP(body: RequestNIPBody,  Response: @escaping () -> ()){
+    func requestCardNIP(body: RequestNIPBody,  Response: @escaping (RequestNIPResponse?) -> ()){
         interactor?.tryRequestCardNIP(body: body, Response: Response)
     }
 

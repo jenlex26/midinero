@@ -37,7 +37,7 @@ extension UIViewController
             }
             else{
                 self.dismiss(animated: true, completion: {
-                    self.navigationController?.popViewController(animated: true)
+                    NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ExitFlow"), object: nil, userInfo: nil))
                 })
             }
         })

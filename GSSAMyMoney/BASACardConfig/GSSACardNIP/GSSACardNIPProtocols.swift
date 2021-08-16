@@ -16,13 +16,13 @@ protocol GSSACardNIPWireframeProtocol: AnyObject {
 }
 //MARK: Presenter -
 protocol GSSACardNIPPresenterProtocol: AnyObject {
-    func requestCardNIP(body: RequestNIPBody,  Response: @escaping () -> ())
+    func requestCardNIP(body: RequestNIPBody,  Response: @escaping (RequestNIPResponse?) -> ())
 }
 
 //MARK: Interactor -
 protocol GSSACardNIPInteractorProtocol: AnyObject {
     var presenter: GSSACardNIPPresenterProtocol?  { get set }
-    func tryRequestCardNIP(body: RequestNIPBody,  Response: @escaping () -> ())
+    func tryRequestCardNIP(body: RequestNIPBody,  Response: @escaping (RequestNIPResponse?) -> ())
 }
 
 //MARK: View -
