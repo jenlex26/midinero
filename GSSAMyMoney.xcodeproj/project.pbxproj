@@ -195,7 +195,7 @@
 		EEAD107326C20792000E5BEF /* GSSAConfirmCardSaveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAD103D26C20792000E5BEF /* GSSAConfirmCardSaveViewController.swift */; };
 		EEAD107426C20792000E5BEF /* GSSAConfirmCardSaveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEAD103E26C20792000E5BEF /* GSSAConfirmCardSaveViewController.xib */; };
 		EEAD107526C20792000E5BEF /* GSSAConfirmCardSaveInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAD103F26C20792000E5BEF /* GSSAConfirmCardSaveInteractor.swift */; };
-		EEAD107626C20792000E5BEF /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAD104126C20792000E5BEF /* UIColorExtension.swift */; };
+		EEAD107626C20792000E5BEF /* GSSAVisualsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAD104126C20792000E5BEF /* GSSAVisualsExtension.swift */; };
 		EEAD107726C20792000E5BEF /* GSSAGenericAlertsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAD104226C20792000E5BEF /* GSSAGenericAlertsExtension.swift */; };
 		EEAD107826C20792000E5BEF /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAD104326C20792000E5BEF /* StringExtension.swift */; };
 		EEAD107926C20792000E5BEF /* GSSAFundWebViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAD104526C20792000E5BEF /* GSSAFundWebViewProtocols.swift */; };
@@ -454,7 +454,7 @@
 		EEAD103D26C20792000E5BEF /* GSSAConfirmCardSaveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSSAConfirmCardSaveViewController.swift; sourceTree = "<group>"; };
 		EEAD103E26C20792000E5BEF /* GSSAConfirmCardSaveViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GSSAConfirmCardSaveViewController.xib; sourceTree = "<group>"; };
 		EEAD103F26C20792000E5BEF /* GSSAConfirmCardSaveInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSSAConfirmCardSaveInteractor.swift; sourceTree = "<group>"; };
-		EEAD104126C20792000E5BEF /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		EEAD104126C20792000E5BEF /* GSSAVisualsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSSAVisualsExtension.swift; sourceTree = "<group>"; };
 		EEAD104226C20792000E5BEF /* GSSAGenericAlertsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSSAGenericAlertsExtension.swift; sourceTree = "<group>"; };
 		EEAD104326C20792000E5BEF /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		EEAD104526C20792000E5BEF /* GSSAFundWebViewProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSSAFundWebViewProtocols.swift; sourceTree = "<group>"; };
@@ -600,6 +600,7 @@
 				EE2A261226B369DA00E1C2C5 /* GSSAMasterViewController.swift */,
 				EE344CC526BCA583001727B4 /* GSSARockaletaCustom.swift */,
 				EE01F6BD268B76A10010C485 /* GSSAMyMoneyExtensions.swift */,
+				EEAD104126C20792000E5BEF /* GSSAVisualsExtension.swift */,
 				EEAEFB12269E0F5400F97E4D /* GSSAGradientController.swift */,
 				EE36C43026878F11001AD9F2 /* GSSASecurityController.swift */,
 				EED2CB92269D0C3000A1E129 /* GSSALinkDePago */,
@@ -1176,7 +1177,6 @@
 		EEAD104026C20792000E5BEF /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				EEAD104126C20792000E5BEF /* UIColorExtension.swift */,
 				EEAD104226C20792000E5BEF /* GSSAGenericAlertsExtension.swift */,
 				EEAD104326C20792000E5BEF /* StringExtension.swift */,
 			);
@@ -1527,7 +1527,7 @@
 				10E9EDD4267D6BA400F45640 /* BASANewBeneficiaryViewController.swift in Sources */,
 				10E9EDE7267D6BA400F45640 /* BASAButtonsCell.swift in Sources */,
 				EE2A25FB26B300CE00E1C2C5 /* GSSAPhysicalCardRequestAddressViewController.swift in Sources */,
-				EEAD107626C20792000E5BEF /* UIColorExtension.swift in Sources */,
+				EEAD107626C20792000E5BEF /* GSSAVisualsExtension.swift in Sources */,
 				EEAD106426C20792000E5BEF /* GSSAFundSetCVVViewController.swift in Sources */,
 				EEAD107226C20792000E5BEF /* GSSAConfirmCardSaveProtocols.swift in Sources */,
 				10E9EDFA267D6BA400F45640 /* BASAShadowRadiusImage.swift in Sources */,

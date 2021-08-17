@@ -69,9 +69,7 @@ class GSSASetCVVViewController: GSSAMasterViewController, GSSASetCVVViewProtocol
                     let button = GSVCButton()
                     button.setTitle("Ver NIP", for: .normal)
                     button.style = 10
-                    if #available(iOS 13.0, *) {
-                        button.setImage(UIImage(named: "ic_card"), for: .normal)
-                    }
+                    button.setImage(UIImage(named: "ic_card"), for: .normal)
                     let success = GSVTOperationStatusViewController(status: .success(title: "¡Listo!", message: "Tu tarjeta baz ya está activa", views: [spaceView, info!, card!]),
                                                                     roundButtonAction: {
                                                                         self.dismiss(animated: false, completion: {

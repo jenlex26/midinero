@@ -98,10 +98,10 @@
     </objects>
     <designables>
         <designable name="2WI-Ck-ngq">
-            <size key="intrinsicContentSize" width="188" height="20.5"/>
+            <size key="intrinsicContentSize" width="172.5" height="22.5"/>
         </designable>
         <designable name="zcI-Ro-DSR">
-            <size key="intrinsicContentSize" width="157" height="20.5"/>
+            <size key="intrinsicContentSize" width="141.5" height="20"/>
         </designable>
     </designables>
     <resources>

@@ -21,16 +21,12 @@ class BASAMovementTableViewCell: UITableViewCell {
     }
     
     func setArrow(amount: String){
-        if #available(iOS 13.0, *) {
-            if amount.contains("-"){
-                imgView.image = UIImage(systemName: "arrow.left")
-                imgView.tintColor = .systemPink
-            }else{
-                imgView.image = UIImage(systemName: "arrow.right")
-                imgView.tintColor = .systemGreen
-            }
+        if amount.contains("-"){
+            imgView.image = UIImage.arrowLeft()
+            imgView.tintColor = .systemPink
         }else{
-            imgView.isHidden = true
+            imgView.image = UIImage.arrowRight()
+            imgView.tintColor = .systemGreen
         }
     }
 }

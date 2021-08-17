@@ -188,13 +188,12 @@ class GSSANewBeneficiaryAddressViewController: UIViewController, GSSANewBenefici
                                 colonias.append(item.nombre ?? "")
                             }
                             
-                            if #available(iOS 13.0, *) {
-                                let postalCodePickerData = beneficiaryField(title: "Colonia", image: UIImage(systemName: "chevron.down"), placeHolder: "Selecciona", pickerData: pickerTextField.init(pickerOptions: colonias, datePicker: false, dateFormat: nil))
+                            let postalCodePickerData = beneficiaryField(title: "Colonia", image: UIImage.chevronDown(), placeHolder: "Selecciona", pickerData: pickerTextField.init(pickerOptions: colonias, datePicker: false, dateFormat: nil))
                                 
                                 let cell = table.dequeueReusableCell(withIdentifier: "BASATextFieldCell") as! BASATextFieldCell
                                 cell.configureCell(data: postalCodePickerData)
                                 cellsArray.append([cell:117.0])
-                            }
+                            
                             
                             let section = table.dequeueReusableCell(withIdentifier: "SectionCell") as! SectionCell
                             section.lblTitle.text = "Alcaldía o municipio"

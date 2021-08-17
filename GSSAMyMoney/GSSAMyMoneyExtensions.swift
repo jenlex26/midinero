@@ -123,7 +123,6 @@ extension UITableViewCell{
     }
 }
 
-
 extension UITableView{
     func shake() {
         let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
@@ -349,7 +348,6 @@ extension Int{
         return amountFormat.mutableString.description
     }
 }
-
 
 extension Character{
     func toString() -> String{

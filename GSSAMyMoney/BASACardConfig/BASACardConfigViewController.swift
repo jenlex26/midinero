@@ -41,6 +41,7 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
         account = GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().tnuoccaFormat ?? ""
         registerCells()
         setOptions()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(handleCustomCardStatusResponse(notification:)), name: NSNotification.Name(rawValue: "customCardStatusRequestResponse"), object: nil)
         table.delegate = self
         table.dataSource = self
@@ -67,20 +68,23 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
     
     func setOptions(){
         //Añade opciones genericas al menú de configuración
-        if #available(iOS 13.0, *) {
-            if credit == false{
-                configurations.append(userOptions(title: "CLABE Interbancaria", subTitle: CLABE, image: UIImage(systemName: "square.and.arrow.up"), tag: 4))
-                configurations.append(userOptions(title: "Número de cuenta", subTitle: account, image: nil))
-                configurations.append(userOptions(title: "Celular asociado", subTitle: phone, image: nil))
-                configurations.append(userOptions.init(title: "Estados de cuenta", subTitle: nil, image: UIImage(systemName: "chevron.right"), tag: 1))
-                configurations.append(userOptions.init(title: "Límites", subTitle: nil, image: UIImage(systemName: "chevron.right"), tag: 2))
-                configurations.append(userOptions.init(title: "Beneficiarios", subTitle: nil, image: UIImage(systemName: "chevron.right"), tag: 3))
-                configurations.append(userOptions.init(title: "Activar tarjeta fisica", subTitle: nil, image: UIImage(systemName: "chevron.right"), tag: 7))
-            }else{
-                configurations.append(userOptions(title: "Número de tarjeta física", subTitle: CLABE, image: UIImage(systemName: "doc.fill"), tag: 5))
-                configurations.append(userOptions.init(title: "Estado de cuenta", subTitle: nil, image: UIImage(systemName: "chevron.right"), tag: 1))
-            }
+        let imgShare = UIImage.shareIcon()
+        let chevronRight = UIImage.chevronRight()
+        let docFill = UIImage.copyIcon()
+        
+        if credit == false{
+            configurations.append(userOptions(title: "CLABE Interbancaria", subTitle: CLABE, image: imgShare, tag: 4))
+            configurations.append(userOptions(title: "Número de cuenta", subTitle: account, image: nil))
+            configurations.append(userOptions(title: "Celular asociado", subTitle: phone, image: nil))
+            configurations.append(userOptions.init(title: "Estados de cuenta", subTitle: nil, image: chevronRight, tag: 1))
+            configurations.append(userOptions.init(title: "Límites", subTitle: nil, image: chevronRight, tag: 2))
+            configurations.append(userOptions.init(title: "Beneficiarios", subTitle: nil, image: chevronRight, tag: 3))
+            configurations.append(userOptions.init(title: "Activar tarjeta fisica", subTitle: nil, image: chevronRight, tag: 7))
+        }else{
+            configurations.append(userOptions(title: "Número de tarjeta física", subTitle: CLABE, image: docFill, tag: 5))
+            configurations.append(userOptions(title: "Estado de cuenta", subTitle: nil, image: chevronRight, tag: 1))
         }
+        
     }
     
     func optionalAction() {}
@@ -131,10 +135,10 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
                 cellsArray.append([cell:111.0])
             case .active:
                 let cell = table.dequeueReusableCell(withIdentifier: "BASACardControl") as! BASACardControl
-                 cell.nipCardView.isHidden = false
-                 cell.reportCardView.isHidden = false
-                 cell.btnCheckNIP.addTarget(self, action: #selector(checkNIP(sender:)), for: .touchUpInside)
-                 cell.turnOfSwitch.addTarget(self, action: #selector(turnOnCard(sender:)), for: .valueChanged)
+                cell.nipCardView.isHidden = false
+                cell.reportCardView.isHidden = false
+                cell.btnCheckNIP.addTarget(self, action: #selector(checkNIP(sender:)), for: .touchUpInside)
+                cell.turnOfSwitch.addTarget(self, action: #selector(turnOnCard(sender:)), for: .valueChanged)
                 cellsArray.insert([cell:220.0], at: 0)
             case .unknown:
                 print("DESCONOCIDO")
@@ -145,6 +149,8 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
     }
     
     @objc func handleCustomCardStatusResponse(notification: Notification){
+        #warning("Eliminar custom request en versiones de producción")
+        //RECIBE una notificación con el status code del custom request y dependiendo de este determina las celdas que se mostrarán en ajustes
         let statusCode = notification.object as! Int
         switch statusCode{
         case 404:
