@@ -16,17 +16,16 @@ protocol GSSAMovementPreviewWireframeProtocol: AnyObject {
 }
 //MARK: Presenter -
 protocol GSSAMovementPreviewPresenterProtocol: AnyObject {
-
+    func requestGetSPEIDetail(Body: SPEIDetailBody,  Response: @escaping (SPEIDetailResponse?) -> ())
 }
 
 //MARK: Interactor -
 protocol GSSAMovementPreviewInteractorProtocol: AnyObject {
-
-  var presenter: GSSAMovementPreviewPresenterProtocol?  { get set }
+    var presenter: GSSAMovementPreviewPresenterProtocol?  { get set }
+    func tryGetSPEIDetail(Body: SPEIDetailBody,  Response: @escaping (SPEIDetailResponse?) -> ())
 }
 
 //MARK: View -
 protocol GSSAMovementPreviewViewProtocol: AnyObject {
-
   var presenter: GSSAMovementPreviewPresenterProtocol?  { get set }
 }

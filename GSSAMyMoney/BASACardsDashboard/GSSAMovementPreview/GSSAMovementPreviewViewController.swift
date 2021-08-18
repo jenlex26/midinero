@@ -69,11 +69,9 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
             }
         }
         
-        
         cellsArray = cellsArray.sorted(by: { ($0.first?.key as! BASAMovementTableViewCell).lblTitle.text!  < ($1.first?.key as! BASAMovementTableViewCell).lblTitle.text! })
         
         if SPEI == true{
-            
             let sectionCell =  table.dequeueReusableCell(withIdentifier: "SectionCell")!
             sectionCell.isHidden = true
             cellsArray.append([sectionCell:30.0])
@@ -83,11 +81,9 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
             cardInfo.tag = 1
             cellsArray.append([cardInfo:81.0])
             
-            
             let secondCard = table.dequeueReusableCell(withIdentifier: "BASAInfoCardCell") as! BASAInfoCardCell
             secondCard.lblText.text = "Este vínculo se activará a más tardar dentro de los primeros 5 minutos siguientes de la aceptación de la operación."
             cellsArray.append([secondCard:121.0])
-            
         }
         self.table.reloadData()
     }
@@ -129,7 +125,19 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
         // details.updateValue("Estatus de transferencia", forKey: "Liquidada")
         details.updateValue("Fecha y hora de registro", forKey: (transaction.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy") ?? "") + " " + (data.hora?.timeFormatter() ?? ""))
         
-        if (transaction.descripcionBeneficiario ?? "") != ""{
+        if transaction.idOperacion == "212"{
+            GSVCLoader.show()
+            let body = SPEIDetailBody.init(transaccion: SPEIDetailTransaccion.init(claveInstitucionBancaria: "", operacion: SPEIDetailOperacion.init(tipo: "E", fecha: transaction.fecha, hora: transaction.hora)))
+            
+            presenter?.requestGetSPEIDetail(Body: body, Response: { [self] Response in
+                if Response != nil{
+                    let data = Response?.transaccion?.resultado
+                    details.updateValue("Realizado con", forKey: data?.numeroCuentaOrigen ?? "")
+                    details.updateValue("Nombre del beneficiario", forKey: data?.nombreBeneficiario ?? "")
+                    details.updateValue("Estatus de transferencia", forKey: data?.estatusTransferencia ?? "")
+                }
+                GSVCLoader.hide()
+            })
             setOptions(SPEI: true)
         }else{
             setOptions(SPEI: false)

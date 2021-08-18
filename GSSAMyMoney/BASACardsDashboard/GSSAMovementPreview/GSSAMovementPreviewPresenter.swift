@@ -22,4 +22,7 @@ class GSSAMovementPreviewPresenter: GSSAMovementPreviewPresenterProtocol {
         self.router = router
     }
 
+    func requestGetSPEIDetail(Body: SPEIDetailBody,  Response: @escaping (SPEIDetailResponse?) -> ()){
+        interactor?.tryGetSPEIDetail(Body: Body, Response: Response)
+    }
 }

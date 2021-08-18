@@ -79,7 +79,7 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
             configurations.append(userOptions.init(title: "Estados de cuenta", subTitle: nil, image: chevronRight, tag: 1))
             configurations.append(userOptions.init(title: "Límites", subTitle: nil, image: chevronRight, tag: 2))
             configurations.append(userOptions.init(title: "Beneficiarios", subTitle: nil, image: chevronRight, tag: 3))
-            configurations.append(userOptions.init(title: "Activar tarjeta fisica", subTitle: nil, image: chevronRight, tag: 7))
+            //configurations.append(userOptions.init(title: "Activar tarjeta fisica", subTitle: nil, image: chevronRight, tag: 7))
         }else{
             configurations.append(userOptions(title: "Número de tarjeta física", subTitle: CLABE, image: docFill, tag: 5))
             configurations.append(userOptions(title: "Estado de cuenta", subTitle: nil, image: chevronRight, tag: 1))
