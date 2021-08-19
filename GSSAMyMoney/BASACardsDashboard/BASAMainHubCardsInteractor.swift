@@ -42,7 +42,9 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
     
     func TryGetDebitCardBalance(Account:[String:String], Balance: @escaping (BalanceResponse?) -> ()){
         let requestBody = TransationBalanceRequest(transaccion: TransationItem(folio: (GSSISessionInfo.sharedInstance.gsUser.SICU?.encryptAlnova() ?? "")))
-        self.strPathEndpoint = "/superapp/dinero/captacion/cuentas/v1/busquedas"
+        
+        self.urlPath = "https://apigateway.superappbaz.com/"
+        self.strPathEndpoint = "integracion/superapp/dinero/captacion/cuentas/v1/busquedas"
         
 //        self.urlPath = "https://apigateway.superappbaz.com/"
 //        self.strPathEndpoint = "integracion/superapp/dinero/captacion/cuentas/v1/busquedas"
@@ -157,8 +159,8 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
     }
     
     func TryGetDebitCardMovementsV2(Body: MovimientosBodyv2, Movements: @escaping (DebitCardTransactionV2?) -> ()) {
-       // self.urlPath = "https://apigateway.superappbaz.com/"
-        self.strPathEndpoint = "/superapp/dinero/captacion/cuentas/v2/movimientos/busquedas"
+        self.urlPath = "https://apigateway.superappbaz.com/"
+        self.strPathEndpoint = "integracion/superapp/dinero/captacion/cuentas/v2/movimientos/busquedas"
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: Body, environment: GLOBAL_ENVIROMENT) { (objRes: DebitCardTransactionV2?, error) in
             

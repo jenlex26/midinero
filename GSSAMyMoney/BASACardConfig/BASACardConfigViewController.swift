@@ -157,9 +157,9 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
         case 200:
             configureDebitCard(forStatus: .active)
         case 400:
-            configureDebitCard(forStatus: .unknown)
+            configureDebitCard(forStatus: .request)
         default:
-            configureDebitCard(forStatus: .activate)
+            configureDebitCard(forStatus: .request)
         }
     }
     

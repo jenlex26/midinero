@@ -96,6 +96,11 @@ class GSSARequestDebitCardViewController: GSSAMasterViewController, GSSARequestD
     func setAddress(){
         let address = GSSISessionInfo.sharedInstance.gsUser.address
         lblAddress.text = "\((address?.street ?? "").capitalized) \((address?.externalNumber ?? "").capitalized) \((address?.neighborhood ?? "").capitalized) \((address?.city ?? "").capitalized) \(address?.zipCode ?? "")"
+        requestedAddress.shared.street = address?.street
+        requestedAddress.shared.externalNumber = address?.externalNumber
+        requestedAddress.shared.suburb = address?.neighborhood
+        requestedAddress.shared.city = address?.city
+        requestedAddress.shared.postalCode = address?.zipCode
     }
     
     func didFailToEnterFlow(error: NSError) {
@@ -150,6 +155,4 @@ extension GSSARequestDebitCardViewController : GSVTTicketOperationDelegate
     func operationSuccessActionClosed() {
         self.navigationController?.popToRootViewController(animated: true)
     }
-    
-
 }

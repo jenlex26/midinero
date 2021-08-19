@@ -123,12 +123,16 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     }
     
     func loadDebitMovementsV2(){
-        let BodyProdV2 =  MovimientosBodyv2.init(transaccion: MovementsBodyDataV2.init(sicu: GSSISessionInfo.sharedInstance.gsUser.SICU, numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().encryptAlnova(), geolocalizacion: Geolocalizacion.init(latitud: "", longitud: "")))
+       // let BodyProdV2 =  MovimientosBodyv2.init(transaccion: MovementsBodyDataV2.init(sicu: GSSISessionInfo.sharedInstance.gsUser.SICU, numeroCuenta:  GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().encryptAlnova(), geolocalizacion: Geolocalizacion.init(latitud: "", longitud: "")))
         
-        self.presenter?.requestDebitCardMovementsV2(Body: BodyProdV2, Movements: { [self] Movements in
+        let BodyDevV2 =  MovimientosBodyv2.init(transaccion: MovementsBodyDataV2.init(sicu: GSSISessionInfo.sharedInstance.gsUser.SICU, numeroCuenta:  "01271156141200001956".formatToTnuocca14Digits().encryptAlnova(), geolocalizacion: Geolocalizacion.init(latitud: "", longitud: "")))
+        
+        self.presenter?.requestDebitCardMovementsV2(Body: BodyDevV2, Movements: { [self] Movements in
+            
             GSVCLoader.hide()
             self.BasaMainHubTableView.isHidden = false
             if Movements != nil{
+                
                 debitCardMovementsV2 = Movements
                 setTableForDebitCard()
                 loadActivateCard()
@@ -274,7 +278,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                         print("fecha: \(item.fecha?.alnovaDecrypt() ?? "")")
                         let movementCell = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAMovementCell") as! BASAMovementTableViewCell
                         
-                        if index == 0{
+                        if item.descripcionOperacion?.contains("m") == true{
                             movementCell.lblDate.text = (item.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy") ?? "") + " " + "MOV. PENDIENTE"
                         }else{
                             movementCell.lblDate.text = item.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy")

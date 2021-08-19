@@ -57,6 +57,12 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
             self.imgHeader.image = image
         }
         
+        
+        if #available(iOS 13.0, *) {}else{
+            backButton.contentMode = .scaleAspectFit
+            backButton.setImage(UIImage.backIcon(tint: .white), for: .normal)
+        }
+        
         debitCardView.layer.cornerRadius = 10
         debitCardView.layer.masksToBounds = true
         
@@ -168,7 +174,7 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
                        })
         showOnlyLendsInCredit = true
     }
-    
+        
     @IBAction func debitCardClick(_ sender: Any){
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "HomeHeaderViewChange"), object:  cardType.debit, userInfo: nil))
         debitCardView.isHidden = false
@@ -197,6 +203,9 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
             self.cardCollection.isUserInteractionEnabled = false
             self.pageController.isHidden = true
         }else{
+            self.cardCollection.scrollToItem(at: [0,0], at: .left, animated: false)
+            self.cardCollection.isUserInteractionEnabled = false
+            self.pageController.isHidden = true
             handleCardChange(index: pageController.currentPage)
         }
     }

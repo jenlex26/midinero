@@ -107,7 +107,7 @@ extension GSSACardFundResumeViewController {
         }
         
         let extraData = GSVTResumeCellInfo(sectionTitle: "Datos de tu recarga",
-                                           subTitle: "Comisión",
+                                           subTitle: "Costo por servicio",
                                            mainInfo: "$0.00",
                                            iconImage: UIImage(named: "legalInfoSAIcon"))
         

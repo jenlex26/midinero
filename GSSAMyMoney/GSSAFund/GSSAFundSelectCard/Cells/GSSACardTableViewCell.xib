@@ -43,7 +43,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sF5-2B-why">
-                                <rect key="frame" x="387" y="4" width="24" height="24"/>
+                                <rect key="frame" x="387" y="39" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="sF5-2B-why" secondAttribute="height" multiplier="1:1" id="Z5T-Cu-5a6"/>
                                     <constraint firstAttribute="height" constant="24" id="o8o-jG-Sso"/>
@@ -57,11 +57,11 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="sF5-2B-why" firstAttribute="leading" secondItem="6pu-5M-xgI" secondAttribute="trailing" constant="8" id="C59-BE-UHe"/>
+                            <constraint firstItem="sF5-2B-why" firstAttribute="centerY" secondItem="6pu-5M-xgI" secondAttribute="centerY" id="IIG-GE-DPd"/>
                             <constraint firstItem="6pu-5M-xgI" firstAttribute="top" secondItem="hgN-ZS-64Y" secondAttribute="top" constant="8" id="L1Q-Sj-xLz"/>
                             <constraint firstItem="6pu-5M-xgI" firstAttribute="leading" secondItem="hgN-ZS-64Y" secondAttribute="leading" constant="8" id="OJP-Nv-9bp"/>
                             <constraint firstAttribute="bottom" secondItem="6pu-5M-xgI" secondAttribute="bottom" constant="8" id="bUd-iA-SFR"/>
                             <constraint firstAttribute="trailing" secondItem="sF5-2B-why" secondAttribute="trailing" constant="8" id="rgg-6V-GuK"/>
-                            <constraint firstItem="sF5-2B-why" firstAttribute="top" secondItem="hgN-ZS-64Y" secondAttribute="top" constant="4" id="uLj-9G-hX5"/>
                         </constraints>
                     </view>
                 </subviews>
