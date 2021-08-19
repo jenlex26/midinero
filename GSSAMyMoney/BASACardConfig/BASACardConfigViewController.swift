@@ -55,8 +55,8 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        GSVCLoader.show()
-        presenter?.requestCardStatus(CardSearchResponse: {})
+        //GSVCLoader.show()
+        //presenter?.requestCardStatus(CardSearchResponse: {})
     }
     
     enum status{

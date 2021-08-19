@@ -10,6 +10,7 @@
 
 import UIKit
 import GSSAVisualComponents
+import GSSAFunctionalUtilities
 
 class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewViewProtocol {
     
@@ -106,7 +107,7 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
         
         lblAmount.text = transaction.importe?.alnovaDecrypt().removeWhiteSpaces().moneyFormatWithoutSplit()
         lblDate.text = transaction.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy")
-    
+        
         lblTitle.text = transaction.concepto?.alnovaDecrypt()
         
         if transaction.concepto?.alnovaDecrypt().contains("SPEI") == true{
@@ -117,10 +118,7 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
         
         details.updateValue("Realizado", forKey: transaction.nombreOrdenante ?? "")
         details.updateValue("Para", forKey:  transaction.descripcionBeneficiario ?? "")
-        if transaction.descripcionOperacion == "m"{
-            details.updateValue("Estatus", forKey: "MOV. PENDIENTE")
-        }
-       // details.updateValue("Id de operación", forKey: transaction.idOperacion ?? "")
+        // details.updateValue("Id de operación", forKey: transaction.idOperacion ?? "")
         details.updateValue("Folio", forKey: transaction.folio ?? "")
         details.updateValue("Número de operación", forKey: transaction.numeroOperacion ?? "")
         // details.updateValue("Clave de rastreo", forKey: "123456678909876I")
@@ -128,17 +126,32 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
         details.updateValue("Fecha y hora de registro", forKey: (transaction.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy") ?? "") + " " + (data.hora?.timeFormatter() ?? ""))
         
         if transaction.idOperacion == "212"{
-            GSVCLoader.show()
-            let body = SPEIDetailBody.init(transaccion: SPEIDetailTransaccion.init(claveInstitucionBancaria: "", operacion: SPEIDetailOperacion.init(tipo: "E", fecha: transaction.fecha, hora: transaction.hora)))
-            presenter?.requestGetSPEIDetail(Body: body, Response: { [self] Response in
-                if Response != nil{
-                    let data = Response?.transaccion?.resultado
-                    details.updateValue("Realizado con", forKey: data?.numeroCuentaOrigen ?? "")
-                    details.updateValue("Nombre del beneficiario", forKey: data?.nombreBeneficiario ?? "")
-                    details.updateValue("Estatus de transferencia", forKey: data?.estatusTransferencia ?? "")
+            if GLOBAL_ENVIROMENT == .develop{
+                GSVCLoader.show()
+                var claveInstitucion = ""
+                let descriptionData = transaction.descripcionOperacion?.components(separatedBy: "|")
+                
+                if descriptionData?.count ?? 0 >= 2{
+                    if descriptionData![0].count >= 4{
+                        claveInstitucion = transaction.descripcionOperacion?.suffix(4).description ?? ""
+                    }
+                    if descriptionData![1] == "m"{
+                        details.updateValue("Estatus", forKey: "MOV. PENDIENTE")
+                    }
                 }
-                GSVCLoader.hide()
-            })
+                
+                
+                let body = SPEIDetailBody.init(transaccion: SPEIDetailTransaccion.init(claveInstitucionBancaria: claveInstitucion, operacion: SPEIDetailOperacion.init(tipo: "E", fecha: transaction.fecha, hora: transaction.hora)))
+                presenter?.requestGetSPEIDetail(Body: body, Response: { [self] Response in
+                    if Response != nil{
+                        let data = Response?.transaccion?.resultado
+                        details.updateValue("Realizado con", forKey: data?.numeroCuentaOrigen ?? "")
+                        details.updateValue("Nombre del beneficiario", forKey: data?.nombreBeneficiario ?? "")
+                        details.updateValue("Estatus de transferencia", forKey: data?.estatusTransferencia ?? "")
+                    }
+                    GSVCLoader.hide()
+                })
+            }
             setOptions(SPEI: true)
         }else{
             setOptions(SPEI: false)
@@ -163,7 +176,7 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
     
     @IBAction func close(_ sender: Any){
         self.dismiss(animated: true, completion: nil)
-       // self.navigationController?.popViewController(animated: true)
+        // self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func share(_ sender: Any){

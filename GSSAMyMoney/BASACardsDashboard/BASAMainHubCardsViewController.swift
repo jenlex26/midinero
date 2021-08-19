@@ -12,6 +12,7 @@ import UIKit
 import GSSAVisualComponents
 import GSSAVisualTemplates
 import GSSASessionInfo
+import GSSAFunctionalUtilities
 
 class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProtocol, GSVCBottomAlertHandler {
     
@@ -96,7 +97,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                     self.accountBalance = NewBalance
                     UserDefaults.standard.setValue(NewBalance.resultado.cliente?.cuentas?.first?.clabe?.alnovaDecrypt().tnuoccaFormat, forKey: "DebitCardCLABE")
                     NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "reloadHeaderData"), object: NewBalance, userInfo: nil))
-                   // self.loadDebitMovements()
+                    // self.loadDebitMovements()
                     self.loadDebitMovementsV2()
                 }
             }else{
@@ -123,16 +124,17 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     }
     
     func loadDebitMovementsV2(){
-       // let BodyProdV2 =  MovimientosBodyv2.init(transaccion: MovementsBodyDataV2.init(sicu: GSSISessionInfo.sharedInstance.gsUser.SICU, numeroCuenta:  GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().encryptAlnova(), geolocalizacion: Geolocalizacion.init(latitud: "", longitud: "")))
+        var body = MovimientosBodyv2.init()
+        if GLOBAL_ENVIROMENT == .develop{
+            body =  MovimientosBodyv2.init(transaccion: MovementsBodyDataV2.init(sicu: GSSISessionInfo.sharedInstance.gsUser.SICU, numeroCuenta:  "01271156141200001956".formatToTnuocca14Digits().encryptAlnova(), geolocalizacion: Geolocalizacion.init(latitud: "", longitud: "")))
+        }else{
+            body =  MovimientosBodyv2.init(transaccion: MovementsBodyDataV2.init(sicu: GSSISessionInfo.sharedInstance.gsUser.SICU, numeroCuenta:  GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().encryptAlnova(), geolocalizacion: Geolocalizacion.init(latitud: "", longitud: "")))
+        }
         
-        let BodyDevV2 =  MovimientosBodyv2.init(transaccion: MovementsBodyDataV2.init(sicu: GSSISessionInfo.sharedInstance.gsUser.SICU, numeroCuenta:  "01271156141200001956".formatToTnuocca14Digits().encryptAlnova(), geolocalizacion: Geolocalizacion.init(latitud: "", longitud: "")))
-        
-        self.presenter?.requestDebitCardMovementsV2(Body: BodyDevV2, Movements: { [self] Movements in
-            
+        self.presenter?.requestDebitCardMovementsV2(Body: body, Movements: { [self] Movements in
             GSVCLoader.hide()
             self.BasaMainHubTableView.isHidden = false
             if Movements != nil{
-                
                 debitCardMovementsV2 = Movements
                 setTableForDebitCard()
                 loadActivateCard()
@@ -278,13 +280,20 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                         print("fecha: \(item.fecha?.alnovaDecrypt() ?? "")")
                         let movementCell = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAMovementCell") as! BASAMovementTableViewCell
                         
-                        if item.descripcionOperacion?.contains("m") == true{
-                            movementCell.lblDate.text = (item.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy") ?? "") + " " + "MOV. PENDIENTE"
+                        
+                        let status = item.descripcionOperacion?.components(separatedBy: "|")
+                        
+                        if status?.count ?? 0 >= 2{
+                            if status![1] == "m"{
+                                movementCell.lblDate.text = (item.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy") ?? "") + " " + "MOV. PENDIENTE"
+                            }else{
+                                movementCell.lblDate.text = item.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy")
+                            }
                         }else{
                             movementCell.lblDate.text = item.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy")
                         }
                         
-                       
+                        
                         movementCell.tag = index
                         movementCell.lblTitle.text = item.concepto?.alnovaDecrypt()
                         
