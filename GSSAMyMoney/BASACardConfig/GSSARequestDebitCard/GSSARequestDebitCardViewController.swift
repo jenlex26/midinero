@@ -13,19 +13,9 @@ import GSSAVisualComponents
 import GSSAVisualTemplates
 import GSSASessionInfo
 import GSSAInterceptor
+import GSSAPermissionsManager
 
-
-class GSSARequestDebitCardViewController: GSSAMasterViewController, GSSARequestDebitCardViewProtocol, GSINNavigateDelegate, GSVCBottomAlertHandler, BASAScanCodeWireframeProtocol {
-    func codeDetectedRouter(sCode: String) {
-        let view = GSSASetCVVRouter.createModule()
-        self.navigationController?.pushViewController(view, animated: true)
-    }
-    
-    func cancelCodeScanner() {
-        
-    }
- 
-    
+class GSSARequestDebitCardViewController: GSSAMasterViewController, GSSARequestDebitCardViewProtocol, GSINNavigateDelegate, GSVCBottomAlertHandler {
     
     @IBOutlet weak var headerView               : UIView!
     @IBOutlet weak var containerView            : UIView!
@@ -73,10 +63,8 @@ class GSSARequestDebitCardViewController: GSSAMasterViewController, GSSARequestD
     @objc func parseCustomRequest(notification: Notification){
         DispatchQueue.main.async {
             GSVCLoader.hide()
-            print("USANDO CUSTOM REQUEST...")
             let data = notification.object as! Data
             let model = try! JSONDecoder().decode(PhysicalCardShippingAmountResponse.self, from: data)
-            debugPrint(model)
             if model.resultado?.monto == nil{
                 self.btnNext.isEnabled = false
                 let view = self.showErrorViewController(message: "Intente más tarde")
@@ -92,7 +80,8 @@ class GSSARequestDebitCardViewController: GSSAMasterViewController, GSSARequestD
     
     func getShippingAmount(){
         GSVCLoader.show()
-        presenter?.requestGetShippingCost(Response: { [self] Response in
+        let body = PhysicalCardShippingAmountBody.init(numeroTarjeta: "", primerTokenVerificacion: GSSISessionInfo.sharedInstance.gsUserToken, geolocalizacion: ShippingAmountLocation.init(latitud: GSPMLocationManager.shared.lastLocation?.coordinate.latitude.description, longitud: GSPMLocationManager.shared.lastLocation?.coordinate.longitude.description))
+        presenter?.requestGetShippingCost(body: body, Response: { [self] Response in
             if Response != nil{
                 GSVCLoader.hide()
                 amount = Response?.resultado?.monto ?? ""
@@ -136,7 +125,7 @@ class GSSARequestDebitCardViewController: GSSAMasterViewController, GSSARequestD
                     ],
                 "viewConfig" :
                     [
-                        "txtTitle":"Cualquier persona puede recibir tu tarjeta pero solo tú podrás activarla desde la App.",
+                        "txtTitle":"Envío de tarjeta \n fisica Baz",
                         "txtSubtitle":"Realizado con:",
                         "txtHelper":"\(amount)",
                         "txtSlideButton": "Desliza para pagar",

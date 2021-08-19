@@ -82,6 +82,7 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
         debitCardbtnConfig.setImage(UIImage(named: "ic_more_icon", in: Bundle(for: BASAHomeHeaderViewComponent.self), compatibleWith: nil), for: .normal)
         debitCardbtnConfig.tag = 0
         if data != nil{
+            
             debitCardlblBalance.text = data!.resultado.cliente?.cuentas?.first?.saldoDisponible?.alnovaDecrypt().moneyFormat()
         }
     }

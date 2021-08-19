@@ -132,7 +132,7 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
                 cell.buttonView.isUserInteractionEnabled = false
                 cell.backgroundColor = UIColor.GSVCBase300()
                 cell.tag = 7
-                cellsArray.append([cell:111.0])
+                cellsArray.insert([cell:111.0], at: 0)
             case .active:
                 let cell = table.dequeueReusableCell(withIdentifier: "BASACardControl") as! BASACardControl
                 cell.nipCardView.isHidden = false
@@ -149,14 +149,17 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
     }
     
     @objc func handleCustomCardStatusResponse(notification: Notification){
-        #warning("Eliminar custom request en versiones de producción")
         //RECIBE una notificación con el status code del custom request y dependiendo de este determina las celdas que se mostrarán en ajustes
         let statusCode = notification.object as! Int
         switch statusCode{
         case 404:
             configureDebitCard(forStatus: .request)
-        default:
+        case 200:
             configureDebitCard(forStatus: .active)
+        case 400:
+            configureDebitCard(forStatus: .unknown)
+        default:
+            configureDebitCard(forStatus: .activate)
         }
     }
     

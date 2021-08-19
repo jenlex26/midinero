@@ -21,10 +21,10 @@ import FoundationNetworking
 class GSSARequestDebitCardInteractor: GSSAURLSessionTaskCoordinatorBridge, GSSARequestDebitCardInteractorProtocol {
     weak var presenter: GSSARequestDebitCardPresenterProtocol?
     
-    func tryGetShippingCost(Response: @escaping (PhysicalCardShippingAmountResponse?) -> ()){
+    func tryGetShippingCost(body: PhysicalCardShippingAmountBody, Response: @escaping (PhysicalCardShippingAmountResponse?) -> ()){
         self.urlPath = "https://apigateway.superappbaz.com/"
         self.strPathEndpoint = "integracion/superapp/dinero/captacion/gestion-tarjetas-fisicas/v1/tarjetas/busquedas/comision"
-        sendRequest(strUrl: strPathEndpoint, method: .GET, arrHeaders: [], environment: .production) { (objRes: PhysicalCardShippingAmountResponse?, error) in
+        sendRequest(strUrl: strPathEndpoint, method: .POST, environment: GLOBAL_ENVIROMENT) { (objRes: PhysicalCardShippingAmountResponse?, error) in
             if error.code == 0 {
                 Response(objRes)
             } else {

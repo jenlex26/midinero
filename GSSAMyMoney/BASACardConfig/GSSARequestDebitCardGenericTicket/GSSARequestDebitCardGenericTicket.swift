@@ -59,8 +59,8 @@ class GSSARequestDebitCardGenericTicket
         let selectedAddress = requestedAddress.shared
         let addressDetailOption:[(subTitle: String?, info: String)] =
             [
-                (subTitle: "Domicilio", info: "\(selectedAddress.street ?? "...") \(selectedAddress.externalNumber  ?? "...") \(selectedAddress.internalNumber  ?? "..." ) \(selectedAddress.postalCode  ?? "..." )  \(selectedAddress.suburb  ?? "..." )  \(selectedAddress.country  ?? "..." )  \(selectedAddress.city  ?? "..." )" ),
-                (subTitle: "Recibe", info: "Liliana Gomez Bolaños"),
+                (subTitle: "Domicilio", info: "\(selectedAddress.street ?? "Hacienda El Nardo") \(selectedAddress.externalNumber  ?? "25") \(selectedAddress.internalNumber  ?? "" ) \(selectedAddress.postalCode  ?? "54720" )  \(selectedAddress.suburb  ?? "Cuautitlán Izcalli" )  \(selectedAddress.country  ?? "" )  \(selectedAddress.city  ?? "Estado de México" )" ),
+                (subTitle: "Recibe", info: "Andoni Suarez Martinez"),
                 (subTitle: "Entrega estimada", info: "Entre 2 y 10 dias hábiles")
             ]
         

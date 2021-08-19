@@ -328,8 +328,9 @@
         <designable name="Z9y-sa-tol">
             <size key="intrinsicContentSize" width="127.5" height="20.5"/>
         </designable>
+        <designable name="bg1-hv-dWQ"/>
         <designable name="p2I-W4-8Ax">
-            <size key="intrinsicContentSize" width="67" height="30"/>
+            <size key="intrinsicContentSize" width="75" height="33"/>
         </designable>
         <designable name="tp7-Ew-YJ0">
             <size key="intrinsicContentSize" width="402.5" height="20.5"/>

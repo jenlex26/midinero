@@ -104,7 +104,7 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
             btnArrow.isHidden = false
         }
         
-        lblAmount.text = transaction.importe?.alnovaDecrypt().moneyFormat().removeWhiteSpaces().replacingOccurrences(of: "+", with: "$").replacingOccurrences(of: "-", with: "-$")
+        lblAmount.text = transaction.importe?.alnovaDecrypt().removeWhiteSpaces().moneyFormatWithoutSplit()
         lblDate.text = transaction.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy")
     
         lblTitle.text = transaction.concepto?.alnovaDecrypt()
@@ -117,7 +117,9 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
         
         details.updateValue("Realizado", forKey: transaction.nombreOrdenante ?? "")
         details.updateValue("Para", forKey:  transaction.descripcionBeneficiario ?? "")
-       
+        if transaction.descripcionOperacion == "m"{
+            details.updateValue("Estatus", forKey: "MOV. PENDIENTE")
+        }
        // details.updateValue("Id de operación", forKey: transaction.idOperacion ?? "")
         details.updateValue("Folio", forKey: transaction.folio ?? "")
         details.updateValue("Número de operación", forKey: transaction.numeroOperacion ?? "")
@@ -128,7 +130,6 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
         if transaction.idOperacion == "212"{
             GSVCLoader.show()
             let body = SPEIDetailBody.init(transaccion: SPEIDetailTransaccion.init(claveInstitucionBancaria: "", operacion: SPEIDetailOperacion.init(tipo: "E", fecha: transaction.fecha, hora: transaction.hora)))
-            
             presenter?.requestGetSPEIDetail(Body: body, Response: { [self] Response in
                 if Response != nil{
                     let data = Response?.transaccion?.resultado
@@ -149,7 +150,7 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
         var screenshotImage :UIImage?
         let layer = UIApplication.shared.keyWindow!.layer
         let scale = UIScreen.main.scale
-        UIGraphicsBeginImageContextWithOptions(layer.frame.size, false, scale);
+        UIGraphicsBeginImageContextWithOptions(layer.frame.size, false, scale)
         guard let context = UIGraphicsGetCurrentContext() else {return nil}
         layer.render(in:context)
         screenshotImage = UIGraphicsGetImageFromCurrentImageContext()

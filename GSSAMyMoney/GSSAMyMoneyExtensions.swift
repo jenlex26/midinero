@@ -182,7 +182,7 @@ extension String{
                                                                       withFontWeight: .bold,
                                                                       withFontColor: .GSVCText100,
                                                                       withLittleCoin: false)
-        
+         
         
         
         return amountFormat.mutableString.description

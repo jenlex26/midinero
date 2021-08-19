@@ -7,6 +7,20 @@
 
 import Foundation
 
+
+
+// MARK: - PhysicalCardShippingAmountBody
+struct PhysicalCardShippingAmountBody: Codable {
+    var numeroTarjeta, primerTokenVerificacion: String?
+    var geolocalizacion: ShippingAmountLocation?
+}
+
+// MARK: - Geolocalizacion
+struct ShippingAmountLocation: Codable {
+    var latitud, longitud: String?
+}
+
+
 // MARK: - PhysicalCardShippingAmountResponse
 struct PhysicalCardShippingAmountResponse: Codable {
     var mensaje, folio: String?
@@ -17,6 +31,13 @@ struct PhysicalCardShippingAmountResponse: Codable {
 struct PhysicalCardShippingAmountResult: Codable {
     var monto: String?
 }
+
+
+
+
+
+
+
 
 // MARK: - ConfirmCardRequestBody
 struct ConfirmCardRequestBody: Codable {
@@ -45,18 +66,4 @@ struct ConfirmCardRequestTransaccionClient: Codable {
 struct Domicilio: Codable {
     var ciudad, calle, colonia, codigoPostal: String?
     var numeroExterior, numeroInterior: String?
-}
-
-
-// MARK: - BearerTokenResponse
-struct BearerTokenResponse: Codable {
-    var accessToken: String?
-    var expiresIn: Int?
-    var tokenType: String?
-
-    enum CodingKeys: String, CodingKey {
-        case accessToken = "access_token"
-        case expiresIn = "expires_in"
-        case tokenType = "token_type"
-    }
 }
