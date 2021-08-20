@@ -16,25 +16,33 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
     
     var presenter: GSSAMovementPreviewPresenterProtocol?
     
-    @IBOutlet weak var tableContainer: UIView!
-    @IBOutlet weak var lblTitle      : GSVCLabel!
-    @IBOutlet weak var lblAmount     : GSVCLabel!
-    @IBOutlet weak var lblDate       : GSVCLabel!
-    @IBOutlet weak var btnArrow      : UIButton!
-    @IBOutlet weak var btnArrowLeft  : UIButton!
-    @IBOutlet weak var table         : UITableView!
+    @IBOutlet weak var tableContainer : UIView!
+    @IBOutlet weak var lblTitle       : GSVCLabel!
+    @IBOutlet weak var lblAmount      : GSVCLabel!
+    @IBOutlet weak var lblDate        : GSVCLabel!
+    @IBOutlet weak var btnArrow       : UIButton!
+    @IBOutlet weak var btnClose       : UIButton!
+    @IBOutlet weak var btnShare       : UIButton!
+    @IBOutlet weak var btnArrowLeft   : UIButton!
+    @IBOutlet weak var table          : UITableView!
+    @IBOutlet weak var buttonStackSize: NSLayoutConstraint!
     
     var cellsArray:  Array<[UITableViewCell:CGFloat]> = []
     var details: [String:String] = [:]
     var data: DebitCardTransactionItemV2!
     var movementsArray: DebitCardTransactionV2!
     var index: Int!
+    var URLBanxico = "https://www.banxico.org.mx/cep/"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.clear
         btnArrow.makeCircular()
         btnArrowLeft.makeCircular()
+        if UIDevice.current.screenType == .iPhones_5_5s_5c_SE{
+            buttonStackSize.constant = 24
+        }
+        configureViewForOlderDevices()
         tableContainer.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
         tableContainer.layoutIfNeeded()
         table.delegate = self
@@ -42,6 +50,21 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
         table.alwaysBounceVertical = false
         registerCells()
         readData(transaction: data)
+    }
+    
+    func configureViewForOlderDevices(){
+        if #available(iOS 13.0, *){}else{
+            btnArrow.tintColor = .white
+            btnArrow.setImage(UIImage(named: "ChevronRight", in: Bundle.init(for: GSSAMovementPreviewViewController.self), compatibleWith: nil)?.withRenderingMode(.alwaysTemplate), for: .normal)
+            btnArrow.imageEdgeInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
+            btnArrowLeft.tintColor = .white
+            btnArrowLeft.setImage(UIImage(named: "ChevronLeft", in: Bundle.init(for: GSSAMovementPreviewViewController.self), compatibleWith: nil)?.withRenderingMode(.alwaysTemplate), for: .normal)
+            btnArrowLeft.imageEdgeInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
+            btnShare.setImage(UIImage.shareIcon().withRenderingMode(.alwaysTemplate), for: .normal)
+            btnShare.tintColor = .white
+            btnShare.imageEdgeInsets = UIEdgeInsets(top: 3.0, left: 3.0, bottom: 3.0, right: 3.0)
+            btnClose.setImage(UIImage(named: "close", in: Bundle.init(for: GSSAMovementPreviewViewController.self), compatibleWith: nil), for: .normal)
+        }
     }
     
     func registerCells(){
@@ -69,7 +92,6 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
                 }
             }
         }
-        
         cellsArray = cellsArray.sorted(by: { ($0.first?.key as! BASAMovementTableViewCell).lblTitle.text!  < ($1.first?.key as! BASAMovementTableViewCell).lblTitle.text! })
         
         if SPEI == true{
@@ -92,6 +114,7 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
     func readData(transaction: DebitCardTransactionItemV2){
         cellsArray.removeAll()
         details.removeAll()
+        self.table.reloadData()
         
         if index == 0{
             btnArrowLeft.isHidden = true
@@ -118,41 +141,41 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
         
         details.updateValue("Realizado", forKey: transaction.nombreOrdenante ?? "")
         details.updateValue("Para", forKey:  transaction.descripcionBeneficiario ?? "")
-        // details.updateValue("Id de operación", forKey: transaction.idOperacion ?? "")
+        details.updateValue("Id de operación", forKey: transaction.idOperacion ?? "")
         details.updateValue("Folio", forKey: transaction.folio ?? "")
         details.updateValue("Número de operación", forKey: transaction.numeroOperacion ?? "")
-        // details.updateValue("Clave de rastreo", forKey: "123456678909876I")
-        // details.updateValue("Estatus de transferencia", forKey: "Liquidada")
         details.updateValue("Fecha y hora de registro", forKey: (transaction.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy") ?? "") + " " + (data.hora?.timeFormatter() ?? ""))
         
         if transaction.idOperacion == "212"{
+            URLBanxico = "https://www.banxico.org.mx/cep/"
             if GLOBAL_ENVIROMENT == .develop{
                 GSVCLoader.show()
                 var claveInstitucion = ""
                 let descriptionData = transaction.descripcionOperacion?.components(separatedBy: "|")
-                
                 if descriptionData?.count ?? 0 >= 2{
                     if descriptionData![0].count >= 4{
-                        claveInstitucion = transaction.descripcionOperacion?.suffix(4).description ?? ""
+                        claveInstitucion = descriptionData![0].suffix(4).description
                     }
                     if descriptionData![1] == "m"{
                         details.updateValue("Estatus", forKey: "MOV. PENDIENTE")
                     }
                 }
-                
-                
                 let body = SPEIDetailBody.init(transaccion: SPEIDetailTransaccion.init(claveInstitucionBancaria: claveInstitucion, operacion: SPEIDetailOperacion.init(tipo: "E", fecha: transaction.fecha, hora: transaction.hora)))
-                presenter?.requestGetSPEIDetail(Body: body, Response: { [self] Response in
+                presenter?.requestGetSPEIDetail(Body: body, claveRastreo: transaction.descripcion ?? "", Response: { [self] Response in
                     if Response != nil{
-                        let data = Response?.transaccion?.resultado
+                        let data = Response?.resultado
+                        URLBanxico = data?.urlEstatusTransferencia ?? ""
+                        details.updateValue("Clave de rastreo", forKey: transaction.descripcion ?? "")
                         details.updateValue("Realizado con", forKey: data?.numeroCuentaOrigen ?? "")
                         details.updateValue("Nombre del beneficiario", forKey: data?.nombreBeneficiario ?? "")
                         details.updateValue("Estatus de transferencia", forKey: data?.estatusTransferencia ?? "")
                     }
                     GSVCLoader.hide()
+                    setOptions(SPEI: true)
                 })
+            }else{
+                setOptions(SPEI: true)
             }
-            setOptions(SPEI: true)
         }else{
             setOptions(SPEI: false)
         }
@@ -223,7 +246,7 @@ extension GSSAMovementPreviewViewController: UITableViewDelegate, UITableViewDat
         let cell = table.cellForRow(at: indexPath)
         switch cell?.tag{
         case 1:
-            if let url = URL(string: "https://www.banxico.org.mx/cep/") {
+            if let url = URL(string: "\(URLBanxico)") {
                 UIApplication.shared.open(url)
             }
         case .none:

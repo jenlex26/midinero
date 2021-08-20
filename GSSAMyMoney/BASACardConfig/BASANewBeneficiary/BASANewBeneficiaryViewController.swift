@@ -30,6 +30,7 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setBackButtonForOlderDevices(tint: .purple)
         if beneficiaryData != nil{
             beneficiaryPublicData.shared.id = String(beneficiaryData?.id ?? -1)
             beneficiaryPublicData.shared.nombre = beneficiaryData?.nombre?.alnovaDecrypt().nameFormatter()

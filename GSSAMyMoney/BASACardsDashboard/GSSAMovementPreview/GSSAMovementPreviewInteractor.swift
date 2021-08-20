@@ -17,13 +17,13 @@ import GSSASessionInfo
 class GSSAMovementPreviewInteractor: GSSAURLSessionTaskCoordinatorBridge, GSSAMovementPreviewInteractorProtocol {
     weak var presenter: GSSAMovementPreviewPresenterProtocol?
     
-    public func tryGetSPEIDetail(Body: SPEIDetailBody,  Response: @escaping (SPEIDetailResponse?) -> ())
+    public func tryGetSPEIDetail(Body: SPEIDetailBody, claveRastreo: String,  Response: @escaping (SPEIDetailTransactionResponse?) -> ())
     {
+     
         self.urlPath = "https://apigateway.superappbaz.com/"
         self.strPathEndpoint = "integracion/superapp/pagos/captacion/transferencias/v1/spei/busquedas"
-    
-        sendRequest(strUrl: strPathEndpoint, method: .POST, objBody: Body, environment: GLOBAL_ENVIROMENT) { (objRes: SPEIDetailResponse?, error) in
-            
+        let claveRastreo = HeadersCustom.init(value: claveRastreo, forHTTPHeaderField: "x-idClaveRastreo")
+        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [claveRastreo], objBody: Body, environment: GLOBAL_ENVIROMENT) { (objRes: SPEIDetailTransactionResponse?, error) in
             debugPrint(objRes ?? "nil")
             if error.code == 0 {
                 Response(objRes)

@@ -67,6 +67,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="infoCardIcon" destination="kbg-wT-jt4" id="Q1q-c8-abR"/>
                 <outlet property="lblText" destination="cjC-sP-LNs" id="EkI-Dm-heB"/>
             </connections>
             <point key="canvasLocation" x="142.02898550724638" y="50.223214285714285"/>
@@ -74,7 +75,7 @@
     </objects>
     <designables>
         <designable name="cjC-sP-LNs">
-            <size key="intrinsicContentSize" width="407.5" height="20"/>
+            <size key="intrinsicContentSize" width="448" height="20.5"/>
         </designable>
     </designables>
     <resources>

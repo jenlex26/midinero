@@ -41,6 +41,7 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
         account = GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().tnuoccaFormat ?? ""
         registerCells()
         setOptions()
+        self.setBackButtonForOlderDevices(tint: .purple)
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleCustomCardStatusResponse(notification:)), name: NSNotification.Name(rawValue: "customCardStatusRequestResponse"), object: nil)
         table.delegate = self
@@ -65,6 +66,8 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
         case activate
         case active
     }
+    
+  
     
     func setOptions(){
         //Añade opciones genericas al menú de configuración

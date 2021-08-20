@@ -32,6 +32,7 @@ class BASACardLimitsViewController: UIViewController, BASACardLimitsViewProtocol
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setBackButtonForOlderDevices(tint: .purple)
         setCells()
         registerCells()
         table.delegate = self

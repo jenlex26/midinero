@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BASABeneficiaryListViewController" customModule="GSSAMyMoney" customModuleProvider="target">
             <connections>
+                <outlet property="cardIcon" destination="qD2-Gf-91b" id="gs6-qq-OPW"/>
                 <outlet property="table" destination="VrR-6i-RZu" id="tyW-3z-p9E"/>
                 <outlet property="view" destination="iN0-l3-epB" id="5j8-M9-IbY"/>
             </connections>

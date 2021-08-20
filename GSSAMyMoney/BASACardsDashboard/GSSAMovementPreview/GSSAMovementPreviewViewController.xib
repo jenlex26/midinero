@@ -13,6 +13,9 @@
             <connections>
                 <outlet property="btnArrow" destination="zk6-nS-gfP" id="URi-0j-Yf3"/>
                 <outlet property="btnArrowLeft" destination="UiH-Yi-zen" id="1mt-Mq-haT"/>
+                <outlet property="btnClose" destination="0wx-Bw-EFS" id="fns-lS-Sci"/>
+                <outlet property="btnShare" destination="q88-NP-3zE" id="Xcd-AD-DeW"/>
+                <outlet property="buttonStackSize" destination="Cfx-M3-ig1" id="odB-vs-nvO"/>
                 <outlet property="lblAmount" destination="sb6-Mf-WF8" id="dJM-Fx-PEj"/>
                 <outlet property="lblDate" destination="vXl-TQ-k6g" id="Vza-5U-hMj"/>
                 <outlet property="lblTitle" destination="qfd-hU-t6A" id="KaN-2K-Oih"/>
@@ -160,7 +163,7 @@
                                 <constraint firstAttribute="height" constant="40" id="Cfx-M3-ig1"/>
                             </constraints>
                         </stackView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qfd-hU-t6A" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qfd-hU-t6A" customClass="GSVCLabel" customModule="GSSAVisualComponents">
                             <rect key="frame" x="0.0" y="72.5" width="262" height="22.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -171,7 +174,7 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00 - 0000 00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vXl-TQ-k6g" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00 - 0000 00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vXl-TQ-k6g" customClass="GSVCLabel" customModule="GSSAVisualComponents">
                             <rect key="frame" x="0.0" y="100" width="262" height="27.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -215,7 +218,6 @@
         </view>
     </objects>
     <designables>
-        <designable name="IgZ-T5-pxA"/>
         <designable name="qfd-hU-t6A">
             <size key="intrinsicContentSize" width="15.5" height="20.5"/>
         </designable>

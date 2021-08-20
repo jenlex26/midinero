@@ -37,10 +37,10 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
         table.delegate = self
         table.dataSource = self
         table.alwaysBounceVertical = false
-      
+        self.setBackButtonForOlderDevices(tint: .purple)
         if type == .debit{
             tagCardStatementsViewDidAppear(credit: false)
-            GSVCLoader.show(type: .native)
+            GSVCLoader.show()
             let requestBody = DebitCardStatementBody(numeroCuenta: "", fechaInicio: "", fechaFin: "")
             presenter?.requestStatements(body: requestBody, StatementsResultData: { [self] StatementsResultData in
                 GSVCLoader.hide()

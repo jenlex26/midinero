@@ -24,7 +24,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="261" height="99"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Retiro en cajero" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ghv-vV-48x" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                        <rect key="frame" x="0.0" y="0.0" width="261" height="47"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="261" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="28.5" id="1IZ-3o-3xX"/>
                                         </constraints>
@@ -37,8 +37,8 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hasta $7,500.00" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1nX-FC-S3C" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                        <rect key="frame" x="0.0" y="52" width="261" height="47"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hasta $7,500.00" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1nX-FC-S3C" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                                        <rect key="frame" x="0.0" y="49" width="261" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -131,16 +131,16 @@
     </objects>
     <designables>
         <designable name="1nX-FC-S3C">
-            <size key="intrinsicContentSize" width="111" height="20"/>
+            <size key="intrinsicContentSize" width="125" height="20.5"/>
         </designable>
         <designable name="ARQ-jK-s9U">
             <size key="intrinsicContentSize" width="38" height="29"/>
         </designable>
         <designable name="BU5-r8-1dG">
-            <size key="intrinsicContentSize" width="111" height="20"/>
+            <size key="intrinsicContentSize" width="125" height="20.5"/>
         </designable>
         <designable name="ghv-vV-48x">
-            <size key="intrinsicContentSize" width="126" height="22.5"/>
+            <size key="intrinsicContentSize" width="119" height="20.5"/>
         </designable>
     </designables>
 </document>

@@ -30,6 +30,7 @@ class GSSANewBeneficiaryAddressViewController: UIViewController, GSSANewBenefici
         table.delegate = self
         table.dataSource = self
         table.alwaysBounceVertical = false
+        self.setBackButtonForOlderDevices(tint: .purple)
         registerCells()
         setOptions()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)

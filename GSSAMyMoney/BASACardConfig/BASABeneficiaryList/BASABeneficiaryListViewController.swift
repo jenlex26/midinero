@@ -16,6 +16,7 @@ import GSSASessionInfo
 class BASABeneficiaryListViewController: UIViewController, BASABeneficiaryListViewProtocol, GSVCBottomAlertHandler {
     
     @IBOutlet weak var table: UITableView!
+    @IBOutlet weak var cardIcon: UIButton!
     
     var bottomAlert: GSVCBottomAlert?
     var presenter: BASABeneficiaryListPresenterProtocol?
@@ -27,6 +28,12 @@ class BASABeneficiaryListViewController: UIViewController, BASABeneficiaryListVi
         table.delegate = self
         table.dataSource = self
         table.alwaysBounceVertical = false
+        self.setBackButtonForOlderDevices(tint: .purple)
+        if #available(iOS 13.0, *){}else{
+            cardIcon.imageView?.contentMode = .scaleAspectFit
+            cardIcon.imageEdgeInsets = UIEdgeInsets(top: 3, left: 3, bottom: 3.0, right: 3.0)
+            cardIcon.setImage(UIImage(named: "alert", in: Bundle.init(for: BASABeneficiaryListViewController.self), compatibleWith: nil), for: .normal)
+        }
         registerCells()
     }
     
@@ -48,7 +55,7 @@ class BASABeneficiaryListViewController: UIViewController, BASABeneficiaryListVi
     }
     
     func loadBeneficiaries(){
-        GSVCLoader.show(type: .native)
+        GSVCLoader.show()
         presenter?.requestBeneficiaries(account: GSSISessionInfo.sharedInstance.gsUser.mainAccount ?? "", beneficiaryList: { [self] beneficiaryList in
             GSVCLoader.hide()
             if beneficiaryList?.resultado?.beneficiarios != nil{

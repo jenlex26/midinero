@@ -36,7 +36,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Límites de la tarjeta" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gf7-rL-dIK" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                            <rect key="frame" x="127.5" y="14" width="159" height="22.5"/>
+                            <rect key="frame" x="133" y="15" width="148.5" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -77,9 +77,8 @@
     </objects>
     <designables>
         <designable name="gf7-rL-dIK">
-            <size key="intrinsicContentSize" width="159" height="22.5"/>
+            <size key="intrinsicContentSize" width="148.5" height="20.5"/>
         </designable>
-        <designable name="hRc-ov-gmF"/>
     </designables>
     <resources>
         <image name="arrow.backward" catalog="system" width="128" height="98"/>
