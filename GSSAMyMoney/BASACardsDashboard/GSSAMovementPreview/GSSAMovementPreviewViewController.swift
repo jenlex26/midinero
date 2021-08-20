@@ -168,7 +168,17 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
                         details.updateValue("Clave de rastreo", forKey: transaction.descripcion ?? "")
                         details.updateValue("Realizado con", forKey: data?.numeroCuentaOrigen ?? "")
                         details.updateValue("Nombre del beneficiario", forKey: data?.nombreBeneficiario ?? "")
-                        details.updateValue("Estatus de transferencia", forKey: data?.estatusTransferencia ?? "")
+                        switch data?.estatusTransferencia{
+                         case "T":
+                            details.updateValue("Estatus de transferencia", forKey: "Liquidada")
+                        case "C":
+                            details.updateValue("Estatus de transferencia", forKey: "Liquidada por contingencia")
+                        case .none:
+                            details.updateValue("Estatus de transferencia", forKey: "")
+                        case .some(_):
+                            details.updateValue("Estatus de transferencia", forKey: "")
+                        }
+                       
                     }
                     GSVCLoader.hide()
                     setOptions(SPEI: true)
