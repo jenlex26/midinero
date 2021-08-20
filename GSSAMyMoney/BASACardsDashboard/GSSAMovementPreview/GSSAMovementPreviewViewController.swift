@@ -85,8 +85,8 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
             cell.lblDate.numberOfLines = 2
             cell.lblDate.styleType = 6
             if element.key.removeWhiteSpaces() != ""{
-                if element.value == "Para"{
-                    cellsArray.append([cell:85.0])
+                if element.value == "Nombre del beneficiario"{
+                    cellsArray.append([cell:90.0])
                 }else{
                     cellsArray.append([cell:75.0])
                 }
@@ -139,6 +139,7 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
             details.updateValue("Concepto", forKey: transaction.concepto?.alnovaDecrypt() ?? "")
         }
         
+        
         details.updateValue("Realizado", forKey: transaction.nombreOrdenante ?? "")
         details.updateValue("Para", forKey:  transaction.descripcionBeneficiario ?? "")
         details.updateValue("Id de operación", forKey: transaction.idOperacion ?? "")
@@ -167,7 +168,7 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
                         URLBanxico = data?.urlEstatusTransferencia ?? ""
                         details.updateValue("Clave de rastreo", forKey: transaction.descripcion ?? "")
                         details.updateValue("Realizado con", forKey: data?.numeroCuentaOrigen ?? "")
-                        details.updateValue("Nombre del beneficiario", forKey: data?.nombreBeneficiario ?? "")
+                        details.updateValue("Nombre del beneficiario", forKey: (data?.nombreBeneficiario ?? "") + "\n" + (descriptionData?[0] ?? ""))
                         switch data?.estatusTransferencia{
                          case "T":
                             details.updateValue("Estatus de transferencia", forKey: "Liquidada")
@@ -192,7 +193,6 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
     }
     
     func share(_ shouldSave: Bool = false) -> UIImage? {
-        let tableImage = table.renderTable()
         var screenshotImage :UIImage?
         let layer = UIApplication.shared.keyWindow!.layer
         let scale = UIScreen.main.scale
@@ -202,7 +202,7 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
         screenshotImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         if let image = screenshotImage, shouldSave {
-            UIImageWriteToSavedPhotosAlbum(image, tableImage, nil, nil)
+            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
         }
         return screenshotImage
     }

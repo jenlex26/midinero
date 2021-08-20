@@ -152,7 +152,7 @@ extension UITableView{
         self.scrollToRow(at: [0,0], at: UITableView.ScrollPosition.top, animated: false)
         self.layer.render(in: UIGraphicsGetCurrentContext()!)
         let row = self.numberOfRows(inSection: 0)
-        let numberofRowthatShowinscreen = 4
+        let numberofRowthatShowinscreen = 8
         let scrollCount = row / numberofRowthatShowinscreen
         for i in 0..<scrollCount {
             self.scrollToRow(at: [0, (i+1)*numberofRowthatShowinscreen], at: UITableView.ScrollPosition.top, animated: false)
