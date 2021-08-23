@@ -12,10 +12,12 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GSDigitalCardConfigViewController" customModule="GSSAMyMoney" customModuleProvider="target">
             <connections>
                 <outlet property="buttonsView" destination="l9K-uM-Na1" id="rZ9-Dp-pdR"/>
+                <outlet property="cartIcon" destination="SCJ-a9-oyR" id="Ojw-Nd-gf3"/>
                 <outlet property="containerView" destination="7qs-xP-P8J" id="Zsd-sx-R3D"/>
                 <outlet property="lblBuyLimit" destination="u2p-7w-fNa" id="WlV-U2-USN"/>
                 <outlet property="lblDigitalCardStatus" destination="YAZ-AI-0k9" id="HLp-9Y-Lez"/>
                 <outlet property="lblMessage" destination="hhD-uO-DEt" id="5pE-R2-1bb"/>
+                <outlet property="lockIcon" destination="mnk-CE-PMU" id="9Ek-DF-Jws"/>
                 <outlet property="messageView" destination="DYi-qX-BBT" id="IF8-hG-QSR"/>
                 <outlet property="swtch" destination="3zO-Zo-eIY" id="Sd8-gS-dXv"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

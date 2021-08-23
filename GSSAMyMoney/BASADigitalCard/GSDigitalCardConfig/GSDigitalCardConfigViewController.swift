@@ -25,12 +25,15 @@ class GSDigitalCardConfigViewController: UIViewController, GSDigitalCardConfigVi
     @IBOutlet weak var lblBuyLimit          : GSVCLabel!
     @IBOutlet weak var lblDigitalCardStatus : GSVCLabel!
     @IBOutlet weak var lblMessage           : GSVCLabel!
+    @IBOutlet weak var lockIcon             : UIImageView!
+    @IBOutlet weak var cartIcon             : UIImageView!
     
     var cardStatus: Bool? = true
     var bottomAlert: GSVCBottomAlert?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setBackButtonForOlderDevices(tint: .purple)
         swtch.addTarget(self, action: #selector(switchChanged(sender:)), for: .valueChanged)
         buttonsView.layer.borderWidth = 0.5
         containerView.backgroundColor = .GSVCBase200
@@ -38,15 +41,17 @@ class GSDigitalCardConfigViewController: UIViewController, GSDigitalCardConfigVi
         containerView.backgroundColor = .GSVCBase200
         cardStatus = UserDefaults.standard.value(forKey: "DigitalCardStatus") as? Bool
         swtch.isOn = (cardStatus ?? false)
+        if #available(iOS 13.0, *){}else{
+            lockIcon.image = UIImage(named: "lock", in: Bundle.init(for: GSDigitalCardConfigViewController.self), compatibleWith: nil)
+            cartIcon.image = UIImage(named: "cart", in: Bundle.init(for: GSDigitalCardConfigViewController.self), compatibleWith: nil)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         tagDebitDigitalCardConfigViewDidAppear()
     }
     
-    func optionalAction() {
-        print("Ok")
-    }
+    func optionalAction() {}
     
     func requestCardStatusChange(){
         GSVCLoader.show()

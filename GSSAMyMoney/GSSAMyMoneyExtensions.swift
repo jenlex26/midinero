@@ -75,6 +75,8 @@ extension UIViewController{
     }
     
     func createTag(eventName: eventNames, section: String, flow: String, screenName: String, type: String? = nil, element: String? = nil, origin: String){
+        activityTime.shared.startTime = Date()
+        activityTime.shared.time = 300.0
         var name = ""
         switch eventName{
         case .pageView:
@@ -96,21 +98,6 @@ extension UIViewController{
         case UIInteraction
         case pageView
     }
-    
-    func setBackButtonForOlderDevices(tint: UIColor){
-        if #available(iOS 13.0, *){}else{
-            if self.view.subviews[0].subviews.count > 0{
-                if self.view.subviews[0].subviews[0] is UIButton{
-                    let button = (self.view.subviews[0].subviews[0] as! UIButton)
-                    if button.image(for: .normal) == nil{
-                        button.imageView?.contentMode = .scaleAspectFit
-                        button.imageEdgeInsets = UIEdgeInsets(top: 3.0, left: 3.0, bottom: 3.0, right: 3.0)
-                        button.setImage(UIImage.backIcon(tint: tint), for: .normal)
-                    }
-                }
-            }
-        }
-    }
 }
 
 extension UITableViewCell{
@@ -120,6 +107,8 @@ extension UITableViewCell{
     }
     
     func createTag(eventName: eventNames, section: String, flow: String, screenName: String, type: String? = nil, element: String? = nil, origin: String){
+        activityTime.shared.time = 300.0
+        activityTime.shared.startTime = Date()
         var name = ""
         switch eventName{
         case .pageView:

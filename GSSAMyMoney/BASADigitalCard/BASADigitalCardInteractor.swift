@@ -20,10 +20,12 @@ class BASADigitalCardInteractor: GSSAURLSessionTaskCoordinatorBridge, BASADigita
     
     public func TryGetCardDigitalCardData(Body: Transaction,  DataCard: @escaping (DigitalCardResponse?) -> ())
     {
-        self.strPathEndpoint = "/superapp/dinero/captacion/gestion-tarjetas-digitales/v1/tarjetas/busquedas"
-        
-//        self.urlPath = "https://apigateway.superappbaz.com/"
-//        self.strPathEndpoint = "integracion/superapp/dinero/captacion/gestion-tarjetas-digitales/v1/tarjetas/busquedas"
+        if GLOBAL_ENVIROMENT == .develop{
+            self.urlPath = "https://apigateway.superappbaz.com/"
+            self.strPathEndpoint = "integracion/superapp/dinero/captacion/gestion-tarjetas-digitales/v1/tarjetas/busquedas"
+        }else{
+            self.strPathEndpoint = "/superapp/dinero/captacion/gestion-tarjetas-digitales/v1/tarjetas/busquedas"
+        }
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, objBody: Body, environment: GLOBAL_ENVIROMENT) { (objRes: DigitalCardResponse?, error) in
             debugPrint(objRes ?? "nil")

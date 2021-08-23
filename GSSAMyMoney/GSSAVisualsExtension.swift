@@ -8,6 +8,23 @@
 import UIKit
 import GSSAVisualComponents
 
+extension UIViewController{
+    func setBackButtonForOlderDevices(tint: UIColor){
+        if #available(iOS 13.0, *){}else{
+            if self.view.subviews[0].subviews.count > 0{
+                if self.view.subviews[0].subviews[0] is UIButton{
+                    let button = (self.view.subviews[0].subviews[0] as! UIButton)
+                    if button.image(for: .normal) == nil{
+                        button.imageView?.contentMode = .scaleAspectFit
+                        button.imageEdgeInsets = UIEdgeInsets(top: 3.0, left: 3.0, bottom: 3.0, right: 3.0)
+                        button.setImage(UIImage.backIcon(tint: tint), for: .normal)
+                    }
+                }
+            }
+        }
+    }
+}
+
 extension UIColor {
     class func GSVCBase300() -> UIColor{
         return UIColor(red: 242/255, green: 242/255, blue: 242/255, alpha: 1.0)
@@ -134,6 +151,7 @@ extension UIDevice {
         case iPhoneXSMax = "iPhoneXS Max"
         case unknown
     }
+    
     var screenType: ScreenType {
         switch UIScreen.main.nativeBounds.height {
         case 960:

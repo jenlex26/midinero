@@ -11,6 +11,7 @@
 import UIKit
 import GSSAVisualComponents
 import GSSAVisualTemplates
+import GSSAFunctionalUtilities
 import GSSASessionInfo
 
 class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol, GSVCBottomAlertHandler{
@@ -56,8 +57,10 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        //GSVCLoader.show()
-        //presenter?.requestCardStatus(CardSearchResponse: {})
+        if GLOBAL_ENVIROMENT == .develop{
+            GSVCLoader.show()
+            presenter?.requestCardStatus(CardSearchResponse: {})
+        }
     }
     
     enum status{
@@ -66,8 +69,6 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
         case activate
         case active
     }
-    
-  
     
     func setOptions(){
         //Añade opciones genericas al menú de configuración

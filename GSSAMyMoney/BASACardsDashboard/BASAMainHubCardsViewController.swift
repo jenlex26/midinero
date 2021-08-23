@@ -13,6 +13,7 @@ import GSSAVisualComponents
 import GSSAVisualTemplates
 import GSSASessionInfo
 import GSSAFunctionalUtilities
+import GSSAInterceptor
 
 class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProtocol, GSVCBottomAlertHandler {
     
@@ -35,17 +36,18 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     var accountNumber: [String:String]?
     let refreshControl = GSFMoneyRockaletaControl()
     var headerSize: CGFloat = 300.0 //380.0 Valor para cuando el usuario tiene crédito o prestamos, en caso contrario el predeterminado debería ser 300.0
-    var startTime: Date?
-    var time: TimeInterval = 300.0
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("TIEMPO INICIADO")
+        activityTime.shared.time = TimeInterval.init(300.0)
         inicializeView()
         NotificationCenter.default.addObserver(self, selector: #selector(updateHeaderSize(sender:)), name: Notification.Name("creditCardAvailable"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateHeaderSize(sender:)), name: Notification.Name("onlyLendsAvaliable"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadView), name: NSNotification.Name(rawValue: "externalFlowFinished"), object: nil)
         setUpRefreshControl()
-        startTime = Date()
+        activityTime.shared.startTime = Date()
         checkTime()
         self.BasaMainHubTableView.isHidden = true
         createTag(eventName: .pageView, section: "mi_dinero", flow: "dashboard", screenName: "movimientos", origin: "debito")
@@ -65,10 +67,8 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     
     func checkTime(){
         DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [self] in
-            if (self.startTime! + time) < Date(){
-                self.dismiss(animated: true, completion: {
-                    self.navigationController?.popViewController(animated: true)
-                })
+            if ((activityTime.shared.startTime ?? Date()) + (activityTime.shared.time ?? TimeInterval.init(300.0))) < Date(){
+                GSINAdminNavigator.shared.releaseFlows()
             }else{
                 self.checkTime()
             }
@@ -435,8 +435,8 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     }
     
     @objc func activityObserve(){
-        startTime = Date()
-        time = 300.0
+        activityTime.shared.startTime = Date()
+        activityTime.shared.time = 300.0
     }
     
     @objc func updateHeaderSize(sender: Notification){
@@ -505,11 +505,10 @@ extension BASAMainHubCardsViewController:UITableViewDelegate,UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = BasaMainHubTableView.cellForRow(at: indexPath)
         if cell is BASAMovementTableViewCell{
-            if debitCardMovementsV2?.resultado?.movimientos?.count ?? 0 > 0{
+            if debitCardMovementsV2?.resultado?.movimientos?.count ?? 0 > 0 && viewMode == 0{
                 let item = cell as! BASAMovementTableViewCell
                 let data = debitCardMovementsV2?.resultado?.movimientos![item.tag]
                 let view = GSSAMovementPreviewRouter.createModule(index: item.tag, item: data!, array: debitCardMovementsV2!)
-                //self.navigationController?.pushViewController(view, animated: true)
                 view.modalPresentationStyle = .overCurrentContext
                 self.present(view, animated: true, completion: nil)
             }
@@ -519,4 +518,12 @@ extension BASAMainHubCardsViewController:UITableViewDelegate,UITableViewDataSour
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         activityObserve()
     }
+}
+
+
+public struct activityTime {
+    static var shared = activityTime()
+    var time          : TimeInterval?
+    var startTime     : Date?
+    private init() { }
 }

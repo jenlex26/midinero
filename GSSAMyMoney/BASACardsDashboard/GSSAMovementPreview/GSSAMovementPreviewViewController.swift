@@ -132,14 +132,8 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
         lblDate.text = transaction.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy")
         
         lblTitle.text = transaction.concepto?.alnovaDecrypt()
-        
-        if transaction.concepto?.alnovaDecrypt().contains("SPEI") == true{
-            details.updateValue("Concepto", forKey: transaction.descripcion ?? "")
-        }else{
-            details.updateValue("Concepto", forKey: transaction.concepto?.alnovaDecrypt() ?? "")
-        }
-        
-        
+       
+        details.updateValue("Concepto", forKey: transaction.concepto?.alnovaDecrypt() ?? "")
         details.updateValue("Realizado", forKey: transaction.nombreOrdenante ?? "")
         details.updateValue("Para", forKey:  transaction.descripcionBeneficiario ?? "")
         details.updateValue("Id de operación", forKey: transaction.idOperacion ?? "")
@@ -161,14 +155,18 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
                         details.updateValue("Estatus", forKey: "MOV. PENDIENTE")
                     }
                 }
-                let body = SPEIDetailBody.init(transaccion: SPEIDetailTransaccion.init(claveInstitucionBancaria: claveInstitucion, operacion: SPEIDetailOperacion.init(tipo: "E", fecha: transaction.fecha, hora: transaction.hora)))
+                
+                let type = lblAmount.text!.contains("-") ? "E" : "R"
+                
+                let body = SPEIDetailBody.init(transaccion: SPEIDetailTransaccion.init(claveInstitucionBancaria: claveInstitucion, operacion: SPEIDetailOperacion.init(tipo: type, fecha: transaction.fecha, hora: transaction.hora)))
+                
                 presenter?.requestGetSPEIDetail(Body: body, claveRastreo: transaction.descripcion ?? "", Response: { [self] Response in
                     if Response != nil{
                         let data = Response?.resultado
-                        URLBanxico = data?.urlEstatusTransferencia ?? ""
                         details.updateValue("Clave de rastreo", forKey: transaction.descripcion ?? "")
                         details.updateValue("Realizado con", forKey: data?.numeroCuentaOrigen ?? "")
                         details.updateValue("Nombre del beneficiario", forKey: (data?.nombreBeneficiario ?? "") + "\n" + (descriptionData?[0] ?? ""))
+                        
                         switch data?.estatusTransferencia{
                          case "T":
                             details.updateValue("Estatus de transferencia", forKey: "Liquidada")
@@ -180,6 +178,13 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
                             details.updateValue("Estatus de transferencia", forKey: "")
                         }
                        
+                        let URLData = data?.urlEstatusTransferencia?.components(separatedBy: "|")
+                        
+                        if URLData?.count ?? 0 >= 3{
+                            URLBanxico = "https://www.banxico.org.mx/cep/go?i=" + URLData![0]
+                            URLBanxico = URLBanxico + "&s=" + URLData![1]
+                            URLBanxico = URLBanxico + "&d=" + (URLData?[2].alnovaDecrypt().removeWhiteSpaces().replacingOccurrences(of: "\r\n", with: ""))!
+                        }
                     }
                     GSVCLoader.hide()
                     setOptions(SPEI: true)

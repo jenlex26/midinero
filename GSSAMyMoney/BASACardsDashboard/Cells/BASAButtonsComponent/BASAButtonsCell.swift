@@ -20,6 +20,7 @@ class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
     @IBOutlet weak var cashWithdrawalView   : UIView!
     @IBOutlet weak var sendWithQRView       : UIView!
     @IBOutlet weak var openDigitalCardButton: UIButton!
+    @IBOutlet weak var chevronIcon          : UIImageView!
     @IBOutlet weak var stack: UIStackView!
     
     var cellViewController: UIViewController!
@@ -32,6 +33,10 @@ class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
         separatorView.backgroundColor = UIColor.GSVCBase300()
         cellButtonView.layer.cornerRadius = 10
         cellButtonView.layer.masksToBounds = true
+        
+        if #available(iOS 13.0, *){}else{
+            chevronIcon.image = UIImage.chevronRight()
+        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateData(notification:)), name: NSNotification.Name(rawValue: "reloadHeaderData"), object: nil)
         

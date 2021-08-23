@@ -37,7 +37,11 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
     @IBOutlet weak var viewContainerOn   : UIView!
     @IBOutlet weak var cvvView           : UIView!
     @IBOutlet weak var lockIcon          : UIImageView!
+    @IBOutlet weak var btnCopy           : UIButton!
     @IBOutlet weak var optionsView       : UIView!
+    @IBOutlet weak var btnClose          : UIButton!
+    @IBOutlet weak var titleTopSpace     : NSLayoutConstraint!
+    @IBOutlet weak var titleBottomSpace  : NSLayoutConstraint!
     
     var userBalance: String! 
     
@@ -45,6 +49,17 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
         super.viewDidLoad()
         self.ConfigureBlurCardView()
         self.TimerView.delegate = self
+        
+        
+        if UIDevice.current.screenType == .iPhones_5_5s_5c_SE{
+            titleTopSpace.constant = 10.0
+            titleBottomSpace.constant = 10.0
+        }
+        
+        if #available(iOS 13.0, *){}else{
+            btnCopy.setImage(UIImage.copyIcon(), for: .normal)
+            btnClose.setImage(UIImage(named: "close", in: Bundle.init(for: GSSAMovementPreviewViewController.self), compatibleWith: nil), for: .normal)
+        }
         
         configButton.backgroundColor = UIColor(hue: 100/360, saturation: 26/100, brightness: 62/100, alpha: 1.0)
         configButton.layer.masksToBounds = true
@@ -76,9 +91,10 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
     }
     
     func requestCVV(){
-        GSVCLoader.show(type: .native)
-        presenter?.makeDigitalDataRequest(Body: Transaction(transaccion: AccoutRequest.init(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.replacingOccurrences(of: " ", with: "").encryptAlnova(), sicu: GSSISessionInfo.sharedInstance.gsUser.SICU?.encryptAlnova(), latitud: GSPMLocationManager.shared.lastLocation?.coordinate.latitude.description.encryptAlnova(), longitud: GSPMLocationManager.shared.lastLocation?.coordinate.longitude.description.encryptAlnova())), DataCard: { [self] DataCard in
+        GSVCLoader.show()
+        presenter?.makeDigitalDataRequest(Body: Transaction(transaccion: AccoutRequest.init(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.replacingOccurrences(of: " ", with: "").encryptAlnova(), sicu: GSSISessionInfo.sharedInstance.gsUser.SICU?.encryptAlnova(), latitud: (GSPMLocationManager.shared.lastLocation?.coordinate.latitude.description.encryptAlnova() ?? "0.0".encryptAlnova()), longitud: (GSPMLocationManager.shared.lastLocation?.coordinate.longitude.description.encryptAlnova() ?? "0.0".encryptAlnova()))), DataCard: { [self] DataCard in
             GSVCLoader.hide()
+            
             if DataCard != nil{
                 self.StartTimer()
                 UserDefaults.standard.set(DataCard!.resultado!.tarjeta?.numero ?? "0", forKey: "DigitalCardNumber")
@@ -204,7 +220,7 @@ extension BASADigitalCardViewController: TimerHandleDelegate {
     
     func didEndTimer(sender: BASACircularProgressView) {
         if self.isOnScreen{
-            GSVCLoader.show(type: .native)
+            GSVCLoader.show()
             requestCVV()
         }
     }

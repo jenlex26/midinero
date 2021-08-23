@@ -397,6 +397,7 @@
                 <outlet property="cashWithdrawalView" destination="XRC-TB-eSH" id="pSV-Hr-53o"/>
                 <outlet property="cellButtonView" destination="4zf-vu-qVU" id="ypH-BX-4U7"/>
                 <outlet property="cellContentView" destination="QRP-7P-wzD" id="e4n-6z-sqw"/>
+                <outlet property="chevronIcon" destination="QNE-ql-RZe" id="qTl-68-1E6"/>
                 <outlet property="openDigitalCardButton" destination="idS-61-jKV" id="qD5-4e-qUG"/>
                 <outlet property="sendWithQRView" destination="P4L-4w-hSt" id="cxD-g4-kFh"/>
                 <outlet property="separatorView" destination="qOg-3f-RhC" id="Qc0-Ca-tvP"/>
