@@ -141,7 +141,7 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
         details.updateValue("Número de operación", forKey: transaction.numeroOperacion ?? "")
         details.updateValue("Fecha y hora de registro", forKey: (transaction.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy") ?? "") + " " + (data.hora?.timeFormatter() ?? ""))
         
-        if transaction.idOperacion == "212"{
+        if transaction.idOperacion == "212" || transaction.idOperacion == "213"{
             URLBanxico = "https://www.banxico.org.mx/cep/"
             if GLOBAL_ENVIROMENT == .develop{
                 GSVCLoader.show()
@@ -151,6 +151,7 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
                     if descriptionData![0].count >= 4{
                         claveInstitucion = descriptionData![0].suffix(4).description
                     }
+                    
                     if descriptionData![1] == "m"{
                         details.updateValue("Estatus", forKey: "MOV. PENDIENTE")
                     }
@@ -183,7 +184,7 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
                         if URLData?.count ?? 0 >= 3{
                             URLBanxico = "https://www.banxico.org.mx/cep/go?i=" + URLData![0]
                             URLBanxico = URLBanxico + "&s=" + URLData![1]
-                            URLBanxico = URLBanxico + "&d=" + (URLData?[2].alnovaDecrypt().removeWhiteSpaces().replacingOccurrences(of: "\r\n", with: ""))!
+                            URLBanxico = URLBanxico + "&d=" + (URLData?[2].removeWhiteSpaces())!
                         }
                     }
                     GSVCLoader.hide()

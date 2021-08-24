@@ -96,7 +96,6 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
         }
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: Body, environment: GLOBAL_ENVIROMENT) { (objRes: DebitCardTransactionV2?, error) in
-            
             if error.code == 0{
                 Movements(objRes)
             } else if error.code == 400{
