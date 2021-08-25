@@ -25,7 +25,7 @@ class GSSAFundSelectCardViewController: GSSAMasterViewController {
     //MARK: Life cycle methods
 	override func viewDidLoad() {
         super.viewDidLoad()
-        
+        activityObserved()
         setView()
     }
 
@@ -49,6 +49,7 @@ class GSSAFundSelectCardViewController: GSSAMasterViewController {
     }
     
     private func showAlert(token: String) {
+        activityObserved()
         let alert = UIAlertController(title: "Eliminar tarjeta",
                                       message: "¿Estás seguro que quieres eliminar la tarjeta guardada?",
                                       preferredStyle: .alert)
@@ -69,6 +70,7 @@ class GSSAFundSelectCardViewController: GSSAMasterViewController {
     }
     
     private func showError() {
+        activityObserved()
         GSVCLoader.hide()
         let message = "Ocurrio un error intentelo más tarde"
         let view = getErrorMPViewController(message: message)
@@ -77,6 +79,7 @@ class GSSAFundSelectCardViewController: GSSAMasterViewController {
     
     //MARK: - Actions
     @IBAction func addCard(_ sender: Any) {
+        activityObserved()
         let view = GSSAFundSetCardNumberRouter.createModule()
         self.presenter?.goToAddNewCard(view)
     }
@@ -108,6 +111,10 @@ extension GSSAFundSelectCardViewController: UITableViewDataSource {
         })
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        activityObserved()
     }
 }
 

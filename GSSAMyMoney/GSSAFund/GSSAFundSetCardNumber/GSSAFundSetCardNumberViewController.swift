@@ -36,7 +36,7 @@ class GSSAFundSetCardNumberViewController: UIViewController, GSSAFundSetCardNumb
     //MARK: - Methods
     private func setView() {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        
+        setBackButtonForOlderDevices(tint: .purple)
         cardNumberTextField.delegate = self
         cardNumberTextField.allowActions(.allowAll)
         cardNumberTextField.contentFormat(.numeric)
@@ -49,10 +49,12 @@ class GSSAFundSetCardNumberViewController: UIViewController, GSSAFundSetCardNumb
             guard let self = self else { return }
             self.cvvTextField.isSecureTextEntry = !selected
         })
-        cvvTextField.image = cvvTextField.image.tint(with: .GSVCSecundary100)
-        cvvTextField.imageTyped = cvvTextField.imageTyped.tint(with: .GSVCSecundary100)
+        if #available(iOS 13.0, *){
+         cvvTextField.image = cvvTextField.image.tint(with: .GSVCSecundary100)
+         cvvTextField.imageTyped = cvvTextField.imageTyped.tint(with: .GSVCSecundary100)
+        }
     }
-    
+     
     //MARK: - IBActions
     @IBAction func next(_ sender: Any) {
         presenter?.checkTextFields(cardNumber: cardNumberTextField.text,

@@ -15,7 +15,7 @@ import baz_ios_sdk_link_pago
 
 class GSSAFundAddCardViewController: UIViewController {
     
-	var presenter: GSSAFundAddCardPresenterProtocol?
+    var presenter: GSSAFundAddCardPresenterProtocol?
     
     //MARK: - @IBOutlets
     @IBOutlet weak var nameField: GSVCTextField!
@@ -46,9 +46,7 @@ class GSSAFundAddCardViewController: UIViewController {
     //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setView()
-        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -63,18 +61,18 @@ class GSSAFundAddCardViewController: UIViewController {
     
     //MARK: - Methods
     @objc func keyboardWillShow(notification:NSNotification) {
-
+        
         guard let userInfo = notification.userInfo else { return }
         var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
         keyboardFrame = self.view.convert(keyboardFrame, from: nil)
-
+        
         var contentInset:UIEdgeInsets = self.scrollView.contentInset
         contentInset.bottom = keyboardFrame.size.height + 80
         scrollView.contentInset = contentInset
     }
-
+    
     @objc func keyboardWillHide(notification:NSNotification) {
-
+        
         let contentInset:UIEdgeInsets = UIEdgeInsets.zero
         scrollView.contentInset = contentInset
     }
@@ -217,7 +215,7 @@ extension GSSAFundAddCardViewController: GSSAFundAddCardViewProtocol {
     }
     
     func getCountriesError() {
-       showError()
+        showError()
     }
     
     func getStatesSuccess(response: LNKPG_CountryStatesResponseFacade) {
@@ -236,7 +234,7 @@ extension GSSAFundAddCardViewController: GSSAFundAddCardViewProtocol {
             
             if let defaultStateName = GSSISessionInfo.sharedInstance.gsUser.address?.state {
                 let findState = self.states.first { $0.name?.cleanString() == defaultStateName.cleanString() }
-            
+                
                 if findState != nil {
                     self.selectedState = findState
                 } else {
@@ -261,32 +259,32 @@ extension GSSAFundAddCardViewController: GSSAFundAddCardViewProtocol {
 
 //MARK: - UITextFieldDelegate
 extension GSSAFundAddCardViewController: UITextFieldDelegate {
-//    func textFieldDidBeginEditing(_ textField: UITextField) {
-//        if textField.tag == 9 ||
-//           textField.tag == 6 ||
-//           textField.tag == 5 ||
-//           textField.tag == 4 ||
-//           textField.tag == 3{
-//
-//            UIView.animate(withDuration: 0.3, animations: { () -> Void in
-//                            self.view.frame.origin.y -= 320.0
-//                        })
-//            scrollView.smo
-//        }
-//    }
-//
-//    func textFieldDidEndEditing(_ textField: UITextField) {
-//        if textField.tag == 9 ||
-//           textField.tag == 6 ||
-//           textField.tag == 5 ||
-//           textField.tag == 4 ||
-//           textField.tag == 3{
-//
-//            UIView.animate(withDuration: 0.1, animations: { () -> Void in
-//                self.view.frame.origin.y = 0.0
-//            })
-//        }
-//    }
+    //    func textFieldDidBeginEditing(_ textField: UITextField) {
+    //        if textField.tag == 9 ||
+    //           textField.tag == 6 ||
+    //           textField.tag == 5 ||
+    //           textField.tag == 4 ||
+    //           textField.tag == 3{
+    //
+    //            UIView.animate(withDuration: 0.3, animations: { () -> Void in
+    //                            self.view.frame.origin.y -= 320.0
+    //                        })
+    //            scrollView.smo
+    //        }
+    //    }
+    //
+    //    func textFieldDidEndEditing(_ textField: UITextField) {
+    //        if textField.tag == 9 ||
+    //           textField.tag == 6 ||
+    //           textField.tag == 5 ||
+    //           textField.tag == 4 ||
+    //           textField.tag == 3{
+    //
+    //            UIView.animate(withDuration: 0.1, animations: { () -> Void in
+    //                self.view.frame.origin.y = 0.0
+    //            })
+    //        }
+    //    }
     
 }
 
@@ -323,7 +321,7 @@ extension GSSAFundAddCardViewController: GSVCPickerControllerDataSource {
             return nil
         }
     }
-
+    
 }
 
 //MARK: - Private functions
@@ -331,10 +329,8 @@ extension GSSAFundAddCardViewController {
     private func setView() {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         stateField.isUserInteractionEnabled = false
-        
+        setBackButtonForOlderDevices(tint: .purple)
         GSVCLoader.show()
-
-        
         nameField.delegate = self
         nameField.allowActions(.allowAll)
         nameField.contentFormat(.uppercasedLettersAndNumbers)
@@ -342,8 +338,29 @@ extension GSSAFundAddCardViewController {
             guard let self = self else { return }
             self.nameField.text = ""
         })
-        nameField.image = nameField.image.tint(with: .GSVCSecundary100)
-        nameField.imageTyped = nameField.imageTyped.tint(with: .GSVCSecundary100)
+        
+        if #available(iOS 13.0, *){
+            nameField.image = nameField.image.tint(with: .GSVCSecundary100)
+            nameField.imageTyped = nameField.imageTyped.tint(with: .GSVCSecundary100)
+            
+            lastNameField.image = lastNameField.image.tint(with: .GSVCSecundary100)
+            lastNameField.imageTyped = lastNameField.imageTyped.tint(with: .GSVCSecundary100)
+            
+            emailField.image = emailField.image.tint(with: .GSVCSecundary100)
+            emailField.imageTyped = emailField.imageTyped.tint(with: .GSVCSecundary100)
+            
+            phoneField.image = phoneField.image.tint(with: .GSVCSecundary100)
+            phoneField.imageTyped = phoneField.imageTyped.tint(with: .GSVCSecundary100)
+            
+            streetField.image = streetField.image.tint(with: .GSVCSecundary100)
+            streetField.imageTyped = streetField.imageTyped.tint(with: .GSVCSecundary100)
+            
+            zipCodeField.image = zipCodeField.image.tint(with: .GSVCSecundary100)
+            zipCodeField.imageTyped = zipCodeField.imageTyped.tint(with: .GSVCSecundary100)
+            
+            cityField.image = cityField.image.tint(with: .GSVCSecundary100)
+            cityField.imageTyped = cityField.imageTyped.tint(with: .GSVCSecundary100)
+        }
         
         lastNameField.delegate = self
         lastNameField.allowActions(.allowAll)
@@ -352,9 +369,8 @@ extension GSSAFundAddCardViewController {
             guard let self = self else { return }
             self.lastNameField.text = ""
         })
-        lastNameField.image = lastNameField.image.tint(with: .GSVCSecundary100)
-        lastNameField.imageTyped = lastNameField.imageTyped.tint(with: .GSVCSecundary100)
-
+        
+        
         emailField.delegate = self
         emailField.allowActions(.allowAll)
         emailField.contentFormat(.email)
@@ -362,8 +378,7 @@ extension GSSAFundAddCardViewController {
             guard let self = self else { return }
             self.emailField.text = ""
         })
-        emailField.image = emailField.image.tint(with: .GSVCSecundary100)
-        emailField.imageTyped = emailField.imageTyped.tint(with: .GSVCSecundary100)
+        
         
         phoneField.delegate = self
         phoneField.allowActions(.allowAll)
@@ -372,8 +387,7 @@ extension GSSAFundAddCardViewController {
             guard let self = self else { return }
             self.phoneField.text = ""
         })
-        phoneField.image = phoneField.image.tint(with: .GSVCSecundary100)
-        phoneField.imageTyped = phoneField.imageTyped.tint(with: .GSVCSecundary100)
+        
         
         streetField.delegate = self
         streetField.allowActions(.allowAll)
@@ -382,8 +396,7 @@ extension GSSAFundAddCardViewController {
             guard let self = self else { return }
             self.streetField.text = ""
         })
-        streetField.image = streetField.image.tint(with: .GSVCSecundary100)
-        streetField.imageTyped = streetField.imageTyped.tint(with: .GSVCSecundary100)
+        
         
         zipCodeField.delegate = self
         zipCodeField.allowActions(.allowAll)
@@ -392,8 +405,7 @@ extension GSSAFundAddCardViewController {
             guard let self = self else { return }
             self.zipCodeField.text = ""
         })
-        zipCodeField.image = zipCodeField.image.tint(with: .GSVCSecundary100)
-        zipCodeField.imageTyped = zipCodeField.imageTyped.tint(with: .GSVCSecundary100)
+        
         
         cityField.delegate = self
         cityField.allowActions(.allowAll)
@@ -402,8 +414,7 @@ extension GSSAFundAddCardViewController {
             guard let self = self else { return }
             self.cityField.text = ""
         })
-        cityField.image = cityField.image.tint(with: .GSVCSecundary100)
-        cityField.imageTyped = cityField.imageTyped.tint(with: .GSVCSecundary100)
+        
         
         statePicker = GSVCPickerController(type: .data, textField: stateField)
         statePicker.delegate = self

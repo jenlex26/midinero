@@ -284,7 +284,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                         let status = item.descripcionOperacion?.components(separatedBy: "|")
                         
                         if status?.count ?? 0 >= 2{
-                            if status![1] == "m"{
+                            if status![1] == "r"{
                                 movementCell.lblDate.text = (item.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy") ?? "") + " " + "MOV. PENDIENTE"
                             }else{
                                 movementCell.lblDate.text = item.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy")

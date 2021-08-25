@@ -141,7 +141,7 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
         details.updateValue("Número de operación", forKey: transaction.numeroOperacion ?? "")
         details.updateValue("Fecha y hora de registro", forKey: (transaction.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy") ?? "") + " " + (data.hora?.timeFormatter() ?? ""))
         
-        if transaction.idOperacion == "212" || transaction.idOperacion == "213"{
+        if transaction.idOperacion == "212"{
             URLBanxico = "https://www.banxico.org.mx/cep/"
             if GLOBAL_ENVIROMENT == .develop{
                 GSVCLoader.show()
@@ -152,7 +152,7 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
                         claveInstitucion = descriptionData![0].suffix(4).description
                     }
                     
-                    if descriptionData![1] == "m"{
+                    if descriptionData![1] == "r"{
                         details.updateValue("Estatus", forKey: "MOV. PENDIENTE")
                     }
                 }

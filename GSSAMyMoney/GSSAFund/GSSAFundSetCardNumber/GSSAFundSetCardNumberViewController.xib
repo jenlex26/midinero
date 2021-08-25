@@ -298,7 +298,7 @@
             <size key="intrinsicContentSize" width="137.5" height="20.5"/>
         </designable>
         <designable name="Rc2-gu-RY8">
-            <size key="intrinsicContentSize" width="67" height="30"/>
+            <size key="intrinsicContentSize" width="75" height="33"/>
         </designable>
         <designable name="cu3-jY-Euf">
             <size key="intrinsicContentSize" width="94" height="20.5"/>
@@ -309,6 +309,7 @@
         <designable name="nhA-0U-YAc">
             <size key="intrinsicContentSize" width="101.5" height="20.5"/>
         </designable>
+        <designable name="omY-IN-Nkl"/>
         <designable name="uqL-vL-xgF">
             <size key="intrinsicContentSize" width="34" height="20.5"/>
         </designable>

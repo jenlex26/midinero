@@ -74,6 +74,11 @@ extension UIViewController{
         return self.isViewLoaded && view.window != nil
     }
     
+    func activityObserved(){
+        activityTime.shared.time = 300.0
+        activityTime.shared.startTime = Date()
+    }
+    
     func createTag(eventName: eventNames, section: String, flow: String, screenName: String, type: String? = nil, element: String? = nil, origin: String){
         activityTime.shared.startTime = Date()
         activityTime.shared.time = 300.0

@@ -84,7 +84,7 @@ extension GSSAConfirmCardSaveViewController {
 extension GSSAConfirmCardSaveViewController {
     private func setView() {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        
+        setBackButtonForOlderDevices(tint: .purple)
         aliasTextField.allowActions(.allowAll)
         aliasTextField.delegate = self
         aliasTextField.contentFormat(.uppercasedLettersAndNumbers)
