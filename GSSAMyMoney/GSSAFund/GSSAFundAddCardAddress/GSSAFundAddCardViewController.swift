@@ -170,14 +170,14 @@ class GSSAFundAddCardViewController: UIViewController {
                 transactionCurrencyCode: "MXN",
                 email: self.emailField.text!,
                 payer: LNKPG_TokenCardRequestFacade.__Payer(
-                    firstName: self.nameField.text!,
-                    lastName: self.lastNameField.text!,
+                    firstName: self.nameField.text!.removeDiacritics(),
+                    lastName: self.lastNameField.text!.removeDiacritics(),
                     phoneNumber: self.phoneField.text!,
                     email: userEmail!,
                     address: LNKPG_TokenCardRequestFacade.__Payer.__Address(
-                        street: self.streetField.text!,
-                        city: self.cityField.text!,
-                        state: self.selectedState!.name!,
+                        street: self.streetField.text!.removeDiacritics(),
+                        city: self.cityField.text!.removeDiacritics(),
+                        state: self.selectedState!.name!.removeDiacritics(),
                         postalCode: self.zipCodeField.text!,
                         countryCode: self.selectedCountry!.codigo!)),
                 card: LNKPG_TokenCardRequestFacade.__Card(

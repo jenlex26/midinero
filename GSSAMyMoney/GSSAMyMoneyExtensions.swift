@@ -343,6 +343,11 @@ extension String{
         let doubleValue = Double(money) ?? 0.0
         return doubleValue
     }
+    
+    func removeDiacritics() -> String {
+        let userInput: String = self
+        return userInput.folding(options: .diacriticInsensitive, locale: .current)
+    }
 }
 
 extension Int{

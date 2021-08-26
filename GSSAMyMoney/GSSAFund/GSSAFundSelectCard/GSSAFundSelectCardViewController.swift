@@ -21,14 +21,14 @@ class GSSAFundSelectCardViewController: GSSAMasterViewController {
     
     //MARK: - Properties
     var cards: [LNKPG_ListCardResponseFacade.__Tokens] = []
-    
+    var selectCellTask: DispatchWorkItem?
     //MARK: Life cycle methods
-	override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         activityObserved()
         setView()
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.navigationBar.tintColor = UIColor.white
@@ -99,6 +99,13 @@ extension GSSAFundSelectCardViewController: UITableViewDataSource {
         let bankType = GSSAFundSharedVariables.shared.getCardName(cardNumer: card.numeroTarjeta ?? "")
         let accountNumber = card.numeroTarjeta ?? ""
         
+        if indexPath.row == 0{
+            selectCellTask = DispatchWorkItem(block: { [self] in
+                presenter?.goToValidateCVV(GSSAFundSetCVVRouter.createModule(token: token))
+                GSVCLoader.hide()
+            })
+        }
+        
         cell.setupData(token: token, bankType: bankType, accountNumber: accountNumber,
                        onSelect: { [weak self] token in
                         guard let self = self else { return }
@@ -108,7 +115,7 @@ extension GSSAFundSelectCardViewController: UITableViewDataSource {
                        onDelete: { [weak self] token in
                         guard let self = self else { return }
                         self.showAlert(token: token)
-        })
+                       })
         
         return cell
     }
@@ -137,14 +144,12 @@ extension GSSAFundSelectCardViewController: GSSAFundSelectCardViewProtocol {
     }
     
     func getCardsSuccess(cards: [LNKPG_ListCardResponseFacade.__Tokens]) {
-         self.cards = cards
-         self.cardsTable.reloadData()
+        self.cards = cards
+        self.cardsTable.reloadData()
         cardsTable.tableViewDidFinishReloadData{ [self] in
             if cardsTable.numberOfRows(inSection: 0) > 0{
-                
-                cardsTable.selectRow(at: [0,0], animated: true, scrollPosition: UITableView.ScrollPosition.none)
+                selectCellTask?.perform()
             }
-            GSVCLoader.hide()
         }
     }
     

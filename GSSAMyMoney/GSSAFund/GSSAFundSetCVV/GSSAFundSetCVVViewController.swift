@@ -32,6 +32,12 @@ class GSSAFundSetCVVViewController: GSSAMasterViewController, UITextFieldDelegat
         originalViewFrame = self.view.frame.origin.y
         setView()
         searchAccount()
+        if #available(iOS 13.0, *){}else{
+            txtCVV.image = UIImage(named: "openEye", in: Bundle.init(for: GSSAFundSetCVVViewController.self), compatibleWith: nil)?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate) ?? UIImage()
+            txtCVV.imageTyped = UIImage(named: "closedEye", in: Bundle.init(for: GSSAFundSetCVVViewController.self), compatibleWith: nil)?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate) ?? UIImage()
+            txtCVV.tintColor = UIColor.GSVCSecundary100
+        }
+        
         if UIDevice.current.screenType == .iPhones_5_5s_5c_SE{
             txtCVV.addTarget(self, action: #selector(startEditing), for: .editingDidBegin)
             txtCVV.addTarget(self, action: #selector(endEditing), for: .editingDidEnd)
@@ -130,7 +136,6 @@ extension GSSAFundSetCVVViewController {
     
     private func showError(){
         let message = "Ocurrio un error intentelo más tarde"
-        
         presenter?.goToError(message: message, isDouble: false)
     }
 }

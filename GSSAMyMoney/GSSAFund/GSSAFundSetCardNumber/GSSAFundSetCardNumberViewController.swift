@@ -25,7 +25,6 @@ class GSSAFundSetCardNumberViewController: UIViewController, GSSAFundSetCardNumb
     //MARK: - Life cycle
 	override func viewDidLoad() {
         super.viewDidLoad()
-       
         setView()
     }
     
@@ -49,10 +48,12 @@ class GSSAFundSetCardNumberViewController: UIViewController, GSSAFundSetCardNumb
             guard let self = self else { return }
             self.cvvTextField.isSecureTextEntry = !selected
         })
-        if #available(iOS 13.0, *){
-         cvvTextField.image = cvvTextField.image.tint(with: .GSVCSecundary100)
-         cvvTextField.imageTyped = cvvTextField.imageTyped.tint(with: .GSVCSecundary100)
+        if #available(iOS 13.0, *){}else{
+            cvvTextField.image = UIImage(named: "openEye", in: Bundle.init(for: GSSAFundSetCVVViewController.self), compatibleWith: nil)?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate) ?? UIImage()
+            cvvTextField.imageTyped = UIImage(named: "closedEye", in: Bundle.init(for: GSSAFundSetCVVViewController.self), compatibleWith: nil)?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate) ?? UIImage()
         }
+        cvvTextField.image = cvvTextField.image.tint(with: UIColor.GSVCSecundary100)
+        cvvTextField.imageTyped = cvvTextField.imageTyped.tint(with: .GSVCSecundary100)
     }
      
     //MARK: - IBActions

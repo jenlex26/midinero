@@ -40,7 +40,6 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("TIEMPO INICIADO")
         activityTime.shared.time = TimeInterval.init(300.0)
         inicializeView()
         NotificationCenter.default.addObserver(self, selector: #selector(updateHeaderSize(sender:)), name: Notification.Name("creditCardAvailable"), object: nil)
@@ -291,7 +290,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                             }else{
                                 movementCell.lblDate.text = item.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy")
                             }
-                        }else{
+                        }else{     
                             movementCell.lblDate.text = item.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy")
                         }
                         

@@ -21,9 +21,10 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
     var bottomAlert: GSVCBottomAlert?
     var presenter: GSSALinkDePagoPresenterProtocol?
     
-    @IBOutlet weak var txtMail: GSVCTextField!
+    @IBOutlet weak var txtMail  : GSVCTextField!
     @IBOutlet weak var txtAmount: GSVCTextField!
-    @IBOutlet weak var lblMail: GSVCLabel!
+    @IBOutlet weak var lblMail  : GSVCLabel!
+    @IBOutlet weak var lineView : UIView!
     
     var close: Bool? = false
     var hasNav: Bool?
@@ -46,9 +47,11 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
         if GSSISessionInfo.sharedInstance.gsUser.email?.isValidEmail == true{
             lblMail.isHidden = true
             txtMail.isHidden = true
+            lineView.isHidden = true
         }else{
             lblMail.isHidden = false
             txtMail.isHidden = false
+            lineView.isHidden = false
         }
         
         if hasNav != true && close == false{
@@ -150,30 +153,30 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
     }
     
     func showFondeo(){
-            let quantity = txtAmount.text?.moneyToDoubleString()
-            var mail = GSSISessionInfo.sharedInstance.gsUser.email
-            if mail?.haveData() == false || mail == nil{
-                mail = txtMail.text
-            }
-            let accountNumber = GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().encryptAlnova()
-            
-            let parameters = [
-                "amount": "\(quantity ?? "0.0")",
-                "numeroCuentaCliente": "\(accountNumber ?? "")",
-                "merchantDetail":"Abono Saldo", "correo": "\(mail ?? "")",
-                "numeroAfiliacion": "8632464"
-            ]
-            
-            let validado = GSSALinkDePagoViewController.validateStrings(parameters: parameters)
-            let view = PB_HomeMain.createModule(loadingModel: validado!)
-            view.modalPresentationStyle = .fullScreen
-            close = true
-            
+        let quantity = txtAmount.text?.moneyToDoubleString()
+        var mail = GSSISessionInfo.sharedInstance.gsUser.email
+        if mail?.haveData() == false || mail == nil{
+            mail = txtMail.text
+        }
+        let accountNumber = GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().encryptAlnova()
+        
+        let parameters = [
+            "amount": "\(quantity ?? "0.0")",
+            "numeroCuentaCliente": "\(accountNumber ?? "")",
+            "merchantDetail":"Abono Saldo", "correo": "\(mail ?? "")",
+            "numeroAfiliacion": "8632464"
+        ]
+        
+        let validado = GSSALinkDePagoViewController.validateStrings(parameters: parameters)
+        let view = PB_HomeMain.createModule(loadingModel: validado!)
+        view.modalPresentationStyle = .fullScreen
+        close = true
+        
         self.navigationController?.pushViewController(GSSAFundSelectCardRouter.createModule(loadingModel: validado!), animated: true)
         
-    //        self.present(view, animated: true, completion: nil)
-    //        self.navigationController?.pushViewController(view, animated: true)
-        }
+        //        self.present(view, animated: true, completion: nil)
+        //        self.navigationController?.pushViewController(view, animated: true)
+    }
     
     func forgotDigitalSign(_ forgotSecurityCodeViewController: UIViewController?) {
         print("forgot")
@@ -258,16 +261,18 @@ extension GSSALinkDePagoViewController: UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == txtMail{
-            UIView.animate(withDuration: 0.3, animations: { () -> Void in
-                self.view.frame.origin.y -= 100.0
-            })
+            if self.view.frame.origin.y < 100.0 {
+                UIView.animate(withDuration: 0.3, animations: { () -> Void in
+                    self.view.frame.origin.y -= 100.0
+                })
+            }
         }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == txtMail{
             UIView.animate(withDuration: 0.3, animations: { () -> Void in
-                self.view.frame.origin.y = 0.0
+                self.view.frame.origin.y += 100.0
             })
         }
         if textField == txtAmount{

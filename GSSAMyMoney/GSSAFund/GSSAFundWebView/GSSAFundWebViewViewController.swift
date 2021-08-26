@@ -25,23 +25,20 @@ class GSSAFundWebViewViewController: UIViewController, GSSAFundWebViewViewProtoc
     //MARK: - Properties
     lazy var webview: LNKPG_WebViewFacade = {
         let view = LNKPG_WebViewFacade()
-        
         view.alpha = 0
         view.translatesAutoresizingMaskIntoConstraints = false
-        
         return view
     }()
 
     //MARK: - Life cylce
 	override func viewDidLoad() {
         super.viewDidLoad()
-        
         setView()
+        GSVCLoader.show()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
@@ -51,7 +48,6 @@ class GSSAFundWebViewViewController: UIViewController, GSSAFundWebViewViewProtoc
 extension GSSAFundWebViewViewController {
     func onSucess(folio: String) {
         GSVCLoader.hide()
-        
         presenter?.goToTicket(folio: folio)
     }
     
@@ -78,24 +74,23 @@ extension GSSAFundWebViewViewController: LNKPG_WebViewFacadeDelegate {
         presenter?.checkFund()
     }
     
-    func notifyFailure() {
-
+    func notifyFailure() {}
+    
+    func notifyLoad(){
+        print("Carga completa")
+        GSVCLoader.hide()
     }
 }
 
 //MARK: - Private functions
 extension GSSAFundWebViewViewController {
     private func setView() {
-        
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        
         guard let enrollResponse = GSSAFundSharedVariables.shared.enrollmentResponse else { return }
-        
         setupWebView(enrollmentResponse: enrollResponse)
     }
     
     private func setupWebView(enrollmentResponse: LNKPG_EnrollmentResponseFacade) {
-        
         webViewContainer.addSubview(webview)
         webview.delegate = self
         
@@ -110,8 +105,6 @@ extension GSSAFundWebViewViewController {
         
         webview.alpha = 1
         webview.openURL(enrollmentResponse: enrollmentResponse)
-        
-        
     }
 }
 

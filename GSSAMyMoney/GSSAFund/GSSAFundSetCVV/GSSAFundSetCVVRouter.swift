@@ -31,13 +31,11 @@ class GSSAFundSetCVVRouter: GSSAFundSetCVVWireframeProtocol {
     
     func goToNextFlow() {
         let view = GSSACardFundResumeRouter.createModule()
-        
         viewController?.navigationController?.pushViewController(view, animated: true)
     }
     
     func goToError(message: String, isDouble: Bool) {
         guard let errorVC = viewController?.getErrorMPViewController(message: message, isDouble: isDouble) else { return }
-        
         viewController?.navigationController?.pushViewController(errorVC, animated: true)
     }
 }

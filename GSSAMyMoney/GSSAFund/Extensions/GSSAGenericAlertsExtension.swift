@@ -26,7 +26,7 @@ extension UIViewController
         let servicemessageAlert =  getWarningBox(message: message ?? "Ocurrio algo inesperado, intentalo de nuevo mas tarde", color: .GSVCInformation200)
         let contactAlert =  getWarningBox(message: contactMessage, color: .GSVCInformation200)
         return GSVTOperationStatusViewController(status: .error(title: "Algo falló", message: subtitleErrorMessage, views: [servicemessageAlert,contactAlert]),roundButtonAction: {
-        [self] in
+            [self] in
             
             if isDouble {
                 self.popToViewController(ofClass: GSSACardFundResumeViewController.self, animated: false)
@@ -62,8 +62,8 @@ extension UIViewController
     {
         
         let iconimage  = UIImage(named: "GSSAMPInformation",
-                                             in: Bundle(for: type(of:self)),
-                                             compatibleWith: nil)
+                                 in: Bundle(for: type(of:self)),
+                                 compatibleWith: nil)
         let icon = UIImageView(image: iconimage)
         
         

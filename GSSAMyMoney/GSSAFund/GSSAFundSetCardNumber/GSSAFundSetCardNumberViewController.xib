@@ -39,7 +39,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nueva tarjeta" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nhA-0U-YAc" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                            <rect key="frame" x="109.5" y="15" width="101.5" height="20.5"/>
+                            <rect key="frame" x="105" y="14" width="110" height="22.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -75,7 +75,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingresa los datos de la tarjeta" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f2M-xS-vk5" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                                            <rect key="frame" x="20" y="10" width="290" height="20.5"/>
+                                                            <rect key="frame" x="20" y="10" width="290" height="28"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -97,7 +97,7 @@
                                                     <rect key="frame" x="0.0" y="75" width="320" height="100"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Número de tarjeta" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L2J-41-kK1" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                                            <rect key="frame" x="24" y="10" width="272" height="20.5"/>
+                                                            <rect key="frame" x="24" y="10" width="272" height="22.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -108,7 +108,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zqB-VZ-u64" customClass="GSVCTextField" customModule="GSSAVisualComponents">
-                                                            <rect key="frame" x="24" y="41.5" width="272" height="50"/>
+                                                            <rect key="frame" x="24" y="43.5" width="272" height="50"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="50" id="mhk-tn-6tf"/>
                                                             </constraints>
@@ -139,7 +139,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="147.5" height="100"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vencimiento" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cu3-jY-Euf" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                                                    <rect key="frame" x="24" y="10" width="99.5" height="20.5"/>
+                                                                    <rect key="frame" x="24" y="10" width="99.5" height="22.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -150,7 +150,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="MM/YY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vd5-nL-xe7" customClass="GSVCTextField" customModule="GSSAVisualComponents">
-                                                                    <rect key="frame" x="24" y="41.5" width="99.5" height="50"/>
+                                                                    <rect key="frame" x="24" y="43.5" width="99.5" height="50"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="50" id="h71-bd-lZc"/>
                                                                     </constraints>
@@ -178,7 +178,7 @@
                                                             <rect key="frame" x="172.5" y="0.0" width="147.5" height="100"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CVV" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uqL-vL-xgF" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                                                    <rect key="frame" x="24" y="10" width="99.5" height="20.5"/>
+                                                                    <rect key="frame" x="24" y="10" width="99.5" height="22.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -189,7 +189,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <textField opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d4t-t4-FaS" customClass="GSVCTextField" customModule="GSSAVisualComponents">
-                                                                    <rect key="frame" x="24" y="41.5" width="99.5" height="50"/>
+                                                                    <rect key="frame" x="24" y="43.5" width="99.5" height="50"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="50" id="h2E-nJ-Qxw"/>
                                                                     </constraints>
@@ -295,23 +295,23 @@
     </objects>
     <designables>
         <designable name="L2J-41-kK1">
-            <size key="intrinsicContentSize" width="137.5" height="20.5"/>
+            <size key="intrinsicContentSize" width="147" height="22.5"/>
         </designable>
         <designable name="Rc2-gu-RY8">
-            <size key="intrinsicContentSize" width="75" height="33"/>
+            <size key="intrinsicContentSize" width="84" height="35"/>
         </designable>
         <designable name="cu3-jY-Euf">
-            <size key="intrinsicContentSize" width="94" height="20.5"/>
+            <size key="intrinsicContentSize" width="101.5" height="22.5"/>
         </designable>
         <designable name="f2M-xS-vk5">
-            <size key="intrinsicContentSize" width="223" height="20.5"/>
+            <size key="intrinsicContentSize" width="301" height="28"/>
         </designable>
         <designable name="nhA-0U-YAc">
-            <size key="intrinsicContentSize" width="101.5" height="20.5"/>
+            <size key="intrinsicContentSize" width="110" height="22.5"/>
         </designable>
         <designable name="omY-IN-Nkl"/>
         <designable name="uqL-vL-xgF">
-            <size key="intrinsicContentSize" width="34" height="20.5"/>
+            <size key="intrinsicContentSize" width="34" height="22.5"/>
         </designable>
     </designables>
     <resources>

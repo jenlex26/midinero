@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GSSALinkDePagoViewController" customModule="GSSAMyMoney" customModuleProvider="target">
             <connections>
                 <outlet property="lblMail" destination="Wbf-FY-SGx" id="hj0-JV-2yE"/>
+                <outlet property="lineView" destination="liK-0a-nWm" id="gzK-34-88M"/>
                 <outlet property="txtAmount" destination="ixM-tF-bj1" id="hTe-LJ-a2h"/>
                 <outlet property="txtMail" destination="oEQ-4Q-ne2" id="brj-4E-Dys"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -25,11 +26,18 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="liK-0a-nWm">
+                    <rect key="frame" x="40" y="318.5" width="240" height="0.5"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.5" id="7iy-Ih-6vO"/>
+                    </constraints>
+                </view>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="b87-jD-LuN">
-                    <rect key="frame" x="0.0" y="40" width="320" height="256.5"/>
+                    <rect key="frame" x="0.0" y="40" width="320" height="278.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="      1. ¿Cuanto quieres recibir? " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lBv-nc-r67" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="28"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="32.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -40,7 +48,7 @@
                             </userDefinedRuntimeAttributes>
                         </label>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ixM-tF-bj1" customClass="GSVCTextField" customModule="GSSAVisualComponents">
-                            <rect key="frame" x="0.0" y="58" width="320" height="41"/>
+                            <rect key="frame" x="0.0" y="62.5" width="320" height="47"/>
                             <fontDescription key="fontDescription" type="system" pointSize="33"/>
                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             <userDefinedRuntimeAttributes>
@@ -53,13 +61,13 @@
                             </userDefinedRuntimeAttributes>
                         </textField>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monto máximo $2,500.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHJ-Qc-G57" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                            <rect key="frame" x="0.0" y="129" width="320" height="13.5"/>
+                            <rect key="frame" x="0.0" y="139.5" width="320" height="16"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingrese su correo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wbf-FY-SGx" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                            <rect key="frame" x="0.0" y="172.5" width="320" height="20"/>
+                            <rect key="frame" x="0.0" y="185.5" width="320" height="23"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -69,8 +77,11 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </label>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oEQ-4Q-ne2" customClass="GSVCTextField" customModule="GSSAVisualComponents">
-                            <rect key="frame" x="0.0" y="222.5" width="320" height="34"/>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Correo electrónico" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oEQ-4Q-ne2" customClass="GSVCTextField" customModule="GSSAVisualComponents">
+                            <rect key="frame" x="0.0" y="238.5" width="320" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="XzP-Qo-0ra"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
                             <userDefinedRuntimeAttributes>
@@ -104,9 +115,12 @@
                 <constraint firstAttribute="bottom" secondItem="0PP-kN-j82" secondAttribute="bottom" id="8Ok-De-xNb"/>
                 <constraint firstItem="w8x-Ph-tlv" firstAttribute="bottom" secondItem="Cql-cI-Rn6" secondAttribute="bottom" constant="20" id="FrA-WQ-hYI"/>
                 <constraint firstItem="Cql-cI-Rn6" firstAttribute="centerX" secondItem="w8x-Ph-tlv" secondAttribute="centerX" id="G4M-pW-jUK"/>
+                <constraint firstAttribute="trailing" secondItem="liK-0a-nWm" secondAttribute="trailing" constant="40" id="Hsf-sn-jGk"/>
                 <constraint firstItem="0PP-kN-j82" firstAttribute="top" secondItem="w8x-Ph-tlv" secondAttribute="top" id="RIH-uf-4Vl"/>
                 <constraint firstItem="0PP-kN-j82" firstAttribute="leading" secondItem="w8x-Ph-tlv" secondAttribute="leading" id="T0J-Na-YQU"/>
+                <constraint firstItem="liK-0a-nWm" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="40" id="Yks-fF-OF3"/>
                 <constraint firstItem="b87-jD-LuN" firstAttribute="top" secondItem="w8x-Ph-tlv" secondAttribute="top" constant="40" id="iAZ-ho-ikf"/>
+                <constraint firstItem="liK-0a-nWm" firstAttribute="top" secondItem="b87-jD-LuN" secondAttribute="bottom" id="iGy-6Q-TX8"/>
                 <constraint firstItem="w8x-Ph-tlv" firstAttribute="trailing" secondItem="0PP-kN-j82" secondAttribute="trailing" id="ieV-r0-sYm"/>
                 <constraint firstItem="w8x-Ph-tlv" firstAttribute="trailing" secondItem="b87-jD-LuN" secondAttribute="trailing" id="rlO-wE-OI4"/>
             </constraints>
