@@ -24,23 +24,40 @@ class GSSAFundSetCVVViewController: GSSAMasterViewController, UITextFieldDelegat
     
     //MARK: - Properties
     var token: String = ""
+    var originalViewFrame = CGFloat(0.0)
     
     //MARK: - Life cycle
-	override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
-
+        originalViewFrame = self.view.frame.origin.y
         setView()
         searchAccount()
+        if UIDevice.current.screenType == .iPhones_5_5s_5c_SE{
+            txtCVV.addTarget(self, action: #selector(startEditing), for: .editingDidBegin)
+            txtCVV.addTarget(self, action: #selector(endEditing), for: .editingDidEnd)
+        }
     }
+    
+    @objc func startEditing(){
+        if self.view.frame.origin.y < 100.0 {
+            UIView.animate(withDuration: 0.3, animations: { () -> Void in
+                self.view.frame.origin.y -= 100.0
+            })
+        }
+    }
+    
+    @objc func endEditing(){
+        UIView.animate(withDuration: 0.3, animations: { () -> Void in
+            self.view.frame.origin.y += 100.0
+        })
+    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         setProgressLine(value: 0.50, animated: true)
     }
     
-    //MARK: - Methods
-
-
     //MARK: - @IBActions
     @IBAction func next(_ sender: Any) {
         txtCVV.setAppearance(.active)
@@ -74,8 +91,8 @@ extension GSSAFundSetCVVViewController: GSSAFundSetCVVViewProtocol {
               let lastName = response.payer?.lastName,
               let type = response.card?.type,
               let accountNumber = response.card?.number else {
-
-           showError()
+            
+            showError()
             return 
         }
         
@@ -87,7 +104,7 @@ extension GSSAFundSetCVVViewController: GSSAFundSetCVVViewProtocol {
     func searchAccountError() {
         GSVCLoader.hide()
         
-       showError()
+        showError()
     }
 }
 

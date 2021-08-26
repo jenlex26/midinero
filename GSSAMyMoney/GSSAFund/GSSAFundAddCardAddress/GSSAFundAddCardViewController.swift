@@ -158,6 +158,12 @@ class GSSAFundAddCardViewController: UIViewController {
     //MARK: - @IBActions
     @IBAction func next(_ sender: Any) {
         if validateFields() {
+            var userEmail = self.emailField.text
+            
+            if self.emailField.text?.haveData() == false{
+                userEmail = GSSISessionInfo.sharedInstance.gsUser.email ?? ""
+            }
+            
             self.requestCreateCard = LNKPG_TokenCardRequestFacade(
                 merchantID: GSSAFundSharedVariables.shared.ecommerceResponse?.comerciosCybs?.id ?? "",
                 merchantReference: GSSAFundSharedVariables.shared.idTransaccionSuperApp ?? "",
@@ -167,7 +173,7 @@ class GSSAFundAddCardViewController: UIViewController {
                     firstName: self.nameField.text!,
                     lastName: self.lastNameField.text!,
                     phoneNumber: self.phoneField.text!,
-                    email: self.emailField.text!,
+                    email: userEmail!,
                     address: LNKPG_TokenCardRequestFacade.__Payer.__Address(
                         street: self.streetField.text!,
                         city: self.cityField.text!,

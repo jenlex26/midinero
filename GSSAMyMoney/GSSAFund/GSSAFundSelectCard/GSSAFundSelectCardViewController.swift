@@ -31,7 +31,7 @@ class GSSAFundSelectCardViewController: GSSAMasterViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         setProgressLine(value: 0.25, animated: true)
     }
@@ -137,9 +137,15 @@ extension GSSAFundSelectCardViewController: GSSAFundSelectCardViewProtocol {
     }
     
     func getCardsSuccess(cards: [LNKPG_ListCardResponseFacade.__Tokens]) {
-        self.cards = cards
-        cardsTable.reloadData()
-        GSVCLoader.hide()
+         self.cards = cards
+         self.cardsTable.reloadData()
+        cardsTable.tableViewDidFinishReloadData{ [self] in
+            if cardsTable.numberOfRows(inSection: 0) > 0{
+                
+                cardsTable.selectRow(at: [0,0], animated: true, scrollPosition: UITableView.ScrollPosition.none)
+            }
+            GSVCLoader.hide()
+        }
     }
     
     func getCardsError() {

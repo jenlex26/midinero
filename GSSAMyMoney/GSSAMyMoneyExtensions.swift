@@ -157,6 +157,13 @@ extension UITableView{
         UIGraphicsEndImageContext();
         return image;
     }
+    
+    func tableViewDidFinishReloadData(_ closure: @escaping (() -> Void)){
+        CATransaction.begin()
+        CATransaction.setCompletionBlock(closure)
+        self.reloadData()
+        CATransaction.commit()
+    }
 }
 
 extension String{
@@ -191,7 +198,7 @@ extension String{
                                                                       withFontWeight: .bold,
                                                                       withFontColor: .GSVCText100,
                                                                       withLittleCoin: false)
-         
+        
         
         
         return amountFormat.mutableString.description

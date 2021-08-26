@@ -279,12 +279,14 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                     if  item.descripcion?.alnovaDecrypt() != ""{
                         print("fecha: \(item.fecha?.alnovaDecrypt() ?? "")")
                         let movementCell = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAMovementCell") as! BASAMovementTableViewCell
-                        
-                        
+                        movementCell.setArrow(amount: item.importe?.alnovaDecrypt() ?? "")
+                        movementCell.lblAmount.text = item.importe?.alnovaDecrypt().removeWhiteSpaces().moneyFormatWithoutSplit()
                         let status = item.descripcionOperacion?.components(separatedBy: "|")
-                        
                         if status?.count ?? 0 >= 2{
                             if status![1] == "r"{
+                                movementCell.setArrow(amount: "-")
+                                let amount = item.importe?.alnovaDecrypt().removeWhiteSpaces()
+                                movementCell.lblAmount.text = String((Double(amount ?? "0.0") ?? 0.0) * -1.0).moneyFormatWithoutSplit()
                                 movementCell.lblDate.text = (item.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy") ?? "") + " " + "MOV. PENDIENTE"
                             }else{
                                 movementCell.lblDate.text = item.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy")
@@ -293,12 +295,8 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                             movementCell.lblDate.text = item.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy")
                         }
                         
-                        
                         movementCell.tag = index
                         movementCell.lblTitle.text = item.concepto?.alnovaDecrypt()
-                        
-                        movementCell.lblAmount.text = item.importe?.alnovaDecrypt().removeWhiteSpaces().moneyFormatWithoutSplit()
-                        movementCell.setArrow(amount: item.importe?.alnovaDecrypt() ?? "")
                         cellsArray.append([movementCell:88.0])
                     }
                 }

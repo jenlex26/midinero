@@ -141,27 +141,29 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
         details.updateValue("Número de operación", forKey: transaction.numeroOperacion ?? "")
         details.updateValue("Fecha y hora de registro", forKey: (transaction.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy") ?? "") + " " + (data.hora?.timeFormatter() ?? ""))
         
+        let descriptionData = transaction.descripcionOperacion?.components(separatedBy: "|")
+        var claveInstitucion = ""
+        if descriptionData?.count ?? 0 >= 2{
+            if descriptionData![0].count >= 4{
+                claveInstitucion = descriptionData![0].suffix(4).description
+            }
+            
+            if descriptionData![1] == "r"{
+                let amount = transaction.importe?.alnovaDecrypt().removeWhiteSpaces()
+                lblAmount.text = String((Double(amount ?? "0.0") ?? 0.0) * -1.0).moneyFormatWithoutSplit()
+                details.updateValue("Estatus", forKey: "MOV. PENDIENTE")
+            }
+        }
+        
+        
         if transaction.idOperacion == "212"{
             URLBanxico = "https://www.banxico.org.mx/cep/"
-            if GLOBAL_ENVIROMENT == .develop{
+            //if GLOBAL_ENVIROMENT == .develop{
                 GSVCLoader.show()
-                var claveInstitucion = ""
-                let descriptionData = transaction.descripcionOperacion?.components(separatedBy: "|")
-                if descriptionData?.count ?? 0 >= 2{
-                    if descriptionData![0].count >= 4{
-                        claveInstitucion = descriptionData![0].suffix(4).description
-                    }
-                    
-                    if descriptionData![1] == "r"{
-                        details.updateValue("Estatus", forKey: "MOV. PENDIENTE")
-                    }
-                }
-                
                 let type = lblAmount.text!.contains("-") ? "E" : "R"
-                
                 let body = SPEIDetailBody.init(transaccion: SPEIDetailTransaccion.init(claveInstitucionBancaria: claveInstitucion, operacion: SPEIDetailOperacion.init(tipo: type, fecha: transaction.fecha, hora: transaction.hora)))
-                
-                presenter?.requestGetSPEIDetail(Body: body, claveRastreo: transaction.descripcion ?? "", Response: { [self] Response in
+            
+                presenter?.requestGetSPEIDetail(Body: body, claveRastreo: transaction.descripcion ?? "", Response: {  [self] Response in
                     if Response != nil{
                         let data = Response?.resultado
                         details.updateValue("Clave de rastreo", forKey: transaction.descripcion ?? "")
@@ -190,9 +192,9 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
                     GSVCLoader.hide()
                     setOptions(SPEI: true)
                 })
-            }else{
-                setOptions(SPEI: true)
-            }
+//            }else{
+//                setOptions(SPEI: true)
+//            }
         }else{
             setOptions(SPEI: false)
         }
