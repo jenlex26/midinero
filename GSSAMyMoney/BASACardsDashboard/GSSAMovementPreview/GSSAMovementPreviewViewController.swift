@@ -142,13 +142,25 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
         details.updateValue("Fecha y hora de registro", forKey: (transaction.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy") ?? "") + " " + (data.hora?.timeFormatter() ?? ""))
         
         let descriptionData = transaction.descripcionOperacion?.components(separatedBy: "|")
+        let urlFotoData = transaction.urlFoto?.components(separatedBy: "|")
         var claveInstitucion = ""
+        
         if descriptionData?.count ?? 0 >= 2{
             if descriptionData![0].count >= 4{
                 claveInstitucion = descriptionData![0].suffix(4).description
             }
             
             if descriptionData![1] == "r"{
+                let amount = transaction.importe?.alnovaDecrypt().removeWhiteSpaces()
+                lblAmount.text = String((Double(amount ?? "0.0") ?? 0.0) * -1.0).moneyFormatWithoutSplit()
+                details.updateValue("Estatus", forKey: "MOV. PENDIENTE")
+            }
+        }else{
+            if urlFotoData![0].count >= 4{
+                claveInstitucion = urlFotoData![0].suffix(4).description
+            }
+            
+            if urlFotoData![1] == "r"{
                 let amount = transaction.importe?.alnovaDecrypt().removeWhiteSpaces()
                 lblAmount.text = String((Double(amount ?? "0.0") ?? 0.0) * -1.0).moneyFormatWithoutSplit()
                 details.updateValue("Estatus", forKey: "MOV. PENDIENTE")
@@ -168,7 +180,7 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
                         let data = Response?.resultado
                         details.updateValue("Clave de rastreo", forKey: transaction.descripcion ?? "")
                         details.updateValue("Realizado con", forKey: data?.numeroCuentaOrigen ?? "")
-                        details.updateValue("Nombre del beneficiario", forKey: (data?.nombreBeneficiario ?? "") + "\n" + (descriptionData?[0] ?? ""))
+                        details.updateValue("Nombre del beneficiario", forKey: (data?.nombreBeneficiario ?? "") + "\n" + (descriptionData?[0] ?? (urlFotoData?[0] ?? "")))
                         
                         switch data?.estatusTransferencia{
                          case "T":

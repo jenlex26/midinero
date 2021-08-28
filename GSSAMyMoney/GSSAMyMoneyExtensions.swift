@@ -352,13 +352,9 @@ extension String{
 
 extension Int{
     func moneyFormat() -> String{
-        
         var doubleAmount = Double(self)
-        
         doubleAmount = doubleAmount / 100
-        
         let stringAmount = String(doubleAmount)
-        
         let amountFormat = NSMutableAttributedString.setFormattedText(withStringAmmount: stringAmount,
                                                                       withNumberOfDecimals: GSSISessionInfo.sharedInstance.bHideCents ? 0 : 2,
                                                                       withFontSize: 36,

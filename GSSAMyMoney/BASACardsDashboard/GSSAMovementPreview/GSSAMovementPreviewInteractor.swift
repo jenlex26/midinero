@@ -19,11 +19,15 @@ class GSSAMovementPreviewInteractor: GSSAURLSessionTaskCoordinatorBridge, GSSAMo
     
     public func tryGetSPEIDetail(Body: SPEIDetailBody, claveRastreo: String,  Response: @escaping (SPEIDetailTransactionResponse?) -> ())
     {
-     
-        self.urlPath = "https://apigateway.superappbaz.com/"
-        self.strPathEndpoint = "integracion/superapp/pagos/captacion/transferencias/v1/spei/busquedas"
-        let claveRastreo = HeadersCustom.init(value: claveRastreo, forHTTPHeaderField: "x-idClaveRastreo")
+        if GLOBAL_ENVIROMENT == .develop{
+            self.urlPath = "https://apigateway.superappbaz.com/"
+            self.strPathEndpoint = "integracion/superapp/pagos/captacion/transferencias/v1/spei/busquedas"
+        }else{
+            self.strPathEndpoint = "/superapp/pagos/captacion/transferencias/v1/spei/busquedas"
+        }
         
+        
+        let claveRastreo = HeadersCustom.init(value: claveRastreo, forHTTPHeaderField: "x-idClaveRastreo")
         sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [claveRastreo], objBody: Body, environment: GLOBAL_ENVIROMENT) { (objRes: SPEIDetailTransactionResponse?, error) in
             debugPrint(objRes ?? "nil")
             

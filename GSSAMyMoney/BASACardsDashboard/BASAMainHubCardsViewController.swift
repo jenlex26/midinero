@@ -36,7 +36,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     var accountNumber: [String:String]?
     let refreshControl = GSFMoneyRockaletaControl()
     var headerSize: CGFloat = 300.0 //380.0 Valor para cuando el usuario tiene crédito o prestamos, en caso contrario el predeterminado debería ser 300.0
-   
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -281,6 +281,8 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                         movementCell.setArrow(amount: item.importe?.alnovaDecrypt() ?? "")
                         movementCell.lblAmount.text = item.importe?.alnovaDecrypt().removeWhiteSpaces().moneyFormatWithoutSplit()
                         let status = item.descripcionOperacion?.components(separatedBy: "|")
+                        let urlFotoStatus = item.urlFoto?.components(separatedBy: "|")
+                        
                         if status?.count ?? 0 >= 2{
                             if status![1] == "r"{
                                 movementCell.setArrow(amount: "-")
@@ -290,7 +292,17 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                             }else{
                                 movementCell.lblDate.text = item.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy")
                             }
-                        }else{     
+                        }else if urlFotoStatus?.count ?? 0 >= 2{
+                            
+                            if urlFotoStatus![1] == "r"{
+                                movementCell.setArrow(amount: "-")
+                                let amount = item.importe?.alnovaDecrypt().removeWhiteSpaces()
+                                movementCell.lblAmount.text = String((Double(amount ?? "0.0") ?? 0.0) * -1.0).moneyFormatWithoutSplit()
+                                movementCell.lblDate.text = (item.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy") ?? "") + " " + "MOV. PENDIENTE"
+                            }else{
+                                movementCell.lblDate.text = item.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy")
+                            }
+                        }else{
                             movementCell.lblDate.text = item.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy")
                         }
                         
