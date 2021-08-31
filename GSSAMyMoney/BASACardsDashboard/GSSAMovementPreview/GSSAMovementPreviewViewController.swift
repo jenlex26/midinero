@@ -180,7 +180,12 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
                         let data = Response?.resultado
                         details.updateValue("Clave de rastreo", forKey: transaction.descripcion ?? "")
                         details.updateValue("Realizado con", forKey: data?.numeroCuentaOrigen ?? "")
-                        details.updateValue("Nombre del beneficiario", forKey: (data?.nombreBeneficiario ?? "") + "\n" + (descriptionData?[0] ?? (urlFotoData?[0] ?? "")))
+                        
+                        if descriptionData?[0].isEmpty == false{
+                            details.updateValue("Nombre del beneficiario", forKey: (data?.nombreBeneficiario ?? "") + "\n" + (descriptionData?[0] ?? ""))
+                        }else{
+                            details.updateValue("Nombre del beneficiario", forKey: (data?.nombreBeneficiario ?? "") + "\n" + (urlFotoData?[0] ?? ""))
+                        }
                         
                         switch data?.estatusTransferencia{
                          case "T":

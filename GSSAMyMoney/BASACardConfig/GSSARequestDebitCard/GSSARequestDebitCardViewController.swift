@@ -82,8 +82,8 @@ class GSSARequestDebitCardViewController: GSSAMasterViewController, GSSARequestD
         GSVCLoader.show()
         let body = PhysicalCardShippingAmountBody.init(numeroTarjeta: "", primerTokenVerificacion: GSSISessionInfo.sharedInstance.gsUserToken, geolocalizacion: ShippingAmountLocation.init(latitud: GSPMLocationManager.shared.lastLocation?.coordinate.latitude.description, longitud: GSPMLocationManager.shared.lastLocation?.coordinate.longitude.description))
         presenter?.requestGetShippingCost(body: body, Response: { [self] Response in
+            GSVCLoader.hide()
             if Response != nil{
-                GSVCLoader.hide()
                 amount = Response?.resultado?.monto ?? ""
                 lblShippingCost.text = "Solicítala con un costo de \(Response?.resultado?.monto?.moneyFormatWithoutSplit() ?? "")"
                 self.lblShippingCostSubtitle.text = "Solicítala con un costo de \(Response?.resultado?.monto?.moneyFormatWithoutSplit() ?? "")"

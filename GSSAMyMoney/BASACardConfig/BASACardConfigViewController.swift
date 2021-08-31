@@ -13,6 +13,7 @@ import GSSAVisualComponents
 import GSSAVisualTemplates
 import GSSAFunctionalUtilities
 import GSSASessionInfo
+import FirebaseRemoteConfig
 
 class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol, GSVCBottomAlertHandler{
     
@@ -57,9 +58,17 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
         if GLOBAL_ENVIROMENT == .develop{
             GSVCLoader.show()
             presenter?.requestCardStatus(CardSearchResponse: {})
+        }else{
+            if let cardStatusString = RemoteConfig.remoteConfig().remoteString(forKey: "IOS_MOB_SA_MMCARD"){
+                if cardStatusString == "true"{
+                    GSVCLoader.show()
+                    presenter?.requestCardStatus(CardSearchResponse: {})
+                }
+            }
         }
     }
     
@@ -153,12 +162,16 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
     }
     
     @objc func handleCustomCardStatusResponse(notification: Notification){
+        GSVCLoader.hide()
         //RECIBE una notificación con el status code del custom request y dependiendo de este determina las celdas que se mostrarán en ajustes
         let statusCode = notification.object as! Int
+        
         switch statusCode{
         case 404:
             configureDebitCard(forStatus: .request)
         case 200:
+            configureDebitCard(forStatus: .active)
+        case 0:
             configureDebitCard(forStatus: .active)
         case 400:
             configureDebitCard(forStatus: .request)
