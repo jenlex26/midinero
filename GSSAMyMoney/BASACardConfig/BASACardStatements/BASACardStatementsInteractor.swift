@@ -18,13 +18,16 @@ class BASACardStatementsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASACar
     
     weak var presenter: BASACardStatementsPresenterProtocol?
     
-    func getStatements(body: DebitCardStatementBody, StatementsResultData: @escaping (DebitCardStatementData?) -> ()){     
-        self.strPathEndpoint = "/superapp/dinero/captacion/estados-cuenta/v1/periodos/busquedas"
+    func getStatements(body: DebitCardStatementBody, StatementsResultData: @escaping (DebitCardStatementData?) -> ()){
         
-//        self.urlPath = "https://apigateway.superappbaz.com/"
-//        self.strPathEndpoint = "desarrollo/superapp/dinero/captacion/estados-cuenta/v1/periodos/busquedas"
+        if GLOBAL_ENVIROMENT == .develop{
+            self.urlPath = "https://apigateway.superappbaz.com/"
+            self.strPathEndpoint = "desarrollo/superapp/dinero/captacion/estados-cuenta/v1/periodos/busquedas"
+        }else{
+            self.strPathEndpoint = "/superapp/dinero/captacion/estados-cuenta/v1/periodos/busquedas"
+        }
         
-        let bodyTest = DebitCardStatementBody(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.encryptAlnova(), fechaInicio: "10-10-2020", fechaFin: "10-10-2020")
+        let bodyTest = DebitCardStatementBody(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.encryptAlnova(), fechaInicio: "10/09/2021", fechaFin: "10/09/2021")
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, objBody: bodyTest, environment: GLOBAL_ENVIROMENT) { (objRes: DebitCardStatementData?, error) in
             debugPrint(objRes as Any)
@@ -37,5 +40,4 @@ class BASACardStatementsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASACar
             }
         }
     }
-    
 }
