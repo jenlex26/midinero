@@ -207,6 +207,11 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
         self.navigationController?.pushViewController(view, animated: true)
     }
     
+    @objc func activateCreditCard(){
+        let view = GSSAActivateCreditCardRouter.createModule()
+        self.navigationController?.pushViewController(view, animated: true)
+    }
+    
     @IBAction func close(_ sender: Any){
         self.navigationController?.popViewController(animated: true)
     }
@@ -226,7 +231,9 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
             switch indexPath.row{
             case 0:
                 let cell = table.dequeueReusableCell(withIdentifier: "BASACardControl") as! BASACardControl
+                cell.lblCheckNIP.text = "Activa tu tarjeta física"
                 //cell.btnCheckNIP.addTarget(self, action: #selector(checkNIP(sender:)), for: .touchUpInside)
+                cell.btnCheckNIP.addTarget(self, action: #selector(activateCreditCard), for: .touchUpInside)
                 cell.turnOfSwitch.addTarget(self, action: #selector(turnOnCard(sender:)), for: .valueChanged)
                 cell.reportCardView.isHidden = true
                 return cell
@@ -250,7 +257,7 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
         if credit == true{
             switch indexPath.row{
             case 0:
-                return 165.0
+                return 180.0
             case 1:
                 return 60.0
             default:

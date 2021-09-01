@@ -15,7 +15,8 @@ class BASACardControl: UITableViewCell {
     @IBOutlet weak var reportCardView   : UIView!
     @IBOutlet weak var turnOffCard      : UIView!
     @IBOutlet weak var nipCardView      : UIView!
-    @IBOutlet weak var btnCheckNIP  : UIButton!
+    @IBOutlet weak var btnCheckNIP      : UIButton!
+    @IBOutlet weak var lblCheckNIP      : GSVCLabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

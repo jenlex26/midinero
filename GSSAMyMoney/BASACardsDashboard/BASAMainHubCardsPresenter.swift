@@ -25,10 +25,6 @@ class BASAMainHubCardsPresenter: BASAMainHubCardsPresenterProtocol {
         interactor?.TryGetDebitCardBalance(Account: Account, Balance: Balance)
     }
     
-    func requestDebitCardMovements(Body: MovimientosBody, Movements: @escaping (DebitCardTransaction?) -> ()) {
-        interactor?.TryGetDebitCardMovements(Body: Body, Movements: Movements)
-    }
-    
     func requestDebitCardMovementsV2(Body: MovimientosBodyv2, Movements: @escaping (DebitCardTransactionV2?) -> ()) {
         interactor?.TryGetDebitCardMovementsV2(Body: Body, Movements: Movements)
     }

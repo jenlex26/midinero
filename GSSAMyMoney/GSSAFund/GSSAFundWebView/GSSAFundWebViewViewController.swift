@@ -74,7 +74,9 @@ extension GSSAFundWebViewViewController: LNKPG_WebViewFacadeDelegate {
         presenter?.checkFund()
     }
     
-    func notifyFailure() {}
+    func notifyFailure() {
+        GSVCLoader.hide()
+    }
     
     func notifyLoad(){
         print("Carga completa")

@@ -84,7 +84,7 @@
                 <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Z4m-qH-63e">
                     <rect key="frame" x="101.5" y="229" width="172" height="48"/>
                     <subviews>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mzc-HE-xzP">
+                        <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mzc-HE-xzP">
                             <rect key="frame" x="0.0" y="0.0" width="40" height="48"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="4Wn-hq-QaR"/>
@@ -92,7 +92,7 @@
                             <fontDescription key="fontDescription" type="system" pointSize="26"/>
                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                         </textField>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7O7-Ub-t40">
+                        <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7O7-Ub-t40">
                             <rect key="frame" x="44" y="0.0" width="40" height="48"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="7T6-ek-hab"/>
@@ -100,7 +100,7 @@
                             <fontDescription key="fontDescription" type="system" pointSize="26"/>
                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                         </textField>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rm8-x9-McT">
+                        <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rm8-x9-McT">
                             <rect key="frame" x="88" y="0.0" width="40" height="48"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="aye-a4-6Rg"/>
@@ -108,7 +108,7 @@
                             <fontDescription key="fontDescription" type="system" pointSize="26"/>
                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                         </textField>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tEb-Z6-1yI">
+                        <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tEb-Z6-1yI">
                             <rect key="frame" x="132" y="0.0" width="40" height="48"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="yRV-7F-X2x"/>

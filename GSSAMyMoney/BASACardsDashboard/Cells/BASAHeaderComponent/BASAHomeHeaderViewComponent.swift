@@ -124,7 +124,7 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
             UserDefaults.standard.setValue(amountString, forKey: "debitAccountBalance")
             
             GSSISessionInfo.sharedInstance.gsUser.account?.availableBalance = amountString.moneyToDouble()
-            
+                        
             debitCardlblBalance.text = amountString
             debitCardlblCardNumber.text = data.resultado.cliente?.cuentas?.first?.numeroTarjeta?.alnovaDecrypt().tnuoccaFormat
         }
@@ -200,11 +200,11 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
         })
         if showOnlyLendsInCredit == true{
             self.cardCollection.scrollToItem(at: [0,1], at: .left, animated: false)
-            self.cardCollection.isUserInteractionEnabled = false
+            self.cardCollection.isScrollEnabled = false
             self.pageController.isHidden = true
         }else{
             self.cardCollection.scrollToItem(at: [0,0], at: .left, animated: false)
-            self.cardCollection.isUserInteractionEnabled = false
+            self.cardCollection.isScrollEnabled = false
             self.pageController.isHidden = true
             handleCardChange(index: pageController.currentPage)
         }
@@ -227,10 +227,10 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
     @objc func openConfig(sender: UIButton){
         if cellViewController != nil{
             if sender.tag == 0 {
+                createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "dashboard", screenName: "movimientos", type: "click", element: "configuracion_tarjeta", origin: "debito")
                 let view = BASACardConfigRouter.createModule(credit: false)
                 cellViewController.navigationController?.pushViewController(view, animated: true)
             }else{
-                createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "dashboard", screenName: "movimientos", type: "click", element: "configuracion_tarjeta", origin: "debito")
                 let view = BASACardConfigRouter.createModule(credit: true)
                 cellViewController.navigationController?.pushViewController(view, animated: true)
             }

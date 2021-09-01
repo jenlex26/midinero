@@ -130,8 +130,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vei-zf-Q3b">
                                         <rect key="frame" x="0.0" y="128.5" width="281" height="64.5"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="creditcard.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="0Gc-M4-FxG">
-                                                <rect key="frame" x="16" y="22" width="24" height="20.5"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_card" translatesAutoresizingMaskIntoConstraints="NO" id="0Gc-M4-FxG">
+                                                <rect key="frame" x="16" y="20.5" width="24" height="24"/>
                                                 <color key="tintColor" red="0.45098039220000002" green="0.070588235289999995" blue="0.72156862749999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="24" id="URO-oj-zOd"/>
@@ -207,6 +207,7 @@
             <connections>
                 <outlet property="btnCheckNIP" destination="Sye-f6-UqY" id="9jb-iN-gTJ"/>
                 <outlet property="cardControlView" destination="wyh-xA-QEb" id="CTy-zM-HaY"/>
+                <outlet property="lblCheckNIP" destination="Xul-6a-bhu" id="sL0-Te-83J"/>
                 <outlet property="nipCardView" destination="vei-zf-Q3b" id="3EX-0x-4js"/>
                 <outlet property="reportCardView" destination="JNd-xh-jAJ" id="BQ0-a4-esc"/>
                 <outlet property="turnOfSwitch" destination="eyA-gb-Sja" id="bmZ-eY-ZKb"/>
@@ -228,8 +229,8 @@
     </designables>
     <resources>
         <image name="chevron.right" catalog="system" width="96" height="128"/>
-        <image name="creditcard.fill" catalog="system" width="128" height="88"/>
         <image name="exclamationmark.triangle.fill" catalog="system" width="128" height="112"/>
+        <image name="ic_card" width="24" height="24"/>
         <image name="lock.fill" catalog="system" width="128" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

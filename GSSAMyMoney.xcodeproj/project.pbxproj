@@ -164,6 +164,12 @@
 		EE97BB072684DF30000AE34C /* GSNoMovementsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE97BB052684DF2F000AE34C /* GSNoMovementsCell.xib */; };
 		EE9B040126C19BCD0034A81F /* GSSARequestDebitCardEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9B040026C19BCD0034A81F /* GSSARequestDebitCardEntity.swift */; };
 		EEAA129126C5E79800F57C97 /* GSSACardNIPEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAA129026C5E79800F57C97 /* GSSACardNIPEntity.swift */; };
+		EEAB93A126DEE184000F2541 /* GSSAActivateCreditCardPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAB939B26DEE184000F2541 /* GSSAActivateCreditCardPresenter.swift */; };
+		EEAB93A226DEE184000F2541 /* GSSAActivateCreditCardRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAB939C26DEE184000F2541 /* GSSAActivateCreditCardRouter.swift */; };
+		EEAB93A326DEE184000F2541 /* GSSAActivateCreditCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAB939D26DEE184000F2541 /* GSSAActivateCreditCardViewController.swift */; };
+		EEAB93A426DEE184000F2541 /* GSSAActivateCreditCardProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAB939E26DEE184000F2541 /* GSSAActivateCreditCardProtocols.swift */; };
+		EEAB93A526DEE184000F2541 /* GSSAActivateCreditCardInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAB939F26DEE184000F2541 /* GSSAActivateCreditCardInteractor.swift */; };
+		EEAB93A626DEE184000F2541 /* GSSAActivateCreditCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEAB93A026DEE184000F2541 /* GSSAActivateCreditCardViewController.xib */; };
 		EEAD105426C20792000E5BEF /* GSSACardFundResumeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAD101826C20792000E5BEF /* GSSACardFundResumeViewController.swift */; };
 		EEAD105526C20792000E5BEF /* GSSACardFundResumeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEAD101926C20792000E5BEF /* GSSACardFundResumeViewController.xib */; };
 		EEAD105626C20792000E5BEF /* GSSACardFundResumePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAD101A26C20792000E5BEF /* GSSACardFundResumePresenter.swift */; };
@@ -424,6 +430,12 @@
 		EE97BB052684DF2F000AE34C /* GSNoMovementsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GSNoMovementsCell.xib; sourceTree = "<group>"; };
 		EE9B040026C19BCD0034A81F /* GSSARequestDebitCardEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSARequestDebitCardEntity.swift; sourceTree = "<group>"; };
 		EEAA129026C5E79800F57C97 /* GSSACardNIPEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSACardNIPEntity.swift; sourceTree = "<group>"; };
+		EEAB939B26DEE184000F2541 /* GSSAActivateCreditCardPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAActivateCreditCardPresenter.swift; sourceTree = "<group>"; };
+		EEAB939C26DEE184000F2541 /* GSSAActivateCreditCardRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAActivateCreditCardRouter.swift; sourceTree = "<group>"; };
+		EEAB939D26DEE184000F2541 /* GSSAActivateCreditCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAActivateCreditCardViewController.swift; sourceTree = "<group>"; };
+		EEAB939E26DEE184000F2541 /* GSSAActivateCreditCardProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAActivateCreditCardProtocols.swift; sourceTree = "<group>"; };
+		EEAB939F26DEE184000F2541 /* GSSAActivateCreditCardInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAActivateCreditCardInteractor.swift; sourceTree = "<group>"; };
+		EEAB93A026DEE184000F2541 /* GSSAActivateCreditCardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GSSAActivateCreditCardViewController.xib; sourceTree = "<group>"; };
 		EEAD101826C20792000E5BEF /* GSSACardFundResumeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSSACardFundResumeViewController.swift; sourceTree = "<group>"; };
 		EEAD101926C20792000E5BEF /* GSSACardFundResumeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GSSACardFundResumeViewController.xib; sourceTree = "<group>"; };
 		EEAD101A26C20792000E5BEF /* GSSACardFundResumePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSSACardFundResumePresenter.swift; sourceTree = "<group>"; };
@@ -624,6 +636,7 @@
 		10E9ED3C267D6BA400F45640 /* BASACardConfig */ = {
 			isa = PBXGroup;
 			children = (
+				EEAB939A26DEE156000F2541 /* GSSAActivateCreditCard */,
 				585081C826C3BFE400630834 /* GSSARequestDebitCardGenericTicket */,
 				585081A626C3B61700630834 /* BASAScanCode */,
 				10E9ED45267D6BA400F45640 /* Cells */,
@@ -1079,6 +1092,19 @@
 			path = GSNoMovementsCell;
 			sourceTree = "<group>";
 		};
+		EEAB939A26DEE156000F2541 /* GSSAActivateCreditCard */ = {
+			isa = PBXGroup;
+			children = (
+				EEAB939B26DEE184000F2541 /* GSSAActivateCreditCardPresenter.swift */,
+				EEAB939C26DEE184000F2541 /* GSSAActivateCreditCardRouter.swift */,
+				EEAB939D26DEE184000F2541 /* GSSAActivateCreditCardViewController.swift */,
+				EEAB939E26DEE184000F2541 /* GSSAActivateCreditCardProtocols.swift */,
+				EEAB939F26DEE184000F2541 /* GSSAActivateCreditCardInteractor.swift */,
+				EEAB93A026DEE184000F2541 /* GSSAActivateCreditCardViewController.xib */,
+			);
+			path = GSSAActivateCreditCard;
+			sourceTree = "<group>";
+		};
 		EEAD101626C20792000E5BEF /* GSSAFund */ = {
 			isa = PBXGroup;
 			children = (
@@ -1394,6 +1420,7 @@
 				10E9EDF3267D6BA400F45640 /* BASAMainHubCardsViewController.xib in Resources */,
 				10E9EDE1267D6BA400F45640 /* BASALendInfoCell.xib in Resources */,
 				EEAD105F26C20792000E5BEF /* GSSAFundSelectCardViewController.xib in Resources */,
+				EEAB93A626DEE184000F2541 /* GSSAActivateCreditCardViewController.xib in Resources */,
 				EE2A262026B36DF300E1C2C5 /* GSSASetCVVViewController.xib in Resources */,
 				EE2A25FE26B300CE00E1C2C5 /* GSSAPhysicalCardRequestAddressViewController.xib in Resources */,
 				10E9EDE3267D6BA400F45640 /* BASALendViewCVC.xib in Resources */,
@@ -1439,6 +1466,7 @@
 				EEAD107926C20792000E5BEF /* GSSAFundWebViewProtocols.swift in Sources */,
 				EEAD107B26C20792000E5BEF /* GSSAFundWebViewPresenter.swift in Sources */,
 				10E9EDF4267D6BA400F45640 /* GSSAMainHubLendsEntity.swift in Sources */,
+				EEAB93A526DEE184000F2541 /* GSSAActivateCreditCardInteractor.swift in Sources */,
 				585081AF26C3B61700630834 /* BASAScanCodeViewController.swift in Sources */,
 				10E9EDAD267D6BA400F45640 /* BASACardStatementsProtocols.swift in Sources */,
 				10E9EDF5267D6BA400F45640 /* BASAMainHubCardsViewController.swift in Sources */,
@@ -1473,9 +1501,11 @@
 				EEAEFB10269E08BD00F97E4D /* GSSAMovementPreviewInteractor.swift in Sources */,
 				EEAD106226C20792000E5BEF /* GSSAFundSetCVVRouter.swift in Sources */,
 				EE2A25EF26B2142900E1C2C5 /* GSSARequestDebitCardProtocols.swift in Sources */,
+				EEAB93A226DEE184000F2541 /* GSSAActivateCreditCardRouter.swift in Sources */,
 				10E9EDCF267D6BA400F45640 /* BASANewBeneficiaryProtocols.swift in Sources */,
 				10E9EDDF267D6BA400F45640 /* BASAHomeHeaderViewComponent.swift in Sources */,
 				10E9EDB8267D6BA400F45640 /* BASAButtonCell.swift in Sources */,
+				EEAB93A426DEE184000F2541 /* GSSAActivateCreditCardProtocols.swift in Sources */,
 				EED3E3FD269E442B00BDF898 /* GSSAMovementPreviewEntity.swift in Sources */,
 				585081C726C3B69B00630834 /* GSSAMyMoneyScanSecuences.swift in Sources */,
 				10E9EDC6267D6BA400F45640 /* BASACardConfigPresenter.swift in Sources */,
@@ -1547,6 +1577,7 @@
 				10E9EDB3267D6BA400F45640 /* BASACardConfigProtocols.swift in Sources */,
 				EE97BB022683FBB1000AE34C /* BASACardStatementsEntity.swift in Sources */,
 				EEAD107E26C20792000E5BEF /* GSSAFundWebViewInteractor.swift in Sources */,
+				EEAB93A126DEE184000F2541 /* GSSAActivateCreditCardPresenter.swift in Sources */,
 				EEE84F6D26B4B37400C5CACE /* GSSACardNIPRouter.swift in Sources */,
 				EE2A260C26B366D200E1C2C5 /* GSSActivateDebitCardPresenter.swift in Sources */,
 				EE0655DC2682AE6600F7C73D /* GSDigitalCardConfigInteractor.swift in Sources */,
@@ -1589,6 +1620,7 @@
 				10E9EDC5267D6BA400F45640 /* BASAInfoCardCell.swift in Sources */,
 				EE5DB5B326A7998A0004E487 /* GSSAHomeHeaderViewTagging.swift in Sources */,
 				EE9B040126C19BCD0034A81F /* GSSARequestDebitCardEntity.swift in Sources */,
+				EEAB93A326DEE184000F2541 /* GSSAActivateCreditCardViewController.swift in Sources */,
 				EEAD106C26C20792000E5BEF /* GSSAFundSetCardNumberPresenter.swift in Sources */,
 				EEF728A72699382C0093F0DA /* GSSANewBeneficiaryEntity.swift in Sources */,
 				EE5DB5B526A79C480004E487 /* GSSAButtonsCellTagging.swift in Sources */,
