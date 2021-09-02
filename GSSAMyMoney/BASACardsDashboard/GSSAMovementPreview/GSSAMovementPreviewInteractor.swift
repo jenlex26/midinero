@@ -22,6 +22,8 @@ class GSSAMovementPreviewInteractor: GSSAURLSessionTaskCoordinatorBridge, GSSAMo
         if GLOBAL_ENVIROMENT == .develop{
             self.urlPath = "https://apigateway.superappbaz.com/"
             self.strPathEndpoint = "integracion/superapp/pagos/captacion/transferencias/v1/spei/busquedas"
+            
+           // https://apigateway.superappbaz.com/integracion/superapp/pagos/captacion/transferencias/v1/spei/busquedas
         }else{
             self.strPathEndpoint = "/superapp/pagos/captacion/transferencias/v1/spei/busquedas"
         }

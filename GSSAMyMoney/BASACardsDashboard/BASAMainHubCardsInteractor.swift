@@ -15,7 +15,6 @@ import GSSASessionInfo
 import GSSAFunctionalUtilities
 
 open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASAMainHubCardsInteractorProtocol{
-    
     weak var presenter: BASAMainHubCardsPresenterProtocol?
     
     func tryGetUserActivations(UserActivationsResponse: @escaping () -> ()){
@@ -40,6 +39,7 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
         
     }
     
+    //MARK: - DEBIT
     func TryGetDebitCardBalance(Account:[String:String], Balance: @escaping (BalanceResponse?) -> ()){
         let requestBody = TransationBalanceRequest(transaccion: TransationItem(folio: (GSSISessionInfo.sharedInstance.gsUser.SICU?.encryptAlnova() ?? "")))
         
@@ -87,6 +87,7 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
         }
     }
     
+    //MARK: - LENDS
     func tryGetUserLends(Lends: @escaping (LendsResponse?) -> ()){
         if GLOBAL_ENVIROMENT == .develop{
             self.urlPath = "https://apigateway.superappbaz.com/"
@@ -113,8 +114,34 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
         }
     }
     
-    func tryGetCreditCardData(Body: CreditCardBody, CreditCardData: @escaping (CreditCardResponse?) -> ()){
+    //MARK: - CREDIT
+    func tryGetCreditCardNumber(){
+        if GLOBAL_ENVIROMENT == .develop{
+            self.urlPath = "https://apigateway.superappbaz.com/"
+            self.strPathEndpoint = "integracion/superapp/prestamos/tarjeta-credito/v1/tarjetas/busquedas/cu"
+        }else{
+            self.strPathEndpoint = "/superapp/prestamos/tarjeta-credito/v1/tarjetas/busquedas/cu"
+        }
         
+        struct userLendsBody: Codable {}
+        let body = userLendsBody.init()
+        
+        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: GenericRawLendsResponse?, error) in
+            print(body)
+            debugPrint(objRes as Any)
+            
+            let response = objRes?.body
+            print(response)
+            if error.code == 0 {
+                
+                
+            } else {
+                debugPrint(error)
+            }
+        }
+    }
+    
+    func tryGetCreditCardData(Body: CreditCardBody, CreditCardData: @escaping (CreditCardResponse?) -> ()){
         if GLOBAL_ENVIROMENT == .develop{
             self.urlPath = "https://apigateway.superappbaz.com/"
             self.strPathEndpoint = "integracion/superapp/prestamos/tarjeta-credito/v1/tarjetas/busquedas"

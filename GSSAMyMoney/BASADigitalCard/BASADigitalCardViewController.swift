@@ -125,7 +125,7 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
     }
     
     func StartTimer(){
-        TimerView.start(beginingValue: 180)
+        TimerView.start(beginingValue: 300)
     }
     
     func lockCard(){
