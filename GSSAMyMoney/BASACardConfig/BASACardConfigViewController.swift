@@ -59,7 +59,7 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
-        if GLOBAL_ENVIROMENT == .develop{
+        if GLOBAL_ENVIROMENT == .production{
             GSVCLoader.show()
             presenter?.requestCardStatus(CardSearchResponse: {})
         }else{
@@ -174,9 +174,9 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
         case 0:
             configureDebitCard(forStatus: .active)
         case 400:
-            configureDebitCard(forStatus: .request)
+            configureDebitCard(forStatus: .unknown)
         default:
-            configureDebitCard(forStatus: .request)
+            configureDebitCard(forStatus: .unknown)
         }
     }
     

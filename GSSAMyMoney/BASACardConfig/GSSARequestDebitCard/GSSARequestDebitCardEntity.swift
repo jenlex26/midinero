@@ -7,7 +7,16 @@
 
 import Foundation
 
+// MARK: - PhysicalCardCommisionBody
+struct PhysicalCardCommisionBody: Codable {
+    var transaccion: PhysicalCardCommisionTransaction?
+}
 
+// MARK: - PhysicalCardCommisionTransaction
+struct PhysicalCardCommisionTransaction: Codable {
+    var geolocalizacion: ShippingAmountLocation?
+    var numeroTarjeta, primerTokenVerificacion: String
+}
 
 // MARK: - PhysicalCardShippingAmountBody
 struct PhysicalCardShippingAmountBody: Codable {
@@ -19,7 +28,6 @@ struct PhysicalCardShippingAmountBody: Codable {
 struct ShippingAmountLocation: Codable {
     var latitud, longitud: String?
 }
-
 
 // MARK: - PhysicalCardShippingAmountResponse
 struct PhysicalCardShippingAmountResponse: Codable {

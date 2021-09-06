@@ -14,15 +14,17 @@ import GSSASecurityManager
 import GSSAFunctionalUtilities
 
 class GSDigitalCardConfigInteractor: GSSAURLSessionTaskCoordinatorBridge, GSDigitalCardConfigInteractorProtocol {
-
+    
     weak var presenter: GSDigitalCardConfigPresenterProtocol?
     
     func tryShutdownCard(body: CardStateBody,DataCard: @escaping (DigitalCardResponse?) -> ())
     {
-        self.strPathEndpoint = "/superapp/dinero/captacion/gestion-tarjetas/v1/tarjetas/bloqueos"
-        
-//        self.urlPath = "https://apigateway.superappbaz.com/"
-//        self.strPathEndpoint = "integracion/superapp/dinero/captacion/gestion-tarjetas/v1/tarjetas/bloqueos"
+        if GLOBAL_ENVIROMENT == .develop{
+            self.urlPath = "https://apigateway.superappbaz.com/"
+            self.strPathEndpoint = "integracion/superapp/dinero/captacion/gestion-tarjetas/v1/tarjetas/bloqueos"
+        }else{
+            self.strPathEndpoint = "/superapp/dinero/captacion/gestion-tarjetas/v1/tarjetas/bloqueos"
+        }
         
         sendRequest(strUrl: strPathEndpoint, method: .PUT, objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: DigitalCardResponse?, error) in
             debugPrint(objRes as Any)

@@ -80,7 +80,8 @@ class GSSARequestDebitCardViewController: GSSAMasterViewController, GSSARequestD
     
     func getShippingAmount(){
         GSVCLoader.show()
-        let body = PhysicalCardShippingAmountBody.init(numeroTarjeta: "", primerTokenVerificacion: GSSISessionInfo.sharedInstance.gsUserToken, geolocalizacion: ShippingAmountLocation.init(latitud: GSPMLocationManager.shared.lastLocation?.coordinate.latitude.description, longitud: GSPMLocationManager.shared.lastLocation?.coordinate.longitude.description))
+        let body = PhysicalCardShippingAmountBody.init(numeroTarjeta: GSSISessionInfo.sharedInstance.gsUser.card?.encryptAlnova(), primerTokenVerificacion: customToken.shared.firstVerification, geolocalizacion: ShippingAmountLocation.init(latitud: GSPMLocationManager.shared.lastLocation?.coordinate.latitude.description.encryptAlnova(), longitud: GSPMLocationManager.shared.lastLocation?.coordinate.longitude.description.encryptAlnova()))
+        
         presenter?.requestGetShippingCost(body: body, Response: { [self] Response in
             GSVCLoader.hide()
             if Response != nil{

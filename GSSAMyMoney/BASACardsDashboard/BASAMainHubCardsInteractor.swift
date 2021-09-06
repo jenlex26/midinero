@@ -131,7 +131,7 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
             debugPrint(objRes as Any)
             
             let response = objRes?.body
-            print(response)
+            print(response ?? "")
             if error.code == 0 {
                 
                 

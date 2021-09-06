@@ -22,14 +22,20 @@ class BASACardStatementsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASACar
         
         if GLOBAL_ENVIROMENT == .develop{
             self.urlPath = "https://apigateway.superappbaz.com/"
-            self.strPathEndpoint = "desarrollo/superapp/dinero/captacion/estados-cuenta/v1/periodos/busquedas"
+            self.strPathEndpoint = "integracion/superapp/dinero/captacion/estados-cuenta/v1/periodos/busquedas"
         }else{
             self.strPathEndpoint = "/superapp/dinero/captacion/estados-cuenta/v1/periodos/busquedas"
         }
         
-        let bodyTest = DebitCardStatementBody(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.encryptAlnova(), fechaInicio: "10/09/2021", fechaFin: "10/09/2021")
+        let initalDate = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        let initialDateString = dateFormatter.string(from: initalDate)
         
-        sendRequest(strUrl: strPathEndpoint, method: .POST, objBody: bodyTest, environment: GLOBAL_ENVIROMENT) { (objRes: DebitCardStatementData?, error) in
+         
+        let body = DebitCardStatementBody(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.removeWhiteSpaces().dynamicEncrypt(), fechaInicio: initialDateString, fechaFin: "10/12/2020")
+        
+        sendRequest(strUrl: strPathEndpoint, method: .POST, objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: DebitCardStatementData?, error) in
             debugPrint(objRes as Any)
             
             if error.code == 0 {

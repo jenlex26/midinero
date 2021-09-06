@@ -19,6 +19,14 @@ extension String{
         return result
     }
     
+    func hybridEncrypt() -> String{
+        let serviceSecurity = GSSAServiceSecurity()
+        guard let result = serviceSecurity.hybrid(field: self, task: .encrypted)  else {
+            return self
+        }
+        return result
+    }
+    
     func encryptAlnova() -> String{
         let serviceSecurity = GSSAServiceSecurity()
         guard let result = serviceSecurity.alnovaAlgorithm(field: self, task: .encrypted) else {
@@ -39,6 +47,15 @@ extension String{
     func alnovaDecrypt() -> String{
         let serviceSecurity = GSSAServiceSecurity()
         guard let result = serviceSecurity.alnovaAlgorithm(field: self, task: .decrypted) else {
+            return self
+        }
+        
+        return result
+    }
+    
+    func hybridDecrypt() -> String{
+        let serviceSecurity = GSSAServiceSecurity()
+        guard let result = serviceSecurity.hybrid(field: self, task: .decrypted) else {
             return self
         }
         
