@@ -21,12 +21,22 @@ struct DebitCardStatementData: Codable {
 
 // MARK: - DebitCardResultado
 struct StatementResult: Codable {
-    var numeroCuenta: Int?
+    var numeroCuenta: String?
     var detalles: [StatementDetail]?
 }
+
 
 // MARK: - DebitCardDetalle
 struct StatementDetail: Codable {
     var periodo, fechaInicio, fechaFin: String?
 }
 
+// MARK: - RequestDocumentBody
+struct RequestDocumentBody: Codable {
+    let transaccion: RequestDocumentTransaction
+}
+
+// MARK: - Transaccion
+struct RequestDocumentTransaction: Codable {
+    let primerTokenVerificacion, referencia, periodo: String
+}

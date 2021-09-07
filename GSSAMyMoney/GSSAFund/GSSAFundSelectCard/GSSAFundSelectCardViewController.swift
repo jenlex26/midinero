@@ -39,8 +39,8 @@ class GSSAFundSelectCardViewController: GSSAMasterViewController {
     //MARK: - Methods
     private func setView() {
         self.title = "Recarga tu tarjeta"
-        
         cardsTable.dataSource = self
+        cardsTable.rowHeight = 80
         cardsTable.separatorStyle = .none
         cardsTable.register(GSSACardTableViewCell.nib, forCellReuseIdentifier: GSSACardTableViewCell.cellIdentifier)
         
@@ -101,7 +101,7 @@ extension GSSAFundSelectCardViewController: UITableViewDataSource {
         
         if indexPath.row == 0{
             selectCellTask = DispatchWorkItem(block: { [self] in
-                presenter?.goToValidateCVV(GSSAFundSetCVVRouter.createModule(token: token))
+                //presenter?.goToValidateCVV(GSSAFundSetCVVRouter.createModule(token: token))
                 GSVCLoader.hide()
             })
         }

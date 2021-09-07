@@ -18,6 +18,11 @@ struct PhysicalCardCommisionTransaction: Codable {
     var numeroTarjeta, primerTokenVerificacion: String
 }
 
+// MARK: - PhysicalCardCommisionBody
+struct PhysicalCardShippingAmountTransaction: Codable {
+    var transaccion: PhysicalCardShippingAmountBody?
+}
+
 // MARK: - PhysicalCardShippingAmountBody
 struct PhysicalCardShippingAmountBody: Codable {
     var numeroTarjeta, primerTokenVerificacion: String?
@@ -37,7 +42,7 @@ struct PhysicalCardShippingAmountResponse: Codable {
 
 // MARK: - Resultado
 struct PhysicalCardShippingAmountResult: Codable {
-    var monto: String?
+    var montoComision, montoIVA, montoTotal: String?
 }
 
 

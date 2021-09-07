@@ -21,7 +21,8 @@ import FoundationNetworking
 class GSSARequestDebitCardInteractor: GSSAURLSessionTaskCoordinatorBridge, GSSARequestDebitCardInteractorProtocol {
     weak var presenter: GSSARequestDebitCardPresenterProtocol?
     
-    func tryGetShippingCost(body: PhysicalCardShippingAmountBody, Response: @escaping (PhysicalCardShippingAmountResponse?) -> ()){
+    func tryGetShippingCost(body: PhysicalCardShippingAmountTransaction, Response: @escaping (PhysicalCardShippingAmountResponse?) -> ()){
+        
         if GLOBAL_ENVIROMENT == .develop{
             self.urlPath = "https://apigateway.superappbaz.com/"
             self.strPathEndpoint = "integracion/superapp/dinero/captacion/gestion-tarjetas-fisicas/v1/tarjetas/solicitudes/busquedas/comision"
@@ -29,10 +30,11 @@ class GSSARequestDebitCardInteractor: GSSAURLSessionTaskCoordinatorBridge, GSSAR
             self.strPathEndpoint = "/superapp/dinero/captacion/gestion-tarjetas-fisicas/v1/tarjetas/solicitudes/busquedas/comision"
         }
         
-        sendRequest(strUrl: strPathEndpoint, method: .POST, environment: GLOBAL_ENVIROMENT) { (objRes: PhysicalCardShippingAmountResponse?, error) in
+        sendRequest(strUrl: strPathEndpoint, method: .POST, objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: PhysicalCardShippingAmountResponse?, error) in
             if error.code == 0 {
                 Response(objRes)
             } else {
+                Response(nil)
                 debugPrint(error)
             }
         }

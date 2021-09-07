@@ -64,9 +64,9 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
         statements.append(statement.init(title: "Seleccionar todos", subTitle: nil, tag: 0))
         var index = 1
         for item in requestData{
-            let title = item.fechaFin?.dateFormatter(format: "dd-MM-yyyy", outputFormat: "MMMM yyyy")
-            let initialDate = item.fechaInicio?.dateFormatter(format: "dd-MM-yyyy", outputFormat: "dd MMMM") ?? ""
-            let finalDate = item.fechaFin?.dateFormatter(format: "dd-MM-yyyy", outputFormat: "dd MMMM") ?? ""
+            let title = item.fechaFin?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "MMMM yyyy")
+            let initialDate = item.fechaInicio?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMMM") ?? ""
+            let finalDate = item.fechaFin?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMMM") ?? ""
             statements.append(statement(title: title ?? "", subTitle: initialDate + " - " + finalDate, tag: index))
             index += 1
         }
@@ -157,6 +157,8 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
     }
     
     @objc func closeView(_ sender: Any){
+//        let view = GSSADocumentReaderRouter.createModule()
+//        self.navigationController?.pushViewController(view, animated: true)
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -222,7 +224,7 @@ extension BASACardStatementsViewController: UITableViewDelegate, UITableViewData
         case statements.count + 3:
             return 119.0
         default:
-            return 70.0
+            return 80.0
         }
     }
 }

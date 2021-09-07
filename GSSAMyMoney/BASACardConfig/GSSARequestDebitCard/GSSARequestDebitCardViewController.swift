@@ -38,7 +38,6 @@ class GSSARequestDebitCardViewController: GSSAMasterViewController, GSSARequestD
         setAddress()
         getShippingAmount()
         isViewDidLoad = true
-        NotificationCenter.default.addObserver(self, selector: #selector(parseCustomRequest(notification:)), name: NSNotification.Name(rawValue: "PhysicalCardShippingAmountResponse"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(retryRequest), name: NSNotification.Name(rawValue: "RetryRequest"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(closeView), name: NSNotification.Name(rawValue: "ExitFlow"), object: nil)
     }
@@ -60,34 +59,20 @@ class GSSARequestDebitCardViewController: GSSAMasterViewController, GSSARequestD
         self.navigationController?.popViewController(animated: true)
     }
     
-    @objc func parseCustomRequest(notification: Notification){
-        DispatchQueue.main.async {
-            GSVCLoader.hide()
-            let data = notification.object as! Data
-            let model = try! JSONDecoder().decode(PhysicalCardShippingAmountResponse.self, from: data)
-            if model.resultado?.monto == nil{
-                self.btnNext.isEnabled = false
-                let view = self.showErrorViewController(message: "Intente más tarde")
-                view.modalPresentationStyle = .fullScreen
-                self.present(view, animated: true, completion: nil)
-            }else{
-                self.amount = model.resultado?.monto ?? ""
-                self.lblShippingCost.text = "Solicítala con un costo de \(model.resultado?.monto?.moneyFormatWithoutSplit() ?? "")"
-                self.lblShippingCostSubtitle.text = "Solicítala con un costo de \(model.resultado?.monto?.moneyFormatWithoutSplit() ?? "")"
-            }
-        }
-    }
-    
     func getShippingAmount(){
         GSVCLoader.show()
-        let body = PhysicalCardShippingAmountBody.init(numeroTarjeta: GSSISessionInfo.sharedInstance.gsUser.card?.encryptAlnova(), primerTokenVerificacion: customToken.shared.firstVerification, geolocalizacion: ShippingAmountLocation.init(latitud: GSPMLocationManager.shared.lastLocation?.coordinate.latitude.description.encryptAlnova(), longitud: GSPMLocationManager.shared.lastLocation?.coordinate.longitude.description.encryptAlnova()))
+        let transaction = PhysicalCardShippingAmountTransaction.init(transaccion: PhysicalCardShippingAmountBody.init(numeroTarjeta: GSSISessionInfo.sharedInstance.gsUser.card?.encryptAlnova(), primerTokenVerificacion: customToken.shared.firstVerification, geolocalizacion: ShippingAmountLocation.init(latitud: GSPMLocationManager.shared.lastLocation?.coordinate.latitude.description.encryptAlnova(), longitud: GSPMLocationManager.shared.lastLocation?.coordinate.longitude.description.encryptAlnova())))
         
-        presenter?.requestGetShippingCost(body: body, Response: { [self] Response in
-            GSVCLoader.hide()
+        presenter?.requestGetShippingCost(body: transaction, Response: { [self] Response in
             if Response != nil{
-                amount = Response?.resultado?.monto ?? ""
-                lblShippingCost.text = "Solicítala con un costo de \(Response?.resultado?.monto?.moneyFormatWithoutSplit() ?? "")"
-                self.lblShippingCostSubtitle.text = "Solicítala con un costo de \(Response?.resultado?.monto?.moneyFormatWithoutSplit() ?? "")"
+                amount = Response?.resultado?.montoTotal?.alnovaDecrypt().moneyFormatWithoutSplit() ?? ""
+                    lblShippingCost.text = "Solicítala con un costo de \(Response?.resultado?.montoTotal?.alnovaDecrypt().moneyFormatWithoutSplit() ?? "")"
+                    self.lblShippingCostSubtitle.text = "Solicítala con un costo de \(Response?.resultado?.montoTotal?.alnovaDecrypt().moneyFormatWithoutSplit() ?? "")"
+                 GSVCLoader.hide()
+            }else{
+                GSVCLoader.hide()
+               let view = showErrorViewController(message: "Ocurrió un error")
+               self.present(view, animated: true, completion: nil)
             }
         })
     }
@@ -131,9 +116,9 @@ class GSSARequestDebitCardViewController: GSSAMasterViewController, GSSARequestD
                     ],
                 "viewConfig" :
                     [
-                        "txtTitle":"Envío de tarjeta \n fisica Baz",
+                        "txtTitle":"Envío de tarjeta\nfisica Baz",
                         "txtSubtitle":"Realizado con:",
-                        "txtHelper":"\(amount)",
+                        "txtHelper":"Costo de envío: \(amount)",
                         "txtSlideButton": "Desliza para pagar",
                     ]
             ]
@@ -151,8 +136,7 @@ class GSSARequestDebitCardViewController: GSSAMasterViewController, GSSARequestD
     }
 }
 
-extension GSSARequestDebitCardViewController : GSVTTicketOperationDelegate
-{
+extension GSSARequestDebitCardViewController : GSVTTicketOperationDelegate{
     func operationSuccessActionClosed() {
         self.navigationController?.popToRootViewController(animated: true)
     }

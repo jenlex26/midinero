@@ -11,6 +11,7 @@
 import UIKit
 import GSSAVisualComponents
 import GSSAFunctionalUtilities
+import GSSASessionInfo
 
 class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewViewProtocol {
     
@@ -132,7 +133,7 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
         lblDate.text = transaction.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy")
         
         lblTitle.text = transaction.concepto?.alnovaDecrypt()
-       
+        
         details.updateValue("Concepto", forKey: transaction.concepto?.alnovaDecrypt() ?? "")
         details.updateValue("Realizado", forKey: transaction.nombreOrdenante ?? "")
         details.updateValue("Para", forKey:  transaction.descripcionBeneficiario ?? "")
@@ -168,50 +169,50 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
         }
         
         
-        if transaction.idOperacion == "212"{
+        if transaction.idOperacion == "212" || transaction.idOperacion == "213"{
             URLBanxico = "https://www.banxico.org.mx/cep/"
             //if GLOBAL_ENVIROMENT == .develop{
-                GSVCLoader.show()
-                let type = lblAmount.text!.contains("-") ? "E" : "R"
-                let body = SPEIDetailBody.init(transaccion: SPEIDetailTransaccion.init(claveInstitucionBancaria: claveInstitucion, operacion: SPEIDetailOperacion.init(tipo: type, fecha: transaction.fecha, hora: transaction.hora)))
+            GSVCLoader.show()
+            let type = lblAmount.text!.contains("-") ? "E" : "R"
+            let body = SPEIDetailBody.init(transaccion: SPEIDetailTransaccion.init(claveInstitucionBancaria: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits(), operacion: SPEIDetailOperacion.init(tipo: type, fecha: transaction.fecha, hora: transaction.numeroOperacion)))
             
-                presenter?.requestGetSPEIDetail(Body: body, claveRastreo: transaction.descripcion ?? "", Response: {  [self] Response in
-                    if Response != nil{
-                        let data = Response?.resultado
-                        details.updateValue("Clave de rastreo", forKey: transaction.descripcion ?? "")
-                        details.updateValue("Realizado con", forKey: data?.numeroCuentaOrigen ?? "")
-                        
-                        if descriptionData?[0].isEmpty == false{
-                            details.updateValue("Nombre del beneficiario", forKey: (data?.nombreBeneficiario ?? "") + "\n" + (descriptionData?[0] ?? ""))
-                        }else{
-                            details.updateValue("Nombre del beneficiario", forKey: (data?.nombreBeneficiario ?? "") + "\n" + (urlFotoData?[0] ?? ""))
-                        }
-                        
-                        switch data?.estatusTransferencia{
-                         case "T":
-                            details.updateValue("Estatus de transferencia", forKey: "Liquidada")
-                        case "C":
-                            details.updateValue("Estatus de transferencia", forKey: "Liquidada por contingencia")
-                        case .none:
-                            details.updateValue("Estatus de transferencia", forKey: "")
-                        case .some(_):
-                            details.updateValue("Estatus de transferencia", forKey: "")
-                        }
-                       
-                        let URLData = data?.urlEstatusTransferencia?.components(separatedBy: "|")
-                        
-                        if URLData?.count ?? 0 >= 3{
-                            URLBanxico = "https://www.banxico.org.mx/cep/go?i=" + URLData![0]
-                            URLBanxico = URLBanxico + "&s=" + URLData![1]
-                            URLBanxico = URLBanxico + "&d=" + (URLData?[2].removeWhiteSpaces())!
-                        }
+            presenter?.requestGetSPEIDetail(Body: body, claveRastreo: transaction.descripcion ?? "", Response: {  [self] Response in
+                if Response != nil{
+                    let data = Response?.resultado
+                    details.updateValue("Clave de rastreo", forKey: transaction.descripcion ?? "")
+                    details.updateValue("Realizado con", forKey: data?.numeroCuentaOrigen ?? "")
+                    
+                    if descriptionData?[0].isEmpty == false{
+                        details.updateValue("Nombre del beneficiario", forKey: (data?.nombreBeneficiario ?? "") + "\n" + (descriptionData?[0] ?? ""))
+                    }else{
+                        details.updateValue("Nombre del beneficiario", forKey: (data?.nombreBeneficiario ?? "") + "\n" + (urlFotoData?[0] ?? ""))
                     }
-                    GSVCLoader.hide()
-                    setOptions(SPEI: true)
-                })
-//            }else{
-//                setOptions(SPEI: true)
-//            }
+                    
+                    switch data?.estatusTransferencia{
+                    case "T":
+                        details.updateValue("Estatus de transferencia", forKey: "Liquidada")
+                    case "C":
+                        details.updateValue("Estatus de transferencia", forKey: "Liquidada por contingencia")
+                    case .none:
+                        details.updateValue("Estatus de transferencia", forKey: "")
+                    case .some(_):
+                        details.updateValue("Estatus de transferencia", forKey: "")
+                    }
+                    
+                    let URLData = data?.urlEstatusTransferencia?.components(separatedBy: "|")
+                    
+                    if URLData?.count ?? 0 >= 3{
+                        URLBanxico = "https://www.banxico.org.mx/cep/go?i=" + URLData![0]
+                        URLBanxico = URLBanxico + "&s=" + URLData![1]
+                        URLBanxico = URLBanxico + "&d=" + (URLData?[2].removeWhiteSpaces())!
+                    }
+                }
+                GSVCLoader.hide()
+                setOptions(SPEI: true)
+            })
+            //            }else{
+            //                setOptions(SPEI: true)
+            //            }
         }else{
             setOptions(SPEI: false)
         }
