@@ -98,31 +98,7 @@ class GSSARequestDebitCardViewController: GSSAMasterViewController, GSSARequestD
     }
     
     @IBAction func next(_ sender: Any){
-        let parameters:[String:Any] =
-            [
-                "paymentConfig":
-                    [
-                        "productQuantity":"1",
-                        "commission":"0",
-                        "concept":"Donación",
-                        "idCompany":"",
-                        "idReferencePay":"",
-                        "iva":"0",
-                        "amount":"\(amount)",
-                        "requieredBill" : true,
-                        "shippingAmount": "\(amount)",
-                        "x-idOperacionConciliacion": ""
-                    ],
-                "viewConfig" :
-                    [
-                        "txtTitle":"Envío de tarjeta\nfisica Baz",
-                        "txtSubtitle":"Realizado con:",
-                        "txtHelper":"Costo de envío: \(amount)",
-                        "txtSlideButton": "Desliza para pagar",
-                    ]
-            ]
-        
-        GSINAdminNavigator.shared.startFlow(forAction: "GSIFTr_PaymentBTN", navigateDelegate: self, withInfo: parameters)
+        self.present(GSSACardPaymentBtnCoreViewRouter.createModule(), animated: true)
     }
     
     @IBAction func editAddress(_ sender: Any){

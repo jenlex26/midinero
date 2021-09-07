@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GSSACardPaymentBtnSliderViewViewController" customModule="GSSAMyMoney" customModuleProvider="target">
+            <connections>
+                <outlet property="sliderView" destination="1jf-2p-ZxK" id="S8N-Kw-Os6"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sX2-yA-Z2m">
+                    <rect key="frame" x="0.0" y="399.5" width="375" height="267.5"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HXY-Tq-3aM">
+                            <rect key="frame" x="315" y="10" width="50" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="5Z5-No-A8w"/>
+                                <constraint firstAttribute="width" constant="50" id="Le9-C0-yww"/>
+                            </constraints>
+                            <color key="tintColor" systemColor="systemIndigoColor"/>
+                            <state key="normal" image="xmark" catalog="system"/>
+                            <connections>
+                                <action selector="tryClose" destination="-1" eventType="touchUpInside" id="flE-p1-YgZ"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1jf-2p-ZxK">
+                            <rect key="frame" x="20" y="167.5" width="335" height="70"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="70" id="L4t-zY-WzY"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cualquier persona puede recibir tu tarjeta pero solo tú podrás activarla desde la App." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i0k-hc-92y" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                            <rect key="frame" x="30" y="80" width="315" height="67.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="styleType">
+                                    <integer key="value" value="6"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="i0k-hc-92y" firstAttribute="top" secondItem="HXY-Tq-3aM" secondAttribute="bottom" constant="20" id="9Jr-dY-tif"/>
+                        <constraint firstAttribute="trailing" secondItem="i0k-hc-92y" secondAttribute="trailing" constant="30" id="J2d-6j-XUM"/>
+                        <constraint firstAttribute="trailing" secondItem="1jf-2p-ZxK" secondAttribute="trailing" constant="20" id="Vs7-i0-QAJ"/>
+                        <constraint firstItem="1jf-2p-ZxK" firstAttribute="top" secondItem="i0k-hc-92y" secondAttribute="bottom" constant="20" id="XzX-BA-Zxo"/>
+                        <constraint firstAttribute="bottom" secondItem="1jf-2p-ZxK" secondAttribute="bottom" constant="30" id="dx5-ae-58M"/>
+                        <constraint firstItem="i0k-hc-92y" firstAttribute="leading" secondItem="sX2-yA-Z2m" secondAttribute="leading" constant="30" id="gbO-C5-UtR"/>
+                        <constraint firstAttribute="trailing" secondItem="HXY-Tq-3aM" secondAttribute="trailing" constant="10" id="kuB-mO-ff7"/>
+                        <constraint firstItem="HXY-Tq-3aM" firstAttribute="top" secondItem="sX2-yA-Z2m" secondAttribute="top" constant="10" id="ln2-0d-qco"/>
+                        <constraint firstItem="1jf-2p-ZxK" firstAttribute="leading" secondItem="sX2-yA-Z2m" secondAttribute="leading" constant="20" id="uNS-bg-2Hb"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="30"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="sX2-yA-Z2m" secondAttribute="trailing" id="YjW-FZ-GSi"/>
+                <constraint firstItem="sX2-yA-Z2m" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="fez-Rv-cus"/>
+                <constraint firstAttribute="bottom" secondItem="sX2-yA-Z2m" secondAttribute="bottom" id="qXm-HA-whU"/>
+            </constraints>
+            <point key="canvasLocation" x="140" y="153"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="i0k-hc-92y">
+            <size key="intrinsicContentSize" width="685.5" height="22.5"/>
+        </designable>
+    </designables>
+    <resources>
+        <image name="xmark" catalog="system" width="128" height="113"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
