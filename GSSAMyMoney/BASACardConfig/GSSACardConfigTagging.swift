@@ -2,7 +2,7 @@
 //  GSSACardConfigTagging.swift
 //  GSSAMyMoney
 //
-//  Created by Desarrollo on 21/07/21.
+//  Created by Andoni Suarez on 21/07/21.
 //
 
 import Foundation

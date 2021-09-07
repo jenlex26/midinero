@@ -2,7 +2,7 @@
 //  GSSACardConfigEntity.swift
 //  GSSAMyMoney
 //
-//  Created by Desarrollo on 10/08/21.
+//  Created by Andoni Suarez on 10/08/21.
 //
 
 import Foundation

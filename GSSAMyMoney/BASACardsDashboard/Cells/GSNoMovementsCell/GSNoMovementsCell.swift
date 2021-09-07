@@ -2,7 +2,7 @@
 //  GSNoMovementsCell.swift
 //  GSSAMyMoney
 //
-//  Created by Desarrollo on 24/06/21.
+//  Created by Andoni Suarez on 24/06/21.
 //
 
 import UIKit

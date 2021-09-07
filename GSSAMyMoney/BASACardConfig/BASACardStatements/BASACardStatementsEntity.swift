@@ -2,7 +2,7 @@
 //  BASACardStatementsEntity.swift
 //  GSSAMyMoney
 //
-//  Created by Desarrollo on 23/06/21.
+//  Created by Andoni Suarez on 23/06/21.
 //
 
 import Foundation

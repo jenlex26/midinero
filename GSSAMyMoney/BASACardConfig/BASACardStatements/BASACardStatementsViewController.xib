@@ -36,7 +36,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Estados de cuenta" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C8E-dw-h0v" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                            <rect key="frame" x="132.5" y="14" width="149.5" height="22.5"/>
+                            <rect key="frame" x="136.5" y="15" width="141" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -77,7 +77,7 @@
     </objects>
     <designables>
         <designable name="C8E-dw-h0v">
-            <size key="intrinsicContentSize" width="149.5" height="22.5"/>
+            <size key="intrinsicContentSize" width="141" height="20.5"/>
         </designable>
         <designable name="kUC-A5-hdZ"/>
     </designables>

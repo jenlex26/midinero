@@ -2,7 +2,7 @@
 //  GSSANewBeneficiaryEntity.swift
 //  GSSAMyMoney
 //
-//  Created by Desarrollo on 09/07/21.
+//  Created by Andoni Suarez on 09/07/21.
 //
 
 import Foundation

@@ -163,7 +163,7 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
     }
     
     @IBAction func close(_ sender: Any){
-        self.navigationController?.popViewController(animated: true)
+       self.navigationController?.popViewController(animated: true)
     }
     
 }

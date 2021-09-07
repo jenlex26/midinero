@@ -2,7 +2,7 @@
 //  BASACardControl.swift
 //  GSSAFront
 //
-//  Created by Desarrollo on 14/06/21.
+//  Created by Andoni Suarez on 14/06/21.
 //
 
 import UIKit

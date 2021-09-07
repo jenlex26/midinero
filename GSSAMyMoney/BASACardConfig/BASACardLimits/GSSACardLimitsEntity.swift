@@ -2,7 +2,7 @@
 //  GSSACardLimitsEntity.swift
 //  GSSAMyMoney
 //
-//  Created by Desarrollo on 08/07/21.
+//  Created by Andoni Suarez on 08/07/21.
 //
 
 import Foundation

@@ -2,7 +2,7 @@
 //  GSSAHomeHeaderViewTagging.swift
 //  GSSAMyMoney
 //
-//  Created by Desarrollo on 20/07/21.
+//  Created by Andoni Suarez on 20/07/21.
 //
 
 import Foundation

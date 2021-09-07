@@ -2,7 +2,7 @@
 //  GSSARockaletaCustom.swift
 //  GSSAMyMoney
 //
-//  Created by Desarrollo on 05/08/21.
+//  Created by Andoni Suarez on 05/08/21.
 //
 
 import Foundation

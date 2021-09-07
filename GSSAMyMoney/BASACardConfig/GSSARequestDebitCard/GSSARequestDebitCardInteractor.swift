@@ -49,11 +49,11 @@ class GSSARequestDebitCardInteractor: GSSAURLSessionTaskCoordinatorBridge, GSSAR
         }
         
         
-        let address = Envio(comision: commission, idTipoTarjeta: "CP", cliente: ConfirmCardRequestTransaccionClient.init(nombre: (GSSISessionInfo.sharedInstance.gsUser.name ?? "") + " " + (GSSISessionInfo.sharedInstance.gsUser.lastName ?? ""), numeroTelefonico: GSSISessionInfo.sharedInstance.gsUser.phone), domicilio: Domicilio.init(ciudad: requestedAddress.shared.city, calle: requestedAddress.shared.street, colonia: requestedAddress.shared.suburb, codigoPostal: requestedAddress.shared.postalCode, numeroExterior: requestedAddress.shared.externalNumber, numeroInterior: requestedAddress.shared.internalNumber))
+        let address = Envio(idTipoTarjeta: "CP", cliente: ConfirmCardRequestTransaccionClient.init(nombre: (GSSISessionInfo.sharedInstance.gsUser.name ?? "") + " " + (GSSISessionInfo.sharedInstance.gsUser.lastName ?? ""), numeroTelefonico: GSSISessionInfo.sharedInstance.gsUser.phone), comision: commission, domicilio: Domicilio.init(ciudad: requestedAddress.shared.city, colonia: requestedAddress.shared.suburb, numeroExterior: requestedAddress.shared.externalNumber, numeroInterior: requestedAddress.shared.internalNumber, codigoPostal: requestedAddress.shared.postalCode, calle: requestedAddress.shared.street))
         
-        let body = ConfirmCardRequestBody(transaccion: ConfirmCardRequestTransaccion.init(primerTokenVerificacion: GSSISessionInfo.sharedInstance.gsUserToken, sicu: GSSISessionInfo.sharedInstance.gsUser.SICU, numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount, envio: address))
+        let body = ConfirmCardRequestBody(transaccion: ConfirmCardRequestTransaccion.init(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount, primerTokenVerificacion: GSSISessionInfo.sharedInstance.gsUserToken, envio: address))
         
-        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: body, environment: .develop) { (objRes: PhysicalCardShippingAmountResponse?, error) in
+        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: PhysicalCardShippingAmountResponse?, error) in
             
             if error.code == 0 {
             } else {

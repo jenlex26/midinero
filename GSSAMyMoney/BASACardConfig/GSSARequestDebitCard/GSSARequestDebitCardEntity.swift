@@ -2,21 +2,11 @@
 //  GSSARequestDebitCardEntity.swift
 //  GSSAMyMoney
 //
-//  Created by Desarrollo on 09/08/21.
+//  Created by Andoni Suarez on 09/08/21.
 //
 
 import Foundation
 
-// MARK: - PhysicalCardCommisionBody
-struct PhysicalCardCommisionBody: Codable {
-    var transaccion: PhysicalCardCommisionTransaction?
-}
-
-// MARK: - PhysicalCardCommisionTransaction
-struct PhysicalCardCommisionTransaction: Codable {
-    var geolocalizacion: ShippingAmountLocation?
-    var numeroTarjeta, primerTokenVerificacion: String
-}
 
 // MARK: - PhysicalCardCommisionBody
 struct PhysicalCardShippingAmountTransaction: Codable {
@@ -46,12 +36,6 @@ struct PhysicalCardShippingAmountResult: Codable {
 }
 
 
-
-
-
-
-
-
 // MARK: - ConfirmCardRequestBody
 struct ConfirmCardRequestBody: Codable {
     var transaccion: ConfirmCardRequestTransaccion?
@@ -59,14 +43,15 @@ struct ConfirmCardRequestBody: Codable {
 
 // MARK: - Transaccion
 struct ConfirmCardRequestTransaccion: Codable {
-    var primerTokenVerificacion, sicu, numeroCuenta: String?
+    var numeroCuenta, primerTokenVerificacion: String?
     var envio: Envio?
 }
 
 // MARK: - Envio
 struct Envio: Codable {
-    var comision, idTipoTarjeta: String?
+    var idTipoTarjeta: String?
     var cliente: ConfirmCardRequestTransaccionClient?
+    var comision: String?
     var domicilio: Domicilio?
 }
 
@@ -77,6 +62,9 @@ struct ConfirmCardRequestTransaccionClient: Codable {
 
 // MARK: - Domicilio
 struct Domicilio: Codable {
-    var ciudad, calle, colonia, codigoPostal: String?
-    var numeroExterior, numeroInterior: String?
+    var ciudad, colonia, numeroExterior, numeroInterior: String?
+    var codigoPostal, calle: String?
 }
+
+
+

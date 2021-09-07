@@ -2,7 +2,7 @@
 //  BeneficiaryButtonCell.swift
 //  GSSAMyMoney
 //
-//  Created by Desarrollo on 30/06/21.
+//  Created by Andoni Suarez on 30/06/21.
 //
 
 import UIKit

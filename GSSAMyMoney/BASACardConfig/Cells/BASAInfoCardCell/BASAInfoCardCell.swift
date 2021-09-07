@@ -2,7 +2,7 @@
 //  BASAInfoCardCell.swift
 //  GSSAFront
 //
-//  Created by Desarrollo on 13/06/21.
+//  Created by Andoni Suarez on 13/06/21.
 //
 
 import UIKit

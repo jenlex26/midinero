@@ -2,7 +2,7 @@
 //  BASALendInfoCell.swift
 //  GSSAFront
 //
-//  Created by Desarrollo on 17/06/21.
+//  Created by Andoni Suarez on 17/06/21.
 //
 
 import UIKit
