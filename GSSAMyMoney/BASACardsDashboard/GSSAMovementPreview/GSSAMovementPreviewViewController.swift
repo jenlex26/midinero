@@ -86,7 +86,7 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
             cell.lblDate.numberOfLines = 2
             cell.lblDate.styleType = 6
             if element.key.removeWhiteSpaces() != ""{
-                if element.value == "Nombre del beneficiario"{
+                if element.value == "Nombre del beneficiario" || element.value == "Ordenante"{
                     cellsArray.append([cell:90.0])
                 }else{
                     cellsArray.append([cell:75.0])
@@ -134,9 +134,9 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
         
         lblTitle.text = transaction.concepto?.alnovaDecrypt()
         
-        details.updateValue("Concepto", forKey: transaction.concepto?.alnovaDecrypt() ?? "")
-        details.updateValue("Realizado", forKey: transaction.nombreOrdenante ?? "")
-        details.updateValue("Para", forKey:  transaction.descripcionBeneficiario ?? "")
+        details.updateValue("Descripción", forKey: transaction.concepto?.alnovaDecrypt() ?? "")
+        //details.updateValue("Realizado", forKey: transaction.nombreOrdenante ?? "")
+        //details.updateValue("Para", forKey:  transaction.descripcionBeneficiario ?? "")
         details.updateValue("Id de operación", forKey: transaction.idOperacion ?? "")
         details.updateValue("Folio", forKey: transaction.folio ?? "")
         details.updateValue("Número de operación", forKey: transaction.numeroOperacion ?? "")
@@ -174,19 +174,26 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
             //if GLOBAL_ENVIROMENT == .develop{
             GSVCLoader.show()
             let type = lblAmount.text!.contains("-") ? "E" : "R"
-            let body = SPEIDetailBody.init(transaccion: SPEIDetailTransaccion.init(claveInstitucionBancaria: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits(), operacion: SPEIDetailOperacion.init(tipo: type, fecha: transaction.fecha, hora: transaction.numeroOperacion)))
+            let body = SPEIDetailBody.init(transaccion: SPEIDetailTransaccion.init(claveInstitucionBancaria: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().encryptAlnova(), operacion: SPEIDetailOperacion.init(tipo: type, fecha: transaction.fecha, hora: transaction.numeroOperacion)))
             
             presenter?.requestGetSPEIDetail(Body: body, claveRastreo: transaction.descripcion ?? "", Response: {  [self] Response in
                 if Response != nil{
-                    let data = Response?.resultado
-                    details.updateValue("Clave de rastreo", forKey: transaction.descripcion ?? "")
-                    details.updateValue("Realizado con", forKey: data?.numeroCuentaOrigen ?? "")
                     
-                    if descriptionData?[0].isEmpty == false{
-                        details.updateValue("Nombre del beneficiario", forKey: (data?.nombreBeneficiario ?? "") + "\n" + (descriptionData?[0] ?? ""))
-                    }else{
-                        details.updateValue("Nombre del beneficiario", forKey: (data?.nombreBeneficiario ?? "") + "\n" + (urlFotoData?[0] ?? ""))
-                    }
+                    let data = Response?.resultado
+                    
+                    let originData = data?.numeroCuentaOrigen?.components(separatedBy: "|")
+                    
+                    details.updateValue("Clave de rastreo", forKey: transaction.descripcion ?? "")
+                    details.updateValue("Ordenante", forKey: (originData?[0] ?? "") + "\n" + (originData?[1] ?? ""))
+                    
+                    let destinationData = data?.importeBeneficiario?.components(separatedBy: "|")
+                    
+                    let referenceData = data?.nombreBeneficiario?.components(separatedBy: "|")
+                    
+                    details.updateValue("Referencia", forKey: referenceData?[0] ?? "")
+                    details.updateValue("Concepto ", forKey: referenceData?[1] ?? "")
+                    
+                    details.updateValue("Nombre del beneficiario", forKey: (destinationData?[0] ?? "") + "\nCuenta: " + (destinationData?[1] ?? ""))
                     
                     switch data?.estatusTransferencia{
                     case "T":
@@ -234,11 +241,13 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
     }
     
     @IBAction func close(_ sender: Any){
+        activityObserved()
         self.dismiss(animated: true, completion: nil)
         // self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func share(_ sender: Any){
+        activityObserved()
         let image = share()
         let imageToShare = [ image! ]
         let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
@@ -280,6 +289,7 @@ extension GSSAMovementPreviewViewController: UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = table.cellForRow(at: indexPath)
+        activityObserved()
         switch cell?.tag{
         case 1:
             if let url = URL(string: "\(URLBanxico)") {
@@ -290,5 +300,9 @@ extension GSSAMovementPreviewViewController: UITableViewDelegate, UITableViewDat
         case .some(_):
             print("Some")
         }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        activityObserved()
     }
 }

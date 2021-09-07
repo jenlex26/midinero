@@ -17,25 +17,4 @@ import GSSAFunctionalUtilities
 class GSSADocumentReaderInteractor: GSSAURLSessionTaskCoordinatorBridge,  GSSADocumentReaderInteractorProtocol {
 
     weak var presenter: GSSADocumentReaderPresenterProtocol?
-    
-    func getDocument(){
-        if GLOBAL_ENVIROMENT == .develop{
-            self.urlPath = "https://apigateway.superappbaz.com/"
-            self.strPathEndpoint = "integracion/superapp/dinero/captacion/estados-cuenta/v1/documentos/busquedas"
-        }else{
-            self.strPathEndpoint = "/superapp/dinero/captacion/estados-cuenta/v1/documentos/busquedas"
-        }
-        let body = RequestDocumentBody.init(transaccion: RequestDocumentTransaction.init(primerTokenVerificacion: customToken.shared.firstVerification, referencia: "95461600329333", periodo: "19-12"))
-        
-        sendRequest(strUrl: strPathEndpoint, method: .POST, objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: DebitCardStatementData?, error) in
-            debugPrint(objRes as Any)
-            
-            if error.code == 0 {
-                print(objRes ?? "null")
-            } else {
-                debugPrint(error)
-            }
-        }
-        
-    }
 }

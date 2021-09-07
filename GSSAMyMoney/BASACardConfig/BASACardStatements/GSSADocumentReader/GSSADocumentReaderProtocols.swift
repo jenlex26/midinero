@@ -11,22 +11,22 @@
 import Foundation
 
 //MARK: Wireframe -
-protocol GSSADocumentReaderWireframeProtocol: class {
+protocol GSSADocumentReaderWireframeProtocol: AnyObject {
 
 }
 //MARK: Presenter -
-protocol GSSADocumentReaderPresenterProtocol: class {
+protocol GSSADocumentReaderPresenterProtocol: AnyObject {
 
 }
 
 //MARK: Interactor -
-protocol GSSADocumentReaderInteractorProtocol: class {
+protocol GSSADocumentReaderInteractorProtocol: AnyObject {
 
   var presenter: GSSADocumentReaderPresenterProtocol?  { get set }
 }
 
 //MARK: View -
-protocol GSSADocumentReaderViewProtocol: class {
+protocol GSSADocumentReaderViewProtocol: AnyObject {
 
   var presenter: GSSADocumentReaderPresenterProtocol?  { get set }
 }

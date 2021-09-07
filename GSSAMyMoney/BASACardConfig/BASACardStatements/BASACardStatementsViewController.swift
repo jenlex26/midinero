@@ -15,10 +15,6 @@ import GSSASessionInfo
 
 class BASACardStatementsViewController: UIViewController, BASACardStatementsViewProtocol, GSVCBottomAlertHandler{
     
-    var bottomAlert: GSVCBottomAlert?
-    var presenter: BASACardStatementsPresenterProtocol?
-    var type: CardType!
-    
     @IBOutlet weak var table: UITableView!
     
     struct statement{
@@ -30,6 +26,9 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
     
     var statements: Array<statement> = []
     var requestData: [StatementDetail] = []
+    var bottomAlert: GSVCBottomAlert?
+    var presenter: BASACardStatementsPresenterProtocol?
+    var type: CardType!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,13 +42,13 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
             GSVCLoader.show()
             let requestBody = DebitCardStatementBody(numeroCuenta: "", fechaInicio: "", fechaFin: "")
             presenter?.requestStatements(body: requestBody, StatementsResultData: { [self] StatementsResultData in
-                GSVCLoader.hide()
                 if StatementsResultData != nil{
                     requestData = StatementsResultData?.resultado?.detalles ?? []
                     setStatements()
                 }else{
                     showEmptyStatementsView()
                 }
+                GSVCLoader.hide()
             })
         }
         
@@ -96,15 +95,19 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
         }else{
             tagSendStatementsButtonClick(origin: "debito")
         }
-       
-        let success = GSVTOperationStatusViewController(status: .success(title: "Operación completada", message: "Estados de cuenta envíados", views: []), plainButtonAction: {
-            self.dismiss(animated: true, completion: {
-                GSVCLoader.hide()
-                self.navigationController?.popViewController(animated: true)
-            })
-        })
-        success.modalPresentationStyle = .fullScreen
-        self.present(success, animated: true, completion: nil)
+        
+        
+        table.selectRow(at: [0,3], animated: true, scrollPosition: .middle)
+        table.delegate?.tableView!(table, didSelectRowAt: [0,3])
+        
+        //        let success = GSVTOperationStatusViewController(status: .success(title: "Operación completada", message: "Estados de cuenta envíados", views: []), plainButtonAction: {
+        //            self.dismiss(animated: true, completion: {
+        //                GSVCLoader.hide()
+        //                self.navigationController?.popViewController(animated: true)
+        //            })
+        //        })
+        //        success.modalPresentationStyle = .fullScreen
+        //        self.present(success, animated: true, completion: nil)
     }
     
     func cerraBottomAlert() {
@@ -136,8 +139,8 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
         statements[0].switchState = false
         statements[sender.tag].switchState = sender.isOn
         if sender.isOn == false{
-           let cell = self.table.cellForRow(at: [0,2]) as! BASASwitchItemCell
-           cell.swtch.isOn = false
+            let cell = self.table.cellForRow(at: [0,2]) as! BASASwitchItemCell
+            cell.swtch.isOn = false
         }
     }
     
@@ -150,20 +153,18 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
         }
         
         if statementsSelected == true{
-              sendStatements()
+            sendStatements()
         }else{
             self.presentBottomAlertFullData(status: .caution, message: "Debe seleccionar al menos un estado de cuenta", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
         }
     }
     
     @objc func closeView(_ sender: Any){
-//        let view = GSSADocumentReaderRouter.createModule()
-//        self.navigationController?.pushViewController(view, animated: true)
         self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func close(_ sender: Any){
-       self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
     
 }
@@ -196,6 +197,7 @@ extension BASACardStatementsViewController: UITableViewDelegate, UITableViewData
         default:
             let cell = table.dequeueReusableCell(withIdentifier: "BASASwitchItemCell") as! BASASwitchItemCell
             let data = statements[indexPath.row - 2]
+            
             if data.tag == 0{
                 cell.backgroundColor = UIColor.GSVCBase300()
                 cell.swtch.addTarget(self, action: #selector(selectAllStatements(sender:)), for: .valueChanged)
@@ -208,6 +210,7 @@ extension BASACardStatementsViewController: UITableViewDelegate, UITableViewData
             }else{
                 cell.swtch.isOn = false
             }
+            cell.tag = data.tag ?? -1
             cell.configureCell(title: data.title, subtitle: data.subTitle)
             return cell
         }
@@ -225,6 +228,27 @@ extension BASACardStatementsViewController: UITableViewDelegate, UITableViewData
             return 119.0
         default:
             return 80.0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if table.cellForRow(at: indexPath) is BASASwitchItemCell{
+            let cell = table.cellForRow(at: indexPath) as! BASASwitchItemCell
+            if cell.tag != 0{
+                let data = requestData[cell.tag - 1]
+                GSVCLoader.show()
+                let body = RequestDocumentBody.init(primerTokenVerificacion: customToken.shared.firstVerification, referencia: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().encryptAlnova() ?? "", periodo: data.periodo ?? "")
+                
+                presenter?.requestDocument(body: body, Document: { Document in
+                    if Document != nil{
+                        let view = GSSADocumentReaderRouter.createModule(base64Document: Document?.resultado?.documento ?? "")
+                        self.navigationController?.pushViewController(view, animated: true)
+                    }else{
+                        self.presentBottomAlertFullData(status: .error, message: "Ocurrió un problema al consultar su estado de cuenta, intente más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+                    }
+                    GSVCLoader.hide()
+                })
+            }
         }
     }
 }

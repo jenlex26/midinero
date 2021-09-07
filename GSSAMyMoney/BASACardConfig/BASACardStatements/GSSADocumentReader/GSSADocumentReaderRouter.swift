@@ -14,13 +14,14 @@ class GSSADocumentReaderRouter: GSSADocumentReaderWireframeProtocol {
     
     weak var viewController: UIViewController?
     
-    static func createModule() -> UIViewController {
+    static func createModule(base64Document: String) -> UIViewController {
         // Change to get view from storyboard if not using progammatic UI
         let view = GSSADocumentReaderViewController(nibName: nil, bundle: Bundle.init(for: GSSADocumentReaderRouter.self))
         let interactor = GSSADocumentReaderInteractor()
         let router = GSSADocumentReaderRouter()
         let presenter = GSSADocumentReaderPresenter(interface: view, interactor: interactor, router: router)
         
+        view.base64Document = base64Document
         view.presenter = presenter
         interactor.presenter = presenter
         router.viewController = view

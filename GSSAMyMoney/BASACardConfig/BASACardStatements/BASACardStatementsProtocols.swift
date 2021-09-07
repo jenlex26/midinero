@@ -11,22 +11,24 @@
 import Foundation
 
 //MARK: Wireframe -
-protocol BASACardStatementsWireframeProtocol: class {
+protocol BASACardStatementsWireframeProtocol: AnyObject {
 
 }
 //MARK: Presenter -
-protocol BASACardStatementsPresenterProtocol: class {
+protocol BASACardStatementsPresenterProtocol: AnyObject {
     func requestStatements(body: DebitCardStatementBody, StatementsResultData: @escaping (DebitCardStatementData?) -> ())
+    func requestDocument(body: RequestDocumentBody, Document: @escaping (RequestDocumentResponse?) -> ())
 }
 
 //MARK: Interactor -
-protocol BASACardStatementsInteractorProtocol: class {
+protocol BASACardStatementsInteractorProtocol: AnyObject {
   var presenter: BASACardStatementsPresenterProtocol?  { get set }
     func getStatements(body: DebitCardStatementBody, StatementsResultData: @escaping (DebitCardStatementData?) -> ())
+    func getDocument(body: RequestDocumentBody, Document: @escaping (RequestDocumentResponse?) -> ())
 }
 
 //MARK: View -
-protocol BASACardStatementsViewProtocol: class {
+protocol BASACardStatementsViewProtocol: AnyObject {
 
   var presenter: BASACardStatementsPresenterProtocol?  { get set }
 }

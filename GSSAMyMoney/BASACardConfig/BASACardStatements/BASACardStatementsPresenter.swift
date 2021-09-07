@@ -25,4 +25,8 @@ class BASACardStatementsPresenter: BASACardStatementsPresenterProtocol {
         interactor?.getStatements(body: body, StatementsResultData: StatementsResultData)
     }
 
+    func requestDocument(body: RequestDocumentBody, Document: @escaping (RequestDocumentResponse?) -> ()){
+        interactor?.getDocument(body: body, Document: Document)
+    }
+    
 }

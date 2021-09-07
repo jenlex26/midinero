@@ -15,6 +15,7 @@ import GSSASessionInfo
 import GSSAFunctionalUtilities
 import GSSAFirebaseManager
 import baz_ios_sdk_link_pago
+import GSSAInterceptor
 
 class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoViewProtocol, GSVCBottomAlertHandler, GSVTDigitalSignDelegate {
     
@@ -187,7 +188,7 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
     }
     
     func cancelDigitalSing(_ isUserBlocked: Bool) {
-        self.dismiss(animated: true, completion: nil)
+        GSINAdminNavigator.shared.releaseLastFlow()
     }
     
     public static func validateStrings(parameters: [String : Any]?) -> PB_HomeEntity? {

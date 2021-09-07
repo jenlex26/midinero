@@ -46,5 +46,24 @@ class BASACardStatementsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASACar
         }
     }
     
-  
+    func getDocument(body: RequestDocumentBody, Document: @escaping (RequestDocumentResponse?) -> ()){
+        if GLOBAL_ENVIROMENT == .develop{
+            self.urlPath = "https://apigateway.superappbaz.com/"
+            self.strPathEndpoint = "integracion/superapp/dinero/captacion/estados-cuenta/v1/documentos/busquedas"
+        }else{
+            self.strPathEndpoint = "/superapp/dinero/captacion/estados-cuenta/v1/documentos/busquedas"
+        }
+        
+        sendRequest(strUrl: strPathEndpoint, method: .POST, objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: RequestDocumentResponse?, error) in
+            debugPrint(objRes as Any)
+            if error.code == 0 {
+                print(objRes ?? "null")
+                Document(objRes)
+            } else {
+                Document(nil)
+                debugPrint(error)
+            }
+        }
+        
+    }
 }

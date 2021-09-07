@@ -31,12 +31,20 @@ struct StatementDetail: Codable {
     var periodo, fechaInicio, fechaFin: String?
 }
 
-// MARK: - RequestDocumentBody
-struct RequestDocumentBody: Codable {
-    let transaccion: RequestDocumentTransaction
-}
 
 // MARK: - Transaccion
-struct RequestDocumentTransaction: Codable {
+struct RequestDocumentBody: Codable {
     let primerTokenVerificacion, referencia, periodo: String
+}
+
+
+// MARK: - RequestDocumentResponse
+struct RequestDocumentResponse: Codable {
+    var mensaje, folio: String?
+    var resultado: RequestDocumentResult?
+}
+
+// MARK: -  RequestDocumentResult
+struct RequestDocumentResult: Codable {
+    var documento: String?
 }
