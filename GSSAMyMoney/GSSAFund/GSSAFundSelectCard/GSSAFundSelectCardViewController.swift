@@ -11,6 +11,7 @@
 import UIKit
 import GSSAVisualComponents
 import baz_ios_sdk_link_pago
+import GSSAFunctionalUtilities
 
 class GSSAFundSelectCardViewController: GSSAMasterViewController {
     
@@ -101,7 +102,9 @@ extension GSSAFundSelectCardViewController: UITableViewDataSource {
         
         if indexPath.row == 0{
             selectCellTask = DispatchWorkItem(block: { [self] in
-                //presenter?.goToValidateCVV(GSSAFundSetCVVRouter.createModule(token: token))
+                if GLOBAL_ENVIROMENT == .develop{
+                  presenter?.goToValidateCVV(GSSAFundSetCVVRouter.createModule(token: token))
+                }
                 GSVCLoader.hide()
             })
         }
@@ -147,6 +150,7 @@ extension GSSAFundSelectCardViewController: GSSAFundSelectCardViewProtocol {
         self.cards = cards
         self.cardsTable.reloadData()
         cardsTable.tableViewDidFinishReloadData{ [self] in
+            GSVCLoader.hide()
             if cardsTable.numberOfRows(inSection: 0) > 0{
                 selectCellTask?.perform()
             }

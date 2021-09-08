@@ -17,14 +17,14 @@ protocol GSSARequestDebitCardWireframeProtocol: AnyObject {
 //MARK: Presenter -
 protocol GSSARequestDebitCardPresenterProtocol: AnyObject {
     func requestGetShippingCost(body: PhysicalCardShippingAmountTransaction, Response: @escaping (PhysicalCardShippingAmountResponse?) -> ())
-    func requestCard(commission: String,  Response: @escaping () -> ())
+    func requestCard(commission: String,  Response: @escaping (RequestCardResponse?) -> ())
 }
 
 //MARK: Interactor -
 protocol GSSARequestDebitCardInteractorProtocol: AnyObject {
   var presenter: GSSARequestDebitCardPresenterProtocol?  { get set }
     func tryGetShippingCost(body: PhysicalCardShippingAmountTransaction, Response: @escaping (PhysicalCardShippingAmountResponse?) -> ())
-    func tryRequestCard(commission: String,  Response: @escaping () -> ())
+    func tryRequestCard(commission: String,  Response: @escaping (RequestCardResponse?) -> ())
 }
 
 //MARK: View -

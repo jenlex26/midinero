@@ -125,6 +125,7 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
     }
     
     @objc func selectAllStatements(sender: UISwitch){
+        activityObserved()
         for n in 0..<statements.count{
             if sender.isOn{
                 statements[n].switchState = true
@@ -136,6 +137,7 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
     }
     
     @objc func stamementSelected(sender: UISwitch){
+        activityObserved()
         statements[0].switchState = false
         statements[sender.tag].switchState = sender.isOn
         if sender.isOn == false{
@@ -145,6 +147,7 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
     }
     
     @objc func nextAction(sender: UIButton){
+        activityObserved()
         var statementsSelected = false
         for n in 0..<statements.count{
             if statements[n].switchState == true{
@@ -232,12 +235,15 @@ extension BASACardStatementsViewController: UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        activityObserved()
         if table.cellForRow(at: indexPath) is BASASwitchItemCell{
             let cell = table.cellForRow(at: indexPath) as! BASASwitchItemCell
             if cell.tag != 0{
                 let data = requestData[cell.tag - 1]
                 GSVCLoader.show()
                 let body = RequestDocumentBody.init(primerTokenVerificacion: customToken.shared.firstVerification, referencia: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().encryptAlnova() ?? "", periodo: data.periodo ?? "")
+                
+               // let testBody = RequestDocumentBody.init(primerTokenVerificacion: customToken.shared.firstVerification, referencia: "01180100151815".encryptAlnova(), periodo: "21-01")
                 
                 presenter?.requestDocument(body: body, Document: { Document in
                     if Document != nil{

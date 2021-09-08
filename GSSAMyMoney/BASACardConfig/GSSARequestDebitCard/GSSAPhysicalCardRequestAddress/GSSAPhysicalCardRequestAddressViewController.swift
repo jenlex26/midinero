@@ -172,6 +172,7 @@ extension GSSAPhysicalCardRequestAddressViewController: UITextFieldDelegate{
 
 public struct requestedAddress{
     static var shared = requestedAddress()
+    var amount              : String? 
     var postalCode          : String?
     var suburb              : String? //Colonia
     var street              : String?

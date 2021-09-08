@@ -12,10 +12,9 @@ import UIKit
 import GSSAVisualComponents
 import GSSAVisualTemplates
 import GSSASessionInfo
-import GSSAInterceptor
 import GSSAPermissionsManager
 
-class GSSARequestDebitCardViewController: GSSAMasterViewController, GSSARequestDebitCardViewProtocol, GSINNavigateDelegate, GSVCBottomAlertHandler {
+class GSSARequestDebitCardViewController: GSSAMasterViewController, GSSARequestDebitCardViewProtocol, GSVCBottomAlertHandler {
     
     @IBOutlet weak var headerView               : UIView!
     @IBOutlet weak var containerView            : UIView!
@@ -36,10 +35,12 @@ class GSSARequestDebitCardViewController: GSSAMasterViewController, GSSARequestD
         containerView.layer.cornerRadius = 10.0
         gradientView.layer.cornerRadius = 10.0
         setAddress()
+        activityObserved()
         getShippingAmount()
         isViewDidLoad = true
         NotificationCenter.default.addObserver(self, selector: #selector(retryRequest), name: NSNotification.Name(rawValue: "RetryRequest"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(closeView), name: NSNotification.Name(rawValue: "ExitFlow"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(makeCardRequest), name: NSNotification.Name(rawValue: "SlideComplete"), object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -52,11 +53,25 @@ class GSSARequestDebitCardViewController: GSSAMasterViewController, GSSARequestD
     }
     
     @objc func retryRequest(){
+        activityObserved()
         getShippingAmount()
     }
     
     @objc func closeView(){
+        activityObserved()
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func makeCardRequest(){
+        GSVCLoader.show()
+        presenter?.requestCard(commission: amount.moneyToDoubleString(), Response: { Response in
+            if Response != nil{
+                self.present(GSSARequestDebitCardGenericTicket.getGenericTicket(delegate: self), animated: true)
+            }else{
+                self.presentBottomAlertFullData(status: .error, message: "Ocurrió un problema al solicitar su tarjeta, intente de nuevo más tared", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+            }
+            GSVCLoader.hide()
+        })
     }
     
     func getShippingAmount(){
@@ -68,6 +83,7 @@ class GSSARequestDebitCardViewController: GSSAMasterViewController, GSSARequestD
                 amount = Response?.resultado?.montoTotal?.alnovaDecrypt().moneyFormatWithoutSplit() ?? ""
                     lblShippingCost.text = "Solicítala con un costo de \(Response?.resultado?.montoTotal?.alnovaDecrypt().moneyFormatWithoutSplit() ?? "")"
                     self.lblShippingCostSubtitle.text = "Solicítala con un costo de \(Response?.resultado?.montoTotal?.alnovaDecrypt().moneyFormatWithoutSplit() ?? "")"
+                requestedAddress.shared.amount = amount
                  GSVCLoader.hide()
             }else{
                 GSVCLoader.hide()
@@ -89,16 +105,17 @@ class GSSARequestDebitCardViewController: GSSAMasterViewController, GSSARequestD
         requestedAddress.shared.postalCode = address?.zipCode
     }
     
-    func didFailToEnterFlow(error: NSError) {
-        print("Error...")
-    }
-    
-    func willFinishFlow(withInfo info: [String : Any]?) {
-       
-    }
-    
     @IBAction func next(_ sender: Any){
-        self.present(GSSACardPaymentBtnCoreViewRouter.createModule(), animated: true)
+        activityObserved()
+        if amount != ""{
+            let actualBalance = (UserDefaults.standard.value(forKey: "debitAccountBalance") as? String)?.moneyToDoubleString()
+            let cardCost = amount.moneyToDoubleString()
+            if Double(actualBalance ?? "0.0")! >= Double(cardCost) ?? 0.0{
+               self.present(GSSACardPaymentBtnCoreViewRouter.createModule(), animated: true)
+            }else{
+                self.presentBottomAlertFullData(status: .caution, message: "Lo sentimos, no cuenta con saldo suficiente para solicitar la tarjeta", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+            }
+        }
     }
     
     @IBAction func editAddress(_ sender: Any){

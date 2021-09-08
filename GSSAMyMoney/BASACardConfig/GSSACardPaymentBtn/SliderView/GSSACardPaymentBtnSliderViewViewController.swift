@@ -20,6 +20,8 @@ class GSSACardPaymentBtnSliderViewViewController: UIViewController, GSSACardPaym
     @IBOutlet weak var sliderView:UIView!
 	override func viewDidLoad() {
         super.viewDidLoad()
+        activityObserved()
+        NotificationCenter.default.addObserver(self, selector: #selector(closeFlow), name: NSNotification.Name(rawValue: "closeBtnSlider"), object: nil)
         self.configureSliderBtn()
     }
 
@@ -33,12 +35,17 @@ class GSSACardPaymentBtnSliderViewViewController: UIViewController, GSSACardPaym
         self.closeFlow()
     }
     
-    func closeFlow(){
+//    func finishFlow(){
+//        self.dismiss(animated: true) {
+//            self.presenter?.closeParent()
+//        }
+//    }
+    
+    @objc func closeFlow(){
         self.dismiss(animated: true) {
             self.presenter?.closeParent()
         }
     }
-    
     
 }
 extension GSSACardPaymentBtnSliderViewViewController : GSVTDigitalSignDelegate{
@@ -48,26 +55,27 @@ extension GSSACardPaymentBtnSliderViewViewController : GSVTDigitalSignDelegate{
     
     func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
         if success{
-            self.present(GSSARequestDebitCardGenericTicket.getGenericTicket(delegate: self), animated: true)
+            activityObserved()
+            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "SlideComplete"), object: nil, userInfo: nil))
+            self.closeFlow()
         }
     }
     
     func cancelDigitalSing(_ isUserBlocked: Bool) {
+        activityObserved()
         self.closeFlow()
     }
 }
 
 extension GSSACardPaymentBtnSliderViewViewController : GSVTTicketOperationDelegate{
     func operationSuccessActionClosed() {
+        activityObserved()
         self.closeFlow()
     }
     func operationSecundary() {
+        activityObserved()
         self.closeFlow()
     }
-  
-    
-    
-    
 }
 
 extension GSSACardPaymentBtnSliderViewViewController : GSVCSliderButtonDelegate{

@@ -67,4 +67,7 @@ struct Domicilio: Codable {
 }
 
 
-
+// MARK: - RequestCardResponse
+struct RequestCardResponse: Codable {
+    var mensaje, folio: String?
+}

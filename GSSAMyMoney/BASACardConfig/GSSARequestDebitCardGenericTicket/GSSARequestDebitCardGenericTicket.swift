@@ -14,8 +14,6 @@ import GSSASessionInfo
 
 class GSSARequestDebitCardGenericTicket
 {
-    
-    
     static func getWarningBox(message:String)->UIView {
         let iconimage  = UIImage(named: "GSSAMyMoneyinfoIcon", in: Bundle(for: GSSARequestDebitCardGenericTicket.self),
                                              compatibleWith: nil)
@@ -42,10 +40,10 @@ class GSSARequestDebitCardGenericTicket
      class func getTicketInfo()->[GSVTResumeCellInfo] {
         
         // Payment Detail Configuration Cell Start
-        
+        let selectedAddress = requestedAddress.shared
         let  paymentDetailOption:[(subTitle: String?, info: String)] =
             [
-                (subTitle: "Tarjeta baz física", info: "Pago de $90.00"),
+                (subTitle: "Tarjeta baz física", info: "Pago de \(selectedAddress.amount ?? "tarjeta física")"),
                 (subTitle: "Número de pedido baz física", info: "v12345678ekt")
             ]
         
@@ -57,7 +55,6 @@ class GSSARequestDebitCardGenericTicket
         
         // Address Detail Configuration Cell Start
         
-        let selectedAddress = requestedAddress.shared
         let addressDetailOption:[(subTitle: String?, info: String)] =
             [
                 (subTitle: "Domicilio", info: "\(selectedAddress.street ?? "") \(selectedAddress.externalNumber  ?? "") \(selectedAddress.internalNumber  ?? "" ) \(selectedAddress.postalCode  ?? "" )  \(selectedAddress.suburb  ?? "" )  \(selectedAddress.country  ?? "" )  \(selectedAddress.city  ?? "" )" ),

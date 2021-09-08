@@ -40,23 +40,23 @@ class GSSARequestDebitCardInteractor: GSSAURLSessionTaskCoordinatorBridge, GSSAR
         }
     }
     
-    func tryRequestCard(commission: String,  Response: @escaping () -> ()){
+    func tryRequestCard(commission: String,  Response: @escaping (RequestCardResponse?) -> ()){
         if GLOBAL_ENVIROMENT == .develop{
             self.urlPath = "https://apigateway.superappbaz.com/"
             self.strPathEndpoint = "integracion/superapp/dinero/captacion/gestion-tarjetas-fisicas/v1/tarjetas/solicitudes"
         }else{
-            self.strPathEndpoint = "/superapp/dinero/captacion/gestion-tarjetas-fisicas/v1/tarjetas/busquedas/comision"
+            self.strPathEndpoint = "/superapp/dinero/captacion/gestion-tarjetas-fisicas/v1/tarjetas/solicitudes"
         }
         
+        let address = Envio(idTipoTarjeta: "OK".encryptAlnova(), cliente: ConfirmCardRequestTransaccionClient.init(nombre: (GSSISessionInfo.sharedInstance.gsUser.name?.encryptAlnova() ?? "".encryptAlnova()), numeroTelefonico: GSSISessionInfo.sharedInstance.gsUser.phone?.encryptAlnova()), comision: commission.encryptAlnova(), domicilio: Domicilio.init(ciudad: requestedAddress.shared.city?.encryptAlnova(), colonia: requestedAddress.shared.suburb?.encryptAlnova(), numeroExterior: requestedAddress.shared.externalNumber?.encryptAlnova(), numeroInterior: (requestedAddress.shared.internalNumber?.encryptAlnova() ?? "".encryptAlnova()), codigoPostal: requestedAddress.shared.postalCode?.encryptAlnova(), calle: requestedAddress.shared.street?.encryptAlnova()))
         
-        let address = Envio(idTipoTarjeta: "CP", cliente: ConfirmCardRequestTransaccionClient.init(nombre: (GSSISessionInfo.sharedInstance.gsUser.name ?? "") + " " + (GSSISessionInfo.sharedInstance.gsUser.lastName ?? ""), numeroTelefonico: GSSISessionInfo.sharedInstance.gsUser.phone), comision: commission, domicilio: Domicilio.init(ciudad: requestedAddress.shared.city, colonia: requestedAddress.shared.suburb, numeroExterior: requestedAddress.shared.externalNumber, numeroInterior: requestedAddress.shared.internalNumber, codigoPostal: requestedAddress.shared.postalCode, calle: requestedAddress.shared.street))
+        let body = ConfirmCardRequestBody(transaccion: ConfirmCardRequestTransaccion.init(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().encryptAlnova(), primerTokenVerificacion: customToken.shared.firstVerification, envio: address))
         
-        let body = ConfirmCardRequestBody(transaccion: ConfirmCardRequestTransaccion.init(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount, primerTokenVerificacion: GSSISessionInfo.sharedInstance.gsUserToken, envio: address))
-        
-        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: PhysicalCardShippingAmountResponse?, error) in
-            
+        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: RequestCardResponse?, error) in
             if error.code == 0 {
+                Response(objRes)
             } else {
+                Response(nil)
                 debugPrint(error)
             }
         }
