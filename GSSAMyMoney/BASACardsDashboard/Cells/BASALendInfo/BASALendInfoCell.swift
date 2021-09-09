@@ -26,8 +26,4 @@ class BASALendInfoCell: UITableViewCell {
         self.selectionStyle = .none
         separatorView.backgroundColor = UIColor.GSVCBase300()
     }
-    
-    @IBAction func showMessage(_ sender: Any){
-     
-    }
 }

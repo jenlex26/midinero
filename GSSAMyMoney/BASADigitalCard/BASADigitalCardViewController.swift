@@ -56,7 +56,7 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
             titleBottomSpace.constant = 10.0
         }
         
-        if #available(iOS 13.0, *){}else{
+        if #available(iOS 13.0, *){  print("") }else{
             btnCopy.setImage(UIImage.copyIcon(), for: .normal)
             btnClose.setImage(UIImage(named: "close", in: Bundle.init(for: GSSAMovementPreviewViewController.self), compatibleWith: nil), for: .normal)
         }

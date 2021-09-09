@@ -45,7 +45,7 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
         setOptions()
         self.setBackButtonForOlderDevices(tint: .purple)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(handleCustomCardStatusResponse(notification:)), name: NSNotification.Name(rawValue: "customCardStatusRequestResponse"), object: nil)
+       // NotificationCenter.default.addObserver(self, selector: #selector(handleCustomCardStatusResponse(notification:)), name: NSNotification.Name(rawValue: "customCardStatusRequestResponse"), object: nil)
         table.delegate = self
         table.dataSource = self
         table.alwaysBounceVertical = false
@@ -61,12 +61,24 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
         
         if GLOBAL_ENVIROMENT == .production{
             GSVCLoader.show()
-            presenter?.requestCardStatus(CardSearchResponse: {})
+            presenter?.requestCardStatus(CardSearchResponse: { [self] CardSearchResponse in
+                if CardSearchResponse != nil{
+                    configureDebitCard(forStatus: .activate)
+                }else{
+                    configureDebitCard(forStatus: .request)
+                }
+            })
         }else{
             if let cardStatusString = RemoteConfig.remoteConfig().remoteString(forKey: "IOS_MOB_SA_MMCARD"){
                 if cardStatusString == "true"{
                     GSVCLoader.show()
-                    presenter?.requestCardStatus(CardSearchResponse: {})
+                    presenter?.requestCardStatus(CardSearchResponse: { [self] CardSearchResponse in
+                        if CardSearchResponse != nil{
+                            configureDebitCard(forStatus: .activate)
+                        }else{
+                            configureDebitCard(forStatus: .request)
+                        }
+                    })
                 }
             }
         }
@@ -100,7 +112,7 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
         
     }
     
-    func optionalAction() {}
+    func optionalAction() { print("") }
     
     func registerCells(){
         let bundle = Bundle.init(for: BASACardConfigViewController.self)
@@ -158,25 +170,6 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
             }
             self.table.reloadData()
             GSVCLoader.hide()
-        }
-    }
-    
-    @objc func handleCustomCardStatusResponse(notification: Notification){
-        GSVCLoader.hide()
-        //RECIBE una notificación con el status code del custom request y dependiendo de este determina las celdas que se mostrarán en ajustes
-        let statusCode = notification.object as! Int
-        
-        switch statusCode{
-        case 404:
-            configureDebitCard(forStatus: .request)
-        case 200:
-            configureDebitCard(forStatus: .active)
-        case 0:
-            configureDebitCard(forStatus: .active)
-        case 400:
-            configureDebitCard(forStatus: .unknown)
-        default:
-            configureDebitCard(forStatus: .unknown)
         }
     }
     

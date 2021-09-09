@@ -28,7 +28,9 @@ class GSSAActivateCreditCardViewController: UIViewController, GSSAActivateCredit
             guard let self = self else { return }
             self.txtCVV.isSecureTextEntry = !selected
         })
-        if #available(iOS 13.0, *){}else{
+        if #available(iOS 13.0, *){
+            print("")
+        }else{
             txtCVV.image = UIImage(named: "openEye", in: Bundle.init(for: GSSAFundSetCVVViewController.self), compatibleWith: nil)?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate) ?? UIImage()
             txtCVV.imageTyped = UIImage(named: "closedEye", in: Bundle.init(for: GSSAFundSetCVVViewController.self), compatibleWith: nil)?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate) ?? UIImage()
             txtCVV.tintColor = UIColor.GSVCSecundary100
@@ -39,7 +41,9 @@ class GSSAActivateCreditCardViewController: UIViewController, GSSAActivateCredit
         self.txtCVV.becomeFirstResponder()
     }
     
-    func forgotDigitalSign(_ forgotSecurityCodeViewController: UIViewController?) {}
+    func forgotDigitalSign(_ forgotSecurityCodeViewController: UIViewController?) {
+        print("")
+    }
     
     func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
         UIWindow.addSuccess {

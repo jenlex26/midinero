@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
@@ -15,11 +15,11 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Busca el código QR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DQH-2Z-qE5" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                    <rect key="frame" x="24" y="25" width="327" height="28"/>
+                    <rect key="frame" x="24" y="25" width="272" height="28"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -30,7 +30,7 @@
                     </userDefinedRuntimeAttributes>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Para activar tu tarjeta escanea el código QR que se encuentra en tu empaque." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C1v-0q-ygG" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                    <rect key="frame" x="24" y="61" width="327" height="67.5"/>
+                    <rect key="frame" x="24" y="61" width="272" height="67.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -41,27 +41,27 @@
                     </userDefinedRuntimeAttributes>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hDB-7b-H2E">
-                    <rect key="frame" x="40" y="169.5" width="295" height="200"/>
+                    <rect key="frame" x="35" y="169.5" width="250" height="164.5"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="debitCard3" translatesAutoresizingMaskIntoConstraints="NO" id="LjD-v3-EH4">
-                            <rect key="frame" x="0.0" y="0.0" width="295" height="200"/>
+                            <rect key="frame" x="0.0" y="0.0" width="250" height="164.5"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </imageView>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoBaz" translatesAutoresizingMaskIntoConstraints="NO" id="tPU-kW-ZuZ">
-                            <rect key="frame" x="87.5" y="65" width="120" height="70"/>
+                            <rect key="frame" x="65" y="53.5" width="120" height="57.5"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="120" id="bFP-W2-ujp"/>
                             </constraints>
                         </imageView>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="visaIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Mut-PX-5qX">
-                            <rect key="frame" x="232" y="173" width="53" height="17"/>
+                            <rect key="frame" x="187" y="137.5" width="53" height="17"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="53" id="MbD-V8-Teu"/>
                                 <constraint firstAttribute="height" constant="17" id="czU-bV-heA"/>
                             </constraints>
                         </imageView>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="contactLess" translatesAutoresizingMaskIntoConstraints="NO" id="8QN-sp-scL">
-                            <rect key="frame" x="15" y="90" width="16" height="20"/>
+                            <rect key="frame" x="15" y="72.5" width="16" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="16" id="bxB-A8-Axk"/>
                                 <constraint firstAttribute="height" constant="20" id="n5b-tW-az4"/>
@@ -70,6 +70,7 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="899" constant="200" id="Hde-Iw-tC0"/>
                         <constraint firstAttribute="trailing" secondItem="LjD-v3-EH4" secondAttribute="trailing" id="N65-LO-vyp"/>
                         <constraint firstItem="tPU-kW-ZuZ" firstAttribute="height" secondItem="LjD-v3-EH4" secondAttribute="height" multiplier="0.35" id="NWJ-0s-YIx"/>
                         <constraint firstItem="8QN-sp-scL" firstAttribute="leading" secondItem="hDB-7b-H2E" secondAttribute="leading" constant="15" id="Oel-8S-FnL"/>
@@ -80,12 +81,11 @@
                         <constraint firstItem="LjD-v3-EH4" firstAttribute="top" secondItem="hDB-7b-H2E" secondAttribute="top" id="h6h-9U-3rx"/>
                         <constraint firstAttribute="trailing" secondItem="Mut-PX-5qX" secondAttribute="trailing" constant="10" id="jlA-YA-4uf"/>
                         <constraint firstAttribute="bottom" secondItem="LjD-v3-EH4" secondAttribute="bottom" id="jmu-nv-qNw"/>
-                        <constraint firstAttribute="height" constant="200" id="pFQ-yP-X1e"/>
                         <constraint firstItem="LjD-v3-EH4" firstAttribute="leading" secondItem="hDB-7b-H2E" secondAttribute="leading" id="pKQ-Kj-Znq"/>
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BEL-f8-2Fo" customClass="GSVCButton" customModule="GSSAVisualComponents">
-                    <rect key="frame" x="71.5" y="571" width="232" height="48"/>
+                    <rect key="frame" x="44" y="472" width="232" height="48"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="48" id="OwE-nL-Vux"/>
                         <constraint firstAttribute="width" constant="232" id="sxm-Dr-cmH"/>
@@ -104,8 +104,8 @@
             <viewLayoutGuide key="safeArea" id="kzA-SB-iI7"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="hDB-7b-H2E" firstAttribute="leading" secondItem="kzA-SB-iI7" secondAttribute="leading" constant="40" id="4Ux-Hb-2Ky"/>
-                <constraint firstItem="kzA-SB-iI7" firstAttribute="trailing" secondItem="hDB-7b-H2E" secondAttribute="trailing" constant="40" id="5ll-fY-MAT"/>
+                <constraint firstItem="hDB-7b-H2E" firstAttribute="leading" secondItem="kzA-SB-iI7" secondAttribute="leading" constant="35" id="4Ux-Hb-2Ky"/>
+                <constraint firstItem="kzA-SB-iI7" firstAttribute="trailing" secondItem="hDB-7b-H2E" secondAttribute="trailing" constant="35" id="5ll-fY-MAT"/>
                 <constraint firstItem="DQH-2Z-qE5" firstAttribute="leading" secondItem="kzA-SB-iI7" secondAttribute="leading" constant="24" id="5mP-d6-tlb"/>
                 <constraint firstItem="hDB-7b-H2E" firstAttribute="top" secondItem="C1v-0q-ygG" secondAttribute="bottom" constant="41" id="6de-nH-fhJ"/>
                 <constraint firstItem="kzA-SB-iI7" firstAttribute="trailing" secondItem="DQH-2Z-qE5" secondAttribute="trailing" constant="24" id="E76-8y-WMH"/>
@@ -114,6 +114,7 @@
                 <constraint firstItem="C1v-0q-ygG" firstAttribute="top" secondItem="DQH-2Z-qE5" secondAttribute="bottom" constant="8" id="Sdj-be-gMN"/>
                 <constraint firstItem="kzA-SB-iI7" firstAttribute="bottom" secondItem="BEL-f8-2Fo" secondAttribute="bottom" constant="48" id="aQg-QX-bef"/>
                 <constraint firstItem="DQH-2Z-qE5" firstAttribute="top" secondItem="kzA-SB-iI7" secondAttribute="top" constant="25" id="fSC-CX-CgE"/>
+                <constraint firstItem="hDB-7b-H2E" firstAttribute="height" relation="lessThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.29" priority="900" id="oiM-Fy-rvV"/>
                 <constraint firstItem="BEL-f8-2Fo" firstAttribute="centerX" secondItem="kzA-SB-iI7" secondAttribute="centerX" id="pl9-r5-DLF"/>
             </constraints>
             <point key="canvasLocation" x="89" y="82"/>

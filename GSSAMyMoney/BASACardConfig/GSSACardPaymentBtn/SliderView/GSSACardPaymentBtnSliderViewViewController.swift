@@ -50,7 +50,7 @@ class GSSACardPaymentBtnSliderViewViewController: UIViewController, GSSACardPaym
 }
 extension GSSACardPaymentBtnSliderViewViewController : GSVTDigitalSignDelegate{
     func forgotDigitalSign(_ forgotSecurityCodeViewController: UIViewController?) {
-        
+        print("")
     }
     
     func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {

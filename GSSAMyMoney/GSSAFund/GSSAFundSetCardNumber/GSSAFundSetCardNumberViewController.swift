@@ -48,7 +48,9 @@ class GSSAFundSetCardNumberViewController: UIViewController, GSSAFundSetCardNumb
             guard let self = self else { return }
             self.cvvTextField.isSecureTextEntry = !selected
         })
-        if #available(iOS 13.0, *){}else{
+        if #available(iOS 13.0, *){
+            print("")
+        }else{
             cvvTextField.image = UIImage(named: "openEye", in: Bundle.init(for: GSSAFundSetCVVViewController.self), compatibleWith: nil)?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate) ?? UIImage()
             cvvTextField.imageTyped = UIImage(named: "closedEye", in: Bundle.init(for: GSSAFundSetCVVViewController.self), compatibleWith: nil)?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate) ?? UIImage()
         }

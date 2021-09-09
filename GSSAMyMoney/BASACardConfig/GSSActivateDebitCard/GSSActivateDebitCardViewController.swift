@@ -42,6 +42,6 @@ extension GSSActivateDebitCardViewController : BASAScanCodeWireframeProtocol {
     }
     
     func cancelCodeScanner() {
-        
+        print("")
     }
 }

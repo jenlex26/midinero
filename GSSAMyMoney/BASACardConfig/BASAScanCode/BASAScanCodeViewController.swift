@@ -95,7 +95,6 @@ extension BASAScanCodeViewController: BASAScanCodeButtonsViewControllerDelegate 
         
     }
     
-    func onClickGenerateBtn() {
-    }
+    func onClickGenerateBtn() { print("") }
 }
 

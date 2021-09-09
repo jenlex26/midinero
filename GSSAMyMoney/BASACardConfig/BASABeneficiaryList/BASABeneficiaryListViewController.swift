@@ -29,7 +29,9 @@ class BASABeneficiaryListViewController: UIViewController, BASABeneficiaryListVi
         table.dataSource = self
         table.alwaysBounceVertical = false
         self.setBackButtonForOlderDevices(tint: .purple)
-        if #available(iOS 13.0, *){}else{
+        if #available(iOS 13.0, *){
+            print("")
+        }else{
             cardIcon.imageView?.contentMode = .scaleAspectFit
             cardIcon.imageEdgeInsets = UIEdgeInsets(top: 3, left: 3, bottom: 3.0, right: 3.0)
             cardIcon.setImage(UIImage(named: "alert", in: Bundle.init(for: BASABeneficiaryListViewController.self), compatibleWith: nil), for: .normal)

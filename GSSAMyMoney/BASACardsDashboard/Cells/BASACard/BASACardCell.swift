@@ -21,7 +21,7 @@ class BASACardCell: UICollectionViewCell {
         super.awakeFromNib()
         btnConfig.layer.masksToBounds = true
         btnConfig.layer.cornerRadius = btnConfig.frame.width/2
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadCards), name: NSNotification.Name(rawValue: "reloadHeaderData"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadCards(notification:)), name: NSNotification.Name(rawValue: "reloadHeaderData"), object: nil)
     }
     
     @objc func reloadCards(notification: Notification){

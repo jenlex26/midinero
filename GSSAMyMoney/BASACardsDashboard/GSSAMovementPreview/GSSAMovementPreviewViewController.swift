@@ -54,7 +54,7 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
     }
     
     func configureViewForOlderDevices(){
-        if #available(iOS 13.0, *){}else{
+        if #available(iOS 13.0, *){print("")}else{
             btnArrow.tintColor = .white
             btnArrow.setImage(UIImage(named: "ChevronRight", in: Bundle.init(for: GSSAMovementPreviewViewController.self), compatibleWith: nil)?.withRenderingMode(.alwaysTemplate), for: .normal)
             btnArrow.imageEdgeInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)

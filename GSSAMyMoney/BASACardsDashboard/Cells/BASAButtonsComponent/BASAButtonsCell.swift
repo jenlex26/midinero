@@ -34,7 +34,7 @@ class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
         cellButtonView.layer.cornerRadius = 10
         cellButtonView.layer.masksToBounds = true
         
-        if #available(iOS 13.0, *){}else{
+        if #available(iOS 13.0, *){  print("") }else{
             chevronIcon.image = UIImage.chevronRight()
         }
         

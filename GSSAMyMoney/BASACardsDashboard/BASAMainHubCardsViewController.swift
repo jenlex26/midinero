@@ -30,6 +30,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     var debitCardMovements: DebitCardTransaction?
     var debitCardMovementsV2: DebitCardTransactionV2?
     var lendsData: LendsResponse?
+    var creditCardInfo: CreditCardInfoResponse?
     var creditCardData: CreditCardResponse?
     var creditCardBalance: CreditCardBalanceResponse?
     var creditCardMovements: CreditCardMovementsResponse?
@@ -111,7 +112,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     func loadDebitMovementsV2(){
         var body = MovimientosBodyv2.init()
         if GLOBAL_ENVIROMENT == .develop{
-            body =  MovimientosBodyv2.init(transaccion: MovementsBodyDataV2.init(sicu: GSSISessionInfo.sharedInstance.gsUser.SICU, numeroCuenta:  "01271156141200001956".formatToTnuocca14Digits().encryptAlnova(), geolocalizacion: Geolocalizacion.init(latitud: "", longitud: "")))
+            body =  MovimientosBodyv2.init(transaccion: MovementsBodyDataV2.init(sicu: GSSISessionInfo.sharedInstance.gsUser.SICU, numeroCuenta:  GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().encryptAlnova(), geolocalizacion: Geolocalizacion.init(latitud: "", longitud: "")))
         }else{
             body =  MovimientosBodyv2.init(transaccion: MovementsBodyDataV2.init(sicu: GSSISessionInfo.sharedInstance.gsUser.SICU, numeroCuenta:  GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().encryptAlnova(), geolocalizacion: Geolocalizacion.init(latitud: "", longitud: "")))
         }
@@ -122,7 +123,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
             if Movements != nil{
                 debitCardMovementsV2 = Movements
                 setTableForDebitCard()
-                loadActivateCard()
+                loadActiveCardV2()
             }else{
                 self.presentBottomAlertFullData(status: .error, message: "No podemos cargar tus movimientos en este momento, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
             }
@@ -146,9 +147,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     }
     
     func loadCreditCardInfo(){
-        //let numberCard = GSSISessionInfo.sharedInstance.gsUser.card?.dynamicEncrypt()
-        
-        let numberCard = String(4589090600000345).dynamicEncrypt()
+        let numberCard =  creditCardInfo?.body?.resultado?.tarjetas?.first?.numero?.dynamicEncrypt()
         GSVCLoader.show()
         presenter?.requestCreditCardData(Body: CreditCardBody.init(transaccion: CreditCardTransaccion.init(numeroCuenta: "", numeroTarjeta: numberCard, numeroContrato: "")), CreditCardData: { [self] CreditCardData in
             if let CreditCard = CreditCardData{
@@ -164,7 +163,8 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     }
     
     func loadCreditCardBalance(){
-        presenter?.requestCreditCardBalance(Body: CreditCardBalanceBody.init(transaccion: CreditCardBalanceTransaccion.init(numeroTarjeta: "4589090600000345".dynamicEncrypt())), CreditCardBalance: { [self] CreditCardBalance in
+        presenter?.requestCreditCardBalance(Body: CreditCardBalanceBody.init(transaccion: CreditCardBalanceTransaccion.init(numeroTarjeta: creditCardInfo?.body?.resultado?.tarjetas?.first?.numero?.dynamicEncrypt())), CreditCardBalance: { [self] CreditCardBalance in
+            
             if let creditCardBalanceResponse = CreditCardBalance{
                 creditCardBalance = creditCardBalanceResponse
                 NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "reloadCreditCardBalance"), object: creditCardBalanceResponse, userInfo: nil))
@@ -197,6 +197,23 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                 NotificationCenter.default.post(name: Notification.Name("creditCardAvailable"), object: nil)
             }else{
                 presenter?.requestUserLends(Lends: {LendsResponse in
+                    if LendsResponse != nil{
+                        NotificationCenter.default.post(name: Notification.Name("onlyLendsAvaliable"), object: nil)
+                    }else{
+                        GSVCLoader.hide()
+                    }
+                })
+            }
+        })
+    }
+    
+    func loadActiveCardV2(){
+        presenter?.requestCreditCardNumber(CardInfoResponse: { [self] CreditCardInfoResponse in
+            if CreditCardInfoResponse !=  nil{
+                creditCardInfo = CreditCardInfoResponse
+                NotificationCenter.default.post(name: Notification.Name("creditCardAvailable"), object: nil)
+            }else{
+                presenter?.requestUserLends(Lends: { LendsResponse in
                     if LendsResponse != nil{
                         NotificationCenter.default.post(name: Notification.Name("onlyLendsAvaliable"), object: nil)
                     }else{

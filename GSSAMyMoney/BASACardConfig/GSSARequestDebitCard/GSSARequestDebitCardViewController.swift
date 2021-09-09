@@ -93,7 +93,7 @@ class GSSARequestDebitCardViewController: GSSAMasterViewController, GSSARequestD
         })
     }
     
-    func optionalAction() {}
+    func optionalAction() { print("")}
     
     func setAddress(){
         let address = GSSISessionInfo.sharedInstance.gsUser.address

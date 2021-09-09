@@ -17,7 +17,7 @@ import GSSAFunctionalUtilities
 class BASACardConfigInteractor:  GSSAURLSessionTaskCoordinatorBridge,  BASACardConfigInteractorProtocol {
     weak var presenter: BASACardConfigPresenterProtocol?
     
-    func tryGetRequestedCardStatus(CardSearchResponse: @escaping () -> ()){
+    func tryGetRequestedCardStatus(CardSearchResponse: @escaping (CardStatusResponse?) -> ()){
         var body = CardConfigCardSearchBody.init()
         
         if GLOBAL_ENVIROMENT == .develop{
@@ -31,10 +31,14 @@ class BASACardConfigInteractor:  GSSAURLSessionTaskCoordinatorBridge,  BASACardC
             body = CardConfigCardSearchBody.init(transaccion: CardConfigCardSearchTransaccion.init(idTipoTarjeta: "OK".encryptAlnova(), numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().encryptAlnova(), primerTokenVerificacion: customToken.shared.firstVerification))
         }
         
-        sendRequest(strUrl: strPathEndpoint, method: .POST, objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: DebitCardStatementData?, error) in
+        sendRequest(strUrl: strPathEndpoint, method: .POST, objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: CardStatusResponse?, error) in
             debugPrint(objRes as Any)
-            self.tryGetRequestCardInfo()
-            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "customCardStatusRequestResponse"), object: error.code, userInfo: nil))
+            //NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "customCardStatusRequestResponse"), object: error.code, userInfo: nil))
+            if error.code == 0{
+                CardSearchResponse(objRes)
+            }else{
+                CardSearchResponse(nil)
+            }
         }
     }
     

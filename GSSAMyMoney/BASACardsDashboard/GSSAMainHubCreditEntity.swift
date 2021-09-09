@@ -79,9 +79,6 @@ struct CreditCardBalanceResult: Codable {
 struct Fecha: Codable {
 }
 
-
-
-
 // MARK: - CreditCardMovementsBody
 struct CreditCardMovementsBody: Codable {
     var transaccion: CreditCardMovementsTransaccion?
@@ -117,5 +114,37 @@ struct CreditCardMovement: Codable {
     var idEstatus, idTipo, concepto, monto: String?
     var divisa, tipoDeCambio, montoOriginal, referencia: String?
     var fechaHora: String?
+}
+
+
+// MARK: - CreditCardInfoResponse
+struct CreditCardInfoResponse: Codable {
+    var headers: CreditCardInfoResponseHeaders?
+    var body: CreditCardInfoResponseBody?
+    var statusCode: String?
+    var statusCodeValue: Int?
+}
+
+// MARK: - Body
+struct CreditCardInfoResponseBody: Codable {
+    var mensaje, folio: String?
+    var resultado:  CreditCardInfoResult?
+}
+
+// MARK: - Resultado
+struct CreditCardInfoResult: Codable {
+    var tarjetas: [CreditCardInfoCard]?
+    var ofertarNuevaTarjetaTOR, ofertarNuevaTarjetaTAZ: Bool?
+}
+
+// MARK: - Tarjeta
+struct CreditCardInfoCard: Codable {
+    var numero: String?
+    var entregada: Bool?
+    var estatus, estatusActual, codigoTipoTarjeta: String?
+}
+
+// MARK: - Headers
+struct CreditCardInfoResponseHeaders: Codable {
 }
 

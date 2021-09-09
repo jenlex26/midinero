@@ -21,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2. ¿Desde qué tarjeta recibes?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="55D-bn-jia" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                    <rect key="frame" x="25" y="40" width="330" height="20.5"/>
+                    <rect key="frame" x="25" y="40" width="330" height="28"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -32,7 +32,7 @@
                     </userDefinedRuntimeAttributes>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H0C-kB-Ntn" customClass="GSVCButton" customModule="GSSAVisualComponents">
-                    <rect key="frame" x="20" y="80.5" width="140" height="35"/>
+                    <rect key="frame" x="20" y="88" width="140" height="35"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="140" id="lvw-eQ-Nk4"/>
                         <constraint firstAttribute="height" constant="35" id="pB3-sk-Vrm"/>
@@ -53,7 +53,7 @@
                     </connections>
                 </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Occ-cf-qgc">
-                    <rect key="frame" x="25" y="135.5" width="330" height="511.5"/>
+                    <rect key="frame" x="25" y="143" width="330" height="504"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
             </subviews>
@@ -75,10 +75,10 @@
     </objects>
     <designables>
         <designable name="55D-bn-jia">
-            <size key="intrinsicContentSize" width="230" height="20.5"/>
+            <size key="intrinsicContentSize" width="302" height="28"/>
         </designable>
         <designable name="H0C-kB-Ntn">
-            <size key="intrinsicContentSize" width="120" height="21"/>
+            <size key="intrinsicContentSize" width="115" height="20"/>
         </designable>
     </designables>
     <resources>

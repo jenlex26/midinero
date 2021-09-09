@@ -186,8 +186,10 @@ extension BASACardStatementsViewController: UITableViewDelegate, UITableViewData
             return cell
         case 1:
             let cell = table.dequeueReusableCell(withIdentifier: "SectionCell") as! SectionCell
-            cell.lblTitle.text = "Se enviarán al correo electrónico \(GSSISessionInfo.sharedInstance.gsUser.email ?? "")"
-            cell.lblTitle.numberOfLines = 2
+            //cell.lblTitle.text = "Se enviarán al correo electrónico \(GSSISessionInfo.sharedInstance.gsUser.email ?? "")"
+            cell.lblTitle.text = "Tu estado de cuenta se encuentra protegido. La contraseña para visualizarlo son los últimos 4 dígitos de tu numero de cuenta"
+            cell.lblSubTitle.text = ""
+            cell.lblTitle.numberOfLines = 3
             cell.lblTitle.styleType = 6
             return cell
         case statements.count + 2:
@@ -222,15 +224,15 @@ extension BASACardStatementsViewController: UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
         case 0:
-            return 65.0
+            return 40.0
         case 1:
-            return 70.0
+            return 90.0
         case statements.count + 2:
-            return 110.0
+            return 90.0
         case statements.count + 3:
-            return 119.0
+            return 100.0
         default:
-            return 80.0
+            return 75.0
         }
     }
     

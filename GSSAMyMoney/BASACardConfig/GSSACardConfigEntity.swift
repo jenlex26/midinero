@@ -24,6 +24,25 @@ struct CardConfigCardSearchTransaccion: Codable {
     var idTipoTarjeta, numeroCuenta, primerTokenVerificacion : String?
 }
 
+// MARK: - CardStatusResponse
+struct CardStatusResponse: Codable {
+    var mensaje, folio: String?
+    var resultado: CardStatusResponseResult?
+}
+
+// MARK: - Resultado
+struct CardStatusResponseResult: Codable {
+    var idCliente: String?
+    var tarjeta: CardStatusCard?
+}
+
+// MARK: - Tarjeta
+struct CardStatusCard: Codable {
+    var tipo, fechaRegistro, estatus, numeroGuia: String?
+}
+
+
+
 // MARK: - CardConfigCardInfo Body
 struct CardConfigCardInfoBody: Codable {
     var transaccion: CardConfigCardInfoTransaccion?

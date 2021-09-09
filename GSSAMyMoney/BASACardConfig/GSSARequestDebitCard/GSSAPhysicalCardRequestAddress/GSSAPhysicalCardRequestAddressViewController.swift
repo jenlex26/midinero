@@ -52,7 +52,7 @@ class GSSAPhysicalCardRequestAddressViewController: UIViewController, GSSAPhysic
         txtPostalCode.becomeFirstResponder()
     }
     
-    func optionalAction() {}
+    func optionalAction() {print("")}
     
     func changeFieldsVisibility(hidden: Bool){
         for item in self.view.subviews[1].subviews[0].subviews{

@@ -150,10 +150,12 @@ extension GSSAFundSelectCardViewController: GSSAFundSelectCardViewProtocol {
         self.cards = cards
         self.cardsTable.reloadData()
         cardsTable.tableViewDidFinishReloadData{ [self] in
-            GSVCLoader.hide()
-            if cardsTable.numberOfRows(inSection: 0) > 0{
-                selectCellTask?.perform()
-            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5, execute: {
+                GSVCLoader.hide()
+                if cardsTable.numberOfRows(inSection: 0) > 0{
+                    selectCellTask?.perform()
+                }
+            })
         }
     }
     

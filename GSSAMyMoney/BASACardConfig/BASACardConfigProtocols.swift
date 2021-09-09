@@ -16,13 +16,13 @@ protocol BASACardConfigWireframeProtocol: AnyObject {
 }
 //MARK: Presenter -
 protocol BASACardConfigPresenterProtocol: AnyObject {
-    func requestCardStatus(CardSearchResponse: @escaping () -> ())
+    func requestCardStatus(CardSearchResponse: @escaping (CardStatusResponse?) -> ())
 }
 
 //MARK: Interactor -
 protocol BASACardConfigInteractorProtocol: AnyObject {
   var presenter: BASACardConfigPresenterProtocol?  { get set }
-    func tryGetRequestedCardStatus(CardSearchResponse: @escaping () -> ())
+    func tryGetRequestedCardStatus(CardSearchResponse: @escaping (CardStatusResponse?) -> ())
 }
 
 //MARK: View -

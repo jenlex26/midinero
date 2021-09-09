@@ -10,7 +10,9 @@ import GSSAVisualComponents
 
 extension UIViewController{
     func setBackButtonForOlderDevices(tint: UIColor){
-        if #available(iOS 13.0, *){}else{
+        if #available(iOS 13.0, *){
+            print("")
+        }else{
             if self.view.subviews[0].subviews.count > 0{
                 if self.view.subviews[0].subviews[0] is UIButton{
                     let button = (self.view.subviews[0].subviews[0] as! UIButton)
