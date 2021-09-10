@@ -17,12 +17,14 @@ protocol BASACardConfigWireframeProtocol: AnyObject {
 //MARK: Presenter -
 protocol BASACardConfigPresenterProtocol: AnyObject {
     func requestCardStatus(CardSearchResponse: @escaping (CardStatusResponse?) -> ())
+    func requestCardInfo(DebitCardInfoResponse: @escaping (DebitCardInfoResponse?) -> ())
 }
 
 //MARK: Interactor -
 protocol BASACardConfigInteractorProtocol: AnyObject {
   var presenter: BASACardConfigPresenterProtocol?  { get set }
     func tryGetRequestedCardStatus(CardSearchResponse: @escaping (CardStatusResponse?) -> ())
+    func tryGetRequestCardInfo(DebitCardInfoResponse: @escaping (DebitCardInfoResponse?) -> ())
 }
 
 //MARK: View -

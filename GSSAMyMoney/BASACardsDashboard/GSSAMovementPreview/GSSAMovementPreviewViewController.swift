@@ -184,7 +184,7 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
                     let originData = data?.numeroCuentaOrigen?.components(separatedBy: "|")
                     
                     details.updateValue("Clave de rastreo", forKey: transaction.descripcion ?? "")
-                    details.updateValue("Ordenante", forKey: (originData?[0] ?? "") + "\n" + (originData?[1] ?? ""))
+                    details.updateValue("Ordenante", forKey: (originData?[0].nameFormatter() ?? "") + "\n" + (originData?[1] ?? ""))
                     
                     let destinationData = data?.importeBeneficiario?.components(separatedBy: "|")
                     
@@ -211,8 +211,9 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
                     if URLData?.count ?? 0 >= 3{
                         URLBanxico = "https://www.banxico.org.mx/cep/go?i=" + URLData![0]
                         URLBanxico = URLBanxico + "&s=" + URLData![1]
-                        URLBanxico = URLBanxico + "&d=" + (URLData?[2].removeWhiteSpaces())!
+                        URLBanxico = URLBanxico + "&d=" + (URLData?[2].alnovaDecrypt().removeWhiteSpaces().replacingOccurrences(of: "\r\n", with: ""))!
                     }
+                    
                 }
                 GSVCLoader.hide()
                 setOptions(SPEI: true)

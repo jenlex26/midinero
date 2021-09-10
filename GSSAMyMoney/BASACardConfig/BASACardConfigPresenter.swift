@@ -25,4 +25,9 @@ class BASACardConfigPresenter: BASACardConfigPresenterProtocol {
     func requestCardStatus(CardSearchResponse: @escaping (CardStatusResponse?) -> ()){
         interactor?.tryGetRequestedCardStatus(CardSearchResponse: CardSearchResponse)
     }
+    
+    func requestCardInfo(DebitCardInfoResponse: @escaping (DebitCardInfoResponse?) -> ()){
+        interactor?.tryGetRequestCardInfo(DebitCardInfoResponse: DebitCardInfoResponse)
+    }
+
 }

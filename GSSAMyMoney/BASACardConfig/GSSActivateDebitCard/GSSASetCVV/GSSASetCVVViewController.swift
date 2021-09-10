@@ -18,19 +18,38 @@ class GSSASetCVVViewController: GSSAMasterViewController, GSSASetCVVViewProtocol
     var bottomAlert: GSVCBottomAlert?
     var presenter: GSSASetCVVPresenterProtocol?
     
-    @IBOutlet weak var txtCVV       : GSVCTextField!
-    @IBOutlet weak var infoView     : UIView!
-    @IBOutlet weak var cardInfoView : UIView!
+    @IBOutlet weak var txtCVV                : GSVCTextField!
+    @IBOutlet weak var infoView              : UIView!
+    @IBOutlet weak var cardInfoView          : UIView!
+    @IBOutlet weak var customNavBarView      : UIView!
+    @IBOutlet weak var safeAreaContraint     : NSLayoutConstraint!
+    @IBOutlet weak var customNavBarConstraint: NSLayoutConstraint!
+    
+    var cardNumber: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Activa tu tarjeta"
         txtCVV.delegate = self
+        if cardNumber == "NIPFLOW"{
+            customNavBarConstraint.isActive = true
+            safeAreaContraint.isActive = false
+            self.navigationController?.setNavigationBarHidden(true, animated: false)
+        }else{
+            customNavBarView.isHidden = true
+            customNavBarConstraint.isActive = false
+            safeAreaContraint.isActive = true
+            self.navigationController?.setNavigationBarHidden(false, animated: false)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
-        setProgressLine(value: 0.5, animated: true)
+        if cardNumber != "NIPFLOW"{
+            self.navigationController?.setNavigationBarHidden(false, animated: false)
+            setProgressLine(value: 0.5, animated: true)
+        }else{
+            self.navigationController?.setNavigationBarHidden(true, animated: false)
+        }
         txtCVV.becomeFirstResponder()
     }
     
@@ -50,13 +69,17 @@ class GSSASetCVVViewController: GSSAMasterViewController, GSSASetCVVViewProtocol
         bottomAlert?.animateDismissal()
     }
     
-    @IBAction func next(_ sender: Any){
-        if txtCVV.text?.count == 3{
-            GSVCLoader.show()
-            let body = SetCVVBody.init(transaccion: SetCVVTransaccion.init(primerTokenVerificacion: GSSISessionInfo.sharedInstance.gsUserToken, numeroCliente: GSSISessionInfo.sharedInstance.gsUser.account?.number, idTipoParticipante: "1", cuenta: SetCVVAccount.init(numero: GSSISessionInfo.sharedInstance.gsUser.account?.number, idProducto: "01", idSubproducto: "0001"), tarjeta: Tarjeta.init(numero: "", cvv: txtCVV.text)))
-            presenter?.requestSetCardCVV(body: body, CardSearchResponse: {
-                GSVCLoader.hide()
+    func requestCardActivation(idSubproducto: String){
+        GSVCLoader.show()
+        let body = SetCVVBody.init(transaccion: SetCVVTransaccion.init(primerTokenVerificacion: customToken.shared.firstVerification, idTipoParticipante: "T".encryptAlnova(), cuenta: SetCVVAccount.init(numero: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.removeWhiteSpaces().encryptAlnova(), idProducto: "12".encryptAlnova(), idSubproducto: idSubproducto.encryptAlnova()), tarjeta: Tarjeta.init(numero: cardNumber.removeWhiteSpaces().encryptAlnova(), cvv: txtCVV.text?.encryptAlnova())))
+        
+        presenter?.requestSetCardCVV(body: body, CardSearchResponse: { [self] CardSearchResponse in
+            if CardSearchResponse != nil{
                 UIWindow.addSuccess {
+                    GSVCLoader.hide()
+                    
+                    UserDefaults.standard.setValue(txtCVV.text?.encryptAlnova(), forKey: "DebitCardCVV")
+                    
                     let spaceView = UIView()
                     spaceView.bounds = self.infoView.bounds
                     
@@ -66,16 +89,13 @@ class GSSASetCVVViewController: GSSAMasterViewController, GSSASetCVVViewProtocol
                     let card = self.cardInfoView
                     card?.isHidden = false
                     
-                    let button = GSVCButton()
-                    button.setTitle("Ver NIP", for: .normal)
-                    button.style = 10
-                    button.setImage(UIImage(named: "ic_card"), for: .normal)
+                    //                    let button = GSVCButton()
+                    //                    button.setTitle("Ver NIP", for: .normal)
+                    //                    button.style = 10
+                    //                    button.setImage(UIImage(named: "ic_card"), for: .normal)
                     let success = GSVTOperationStatusViewController(status: .success(title: "¡Listo!", message: "Tu tarjeta baz ya está activa", views: [spaceView, info!, card!]),
                                                                     roundButtonAction: {
-                                                                        self.dismiss(animated: false, completion: {
-                                                                            let view = GSSACardNIPRouter.createModule()
-                                                                            self.navigationController?.pushViewController(view, animated: true)
-                                                                        })
+                                                                        self.dismiss(animated: false, completion: nil)
                                                                     },
                                                                     plainButtonAction: {
                                                                         self.dismiss(animated: false, completion: {
@@ -86,15 +106,37 @@ class GSSASetCVVViewController: GSSAMasterViewController, GSSASetCVVViewProtocol
                                                                                 }
                                                                             }
                                                                         })
-                                                                    },
-                                                                    roundButton: button)
+                                                                    })
                     success.modalPresentationStyle = .fullScreen
                     self.present(success, animated: true, completion: nil)
                 }
-            })
             }else{
-                self.presentBottomAlertFullData(status: .error, message: "Ingrese un CVV válido", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: "")
+                if idSubproducto == "0001"{
+                    requestCardActivation(idSubproducto: "0002")
+                }else{
+                    self.presentBottomAlertFullData(status: .error, message: "Verifique que el CVV sea correcto e intente de nuevo", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+                    GSVCLoader.hide()
+                }
             }
+        })
+        
+    }
+    
+    @IBAction func next(_ sender: Any){
+        if txtCVV.text?.count == 3{
+            if cardNumber == "NIPFLOW"{
+                let view = GSSACardNIPRouter.createModule(cvv: UserDefaults.standard.string(forKey: "DebitCardCVV") ?? "", contractNumber:  customToken.shared.contractNumber)
+                self.navigationController?.pushViewController(view, animated: true)
+            }else{
+                requestCardActivation(idSubproducto: "0001")
+            }
+        }else{
+            self.presentBottomAlertFullData(status: .error, message: "Ingrese un CVV válido", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: "")
+        }
+    }
+    
+    @IBAction func close(_ sender: Any){
+        self.navigationController?.popViewController(animated: true)
     }
 }
 

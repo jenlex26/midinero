@@ -17,19 +17,24 @@ import GSSAFunctionalUtilities
 class GSSASetCVVInteractor: GSSAURLSessionTaskCoordinatorBridge, GSSASetCVVInteractorProtocol {
     weak var presenter: GSSASetCVVPresenterProtocol?
     
-    func trySetCardCVV(body: SetCVVBody, CardSearchResponse: @escaping () -> ()){
-        self.urlPath = "https://apigateway.superappbaz.com/"
-        self.strPathEndpoint = "integracion/superapp/dinero/captacion/gestion-tarjetas-fisicas/v1/tarjetas"
+    func trySetCardCVV(body: SetCVVBody, CardSearchResponse: @escaping (CreditCardActivationResponse?) -> ()){
         
-        sendRequest(strUrl: strPathEndpoint, method: .POST, objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: DebitCardStatementData?, error) in
+        if GLOBAL_ENVIROMENT == .develop{
+            self.urlPath = "https://apigateway.superappbaz.com/"
+            self.strPathEndpoint = "integracion/superapp/dinero/captacion/gestion-tarjetas-fisicas/v1/tarjetas"
+        }else{
+            self.strPathEndpoint = "/superapp/dinero/captacion/gestion-tarjetas-fisicas/v1/tarjetas"
+        }
+       
+        sendRequest(strUrl: strPathEndpoint, method: .POST, objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: CreditCardActivationResponse?, error) in
             debugPrint(objRes as Any)
             if error.code == 0 {
                 print("correcto")
                 debugPrint(objRes as Any)
-                CardSearchResponse()
+                CardSearchResponse(objRes)
             } else {
                 debugPrint(error)
-                CardSearchResponse()
+                CardSearchResponse(nil)
             }
         }
     }

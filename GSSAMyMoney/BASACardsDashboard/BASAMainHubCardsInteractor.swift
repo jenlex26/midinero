@@ -126,7 +126,6 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
         let body = userLendsBody.init()
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: CreditCardInfoResponse?, error) in
-            
             if error.code == 0 {
                 CardInfoResponse(objRes)
             } else {
@@ -159,18 +158,12 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
     
     func tryGetCreditCardBalance(Body: CreditCardBalanceBody, CreditCardBalance: @escaping (CreditCardBalanceResponse?) -> ()){
         
-        var body = CreditCardBalanceBody.init()
-        
         if GLOBAL_ENVIROMENT == .develop{
             self.urlPath = "https://apigateway.superappbaz.com/"
             self.strPathEndpoint = "integracion/superapp/prestamos/tarjeta-credito/v1/tarjetas/saldos/busquedas"
-            
-            body = CreditCardBalanceBody.init(transaccion: CreditCardBalanceTransaccion.init(numeroTarjeta: "4589090600000345".dynamicEncrypt()))
         }else{
             self.strPathEndpoint = "/superapp/prestamos/tarjeta-credito/v1/tarjetas/saldos/busquedas"
-            body = CreditCardBalanceBody.init(transaccion: CreditCardBalanceTransaccion.init(numeroTarjeta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.dynamicEncrypt()))
         }
-        
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: Body, environment: GLOBAL_ENVIROMENT) { (objRes: GenericRawCreditCardBalanceResponse?, error) in
             debugPrint(objRes as Any)

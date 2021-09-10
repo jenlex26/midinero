@@ -16,7 +16,6 @@ struct RequestNIPBody: Codable {
 struct RequestNIPTransaccion: Codable {
     var primerTokenVerificacion: String?
     var tarjeta: RequestNIPCard?
-    var clienteUnico: ClienteUnico?
 }
 
 // MARK: - ClienteUnico
@@ -26,7 +25,7 @@ struct ClienteUnico: Codable {
 
 // MARK: - Tarjeta
 struct RequestNIPCard: Codable {
-    var numero, numeroContrato, codigoSeguridad, idCliente: String?
+    var numero, numeroContrato, codigoSeguridad: String?
 }
 
 // MARK: - RequestNIPResponse

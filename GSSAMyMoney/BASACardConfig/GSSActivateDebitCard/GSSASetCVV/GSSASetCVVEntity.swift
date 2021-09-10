@@ -14,7 +14,7 @@ struct SetCVVBody: Codable {
 
 // MARK: - Transaccion
 struct SetCVVTransaccion: Codable {
-    var primerTokenVerificacion, numeroCliente, idTipoParticipante: String?
+    var primerTokenVerificacion, idTipoParticipante: String?
     var cuenta: SetCVVAccount?
     var tarjeta: Tarjeta?
 }
@@ -27,4 +27,15 @@ struct SetCVVAccount: Codable {
 // MARK: - Tarjeta
 struct Tarjeta: Codable {
     var numero, cvv: String?
+}
+
+// MARK: - CreditCardActivationResponse
+struct CreditCardActivationResponse: Codable {
+    var mensaje, folio: String?
+    var resultado: CreditCardActivationResult?
+}
+
+// MARK: - Resultado
+struct CreditCardActivationResult: Codable {
+    var fechaExpiracion: String?
 }

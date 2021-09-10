@@ -22,6 +22,9 @@ class GSSACardNIPViewController: UIViewController, GSSACardNIPViewProtocol, GSVC
     @IBOutlet weak var txtNIP3: UITextField!
     @IBOutlet weak var txtNIP4: UITextField!
     
+    var CVV           : String!
+    var contractNumber: String! 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
@@ -57,10 +60,11 @@ class GSSACardNIPViewController: UIViewController, GSSACardNIPViewProtocol, GSVC
     
     func requestNIP(){
         GSVCLoader.show()
-        let body = RequestNIPBody.init(transaccion: RequestNIPTransaccion.init(primerTokenVerificacion: GSSISessionInfo.sharedInstance.gsUser.account?.number, tarjeta: RequestNIPCard.init(numero: "", numeroContrato: "", codigoSeguridad: "", idCliente: ""), clienteUnico: ClienteUnico.init(idPais: "001", idCanal: "033", idSucursal: "7760", folio: "88582")))
+        let body = RequestNIPBody.init(transaccion: RequestNIPTransaccion.init(primerTokenVerificacion: GSSISessionInfo.sharedInstance.gsUser.account?.number, tarjeta: RequestNIPCard.init(numero: "", numeroContrato: "", codigoSeguridad: "")))
         presenter?.requestCardNIP(body: body, Response: { [self] Response in
             GSVCLoader.hide()
             if Response != nil{
+                UserDefaults.standard.setValue(CVV, forKey: "DebitCardCVV")
                 setNIP(NIP: Response?.resultado?.nip ?? "    ")
             }else{
                 setNIP(NIP: "    ")

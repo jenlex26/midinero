@@ -245,7 +245,7 @@ extension BASACardStatementsViewController: UITableViewDelegate, UITableViewData
                 GSVCLoader.show()
                 let body = RequestDocumentBody.init(primerTokenVerificacion: customToken.shared.firstVerification, referencia: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().encryptAlnova() ?? "", periodo: data.periodo ?? "")
                 
-               // let testBody = RequestDocumentBody.init(primerTokenVerificacion: customToken.shared.firstVerification, referencia: "01180100151815".encryptAlnova(), periodo: "21-01")
+              // let testBody = RequestDocumentBody.init(primerTokenVerificacion: customToken.shared.firstVerification, referencia: "01180100151815".encryptAlnova(), periodo: "21-01")
                 
                 presenter?.requestDocument(body: body, Document: { Document in
                     if Document != nil{

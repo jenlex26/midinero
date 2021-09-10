@@ -210,8 +210,10 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     func loadActiveCardV2(){
         presenter?.requestCreditCardNumber(CardInfoResponse: { [self] CreditCardInfoResponse in
             if CreditCardInfoResponse !=  nil{
-                creditCardInfo = CreditCardInfoResponse
-                NotificationCenter.default.post(name: Notification.Name("creditCardAvailable"), object: nil)
+                if CreditCardInfoResponse?.body?.resultado?.tarjetas?.count ?? 0 > 0{
+                    creditCardInfo = CreditCardInfoResponse
+                    NotificationCenter.default.post(name: Notification.Name("creditCardAvailable"), object: nil)
+                }
             }else{
                 presenter?.requestUserLends(Lends: { LendsResponse in
                     if LendsResponse != nil{

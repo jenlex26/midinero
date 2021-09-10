@@ -307,11 +307,15 @@ extension String{
     }
     
     func nameFormatter() -> String{
-        var formatterName = self
-        let itemArray = formatterName.components(separatedBy: " ")
-        if itemArray.count >= 2{
-            formatterName = itemArray[0] + " " + itemArray[1]
+        var formatterName = ""
+        let itemArray = self.components(separatedBy: " ")
+        let itemElements = itemArray.filter({ $0 != "" })
+        
+        for component in itemElements{
+            formatterName.append(" \(component)")
         }
+        formatterName.removeFirst()
+        
         return formatterName
     }
     

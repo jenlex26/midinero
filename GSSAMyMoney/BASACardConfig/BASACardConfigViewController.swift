@@ -34,18 +34,17 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
     var CLABE = ""
     var phone = ""
     var account = ""
+    var debitCardNumber = ""
+    var contractNumber = ""
+    var cancelReload = false
     var cellsArray: Array<[UITableViewCell:CGFloat]> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        CLABE = GSSISessionInfo.sharedInstance.gsUser.account?.clabe?.tnuoccaFormat ?? ""
-        phone = GSSISessionInfo.sharedInstance.gsUser.phone?.tryToAdCellphoneFormat ?? ""
-        account = GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().tnuoccaFormat ?? ""
+        saveValues()
         registerCells()
         setOptions()
         self.setBackButtonForOlderDevices(tint: .purple)
-        
-       // NotificationCenter.default.addObserver(self, selector: #selector(handleCustomCardStatusResponse(notification:)), name: NSNotification.Name(rawValue: "customCardStatusRequestResponse"), object: nil)
         table.delegate = self
         table.dataSource = self
         table.alwaysBounceVertical = false
@@ -58,27 +57,14 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        
-        if GLOBAL_ENVIROMENT == .production{
-            GSVCLoader.show()
-            presenter?.requestCardStatus(CardSearchResponse: { [self] CardSearchResponse in
-                if CardSearchResponse != nil{
-                    configureDebitCard(forStatus: .activate)
-                }else{
-                    configureDebitCard(forStatus: .request)
-                }
-            })
-        }else{
-            if let cardStatusString = RemoteConfig.remoteConfig().remoteString(forKey: "IOS_MOB_SA_MMCARD"){
-                if cardStatusString == "true"{
-                    GSVCLoader.show()
-                    presenter?.requestCardStatus(CardSearchResponse: { [self] CardSearchResponse in
-                        if CardSearchResponse != nil{
-                            configureDebitCard(forStatus: .activate)
-                        }else{
-                            configureDebitCard(forStatus: .request)
-                        }
-                    })
+        if cancelReload == false{
+            if GLOBAL_ENVIROMENT == .develop{
+                checkUserActivations()
+            }else{
+                if let cardStatusString = RemoteConfig.remoteConfig().remoteString(forKey: "iOS_MOB_SA_MMCARD"){
+                    if cardStatusString == "true"{
+                        checkUserActivations()
+                    }
                 }
             }
         }
@@ -91,16 +77,60 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
         case active
     }
     
+    func checkUserActivations(){
+        GSVCLoader.show()
+        presenter?.requestCardInfo(DebitCardInfoResponse: { [self] DebitCardInfoResponse in
+            if DebitCardInfoResponse != nil{
+                let dataArray = DebitCardInfoResponse?.resultado?.numeroTarjeta?.components(separatedBy: "|")
+                debitCardNumber = dataArray?[0].alnovaDecrypt() ?? ""
+                contractNumber = dataArray?[1].alnovaDecrypt() ?? ""
+                customToken.shared.contractNumber = dataArray?[1].alnovaDecrypt() ?? ""
+                if let cardStatusString = RemoteConfig.remoteConfig().remoteString(forKey: "iOS_MOB_SA_MMPIN"){
+                    if cardStatusString == "true"{
+                        configureDebitCard(forStatus: .active )
+                    }else{
+                        GSVCLoader.hide()
+                    }
+                }
+            }else{
+                presenter?.requestCardStatus(CardSearchResponse: { [self] CardSearchResponse in
+                    if CardSearchResponse != nil{
+                        if CardSearchResponse?.resultado?.tarjeta?.estatus?.alnovaDecrypt().removeWhiteSpaces() == "ENVIADA"{
+                            configureDebitCard(forStatus: .activate )
+                        }else{
+                            configureDebitCard(forStatus: .unknown)
+                        }
+                    }else{
+                        configureDebitCard(forStatus: .request)
+                    }
+                })
+            }
+        })
+        
+    }
+    
+    func saveValues(){
+        CLABE = GSSISessionInfo.sharedInstance.gsUser.account?.clabe?.tnuoccaFormat ?? ""
+        phone = GSSISessionInfo.sharedInstance.gsUser.phone?.tryToAdCellphoneFormat ?? ""
+        account =  GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().tnuoccaFormat ?? ""
+    }
+    
     func setOptions(){
         //Añade opciones genericas al menú de configuración
         let imgShare = UIImage.shareIcon()
         let chevronRight = UIImage.chevronRight()
         let docFill = UIImage.copyIcon()
         
+        configurations.removeAll()
+        
         if credit == false{
             configurations.append(userOptions(title: "CLABE Interbancaria", subTitle: CLABE, image: imgShare, tag: 4))
             configurations.append(userOptions(title: "Número de cuenta", subTitle: account, image: nil))
             configurations.append(userOptions(title: "Celular asociado", subTitle: phone, image: nil))
+            if debitCardNumber != ""{
+                configurations.append(userOptions(title: "Número de tarjeta", subTitle: debitCardNumber.tnuoccaFormat, image: nil, tag: nil, index: nil))
+            }
+            
             configurations.append(userOptions.init(title: "Estados de cuenta", subTitle: nil, image: chevronRight, tag: 1))
             configurations.append(userOptions.init(title: "Límites", subTitle: nil, image: chevronRight, tag: 2))
             configurations.append(userOptions.init(title: "Beneficiarios", subTitle: nil, image: chevronRight, tag: 3))
@@ -122,7 +152,25 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
         table.register(UINib(nibName: "BASACardControl", bundle: bundle), forCellReuseIdentifier: "BASACardControl")
     }
     
+    func removeAllExceptFirst(){
+        if cellsArray.count > 0{
+            let count = cellsArray.count
+            for _ in 1..<count{
+                cellsArray.removeLast()
+            }
+            
+            var cellsToRemove: [IndexPath] = []
+            
+            for n in 1..<table.numberOfRows(inSection: 0){
+                cellsToRemove.append([0,n])
+            }
+            
+            table.deleteRows(at: cellsToRemove, with: .fade)
+        }
+    }
+    
     func setTableForDebitCard(){
+        removeAllExceptFirst()
         //Crea las celdas de las opciones genericas y añade nuevas al arreglo
         let cell = table.dequeueReusableCell(withIdentifier: "SectionCell") as! SectionCell
         cell.lblTitle.text = "Información"
@@ -135,6 +183,7 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
             cell.configureCell(title: data.title, subtitle: data.subTitle, image: data.image)
             cellsArray.append([cell:75.0])
         }
+        
     }
     
     func configureDebitCard(forStatus: status){
@@ -159,12 +208,22 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
                 cell.tag = 7
                 cellsArray.insert([cell:111.0], at: 0)
             case .active:
-                let cell = table.dequeueReusableCell(withIdentifier: "BASACardControl") as! BASACardControl
-                cell.nipCardView.isHidden = false
-                cell.reportCardView.isHidden = false
-                cell.btnCheckNIP.addTarget(self, action: #selector(checkNIP(sender:)), for: .touchUpInside)
-                cell.turnOfSwitch.addTarget(self, action: #selector(turnOnCard(sender:)), for: .valueChanged)
-                cellsArray.insert([cell:220.0], at: 0)
+                //                let cell = table.dequeueReusableCell(withIdentifier: "BASACardControl") as! BASACardControl
+                //                cell.nipCardView.isHidden = false
+                //                cell.reportCardView.isHidden = false
+                //                cell.btnCheckNIP.addTarget(self, action: #selector(checkNIP(sender:)), for: .touchUpInside)
+                //                cell.turnOfSwitch.addTarget(self, action: #selector(turnOnCard(sender:)), for: .valueChanged)
+                //                cellsArray.insert([cell:220.0], at: 0)
+                let cell = table.dequeueReusableCell(withIdentifier: "RequestCardCell") as! RequestCardCell
+                cell.lblTitle.text = "Ver NIP"
+                cell.buttonView.isUserInteractionEnabled = false
+                cell.backgroundColor = UIColor.GSVCBase300()
+                cell.tag = 8
+                cellsArray.insert([cell:111.0], at: 0)
+                saveValues()
+                setOptions()
+                cancelReload = true
+                setTableForDebitCard()
             case .unknown:
                 print("DESCONOCIDO")
             }
@@ -196,7 +255,7 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
     }
     
     @objc func checkNIP(sender: UIButton){
-        let view = GSSACardNIPRouter.createModule()
+        let view = GSSACardNIPRouter.createModule(cvv: UserDefaults.standard.string(forKey: "DebitCardCVV") ?? "", contractNumber: contractNumber)
         self.navigationController?.pushViewController(view, animated: true)
     }
     
@@ -298,6 +357,14 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
             tagCardConfigActivateCard()
             let view = GSSActivateDebitCardRouter.createModule()
             self.navigationController?.pushViewController(view, animated: true)
+        case 8:
+            if UserDefaults.standard.string(forKey: "DebitCardCVV") != nil{
+                let view = GSSACardNIPRouter.createModule(cvv: UserDefaults.standard.string(forKey: "DebitCardCVV") ?? "", contractNumber: contractNumber)
+                self.navigationController?.pushViewController(view, animated: true)
+            }else{
+                let view = GSSASetCVVRouter.createModule(cardNumber: "NIPFLOW")
+                self.navigationController?.pushViewController(view, animated: true)
+            }
         default:
             print("default case...")
         }

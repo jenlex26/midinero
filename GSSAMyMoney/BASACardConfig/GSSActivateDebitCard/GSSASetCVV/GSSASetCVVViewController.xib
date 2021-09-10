@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GSSASetCVVViewController" customModule="GSSAMyMoney" customModuleProvider="target">
             <connections>
                 <outlet property="cardInfoView" destination="veD-Qr-LUb" id="I5r-iT-Frl"/>
+                <outlet property="customNavBarConstraint" destination="pT9-sh-UOs" id="GS0-xc-CAy"/>
+                <outlet property="customNavBarView" destination="RXd-mm-4qw" id="3A1-6V-Bxb"/>
                 <outlet property="infoView" destination="jD7-A3-ga9" id="QPY-J6-pzx"/>
+                <outlet property="safeAreaContraint" destination="v0J-NW-mvF" id="2W9-DE-ZQP"/>
                 <outlet property="txtCVV" destination="d8l-bl-aWH" id="sDb-zU-DzN"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -21,7 +26,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingresa el CVV" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nhI-Mo-hmq" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                    <rect key="frame" x="24" y="25" width="327" height="28"/>
+                    <rect key="frame" x="24" y="75" width="327" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -32,7 +37,7 @@
                     </userDefinedRuntimeAttributes>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Se encuentra al reverso de tu tarjeta baz." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vOX-bf-wpE" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                    <rect key="frame" x="24" y="69" width="327" height="45"/>
+                    <rect key="frame" x="24" y="111.5" width="327" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
@@ -43,7 +48,7 @@
                     </userDefinedRuntimeAttributes>
                 </label>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d8l-bl-aWH" customClass="GSVCTextField" customModule="GSSAVisualComponents">
-                    <rect key="frame" x="24" y="146" width="144" height="48"/>
+                    <rect key="frame" x="24" y="164" width="144" height="48"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="144" id="9uc-ny-pmy"/>
                         <constraint firstAttribute="height" constant="48" id="seN-Tw-wEL"/>
@@ -68,7 +73,7 @@
                     </connections>
                 </button>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="veD-Qr-LUb">
-                    <rect key="frame" x="29" y="214" width="317" height="80"/>
+                    <rect key="frame" x="29" y="232" width="317" height="80"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="creditcard" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ejm-Qb-XjA">
                             <rect key="frame" x="10" y="11.5" width="24" height="20.5"/>
@@ -107,7 +112,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jD7-A3-ga9">
-                    <rect key="frame" x="29" y="304" width="317" height="60"/>
+                    <rect key="frame" x="29" y="322" width="317" height="60"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="uAX-IA-0CX">
                             <rect key="frame" x="10" y="10.5" width="24" height="23"/>
@@ -145,12 +150,51 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RXd-mm-4qw" customClass="GSVCBottomAlert" customModule="GSSAVisualComponents">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uK8-fM-Eky">
+                            <rect key="frame" x="20" y="10" width="30" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="BYX-Mo-c2h"/>
+                                <constraint firstAttribute="height" constant="30" id="ZaI-M8-h93"/>
+                            </constraints>
+                            <color key="tintColor" red="0.45098039220000002" green="0.070588235289999995" blue="0.72156862749999995" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" image="arrow.backward" catalog="system"/>
+                            <connections>
+                                <action selector="close:" destination="-1" eventType="touchUpInside" id="z8b-sY-1Hd"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l3q-XM-Hra" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                            <rect key="frame" x="187.5" y="25" width="0.0" height="0.0"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="styleType">
+                                    <integer key="value" value="7"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="AWR-D6-w0N"/>
+                        <constraint firstItem="l3q-XM-Hra" firstAttribute="centerY" secondItem="uK8-fM-Eky" secondAttribute="centerY" id="SJy-RB-HEU"/>
+                        <constraint firstItem="uK8-fM-Eky" firstAttribute="centerY" secondItem="RXd-mm-4qw" secondAttribute="centerY" id="ZSU-QF-17T"/>
+                        <constraint firstItem="uK8-fM-Eky" firstAttribute="leading" secondItem="RXd-mm-4qw" secondAttribute="leading" constant="20" id="aSa-53-h2e"/>
+                        <constraint firstItem="l3q-XM-Hra" firstAttribute="centerX" secondItem="RXd-mm-4qw" secondAttribute="centerX" id="ryu-Ye-Nff"/>
+                    </constraints>
+                </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="FQJ-lF-YzG"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="vOX-bf-wpE" firstAttribute="leading" secondItem="nhI-Mo-hmq" secondAttribute="leading" id="14S-Aw-CPB"/>
                 <constraint firstItem="veD-Qr-LUb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="29" id="1li-rN-Qyx"/>
+                <constraint firstAttribute="trailing" secondItem="RXd-mm-4qw" secondAttribute="trailing" id="1oe-Vk-KxK"/>
                 <constraint firstItem="veD-Qr-LUb" firstAttribute="top" secondItem="d8l-bl-aWH" secondAttribute="bottom" constant="20" id="2qH-5b-REU"/>
+                <constraint firstItem="RXd-mm-4qw" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="2w8-ti-7Ic"/>
                 <constraint firstItem="vOX-bf-wpE" firstAttribute="trailing" secondItem="nhI-Mo-hmq" secondAttribute="trailing" id="7FA-Hz-Ntn"/>
                 <constraint firstAttribute="trailing" secondItem="nhI-Mo-hmq" secondAttribute="trailing" constant="24" id="9Vw-cq-col"/>
                 <constraint firstItem="jD7-A3-ga9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="29" id="IHJ-ft-Y7X"/>
@@ -158,35 +202,42 @@
                 <constraint firstItem="vOX-bf-wpE" firstAttribute="top" secondItem="nhI-Mo-hmq" secondAttribute="bottom" constant="16" id="PGH-mj-MX6"/>
                 <constraint firstAttribute="trailing" secondItem="jD7-A3-ga9" secondAttribute="trailing" constant="29" id="SeM-20-lci"/>
                 <constraint firstItem="mGx-nf-Qhu" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="VFw-6T-Ffe"/>
-                <constraint firstItem="nhI-Mo-hmq" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="25" id="a70-5V-dqq"/>
                 <constraint firstItem="jD7-A3-ga9" firstAttribute="top" secondItem="veD-Qr-LUb" secondAttribute="bottom" constant="10" id="hjN-Q2-zCB"/>
                 <constraint firstItem="d8l-bl-aWH" firstAttribute="top" secondItem="vOX-bf-wpE" secondAttribute="bottom" constant="32" id="i97-jK-1SJ"/>
                 <constraint firstAttribute="trailing" secondItem="veD-Qr-LUb" secondAttribute="trailing" constant="29" id="laB-43-v9E"/>
                 <constraint firstItem="nhI-Mo-hmq" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="24" id="lix-cq-2fM"/>
                 <constraint firstAttribute="bottom" secondItem="mGx-nf-Qhu" secondAttribute="bottom" constant="48" id="llP-JS-TZV"/>
+                <constraint firstItem="nhI-Mo-hmq" firstAttribute="top" secondItem="RXd-mm-4qw" secondAttribute="bottom" constant="25" id="pT9-sh-UOs"/>
+                <constraint firstItem="nhI-Mo-hmq" firstAttribute="top" secondItem="FQJ-lF-YzG" secondAttribute="top" priority="999" constant="25" id="v0J-NW-mvF"/>
+                <constraint firstItem="RXd-mm-4qw" firstAttribute="top" secondItem="FQJ-lF-YzG" secondAttribute="top" id="wVP-a0-NDb"/>
             </constraints>
             <point key="canvasLocation" x="88.799999999999997" y="90.404797601199405"/>
         </view>
     </objects>
     <designables>
         <designable name="4h5-bP-J3Z">
-            <size key="intrinsicContentSize" width="503" height="20"/>
+            <size key="intrinsicContentSize" width="539.5" height="20.5"/>
         </designable>
         <designable name="TtU-sC-mgS">
-            <size key="intrinsicContentSize" width="622" height="20"/>
+            <size key="intrinsicContentSize" width="671" height="20.5"/>
         </designable>
+        <designable name="l3q-XM-Hra"/>
         <designable name="mGx-nf-Qhu">
-            <size key="intrinsicContentSize" width="84" height="35"/>
+            <size key="intrinsicContentSize" width="75" height="33"/>
         </designable>
         <designable name="nhI-Mo-hmq">
-            <size key="intrinsicContentSize" width="147.5" height="28"/>
+            <size key="intrinsicContentSize" width="112" height="20.5"/>
         </designable>
         <designable name="vOX-bf-wpE">
-            <size key="intrinsicContentSize" width="328.5" height="22.5"/>
+            <size key="intrinsicContentSize" width="312" height="20.5"/>
         </designable>
     </designables>
     <resources>
+        <image name="arrow.backward" catalog="system" width="128" height="98"/>
         <image name="creditcard" catalog="system" width="128" height="88"/>
         <image name="info.circle.fill" catalog="system" width="128" height="121"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

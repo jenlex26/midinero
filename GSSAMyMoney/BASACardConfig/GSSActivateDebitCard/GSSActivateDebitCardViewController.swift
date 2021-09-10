@@ -37,7 +37,7 @@ class GSSActivateDebitCardViewController: GSSAMasterViewController, GSSActivateD
 
 extension GSSActivateDebitCardViewController : BASAScanCodeWireframeProtocol {
     func codeDetectedRouter(sCode: String) {
-        let view = GSSASetCVVRouter.createModule()
+        let view = GSSASetCVVRouter.createModule(cardNumber: sCode)
         self.navigationController?.pushViewController(view, animated: true)
     }
     

@@ -11,22 +11,22 @@
 import Foundation
 
 //MARK: Wireframe -
-protocol GSSASetCVVWireframeProtocol: class {
+protocol GSSASetCVVWireframeProtocol: AnyObject {
 
 }
 //MARK: Presenter -
-protocol GSSASetCVVPresenterProtocol: class {
-    func requestSetCardCVV(body: SetCVVBody, CardSearchResponse: @escaping () -> ())
+protocol GSSASetCVVPresenterProtocol: AnyObject {
+    func requestSetCardCVV(body: SetCVVBody, CardSearchResponse: @escaping (CreditCardActivationResponse?) -> ())
 }
 
 //MARK: Interactor -
-protocol GSSASetCVVInteractorProtocol: class {
+protocol GSSASetCVVInteractorProtocol: AnyObject {
    var presenter: GSSASetCVVPresenterProtocol?  { get set }
-    func trySetCardCVV(body: SetCVVBody, CardSearchResponse: @escaping () -> ())
+   func trySetCardCVV(body: SetCVVBody, CardSearchResponse: @escaping (CreditCardActivationResponse?) -> ())
 }
 
 //MARK: View -
-protocol GSSASetCVVViewProtocol: class {
+protocol GSSASetCVVViewProtocol: AnyObject {
 
   var presenter: GSSASetCVVPresenterProtocol?  { get set }
 }

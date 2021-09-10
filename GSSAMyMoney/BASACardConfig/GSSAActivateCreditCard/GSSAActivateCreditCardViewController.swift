@@ -62,10 +62,7 @@ class GSSAActivateCreditCardViewController: UIViewController, GSSAActivateCredit
             button.setImage(UIImage(named: "ic_card"), for: .normal)
             let success = GSVTOperationStatusViewController(status: .success(title: "¡Listo!", message: "Tu tarjeta baz ya está activa", views: [spaceView, info!, card!]),
                                                             roundButtonAction: {
-                                                                self.dismiss(animated: false, completion: {
-                                                                    let view = GSSACardNIPRouter.createModule()
-                                                                    self.navigationController?.pushViewController(view, animated: true)
-                                                                })
+                                                                self.dismiss(animated: false, completion: nil)
                                                             },
                                                             plainButtonAction: {
                                                                 self.dismiss(animated: false, completion: {

@@ -42,7 +42,7 @@ class BASACardConfigInteractor:  GSSAURLSessionTaskCoordinatorBridge,  BASACardC
         }
     }
     
-    func tryGetRequestCardInfo(){
+    func tryGetRequestCardInfo(DebitCardInfoResponse: @escaping (DebitCardInfoResponse?) -> ()){
         var body = CardConfigCardInfoBody.init()
         
         body = CardConfigCardInfoBody.init(transaccion: CardConfigCardInfoTransaccion.init(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().encryptAlnova(), primerTokenVerificacion: customToken.shared.firstVerification))
@@ -54,10 +54,13 @@ class BASACardConfigInteractor:  GSSAURLSessionTaskCoordinatorBridge,  BASACardC
             self.strPathEndpoint = "/superapp/dinero/captacion/gestion-tarjetas-fisicas/v1/tarjetas/busquedas"
         }
         
-        sendRequest(strUrl: strPathEndpoint, method: .POST, objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: DebitCardStatementData?, error) in
-            
+        sendRequest(strUrl: strPathEndpoint, method: .POST, objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: DebitCardInfoResponse?, error) in
             debugPrint(objRes as Any)
-            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "customCardStatusRequestResponse"), object: error.code, userInfo: nil))
+            if error.code == 0{
+                DebitCardInfoResponse(objRes)
+            }else{
+                DebitCardInfoResponse(nil)
+            }
         }
     }
 }
