@@ -95,7 +95,7 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
             }else{
                 presenter?.requestCardStatus(CardSearchResponse: { [self] CardSearchResponse in
                     if CardSearchResponse != nil{
-                        if CardSearchResponse?.resultado?.tarjeta?.estatus?.alnovaDecrypt().removeWhiteSpaces() == "ENVIADA"{
+                        if CardSearchResponse?.resultado?.tarjeta?.estatus?.alnovaDecrypt().removeWhiteSpaces() == "ENVIADA" || CardSearchResponse?.resultado?.tarjeta?.estatus?.alnovaDecrypt().removeWhiteSpaces() == "PENDENTRE"{
                             configureDebitCard(forStatus: .activate )
                         }else{
                             configureDebitCard(forStatus: .unknown)

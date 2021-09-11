@@ -193,11 +193,16 @@ extension BASACardStatementsViewController: UITableViewDelegate, UITableViewData
             cell.lblTitle.styleType = 6
             return cell
         case statements.count + 2:
-            let cell = table.dequeueReusableCell(withIdentifier: "BASAInfoCardCell")
-            return cell!
+//            let cell = table.dequeueReusableCell(withIdentifier: "BASAInfoCardCell")
+            let cell = table.dequeueReusableCell(withIdentifier: "BASAButtonCell") as! BASAButtonCell
+            cell.btnNext.addTarget(self, action: #selector(nextAction(sender:)), for: .touchUpInside)
+            cell.btnNext.isUserInteractionEnabled = true
+            return cell
         case statements.count + 3:
             let cell = table.dequeueReusableCell(withIdentifier: "BASAButtonCell") as! BASAButtonCell
             cell.btnNext.addTarget(self, action: #selector(nextAction(sender:)), for: .touchUpInside)
+            cell.isHidden = true
+            cell.btnNext.isUserInteractionEnabled = false
             return cell
         default:
             let cell = table.dequeueReusableCell(withIdentifier: "BASASwitchItemCell") as! BASASwitchItemCell
