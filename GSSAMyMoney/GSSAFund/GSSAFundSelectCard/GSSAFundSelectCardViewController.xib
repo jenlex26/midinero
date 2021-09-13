@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GSSAFundSelectCardViewController" customModule="GSSAMyMoney" customModuleProvider="target">
             <connections>
+                <outlet property="addCardBtn" destination="H0C-kB-Ntn" id="QtZ-Ob-okd"/>
                 <outlet property="cardsTable" destination="Occ-cf-qgc" id="Aey-DX-JOv"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -31,6 +32,10 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </label>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Occ-cf-qgc">
+                    <rect key="frame" x="20" y="143" width="335" height="504"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H0C-kB-Ntn" customClass="GSVCButton" customModule="GSSAVisualComponents">
                     <rect key="frame" x="20" y="88" width="140" height="35"/>
                     <constraints>
@@ -40,7 +45,7 @@
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <inset key="imageEdgeInsets" minX="10" minY="10" maxX="15" maxY="10"/>
-                    <state key="normal" title="Nueva tarjeta" image="plus" catalog="system">
+                    <state key="normal" title="Usar tarjeta" image="plus" catalog="system">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <userDefinedRuntimeAttributes>
@@ -52,25 +57,21 @@
                         <action selector="addCard:" destination="-1" eventType="touchUpInside" id="Iom-Wo-Oda"/>
                     </connections>
                 </button>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Occ-cf-qgc">
-                    <rect key="frame" x="25" y="143" width="330" height="504"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="don-y9-jGb"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="Occ-cf-qgc" firstAttribute="leading" secondItem="55D-bn-jia" secondAttribute="leading" id="0sw-wA-cjf"/>
-                <constraint firstItem="Occ-cf-qgc" firstAttribute="top" secondItem="H0C-kB-Ntn" secondAttribute="bottom" constant="20" id="1jt-aX-yqM"/>
-                <constraint firstItem="H0C-kB-Ntn" firstAttribute="top" secondItem="55D-bn-jia" secondAttribute="bottom" constant="20" id="7Ui-1n-G63"/>
-                <constraint firstItem="H0C-kB-Ntn" firstAttribute="leading" secondItem="don-y9-jGb" secondAttribute="leading" constant="20" id="ENR-pF-zIb"/>
+                <constraint firstItem="Occ-cf-qgc" firstAttribute="leading" secondItem="don-y9-jGb" secondAttribute="leading" constant="20" id="6kz-8s-pL8"/>
+                <constraint firstItem="Occ-cf-qgc" firstAttribute="top" secondItem="H0C-kB-Ntn" secondAttribute="bottom" constant="20" id="C41-3X-ACt"/>
+                <constraint firstItem="H0C-kB-Ntn" firstAttribute="top" secondItem="55D-bn-jia" secondAttribute="bottom" constant="20" id="Ped-td-71H"/>
                 <constraint firstItem="55D-bn-jia" firstAttribute="top" secondItem="don-y9-jGb" secondAttribute="top" constant="40" id="SI7-YZ-nq8"/>
                 <constraint firstItem="55D-bn-jia" firstAttribute="leading" secondItem="don-y9-jGb" secondAttribute="leading" constant="25" id="VLx-HE-Fdj"/>
-                <constraint firstItem="don-y9-jGb" firstAttribute="bottom" secondItem="Occ-cf-qgc" secondAttribute="bottom" constant="20" id="W42-WP-3ob"/>
-                <constraint firstItem="don-y9-jGb" firstAttribute="trailing" secondItem="Occ-cf-qgc" secondAttribute="trailing" constant="20" id="Yac-N6-AZJ"/>
+                <constraint firstItem="H0C-kB-Ntn" firstAttribute="leading" secondItem="don-y9-jGb" secondAttribute="leading" constant="20" id="X3Z-JR-2UQ"/>
+                <constraint firstItem="don-y9-jGb" firstAttribute="bottom" secondItem="Occ-cf-qgc" secondAttribute="bottom" constant="20" id="iRw-Lh-rzM"/>
                 <constraint firstItem="don-y9-jGb" firstAttribute="trailing" secondItem="55D-bn-jia" secondAttribute="trailing" constant="20" id="jsE-7b-CFK"/>
+                <constraint firstItem="don-y9-jGb" firstAttribute="trailing" secondItem="Occ-cf-qgc" secondAttribute="trailing" constant="20" id="oPR-LC-k9x"/>
             </constraints>
-            <point key="canvasLocation" x="138" y="92"/>
+            <point key="canvasLocation" x="136.80000000000001" y="91.304347826086968"/>
         </view>
     </objects>
     <designables>
@@ -78,7 +79,7 @@
             <size key="intrinsicContentSize" width="302" height="28"/>
         </designable>
         <designable name="H0C-kB-Ntn">
-            <size key="intrinsicContentSize" width="115" height="20"/>
+            <size key="intrinsicContentSize" width="101" height="20"/>
         </designable>
     </designables>
     <resources>

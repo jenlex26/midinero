@@ -26,6 +26,9 @@ class GSSACardFundResumeInteractor: GSSACardFundResumeInteractorProtocol {
         }, failure: {
             [weak self] error in
             
+            print("errorrrr")
+            print(error)
+            
             guard let self = self else { return }
             
             self.presenter?.enrollError()
@@ -37,7 +40,7 @@ class GSSACardFundResumeInteractor: GSSACardFundResumeInteractorProtocol {
 extension GSSACardFundResumeInteractor {
     private func payServices(enrollmentRequest: LNKPG_EnrollmentRequestFacade){
         guard let ecommerceResponse = GSSAFundSharedVariables.shared.ecommerceResponse,
-              let accountNumber = GSSAFundSharedVariables.shared.account else {
+              let accountNumber = GSSAFundSharedVariables.shared.cardInformation?.card?.number else {
             
             self.presenter?.enrollError()
             return
@@ -77,28 +80,31 @@ extension GSSACardFundResumeInteractor {
             guard let self = self else { return }
             
             self.presenter?.enrollError()
-            print(error)
         })
     }
     
     private func notifyEnrollment(response: LNKPG_EnrollmentResponseFacade){
-        guard let appEmail = GSSISessionInfo.sharedInstance.gsUser.email?.lowercased() else {
+        //let email: String? = Optional.some("tiwasos367@ppp998.com")
+        //guard let appEmail = email?.lowercased(),
+        //guard let appEmail: String? = Optional.some("rajale6884@rebation.com"),
+        guard let appEmail = GSSISessionInfo.sharedInstance.gsUser.email?.lowercased(),
+              let cardInformation = GSSAFundSharedVariables.shared.cardInformation,
+              let cvv = GSSAFundSharedVariables.shared.cvv,
+              let transactionId = GSSAFundSharedVariables.shared.idTransaccionSuperApp,
+              //let clientAccountNumber = cardInformation.card?.number,
+              let clientAccountNumber = GSSAFundSharedVariables.shared.clientAccountNumber,
+              let afiliationNumber = GSSAFundSharedVariables.shared.numeroAfiliacion,
+              let amount = GSSAFundSharedVariables.shared.amount else {
             
             presenter?.enrollError()
             return
         }
         
-        guard let cardInformation = GSSAFundSharedVariables.shared.cardInformationResponse else {
-            
-            searchInformation(enrollResponse: response)
-            return
-        }
-        
-        LNKPG_PaymentFacade.shared.notifyEnrollment(enrollment: response, ecommerceResponse: GSSAFundSharedVariables.shared.ecommerceResponse, cardInformationResponse: cardInformation, cvv: GSSAFundSharedVariables.shared.cvv ?? "", idTransaccionSuperApp: GSSAFundSharedVariables.shared.idTransaccionSuperApp ?? "", numeroCuentaCliente: GSSAFundSharedVariables.shared.clientAccountNumber ?? "", numeroAfiliacion: GSSAFundSharedVariables.shared.numeroAfiliacion ?? "", correo: GSSAFundSharedVariables.shared.createTokenRequest?.email ?? appEmail, amount: GSSAFundSharedVariables.shared.amount ?? "", successFondeoAccountResponse: {
-            [weak self] fondeoAccountResponse in
+        LNKPG_PaymentFacade.shared.notifyEnrollment(enrollment: response, ecommerceResponse: GSSAFundSharedVariables.shared.ecommerceResponse, cardInformation: cardInformation, cvv: cvv, idTransaccionSuperApp: transactionId, numeroCuentaCliente: clientAccountNumber, numeroAfiliacion:  afiliationNumber, correo: GSSAFundSharedVariables.shared.createTokenRequest?.email ?? appEmail, amount:  amount, successFondeoAccountResponse: {
+            [weak self] accountResponse in
             guard let self = self else { return }
             
-            guard let fondeoAccountResponse = fondeoAccountResponse else {
+            guard let fondeoAccountResponse = accountResponse else {
                 self.presenter?.enrollError()
                 return
             }
@@ -126,29 +132,6 @@ extension GSSACardFundResumeInteractor {
             }
             
             self.presenter?.enrollSuccess(responseEnroll: response, responseOtp: sessionOtpResponse, responseCargo: nil, responseFondeo: nil)
-        }, failure: {
-            [weak self] error in
-            
-            guard let self = self else { return }
-            
-            print(error)
-            
-            self.presenter?.enrollError()
-        })
-    }
-    
-    private func searchInformation(enrollResponse: LNKPG_EnrollmentResponseFacade){
-        LNKPG_Facade.shared.getCardInformation(merchantID: GSSAFundSharedVariables.shared.ecommerceResponse?.comerciosCybs?.id ?? "", merchantReference: GSSAFundSharedVariables.shared.idTransaccionSuperApp ?? "", paySubscriptionId: GSSAFundSharedVariables.shared.tokenCardResponse?.paySubscriptionId ?? "", success: {
-            [weak self] response in
-            guard let self = self else { return }
-            
-            guard let response = response else {
-                self.presenter?.enrollError()
-                return
-            }
-            
-            GSSAFundSharedVariables.shared.cardInformationResponse = response
-            self.notifyEnrollment(response: enrollResponse)
         }, failure: {
             [weak self] error in
             

@@ -38,8 +38,14 @@ class GSSAConfirmCardSaveRouter: GSSAConfirmCardSaveWireframeProtocol {
         
     }
     
-    func goToError(message: String, isDouble: Bool) {
-        guard let errorVC = viewController?.getErrorMPViewController(message: message, isDouble: isDouble) else { return }
+    func goToError(message: String, isDouble: Bool, isWarning: Bool = false) {
+        var errorVC: UIViewController!
+        
+        if !isWarning {
+            errorVC = viewController?.getErrorMPViewController(message: message, isDouble: isDouble)
+        } else {
+            errorVC = viewController?.getWarningMPViewController(message: message, releaseLastFlow: true)
+        }
         
         viewController?.navigationController?.pushViewController(errorVC, animated: true)
     }

@@ -15,9 +15,13 @@ import GSSAInterceptor
 import baz_ios_sdk_link_pago
 import GSSASessionInfo
 
-class GSSACardFundResumeViewController: GSVTGenericResumeViewController {
+class GSSACardFundResumeViewController: GSVTGenericResumeViewController, GSVCBottomAlertHandler {
+    var bottomAlert: GSVCBottomAlert?
+    
 
 	var presenter: GSSACardFundResumePresenterProtocol?
+    
+    
     
     //MARK: - Life cycle
 	override func viewDidLoad() {
@@ -70,9 +74,32 @@ extension GSSACardFundResumeViewController: GSSACardFundResumeViewProtocol {
 extension GSSACardFundResumeViewController: GSVCSliderButtonDelegate {
     func slideDidFinish(_ sender: GSVCSliderButton) {
         sender.resetSliderState(animated: true)
+        
+        
+        guard let dailyLimit = GSSAFundSharedVariables.shared.ecommerceSMTIResponse?.limiteDiario,
+        //guard let dailyLimit = flag,
+              dailyLimit, let numBerTransactionDaily = GSSAFundSharedVariables.shared.ecommerceSMTIResponse?.numeroTransaccionesDiarias , numBerTransactionDaily < GSSAFundSharedVariables.shared.ecommerceResponse?.limiteTransaccionesDia ?? 0 else {
+            self.showBottomAlert(msg: "Supero el limite diario de cargos")
+            return
+        }
+        
+        
+        guard let monthLimit = GSSAFundSharedVariables.shared.ecommerceSMTIResponse?.limiteMensual, let numBerTransactionMonth = GSSAFundSharedVariables.shared.ecommerceSMTIResponse?.numeroTransaccionesMensuales, numBerTransactionMonth < GSSAFundSharedVariables.shared.ecommerceResponse?.limiteTransaccionesMes ?? 0 ,
+        //guard let monthLimit = flag,
+              monthLimit  else {
+            self.showBottomAlert(msg: "Supero el limite mensual de cargos")
+            
+            return
+        }
+        
+        
+        
         guard let enrollRequest = GSSAFundSharedVariables.shared.enrollmentRequest else { return }
         GSVCLoader.show()
         presenter?.enroll(request: enrollRequest)
+        
+        
+        
     }
 }
 
@@ -93,7 +120,7 @@ extension GSSACardFundResumeViewController {
     
     private func configureCells() {
         var cells:[GSVTResumeCellInfo] = []
-        let account: String = GSSAFundSharedVariables.shared.account ?? ""
+        let account: String = GSSAFundSharedVariables.shared.cardInformation?.card?.number ?? ""
         
         let origin = GSVTResumeCellInfo(sectionTitle: "Desde qué tarjeta recargas", mainInfo: account.maskedAccount, iconImage: UIImage(named: "paypalCardSAIcon"), nameAction: "Editar") {
             
@@ -127,6 +154,11 @@ extension GSSACardFundResumeViewController {
             frame: CGRect(x: 0,y: 0, width: self.view.frame.width, height: 64)
         )
     }
+    
+    private func showBottomAlert(msg: String) {
+        self.presentBottomAlertFullData(status: .caution, message: msg, attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+    }
+    
 }
 
 

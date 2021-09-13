@@ -39,8 +39,8 @@ class GSSAConfirmCardSavePresenter: GSSAConfirmCardSavePresenterProtocol {
         router.goToNextFlow()
     }
     
-    func goToError(message: String, isDouble: Bool) {
-        router.goToError(message: message, isDouble: isDouble)
+    func goToError(message: String, isDouble: Bool, isWarning: Bool) {
+        router.goToError(message: message, isDouble: isDouble, isWarning: isWarning)
     }
     
     func returnTo(vc: AnyClass, animated: Bool) {

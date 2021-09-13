@@ -16,19 +16,19 @@ class GSSACardTableViewCell: UITableViewCell {
     @IBOutlet weak var accountLabel: UILabel!
     
     //MARK: - Properties
-    static let cellIdentifier = "GSSACardTableViewCell"
-    private var onDelete: ((_ token: String) -> Void)?
-    private var onSelect: ((_ token: String) -> Void)?
-    private var token: String?
+    private var onDelete: ((_ card: LNKPG_ListCardResponseFacade.__Tokens) -> Void)?
+    private var onSelect: ((_ card: LNKPG_ListCardResponseFacade.__Tokens) -> Void)?
+    private var card: LNKPG_ListCardResponseFacade.__Tokens?
     
-    static var nib: UINib {
+    static let cellIdentifier: String = "GSSACardTableViewCell"
+    static let nib: UINib  = {
         return UINib.init(nibName: identifier, bundle: Bundle.init(for: GSSACardTableViewCell.self))
-    }
+    }()
     
     //MARK: - Life cycle
     override func awakeFromNib() {
         super.awakeFromNib()
-
+        
         setView()
     }
     
@@ -39,11 +39,11 @@ class GSSACardTableViewCell: UITableViewCell {
         self.selectionStyle = .none
     }
     
-    func setupData(token: String, bankType: String, accountNumber: String, onSelect: @escaping ((_ token: String) -> Void), onDelete: @escaping ((_ token: String) -> Void)) {
+    func setupData(card: LNKPG_ListCardResponseFacade.__Tokens, bankType: String, accountNumber: String, onSelect: @escaping ((_ card: LNKPG_ListCardResponseFacade.__Tokens) -> Void), onDelete: @escaping ((_ card: LNKPG_ListCardResponseFacade.__Tokens) -> Void)) {
         
         self.onDelete = onDelete
         self.onSelect = onSelect
-        self.token = token
+        self.card = card
         
         accountLabel.text = accountNumber
         cardTypeLabel.text = bankType
@@ -52,14 +52,14 @@ class GSSACardTableViewCell: UITableViewCell {
     //MARK: - Actions
     @objc
     private func onClickCard() {
-        guard let token = token else { return }
-        onSelect?(token)
+        guard let card = card else { return }
+        onSelect?(card)
     }
     
     //MARK: - @IBActions
     @IBAction func onClickDelete(_ sender: Any) {
-        guard let token = token else { return }
+        guard let card = card else { return }
         
-        self.onDelete?(token)
+        self.onDelete?(card)
     }
 }

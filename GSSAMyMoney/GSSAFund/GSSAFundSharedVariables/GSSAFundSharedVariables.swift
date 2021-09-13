@@ -14,6 +14,8 @@ class GSSAFundSharedVariables {
     let currencyCode = "MXN"
     
     var ecommerceResponse: LNKPG_EcommerceResponseFacade?
+    var ecommerceSMMIResponse: LNKPG_ESM_MovementsResponseFacade?
+    var ecommerceSMTIResponse: LNKPG_ESM_TransactionsResponseFacade?
     var cardListResponse: LNKPG_ListCardResponseFacade?
     var cardInformationResponse: LNKPG_CardInformationResponseFacade?
     var tokenCardResponse: LNKPG_TokenCardResponseFacade?
@@ -27,14 +29,14 @@ class GSSAFundSharedVariables {
     var cargoEcommerceResponse: LNKPG_CargoEcommerceResponseFacade?
     var enrollmentRequest: LNKPG_EnrollmentRequestFacade?
     var createTokenRequest: LNKPG_TokenCardRequestFacade?
+    var cardInformation: LNKPG_CardInformationFacade?
     
-    var amount: String?
-    var account: String?
     var cvv: String?
+    var cardCount: Int?
+    var amount: String?
     var merchantDetail: String?
-    var clientAccountNumber: String?
     var numeroAfiliacion: String?
-    
+    var clientAccountNumber: String?
     var idTransaccionSuperApp: String?
     
     func randomString(length: Int) -> String {
@@ -57,6 +59,8 @@ class GSSAFundSharedVariables {
     
     func resetSingleton(){
         self.ecommerceResponse = nil
+        self.ecommerceSMMIResponse = nil
+        self.ecommerceSMTIResponse = nil
         self.cardListResponse = nil
         self.cardInformationResponse = nil
         self.tokenCardResponse = nil
@@ -70,15 +74,15 @@ class GSSAFundSharedVariables {
         self.cargoEcommerceResponse = nil
         self.enrollmentRequest = nil
         self.createTokenRequest = nil
+        self.cardInformation = nil
         
-        self.cvv = ""
-        self.amount = ""
-        self.account = ""
-        self.merchantDetail = ""
-        self.clientAccountNumber = ""
-        self.numeroAfiliacion = ""
-        
-        self.idTransaccionSuperApp = ""
+        self.cardCount = nil
+        self.amount = nil
+        self.merchantDetail = nil
+        self.clientAccountNumber = nil
+        self.numeroAfiliacion = nil
+        self.cvv = nil
+        self.idTransaccionSuperApp = nil
     }
     
     /*

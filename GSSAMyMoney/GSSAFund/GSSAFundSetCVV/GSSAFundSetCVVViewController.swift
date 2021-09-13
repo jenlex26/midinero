@@ -32,9 +32,7 @@ class GSSAFundSetCVVViewController: GSSAMasterViewController, UITextFieldDelegat
         originalViewFrame = self.view.frame.origin.y
         setView()
         searchAccount()
-        if #available(iOS 13.0, *){
-            print("")
-        }else{
+        if #available(iOS 13.0, *){}else{
             txtCVV.image = UIImage(named: "openEye", in: Bundle.init(for: GSSAFundSetCVVViewController.self), compatibleWith: nil)?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate) ?? UIImage()
             txtCVV.imageTyped = UIImage(named: "closedEye", in: Bundle.init(for: GSSAFundSetCVVViewController.self), compatibleWith: nil)?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate) ?? UIImage()
             txtCVV.tintColor = UIColor.GSVCSecundary100
@@ -72,18 +70,28 @@ class GSSAFundSetCVVViewController: GSSAMasterViewController, UITextFieldDelegat
         cvcInfoLabel.isHidden = false
         
         guard let cvv = txtCVV.text,
-              cvv.count == 3,
-              let responseCard = GSSAFundSharedVariables.shared.cardInformationResponse,
-              let accountNumber = responseCard.card?.number,
-              let expirationMonth = responseCard.card?.expirationMonth,
-              let expirationYear = responseCard.card?.expirationYear else {
+              cvv.count == 3 else {
             
             cvcInfoLabel.isHidden = true
             txtCVV.setAppearance(.error(message: "CVV invalido"))
             return
         }
         
+        guard let responseCard = GSSAFundSharedVariables.shared.cardInformationResponse,
+              let payer = responseCard.payer,
+              let payerFirstName = payer.firstName,
+              let payerLastName = payer.lastName,
+              let cardType = responseCard.card?.type,
+              let accountNumber = responseCard.card?.number,
+              let expirationMonth = responseCard.card?.expirationMonth,
+              let expirationYear = responseCard.card?.expirationYear else {
+            
+            showError()
+            return
+        }
+        
         GSSAFundSharedVariables.shared.cvv = cvv
+        GSSAFundSharedVariables.shared.cardInformation = LNKPG_CardInformationFacade(transactionCurrencyCode: GSSAFundSharedVariables.shared.currencyCode, payer: LNKPG_CardInformationFacade.__Payer(firstName: payerFirstName, lastName: payerLastName), card: LNKPG_CardInformationFacade.__Card(expirationMonth: expirationMonth, expirationYear: expirationYear, number: accountNumber, type: cardType))
         GSSAFundSharedVariables.shared.enrollmentRequest = LNKPG_EnrollmentRequestFacade(merchantID: GSSAFundSharedVariables.shared.ecommerceResponse?.comerciosCybs?.id ?? "", merchantReference: GSSAFundSharedVariables.shared.idTransaccionSuperApp ?? "", amount: GSSAFundSharedVariables.shared.amount ?? "", transactionCurrencyCode: GSSAFundSharedVariables.shared.currencyCode, card: LNKPG_EnrollmentRequestFacade.__card(number: accountNumber, expirationMonth: expirationMonth, expirationYear: expirationYear, type: GSSAFundSharedVariables.shared.getCardType(cardNumer: accountNumber)))
         
         presenter?.goToNextFlow()
@@ -98,13 +106,15 @@ extension GSSAFundSetCVVViewController: GSSAFundSetCVVViewProtocol {
         guard let firstName = response.payer?.firstName,
               let lastName = response.payer?.lastName,
               let type = response.card?.type,
+              let expirationMonth = response.card?.expirationMonth,
+              let expirationYear = response.card?.expirationYear,
               let accountNumber = response.card?.number else {
             
             showError()
             return 
         }
         
-        GSSAFundSharedVariables.shared.account = accountNumber
+        GSSAFundSharedVariables.shared.cardInformation = LNKPG_CardInformationFacade(transactionCurrencyCode: GSSAFundSharedVariables.shared.currencyCode, payer: LNKPG_CardInformationFacade.__Payer(firstName: firstName, lastName: lastName), card: LNKPG_CardInformationFacade.__Card(expirationMonth: expirationMonth, expirationYear: expirationYear, number: accountNumber, type: type))
         GSSAFundSharedVariables.shared.cardInformationResponse = response
         cardInfoView.setupInfo(name: firstName + " " + lastName, bankName: type, accountNumber: accountNumber)
     }

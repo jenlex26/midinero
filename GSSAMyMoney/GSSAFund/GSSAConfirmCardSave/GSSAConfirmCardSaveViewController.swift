@@ -12,8 +12,8 @@ import UIKit
 import GSSAVisualComponents
 import baz_ios_sdk_link_pago
 
-class GSSAConfirmCardSaveViewController: GSSAMasterViewController, GSSAConfirmCardSaveViewProtocol {
-    
+class GSSAConfirmCardSaveViewController: GSSAMasterViewController, GSSAConfirmCardSaveViewProtocol, GSVCBottomAlertHandler {
+    var bottomAlert: GSVCBottomAlert?
     var presenter: GSSAConfirmCardSavePresenterProtocol?
     
     //MARK: - @IBOutlets
@@ -25,7 +25,7 @@ class GSSAConfirmCardSaveViewController: GSSAMasterViewController, GSSAConfirmCa
     
     //MARK: - Properties
     var tokenCardRequest: LNKPG_TokenCardRequestFacade?
-
+    private var canSave: Bool = false
     //MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,14 +40,25 @@ class GSSAConfirmCardSaveViewController: GSSAMasterViewController, GSSAConfirmCa
     }
     //MARK: - @IBActions
     @IBAction func next(_ sender: Any) {
-        if let tokenCardRequest = tokenCardRequest {
-            guard let accountNunmber = tokenCardRequest.card?.number else { return }
-            
-            GSSAFundSharedVariables.shared.account =  accountNunmber
-            
+        guard let tokenCardRequest = tokenCardRequest,
+              let firstName = tokenCardRequest.payer?.firstName,
+              let lastName = tokenCardRequest.payer?.lastName,
+              let accountNumber = tokenCardRequest.card?.number,
+              let expirationMonth = tokenCardRequest.card?.expirationMonth,
+              let expirationYear = tokenCardRequest.card?.expirationYear,
+              let type = tokenCardRequest.card?.type else { return }
+        
+        GSSAFundSharedVariables.shared.cardInformation = LNKPG_CardInformationFacade(transactionCurrencyCode: GSSAFundSharedVariables.shared.currencyCode, payer: LNKPG_CardInformationFacade.__Payer(firstName: firstName, lastName: lastName), card: LNKPG_CardInformationFacade.__Card(expirationMonth: expirationMonth, expirationYear: expirationYear, number: accountNumber, type: type))
+        
+        
+        if saveCardSwitch.isOn {
             GSVCLoader.show()
             presenter?.requestSaveCard(tokenCardRequest: tokenCardRequest)
+
+            return
         }
+
+        presenter?.goToNextFlow()
     }
     
     @IBAction func editAction(_ sender: Any) {
@@ -56,6 +67,14 @@ class GSSAConfirmCardSaveViewController: GSSAMasterViewController, GSSAConfirmCa
     
     @IBAction func close(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func onChangeSaveCard(_ sender: UISwitch) {
+        if !canSave {
+            sender.setOn(false, animated: false)
+            showBottomAlert(msg: "Ya no puede guardar más tarjetas porque supero el límite")
+        }
+        
     }
 }
 
@@ -70,8 +89,8 @@ extension GSSAConfirmCardSaveViewController: UITextFieldDelegate {
 extension GSSAConfirmCardSaveViewController {
     func onSuccess(_ response: LNKPG_TokenCardResponseFacade) {
         GSVCLoader.hide()
-        GSSAFundSharedVariables.shared.tokenCardResponse = response
         
+        //presenter?.goToError(message: "Tiene que esperar 24 hrs. para poder usar esta cuenta",isDouble: false,  isWarning: true)
         presenter?.goToNextFlow()
     }
     
@@ -96,7 +115,12 @@ extension GSSAConfirmCardSaveViewController {
         editBtn.setTitleColor(.GSVCPrincipal100, for: .normal)
         saveView.backgroundColor = .GSVCBase200
         
-       setupInfo()
+        
+        print(GSSAFundSharedVariables.shared.ecommerceSMMIResponse)
+        
+        canSave = true
+        
+        setupInfo()
     }
     
     private func setupInfo(){
@@ -117,6 +141,10 @@ extension GSSAConfirmCardSaveViewController {
         GSVCLoader.hide()
         let message = "Ocurrio un error intentelo más tarde"
         
-        presenter?.goToError(message: message, isDouble: false)
+        presenter?.goToError(message: message, isDouble: false, isWarning: false)
+    }
+    
+    private func showBottomAlert(msg: String) {
+        self.presentBottomAlertFullData(status: .caution, message: msg, attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
     }
 }

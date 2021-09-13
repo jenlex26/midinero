@@ -16,38 +16,54 @@ import GSSAInterceptor
 
 extension UIViewController
 {
+    func getWarningMPViewController(title: String? = nil,subtitle: String? = nil, message:String?, releaseLastFlow:Bool = false) -> GSVTOperationStatusViewController {
+        return prepareMPVC(title: title ?? "Advertencia", subtitle: subtitle ?? "", message: message ?? "", isWarning: true, releaseLastFlow: releaseLastFlow)
+    }
     
+    public func getErrorMPViewController(title: String? = nil,subtitle: String? = nil, message:String?, releaseLastFlow:Bool = false, isDouble: Bool? = false) -> GSVTOperationStatusViewController
+    {//lanza este error
+        return prepareMPVC(title: title ?? "Algo falló", subtitle: subtitle ?? "Por el momento no podemos completar tu solicitud. Estamos trabajando para resolverlo.", message: message ?? "Ocurrio algo inesperado, intentalo de nuevo mas tarde", isWarning: false, releaseLastFlow: releaseLastFlow, isDouble: isDouble)
+    }
     
-    public func getErrorMPViewController(message:String?,releaseLastFlow:Bool = false, isDouble: Bool = false) -> GSVTOperationStatusViewController
-    {
-        let subtitleErrorMessage = "Por el momento no podemos completar tu solicitud. Estamos trabajando para resolverlo."
+    private func prepareMPVC(title: String, subtitle: String = "", message: String = "", isWarning: Bool = false, releaseLastFlow:Bool = false, isDouble: Bool? = nil) -> GSVTOperationStatusViewController {
+        let subtitleErrorMessage = subtitle
         let configPhone =  RemoteConfig.remoteConfig().remoteString(forKey: "iOS_SA_phone_contact") ?? ""
         let contactMessage:String =  "Contáctanos a través del servicio a clientes en tu Chat Linea SAPP \(configPhone)"
-        let servicemessageAlert =  getWarningBox(message: message ?? "Ocurrio algo inesperado, intentalo de nuevo mas tarde", color: .GSVCInformation200)
+        let servicemessageAlert =  getWarningBox(message: message, color: .GSVCInformation200)
         let contactAlert =  getWarningBox(message: contactMessage, color: .GSVCInformation200)
-        return GSVTOperationStatusViewController(status: .error(title: "Algo falló", message: subtitleErrorMessage, views: [servicemessageAlert,contactAlert]),roundButtonAction: {
+        let plainButtonAction: () -> Void = {
             [self] in
             
-            if isDouble {
-                self.popToViewController(ofClass: GSSACardFundResumeViewController.self, animated: false)
-            } else {
-                self.navigationController?.popViewController(animated: true)
+            if releaseLastFlow
+            {
+                GSINAdminNavigator.shared.releaseLastFlow()
             }
-            
-    }, plainButtonAction: {
-        [self] in
-        
-        
-        if releaseLastFlow
-        {
-            GSINAdminNavigator.shared.releaseLastFlow()
-        }
-        else
-        {
-            self.navigationController?.popToRootViewController(animated: true)
+            else
+            {
+                self.navigationController?.popToRootViewController(animated: true)
 
+            }
         }
-    })
+        var roundButtonAction: (() -> ())? = nil
+        
+        if let isDouble = isDouble {
+            roundButtonAction = {
+                [self] in
+                
+                if isDouble {
+                    self.navigationController?.popViewController(animated: false)
+                    self.navigationController?.popViewController(animated: true)
+                } else {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            
+            }
+        }
+        
+        return isWarning
+            ? GSVTOperationStatusViewController(status: .caution(title: title, message: subtitleErrorMessage, views: [servicemessageAlert,contactAlert]),plainButtonAction: plainButtonAction)
+            : GSVTOperationStatusViewController(status: .error(title: title, message: subtitleErrorMessage, views: [servicemessageAlert,contactAlert]),roundButtonAction: roundButtonAction,
+            plainButtonAction: plainButtonAction)
     }
     
     private func popToViewController(ofClass: AnyClass, animated: Bool = true) {

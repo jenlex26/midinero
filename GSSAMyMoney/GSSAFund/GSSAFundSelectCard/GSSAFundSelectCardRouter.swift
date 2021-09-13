@@ -16,18 +16,20 @@ open class GSSAFundSelectCardRouter: GSSAFundSelectCardWireframeProtocol {
     weak var viewController: UIViewController?
     
     static public func createModule(loadingModel: PB_HomeEntity) -> UIViewController {
+        //Initializate initial values of GSSAFundSharedVariables
+        GSSAFundSharedVariables.shared.amount = loadingModel.amount
+        GSSAFundSharedVariables.shared.clientAccountNumber = loadingModel.numeroCuentaCliente
+        //GSSAFundSharedVariables.shared.clientAccountNumber = "2HFkdMx6Ra7-VNX4mTPEmw"
+        GSSAFundSharedVariables.shared.numeroAfiliacion = loadingModel.numeroAfiliacion
+        GSSAFundSharedVariables.shared.merchantDetail = loadingModel.merchantDetail
+        GSSAFundSharedVariables.shared.idTransaccionSuperApp = loadingModel.idTransaccion
+        
         // Change to get view from storyboard if not using progammatic UI
         let view = GSSAFundSelectCardViewController(nibName: nil, bundle: Bundle.init(for: GSSAFundSelectCardRouter.self))
         let interactor = GSSAFundSelectCardInteractor()
         let router = GSSAFundSelectCardRouter()
         let presenter = GSSAFundSelectCardPresenter(interface: view, interactor: interactor, router: router)
-        
-        GSSAFundSharedVariables.shared.amount = loadingModel.amount
-        GSSAFundSharedVariables.shared.clientAccountNumber = loadingModel.numeroCuentaCliente
-        GSSAFundSharedVariables.shared.numeroAfiliacion = loadingModel.numeroAfiliacion
-        GSSAFundSharedVariables.shared.merchantDetail = loadingModel.merchantDetail
-        GSSAFundSharedVariables.shared.idTransaccionSuperApp = loadingModel.idTransaccion
-        
+
         view.presenter = presenter
         interactor.presenter = presenter
         router.viewController = view

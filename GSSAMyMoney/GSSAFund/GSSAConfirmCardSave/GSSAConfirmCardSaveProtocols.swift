@@ -15,7 +15,7 @@ import baz_ios_sdk_link_pago
 protocol GSSAConfirmCardSaveWireframeProtocol: class {
     func goToNextFlow()
     func returnTo(vc: AnyClass, animated: Bool)
-    func goToError(message: String, isDouble: Bool)
+    func goToError(message: String, isDouble: Bool, isWarning: Bool)
 }
 
 //MARK: Presenter -
@@ -27,7 +27,7 @@ protocol GSSAConfirmCardSavePresenterProtocol: class {
     
     func goToNextFlow()
     func returnTo(vc: AnyClass, animated: Bool)
-    func goToError(message: String, isDouble: Bool)
+    func goToError(message: String, isDouble: Bool, isWarning: Bool)
 }
 
 //MARK: Interactor -

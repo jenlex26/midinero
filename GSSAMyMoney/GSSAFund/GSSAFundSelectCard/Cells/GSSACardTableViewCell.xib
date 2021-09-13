@@ -13,14 +13,14 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="118" id="KGk-i7-Jjw" customClass="GSSACardTableViewCell" customModule="GSSAMyMoney" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="435" height="118"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="435" height="118"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hgN-ZS-64Y">
                         <rect key="frame" x="8" y="8" width="419" height="102"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="6pu-5M-xgI">
+                            <stackView contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="6pu-5M-xgI">
                                 <rect key="frame" x="8" y="8" width="371" height="86"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Isv-9Q-5hQ">
@@ -42,8 +42,8 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sF5-2B-why">
-                                <rect key="frame" x="387" y="39" width="24" height="24"/>
+                            <button contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sF5-2B-why">
+                                <rect key="frame" x="368" y="23" width="58" height="57"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="sF5-2B-why" secondAttribute="height" multiplier="1:1" id="Z5T-Cu-5a6"/>
                                     <constraint firstAttribute="height" constant="24" id="o8o-jG-Sso"/>
@@ -80,7 +80,7 @@
                 <outlet property="cardContainer" destination="hgN-ZS-64Y" id="AW3-Ic-zRU"/>
                 <outlet property="cardTypeLabel" destination="Isv-9Q-5hQ" id="Xzz-gC-z54"/>
             </connections>
-            <point key="canvasLocation" x="96.376811594202906" y="128.57142857142856"/>
+            <point key="canvasLocation" x="96.376811594202906" y="127.90178571428571"/>
         </tableViewCell>
     </objects>
     <designables>

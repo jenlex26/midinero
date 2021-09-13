@@ -14,7 +14,7 @@ import GSSAInterceptor
 class GSSAFundTicket: UIViewController {
     private static func getTicketInfo() -> [GSVTResumeCellInfo] {
         var cells: [GSVTResumeCellInfo] = []
-        let account: String = GSSAFundSharedVariables.shared.account?.maskedAccount ?? ""
+        let account: String = GSSAFundSharedVariables.shared.cardInformation?.card?.number?.maskedAccount ?? ""
         let mainAccount: String = GSSISessionInfo.sharedInstance.gsUser.account?.card?.maskedAccount ?? ""
         
         let extraData = GSVTResumeCellInfo(sectionTitle: "Detalle del envío",

@@ -16,12 +16,17 @@ class GSSAFundSelectCardInteractor: GSSAFundSelectCardInteractorProtocol {
 
     weak var presenter: GSSAFundSelectCardPresenterProtocol?
     
+    //let email: String? = Optional.some("tiwasos367@ppp998.com")
+    
     //MARK: - Properties
-    private let afiliationNumber: String = "8632464"
+    private let afiliationNumber: String? = GSSAFundSharedVariables.shared.numeroAfiliacion
+    private let email = GSSISessionInfo.sharedInstance.gsUser.email?.lowercased()
+    //private let email = mail
     
     func getCards() {
-        guard let email = GSSISessionInfo.sharedInstance.gsUser.email?.lowercased() else {
-            presenter?.getCardsError()
+        guard let email = email,
+              let afiliationNumber = afiliationNumber else {
+            self.presenter?.getCardsError()
             return
         }
         
@@ -37,6 +42,8 @@ class GSSAFundSelectCardInteractor: GSSAFundSelectCardInteractorProtocol {
             
         }, failure: { [weak self] message in
             guard let self = self else { return }
+            
+            print("Error message: \(message)")
             self.presenter?.getCardsError()
         })
     }
@@ -59,6 +66,11 @@ class GSSAFundSelectCardInteractor: GSSAFundSelectCardInteractorProtocol {
     }
     
     func getEccomerceInformation() {
+        guard let afiliationNumber = afiliationNumber else {
+            self.presenter?.getEccomerceInformationError()
+            return
+        }
+        
         LNKPG_Facade.shared.Initialize(environment: .release)
         LNKPG_Facade.shared.getEcommerceInformation(numeroAfiliacion: afiliationNumber, success: { [weak self] response in
             guard let self = self else { return }
@@ -69,13 +81,84 @@ class GSSAFundSelectCardInteractor: GSSAFundSelectCardInteractorProtocol {
             }
             
             GSSAFundSharedVariables.shared.ecommerceResponse = response
-            GSSAFundSharedVariables.shared.getIdTransactionSuperApp()
+            self.requestEcommerceSMMInformation()
+            //self.getDummyInformation()
             
-            self.presenter?.getEccomerceInformationSuccess(response: response)
-            
-        }, failure: { [weak self] message in
+        }, failure: {  [weak self] message in
             guard let self = self else { return }
+            
+            print("Message Error: \(message ?? "")")
             self.presenter?.getEccomerceInformationError()
         })
     }
+    
+    
+}
+
+//MARK: - Private functions
+extension GSSAFundSelectCardInteractor {
+    private func requestEcommerceSMMInformation(){
+        guard let email = email,
+              let afiliationNumber = afiliationNumber else {
+            self.presenter?.getEccomerceInformation()
+            return 
+        }
+        
+        LNKPG_Facade.shared.getEcommerceSMMInformation(numeroAfiliacion: afiliationNumber, email: email) { [weak self] (information) in
+            guard let self = self else { return }
+
+            guard let response = information else {
+                self.presenter?.getEccomerceInformationError()
+                return
+            }
+
+            GSSAFundSharedVariables.shared.ecommerceSMMIResponse = response
+            self.requestEcommerceSMTInformation()
+        } failure: {
+            [weak self] message in
+            guard let self = self else { return }
+            self.presenter?.getEccomerceInformationError()
+        }
+    }
+        
+    private func requestEcommerceSMTInformation() {
+        guard let email = email,
+              let afiliationNumber = afiliationNumber else {
+            self.presenter?.getEccomerceInformationError()
+            return
+        }
+    
+        LNKPG_Facade.shared.getEcommerceSMTInformation(numeroAfiliacion: afiliationNumber, email: email) { [weak self] (information) in
+
+            guard let self = self else { return }
+            guard let response = information else {
+                self.presenter?.getEccomerceInformationError()
+                return
+            }
+
+            let _ = GSSAFundSharedVariables.shared.getIdTransactionSuperApp()
+
+            GSSAFundSharedVariables.shared.ecommerceSMTIResponse = response
+
+            self.presenter?.getEccomerceInformationSuccess()
+        } failure: { [weak self] (error) in
+            guard let self = self else { return }
+            self.presenter?.getEccomerceInformationError()
+        }
+    }
+    
+//    private func getDummyInformation() {
+//        GSSAFundSharedVariables.shared.ecommerceSMMIResponse = LNKPG_ESM_MovementsResponseFacade(numeroMovimientosMensuales: 10, movimientos: false)
+//
+//        GSSAFundSharedVariables.shared.ecommerceSMTIResponse = LNKPG_ESM_TransactionsResponseFacade(limiteDiario: true, limiteMensual: true , numeroTransaccionesDiarias: 10, numeroTransaccionesMensuales: 0)
+//
+//        GSSAFundSharedVariables.shared.ecommerceResponse?.limiteTarjetasPermitidas = 2
+//
+//        let _ = GSSAFundSharedVariables.shared.getIdTransactionSuperApp()
+//
+//
+//        self.presenter?.getEccomerceInformationSuccess()
+////        var ecommerceSMMIResponse: LNKPG_ESM_MovementsResponseFacade?
+////        var ecommerceSMTIResponse: LNKPG_ESM_TransactionsResponseFacade?
+//    }
 }

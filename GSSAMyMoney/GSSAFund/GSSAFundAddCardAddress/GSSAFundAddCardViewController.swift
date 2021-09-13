@@ -47,8 +47,8 @@ class GSSAFundAddCardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setView()
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name:UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name:UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -86,6 +86,7 @@ class GSSAFundAddCardViewController: UIViewController {
         GSVCLoader.show()
         
         if let selectedCountryCode = selectedCountry?.codigo {
+            //presenter?.getStates(request: LNKPG_CountryStatesRequestFacade(countryCode: "MX"))
             presenter?.getStates(request: LNKPG_CountryStatesRequestFacade(countryCode: selectedCountryCode))
         }
     }
@@ -209,10 +210,13 @@ extension GSSAFundAddCardViewController: GSSAFundAddCardViewProtocol {
             return
         }
         
+        //self.countries = paises.map({$0})
+        
         self.countries.append(contentsOf: paises)
         
         if self.countries.count > 0 {
-            self.selectedCountry = self.countries.first
+            self.selectedCountry = self.countries[146]//mexicio
+            //self.selectedCountry = self.countries.first
             self.countryField.text = self.selectedCountry?.nombre
             self.requestStates()
         } else {
@@ -263,43 +267,12 @@ extension GSSAFundAddCardViewController: GSSAFundAddCardViewProtocol {
     
 }
 
-//MARK: - UITextFieldDelegate
-extension GSSAFundAddCardViewController: UITextFieldDelegate {
-    //    func textFieldDidBeginEditing(_ textField: UITextField) {
-    //        if textField.tag == 9 ||
-    //           textField.tag == 6 ||
-    //           textField.tag == 5 ||
-    //           textField.tag == 4 ||
-    //           textField.tag == 3{
-    //
-    //            UIView.animate(withDuration: 0.3, animations: { () -> Void in
-    //                            self.view.frame.origin.y -= 320.0
-    //                        })
-    //            scrollView.smo
-    //        }
-    //    }
-    //
-    //    func textFieldDidEndEditing(_ textField: UITextField) {
-    //        if textField.tag == 9 ||
-    //           textField.tag == 6 ||
-    //           textField.tag == 5 ||
-    //           textField.tag == 4 ||
-    //           textField.tag == 3{
-    //
-    //            UIView.animate(withDuration: 0.1, animations: { () -> Void in
-    //                self.view.frame.origin.y = 0.0
-    //            })
-    //        }
-    //    }
-    
-}
-
 //MARK: - GSVCPickerControllerDelegate
 extension GSSAFundAddCardViewController: GSVCPickerControllerDelegate {
     func didSelect(row: Int, key: String, value: Any?, from textField: UITextField) {
         switch textField.tag {
         case 7:
-            selectedCountry = self.countries[row]
+            selectedCountry = self.countries[row+2]
             countryField.text = key
             requestStates()
         case 8:
@@ -318,6 +291,7 @@ extension GSSAFundAddCardViewController: GSVCPickerControllerDataSource {
     }
     
     func getElements(component: Int, textField: UITextField) -> [DataPicker]? {
+
         switch textField.tag {
         case 7:
             return countries.map { DataPicker($0.nombre ?? "", nil) }
@@ -337,7 +311,7 @@ extension GSSAFundAddCardViewController {
         stateField.isUserInteractionEnabled = false
         setBackButtonForOlderDevices(tint: .purple)
         GSVCLoader.show()
-        nameField.delegate = self
+        
         nameField.allowActions(.allowAll)
         nameField.contentFormat(.uppercasedLettersAndNumbers)
         nameField.rightButtonAction({ [weak self] selected in
@@ -368,7 +342,6 @@ extension GSSAFundAddCardViewController {
             cityField.imageTyped = cityField.imageTyped.tint(with: .GSVCSecundary100)
         }
         
-        lastNameField.delegate = self
         lastNameField.allowActions(.allowAll)
         lastNameField.contentFormat(.uppercasedLettersAndNumbers)
         lastNameField.rightButtonAction({ [weak self] selected in
@@ -376,8 +349,6 @@ extension GSSAFundAddCardViewController {
             self.lastNameField.text = ""
         })
         
-        
-        emailField.delegate = self
         emailField.allowActions(.allowAll)
         emailField.contentFormat(.email)
         emailField.rightButtonAction({ [weak self] selected in
@@ -385,8 +356,6 @@ extension GSSAFundAddCardViewController {
             self.emailField.text = ""
         })
         
-        
-        phoneField.delegate = self
         phoneField.allowActions(.allowAll)
         phoneField.contentFormat(.phone)
         phoneField.rightButtonAction({ [weak self] selected in
@@ -394,8 +363,6 @@ extension GSSAFundAddCardViewController {
             self.phoneField.text = ""
         })
         
-        
-        streetField.delegate = self
         streetField.allowActions(.allowAll)
         streetField.contentFormat(.address)
         streetField.rightButtonAction({ [weak self] selected in
@@ -403,8 +370,6 @@ extension GSSAFundAddCardViewController {
             self.streetField.text = ""
         })
         
-        
-        zipCodeField.delegate = self
         zipCodeField.allowActions(.allowAll)
         zipCodeField.contentFormat(.numeric)
         zipCodeField.rightButtonAction({ [weak self] selected in
@@ -412,8 +377,6 @@ extension GSSAFundAddCardViewController {
             self.zipCodeField.text = ""
         })
         
-        
-        cityField.delegate = self
         cityField.allowActions(.allowAll)
         cityField.contentFormat(.address)
         cityField.rightButtonAction({ [weak self] selected in

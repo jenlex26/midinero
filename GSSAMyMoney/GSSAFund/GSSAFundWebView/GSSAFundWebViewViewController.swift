@@ -34,7 +34,6 @@ class GSSAFundWebViewViewController: UIViewController, GSSAFundWebViewViewProtoc
 	override func viewDidLoad() {
         super.viewDidLoad()
         setView()
-        GSVCLoader.show()
     }
     
     override func viewWillAppear(_ animated: Bool) {

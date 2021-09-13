@@ -11,36 +11,188 @@
 import UIKit
 import GSSAVisualComponents
 import baz_ios_sdk_link_pago
-import GSSAFunctionalUtilities
 
-class GSSAFundSelectCardViewController: GSSAMasterViewController {
-    
+class GSSAFundSelectCardViewController: GSSAMasterViewController, GSVCBottomAlertHandler {
+    var bottomAlert: GSVCBottomAlert?
     var presenter: GSSAFundSelectCardPresenterProtocol?
     
     //MARK: - @IBOutlets
     @IBOutlet weak var cardsTable: UITableView!
+    @IBOutlet weak var addCardBtn: GSVCButton!
     
     //MARK: - Properties
-    var cards: [LNKPG_ListCardResponseFacade.__Tokens] = []
+    private var cards: [LNKPG_ListCardResponseFacade.__Tokens] = []
+    private var defaultSelect: Bool = false
+    
     var selectCellTask: DispatchWorkItem?
     //MARK: Life cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
+       
         activityObserved()
         setView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        super.viewWillAppear(animated)
+        
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         setProgressLine(value: 0.25, animated: true)
     }
     
-    //MARK: - Methods
+    deinit {
+        GSSAFundSharedVariables.shared.resetSingleton()
+    }
+    //MARK: - Actions
+    @IBAction func addCard(_ sender: Any) {
+        
+        
+        if let cardLimit = GSSAFundSharedVariables.shared.ecommerceResponse?.limiteTarjetasPermitidas ,
+           cards.count >= cardLimit  {
+            showBottomAlert(msg: "Limite de tarjetas alcanzado")
+        }else{
+            activityObserved()
+            let view = GSSAFundSetCardNumberRouter.createModule()
+            self.presenter?.goToAddNewCard(view)
+        }
+    }
+}
+
+//MARK: - UITableViewDataSource
+extension GSSAFundSelectCardViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return cards.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let identifier = GSSACardTableViewCell.cellIdentifier
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! GSSACardTableViewCell
+        let card = cards[indexPath.row]
+        
+        let token = card.token ?? ""
+        let bankType = GSSAFundSharedVariables.shared.getCardName(cardNumer: card.numeroTarjeta ?? "")
+        let accountNumber = card.numeroTarjeta ?? ""
+        
+        if indexPath.row == 0{
+            selectCellTask = DispatchWorkItem(block: { [weak self] in
+                guard let self = self else { return }
+                
+                
+//                guard let tokenActive = card.activo,
+//                      tokenActive else {
+//                    self.showBottomAlert(msg: "Esta tarjeta se encuentra bloqueada")
+//                    return
+//                }
+                
+                self.presenter?.goToValidateCVV(GSSAFundSetCVVRouter.createModule(token: token))
+            })
+        }
+        
+        cell.setupData(card: card, bankType: bankType, accountNumber: accountNumber)
+        {
+            [weak self] card in
+            
+            guard let self = self else { return }
+            
+            guard let tokenActive = card.activo,
+                  tokenActive else {
+                self.showBottomAlert(msg: "Esta tarjeta se encuentra bloqueada")
+                return
+            }
+            
+            guard let token = card.token else {
+                self.showError()
+                return
+            }
+            
+            self.presenter?.goToValidateCVV(GSSAFundSetCVVRouter.createModule(token: token))
+        } onDelete:
+        {
+            [weak self] card in
+            
+            guard let self = self else { return }
+            guard let token = card.token else {
+                self.showError()
+                return
+            }
+            
+            self.showAlert(token: token)
+        }
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        activityObserved()
+    }
+}
+
+//MARK: - GSSAFundSelectCardViewProtocol
+extension GSSAFundSelectCardViewController: GSSAFundSelectCardViewProtocol {
+    func getEccomerceInformationSuccess() {
+        
+
+        // TODO: Discomment this when services its in release
+//        var flag : Bool?
+//        flag = true
+        
+        
+        defaultSelect = true
+        
+        presenter?.getCards()
+        
+        
+    }
+    
+    func getEccomerceInformationError() {
+        showError()
+    }
+    
+    func deleteCardSuccess(response: LNKPG_TokenCardDeleteResponseFacade) {
+        defaultSelect = false
+        presenter?.getCards()
+    }
+    
+    func deleteCardError() {
+        showError()
+    }
+    
+    func getCardsSuccess(cards: [LNKPG_ListCardResponseFacade.__Tokens]) {
+
+        GSSAFundSharedVariables.shared.cardCount = cards.count
+        
+        addCardBtn.backgroundColor = UIColor.clear
+        
+        if let cardLimit = GSSAFundSharedVariables.shared.ecommerceResponse?.limiteTarjetasPermitidas ,
+           cards.count >= cardLimit  {
+            addCardBtn.backgroundColor = UIColor.GSVCInformation
+        }
+        
+        //
+        
+        self.cards = cards
+        self.cardsTable.reloadData()
+        cardsTable.tableViewDidFinishReloadData{ [self] in
+            
+            GSVCLoader.hide()
+            if cardsTable.numberOfRows(inSection: 0) > 0 && defaultSelect {
+                selectCellTask?.perform()
+            }
+        }
+    }
+    
+    func getCardsError() {
+        showError()
+    }
+}
+//MARK: - Private functions
+extension GSSAFundSelectCardViewController {
     private func setView() {
         self.title = "Recarga tu tarjeta"
+        
         cardsTable.dataSource = self
+        
         cardsTable.rowHeight = 80
         cardsTable.separatorStyle = .none
         cardsTable.register(GSSACardTableViewCell.nib, forCellReuseIdentifier: GSSACardTableViewCell.cellIdentifier)
@@ -70,96 +222,16 @@ class GSSAFundSelectCardViewController: GSSAMasterViewController {
         presenter?.showAlert(alert)
     }
     
-    private func showError() {
+    private func showError(msg: String = "Ocurrio un error intentelo más tarde", subtitle: String? = nil, isDouble: Bool? = true) {
         activityObserved()
+        
         GSVCLoader.hide()
-        let message = "Ocurrio un error intentelo más tarde"
-        let view = getErrorMPViewController(message: message)
+        
+        let view = getErrorMPViewController(subtitle: subtitle, message: msg, isDouble: isDouble)
         self.presenter?.showError(view)
     }
     
-    //MARK: - Actions
-    @IBAction func addCard(_ sender: Any) {
-        activityObserved()
-        let view = GSSAFundSetCardNumberRouter.createModule()
-        self.presenter?.goToAddNewCard(view)
-    }
-}
-
-//MARK: - UITableViewDataSource
-extension GSSAFundSelectCardViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cards.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let identifier = GSSACardTableViewCell.cellIdentifier
-        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! GSSACardTableViewCell
-        let card = cards[indexPath.row]
-        let token = card.token ?? ""
-        let bankType = GSSAFundSharedVariables.shared.getCardName(cardNumer: card.numeroTarjeta ?? "")
-        let accountNumber = card.numeroTarjeta ?? ""
-        
-        if indexPath.row == 0{
-            selectCellTask = DispatchWorkItem(block: { [self] in
-                if GLOBAL_ENVIROMENT == .develop{
-                  presenter?.goToValidateCVV(GSSAFundSetCVVRouter.createModule(token: token))
-                }
-                GSVCLoader.hide()
-            })
-        }
-        
-        cell.setupData(token: token, bankType: bankType, accountNumber: accountNumber,
-                       onSelect: { [weak self] token in
-                        guard let self = self else { return }
-                        self.presenter?.goToValidateCVV(GSSAFundSetCVVRouter.createModule(token: token))
-                       },
-                       
-                       onDelete: { [weak self] token in
-                        guard let self = self else { return }
-                        self.showAlert(token: token)
-                       })
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        activityObserved()
-    }
-}
-
-//MARK: - GSSAFundSelectCardViewProtocol
-extension GSSAFundSelectCardViewController: GSSAFundSelectCardViewProtocol {
-    func getEccomerceInformationSuccess(response: LNKPG_EcommerceResponseFacade) {
-        presenter?.getCards()
-    }
-    
-    func getEccomerceInformationError() {
-        showError()
-    }
-    
-    func deleteCardSuccess(response: LNKPG_TokenCardDeleteResponseFacade) {
-        presenter?.getCards()
-    }
-    
-    func deleteCardError() {
-        showError()
-    }
-    
-    func getCardsSuccess(cards: [LNKPG_ListCardResponseFacade.__Tokens]) {
-        self.cards = cards
-        self.cardsTable.reloadData()
-        cardsTable.tableViewDidFinishReloadData{ [self] in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5, execute: {
-                GSVCLoader.hide()
-                if cardsTable.numberOfRows(inSection: 0) > 0{
-                    selectCellTask?.perform()
-                }
-            })
-        }
-    }
-    
-    func getCardsError() {
-        showError()
+    private func showBottomAlert(msg: String) {
+        self.presentBottomAlertFullData(status: .caution, message: msg, attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
     }
 }

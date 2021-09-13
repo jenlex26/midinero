@@ -39,6 +39,8 @@ class GSSAFundAddCardInteractor: GSSAFundAddCardInteractorProtocol{
     }
     
     func getStates(request: LNKPG_CountryStatesRequestFacade) {
+        
+        
         LNKPG_Facade.shared.getStates(model: request, success: {
             [weak self] response in
             guard let self = self else { return }
