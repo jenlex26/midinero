@@ -51,14 +51,9 @@ class GSSAConfirmCardSaveViewController: GSSAMasterViewController, GSSAConfirmCa
         GSSAFundSharedVariables.shared.cardInformation = LNKPG_CardInformationFacade(transactionCurrencyCode: GSSAFundSharedVariables.shared.currencyCode, payer: LNKPG_CardInformationFacade.__Payer(firstName: firstName, lastName: lastName), card: LNKPG_CardInformationFacade.__Card(expirationMonth: expirationMonth, expirationYear: expirationYear, number: accountNumber, type: type))
         
         
-        if saveCardSwitch.isOn {
+        
             GSVCLoader.show()
             presenter?.requestSaveCard(tokenCardRequest: tokenCardRequest)
-
-            return
-        }
-
-        presenter?.goToNextFlow()
     }
     
     @IBAction func editAction(_ sender: Any) {

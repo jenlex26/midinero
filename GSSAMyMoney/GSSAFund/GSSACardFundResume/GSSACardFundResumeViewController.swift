@@ -75,22 +75,26 @@ extension GSSACardFundResumeViewController: GSVCSliderButtonDelegate {
     func slideDidFinish(_ sender: GSVCSliderButton) {
         sender.resetSliderState(animated: true)
         
-        
-        guard let dailyLimit = GSSAFundSharedVariables.shared.ecommerceSMTIResponse?.limiteDiario,
-        //guard let dailyLimit = flag,
-              dailyLimit, let numBerTransactionDaily = GSSAFundSharedVariables.shared.ecommerceSMTIResponse?.numeroTransaccionesDiarias , numBerTransactionDaily < GSSAFundSharedVariables.shared.ecommerceResponse?.limiteTransaccionesDia ?? 0 else {
-            self.showBottomAlert(msg: "Supero el limite diario de cargos")
-            return
-        }
-        
-        
-        guard let monthLimit = GSSAFundSharedVariables.shared.ecommerceSMTIResponse?.limiteMensual, let numBerTransactionMonth = GSSAFundSharedVariables.shared.ecommerceSMTIResponse?.numeroTransaccionesMensuales, numBerTransactionMonth < GSSAFundSharedVariables.shared.ecommerceResponse?.limiteTransaccionesMes ?? 0 ,
-        //guard let monthLimit = flag,
-              monthLimit  else {
-            self.showBottomAlert(msg: "Supero el limite mensual de cargos")
+        if let _ = GSSAFundSharedVariables.shared.ecommerceSMTIResponse {
+            guard let dailyLimit = GSSAFundSharedVariables.shared.ecommerceSMTIResponse?.limiteDiario,
+            //guard let dailyLimit = flag,
+                  dailyLimit, let numBerTransactionDaily = GSSAFundSharedVariables.shared.ecommerceSMTIResponse?.numeroTransaccionesDiarias , numBerTransactionDaily < GSSAFundSharedVariables.shared.ecommerceResponse?.limiteTransaccionesDia ?? 0 else {
+                self.showBottomAlert(msg: "Supero el limite diario de cargos")
+                return
+            }
             
-            return
+            guard let monthLimit = GSSAFundSharedVariables.shared.ecommerceSMTIResponse?.limiteMensual, let numBerTransactionMonth = GSSAFundSharedVariables.shared.ecommerceSMTIResponse?.numeroTransaccionesMensuales, numBerTransactionMonth < GSSAFundSharedVariables.shared.ecommerceResponse?.limiteTransaccionesMes ?? 0 ,
+            //guard let monthLimit = flag,
+                  monthLimit  else {
+                self.showBottomAlert(msg: "Supero el limite mensual de cargos")
+                
+                return
+            }
         }
+        
+        
+        
+        
         
         
         

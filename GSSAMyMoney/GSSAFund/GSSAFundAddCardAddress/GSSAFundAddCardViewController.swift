@@ -215,8 +215,8 @@ extension GSSAFundAddCardViewController: GSSAFundAddCardViewProtocol {
         self.countries.append(contentsOf: paises)
         
         if self.countries.count > 0 {
-            self.selectedCountry = self.countries[146]//mexicio
-            //self.selectedCountry = self.countries.first
+            //self.selectedCountry = self.countries[146]//mexicio
+            self.selectedCountry = self.countries.first
             self.countryField.text = self.selectedCountry?.nombre
             self.requestStates()
         } else {

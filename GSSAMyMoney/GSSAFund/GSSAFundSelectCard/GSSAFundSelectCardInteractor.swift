@@ -45,7 +45,7 @@ class GSSAFundSelectCardInteractor: GSSAFundSelectCardInteractorProtocol {
             
             print("Error message: \(message)")
             self.presenter?.getCardsError()
-        })
+        }) 
     }
     
     func deleteCard(body request: LNKPG_TokenCardDeleteRequestFacade) {
@@ -84,6 +84,9 @@ class GSSAFundSelectCardInteractor: GSSAFundSelectCardInteractorProtocol {
             self.requestEcommerceSMMInformation()
             //self.getDummyInformation()
             
+            
+
+            
         }, failure: {  [weak self] message in
             guard let self = self else { return }
             
@@ -107,17 +110,22 @@ extension GSSAFundSelectCardInteractor {
         LNKPG_Facade.shared.getEcommerceSMMInformation(numeroAfiliacion: afiliationNumber, email: email) { [weak self] (information) in
             guard let self = self else { return }
 
-            guard let response = information else {
-                self.presenter?.getEccomerceInformationError()
-                return
+            if let response = information {
+                GSSAFundSharedVariables.shared.ecommerceSMMIResponse = response
             }
+//            guard let response = information else {
+//                self.presenter?.getEccomerceInformationError()
+//                return
+//            }
 
-            GSSAFundSharedVariables.shared.ecommerceSMMIResponse = response
+            
             self.requestEcommerceSMTInformation()
         } failure: {
             [weak self] message in
             guard let self = self else { return }
-            self.presenter?.getEccomerceInformationError()
+            //self.presenter?.getEccomerceInformationError()
+            
+            self.requestEcommerceSMTInformation()
         }
     }
         
@@ -131,19 +139,24 @@ extension GSSAFundSelectCardInteractor {
         LNKPG_Facade.shared.getEcommerceSMTInformation(numeroAfiliacion: afiliationNumber, email: email) { [weak self] (information) in
 
             guard let self = self else { return }
+            
+            /*
             guard let response = information else {
                 self.presenter?.getEccomerceInformationError()
                 return
+            }*/
+            if let response = information {
+                GSSAFundSharedVariables.shared.ecommerceSMTIResponse = response
             }
 
             let _ = GSSAFundSharedVariables.shared.getIdTransactionSuperApp()
 
-            GSSAFundSharedVariables.shared.ecommerceSMTIResponse = response
-
             self.presenter?.getEccomerceInformationSuccess()
         } failure: { [weak self] (error) in
             guard let self = self else { return }
-            self.presenter?.getEccomerceInformationError()
+            //self.presenter?.getEccomerceInformationError()
+            let _ = GSSAFundSharedVariables.shared.getIdTransactionSuperApp()
+            self.presenter?.getEccomerceInformationSuccess()
         }
     }
     

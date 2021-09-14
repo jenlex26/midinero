@@ -46,6 +46,15 @@ class GSSAFundSelectCardViewController: GSSAMasterViewController, GSVCBottomAler
     }
     //MARK: - Actions
     @IBAction func addCard(_ sender: Any) {
+        if let _ = GSSAFundSharedVariables.shared.ecommerceSMMIResponse {
+            if let cardsMovements = GSSAFundSharedVariables.shared.ecommerceSMMIResponse?.movimientos, cardsMovements, let movementsPerMonth =  GSSAFundSharedVariables.shared.ecommerceSMMIResponse?.numeroMovimientosMensuales, movementsPerMonth < GSSAFundSharedVariables.shared.ecommerceResponse?.limiteMovimentosTarjetas ?? 0{
+                showBottomAlert(msg: "Limite movimientos de tarjetas alcanzado")
+            }else{
+                activityObserved()
+                let view = GSSAFundSetCardNumberRouter.createModule()
+                self.presenter?.goToAddNewCard(view)
+            }
+        }
         
         
         if let cardLimit = GSSAFundSharedVariables.shared.ecommerceResponse?.limiteTarjetasPermitidas ,
@@ -85,7 +94,7 @@ extension GSSAFundSelectCardViewController: UITableViewDataSource {
 //                    return
 //                }
                 
-                self.presenter?.goToValidateCVV(GSSAFundSetCVVRouter.createModule(token: token))
+               // self.presenter?.goToValidateCVV(GSSAFundSetCVVRouter.createModule(token: token))
             })
         }
         
@@ -167,6 +176,12 @@ extension GSSAFundSelectCardViewController: GSSAFundSelectCardViewProtocol {
         if let cardLimit = GSSAFundSharedVariables.shared.ecommerceResponse?.limiteTarjetasPermitidas ,
            cards.count >= cardLimit  {
             addCardBtn.backgroundColor = UIColor.GSVCInformation
+        }
+        
+        if let _ = GSSAFundSharedVariables.shared.ecommerceSMMIResponse {
+            if let cardsMovements = GSSAFundSharedVariables.shared.ecommerceSMMIResponse?.movimientos, cardsMovements, let movementsPerMonth =  GSSAFundSharedVariables.shared.ecommerceSMMIResponse?.numeroMovimientosMensuales, movementsPerMonth < GSSAFundSharedVariables.shared.ecommerceResponse?.limiteMovimentosTarjetas ?? 0 {
+                addCardBtn.backgroundColor = UIColor.GSVCInformation
+            }
         }
         
         //
