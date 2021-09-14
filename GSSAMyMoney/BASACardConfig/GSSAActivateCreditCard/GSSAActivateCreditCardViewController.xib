@@ -39,7 +39,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activa tu tarjeta" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0lo-zQ-75G" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                            <rect key="frame" x="123" y="14" width="129.5" height="22.5"/>
+                            <rect key="frame" x="128" y="15" width="119.5" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -223,17 +223,22 @@
     </objects>
     <designables>
         <designable name="0lo-zQ-75G">
-            <size key="intrinsicContentSize" width="129.5" height="22.5"/>
+            <size key="intrinsicContentSize" width="119.5" height="20.5"/>
         </designable>
         <designable name="4Uz-rL-wfi">
-            <size key="intrinsicContentSize" width="622" height="20"/>
+            <size key="intrinsicContentSize" width="671" height="20.5"/>
         </designable>
         <designable name="G2Q-DV-fob">
-            <size key="intrinsicContentSize" width="503" height="20"/>
+            <size key="intrinsicContentSize" width="539.5" height="20.5"/>
         </designable>
-        <designable name="JmV-c4-QSz"/>
         <designable name="ghc-T9-wvX">
-            <size key="intrinsicContentSize" width="84" height="35"/>
+            <size key="intrinsicContentSize" width="67" height="30"/>
+        </designable>
+        <designable name="pWy-QI-ITP">
+            <size key="intrinsicContentSize" width="112" height="20.5"/>
+        </designable>
+        <designable name="xbw-AE-Ehf">
+            <size key="intrinsicContentSize" width="115" height="20.5"/>
         </designable>
     </designables>
     <resources>

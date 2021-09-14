@@ -45,7 +45,7 @@ class GSSAFundSelectCardInteractor: GSSAFundSelectCardInteractorProtocol {
             
             print("Error message: \(message)")
             self.presenter?.getCardsError()
-        }) 
+        })
     }
     
     func deleteCard(body request: LNKPG_TokenCardDeleteRequestFacade) {

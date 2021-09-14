@@ -125,6 +125,7 @@ class GSSASetCVVViewController: GSSAMasterViewController, GSSASetCVVViewProtocol
     @IBAction func next(_ sender: Any){
         if txtCVV.text?.count == 3{
             if cardNumber == "NIPFLOW"{
+                UserDefaults.standard.setValue(txtCVV.text?.encryptAlnova(), forKey: "DebitCardCVV")
                 let view = GSSACardNIPRouter.createModule(cvv: UserDefaults.standard.string(forKey: "DebitCardCVV") ?? "", contractNumber:  customToken.shared.contractNumber)
                 self.navigationController?.pushViewController(view, animated: true)
             }else{

@@ -106,7 +106,7 @@ extension GSSAFundSelectCardViewController: UITableViewDataSource {
             
             guard let tokenActive = card.activo,
                   tokenActive else {
-                self.showBottomAlert(msg: "Esta tarjeta se encuentra bloqueada")
+                self.showBottomAlert(msg: "Alta procesada, su tarjeta estará activa en 24 horas")
                 return
             }
             
@@ -172,10 +172,12 @@ extension GSSAFundSelectCardViewController: GSSAFundSelectCardViewProtocol {
         GSSAFundSharedVariables.shared.cardCount = cards.count
         
         addCardBtn.backgroundColor = UIColor.clear
+        addCardBtn.isEnabled = true
         
         if let cardLimit = GSSAFundSharedVariables.shared.ecommerceResponse?.limiteTarjetasPermitidas ,
            cards.count >= cardLimit  {
-            addCardBtn.backgroundColor = UIColor.GSVCInformation
+            addCardBtn.backgroundColor = UIColor.gray
+            addCardBtn.isEnabled = false
         }
         
         if let _ = GSSAFundSharedVariables.shared.ecommerceSMMIResponse {

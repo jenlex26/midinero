@@ -85,6 +85,7 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
                 debitCardNumber = dataArray?[0].alnovaDecrypt() ?? ""
                 contractNumber = dataArray?[1].alnovaDecrypt() ?? ""
                 customToken.shared.contractNumber = dataArray?[1].alnovaDecrypt() ?? ""
+                customToken.shared.debitCardNumber = debitCardNumber
                 if let cardStatusString = RemoteConfig.remoteConfig().remoteString(forKey: "iOS_MOB_SA_MMPIN"){
                     if cardStatusString == "true"{
                         configureDebitCard(forStatus: .active )

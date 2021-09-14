@@ -60,14 +60,18 @@ class GSSACardNIPViewController: UIViewController, GSSACardNIPViewProtocol, GSVC
     
     func requestNIP(){
         GSVCLoader.show()
-        let body = RequestNIPBody.init(transaccion: RequestNIPTransaccion.init(primerTokenVerificacion: GSSISessionInfo.sharedInstance.gsUser.account?.number, tarjeta: RequestNIPCard.init(numero: "", numeroContrato: "", codigoSeguridad: "")))
+        let body = RequestNIPBody.init(transaccion: RequestNIPTransaccion.init(primerTokenVerificacion: customToken.shared.firstVerification, tarjeta: RequestNIPCard.init(numero: customToken.shared.debitCardNumber.removeWhiteSpaces().encryptAlnova(), numeroContrato: contractNumber.encryptAlnova(), codigoSeguridad:  CVV)))
+      
+        
         presenter?.requestCardNIP(body: body, Response: { [self] Response in
             GSVCLoader.hide()
+            
             if Response != nil{
                 UserDefaults.standard.setValue(CVV, forKey: "DebitCardCVV")
-                setNIP(NIP: Response?.resultado?.nip ?? "    ")
+                setNIP(NIP: Response?.resultado?.nip?.alnovaDecrypt() ?? "    ")
             }else{
                 setNIP(NIP: "    ")
+                UserDefaults.standard.removeObject(forKey: "DebitCardCVV")
                 let view = self.showErrorViewController(message: "Intente más tarde")
                 view.modalPresentationStyle = .fullScreen
                 self.present(view, animated: true, completion: nil)
