@@ -9,6 +9,7 @@
 //
 
 import UIKit
+import GSSAVisualComponents
 
 class GSSAFundWebViewPresenter: GSSAFundWebViewPresenterProtocol {
 
@@ -27,18 +28,22 @@ class GSSAFundWebViewPresenter: GSSAFundWebViewPresenterProtocol {
     }
     
     func onSucess(folio: String) {
+        GSVCLoader.hide()
         view?.onSucess(folio: folio)
     }
     
     func onError(content: String?) {
+        GSVCLoader.hide()
         view?.onError(content: content)
     }
 
     func goToTicket(folio: String) {
+        GSVCLoader.hide()
         router.goToTicket(folio: folio)
     }
     
     func goToError(message: String, isDouble: Bool) {
+        GSVCLoader.hide()
         router.goToError(message: message, isDouble: isDouble)
     }
 }

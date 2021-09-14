@@ -42,7 +42,6 @@ class GSSACardFundResumeViewController: GSVTGenericResumeViewController, GSVCBot
 //MARK: - Presenter Methods
 extension GSSACardFundResumeViewController: GSSACardFundResumeViewProtocol {
     func enrollSuccess(responseEnroll: LNKPG_EnrollmentResponseFacade, responseOtp: LNKPG_SessionOTPResponseFacade?, responseCargo: LNKPG_CargoEcommerceResponseFacade?, responseFondeo: LNKPG_FondeoAccountResponseFacade?) {
-        GSVCLoader.hide()
 
         GSSAFundSharedVariables.shared.enrollmentResponse = responseEnroll
         
@@ -50,6 +49,7 @@ extension GSSACardFundResumeViewController: GSSACardFundResumeViewProtocol {
             GSSAFundSharedVariables.shared.sessionOTPResponse = responseOtp
             
             presenter?.goToNextFlow()
+            GSVCLoader.hide()
             return
         }
         
@@ -60,7 +60,10 @@ extension GSSACardFundResumeViewController: GSSACardFundResumeViewProtocol {
             let folio = responseCargo?.folioOperacion ?? responseFondeo?.folioOperacion ?? ""
             
             presenter?.goToTicket(folio: folio)
+            GSVCLoader.hide()
         }
+        
+        GSVCLoader.hide()
     }
     
     func enrollError() {
