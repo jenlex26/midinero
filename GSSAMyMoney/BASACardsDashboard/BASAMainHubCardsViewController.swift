@@ -348,12 +348,12 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
             infoCreditCell.lblCreditLimit.text = creditCardBalance?.resultado?.montoLimiteCredito?.moneyFormat()
             infoCreditCell.lblMinimumPayment.text = creditCardBalance?.resultado?.montoPagoMinimo?.moneyFormat()
             
-            //infoCreditCell.lblCutOffDate.text = creditCardBalance?.resultado?.fechaCorte?.dateFormatter(format: "dd-MM-yyyy", outputFormat: "dd MMMM")
+            infoCreditCell.lblCutOffDate.text = creditCardBalance?.resultado?.fechaCorte?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMMM")
             
             
-            //let date = "Próxima fecha de pago \(creditCardBalance?.resultado?.fechaPago?.dateFormatter(format: "dd-MM-yyyy", outputFormat: "dd") ?? "Desconocida") de \(creditCardBalance?.resultado?.fechaPago?.dateFormatter(format: "dd-MM-yyyy", outputFormat: "MMMM") ?? "")"
+            let date = "Próxima fecha de pago \(creditCardBalance?.resultado?.fechaPago?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd") ?? "Desconocida") de \(creditCardBalance?.resultado?.fechaPago?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "MMMM") ?? "")"
             
-            // infoCreditCell.lblNextPaymentDate.text = date
+            infoCreditCell.lblNextPaymentDate.text = date
             infoCreditCell.lblPaymentToSettle.text = creditCardBalance?.resultado?.saldoDispuesto?.moneyFormat()
             infoCreditCell.lblNotInterestPayment.text = creditCardBalance?.resultado?.pagoSinInteres?.moneyFormat()
         }

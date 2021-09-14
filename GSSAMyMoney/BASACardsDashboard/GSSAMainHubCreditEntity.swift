@@ -70,9 +70,9 @@ struct CreditCardBalanceResponse: Codable {
 struct CreditCardBalanceResult: Codable {
     var saldo, saldoActual, saldoDisponible, saldoDispuesto: String?
     var saldoRetenido: String?
-    var fechaCorte: Fecha?
+    var fechaCorte: String?
     var montoLimiteCredito, pagoSinInteres, montoPagoMinimo: String?
-    var fechaPago: Fecha?
+    var fechaPago: String?
 }
 
 // MARK: - CreditCardBalance Fecha
