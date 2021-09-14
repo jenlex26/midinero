@@ -33,18 +33,12 @@ class GSSAFundWebViewViewController: UIViewController, GSSAFundWebViewViewProtoc
     //MARK: - Life cylce
 	override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(showLoad), name: NSNotification.Name(rawValue: "showLoading"), object: nil)
-        GSVCLoader.show()
         setView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-    }
-    
-    @objc func showLoad(){
-        GSVCLoader.show()
     }
     
 }
@@ -84,6 +78,7 @@ extension GSSAFundWebViewViewController: LNKPG_WebViewFacadeDelegate {
     }
     
     func notifyLoad(){
+        print("Carga completa")
         GSVCLoader.hide()
     }
 }

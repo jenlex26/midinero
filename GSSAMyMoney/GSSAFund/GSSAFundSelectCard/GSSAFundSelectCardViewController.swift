@@ -104,11 +104,11 @@ extension GSSAFundSelectCardViewController: UITableViewDataSource {
             
             guard let self = self else { return }
             
-            guard let tokenActive = card.activo,
-                  tokenActive else {
-                self.showBottomAlert(msg: "Alta procesada, su tarjeta estará activa en 24 horas")
-                return
-            }
+//            guard let tokenActive = card.activo,
+//                  tokenActive else {
+//                self.showBottomAlert(msg: "Alta procesada, su tarjeta estará activa en 24 horas")
+//                return
+//            }
             
             guard let token = card.token else {
                 self.showError()

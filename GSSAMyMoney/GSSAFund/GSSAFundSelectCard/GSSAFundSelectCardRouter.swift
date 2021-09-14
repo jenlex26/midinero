@@ -19,7 +19,7 @@ open class GSSAFundSelectCardRouter: GSSAFundSelectCardWireframeProtocol {
         //Initializate initial values of GSSAFundSharedVariables
         GSSAFundSharedVariables.shared.amount = loadingModel.amount
         GSSAFundSharedVariables.shared.clientAccountNumber = loadingModel.numeroCuentaCliente
-        GSSAFundSharedVariables.shared.clientAccountNumber = "2HFkdMx6Ra7-VNX4mTPEmw"
+        //GSSAFundSharedVariables.shared.clientAccountNumber = "2HFkdMx6Ra7-VNX4mTPEmw"
         GSSAFundSharedVariables.shared.numeroAfiliacion = loadingModel.numeroAfiliacion
         GSSAFundSharedVariables.shared.merchantDetail = loadingModel.merchantDetail
         GSSAFundSharedVariables.shared.idTransaccionSuperApp = loadingModel.idTransaccion

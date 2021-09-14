@@ -10,7 +10,6 @@
 
 import UIKit
 import baz_ios_sdk_link_pago
-import GSSAVisualComponents
 
 class GSSAFundWebViewInteractor: GSSAFundWebViewInteractorProtocol {
 
@@ -22,12 +21,8 @@ class GSSAFundWebViewInteractor: GSSAFundWebViewInteractorProtocol {
             return
         }
         
-        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "showLoading"), object: nil, userInfo: nil))
-        
         LNKPG_Facade.shared.getSessionOTP(sessionOTPV2Request: LNKPG_SessionOTPV2RequestFacade(idInscripcion: enrollmentID)) { [weak self] response in
             guard let self = self else { return }
-            
-            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "showLoading"), object: nil, userInfo: nil))
             
             print("response111")
             print(response)
