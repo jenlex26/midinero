@@ -99,7 +99,7 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
                         if CardSearchResponse?.resultado?.tarjeta?.estatus?.alnovaDecrypt().removeWhiteSpaces() == "ENVIADA" || CardSearchResponse?.resultado?.tarjeta?.estatus?.alnovaDecrypt().removeWhiteSpaces() == "PENDENTRE"{
                             configureDebitCard(forStatus: .activate )
                         }else{
-                            configureDebitCard(forStatus: .unknown)
+                            configureDebitCard(forStatus: .active)
                         }
                     }else{
                         configureDebitCard(forStatus: .request)

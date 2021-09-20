@@ -187,7 +187,7 @@ extension BASACardStatementsViewController: UITableViewDelegate, UITableViewData
         case 1:
             let cell = table.dequeueReusableCell(withIdentifier: "SectionCell") as! SectionCell
             //cell.lblTitle.text = "Se enviarán al correo electrónico \(GSSISessionInfo.sharedInstance.gsUser.email ?? "")"
-            cell.lblTitle.text = "Tu estado de cuenta se encuentra protegido. La contraseña para visualizarlo son los últimos 4 dígitos de tu numero de cuenta"
+            cell.lblTitle.text = "Tu estado de cuenta se encuentra protegido. La contraseña para visualizarlo son los últimos 4 dígitos de tu número de cuenta"
             cell.lblSubTitle.text = ""
             cell.lblTitle.numberOfLines = 3
             cell.lblTitle.styleType = 6

@@ -110,6 +110,10 @@ class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
         cellViewController.navigationController?.pushViewController(BASADigitalCardRouter.createModule(userBalance: data), animated: true)
     }
     
+    @IBAction func aceptaPago(sender: Any){
+        
+    }
+    
     func forgotDigitalSign(_ forgotSecurityCodeViewController: UIViewController?) {
         print("NIP INCORRECTO")
     }
