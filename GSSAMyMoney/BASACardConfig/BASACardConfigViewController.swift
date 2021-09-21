@@ -58,7 +58,7 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         if cancelReload == false{
-            if GLOBAL_ENVIROMENT == .production{
+            if GLOBAL_ENVIROMENT == .develop{
                 checkUserActivations()
             }else{
                 if let cardStatusString = RemoteConfig.remoteConfig().remoteString(forKey: "iOS_MOB_SA_MMCARD"){
