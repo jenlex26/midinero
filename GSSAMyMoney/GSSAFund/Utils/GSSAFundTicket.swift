@@ -14,6 +14,7 @@ import GSSAInterceptor
 class GSSAFundTicket: UIViewController {
     private static func getTicketInfo() -> [GSVTResumeCellInfo] {
         var cells: [GSVTResumeCellInfo] = []
+        
         let account: String = GSSAFundSharedVariables.shared.cardInformation?.card?.number?.maskedAccount ?? ""
         let mainAccount: String = GSSISessionInfo.sharedInstance.gsUser.account?.card?.maskedAccount ?? ""
         
@@ -34,6 +35,7 @@ class GSSAFundTicket: UIViewController {
     static func createTicket(folio: String, delegate: GSVTTicketOperationDelegate) -> UIViewController {
 
         let amount = GSSAFundSharedVariables.shared.amount ?? ""
+        let comission: String = GSSAFundSharedVariables.shared.ecommerceResponse?.comisionTransaccion ?? "0.00"
         let operationInfo = GSSAFundTicket.getTicketInfo()
         let amountFormat = NSMutableAttributedString.setFormattedText(withStringAmmount: amount.replacingOccurrences(of: "$", with: ""),
             withNumberOfDecimals: 2,
@@ -42,7 +44,7 @@ class GSSAFundTicket: UIViewController {
             withFontColor: .GSVCText100,
             withLittleCoin: true)
         
-        let mainInfo = GSVTTicketMainInfo(title: "Dinero recibido" ,operationAttributed: amountFormat)
+        let mainInfo = GSVTTicketMainInfo(title: "Dinero recibido -\nComisión $\(comission).00" ,operationAttributed: amountFormat)
         let ticket = GSVTTicketOperationController(delegate: delegate, mainInfo: mainInfo, operationInfo: operationInfo, generatedInfo: [(subTitle: "Folio", info: folio)], aditionalInfo: [], mainActionTitle: nil, hasSecundaryAction: true, firstActionTitle: "Compartir", firstAction: nil, secundaryActionTitle: nil, tagTicketDelegate: nil, titleBtnReturn: "Volver al inicio")
         
         return ticket

@@ -76,21 +76,17 @@ extension GSSACardFundResumeViewController: GSVCSliderButtonDelegate {
         sender.resetSliderState(animated: true)
         
         if let _ = GSSAFundSharedVariables.shared.ecommerceSMTIResponse {
-            print(GSSAFundSharedVariables.shared.ecommerceSMTIResponse)
-            print(GSSAFundSharedVariables.shared.ecommerceSMTIResponse?.limiteDiario)
-            print(GSSAFundSharedVariables.shared.ecommerceSMTIResponse?.numeroTransaccionesDiarias)
-            print(GSSAFundSharedVariables.shared.ecommerceResponse?.limiteTransaccionesDia)
             guard let dailyLimit = GSSAFundSharedVariables.shared.ecommerceSMTIResponse?.limiteDiario,
             //guard let dailyLimit = flag,
                   dailyLimit, let numBerTransactionDaily = GSSAFundSharedVariables.shared.ecommerceSMTIResponse?.numeroTransaccionesDiarias , numBerTransactionDaily < GSSAFundSharedVariables.shared.ecommerceResponse?.limiteTransaccionesDia ?? 0 else {
-                self.showBottomAlert(msg: "Excedió número de movimientos diarios permitidos")
+                self.showBottomAlert(msg: "Excedió número de transacciones diarios permitidos")
                 return
             }
             
             guard let monthLimit = GSSAFundSharedVariables.shared.ecommerceSMTIResponse?.limiteMensual, let numBerTransactionMonth = GSSAFundSharedVariables.shared.ecommerceSMTIResponse?.numeroTransaccionesMensuales, numBerTransactionMonth < GSSAFundSharedVariables.shared.ecommerceResponse?.limiteTransaccionesMes ?? 0 ,
             //guard let monthLimit = flag,
                   monthLimit  else {
-                self.showBottomAlert(msg: "Excedió número de movimientos mensuales permitidos")
+                self.showBottomAlert(msg: "Excedió número de transacciones mensuales permitidos")
                 
                 return
             }
@@ -143,7 +139,7 @@ extension GSSACardFundResumeViewController {
         
         let extraData = GSVTResumeCellInfo(sectionTitle: "Datos de tu recarga",
                                            subTitle: "Costo por servicio",
-                                           mainInfo: "$0.00",
+                                           mainInfo: "$\(GSSAFundSharedVariables.shared.ecommerceResponse?.comisionTransaccion ?? "0.00")",
                                            iconImage: UIImage(named: "legalInfoSAIcon"))
         
         cells.append(origin)

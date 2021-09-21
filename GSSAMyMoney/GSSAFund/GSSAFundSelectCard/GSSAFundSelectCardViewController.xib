@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,6 +14,7 @@
             <connections>
                 <outlet property="addCardBtn" destination="H0C-kB-Ntn" id="QtZ-Ob-okd"/>
                 <outlet property="cardsTable" destination="Occ-cf-qgc" id="Aey-DX-JOv"/>
+                <outlet property="newAddCardButton" destination="5nG-7c-7FU" id="XDL-Tn-NsP"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -36,16 +38,38 @@
                     <rect key="frame" x="20" y="143" width="335" height="504"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H0C-kB-Ntn" customClass="GSVCButton" customModule="GSSAVisualComponents">
-                    <rect key="frame" x="20" y="88" width="155" height="35"/>
+                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5nG-7c-7FU">
+                    <rect key="frame" x="20" y="88" width="200" height="35"/>
+                    <color key="backgroundColor" name="GSTint"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="155" id="lvw-eQ-Nk4"/>
+                        <constraint firstAttribute="height" constant="35" id="4NN-7Y-WYe"/>
+                        <constraint firstAttribute="width" constant="200" id="u0g-zj-zWb"/>
+                    </constraints>
+                    <inset key="imageEdgeInsets" minX="10" minY="5" maxX="15" maxY="5"/>
+                    <state key="normal" title="Button" image="plusSAIcon"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                            <real key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="33"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="newAddCard:" destination="-1" eventType="touchUpInside" id="5x2-KA-oyE"/>
+                    </connections>
+                </button>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H0C-kB-Ntn" customClass="GSVCButton" customModule="GSSAVisualComponents">
+                    <rect key="frame" x="252" y="87" width="107" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="140" id="lvw-eQ-Nk4"/>
                         <constraint firstAttribute="height" constant="35" id="pB3-sk-Vrm"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <inset key="imageEdgeInsets" minX="10" minY="10" maxX="15" maxY="10"/>
-                    <state key="normal" title="Usar otra tarjeta" image="plus" catalog="system">
+                    <state key="normal" title="Usar tarjeta" image="plus" catalog="system">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <userDefinedRuntimeAttributes>
@@ -61,8 +85,10 @@
             <viewLayoutGuide key="safeArea" id="don-y9-jGb"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="5nG-7c-7FU" firstAttribute="top" secondItem="55D-bn-jia" secondAttribute="bottom" constant="20" id="3jf-LD-2My"/>
                 <constraint firstItem="Occ-cf-qgc" firstAttribute="leading" secondItem="don-y9-jGb" secondAttribute="leading" constant="20" id="6kz-8s-pL8"/>
                 <constraint firstItem="Occ-cf-qgc" firstAttribute="top" secondItem="H0C-kB-Ntn" secondAttribute="bottom" constant="20" id="C41-3X-ACt"/>
+                <constraint firstItem="5nG-7c-7FU" firstAttribute="leading" secondItem="don-y9-jGb" secondAttribute="leading" constant="20" id="COI-hs-Lm1"/>
                 <constraint firstItem="H0C-kB-Ntn" firstAttribute="top" secondItem="55D-bn-jia" secondAttribute="bottom" constant="20" id="Ped-td-71H"/>
                 <constraint firstItem="55D-bn-jia" firstAttribute="top" secondItem="don-y9-jGb" secondAttribute="top" constant="40" id="SI7-YZ-nq8"/>
                 <constraint firstItem="55D-bn-jia" firstAttribute="leading" secondItem="don-y9-jGb" secondAttribute="leading" constant="25" id="VLx-HE-Fdj"/>
@@ -70,7 +96,13 @@
                 <constraint firstItem="don-y9-jGb" firstAttribute="bottom" secondItem="Occ-cf-qgc" secondAttribute="bottom" constant="20" id="iRw-Lh-rzM"/>
                 <constraint firstItem="don-y9-jGb" firstAttribute="trailing" secondItem="55D-bn-jia" secondAttribute="trailing" constant="20" id="jsE-7b-CFK"/>
                 <constraint firstItem="don-y9-jGb" firstAttribute="trailing" secondItem="Occ-cf-qgc" secondAttribute="trailing" constant="20" id="oPR-LC-k9x"/>
+                <constraint firstItem="Occ-cf-qgc" firstAttribute="top" secondItem="5nG-7c-7FU" secondAttribute="bottom" constant="20" id="xO2-6Q-d45"/>
             </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="X3Z-JR-2UQ"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="136.80000000000001" y="91.304347826086968"/>
         </view>
     </objects>
@@ -79,11 +111,15 @@
             <size key="intrinsicContentSize" width="302" height="28"/>
         </designable>
         <designable name="H0C-kB-Ntn">
-            <size key="intrinsicContentSize" width="134" height="20"/>
+            <size key="intrinsicContentSize" width="101" height="20"/>
         </designable>
     </designables>
     <resources>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="plusSAIcon" width="24" height="24"/>
+        <namedColor name="GSTint">
+            <color red="1" green="0.76078431372549016" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -21,16 +21,16 @@
                         <rect key="frame" x="8" y="8" width="419" height="102"/>
                         <subviews>
                             <stackView contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="6pu-5M-xgI">
-                                <rect key="frame" x="8" y="8" width="371" height="86"/>
+                                <rect key="frame" x="8" y="8" width="363" height="86"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Isv-9Q-5hQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="371" height="43"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="363" height="43"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jaS-1Z-jh1" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                        <rect key="frame" x="0.0" y="43" width="371" height="43"/>
+                                        <rect key="frame" x="0.0" y="43" width="363" height="43"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -46,7 +46,7 @@
                                 <rect key="frame" x="368" y="23" width="58" height="57"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="sF5-2B-why" secondAttribute="height" multiplier="1:1" id="Z5T-Cu-5a6"/>
-                                    <constraint firstAttribute="height" constant="24" id="o8o-jG-Sso"/>
+                                    <constraint firstAttribute="height" constant="35" id="o8o-jG-Sso"/>
                                 </constraints>
                                 <state key="normal" image="iconosSistemaAccionEliminar"/>
                                 <connections>
@@ -61,7 +61,7 @@
                             <constraint firstItem="6pu-5M-xgI" firstAttribute="top" secondItem="hgN-ZS-64Y" secondAttribute="top" constant="8" id="L1Q-Sj-xLz"/>
                             <constraint firstItem="6pu-5M-xgI" firstAttribute="leading" secondItem="hgN-ZS-64Y" secondAttribute="leading" constant="8" id="OJP-Nv-9bp"/>
                             <constraint firstAttribute="bottom" secondItem="6pu-5M-xgI" secondAttribute="bottom" constant="8" id="bUd-iA-SFR"/>
-                            <constraint firstAttribute="trailing" secondItem="sF5-2B-why" secondAttribute="trailing" constant="8" id="rgg-6V-GuK"/>
+                            <constraint firstAttribute="trailing" secondItem="sF5-2B-why" secondAttribute="trailing" constant="5" id="rgg-6V-GuK"/>
                         </constraints>
                     </view>
                 </subviews>

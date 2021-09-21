@@ -162,7 +162,6 @@
 		EE5DB5CE26A884410004E487 /* GSDigitalCardConfigTagging.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5DB5CD26A884410004E487 /* GSDigitalCardConfigTagging.swift */; };
 		EE5DB5D026A886E80004E487 /* GSSACardConfigTagging.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5DB5CF26A886E80004E487 /* GSSACardConfigTagging.swift */; };
 		EE8457F826EC017B005033B8 /* baz_ios_sdk_link_pago.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE8457F726EC017A005033B8 /* baz_ios_sdk_link_pago.framework */; };
-		EE898F6D26E828260000B119 /* GSSAInterceptor.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE898F6C26E828260000B119 /* GSSAInterceptor.xcframework */; };
 		EE898F7026E8282C0000B119 /* GSSAVisualComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E854F7F26E7D227001521D1 /* GSSAVisualComponents.framework */; };
 		EE898F7326E828320000B119 /* GSSASecurityManager.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE898F7226E828320000B119 /* GSSASecurityManager.xcframework */; };
 		EE898F7626E828390000B119 /* GSSAServiceCoordinator.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE898F7526E828390000B119 /* GSSAServiceCoordinator.xcframework */; };
@@ -276,6 +275,7 @@
 		EEE84F7126B4B37400C5CACE /* GSSACardNIPViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEE84F6B26B4B37400C5CACE /* GSSACardNIPViewController.xib */; };
 		EEF2ED2A2698A4AA0009F771 /* GSDigitalCardEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF2ED292698A4AA0009F771 /* GSDigitalCardEntity.swift */; };
 		EEF728A72699382C0093F0DA /* GSSANewBeneficiaryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF728A62699382C0093F0DA /* GSSANewBeneficiaryEntity.swift */; };
+		F00BFB0526F93AB7000D7FD2 /* GSSAInterceptor.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE898F6C26E828260000B119 /* GSSAInterceptor.xcframework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -576,8 +576,8 @@
 				EE898F7E26E8284D0000B119 /* GSSAFirebaseManager.framework in Frameworks */,
 				EE898F7026E8282C0000B119 /* GSSAVisualComponents.framework in Frameworks */,
 				EE898F8026E828610000B119 /* GSSAServiceCoordinator.xcframework in Frameworks */,
-				EE898F6D26E828260000B119 /* GSSAInterceptor.xcframework in Frameworks */,
 				EE898F7626E828390000B119 /* GSSAServiceCoordinator.xcframework in Frameworks */,
+				F00BFB0526F93AB7000D7FD2 /* GSSAInterceptor.xcframework in Frameworks */,
 				EE8457F826EC017B005033B8 /* baz_ios_sdk_link_pago.framework in Frameworks */,
 				EE898F8626E8289E0000B119 /* GSSASessionInfo.xcframework in Frameworks */,
 				EE898F8226E828750000B119 /* GSSAPermissionsManager.xcframework in Frameworks */,

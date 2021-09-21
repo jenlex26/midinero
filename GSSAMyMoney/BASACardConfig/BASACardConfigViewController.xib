@@ -36,7 +36,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Configuración" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q9v-M3-Slc" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                            <rect key="frame" x="149.5" y="14" width="115.5" height="22.5"/>
+                            <rect key="frame" x="153.5" y="15" width="107" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -77,7 +77,7 @@
     </objects>
     <designables>
         <designable name="q9v-M3-Slc">
-            <size key="intrinsicContentSize" width="115.5" height="22.5"/>
+            <size key="intrinsicContentSize" width="107" height="20.5"/>
         </designable>
     </designables>
     <resources>
