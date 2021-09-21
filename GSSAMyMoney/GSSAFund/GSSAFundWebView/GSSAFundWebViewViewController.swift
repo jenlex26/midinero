@@ -34,6 +34,8 @@ class GSSAFundWebViewViewController: UIViewController, GSSAFundWebViewViewProtoc
 	override func viewDidLoad() {
         super.viewDidLoad()
         setView()
+        GSVCLoader.show()
+        NotificationCenter.default.addObserver(self, selector: #selector(showLoad), name: NSNotification.Name(rawValue: "showLoading"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,18 +43,18 @@ class GSSAFundWebViewViewController: UIViewController, GSSAFundWebViewViewProtoc
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
+    @objc func showLoad(){
+        GSVCLoader.show()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: {
+            GSVCLoader.hide()
+        })
+    }
 }
 
 //MARK: - Presenter Methods
 extension GSSAFundWebViewViewController {
     func onSucess(folio: String) {
         GSVCLoader.show()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-            GSVCLoader.show()
-        })
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-            GSVCLoader.show()
-        })
         DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: {
             GSVCLoader.hide()
         })

@@ -50,6 +50,22 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
         
         super.viewDidLoad()
         maxAmountLabel.text = ""
+        
+        
+        txtMail.delegate = self
+        txtMail.returnKeyType = .done
+        txtAmount.returnKeyType = .next
+        txtAmount.text = "$0.00"
+        txtAmount.addTarget(self, action: #selector(ammountFormatter(sender:)), for: .editingChanged)
+        setUpToolBar()
+        
+        
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.title = "Recarga tu tarjeta"
+        
+        
+        
+        
         getEcommerceInformation()
         
         
@@ -60,6 +76,17 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
     override func viewWillAppear(_ animated: Bool) {
         //GSVCLoader.hide()
         //GSVCLoader.show()
+        
+        if GSSISessionInfo.sharedInstance.gsUser.email?.isValidEmail == true{
+            lblMail.isHidden = true
+            txtMail.isHidden = true
+            lineView.isHidden = true
+        }else{
+            lblMail.isHidden = false
+            txtMail.isHidden = false
+            lineView.isHidden = false
+        }
+        
         if hasNav == true{
             txtAmount.becomeFirstResponder()
         }
@@ -331,7 +358,7 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
     
     
     func getEccomerceInformationSuccess(){
-        txtMail.delegate = self
+        /*txtMail.delegate = self
         txtMail.returnKeyType = .done
         txtAmount.returnKeyType = .next
         txtAmount.text = "$0.00"
@@ -349,7 +376,7 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
             lblMail.isHidden = false
             txtMail.isHidden = false
             lineView.isHidden = false
-        }
+        }*/
         
         if hasNav != true && close == false{
             startTime = Date()
