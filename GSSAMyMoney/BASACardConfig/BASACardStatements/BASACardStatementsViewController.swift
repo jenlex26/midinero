@@ -60,7 +60,7 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
     }
     
     func setStatements(){
-        statements.append(statement.init(title: "Seleccionar todos", subTitle: nil, tag: 0))
+        //statements.append(statement.init(title: "Seleccionar todos", subTitle: nil, tag: 0))
         var index = 1
         for item in requestData{
             let title = item.fechaFin?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "MMMM yyyy")
@@ -181,7 +181,7 @@ extension BASACardStatementsViewController: UITableViewDelegate, UITableViewData
         switch indexPath.row {
         case 0:
             let cell = table.dequeueReusableCell(withIdentifier: "SectionCell") as! SectionCell
-            cell.lblTitle.text = "Selecciona los estados de cuenta"
+            cell.lblTitle.text = "Selecciona el estado de cuenta"
             cell.lblTitle.numberOfLines = 2
             return cell
         case 1:
@@ -197,6 +197,7 @@ extension BASACardStatementsViewController: UITableViewDelegate, UITableViewData
             let cell = table.dequeueReusableCell(withIdentifier: "BASAButtonCell") as! BASAButtonCell
             cell.btnNext.addTarget(self, action: #selector(nextAction(sender:)), for: .touchUpInside)
             cell.btnNext.isUserInteractionEnabled = true
+            cell.isHidden = true
             return cell
         case statements.count + 3:
             let cell = table.dequeueReusableCell(withIdentifier: "BASAButtonCell") as! BASAButtonCell
@@ -207,6 +208,7 @@ extension BASACardStatementsViewController: UITableViewDelegate, UITableViewData
         default:
             let cell = table.dequeueReusableCell(withIdentifier: "BASASwitchItemCell") as! BASASwitchItemCell
             let data = statements[indexPath.row - 2]
+            cell.swtch.isHidden = true
             
             if data.tag == 0{
                 cell.backgroundColor = UIColor.GSVCBase300()
