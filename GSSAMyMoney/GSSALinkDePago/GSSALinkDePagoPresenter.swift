@@ -25,4 +25,23 @@ class GSSALinkDePagoPresenter: GSSALinkDePagoPresenterProtocol {
         interactor?.tryMailUpdate(body: body, Response: Response)
     }
     
+    func getEccomerceInformation() {
+        interactor?.getEccomerceInformation()
+    }
+    
+    func getEccomerceInformationSuccess() {
+        view?.getEccomerceInformationSuccess()
+    }
+    
+    func getEccomerceInformationError() {
+        view?.getEccomerceInformationError()
+    }
+    func showError(_ view: UIViewController) {
+        router.showError(view)
+    }
+    
+    func showAlert(_ view: UIViewController) {
+        router.showAlert(view)
+    }
+    
 }

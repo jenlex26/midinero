@@ -12,6 +12,7 @@
             <connections>
                 <outlet property="lblMail" destination="Wbf-FY-SGx" id="hj0-JV-2yE"/>
                 <outlet property="lineView" destination="liK-0a-nWm" id="gzK-34-88M"/>
+                <outlet property="maxAmountLabel" destination="rHJ-Qc-G57" id="6OD-7D-RER"/>
                 <outlet property="txtAmount" destination="ixM-tF-bj1" id="hTe-LJ-a2h"/>
                 <outlet property="txtMail" destination="oEQ-4Q-ne2" id="brj-4E-Dys"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -36,7 +37,7 @@
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="b87-jD-LuN">
                     <rect key="frame" x="0.0" y="40" width="320" height="278.5"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="      1. ¿Cuánto quieres recibir? " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lBv-nc-r67" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="      1. ¿Cuanto quieres recibir? " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lBv-nc-r67" customClass="GSVCLabel" customModule="GSSAVisualComponents">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="32.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>

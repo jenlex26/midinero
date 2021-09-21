@@ -72,7 +72,7 @@ class GSSAFundSelectCardInteractor: GSSAFundSelectCardInteractorProtocol {
             return
         }
 
-        LNKPG_Facade.shared.Initialize(environment: .development)
+        LNKPG_Facade.shared.Initialize(environment: .release)
         LNKPG_Facade.shared.getEcommerceInformation(numeroAfiliacion: afiliationNumber, success: { [weak self] response in
             guard let self = self else { return }
 

@@ -46,7 +46,16 @@ class GSSAFundWebViewViewController: UIViewController, GSSAFundWebViewViewProtoc
 //MARK: - Presenter Methods
 extension GSSAFundWebViewViewController {
     func onSucess(folio: String) {
-        GSVCLoader.hide()
+        GSVCLoader.show()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+            GSVCLoader.show()
+        })
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+            GSVCLoader.show()
+        })
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: {
+            GSVCLoader.hide()
+        })
         presenter?.goToTicket(folio: folio)
     }
     

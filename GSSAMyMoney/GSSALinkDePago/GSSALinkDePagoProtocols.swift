@@ -9,24 +9,40 @@
 //
 
 import Foundation
+import UIKit
 
 //MARK: Wireframe -
 protocol GSSALinkDePagoWireframeProtocol: class {
-
+    func showError(_ view: UIViewController)
+    func showAlert(_ view: UIViewController) 
 }
 //MARK: Presenter -
 protocol GSSALinkDePagoPresenterProtocol: class {
     func requestMailUpdate(body: UpdateMailBody, Response: @escaping (DigitalCardResponse?) -> ())
+    
+    func getEccomerceInformation()
+    
+    func getEccomerceInformationSuccess()
+    
+    func getEccomerceInformationError()
+    func showError(_ view: UIViewController)
+    func showAlert(_ view: UIViewController) 
 }
 
 //MARK: Interactor -
 protocol GSSALinkDePagoInteractorProtocol: class {
   var presenter: GSSALinkDePagoPresenterProtocol?  { get set }
     func tryMailUpdate(body: UpdateMailBody, Response: @escaping (DigitalCardResponse?) -> ())
+    func getEccomerceInformation()
 }
 
 //MARK: View -
 protocol GSSALinkDePagoViewProtocol: class {
 
   var presenter: GSSALinkDePagoPresenterProtocol?  { get set }
+    
+    
+    func getEccomerceInformationSuccess()
+    
+    func getEccomerceInformationError()
 }

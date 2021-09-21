@@ -15,7 +15,6 @@ import GSSASessionInfo
 import GSSAFunctionalUtilities
 import GSSAFirebaseManager
 import baz_ios_sdk_link_pago
-import GSSAInterceptor
 
 class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoViewProtocol, GSVCBottomAlertHandler, GSVTDigitalSignDelegate {
     
@@ -26,53 +25,47 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
     @IBOutlet weak var txtAmount: GSVCTextField!
     @IBOutlet weak var lblMail  : GSVCLabel!
     @IBOutlet weak var lineView : UIView!
-    
+    @IBOutlet weak var maxAmountLabel: GSVCLabel!
     var close: Bool? = false
     var hasNav: Bool?
     let textTest = UITextField()
     var startTime: Date?
     var time: TimeInterval = 300.0
+    var dailyLimit: Bool = false
+    var monthlyLimit: Bool = false
+    var numDailyTransactions: Int = 0
+    var numMonthlyTransactions: Int = 0
+    var dailyTransactionsLimit: Int = 0
+    var montlyTransactionsLimit: Int = 0
+    
+    
+    
+    internal var comission: String = "0.00"
+    
+    internal var maxAmount = 0.0
+    
+    internal var  minAmount = 5.0
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        txtMail.delegate = self
-        txtMail.returnKeyType = .done
-        txtAmount.returnKeyType = .next
-        txtAmount.text = "$0.00"
-        txtAmount.addTarget(self, action: #selector(ammountFormatter(sender:)), for: .editingChanged)
-        setUpToolBar()
+        maxAmountLabel.text = ""
+        getEcommerceInformation()
         
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-        self.title = "Recarga tu tarjeta"
         
-        if GSSISessionInfo.sharedInstance.gsUser.email?.isValidEmail == true{
-            lblMail.isHidden = true
-            txtMail.isHidden = true
-            lineView.isHidden = true
-        }else{
-            lblMail.isHidden = false
-            txtMail.isHidden = false
-            lineView.isHidden = false
-        }
         
-        if hasNav != true && close == false{
-            startTime = Date()
-            checkTime()
-            txtAmount.addTarget(self, action: #selector(activityObserve), for: .editingChanged)
-            let verification = GSVTDigitalSignViewController(delegate: self)
-            verification.modalPresentationStyle = .fullScreen
-            verification.bShouldWaitForNewToken = false
-            present(verification, animated: true, completion: nil)
-        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        GSVCLoader.hide()
+        //GSVCLoader.hide()
+        //GSVCLoader.show()
         if hasNav == true{
             txtAmount.becomeFirstResponder()
         }
         createTag(eventName: .pageView, section: "mi_dinero", flow: "fondear_cuenta", screenName: "monto", origin: "")
         setProgressLine(value: 0.25, animated: true)
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -143,7 +136,7 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
     func isValidAmount() -> Bool{
         if txtAmount.text?.haveData() == true{
             let quantity = Double(txtAmount.text?.moneyToDoubleString() ?? "0") ?? 0
-            if quantity > 0.0 && quantity <= 2500.0{
+            if quantity >= self.minAmount && quantity <= maxAmount{
                 return true
             }else{
                 return false
@@ -152,6 +145,22 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
             return false
         }
     }
+    
+    
+    func getEcommerceInformation(){
+        //GSVCLoader.show()
+        
+        lblMail.isHidden = true
+        txtMail.isHidden = true
+        lineView.isHidden = true
+        GSSAFundSharedVariables.shared.numeroAfiliacion = "8632464"
+        //GSSAFundSharedVariables.shared.clientAccountNumber = "yXCGLPa4W1ALv7TGeMcAYA"
+        GSSAFundSharedVariables.shared.clientAccountNumber = GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().encryptAlnova()
+        GSVCLoader.show()
+        self.presenter?.getEccomerceInformation()
+    }
+    
+    
     
     func showFondeo(){
         let quantity = txtAmount.text?.moneyToDoubleString()
@@ -173,7 +182,7 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
         view.modalPresentationStyle = .fullScreen
         close = true
         
-        self.navigationController?.pushViewController(GSSAFundSelectCardRouter.createModule(loadingModel: validado!), animated: true)
+        self.navigationController?.pushViewController(GSSAFundSelectCardRouter.createModule(loadingModel: validado!, comission: self.comission), animated: true)
         
         //        self.present(view, animated: true, completion: nil)
         //        self.navigationController?.pushViewController(view, animated: true)
@@ -188,7 +197,7 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
     }
     
     func cancelDigitalSing(_ isUserBlocked: Bool) {
-        GSINAdminNavigator.shared.releaseLastFlow()
+        self.dismiss(animated: true, completion: nil)
     }
     
     public static func validateStrings(parameters: [String : Any]?) -> PB_HomeEntity? {
@@ -214,34 +223,172 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
         }
     }
     
-    @IBAction func next(sender: GSVCButton){
-        if txtMail.isHidden == false && txtMail.text?.isValidEmail ==  true{
-            if isValidAmount() == true{
-                let quantity = Double(txtAmount.text?.moneyToDoubleString() ?? "0.0") ?? 0.0
-                if quantity > 2500.0{
-                    self.presentBottomAlertFullData(status: .error, message: "Ingrese una cantidad menor o igual a $2,500.00", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+    private func showAlert() {
+        activityObserved()
+        
+        guard dailyLimit, numDailyTransactions < dailyTransactionsLimit else {
+            self.presentBottomAlertFullData(status: .error, message: "Excedió número de movimientos diarios permitidos", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+            return
+        }
+        
+        guard monthlyLimit, numMonthlyTransactions < montlyTransactionsLimit else {
+            self.presentBottomAlertFullData(status: .error, message: "Excedió número de movimientos mensuales permitidos", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+            return
+        }
+        
+        
+        if self.txtMail.isHidden == false && self.txtMail.text?.isValidEmail ==  true{
+            if self.isValidAmount() == true{
+                let quantity = Double(self.txtAmount.text?.moneyToDoubleString() ?? "0.0") ?? 0.0
+                if quantity > self.maxAmount{
+                    self.presentBottomAlertFullData(status: .error, message: "Monto excedido, solo se permiten transacciones de un monto máximo de \(self.maxAmount)0 MXN", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+                    return
+                }else if (quantity < self.minAmount){
+                    self.presentBottomAlertFullData(status: .error, message: "Es necesario colocar un monto mayor a $\(self.minAmount)0", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+                    return
                 }else{
-                    GSVCLoader.show()
-                    presenter?.requestMailUpdate(body: UpdateMailBody.init(correoElectronico: txtMail.text?.encryptAlnova()), Response: { Response in
-                        GSVCLoader.hide()
-                        if Response != nil{
-                            self.showFondeo()
-                        }else{
-                            self.showFondeo()
-                        }
+                    let alert = UIAlertController(title: "Comisión",
+                                                  message: "La transacción tiene un costo de $\(comission).00 MXN.\n¿Deseas continuar?",
+                                                  preferredStyle: .alert)
+                    
+                    alert.addAction(UIAlertAction(title: "Aceptar", style: .default) { [weak self] _ in
+                        guard let self = self else { return }
+                        GSVCLoader.show()
+                        self.presenter?.requestMailUpdate(body: UpdateMailBody.init(correoElectronico: self.txtMail.text?.encryptAlnova()), Response: { Response in
+                            GSVCLoader.hide()
+                            if Response != nil{
+                                self.showFondeo()
+                            }else{
+                                self.showFondeo()
+                            }
+                        })
                     })
+                    
+                    alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+                    presenter?.showAlert(alert)
+                    return
                 }
             }else{
-                self.presentBottomAlertFullData(status: .error, message: "Ingrese una cantidad menor o igual a $2,500", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+                
+                let quantity = Double(self.txtAmount.text?.moneyToDoubleString() ?? "0.0") ?? 0.0
+                if quantity > self.maxAmount{
+                    self.presentBottomAlertFullData(status: .error, message: "Monto excedido, solo se permiten transacciones de un monto máximo de \(self.maxAmount)0 MXN", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+                    return
+                }else if (quantity < self.minAmount){
+                    self.presentBottomAlertFullData(status: .error, message: "Es necesario colocar un monto mayor a $\(self.minAmount)0", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+                    return
+                }
+                
+                
+                //self.presentBottomAlertFullData(status: .error, message: "Ingrese una cantidad menor o igual a $2,500", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
             }
-        }else if isValidAmount() == true && txtMail.isHidden == true{
-            showFondeo()
-        }else if txtMail.isHidden == false{
+        }else if self.isValidAmount() == true && self.txtMail.isHidden == true{
+            let alert = UIAlertController(title: "Comisión",
+                                          message: "La transacción tiene un costo de $\(comission).00 MXN.\n¿Deseas continuar?",
+                                          preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Aceptar", style: .default) { [weak self] _ in
+                guard let self = self else { return }
+                self.showFondeo()
+            })
+            
+            alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+            presenter?.showAlert(alert)
+            return
+        }else if self.txtMail.isHidden == false{
             self.presentBottomAlertFullData(status: .error, message: "Ingrese un correo electrónico válido", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+            return
         }else{
-            self.presentBottomAlertFullData(status: .error, message: "Ingrese una cantidad menor o igual a $2,500", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+            let quantity = Double(self.txtAmount.text?.moneyToDoubleString() ?? "0.0") ?? 0.0
+            if quantity > self.maxAmount {
+                self.presentBottomAlertFullData(status: .error, message: "Monto excedido, solo se permiten transacciones de un monto máximo de \(self.maxAmount)0 MXN", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+                return
+            }else if (quantity < self.minAmount){
+                self.presentBottomAlertFullData(status: .error, message: "Es necesario colocar un monto mayor a $\(self.minAmount)0", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+                return
+            }
+            //self.presentBottomAlertFullData(status: .error, message: "Ingrese una cantidad menor o igual a $2,500", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
         }
+        
+        
+        /*let alert = UIAlertController(title: "Comisión",
+                                      message: "La transacción tiene un costo de $\(comission) MXN por esta transacción.\n¿Deseas continuar?",
+                                      preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Aceptar", style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            //GSVCLoader.show()
+        })
+        
+        alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+        presenter?.showAlert(alert)*/
     }
+    
+    @IBAction func next(sender: GSVCButton){
+        
+        showAlert()
+    }
+    
+    
+    func getEccomerceInformationSuccess(){
+        txtMail.delegate = self
+        txtMail.returnKeyType = .done
+        txtAmount.returnKeyType = .next
+        txtAmount.text = "$0.00"
+        txtAmount.addTarget(self, action: #selector(ammountFormatter(sender:)), for: .editingChanged)
+        setUpToolBar()
+        
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.title = "Recarga tu tarjeta"
+        
+        if GSSISessionInfo.sharedInstance.gsUser.email?.isValidEmail == true{
+            lblMail.isHidden = true
+            txtMail.isHidden = true
+            lineView.isHidden = true
+        }else{
+            lblMail.isHidden = false
+            txtMail.isHidden = false
+            lineView.isHidden = false
+        }
+        
+        if hasNav != true && close == false{
+            startTime = Date()
+            checkTime()
+            txtAmount.addTarget(self, action: #selector(activityObserve), for: .editingChanged)
+            let verification = GSVTDigitalSignViewController(delegate: self)
+            verification.modalPresentationStyle = .fullScreen
+            verification.bShouldWaitForNewToken = false
+            present(verification, animated: true, completion: nil)
+        }
+        maxAmount = Double(GSSAFundSharedVariables.shared.ecommerceResponse?.montoMaximoTransferencia ?? "0.0") ?? 0.0
+        maxAmountLabel.text = "Monto máximo $\(maxAmount)0"
+        comission = GSSAFundSharedVariables.shared.ecommerceResponse?.comisionTransaccion ?? "0.00"
+        dailyLimit = GSSAFundSharedVariables.shared.ecommerceSMTIResponse?.limiteDiario ?? false
+        monthlyLimit = GSSAFundSharedVariables.shared.ecommerceSMTIResponse?.limiteMensual ?? false
+        numDailyTransactions = GSSAFundSharedVariables.shared.ecommerceSMTIResponse?.numeroTransaccionesDiarias ?? 0
+        numMonthlyTransactions = GSSAFundSharedVariables.shared.ecommerceSMTIResponse?.numeroTransaccionesMensuales ?? 0
+        
+        dailyTransactionsLimit = GSSAFundSharedVariables.shared.ecommerceResponse?.limiteTransaccionesDia ?? 0
+        montlyTransactionsLimit = GSSAFundSharedVariables.shared.ecommerceResponse?.limiteTransaccionesMes ?? 0
+        GSVCLoader.hide()
+    }
+    
+    func getEccomerceInformationError(){
+        showError()
+        //GSVCLoader.hide()
+    }
+    
+    private func showError(msg: String = "Ocurrió un error intentelo más tarde", subtitle: String? = nil, isDouble: Bool? = true) {
+        activityObserved()
+        
+        GSVCLoader.hide()
+        
+        let view = getErrorMPViewController(subtitle: subtitle, message: msg, isDouble: isDouble)
+        //self.presenter?.showError(view)
+    }
+    
+    
+    
 }
 
 extension GSSALinkDePagoViewController: UITextFieldDelegate{

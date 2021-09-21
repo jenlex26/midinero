@@ -44,8 +44,8 @@ class GSSAFundTicket: UIViewController {
             withFontColor: .GSVCText100,
             withLittleCoin: true)
         
-        let mainInfo = GSVTTicketMainInfo(title: "Dinero recibido -\nComisión $\(comission).00" ,operationAttributed: amountFormat)
-        let ticket = GSVTTicketOperationController(delegate: delegate, mainInfo: mainInfo, operationInfo: operationInfo, generatedInfo: [(subTitle: "Folio", info: folio)], aditionalInfo: [], mainActionTitle: nil, hasSecundaryAction: true, firstActionTitle: "Compartir", firstAction: nil, secundaryActionTitle: nil, tagTicketDelegate: nil, titleBtnReturn: "Volver al inicio")
+        let mainInfo = GSVTTicketMainInfo(title: "Dinero recibido" ,operationAttributed: amountFormat)
+        let ticket = GSVTTicketOperationController(delegate: delegate, mainInfo: mainInfo, operationInfo: operationInfo, generatedInfo: [(subTitle: "Folio", info: folio),(subTitle: "Comisión", info: "$\(comission).00")], aditionalInfo: [], mainActionTitle: nil, hasSecundaryAction: true, firstActionTitle: "Compartir", firstAction: nil, secundaryActionTitle: nil, tagTicketDelegate: nil, titleBtnReturn: "Volver al inicio")
         
         return ticket
         

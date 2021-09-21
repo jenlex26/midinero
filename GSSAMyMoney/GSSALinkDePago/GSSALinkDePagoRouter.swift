@@ -28,6 +28,10 @@ open class GSSALinkDePagoRouter: GSSALinkDePagoWireframeProtocol {
         return view
     }
     
+    func showAlert(_ view: UIViewController) {
+        viewController?.present(view, animated: true, completion: nil)
+    }
+    
     public static func createModuleWithNavigation() -> UIViewController {
         // Change to get view from storyboard if not using progammatic UI
         let view = GSSALinkDePagoViewController(nibName: nil, bundle:  Bundle(for: GSSALinkDePagoRouter.self))
@@ -41,5 +45,9 @@ open class GSSALinkDePagoRouter: GSSALinkDePagoWireframeProtocol {
         router.viewController = view
         
         return view
+    }
+    
+    func showError(_ view: UIViewController) {
+        viewController?.navigationController?.pushViewController(view, animated: true)
     }
 }

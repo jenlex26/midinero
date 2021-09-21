@@ -12,10 +12,50 @@ import UIKit
 import GSSAServiceCoordinator
 import GSSASecurityManager
 import GSSAFunctionalUtilities
+import baz_ios_sdk_link_pago
+import GSSASessionInfo
 
 class GSSALinkDePagoInteractor: GSSAURLSessionTaskCoordinatorBridge, GSSALinkDePagoInteractorProtocol {
 
     weak var presenter: GSSALinkDePagoPresenterProtocol?
+    private var afiliationNumber: String? = GSSAFundSharedVariables.shared.numeroAfiliacion
+    
+    private let email = GSSISessionInfo.sharedInstance.gsUser.email?.lowercased()
+    
+    
+    func getEccomerceInformation() {
+        LNKPG_Facade.shared.Initialize(environment: .release)
+        afiliationNumber = GSSAFundSharedVariables.shared.numeroAfiliacion
+        guard let afiliationNumber = afiliationNumber else {
+            self.presenter?.getEccomerceInformationError()
+            return
+        }
+        
+        
+        //LNKPG_Facade.shared.Initialize(environment: .development)
+        LNKPG_Facade.shared.getEcommerceInformation(numeroAfiliacion: afiliationNumber, success: { [weak self] response in
+            guard let self = self else { return }
+            
+            guard let response = response else {
+                self.presenter?.getEccomerceInformationError()
+                return
+            }
+            
+            GSSAFundSharedVariables.shared.ecommerceResponse = response
+            
+            self.requestEcommerceSMTInformation()
+            
+            
+            //self.requestEcommerceSMMInformation()
+        }, failure: {  [weak self] message in
+            guard let self = self else { return }
+            
+            print("Message Error: \(message ?? "")")
+            self.presenter?.getEccomerceInformationError()
+        })
+    }
+    
+    
     
     func tryMailUpdate(body: UpdateMailBody, Response: @escaping (DigitalCardResponse?) -> ())
     {
@@ -30,6 +70,36 @@ class GSSALinkDePagoInteractor: GSSAURLSessionTaskCoordinatorBridge, GSSALinkDeP
                 Response(nil)
                 debugPrint(error)
             }
+        }
+    }
+    
+    private func requestEcommerceSMTInformation() {
+        guard let email = email,
+              let afiliationNumber = afiliationNumber else {
+            self.presenter?.getEccomerceInformationError()
+            return
+        }
+    
+        LNKPG_Facade.shared.getEcommerceSMTInformation(numeroAfiliacion: afiliationNumber, email: email) { [weak self] (information) in
+
+            guard let self = self else { return }
+            
+            
+            guard let _ = information else {
+                self.presenter?.getEccomerceInformationError()
+                return
+            }
+            if let response = information {
+                GSSAFundSharedVariables.shared.ecommerceSMTIResponse = response
+            }
+
+            let _ = GSSAFundSharedVariables.shared.getIdTransactionSuperApp()
+            self.presenter?.getEccomerceInformationSuccess()
+        } failure: { [weak self] (error) in
+            guard let self = self else { return }
+            self.presenter?.getEccomerceInformationError()
+            //let _ = GSSAFundSharedVariables.shared.getIdTransactionSuperApp()
+            //self.presenter?.getEccomerceInformationSuccess()
         }
     }
     
