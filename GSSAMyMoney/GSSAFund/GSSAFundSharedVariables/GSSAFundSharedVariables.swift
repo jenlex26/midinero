@@ -34,8 +34,6 @@ class GSSAFundSharedVariables {
     var cvv: String?
     var cardCount: Int?
     var amount: String?
-    var transactionComission: String?
-    var transactionAmountPlusComission: Double?
     var merchantDetail: String?
     var numeroAfiliacion: String?
     var clientAccountNumber: String?
@@ -80,8 +78,6 @@ class GSSAFundSharedVariables {
         
         self.cardCount = nil
         self.amount = nil
-        self.transactionComission = nil
-        self.transactionAmountPlusComission = nil
         self.merchantDetail = nil
         self.clientAccountNumber = nil
         self.numeroAfiliacion = nil

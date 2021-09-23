@@ -86,7 +86,8 @@ class GSSALinkDePagoInteractor: GSSAURLSessionTaskCoordinatorBridge, GSSALinkDeP
             
             
             guard let _ = information else {
-                self.presenter?.getEccomerceInformationError()
+                //self.presenter?.getEccomerceInformationError()
+                self.presenter?.getEccomerceInformationSuccess()
                 return
             }
             if let response = information {
@@ -97,7 +98,8 @@ class GSSALinkDePagoInteractor: GSSAURLSessionTaskCoordinatorBridge, GSSALinkDeP
             self.presenter?.getEccomerceInformationSuccess()
         } failure: { [weak self] (error) in
             guard let self = self else { return }
-            self.presenter?.getEccomerceInformationError()
+            //self.presenter?.getEccomerceInformationError()
+            self.presenter?.getEccomerceInformationSuccess()
             //let _ = GSSAFundSharedVariables.shared.getIdTransactionSuperApp()
             //self.presenter?.getEccomerceInformationSuccess()
         }

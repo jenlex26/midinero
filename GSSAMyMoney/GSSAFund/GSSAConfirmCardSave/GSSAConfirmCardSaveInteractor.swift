@@ -10,7 +10,6 @@
 
 import UIKit
 import baz_ios_sdk_link_pago
-import GSSASessionInfo
 
 class GSSAConfirmCardSaveInteractor: GSSAConfirmCardSaveInteractorProtocol {
 
@@ -20,28 +19,14 @@ class GSSAConfirmCardSaveInteractor: GSSAConfirmCardSaveInteractorProtocol {
         print(tokenCardRequest)
         LNKPG_Facade.shared.postCreateToken(token: tokenCardRequest) {[weak self] response in
             guard let self = self else  { return }
-            print("\n\n##############\n\(response)\n################\n\n")
+            
             if let response = response {
-                if let createdCardToken = response.paySubscriptionId {
-                    LNKPG_Facade.shared.getListCard(numeroAfiliacion: GSSAFundSharedVariables.shared.numeroAfiliacion ?? "", email: (GSSISessionInfo.sharedInstance.gsUser.email ?? "").lowercased()) { tokens in
-                        if let nonNilTokens = tokens {
-                            for token in nonNilTokens {
-                                if createdCardToken == token.token ?? ""{
-                                    if !(token.activo ?? false) {
-                                        self.presenter?.onErrorTokenNoActivo()
-                                        return
-                                    }
-                                }
-                            }
-                            self.presenter?.onSuccess(response)
-                        }
-                    } failure: { error in
-                        self.presenter?.onError()
-                        return
-                    }
+                if let _ = response.paySubscriptionId {
+                    self.presenter?.onSuccess(response)
                 }else{
                     self.presenter?.onError()
                 }
+                
             } else {
                 self.presenter?.onError()
             }

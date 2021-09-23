@@ -16,7 +16,6 @@ class GSSAFundSelectCardViewController: GSSAMasterViewController, GSVCBottomAler
     var bottomAlert: GSVCBottomAlert?
     var presenter: GSSAFundSelectCardPresenterProtocol?
     
-    @IBOutlet weak var newAddCardButton: UIButton!
     //MARK: - @IBOutlets
     @IBOutlet weak var cardsTable: UITableView!
     @IBOutlet weak var addCardBtn: GSVCButton!
@@ -29,23 +28,7 @@ class GSSAFundSelectCardViewController: GSSAMasterViewController, GSVCBottomAler
     //MARK: Life cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-       /*
-        newAddCardButton.layer.cornerRadius = 25
-        newAddCardButton.backgroundColor = .white
-        newAddCardButton.tintColor = .black
-        newAddCardButton.layer.borderWidth = 1
-        newAddCardButton.layer.borderColor = UIColor.black.cgColor*/
-        
-        newAddCardButton.layer.cornerRadius = (newAddCardButton.bounds.height - 4) / 2
-        newAddCardButton.backgroundColor = .clear
-        newAddCardButton.setTitleColor(.GSVCText100, for: .normal)
-        newAddCardButton.titleLabel?.font = UIFont.gsSystemMedium(size: 14)
-        newAddCardButton.titleLabel?.textAlignment = .right
-        newAddCardButton.layer.borderWidth = 1
-        newAddCardButton.layer.borderColor = UIColor.GSVCText100.cgColor
-        newAddCardButton.setImage(UIImage(named: "plusSAIcon"), for: UIControl.State.normal)
-        
-        
+       
         activityObserved()
         setView()
     }
@@ -61,72 +44,30 @@ class GSSAFundSelectCardViewController: GSSAMasterViewController, GSVCBottomAler
     deinit {
         GSSAFundSharedVariables.shared.resetSingleton()
     }
-    
-    
-    @IBAction func newAddCard(_ sender: Any) {
-        
-        if let _ = GSSAFundSharedVariables.shared.ecommerceSMMIResponse {
-            
-            guard let cardsMovements = GSSAFundSharedVariables.shared.ecommerceSMMIResponse?.movimientos, cardsMovements, let movementsPerMonth =  GSSAFundSharedVariables.shared.ecommerceSMMIResponse?.numeroMovimientosMensuales, movementsPerMonth < GSSAFundSharedVariables.shared.ecommerceResponse?.limiteMovimentosTarjetas ?? 0 else{
-                //addCardBtn.backgroundColor = UIColor.gray
-                //addCardBtn.backgorundColorStyle = .GSVCInactive
-                //addCardBtn.backgorundColorStyle = .GSVCInactive
-                newAddCardButton.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
-                showBottomAlert(msg: "Límite de movimientos de tarjetas alcanzado")
-                return
-            }
-            
-            if let cardLimit = GSSAFundSharedVariables.shared.ecommerceResponse?.limiteTarjetasPermitidas ,
-               cards.count >= cardLimit  {
-                //addCardBtn.backgroundColor = UIColor.gray
-                newAddCardButton.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
-                showBottomAlert(msg: "Límite de tarjetas alcanzado")
-                return
-            }/*else{
-                activityObserved()
-                let view = GSSAFundSetCardNumberRouter.createModule()
-                self.presenter?.goToAddNewCard(view)
-            }*/
-            
-            activityObserved()
-            let view = GSSAFundSetCardNumberRouter.createModule()
-            self.presenter?.goToAddNewCard(view)
-        }
-    }
-    
     //MARK: - Actions
     @IBAction func addCard(_ sender: Any) {
-        
-        
-        /*
         if let _ = GSSAFundSharedVariables.shared.ecommerceSMMIResponse {
-            
-            guard let cardsMovements = GSSAFundSharedVariables.shared.ecommerceSMMIResponse?.movimientos, cardsMovements, let movementsPerMonth =  GSSAFundSharedVariables.shared.ecommerceSMMIResponse?.numeroMovimientosMensuales, movementsPerMonth < GSSAFundSharedVariables.shared.ecommerceResponse?.limiteMovimentosTarjetas ?? 0 else{
-                //addCardBtn.backgroundColor = UIColor.gray
-                //addCardBtn.backgorundColorStyle = .GSVCInactive
-                //addCardBtn.backgorundColorStyle = .GSVCInactive
-                showBottomAlert(msg: "Límite de movimientos de tarjetas alcanzado")
+            if let cardsMovements = GSSAFundSharedVariables.shared.ecommerceSMMIResponse?.movimientos, cardsMovements, let movementsPerMonth =  GSSAFundSharedVariables.shared.ecommerceSMMIResponse?.numeroMovimientosMensuales, movementsPerMonth < GSSAFundSharedVariables.shared.ecommerceResponse?.limiteMovimentosTarjetas ?? 0{
+                showBottomAlert(msg: "Limite movimientos de tarjetas alcanzado")
                 return
-            }
-            
-            if let cardLimit = GSSAFundSharedVariables.shared.ecommerceResponse?.limiteTarjetasPermitidas ,
-               cards.count >= cardLimit  {
-                //addCardBtn.backgroundColor = UIColor.gray
-                showBottomAlert(msg: "Límite de tarjetas alcanzado")
-                return
-            }/*else{
+            }else{
                 activityObserved()
                 let view = GSSAFundSetCardNumberRouter.createModule()
                 self.presenter?.goToAddNewCard(view)
-            }*/
-            
-            activityObserved()
-            let view = GSSAFundSetCardNumberRouter.createModule()
-            self.presenter?.goToAddNewCard(view)
-        }*/
-        
-        
-        
+            }
+            if let cardLimit = GSSAFundSharedVariables.shared.ecommerceResponse?.limiteTarjetasPermitidas ,
+               cards.count >= cardLimit  {
+                showBottomAlert(msg: "Limite de tarjetas alcanzado")
+                return
+            }else{
+                activityObserved()
+                let view = GSSAFundSetCardNumberRouter.createModule()
+                self.presenter?.goToAddNewCard(view)
+            }
+        }
+        activityObserved()
+        let view = GSSAFundSetCardNumberRouter.createModule()
+        self.presenter?.goToAddNewCard(view)
     }
 }
 
@@ -145,20 +86,20 @@ extension GSSAFundSelectCardViewController: UITableViewDataSource {
         let bankType = GSSAFundSharedVariables.shared.getCardName(cardNumer: card.numeroTarjeta ?? "")
         let accountNumber = card.numeroTarjeta ?? ""
         
-        /*if indexPath.row == 0{
+        if indexPath.row == 0{
             selectCellTask = DispatchWorkItem(block: { [weak self] in
                 guard let self = self else { return }
                 
                 
-                guard let tokenActive = card.activo,
-                      tokenActive else {
-                    self.showBottomAlert(msg: "Alta procesada, su tarjeta estará activa en 24 horas")
-                    return
-                }
+//                guard let tokenActive = card.activo,
+//                      tokenActive else {
+//                    self.showBottomAlert(msg: "Esta tarjeta se encuentra bloqueada")
+//                    return
+//                }
                 
                 self.presenter?.goToValidateCVV(GSSAFundSetCVVRouter.createModule(token: token))
             })
-        }*/
+        }
         
         cell.setupData(card: card, bankType: bankType, accountNumber: accountNumber)
         {
@@ -166,35 +107,16 @@ extension GSSAFundSelectCardViewController: UITableViewDataSource {
             
             guard let self = self else { return }
             
-            guard let tokenActive = card.activo,
-                  tokenActive else {
-                self.showBottomAlert(msg: "Alta procesada, su tarjeta estará activa en 24 horas")
-                return
-            }
+//            guard let tokenActive = card.activo,
+//                  tokenActive else {
+//                self.showBottomAlert(msg: "Alta procesada, su tarjeta estará activa en 24 horas")
+//                return
+//            }
             
             guard let token = card.token else {
                 self.showError()
                 return
             }
-            
-            
-            if let _ = GSSAFundSharedVariables.shared.ecommerceSMTIResponse {
-                guard let dailyLimit = GSSAFundSharedVariables.shared.ecommerceSMTIResponse?.limiteDiario,
-                //guard let dailyLimit = flag,
-                      dailyLimit, let numBerTransactionDaily = GSSAFundSharedVariables.shared.ecommerceSMTIResponse?.numeroTransaccionesDiarias , numBerTransactionDaily < GSSAFundSharedVariables.shared.ecommerceResponse?.limiteTransaccionesDia ?? 0 else {
-                    self.showBottomAlert(msg: "Excedió número de movimientos diarios permitidos")
-                    return
-                }
-                
-                guard let monthLimit = GSSAFundSharedVariables.shared.ecommerceSMTIResponse?.limiteMensual, let numBerTransactionMonth = GSSAFundSharedVariables.shared.ecommerceSMTIResponse?.numeroTransaccionesMensuales, numBerTransactionMonth < GSSAFundSharedVariables.shared.ecommerceResponse?.limiteTransaccionesMes ?? 0 ,
-                //guard let monthLimit = flag,
-                      monthLimit  else {
-                    self.showBottomAlert(msg: "Excedió número de movimientos mensuales permitidos")
-                    
-                    return
-                }
-            }
-            
             
             self.presenter?.goToValidateCVV(GSSAFundSetCVVRouter.createModule(token: token))
         } onDelete:
@@ -228,7 +150,7 @@ extension GSSAFundSelectCardViewController: GSSAFundSelectCardViewProtocol {
 //        flag = true
         
         
-        defaultSelect = true
+        //defaultSelect = true
         
         presenter?.getCards()
         
@@ -252,32 +174,18 @@ extension GSSAFundSelectCardViewController: GSSAFundSelectCardViewProtocol {
 
         GSSAFundSharedVariables.shared.cardCount = cards.count
         
+        addCardBtn.backgroundColor = UIColor.clear
+        addCardBtn.isEnabled = true
         
-        //addCardBtn.isEnabled = true
-        
-        if cards.count > 0 {
-            newAddCardButton.setTitle("Usar otra tarjeta", for: UIControl.State.normal)
-            //addCardBtn.backgroundColor = UIColor.gray
-            //addCardBtn.isEnabled = false
-        }else {
-            newAddCardButton.setTitle("Añadir una tarjeta", for: UIControl.State.normal)
-            //addCardBtn.backgroundColor = UIColor.white
-        }
+        /*if let cardLimit = GSSAFundSharedVariables.shared.ecommerceResponse?.limiteTarjetasPermitidas ,
+           cards.count >= cardLimit  {
+            addCardBtn.backgroundColor = UIColor.gray
+            addCardBtn.isEnabled = false
+        }*/
         
         if let _ = GSSAFundSharedVariables.shared.ecommerceSMMIResponse {
-            if let cardsMovements = GSSAFundSharedVariables.shared.ecommerceSMMIResponse?.movimientos, cardsMovements, let movementsPerMonth =  GSSAFundSharedVariables.shared.ecommerceSMMIResponse?.numeroMovimientosMensuales, movementsPerMonth < GSSAFundSharedVariables.shared.ecommerceResponse?.limiteMovimentosTarjetas ?? 0 ,
-                let cardLimit = GSSAFundSharedVariables.shared.ecommerceResponse?.limiteTarjetasPermitidas ,
-                  cards.count < cardLimit {
-                //addCardBtn.backgroundColor = UIColor.white
-                //addCardBtn.style = 10
-                newAddCardButton.backgroundColor = .clear
-                //newAddCardButton.backgroundColor = .white
-            }else {
-                //addCardBtn.backgroundColor = UIColor.gray
-                //addCardBtn.styleButt
-                //addCardBtn.style = 8
-                newAddCardButton.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
-                //newAddCardButton.backgroundColor = .gray
+            if let cardsMovements = GSSAFundSharedVariables.shared.ecommerceSMMIResponse?.movimientos, cardsMovements, let movementsPerMonth =  GSSAFundSharedVariables.shared.ecommerceSMMIResponse?.numeroMovimientosMensuales, movementsPerMonth < GSSAFundSharedVariables.shared.ecommerceResponse?.limiteMovimentosTarjetas ?? 0 {
+                addCardBtn.backgroundColor = UIColor.GSVCInformation
             }
         }
         
@@ -311,13 +219,12 @@ extension GSSAFundSelectCardViewController {
         
         GSVCLoader.show()
         presenter?.getEccomerceInformation()
-        
     }
     
     private func showAlert(token: String) {
         activityObserved()
         let alert = UIAlertController(title: "Eliminar tarjeta",
-                                      message: "¿Estás seguro que deseas eliminar tarjeta seleccionada?",
+                                      message: "¿Estás seguro que quieres eliminar la tarjeta guardada?",
                                       preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Aceptar", style: .default) { [weak self] _ in

@@ -16,7 +16,6 @@ protocol GSSAConfirmCardSaveWireframeProtocol: class {
     func goToNextFlow()
     func returnTo(vc: AnyClass, animated: Bool)
     func goToError(message: String, isDouble: Bool, isWarning: Bool)
-    //func showErrorTokenNoActivo(message: String, isDouble: Bool, isWarning: Bool)
 }
 
 //MARK: Presenter -
@@ -29,8 +28,6 @@ protocol GSSAConfirmCardSavePresenterProtocol: class {
     func goToNextFlow()
     func returnTo(vc: AnyClass, animated: Bool)
     func goToError(message: String, isDouble: Bool, isWarning: Bool)
-    func showErrorTokenNoActivo(message: String, isDouble: Bool, isWarning: Bool)
-    func onErrorTokenNoActivo()
 }
 
 //MARK: Interactor -
@@ -48,5 +45,4 @@ protocol GSSAConfirmCardSaveViewProtocol: class {
     
     func onSuccess(_ response: LNKPG_TokenCardResponseFacade)
     func onError()
-    func showErrorTokenNoActivo()
 }

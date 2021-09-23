@@ -33,7 +33,7 @@ class GSSAFundWebViewInteractor: GSSAFundWebViewInteractorProtocol {
             
             guard let merchantID = GSSAFundSharedVariables.shared.ecommerceResponse?.comerciosCybs?.id,
                   let merchantReference = GSSAFundSharedVariables.shared.idTransaccionSuperApp,
-                  let amount = GSSAFundSharedVariables.shared.transactionAmountPlusComission /*GSSAFundSharedVariables.shared.amount*/,
+                  let amount = GSSAFundSharedVariables.shared.amount,
                   //let card = GSSAFundSharedVariables.shared.cardInformationResponse?.card,
                   let card = GSSAFundSharedVariables.shared.cardInformation?.card,
                   
@@ -44,10 +44,9 @@ class GSSAFundWebViewInteractor: GSSAFundWebViewInteractorProtocol {
                 return
             }
             
-            
             let currencyCode = GSSAFundSharedVariables.shared.currencyCode
             
-            let authValidateRequestFacade = LNKPG_AuthValidateRequestFacade(merchantID: merchantID, merchantReference: merchantReference, amount: String(amount), payerAuthenticationResult: response?.resultadoAutenticacionPagador ?? "Dummy", transactionCurrencyCode: currencyCode, card: LNKPG_AuthValidateRequestFacade.__card(number: cardNumber, expirationMonth: expirationMonth, expirationYear: expirationYear, type: type))
+            let authValidateRequestFacade = LNKPG_AuthValidateRequestFacade(merchantID: merchantID, merchantReference: merchantReference, amount: amount, payerAuthenticationResult: response?.resultadoAutenticacionPagador ?? "Dummy", transactionCurrencyCode: currencyCode, card: LNKPG_AuthValidateRequestFacade.__card(number: cardNumber, expirationMonth: expirationMonth, expirationYear: expirationYear, type: type))
             
             LNKPG_Facade.shared.postAuthValidate(authValidateRequest: authValidateRequestFacade) { [weak self] response in
                 guard let self = self else { return }
@@ -59,13 +58,13 @@ class GSSAFundWebViewInteractor: GSSAFundWebViewInteractorProtocol {
                       let enrollmentResponse = GSSAFundSharedVariables.shared.enrollmentResponse,
                       let cvv = GSSAFundSharedVariables.shared.cvv,
                       let merchantReference = GSSAFundSharedVariables.shared.idTransaccionSuperApp,
-                      let amount = GSSAFundSharedVariables.shared.transactionAmountPlusComission /*GSSAFundSharedVariables.shared.amount*/ else {
+                      let amount = GSSAFundSharedVariables.shared.amount else {
                     
                     self.presenter?.onError(content: nil)
                     return
                 }
                 
-                LNKPG_PaymentFacade.shared.notifyAuthValidate(authValidate: response, numeroCuentaCliente: numeroCuenta, ecommerceResponse: ecommerceResponse, cardInformation: cardInformation, enrollmentResponse: enrollmentResponse, cvv: cvv, idTransaccionSuperApp: merchantReference, monto: String(amount)) { [weak self] response in
+                LNKPG_PaymentFacade.shared.notifyAuthValidate(authValidate: response, numeroCuentaCliente: numeroCuenta, ecommerceResponse: ecommerceResponse, cardInformation: cardInformation, enrollmentResponse: enrollmentResponse, cvv: cvv, idTransaccionSuperApp: merchantReference, monto: amount) { [weak self] response in
                     guard let self = self else { return }
                     
                     guard let response = response else {
@@ -94,16 +93,16 @@ class GSSAFundWebViewInteractor: GSSAFundWebViewInteractorProtocol {
                     
                 } failure: { [weak self] error in
                     guard let self = self else { return }
-                    self.presenter?.onError(content: error?.content)
+                    self.presenter?.onError(content: error ?? "")
                 }
 
             } failure: { [weak self] error in
                 guard let self = self else { return }
-                self.presenter?.onError(content: error?.content)
+                self.presenter?.onError(content: error ?? "")
             }
         } failure: { [weak self] error in
             guard let self = self else { return }
-            self.presenter?.onError(content: error?.content)
+            self.presenter?.onError(content: error ?? "")
         }
     }
 }

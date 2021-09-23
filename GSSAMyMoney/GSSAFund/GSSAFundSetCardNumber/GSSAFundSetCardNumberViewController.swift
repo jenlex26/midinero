@@ -79,7 +79,7 @@ extension GSSAFundSetCardNumberViewController {
         
         let merchantID = GSSAFundSharedVariables.shared.ecommerceResponse?.comerciosCybs?.id ?? ""
         let merchantReference = GSSAFundSharedVariables.shared.idTransaccionSuperApp ?? ""
-        let amount =  String(GSSAFundSharedVariables.shared.transactionAmountPlusComission ?? 0.0) /*GSSAFundSharedVariables.shared.amount ?? ""*/
+        let amount = GSSAFundSharedVariables.shared.amount ?? ""
         let currencyCode = GSSAFundSharedVariables.shared.currencyCode
         
         let type = GSSAFundSharedVariables.shared.getCardType(cardNumer: cardNumber)
