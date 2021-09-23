@@ -548,6 +548,7 @@
 		EEE84F6B26B4B37400C5CACE /* GSSACardNIPViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GSSACardNIPViewController.xib; sourceTree = "<group>"; };
 		EEF2ED292698A4AA0009F771 /* GSDigitalCardEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSDigitalCardEntity.swift; sourceTree = "<group>"; };
 		EEF728A62699382C0093F0DA /* GSSANewBeneficiaryEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSANewBeneficiaryEntity.swift; sourceTree = "<group>"; };
+		F09ED91026FBE4970030762A /* GSSAAceptaPago.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GSSAAceptaPago.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0C4F96726F1611200E8B852 /* SDKCHome.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SDKCHome.xcframework; path = "../aceptapago-ios-sdk-base/AceptaPagoSDKBase/SDKCHome.xcframework"; sourceTree = "<group>"; };
 		F0C4F96B26F1639E00E8B852 /* SDKCInquiry.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SDKCInquiry.xcframework; path = "../aceptapago-ios-sdk-base/AceptaPagoSDKBase/SDKCInquiry.xcframework"; sourceTree = "<group>"; };
 		F0C4F96C26F1639E00E8B852 /* SDKCNip.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SDKCNip.xcframework; path = "../aceptapago-ios-sdk-base/AceptaPagoSDKBase/SDKCNip.xcframework"; sourceTree = "<group>"; };
@@ -591,6 +592,7 @@
 		106E8DA0267D6CB2000182DC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F09ED91026FBE4970030762A /* GSSAAceptaPago.framework */,
 				F0C4F98B26F164DF00E8B852 /* SDKProductos.framework */,
 				F0C4F98C26F164DF00E8B852 /* SDKUtils.framework */,
 				F0C4F98726F164CC00E8B852 /* SDKLogin.framework */,

@@ -11,6 +11,7 @@ import GSSAVisualComponents
 import GSSAVisualTemplates
 import GSSAFirebaseManager
 import FirebaseRemoteConfig
+//import GSSAAceptaPago
 
 class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
     
@@ -111,7 +112,10 @@ class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
     }
     
     @IBAction func aceptaPago(sender: Any){
-        
+        if cellViewController != nil{
+          //  let view = GSSAAceptaPagoCalculatorRouter.createModule()
+         //   cellViewController.navigationController?.pushViewController(view, animated: true)
+        }
     }
     
     func forgotDigitalSign(_ forgotSecurityCodeViewController: UIViewController?) {

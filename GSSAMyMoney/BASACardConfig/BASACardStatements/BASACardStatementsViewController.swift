@@ -29,6 +29,7 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
     var bottomAlert: GSVCBottomAlert?
     var presenter: BASACardStatementsPresenterProtocol?
     var type: CardType!
+    var selectedIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +63,7 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
     func setStatements(){
         //statements.append(statement.init(title: "Seleccionar todos", subTitle: nil, tag: 0))
         var index = 1
+        
         for item in requestData{
             let title = item.fechaFin?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "MMMM yyyy")
             let initialDate = item.fechaInicio?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMMM") ?? ""
@@ -90,15 +92,14 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
     }
     
     func sendStatements(){
+        
         if type == .credit{
             tagSendStatementsButtonClick(origin: "credito")
         }else{
             tagSendStatementsButtonClick(origin: "debito")
+            table.selectRow(at: [0, (2 + selectedIndex)], animated: true, scrollPosition: .middle)
+            table.delegate?.tableView!(table, didSelectRowAt: [0, 2+selectedIndex])
         }
-        
-        
-        table.selectRow(at: [0,3], animated: true, scrollPosition: .middle)
-        table.delegate?.tableView!(table, didSelectRowAt: [0,3])
         
         //        let success = GSVTOperationStatusViewController(status: .success(title: "Operación completada", message: "Estados de cuenta envíados", views: []), plainButtonAction: {
         //            self.dismiss(animated: true, completion: {
@@ -108,6 +109,10 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
         //        })
         //        success.modalPresentationStyle = .fullScreen
         //        self.present(success, animated: true, completion: nil)
+    }
+    
+    func readStatementSelected(){
+        
     }
     
     func cerraBottomAlert() {
@@ -138,16 +143,24 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
     
     @objc func stamementSelected(sender: UISwitch){
         activityObserved()
-        statements[0].switchState = false
+        //statements[0].switchState = false
+        
+        for n in 0..<statements.count{
+            statements[n].switchState = false
+        }
+        self.table.reloadData()
+        
         statements[sender.tag].switchState = sender.isOn
-        if sender.isOn == false{
+        selectedIndex = sender.tag
+        /*if sender.isOn == false{
             let cell = self.table.cellForRow(at: [0,2]) as! BASASwitchItemCell
             cell.swtch.isOn = false
-        }
+        } */
     }
     
     @objc func nextAction(sender: UIButton){
         activityObserved()
+        
         var statementsSelected = false
         for n in 0..<statements.count{
             if statements[n].switchState == true{
@@ -197,7 +210,7 @@ extension BASACardStatementsViewController: UITableViewDelegate, UITableViewData
             let cell = table.dequeueReusableCell(withIdentifier: "BASAButtonCell") as! BASAButtonCell
             cell.btnNext.addTarget(self, action: #selector(nextAction(sender:)), for: .touchUpInside)
             cell.btnNext.isUserInteractionEnabled = true
-            cell.isHidden = true
+            cell.isHidden = false
             return cell
         case statements.count + 3:
             let cell = table.dequeueReusableCell(withIdentifier: "BASAButtonCell") as! BASAButtonCell
@@ -208,8 +221,7 @@ extension BASACardStatementsViewController: UITableViewDelegate, UITableViewData
         default:
             let cell = table.dequeueReusableCell(withIdentifier: "BASASwitchItemCell") as! BASASwitchItemCell
             let data = statements[indexPath.row - 2]
-            cell.swtch.isHidden = true
-            
+            cell.swtch.tag = indexPath.row - 2
             if data.tag == 0{
                 cell.backgroundColor = UIColor.GSVCBase300()
                 cell.swtch.addTarget(self, action: #selector(selectAllStatements(sender:)), for: .valueChanged)
@@ -224,6 +236,7 @@ extension BASACardStatementsViewController: UITableViewDelegate, UITableViewData
             }
             cell.tag = data.tag ?? -1
             cell.configureCell(title: data.title, subtitle: data.subTitle)
+            
             return cell
         }
     }
