@@ -17,11 +17,7 @@ import GSSASessionInfo
 
 class GSSACardFundResumeViewController: GSVTGenericResumeViewController, GSVCBottomAlertHandler {
     var bottomAlert: GSVCBottomAlert?
-    
-
 	var presenter: GSSACardFundResumePresenterProtocol?
-    
-    
     
     //MARK: - Life cycle
 	override func viewDidLoad() {
@@ -29,6 +25,7 @@ class GSSACardFundResumeViewController: GSVTGenericResumeViewController, GSVCBot
         self.title = "Recarga tu tarjeta"
         configureCells()
         configureComponents()
+        createTag(eventName: .pageView, section: "mi_dinero", flow: "fondear_cuenta", screenName: "resumen", origin: "")
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -56,7 +53,7 @@ extension GSSACardFundResumeViewController: GSSACardFundResumeViewProtocol {
         if responseCargo != nil || responseFondeo != nil {
             GSSAFundSharedVariables.shared.cargoEcommerceResponse = responseCargo
             GSSAFundSharedVariables.shared.fondeoAccountResponse = responseFondeo
-
+            createTag(eventName: .fondearCuentaSuccess, section: "mi_dinero", flow: "fondear_cuenta", screenName: "dinero_recibido", type: "", element: "", origin: "", amount: responseFondeo?.monto?.moneyToDoubleString())
             let folio = responseCargo?.folioOperacion ?? responseFondeo?.folioOperacion ?? ""
             
             presenter?.goToTicket(folio: folio)
@@ -74,7 +71,7 @@ extension GSSACardFundResumeViewController: GSSACardFundResumeViewProtocol {
 extension GSSACardFundResumeViewController: GSVCSliderButtonDelegate {
     func slideDidFinish(_ sender: GSVCSliderButton) {
         sender.resetSliderState(animated: true)
-        
+        createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "fondear_cuenta", screenName: "resumen", type: "swipe", element: "pagar", origin: "")
         if let _ = GSSAFundSharedVariables.shared.ecommerceSMTIResponse {
             print(GSSAFundSharedVariables.shared.ecommerceSMTIResponse)
             print(GSSAFundSharedVariables.shared.ecommerceSMTIResponse?.limiteDiario)
@@ -105,9 +102,6 @@ extension GSSACardFundResumeViewController: GSVCSliderButtonDelegate {
         guard let enrollRequest = GSSAFundSharedVariables.shared.enrollmentRequest else { return }
         GSVCLoader.show()
         presenter?.enroll(request: enrollRequest)
-        
-        
-        
     }
 }
 

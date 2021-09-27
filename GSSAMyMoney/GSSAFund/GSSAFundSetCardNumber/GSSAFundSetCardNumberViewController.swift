@@ -26,6 +26,7 @@ class GSSAFundSetCardNumberViewController: UIViewController, GSSAFundSetCardNumb
 	override func viewDidLoad() {
         super.viewDidLoad()
         setView()
+        createTag(eventName: .pageView, section: "mi_dinero", flow: "fondear_cuenta", screenName: "nueva_tarjeta", origin: "")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,6 +59,7 @@ class GSSAFundSetCardNumberViewController: UIViewController, GSSAFundSetCardNumb
      
     //MARK: - IBActions
     @IBAction func next(_ sender: Any) {
+        createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "fondear_cuenta", screenName: "nueva_tarjeta", type: "click", element: "continuar", origin: "")
         presenter?.checkTextFields(cardNumber: cardNumberTextField.text,
                                    expiration: expirationTextField.text,
                                    cvv: cvvTextField.text)

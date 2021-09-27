@@ -101,6 +101,7 @@ class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
         verification.bShouldWaitForNewToken = false
         verification.modalPresentationStyle = .fullScreen
         if cellViewController != nil{
+            createTag(eventName: .pageView, section: "mi_dinero", flow: "fondear_cuenta", screenName: "clave_de_seguridad", origin: "debito")
             cellViewController.present(verification, animated: true, completion: nil)
         }
     }
@@ -119,7 +120,7 @@ class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
     }
     
     func forgotDigitalSign(_ forgotSecurityCodeViewController: UIViewController?) {
-        print("NIP INCORRECTO")
+        createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "fondear_cuenta", screenName: "clave_de_seguridad", type: "click", element: "olvide_clave_seguridad", origin: "debito")
     }
     
     func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {

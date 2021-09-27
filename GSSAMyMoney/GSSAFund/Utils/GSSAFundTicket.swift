@@ -35,6 +35,7 @@ class GSSAFundTicket: UIViewController {
 
         let amount = GSSAFundSharedVariables.shared.amount ?? ""
         let operationInfo = GSSAFundTicket.getTicketInfo()
+        
         let amountFormat = NSMutableAttributedString.setFormattedText(withStringAmmount: amount.replacingOccurrences(of: "$", with: ""),
             withNumberOfDecimals: 2,
             withFontSize: 36,

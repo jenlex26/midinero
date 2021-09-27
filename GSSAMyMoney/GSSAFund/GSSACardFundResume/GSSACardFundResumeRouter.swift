@@ -36,8 +36,9 @@ class GSSACardFundResumeRouter: GSSACardFundResumeWireframeProtocol {
     }
     
     func goToTicket(folio: String) {
+        viewController?.createTag(eventName: .pageView, section: "mi_dinero", flow: "fondear_cuenta", screenName: "dinero_recibido", origin: "")
         guard let vc = viewController as? GSSACardFundResumeViewController else { return }
-        
+       
         let ticket = GSSAFundTicket.createTicket(folio: folio, delegate: vc)
         
        

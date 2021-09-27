@@ -79,7 +79,7 @@ extension UIViewController{
         activityTime.shared.startTime = Date()
     }
     
-    func createTag(eventName: eventNames, section: String, flow: String, screenName: String, type: String? = nil, element: String? = nil, origin: String){
+    func createTag(eventName: eventNames, section: String, flow: String, screenName: String, type: String? = nil, element: String? = nil, origin: String, amount: String? = nil){
         activityTime.shared.startTime = Date()
         activityTime.shared.time = 300.0
         var name = ""
@@ -88,10 +88,15 @@ extension UIViewController{
             name = "pageview"
         case .UIInteraction:
             name = "ui_interaction"
+        case .fondearCuentaSuccess:
+            name = "fondear_cuenta_succes"
         }
         
         if type != nil && element != nil{
             let tagEvent = GSSAFirebaseEvent(.custom(name)).set(section: section).set(flow: flow).set(screenName: screenName).set(paramaters: ["type":type!]).set(paramaters: ["element" : element!]).set(origin: origin)
+            GSSAAnalytics.firebase.tracking(event: tagEvent)
+        }else if name == "fondear_cuenta_succes" && amount != nil{
+            let tagEvent = GSSAFirebaseEvent(.custom(name)).set(section: section).set(flow: flow).set(screenName: screenName).set(origin: origin).set(paramaters: ["amount": amount!])
             GSSAAnalytics.firebase.tracking(event: tagEvent)
         }else{
             let tagEvent = GSSAFirebaseEvent(.custom(name)).set(section: section).set(flow: flow).set(screenName: screenName).set(origin: origin)
@@ -102,6 +107,7 @@ extension UIViewController{
     enum eventNames{
         case UIInteraction
         case pageView
+        case fondearCuentaSuccess
     }
 }
 

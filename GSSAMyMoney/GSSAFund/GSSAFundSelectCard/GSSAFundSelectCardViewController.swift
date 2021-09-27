@@ -28,7 +28,7 @@ class GSSAFundSelectCardViewController: GSSAMasterViewController, GSVCBottomAler
     //MARK: Life cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        createTag(eventName: .pageView, section: "mi_dimero", flow: "fondear_cuenta", screenName: "seleccionar_tarjeta", origin: "")
         activityObserved()
         setView()
     }
@@ -46,6 +46,7 @@ class GSSAFundSelectCardViewController: GSSAMasterViewController, GSVCBottomAler
     }
     //MARK: - Actions
     @IBAction func addCard(_ sender: Any) {
+        createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "fondear_cuenta", screenName: "seleccionar_tarjeta", type: "click", element: "nueva_tarjeta", origin: "")
         if let _ = GSSAFundSharedVariables.shared.ecommerceSMMIResponse {
             if let cardsMovements = GSSAFundSharedVariables.shared.ecommerceSMMIResponse?.movimientos, cardsMovements, let movementsPerMonth =  GSSAFundSharedVariables.shared.ecommerceSMMIResponse?.numeroMovimientosMensuales, movementsPerMonth < GSSAFundSharedVariables.shared.ecommerceResponse?.limiteMovimentosTarjetas ?? 0{
                 showBottomAlert(msg: "Limite movimientos de tarjetas alcanzado")
@@ -224,7 +225,7 @@ extension GSSAFundSelectCardViewController {
     private func showAlert(token: String) {
         activityObserved()
         let alert = UIAlertController(title: "Eliminar tarjeta",
-                                      message: "¿Estás seguro que quieres eliminar la tarjeta guardada?",
+                                      message: "¿Estás seguro que deseas eliminar la tarjeta seleccionada?",
                                       preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Aceptar", style: .default) { [weak self] _ in

@@ -49,6 +49,7 @@ class GSSAFundAddCardViewController: UIViewController {
         setView()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
+        createTag(eventName: .pageView, section: "mi_dinero", flow: "fondear_cuenta", screenName: "datos_personales", origin: "")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -158,6 +159,7 @@ class GSSAFundAddCardViewController: UIViewController {
     
     //MARK: - @IBActions
     @IBAction func next(_ sender: Any) {
+        createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "fondear_cuenta", screenName: "datos_personales", type: "click", element: "continuar", origin: "")
         if validateFields() {
             var userEmail = self.emailField.text
             
