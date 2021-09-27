@@ -35,17 +35,22 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
     var monthlyLimit: Bool = false
     var numDailyTransactions: Int = 0
     var numMonthlyTransactions: Int = 0
-    var dailyTransactionsLimit: Int = 2
+    var dailyTransactionsLimit: Int = 0
     var montlyTransactionsLimit: Int = 0
     
+    
+    
     internal var comission: String = "0.00"
+    
     internal var maxAmount = 0.0
+    
     internal var  minAmount = 5.0
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         maxAmountLabel.text = ""
+        
         
         txtMail.delegate = self
         txtMail.returnKeyType = .done
@@ -54,13 +59,18 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
         txtAmount.addTarget(self, action: #selector(ammountFormatter(sender:)), for: .editingChanged)
         setUpToolBar()
         
-        self.view.backgroundColor = .white
+        
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.title = "Recarga tu tarjeta"
         
         
-        createTag(eventName: .pageView, section: "mi_dinero", flow: "fondear_cuenta", screenName: "monto", origin: "")
+        
+        
         getEcommerceInformation()
+        
+        
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -115,7 +125,6 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
     }
     
     @objc func doneButtonClick(){
-        createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "fondear_cuenta", screenName: "monto", type: "click", element: "listo", origin: "")
         self.view.endEditing(true)
     }
     
@@ -164,6 +173,7 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
         }
     }
     
+    
     func getEcommerceInformation(){
         //GSVCLoader.show()
         
@@ -172,10 +182,12 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
         lineView.isHidden = true
         GSSAFundSharedVariables.shared.numeroAfiliacion = "8632464"
         //GSSAFundSharedVariables.shared.clientAccountNumber = "yXCGLPa4W1ALv7TGeMcAYA"
-        GSSAFundSharedVariables.shared.clientAccountNumber = GSSISessionInfo.sharedInstance.gsUser.account?.number?.formatToTnuocca14Digits().encryptAlnova()
+        GSSAFundSharedVariables.shared.clientAccountNumber = GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().encryptAlnova()
         GSVCLoader.show()
         self.presenter?.getEccomerceInformation()
     }
+    
+    
     
     func showFondeo(){
         let quantity = txtAmount.text?.moneyToDoubleString()
@@ -183,7 +195,7 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
         if mail?.haveData() == false || mail == nil{
             mail = txtMail.text
         }
-        let accountNumber = GSSISessionInfo.sharedInstance.gsUser.account?.number?.formatToTnuocca14Digits().encryptAlnova()
+        let accountNumber = GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().encryptAlnova()
         
         let parameters = [
             "amount": "\(quantity ?? "0.0")",
@@ -197,7 +209,7 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
         view.modalPresentationStyle = .fullScreen
         close = true
         
-        self.navigationController?.pushViewController(GSSAFundSelectCardRouter.createModule(loadingModel: validado!), animated: true)
+        self.navigationController?.pushViewController(GSSAFundSelectCardRouter.createModule(loadingModel: validado!, comission: self.comission), animated: true)
         
         //        self.present(view, animated: true, completion: nil)
         //        self.navigationController?.pushViewController(view, animated: true)
@@ -241,12 +253,11 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
     private func showAlert() {
         activityObserved()
         
-        print("DAILY LIMIT \(dailyLimit)")
-        print("NUM DAILY TRANSACTION \(numDailyTransactions)")
-        print("DAILY TRANSACTION LIMIT \(dailyTransactionsLimit)")
-        
-        
         guard dailyLimit, numDailyTransactions < dailyTransactionsLimit else {
+            print("numDailyTransactionsss")
+            print(numDailyTransactions)
+            print(dailyTransactionsLimit)
+            print(dailyLimit)
             self.presentBottomAlertFullData(status: .error, message: "Excedió número de movimientos diarios permitidos", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
             return
         }
@@ -261,22 +272,13 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
             if self.isValidAmount() == true{
                 let quantity = Double(self.txtAmount.text?.moneyToDoubleString() ?? "0.0") ?? 0.0
                 if quantity > self.maxAmount{
-                    self.presentBottomAlertFullData(status: .error, message: "Monto excedido, solo se permiten transacciones de un monto mayor a \(self.maxAmount)0 MXN", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+                    self.presentBottomAlertFullData(status: .error, message: "Monto excedido, solo se permiten transacciones de un monto máximo de \(self.maxAmount)0 MXN", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
                     return
                 }else if (quantity < self.minAmount){
                     self.presentBottomAlertFullData(status: .error, message: "Es necesario colocar un monto mayor a $\(self.minAmount)0", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
                     return
                 }else{
-                    GSVCLoader.show()
-                    self.presenter?.requestMailUpdate(body: UpdateMailBody.init(correoElectronico: self.txtMail.text?.encryptAlnova()), Response: { Response in
-                        GSVCLoader.hide()
-                        if Response != nil{
-                            self.showFondeo()
-                        }else{
-                            self.showFondeo()
-                        }
-                    })
-                    /*let alert = UIAlertController(title: "Comisión",
+                    let alert = UIAlertController(title: "Comisión",
                                                   message: "La transacción tiene un costo de $\(comission).00 MXN.\n¿Deseas continuar?",
                                                   preferredStyle: .alert)
                     
@@ -294,7 +296,7 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
                     })
                     
                     alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
-                    presenter?.showAlert(alert)*/
+                    presenter?.showAlert(alert)
                     return
                 }
             }else{
@@ -312,7 +314,7 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
                 //self.presentBottomAlertFullData(status: .error, message: "Ingrese una cantidad menor o igual a $2,500", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
             }
         }else if self.isValidAmount() == true && self.txtMail.isHidden == true{
-            /*let alert = UIAlertController(title: "Comisión",
+            let alert = UIAlertController(title: "Comisión",
                                           message: "La transacción tiene un costo de $\(comission).00 MXN.\n¿Deseas continuar?",
                                           preferredStyle: .alert)
             
@@ -322,8 +324,7 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
             })
             
             alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
-            presenter?.showAlert(alert)*/
-            self.showFondeo()
+            presenter?.showAlert(alert)
             return
         }else if self.txtMail.isHidden == false{
             self.presentBottomAlertFullData(status: .error, message: "Ingrese un correo electrónico válido", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
@@ -359,6 +360,7 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
         showAlert()
     }
     
+    
     func getEccomerceInformationSuccess(){
         /*txtMail.delegate = self
         txtMail.returnKeyType = .done
@@ -387,7 +389,6 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
             let verification = GSVTDigitalSignViewController(delegate: self)
             verification.modalPresentationStyle = .fullScreen
             verification.bShouldWaitForNewToken = false
-            createTag(eventName: .pageView, section: "mi_dinero", flow: "fondear_cuenta", screenName: "clave_de_seguridad", origin: "dashboard")
             present(verification, animated: true, completion: nil)
         }
         maxAmount = Double(GSSAFundSharedVariables.shared.ecommerceResponse?.montoMaximoTransferencia ?? "0.0") ?? 0.0
@@ -408,14 +409,17 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
         //GSVCLoader.hide()
     }
     
-    private func showError(msg: String = "Ocurrió un error, inténtelo más tarde", subtitle: String? = nil, isDouble: Bool? = true) {
+    private func showError(msg: String = "Ocurrió un error intentelo más tarde", subtitle: String? = nil, isDouble: Bool? = true) {
         activityObserved()
         
         GSVCLoader.hide()
         
         let view = getErrorMPViewController(subtitle: subtitle, message: msg, isDouble: isDouble)
-        self.presenter?.showError(view)
+        //self.presenter?.showError(view)
     }
+    
+    
+    
 }
 
 extension GSSALinkDePagoViewController: UITextFieldDelegate{

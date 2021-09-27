@@ -66,30 +66,31 @@ class GSSAFundSelectCardInteractor: GSSAFundSelectCardInteractorProtocol {
     }
     
     func getEccomerceInformation() {
+        //self.requestEcommerceSMMInformation()
         guard let afiliationNumber = afiliationNumber else {
             self.presenter?.getEccomerceInformationError()
             return
         }
-        
+
         LNKPG_Facade.shared.Initialize(environment: .release)
         LNKPG_Facade.shared.getEcommerceInformation(numeroAfiliacion: afiliationNumber, success: { [weak self] response in
             guard let self = self else { return }
-            
+
             guard let response = response else {
                 self.presenter?.getEccomerceInformationError()
                 return
             }
-            
+
             GSSAFundSharedVariables.shared.ecommerceResponse = response
             self.requestEcommerceSMMInformation()
             //self.getDummyInformation()
-            
-            
 
-            
+
+
+
         }, failure: {  [weak self] message in
             guard let self = self else { return }
-            
+
             print("Message Error: \(message ?? "")")
             self.presenter?.getEccomerceInformationError()
         })
@@ -113,19 +114,19 @@ extension GSSAFundSelectCardInteractor {
             if let response = information {
                 GSSAFundSharedVariables.shared.ecommerceSMMIResponse = response
             }
-//            guard let response = information else {
-//                self.presenter?.getEccomerceInformationError()
-//                return
-//            }
+            guard let _ = information else {
+                self.presenter?.getEccomerceInformationError()
+                return
+            }
 
             
             self.requestEcommerceSMTInformation()
         } failure: {
             [weak self] message in
             guard let self = self else { return }
-            //self.presenter?.getEccomerceInformationError()
+            self.presenter?.getEccomerceInformationError()
             
-            self.requestEcommerceSMTInformation()
+            //self.requestEcommerceSMTInformation()
         }
     }
         
@@ -140,11 +141,11 @@ extension GSSAFundSelectCardInteractor {
 
             guard let self = self else { return }
             
-            /*
-            guard let response = information else {
+            
+            guard let _ = information else {
                 self.presenter?.getEccomerceInformationError()
                 return
-            }*/
+            }
             if let response = information {
                 GSSAFundSharedVariables.shared.ecommerceSMTIResponse = response
             }
@@ -154,9 +155,9 @@ extension GSSAFundSelectCardInteractor {
             self.presenter?.getEccomerceInformationSuccess()
         } failure: { [weak self] (error) in
             guard let self = self else { return }
-            //self.presenter?.getEccomerceInformationError()
-            let _ = GSSAFundSharedVariables.shared.getIdTransactionSuperApp()
-            self.presenter?.getEccomerceInformationSuccess()
+            self.presenter?.getEccomerceInformationError()
+            //let _ = GSSAFundSharedVariables.shared.getIdTransactionSuperApp()
+            //self.presenter?.getEccomerceInformationSuccess()
         }
     }
     

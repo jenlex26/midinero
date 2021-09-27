@@ -17,7 +17,11 @@ import GSSASessionInfo
 
 class GSSACardFundResumeViewController: GSVTGenericResumeViewController, GSVCBottomAlertHandler {
     var bottomAlert: GSVCBottomAlert?
+    
+
 	var presenter: GSSACardFundResumePresenterProtocol?
+    
+    
     
     //MARK: - Life cycle
 	override func viewDidLoad() {
@@ -71,23 +75,19 @@ extension GSSACardFundResumeViewController: GSSACardFundResumeViewProtocol {
 extension GSSACardFundResumeViewController: GSVCSliderButtonDelegate {
     func slideDidFinish(_ sender: GSVCSliderButton) {
         sender.resetSliderState(animated: true)
-        createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "fondear_cuenta", screenName: "resumen", type: "swipe", element: "pagar", origin: "")
+        
         if let _ = GSSAFundSharedVariables.shared.ecommerceSMTIResponse {
-            print(GSSAFundSharedVariables.shared.ecommerceSMTIResponse)
-            print(GSSAFundSharedVariables.shared.ecommerceSMTIResponse?.limiteDiario)
-            print(GSSAFundSharedVariables.shared.ecommerceSMTIResponse?.numeroTransaccionesDiarias)
-            print(GSSAFundSharedVariables.shared.ecommerceResponse?.limiteTransaccionesDia)
             guard let dailyLimit = GSSAFundSharedVariables.shared.ecommerceSMTIResponse?.limiteDiario,
             //guard let dailyLimit = flag,
                   dailyLimit, let numBerTransactionDaily = GSSAFundSharedVariables.shared.ecommerceSMTIResponse?.numeroTransaccionesDiarias , numBerTransactionDaily < GSSAFundSharedVariables.shared.ecommerceResponse?.limiteTransaccionesDia ?? 0 else {
-                self.showBottomAlert(msg: "Excedió número de movimientos diarios permitidos")
+                self.showBottomAlert(msg: "Excedió número de transacciones diarios permitidos")
                 return
             }
             
             guard let monthLimit = GSSAFundSharedVariables.shared.ecommerceSMTIResponse?.limiteMensual, let numBerTransactionMonth = GSSAFundSharedVariables.shared.ecommerceSMTIResponse?.numeroTransaccionesMensuales, numBerTransactionMonth < GSSAFundSharedVariables.shared.ecommerceResponse?.limiteTransaccionesMes ?? 0 ,
             //guard let monthLimit = flag,
                   monthLimit  else {
-                self.showBottomAlert(msg: "Excedió número de movimientos mensuales permitidos")
+                self.showBottomAlert(msg: "Excedió número de transacciones mensuales permitidos")
                 
                 return
             }
@@ -102,6 +102,9 @@ extension GSSACardFundResumeViewController: GSVCSliderButtonDelegate {
         guard let enrollRequest = GSSAFundSharedVariables.shared.enrollmentRequest else { return }
         GSVCLoader.show()
         presenter?.enroll(request: enrollRequest)
+        
+        
+        
     }
 }
 
@@ -137,7 +140,7 @@ extension GSSACardFundResumeViewController {
         
         let extraData = GSVTResumeCellInfo(sectionTitle: "Datos de tu recarga",
                                            subTitle: "Costo por servicio",
-                                           mainInfo: "$0.00",
+                                           mainInfo: "$\(GSSAFundSharedVariables.shared.ecommerceResponse?.comisionTransaccion ?? "0.00")",
                                            iconImage: UIImage(named: "legalInfoSAIcon"))
         
         cells.append(origin)

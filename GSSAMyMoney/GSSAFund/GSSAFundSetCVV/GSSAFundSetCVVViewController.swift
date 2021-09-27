@@ -94,8 +94,27 @@ class GSSAFundSetCVVViewController: GSSAMasterViewController, UITextFieldDelegat
         }
         
         GSSAFundSharedVariables.shared.cvv = cvv
-        GSSAFundSharedVariables.shared.cardInformation = LNKPG_CardInformationFacade(transactionCurrencyCode: GSSAFundSharedVariables.shared.currencyCode, payer: LNKPG_CardInformationFacade.__Payer(firstName: payerFirstName, lastName: payerLastName), card: LNKPG_CardInformationFacade.__Card(expirationMonth: expirationMonth, expirationYear: expirationYear, number: accountNumber, type: cardType))
-        GSSAFundSharedVariables.shared.enrollmentRequest = LNKPG_EnrollmentRequestFacade(merchantID: GSSAFundSharedVariables.shared.ecommerceResponse?.comerciosCybs?.id ?? "", merchantReference: GSSAFundSharedVariables.shared.idTransaccionSuperApp ?? "", amount: GSSAFundSharedVariables.shared.amount ?? "", transactionCurrencyCode: GSSAFundSharedVariables.shared.currencyCode, card: LNKPG_EnrollmentRequestFacade.__card(number: accountNumber, expirationMonth: expirationMonth, expirationYear: expirationYear, type: GSSAFundSharedVariables.shared.getCardType(cardNumer: accountNumber)))
+        GSSAFundSharedVariables.shared.cardInformation = LNKPG_CardInformationFacade(
+            transactionCurrencyCode: GSSAFundSharedVariables.shared.currencyCode,
+            payer: LNKPG_CardInformationFacade.__Payer(
+                firstName: payerFirstName,
+                lastName: payerLastName),
+            card: LNKPG_CardInformationFacade.__Card(
+                expirationMonth: expirationMonth,
+                expirationYear: expirationYear,
+                number: accountNumber,
+                type: cardType))
+        GSSAFundSharedVariables.shared.enrollmentRequest = LNKPG_EnrollmentRequestFacade(
+            merchantID: GSSAFundSharedVariables.shared.ecommerceResponse?.comerciosCybs?.id ?? "",
+            merchantReference: GSSAFundSharedVariables.shared.idTransaccionSuperApp ?? "",
+            amount: String(GSSAFundSharedVariables.shared.transactionAmountPlusComission ?? 0.0)/* GSSAFundSharedVariables.shared.amount ?? ""*/,
+            transactionCurrencyCode: GSSAFundSharedVariables.shared.currencyCode,
+            card: LNKPG_EnrollmentRequestFacade.__card(
+                number: accountNumber,
+                expirationMonth: expirationMonth,
+                expirationYear: expirationYear,
+                type: GSSAFundSharedVariables.shared.getCardType(
+                    cardNumer: accountNumber)))
         
         presenter?.goToNextFlow()
     }

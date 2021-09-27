@@ -18,7 +18,7 @@ import baz_ios_sdk_link_pago
 class GSSAFundWebViewViewController: UIViewController, GSSAFundWebViewViewProtocol {
 
     var presenter: GSSAFundWebViewPresenterProtocol?
-    
+    var loads = 0
     //MARK: - @IBOutlets
     @IBOutlet weak var webViewContainer: UIView!
     
@@ -36,6 +36,7 @@ class GSSAFundWebViewViewController: UIViewController, GSSAFundWebViewViewProtoc
         setView()
         GSVCLoader.show()
         NotificationCenter.default.addObserver(self, selector: #selector(showLoad), name: NSNotification.Name(rawValue: "showLoading"), object: nil)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,10 +55,7 @@ class GSSAFundWebViewViewController: UIViewController, GSSAFundWebViewViewProtoc
 //MARK: - Presenter Methods
 extension GSSAFundWebViewViewController {
     func onSucess(folio: String) {
-        GSVCLoader.show()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: {
-            GSVCLoader.hide()
-        })
+        GSVCLoader.hide()
         presenter?.goToTicket(folio: folio)
     }
     
@@ -89,8 +87,13 @@ extension GSSAFundWebViewViewController: LNKPG_WebViewFacadeDelegate {
     }
     
     func notifyLoad(){
-        print("Carga completa")
-        GSVCLoader.hide()
+        loads += 1
+        print("Carga completa \(loads)")
+        if loads == 3{
+            GSVCLoader.show()
+        }else{
+            GSVCLoader.hide()
+        }
     }
 }
 

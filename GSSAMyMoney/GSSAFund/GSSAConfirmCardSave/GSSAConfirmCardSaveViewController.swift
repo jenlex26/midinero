@@ -42,7 +42,7 @@ class GSSAConfirmCardSaveViewController: GSSAMasterViewController, GSSAConfirmCa
     @IBAction func next(_ sender: Any) {
         guard let tokenCardRequest = tokenCardRequest,
               let firstName = tokenCardRequest.payer?.firstName,
-              let lastName = tokenCardRequest.payer?.lastName,
+              let lastName = tokenCardRequest.payer?.lastName,          
               let accountNumber = tokenCardRequest.card?.number,
               let expirationMonth = tokenCardRequest.card?.expirationMonth,
               let expirationYear = tokenCardRequest.card?.expirationYear,
@@ -85,7 +85,7 @@ extension GSSAConfirmCardSaveViewController {
     func onSuccess(_ response: LNKPG_TokenCardResponseFacade) {
         GSVCLoader.hide()
         
-        //presenter?.goToError(message: "Tiene que esperar 24 hrs. para poder usar esta cuenta",isDouble: false,  isWarning: true)
+        //presenter?.goToError(message: "Alta procesada, su tarjeta estará activa en 24 horas",isDouble: false,  isWarning: true)
         presenter?.goToNextFlow()
     }
     
@@ -136,6 +136,12 @@ extension GSSAConfirmCardSaveViewController {
         GSVCLoader.hide()
         let message = "Ocurrio un error intentelo más tarde"
         
+        presenter?.goToError(message: message, isDouble: false, isWarning: false)
+    }
+    
+    internal func showErrorTokenNoActivo() {
+        GSVCLoader.hide()
+        let message = "Alta procesada, su tarjeta estará activa en 24 horas"
         presenter?.goToError(message: message, isDouble: false, isWarning: false)
     }
     
