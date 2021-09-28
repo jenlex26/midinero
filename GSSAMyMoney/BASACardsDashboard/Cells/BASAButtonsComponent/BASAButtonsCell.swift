@@ -125,9 +125,14 @@ class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
     
     func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
         if cellViewController != nil{
-            if sendToFund == true{
-                let view = GSSALinkDePagoRouter.createModuleWithNavigation()
-                cellViewController.navigationController?.pushViewController(view, animated: true)
+            if sendToFund == true{                
+                if RemoteConfig.remoteConfig().remoteString(forKey: "iOS_SA_CashInWindow") == "true"{
+                    GSINAdminNavigator.shared.startFlow(forAction: "GSIFTr_MenuReload",
+                                                        navigateDelegate: self)
+                }else{
+                    let view = GSSALinkDePagoRouter.createModuleWithNavigation()
+                    cellViewController.navigationController?.pushViewController(view, animated: true)
+                }
             }else{
                 GSINAdminNavigator.shared.startFlow(forAction: "GSIFPqr_CashPickup",
                                                     navigateDelegate: self)
