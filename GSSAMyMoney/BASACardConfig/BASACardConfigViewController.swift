@@ -113,7 +113,7 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
     func saveValues(){
         CLABE = GSSISessionInfo.sharedInstance.gsUser.account?.clabe?.tnuoccaFormat ?? ""
         phone = GSSISessionInfo.sharedInstance.gsUser.phone?.tryToAdCellphoneFormat ?? ""
-        account =  GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().tnuoccaFormat ?? ""
+        account =  GSSISessionInfo.sharedInstance.gsUser.account?.number?.formatToTnuocca14Digits().tnuoccaFormat ?? ""
     }
     
     func setOptions(){
