@@ -125,7 +125,7 @@ class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
     
     func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
         if cellViewController != nil{
-            if sendToFund == true{                
+            if sendToFund == true{
                 if RemoteConfig.remoteConfig().remoteString(forKey: "iOS_SA_CashInWindow") == "true"{
                     GSINAdminNavigator.shared.startFlow(forAction: "GSIFTr_MenuReload",
                                                         navigateDelegate: self)

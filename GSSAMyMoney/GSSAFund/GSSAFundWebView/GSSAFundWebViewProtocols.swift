@@ -17,7 +17,7 @@ protocol GSSAFundWebViewWireframeProtocol: class {
 }
 
 //MARK: Presenter -
-protocol GSSAFundWebViewPresenterProtocol: class {
+protocol GSSAFundWebViewPresenterProtocol: AnyObject {
     
     func checkFund()
     func onSucess(folio: String)
@@ -26,9 +26,9 @@ protocol GSSAFundWebViewPresenterProtocol: class {
     func goToError(message: String, isDouble: Bool)
     func goToTicket(folio: String)
 }
-
+ 
 //MARK: Interactor -
-protocol GSSAFundWebViewInteractorProtocol: class {
+protocol GSSAFundWebViewInteractorProtocol: AnyObject { 
     
     var presenter: GSSAFundWebViewPresenterProtocol?  { get set }
     
@@ -36,7 +36,7 @@ protocol GSSAFundWebViewInteractorProtocol: class {
 }
 
 //MARK: View -
-protocol GSSAFundWebViewViewProtocol: class {
+protocol GSSAFundWebViewViewProtocol: AnyObject {
     
     var presenter: GSSAFundWebViewPresenterProtocol?  { get set }
     
