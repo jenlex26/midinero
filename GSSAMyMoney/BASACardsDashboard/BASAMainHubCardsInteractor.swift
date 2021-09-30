@@ -98,11 +98,11 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
         struct userLendsBody: Codable { }
         let body = userLendsBody.init()
         
-        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: GenericRawLendsResponse?, error) in
+        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: LendsResponse?, error) in
             print(body)
             debugPrint(objRes as Any)
             
-            let response = objRes?.body
+            let response = objRes
             
             if error.code == 0 {
                 Lends(response)

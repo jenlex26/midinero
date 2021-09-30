@@ -393,9 +393,9 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
             loadLends()
         }else{
             infoCell.lblNextPayment.text = "\(lendsData?.resultado?.fechaProximoPago?.dateFormatter(format: "yyyy/MM/dd", outputFormat: "dd") ?? "") de \(lendsData?.resultado?.fechaProximoPago?.dateFormatter(format: "yyyy/MM/dd", outputFormat: "MMMM") ?? "")"
-            infoCell.lblPaymentWithDiscount.text = lendsData?.resultado?.pagoPuntual?.moneyFormat()
-            infoCell.lblSuggestedPayment.text = String(lendsData?.resultado?.pagoSugerido ?? 0).moneyFormat()
-            infoCell.lblFixedPayment.text = lendsData?.resultado?.pagoNormal?.moneyFormat()
+            infoCell.lblPaymentWithDiscount.text = lendsData?.resultado?.pagoPuntual?.moneyFormatWithoutSplit()
+            infoCell.lblSuggestedPayment.text = String(lendsData?.resultado?.pagoSugerido ?? 0).moneyFormatWithoutSplit()
+            infoCell.lblFixedPayment.text = lendsData?.resultado?.pagoNormal?.moneyFormatWithoutSplit()
             infoCell.lblPaymentDay.text = lendsData?.resultado?.fechaProximoPago?.dateFormatter(format: "yyyy/MM/dd", outputFormat: "EEEE")
         }
         cellsArray.append([infoCell:300.0])
@@ -534,7 +534,6 @@ extension BASAMainHubCardsViewController:UITableViewDelegate,UITableViewDataSour
         activityObserve()
     }
 }
-
 
 public struct activityTime {
     static var shared = activityTime()

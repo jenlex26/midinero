@@ -374,6 +374,22 @@ extension Int{
         
         return amountFormat.mutableString.description
     }
+    
+    func moneyFormatWithoutSplit() -> String{
+        var stringAmount = ""
+        let formatedAmount = Double(self)
+        stringAmount = String(formatedAmount)
+        
+        let amountFormat = NSMutableAttributedString.setFormattedText(withStringAmmount: stringAmount,
+                                                                      withNumberOfDecimals: GSSISessionInfo.sharedInstance.bHideCents ? 0 : 2,
+                                                                      withFontSize: 36,
+                                                                      withFontWeight: .bold,
+                                                                      withFontColor: .GSVCText100,
+                                                                      withLittleCoin: false)
+        
+        return amountFormat.mutableString.description
+        
+    }
 }
 
 extension Character{
