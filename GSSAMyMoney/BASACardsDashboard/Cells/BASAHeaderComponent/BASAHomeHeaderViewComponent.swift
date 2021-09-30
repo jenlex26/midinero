@@ -291,7 +291,7 @@ extension BASAHomeHeaderViewComponent: UICollectionViewDelegate, UICollectionVie
             print("case 1")
             let cell = cardCollection.dequeueReusableCell(withReuseIdentifier: "BASALendViewCVC", for: indexPath) as! BASALendViewCVC
             if lendsData != nil{
-                cell.lblAmount.text = lendsData?.resultado?.pagoLiquidar?.moneyFormat()
+                cell.lblAmount.text = lendsData?.resultado?.pagoLiquidar?.moneyFormatWithoutSplit()
             }
             return cell
         default:
