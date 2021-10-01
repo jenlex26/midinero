@@ -43,17 +43,13 @@ class GSSADocumentReaderViewController: UIViewController, GSSADocumentReaderView
             var documentsURL = (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)).last,
             let convertedData = Data(base64Encoded: base64String)
         else {
-            print("OCURRIÓ UN ERROR AL DESENCRIPTAR")
             return
         }
         documentsURL.appendPathComponent("EstadoDeCuenta.pdf")
         
         do {
             try convertedData.write(to: documentsURL)
-        } catch {
-            print("OCURRIÓ UN ERROR AL CONVERTIR")
-        }
-        print(documentsURL)
+        } catch {()}
         urlDocument = documentsURL
         displayPDF()
     }

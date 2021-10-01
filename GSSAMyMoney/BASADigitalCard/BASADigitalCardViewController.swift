@@ -56,7 +56,7 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
             titleBottomSpace.constant = 10.0
         }
         
-        if #available(iOS 13.0, *){  print("") }else{
+        if #available(iOS 13.0, *){()}else{
             btnCopy.setImage(UIImage.copyIcon(), for: .normal)
             btnClose.setImage(UIImage(named: "close", in: Bundle.init(for: GSSAMovementPreviewViewController.self), compatibleWith: nil), for: .normal)
         }
@@ -92,7 +92,7 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
     
     func requestCVV(){
         GSVCLoader.show()
-        presenter?.makeDigitalDataRequest(Body: Transaction(transaccion: AccoutRequest.init(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.replacingOccurrences(of: " ", with: "").encryptAlnova(), sicu: GSSISessionInfo.sharedInstance.gsUser.SICU?.encryptAlnova(), latitud: (GSPMLocationManager.shared.lastLocation?.coordinate.latitude.description.encryptAlnova() ?? "0.0".encryptAlnova()), longitud: (GSPMLocationManager.shared.lastLocation?.coordinate.longitude.description.encryptAlnova() ?? "0.0".encryptAlnova()))), DataCard: { [self] DataCard in
+        presenter?.makeDigitalDataRequest(Body: Transaction(transaccion: AccoutRequest.init(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.account?.number?.replacingOccurrences(of: " ", with: "").encryptAlnova(), sicu: GSSISessionInfo.sharedInstance.gsUser.SICU?.encryptAlnova(), latitud: (GSPMLocationManager.shared.lastLocation?.coordinate.latitude.description.encryptAlnova() ?? "0.0".encryptAlnova()), longitud: (GSPMLocationManager.shared.lastLocation?.coordinate.longitude.description.encryptAlnova() ?? "0.0".encryptAlnova()))), DataCard: { [self] DataCard in
             GSVCLoader.hide()
             
             if DataCard != nil{
@@ -116,9 +116,7 @@ class BASADigitalCardViewController: UIViewController, BASADigitalCardViewProtoc
         })
     }
     
-    func optionalAction() {
-        print("Ok")
-    }
+    func optionalAction() {()}
     
     func ConfigureBlurCardView(){
         CardBackgroundView.blurBackground(style: .light, fallbackColor: .white)
@@ -210,13 +208,9 @@ extension UIView {
 }
 
 extension BASADigitalCardViewController: TimerHandleDelegate {
-    func counterUpdateTimeValue(with sender: BASACircularProgressView, newValue: Int) {
-        print("Time \(newValue)")
-    }
+    func counterUpdateTimeValue(with sender: BASACircularProgressView, newValue: Int) {()}
     
-    func didStartTimer(sender: BASACircularProgressView) {
-        print("Inicio tiempo")
-    }
+    func didStartTimer(sender: BASACircularProgressView) {()}
     
     func didEndTimer(sender: BASACircularProgressView) {
         if self.isOnScreen{

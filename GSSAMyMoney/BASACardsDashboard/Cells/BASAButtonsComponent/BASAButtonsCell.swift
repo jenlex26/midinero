@@ -35,7 +35,7 @@ class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
         cellButtonView.layer.cornerRadius = 10
         cellButtonView.layer.masksToBounds = true
         
-        if #available(iOS 13.0, *){  print("") }else{
+        if #available(iOS 13.0, *){()}else{
             chevronIcon.image = UIImage.chevronRight()
         }
         
@@ -146,8 +146,6 @@ extension BASAButtonsCell: GSINNavigateDelegate{
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "externalFlowFinished"), object: nil, userInfo: nil))
     }
     
-    func didFailToEnterFlow(error: NSError) {
-        print(error)
-    }
+    func didFailToEnterFlow(error: NSError) {()}
     
 }

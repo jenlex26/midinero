@@ -25,7 +25,6 @@ class BASATextFieldCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
-        
     }
     
     func configureCell(data: beneficiaryField){
@@ -118,10 +117,9 @@ extension BASATextFieldCell: GSVCPickerControllerDelegate, GSVCPickerControllerD
         case "Colonia":
             beneficiaryPublicData.shared.colonia = textField.text
         case .none:
-            print("none Case")
+            ()
         case .some(_):
-            
-            print("Unknowed case")
+            ()
         }
     }
     

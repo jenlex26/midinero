@@ -41,7 +41,7 @@ class GSDigitalCardConfigViewController: UIViewController, GSDigitalCardConfigVi
         containerView.backgroundColor = .GSVCBase200
         cardStatus = UserDefaults.standard.value(forKey: "DigitalCardStatus") as? Bool
         swtch.isOn = (cardStatus ?? false)
-        if #available(iOS 13.0, *){  print("") }else{
+        if #available(iOS 13.0, *){()}else{
             lockIcon.image = UIImage(named: "lock", in: Bundle.init(for: GSDigitalCardConfigViewController.self), compatibleWith: nil)
             cartIcon.image = UIImage(named: "cart", in: Bundle.init(for: GSDigitalCardConfigViewController.self), compatibleWith: nil)
         }
@@ -51,7 +51,7 @@ class GSDigitalCardConfigViewController: UIViewController, GSDigitalCardConfigVi
         tagDebitDigitalCardConfigViewDidAppear()
     }
     
-    func optionalAction() {  print("") }
+    func optionalAction() {()}
     
     func requestCardStatusChange(){
         GSVCLoader.show()

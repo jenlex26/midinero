@@ -56,7 +56,7 @@ class GSSACardNIPViewController: UIViewController, GSSACardNIPViewProtocol, GSVC
         }
     }
     
-    func optionalAction() {  print("") }
+    func optionalAction() { () }
     
     func requestNIP(){
         GSVCLoader.show()

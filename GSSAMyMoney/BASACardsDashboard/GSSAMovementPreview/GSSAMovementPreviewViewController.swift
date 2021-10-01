@@ -54,7 +54,7 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
     }
     
     func configureViewForOlderDevices(){
-        if #available(iOS 13.0, *){print("")}else{
+        if #available(iOS 13.0, *){()}else{
             btnArrow.tintColor = .white
             btnArrow.setImage(UIImage(named: "ChevronRight", in: Bundle.init(for: GSSAMovementPreviewViewController.self), compatibleWith: nil)?.withRenderingMode(.alwaysTemplate), for: .normal)
             btnArrow.imageEdgeInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
@@ -174,7 +174,7 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
             //if GLOBAL_ENVIROMENT == .develop{
             GSVCLoader.show()
             let type = lblAmount.text!.contains("-") ? "E" : "R"
-            let body = SPEIDetailBody.init(transaccion: SPEIDetailTransaccion.init(claveInstitucionBancaria: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().encryptAlnova(), operacion: SPEIDetailOperacion.init(tipo: type, fecha: transaction.fecha, hora: transaction.numeroOperacion)))
+            let body = SPEIDetailBody.init(transaccion: SPEIDetailTransaccion.init(claveInstitucionBancaria: GSSISessionInfo.sharedInstance.gsUser.account?.number?.formatToTnuocca14Digits().encryptAlnova(), operacion: SPEIDetailOperacion.init(tipo: type, fecha: transaction.fecha, hora: transaction.numeroOperacion)))
             
             presenter?.requestGetSPEIDetail(Body: body, claveRastreo: transaction.descripcion ?? "", Response: {  [self] Response in
                 if Response != nil{
@@ -259,7 +259,6 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
     @IBAction func previousMovement(_ sender: Any){
         let array = movementsArray.resultado?.movimientos
         if index < array?.count ?? 0 && index >= 0{
-            print("INDEX \(index ?? -29) CONTEO \(array?.count ?? -3) <")
             index -= 1
             readData(transaction: (array?[index])!)
         }
@@ -267,7 +266,6 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
     
     @IBAction func nextMovement(_ sender: Any){
         let array = movementsArray.resultado?.movimientos
-        print("INDEX \(index ?? -29) CONTEO \(array?.count ?? -3) >")
         if index < array?.count ?? 0 || index > array?.count ?? 0{
             index += 1
             readData(transaction: (array?[index])!)
@@ -297,9 +295,9 @@ extension GSSAMovementPreviewViewController: UITableViewDelegate, UITableViewDat
                 UIApplication.shared.open(url)
             }
         case .none:
-            print("None case")
+           ()
         case .some(_):
-            print("Some")
+           ()
         }
     }
     

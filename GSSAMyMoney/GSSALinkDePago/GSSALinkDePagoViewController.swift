@@ -182,7 +182,7 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
         lineView.isHidden = true
         GSSAFundSharedVariables.shared.numeroAfiliacion = "8632464"
         //GSSAFundSharedVariables.shared.clientAccountNumber = "yXCGLPa4W1ALv7TGeMcAYA"
-        GSSAFundSharedVariables.shared.clientAccountNumber = GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().encryptAlnova()
+        GSSAFundSharedVariables.shared.clientAccountNumber = GSSISessionInfo.sharedInstance.gsUser.account?.number?.formatToTnuocca14Digits().encryptAlnova()
         GSVCLoader.show()
         self.presenter?.getEccomerceInformation()
     }
@@ -195,7 +195,7 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
         if mail?.haveData() == false || mail == nil{
             mail = txtMail.text
         }
-        let accountNumber = GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().encryptAlnova()
+        let accountNumber = GSSISessionInfo.sharedInstance.gsUser.account?.number?.formatToTnuocca14Digits().encryptAlnova()
         
         let parameters = [
             "amount": "\(quantity ?? "0.0")",
@@ -414,7 +414,7 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
         
         GSVCLoader.hide()
         
-        let view = getErrorMPViewController(subtitle: subtitle, message: msg, isDouble: isDouble)
+        //let view = getErrorMPViewController(subtitle: subtitle, message: msg, isDouble: isDouble)
         //self.presenter?.showError(view)
     }
     

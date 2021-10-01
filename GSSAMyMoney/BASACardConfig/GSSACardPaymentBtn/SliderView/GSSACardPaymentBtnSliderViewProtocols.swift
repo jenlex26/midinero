@@ -11,20 +11,20 @@
 import Foundation
 
 //MARK: Wireframe -
-protocol GSSACardPaymentBtnSliderViewWireframeProtocol: class {
+protocol GSSACardPaymentBtnSliderViewWireframeProtocol: AnyObject {
 
 }
 //MARK: Presenter -
-protocol GSSACardPaymentBtnSliderViewPresenterProtocol: class {
+protocol GSSACardPaymentBtnSliderViewPresenterProtocol: AnyObject {
     func closeParent()
 }
 
 //MARK: Interactor -
-protocol GSSACardPaymentBtnSliderViewInteractorProtocol: class {
+protocol GSSACardPaymentBtnSliderViewInteractorProtocol: AnyObject {
   var presenter: GSSACardPaymentBtnSliderViewPresenterProtocol?  { get set }
 }
 
 //MARK: View -
-protocol GSSACardPaymentBtnSliderViewViewProtocol: class {
+protocol GSSACardPaymentBtnSliderViewViewProtocol: AnyObject {
   var presenter: GSSACardPaymentBtnSliderViewPresenterProtocol?  { get set }
 }

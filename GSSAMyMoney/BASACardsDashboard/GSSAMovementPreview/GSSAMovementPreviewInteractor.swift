@@ -31,13 +31,10 @@ class GSSAMovementPreviewInteractor: GSSAURLSessionTaskCoordinatorBridge, GSSAMo
         
         let claveRastreo = HeadersCustom.init(value: claveRastreo, forHTTPHeaderField: "x-idClaveRastreo")
         sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [claveRastreo], objBody: Body, environment: GLOBAL_ENVIROMENT) { (objRes: SPEIDetailTransactionResponse?, error) in
-            debugPrint(objRes ?? "nil")
-            
             if error.code == 0 {
                 Response(objRes)
             } else {
                 Response(nil)
-                debugPrint(error)
             }
         }
     }

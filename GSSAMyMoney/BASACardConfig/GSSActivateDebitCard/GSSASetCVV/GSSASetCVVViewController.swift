@@ -53,7 +53,7 @@ class GSSASetCVVViewController: GSSAMasterViewController, GSSASetCVVViewProtocol
         txtCVV.becomeFirstResponder()
     }
     
-    func optionalAction() { print("") }
+    func optionalAction() { () }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let textFieldText = textField.text,
@@ -71,7 +71,7 @@ class GSSASetCVVViewController: GSSAMasterViewController, GSSASetCVVViewProtocol
     
     func requestCardActivation(idSubproducto: String){
         GSVCLoader.show()
-        let body = SetCVVBody.init(transaccion: SetCVVTransaccion.init(primerTokenVerificacion: customToken.shared.firstVerification, idTipoParticipante: "T".encryptAlnova(), cuenta: SetCVVAccount.init(numero: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.removeWhiteSpaces().encryptAlnova(), idProducto: "12".encryptAlnova(), idSubproducto: idSubproducto.encryptAlnova()), tarjeta: Tarjeta.init(numero: cardNumber.removeWhiteSpaces().encryptAlnova(), cvv: txtCVV.text?.encryptAlnova())))
+        let body = SetCVVBody.init(transaccion: SetCVVTransaccion.init(primerTokenVerificacion: customToken.shared.firstVerification, idTipoParticipante: "T".encryptAlnova(), cuenta: SetCVVAccount.init(numero: GSSISessionInfo.sharedInstance.gsUser.account?.number?.removeWhiteSpaces().encryptAlnova(), idProducto: "12".encryptAlnova(), idSubproducto: idSubproducto.encryptAlnova()), tarjeta: Tarjeta.init(numero: cardNumber.removeWhiteSpaces().encryptAlnova(), cvv: txtCVV.text?.encryptAlnova())))
         
         presenter?.requestSetCardCVV(body: body, CardSearchResponse: { [self] CardSearchResponse in
             if CardSearchResponse != nil{

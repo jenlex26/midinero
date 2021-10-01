@@ -55,7 +55,6 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
         
         if type == .credit{
             tagCardStatementsViewDidAppear(credit: true)
-            print("NOT IMPLEMENTED...")
             setStatements()
         }
     }
@@ -87,9 +86,7 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
         table.register(UINib(nibName: "BASAButtonCell", bundle: bundle), forCellReuseIdentifier: "BASAButtonCell")
     }
     
-    func optionalAction() {
-        print("OK")
-    }
+    func optionalAction() {()}
     
     func sendStatements(){
         
@@ -263,7 +260,7 @@ extension BASACardStatementsViewController: UITableViewDelegate, UITableViewData
             if cell.tag != 0{
                 let data = requestData[cell.tag - 1]
                 GSVCLoader.show()
-                let body = RequestDocumentBody.init(primerTokenVerificacion: customToken.shared.firstVerification, referencia: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().encryptAlnova() ?? "", periodo: data.periodo ?? "")
+                let body = RequestDocumentBody.init(primerTokenVerificacion: customToken.shared.firstVerification, referencia: GSSISessionInfo.sharedInstance.gsUser.account?.number?.formatToTnuocca14Digits().encryptAlnova() ?? "", periodo: data.periodo ?? "")
                 
               // let testBody = RequestDocumentBody.init(primerTokenVerificacion: customToken.shared.firstVerification, referencia: "01180100151815".encryptAlnova(), periodo: "21-01")
                 

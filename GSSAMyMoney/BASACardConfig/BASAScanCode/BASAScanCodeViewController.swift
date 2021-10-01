@@ -28,12 +28,8 @@ class BASAScanCodeViewController: GSVTCodeScanner, BASAScanCodeViewProtocol, GSV
         if secuence == .scanCarCode {
             self.arrValidCodeTypes =  [.qr]
             
-        } else
-        {
-            
-                self.arrValidCodeTypes =  [
-                                           .code128
-                                           ]
+        } else{
+            self.arrValidCodeTypes =  [.code128 ]
         }
         scanCodeButtonsViewController.view.isHidden = secuence != .scanCarCode
         NotificationCenter.default.addObserver(self, selector: #selector(dismissView), name: NSNotification.Name(rawValue: "closeScanner"), object: nil)
@@ -48,7 +44,7 @@ class BASAScanCodeViewController: GSVTCodeScanner, BASAScanCodeViewProtocol, GSV
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        self.view.addSubview(scanCodeButtonsViewController.view)
+        //        self.view.addSubview(scanCodeButtonsViewController.view)
     }
     
     override func viewDidLayoutSubviews() {
@@ -86,7 +82,7 @@ extension BASAScanCodeViewController: BASAScanCodeButtonsViewControllerDelegate 
         UIView.animate(withDuration: 0, animations: {
             self.hidePanel = !self.hidePanel
             if !self.hidePanel{
-            
+                
             }
             self.scanCodeButtonsViewController.view.frame = (self.hidePanel ? self.frameHidePanel : self.frameShowPanel) ?? .zero
         }, completion: {_ in 
@@ -95,6 +91,6 @@ extension BASAScanCodeViewController: BASAScanCodeButtonsViewControllerDelegate 
         
     }
     
-    func onClickGenerateBtn() { print("") }
+    func onClickGenerateBtn() {()}
 }
 

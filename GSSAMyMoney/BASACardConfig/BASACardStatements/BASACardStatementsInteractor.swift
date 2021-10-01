@@ -32,16 +32,13 @@ class BASACardStatementsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASACar
         dateFormatter.dateFormat = "dd/MM/yyyy"
         let initialDateString = dateFormatter.string(from: initalDate)
         
-        let body = DebitCardStatementBody(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.removeWhiteSpaces().encryptAlnova(), fechaInicio: initialDateString, fechaFin: "10/12/2020")
+        let body = DebitCardStatementBody(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.account?.number?.removeWhiteSpaces().encryptAlnova(), fechaInicio: initialDateString, fechaFin: "10/12/2020")
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: DebitCardStatementData?, error) in
-            debugPrint(objRes as Any)
-            
             if error.code == 0 {
                 StatementsResultData(objRes)
             } else {
                 StatementsResultData(nil)
-                debugPrint(error)
             }
         }
     }
@@ -55,13 +52,10 @@ class BASACardStatementsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASACar
         }
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: RequestDocumentResponse?, error) in
-            debugPrint(objRes as Any)
             if error.code == 0 {
-                print(objRes ?? "null")
                 Document(objRes)
             } else {
                 Document(nil)
-                debugPrint(error)
             }
         }
         

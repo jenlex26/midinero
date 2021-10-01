@@ -28,13 +28,10 @@ class BASADigitalCardInteractor: GSSAURLSessionTaskCoordinatorBridge, BASADigita
         }
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, objBody: Body, environment: GLOBAL_ENVIROMENT) { (objRes: DigitalCardResponse?, error) in
-            debugPrint(objRes ?? "nil")
-            
             if error.code == 0 {
                 DataCard(objRes)
             } else {
                 DataCard(nil)
-                debugPrint(error)                                                             
             }
         }
     }

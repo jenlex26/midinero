@@ -14,9 +14,7 @@ import GSSAVisualComponents
 class GSSANewBeneficiaryAddressViewController: UIViewController, GSSANewBeneficiaryAddressViewProtocol, GSVCBottomAlertHandler {
     var bottomAlert: GSVCBottomAlert?
     
-    func optionalAction() {
-        print("OK")
-    }
+    func optionalAction() {()}
     
     @IBOutlet weak var table: UITableView!
     
@@ -148,9 +146,9 @@ class GSSANewBeneficiaryAddressViewController: UIViewController, GSSANewBenefici
                     case "Código postal":
                         beneficiaryPublicData.shared.codigoPostal = cell.textField.text
                     case .none:
-                        print("none case")
+                       ()
                     case .some(_):
-                        print("unknowed case")
+                       ()
                     }
                 }
             }
@@ -240,9 +238,7 @@ class GSSANewBeneficiaryAddressViewController: UIViewController, GSSANewBenefici
         }
     }
     
-    @objc func updateData(sender: Notification){
-        print(sender.object as Any)
-    }
+    @objc func updateData(sender: Notification){()}
     
     @IBAction func close(_ sender: Any){
         self.dismiss(animated: true, completion: nil)
@@ -329,7 +325,7 @@ extension GSSANewBeneficiaryAddressViewController: UITextFieldDelegate{
         case 3:
             self.view.endEditing(true)
         default:
-            debugPrint("")
+            ()
         }
         return true
     }

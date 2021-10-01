@@ -24,15 +24,14 @@ class BASACardConfigInteractor:  GSSAURLSessionTaskCoordinatorBridge,  BASACardC
             self.urlPath = "https://apigateway.superappbaz.com/"
             self.strPathEndpoint = "integracion/superapp/dinero/captacion/gestion-tarjetas-fisicas/v1/tarjetas/solicitudes/busquedas/estatus"
             
-            body = CardConfigCardSearchBody.init(transaccion: CardConfigCardSearchTransaccion.init(idTipoTarjeta: "OK".encryptAlnova(), numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().encryptAlnova(), primerTokenVerificacion: GSSISessionInfo.sharedInstance.gsUserToken))
+            body = CardConfigCardSearchBody.init(transaccion: CardConfigCardSearchTransaccion.init(idTipoTarjeta: "OK".encryptAlnova(), numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.account?.number?.formatToTnuocca14Digits().encryptAlnova(), primerTokenVerificacion: GSSISessionInfo.sharedInstance.gsUserToken))
         }else{
             self.strPathEndpoint = "/superapp/dinero/captacion/gestion-tarjetas-fisicas/v1/tarjetas/solicitudes/busquedas/estatus"
             
-            body = CardConfigCardSearchBody.init(transaccion: CardConfigCardSearchTransaccion.init(idTipoTarjeta: "OK".encryptAlnova(), numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().encryptAlnova(), primerTokenVerificacion: customToken.shared.firstVerification))
+            body = CardConfigCardSearchBody.init(transaccion: CardConfigCardSearchTransaccion.init(idTipoTarjeta: "OK".encryptAlnova(), numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.account?.number?.formatToTnuocca14Digits().encryptAlnova(), primerTokenVerificacion: customToken.shared.firstVerification))
         }
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: CardStatusResponse?, error) in
-            debugPrint(objRes as Any)
             //NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "customCardStatusRequestResponse"), object: error.code, userInfo: nil))
             if error.code == 0{
                 CardSearchResponse(objRes)
@@ -45,7 +44,7 @@ class BASACardConfigInteractor:  GSSAURLSessionTaskCoordinatorBridge,  BASACardC
     func tryGetRequestCardInfo(DebitCardInfoResponse: @escaping (DebitCardInfoResponse?) -> ()){
         var body = CardConfigCardInfoBody.init()
         
-        body = CardConfigCardInfoBody.init(transaccion: CardConfigCardInfoTransaccion.init(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.formatToTnuocca14Digits().encryptAlnova(), primerTokenVerificacion: customToken.shared.firstVerification))
+        body = CardConfigCardInfoBody.init(transaccion: CardConfigCardInfoTransaccion.init(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.account?.number?.formatToTnuocca14Digits().encryptAlnova(), primerTokenVerificacion: customToken.shared.firstVerification))
         
         if GLOBAL_ENVIROMENT == .develop{
             self.urlPath = "https://apigateway.superappbaz.com/"
@@ -55,7 +54,6 @@ class BASACardConfigInteractor:  GSSAURLSessionTaskCoordinatorBridge,  BASACardC
         }
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: DebitCardInfoResponse?, error) in
-            debugPrint(objRes as Any)
             if error.code == 0{
                 DebitCardInfoResponse(objRes)
             }else{

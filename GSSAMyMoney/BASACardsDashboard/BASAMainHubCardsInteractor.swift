@@ -22,18 +22,13 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
         self.strPathEndpoint = "integracion/superapp/prestamos/tarjeta-credito/v1/tarjetas/busquedas/cu"
         
         struct userLendsBody: Codable {}
-        let body = userLendsBody.init()
+       // let body = userLendsBody.init()
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], environment: GLOBAL_ENVIROMENT) { (objRes: BalanceResponse?, error) in
-            print(body)
-            print(objRes ?? "null")
-            
             if error.code == 0 {
-                
                 //   UserActivationsResponse(objRes)
             } else {
                 //UserActivationsResponse(nil)
-                debugPrint(error)
             }
         }
         
@@ -60,7 +55,6 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
                 }
             } else {
                 Balance(nil)
-                debugPrint(error)
             }
         }
     }
@@ -81,7 +75,6 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
                 Movements(DebitCardTransactionV2.init(mensaje: "", folio: "", resultado: DebitCardTransactionResultV2.init(movimientos:[])))
             }else{
                 Movements(nil)
-                debugPrint(error)
             }
         }
     }
@@ -99,16 +92,11 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
         let body = userLendsBody.init()
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: LendsResponse?, error) in
-            print(body)
-            debugPrint(objRes as Any)
-            
             let response = objRes
-            
             if error.code == 0 {
                 Lends(response)
             } else {
                 Lends(nil)
-                debugPrint(error)
             }
         }
     }
@@ -130,7 +118,6 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
                 CardInfoResponse(objRes)
             } else {
                 CardInfoResponse(nil)
-                debugPrint(error)
             }
         }
     }
@@ -144,14 +131,11 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
         }
 
         sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: Body, environment: GLOBAL_ENVIROMENT) { (objRes: GenericRawCreditCardResponse?, error) in
-            print(Body)
-            debugPrint(objRes as Any)
             let response = objRes?.body
             if error.code == 0 {
                 CreditCardData(response)
             } else {
                 CreditCardData(nil)
-                debugPrint(error)
             }
         }
     }
@@ -166,14 +150,11 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
         }
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: Body, environment: GLOBAL_ENVIROMENT) { (objRes: GenericRawCreditCardBalanceResponse?, error) in
-            debugPrint(objRes as Any)
             let response = objRes?.body
-            
             if error.code == 0 {
                 CreditCardBalance(response)
             } else {
                 CreditCardBalance(nil)
-                debugPrint(error)
             }
         }
     }
@@ -188,14 +169,11 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
         }
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: Body, environment: GLOBAL_ENVIROMENT) { (objRes: GenericRawCreditCardMovementsResponse?, error) in
-            debugPrint(objRes ?? "")
-            
             let response = objRes?.body
             if error.code == 0 {
                 CreditCardMovements(response)
             } else {
                 CreditCardMovements(nil)
-                debugPrint(error)
             }
         }
     }

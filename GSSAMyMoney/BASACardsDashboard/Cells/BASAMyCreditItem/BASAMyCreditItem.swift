@@ -71,7 +71,7 @@ class BASAMyCreditItem: UITableViewCell {
         case 999:
             title = "Plan de Pago"
         default:
-            print("Default case")
+            title = ""
         }
         lblTitle.text = title
     }

@@ -76,7 +76,7 @@ class GSSARequestDebitCardViewController: GSSAMasterViewController, GSSARequestD
     
     func getShippingAmount(){
         GSVCLoader.show()
-        let transaction = PhysicalCardShippingAmountTransaction.init(transaccion: PhysicalCardShippingAmountBody.init(numeroTarjeta: GSSISessionInfo.sharedInstance.gsUser.card?.encryptAlnova(), primerTokenVerificacion: customToken.shared.firstVerification, geolocalizacion: ShippingAmountLocation.init(latitud: (GSPMLocationManager.shared.lastLocation?.coordinate.latitude.description.encryptAlnova() ?? "0.0".encryptAlnova()), longitud: (GSPMLocationManager.shared.lastLocation?.coordinate.longitude.description.encryptAlnova() ?? "0.0".encryptAlnova()))))
+        let transaction = PhysicalCardShippingAmountTransaction.init(transaccion: PhysicalCardShippingAmountBody.init(numeroTarjeta: GSSISessionInfo.sharedInstance.gsUser.account?.card?.encryptAlnova(), primerTokenVerificacion: customToken.shared.firstVerification, geolocalizacion: ShippingAmountLocation.init(latitud: (GSPMLocationManager.shared.lastLocation?.coordinate.latitude.description.encryptAlnova() ?? "0.0".encryptAlnova()), longitud: (GSPMLocationManager.shared.lastLocation?.coordinate.longitude.description.encryptAlnova() ?? "0.0".encryptAlnova()))))
         
         presenter?.requestGetShippingCost(body: transaction, Response: { [self] Response in
             if Response != nil{
@@ -93,7 +93,7 @@ class GSSARequestDebitCardViewController: GSSAMasterViewController, GSSARequestD
         })
     }
     
-    func optionalAction() { print("")}
+    func optionalAction() {()}
     
     func setAddress(){
         let address = GSSISessionInfo.sharedInstance.gsUser.address

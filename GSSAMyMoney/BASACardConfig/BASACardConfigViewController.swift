@@ -143,7 +143,7 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
         
     }
     
-    func optionalAction() { print("") }
+    func optionalAction() {()}
     
     func registerCells(){
         let bundle = Bundle.init(for: BASACardConfigViewController.self)
@@ -226,7 +226,7 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
                 cancelReload = true
                 setTableForDebitCard()
             case .unknown:
-                print("DESCONOCIDO")
+                ()
             }
             self.table.reloadData()
             GSVCLoader.hide()
@@ -367,7 +367,7 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
                 self.navigationController?.pushViewController(view, animated: true)
             }
         default:
-            print("default case...")
+           ()
         }
     }
 }

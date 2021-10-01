@@ -61,9 +61,7 @@ class BASACardLimitsViewController: UIViewController, BASACardLimitsViewProtocol
         table.register(UINib(nibName: "BASACardLimitCell", bundle: Bundle.init(for: BASACardLimitsViewController.self)), forCellReuseIdentifier: "BASACardLimitCell")
     }
     
-    func optionalAction() {
-        print("ok")
-    }
+    func optionalAction() {()}
     
     @objc func handleEditAction(sender: UIButton){
         bottomAlert?.animateDismissal()
@@ -125,7 +123,7 @@ class BASACardLimitsViewController: UIViewController, BASACardLimitsViewProtocol
                 case "debitCardAmountLimit":
                     LimitItems[1].height = 84.0
                 default:
-                    print("Default case")
+                  ()
                 }
                 table.endUpdates()
             }

@@ -27,13 +27,9 @@ class GSSASetCVVInteractor: GSSAURLSessionTaskCoordinatorBridge, GSSASetCVVInter
         }
        
         sendRequest(strUrl: strPathEndpoint, method: .POST, objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: CreditCardActivationResponse?, error) in
-            debugPrint(objRes as Any)
             if error.code == 0 {
-                print("correcto")
-                debugPrint(objRes as Any)
                 CardSearchResponse(objRes)
             } else {
-                debugPrint(error)
                 CardSearchResponse(nil)
             }
         }

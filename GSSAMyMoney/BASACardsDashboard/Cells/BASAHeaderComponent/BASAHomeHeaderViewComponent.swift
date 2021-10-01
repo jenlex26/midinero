@@ -58,7 +58,7 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
         }
         
         
-        if #available(iOS 13.0, *) {  print("") }else{
+        if #available(iOS 13.0, *) {()}else{
             backButton.contentMode = .scaleAspectFit
             backButton.setImage(UIImage.backIcon(tint: .white), for: .normal)
         }
@@ -259,7 +259,6 @@ extension BASAHomeHeaderViewComponent: UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.row{
         case 0:
-            print("case 0")
             let cell = cardCollection.dequeueReusableCell(withReuseIdentifier: "card", for: indexPath) as! BASACardCell
             cell.lblBalance.textColor = .white
             cell.lblExpDate.textColor = .white
@@ -288,7 +287,6 @@ extension BASAHomeHeaderViewComponent: UICollectionViewDelegate, UICollectionVie
             cell.CardBackgroundView.layer.masksToBounds = true
             return cell
         case 1:
-            print("case 1")
             let cell = cardCollection.dequeueReusableCell(withReuseIdentifier: "BASALendViewCVC", for: indexPath) as! BASALendViewCVC
             if lendsData != nil{
                 cell.lblAmount.text = lendsData?.resultado?.pagoLiquidar?.moneyFormatWithoutSplit()

@@ -29,9 +29,7 @@ class BASABeneficiaryListViewController: UIViewController, BASABeneficiaryListVi
         table.dataSource = self
         table.alwaysBounceVertical = false
         self.setBackButtonForOlderDevices(tint: .purple)
-        if #available(iOS 13.0, *){
-            print("")
-        }else{
+        if #available(iOS 13.0, *){()}else{
             cardIcon.imageView?.contentMode = .scaleAspectFit
             cardIcon.imageEdgeInsets = UIEdgeInsets(top: 3, left: 3, bottom: 3.0, right: 3.0)
             cardIcon.setImage(UIImage(named: "alert", in: Bundle.init(for: BASABeneficiaryListViewController.self), compatibleWith: nil), for: .normal)
@@ -52,13 +50,11 @@ class BASABeneficiaryListViewController: UIViewController, BASABeneficiaryListVi
         table.register(UINib(nibName: "BeneficiaryButtonCell", bundle: Bundle.init(for: BeneficiaryButtonCell.self)), forCellReuseIdentifier: "BeneficiaryButtonCell")
     }
     
-    func optionalAction() {
-        print("alert closed")
-    }
+    func optionalAction() {()}
     
     func loadBeneficiaries(){
         GSVCLoader.show()
-        presenter?.requestBeneficiaries(account: GSSISessionInfo.sharedInstance.gsUser.mainAccount ?? "", beneficiaryList: { [self] beneficiaryList in
+        presenter?.requestBeneficiaries(account: GSSISessionInfo.sharedInstance.gsUser.account?.number ?? "", beneficiaryList: { [self] beneficiaryList in
             GSVCLoader.hide()
             if beneficiaryList?.resultado?.beneficiarios != nil{
                 for item in beneficiaryList!.resultado!.beneficiarios!{

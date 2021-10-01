@@ -32,7 +32,6 @@ class GSSACardNIPInteractor: GSSAURLSessionTaskCoordinatorBridge, GSSACardNIPInt
                 Response(objRes)
             } else {
                 Response(nil)
-                debugPrint(error)
             }
         }
     }

@@ -281,7 +281,6 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                 for item in debitCardMovementsV2!.resultado!.movimientos!{
                     index += 1
                     if  item.descripcion?.alnovaDecrypt() != ""{
-                        print("fecha: \(item.fecha?.alnovaDecrypt() ?? "")")
                         let movementCell = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAMovementCell") as! BASAMovementTableViewCell
                         movementCell.setArrow(amount: item.importe?.alnovaDecrypt() ?? "")
                         movementCell.lblAmount.text = item.importe?.alnovaDecrypt().removeWhiteSpaces().moneyFormatWithoutSplit()
@@ -445,9 +444,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         BasaMainHubTableView.insertRows(at: cellsToAdd, with: .left)
     }
     
-    func optionalAction() {
-        print("OK")
-    }
+    func optionalAction() {()}
     
     @objc func activityObserve(){
         activityTime.shared.startTime = Date()
@@ -499,7 +496,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         case 2:
             loadLends()
         default:
-            print("Default case")
+           ()
         }
     }
 }

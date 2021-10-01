@@ -64,9 +64,7 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
         createTag(eventName: .pageView, section: "mi_dinero", flow: "dashboard", screenName: "datos_beneficiarios", origin: "debito")
     }
     
-    func optionalAction() {
-        print("Ok")
-    }
+    func optionalAction() {()}
     
     func registerCells(){
         let bundle = Bundle(for: BASANewBeneficiaryViewController.self)
@@ -242,7 +240,7 @@ class BASANewBeneficiaryViewController: UIViewController, BASANewBeneficiaryView
                 }
                 
                 
-                let body = NewBeneficiaryBody.init(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.mainAccount?.replacingOccurrences(of: " ", with: "").encryptAlnova(), beneficiarios: beneficiariesArray)
+                let body = NewBeneficiaryBody.init(numeroCuenta: GSSISessionInfo.sharedInstance.gsUser.account?.number?.replacingOccurrences(of: " ", with: "").encryptAlnova(), beneficiarios: beneficiariesArray)
                 
                 var method = EKTHTTPRequestMethod.POST
                 

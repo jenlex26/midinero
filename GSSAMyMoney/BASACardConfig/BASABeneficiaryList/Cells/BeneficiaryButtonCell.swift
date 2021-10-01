@@ -15,9 +15,7 @@ class BeneficiaryButtonCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
-        if #available(iOS 13.0, *){
-            print("")
-        }else{
+        if #available(iOS 13.0, *){()}else{
             button.imageEdgeInsets = UIEdgeInsets(top: 10.0, left: 0.0, bottom: 10.0, right: 0.0)
             button.imageView?.contentMode = .scaleAspectFit
         }

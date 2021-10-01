@@ -11,22 +11,22 @@
 import Foundation
 
 //MARK: Wireframe -
-protocol BASADigitalCardWireframeProtocol: class {
+protocol BASADigitalCardWireframeProtocol: AnyObject {
 
 }
 //MARK: Presenter -
-protocol BASADigitalCardPresenterProtocol: class {
+protocol BASADigitalCardPresenterProtocol: AnyObject {
     func makeDigitalDataRequest(Body: Transaction,  DataCard: @escaping (DigitalCardResponse?) -> ())
 }
 
 //MARK: Interactor -
-protocol BASADigitalCardInteractorProtocol: class {
+protocol BASADigitalCardInteractorProtocol: AnyObject {
   var presenter: BASADigitalCardPresenterProtocol?  { get set }
     func TryGetCardDigitalCardData(Body: Transaction,  DataCard: @escaping (DigitalCardResponse?) -> ())
 }
 
 //MARK: View -
-protocol BASADigitalCardViewProtocol: class {
+protocol BASADigitalCardViewProtocol: AnyObject {
 
   var presenter: BASADigitalCardPresenterProtocol?  { get set }
 }

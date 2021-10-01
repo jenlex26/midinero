@@ -11,22 +11,22 @@
 import Foundation
 
 //MARK: Wireframe -
-protocol GSSANewBeneficiaryAddressWireframeProtocol: class {
+protocol GSSANewBeneficiaryAddressWireframeProtocol: AnyObject {
 
 }
 //MARK: Presenter -
-protocol GSSANewBeneficiaryAddressPresenterProtocol: class {
+protocol GSSANewBeneficiaryAddressPresenterProtocol: AnyObject {
     func requestLocationInfo(CP: String, LocationInfo: @escaping (zipResponse?) -> ())
 }
 
 //MARK: Interactor -
-protocol GSSANewBeneficiaryAddressInteractorProtocol: class {
+protocol GSSANewBeneficiaryAddressInteractorProtocol: AnyObject {
     var presenter: GSSANewBeneficiaryAddressPresenterProtocol?  { get set }
     func tryGetLocationInfo(CP: String, LocationInfo: @escaping (zipResponse?) -> ())
 }
 
 //MARK: View -
-protocol GSSANewBeneficiaryAddressViewProtocol: class {
+protocol GSSANewBeneficiaryAddressViewProtocol: AnyObject {
 
   var presenter: GSSANewBeneficiaryAddressPresenterProtocol?  { get set }
 }
