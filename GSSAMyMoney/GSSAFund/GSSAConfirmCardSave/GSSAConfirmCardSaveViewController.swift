@@ -110,9 +110,6 @@ extension GSSAConfirmCardSaveViewController {
         editBtn.setTitleColor(.GSVCPrincipal100, for: .normal)
         saveView.backgroundColor = .GSVCBase200
         
-        
-        print(GSSAFundSharedVariables.shared.ecommerceSMMIResponse)
-        
         canSave = true
         
         setupInfo()

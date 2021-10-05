@@ -122,9 +122,6 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
             
             let amountString = data.resultado.cliente?.cuentas?.first?.saldoDisponible?.alnovaDecrypt().moneyFormat() ?? "0"
             UserDefaults.standard.setValue(amountString, forKey: "debitAccountBalance")
-            
-            GSSISessionInfo.sharedInstance.gsUser.account?.availableBalance = amountString.moneyToDouble()
-                        
             debitCardlblBalance.text = amountString
             debitCardlblCardNumber.text = data.resultado.cliente?.cuentas?.first?.numeroTarjeta?.alnovaDecrypt().tnuoccaFormat
         }

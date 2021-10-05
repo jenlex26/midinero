@@ -43,7 +43,6 @@ class GSSAFundSelectCardInteractor: GSSAFundSelectCardInteractorProtocol {
         }, failure: { [weak self] message in
             guard let self = self else { return }
             
-            print("Error message: \(message)")
             self.presenter?.getCardsError()
         })
     }
@@ -91,7 +90,6 @@ class GSSAFundSelectCardInteractor: GSSAFundSelectCardInteractorProtocol {
         }, failure: {  [weak self] message in
             guard let self = self else { return }
 
-            print("Message Error: \(message ?? "")")
             self.presenter?.getEccomerceInformationError()
         })
     }

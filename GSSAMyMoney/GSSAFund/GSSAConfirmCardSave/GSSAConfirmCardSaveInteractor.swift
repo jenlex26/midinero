@@ -17,10 +17,8 @@ class GSSAConfirmCardSaveInteractor: GSSAConfirmCardSaveInteractorProtocol {
     weak var presenter: GSSAConfirmCardSavePresenterProtocol?
     
     func requestSaveCard(tokenCardRequest: LNKPG_TokenCardRequestFacade) {
-        print(tokenCardRequest)
         LNKPG_Facade.shared.postCreateToken(token: tokenCardRequest) {[weak self] response in
             guard let self = self else  { return }
-            print("\n\n##############\n\(response)\n################\n\n")
             if let response = response {
                 if let createdCardToken = response.paySubscriptionId {
                     LNKPG_Facade.shared.getListCard(numeroAfiliacion: GSSAFundSharedVariables.shared.numeroAfiliacion ?? "", email: (GSSISessionInfo.sharedInstance.gsUser.email ?? "").lowercased()) { tokens in
@@ -49,7 +47,6 @@ class GSSAConfirmCardSaveInteractor: GSSAConfirmCardSaveInteractorProtocol {
         } failure: { [weak self] error in
             guard let self = self else  { return }
             
-            print(error)
             self.presenter?.onError()
         }
 

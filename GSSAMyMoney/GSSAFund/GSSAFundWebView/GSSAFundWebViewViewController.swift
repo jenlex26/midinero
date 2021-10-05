@@ -88,7 +88,6 @@ extension GSSAFundWebViewViewController: LNKPG_WebViewFacadeDelegate {
     
     func notifyLoad(){
         loads += 1
-        print("Carga completa \(loads)")
         if loads == 3{
             GSVCLoader.show()
         }else{

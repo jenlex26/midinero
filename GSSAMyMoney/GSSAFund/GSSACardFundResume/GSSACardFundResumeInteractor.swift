@@ -32,10 +32,7 @@ class GSSACardFundResumeInteractor: GSSACardFundResumeInteractorProtocol {
             self.payServices(enrollmentRequest: request)
         }, failure: {
             [weak self] error in
-            
-            print("errorrrr")
-            print(error)
-            
+    
             guard let self = self else { return }
             
             self.presenter?.enrollError()

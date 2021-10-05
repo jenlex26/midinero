@@ -156,9 +156,7 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
         txtAmount.inputAccessoryView = numberToolbar
     }
     
-    func optionalAction() {
-        print("Ok")
-    }
+    func optionalAction() {()}
     
     func isValidAmount() -> Bool{
         if txtAmount.text?.haveData() == true{
@@ -215,9 +213,7 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
         //        self.navigationController?.pushViewController(view, animated: true)
     }
     
-    func forgotDigitalSign(_ forgotSecurityCodeViewController: UIViewController?) {
-        print("forgot")
-    }
+    func forgotDigitalSign(_ forgotSecurityCodeViewController: UIViewController?) {()}
     
     func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
         txtAmount.becomeFirstResponder()
@@ -228,11 +224,11 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
     }
     
     public static func validateStrings(parameters: [String : Any]?) -> PB_HomeEntity? {
-        guard let amount: String = parameters?["amount"] as? String else { debugPrint("Falta Campo amount"); return nil }
-        guard let numeroCuentaCliente: String = parameters?["numeroCuentaCliente"] as? String else { debugPrint("Falta Campo numeroCuentaCliente"); return nil }
-        guard let merchantDetail: String = parameters?["merchantDetail"] as? String else { debugPrint("Falta Campo merchantDetail"); return nil }
-        guard let correo: String = parameters?["correo"] as? String else { debugPrint("Falta Campo correo"); return nil }
-        guard let numeroAfiliacion: String = parameters?["numeroAfiliacion"] as? String else { debugPrint("Falta Campo numeroAfiliacion"); return nil }
+        guard let amount: String = parameters?["amount"] as? String else {return nil }
+        guard let numeroCuentaCliente: String = parameters?["numeroCuentaCliente"] as? String else { return nil }
+        guard let merchantDetail: String = parameters?["merchantDetail"] as? String else {return nil }
+        guard let correo: String = parameters?["correo"] as? String else { return nil }
+        guard let numeroAfiliacion: String = parameters?["numeroAfiliacion"] as? String else { return nil }
         return PB_HomeEntity(
             amount: amount,
             numeroAfiliacion: numeroAfiliacion,
@@ -254,10 +250,6 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
         activityObserved()
         
         guard dailyLimit, numDailyTransactions < dailyTransactionsLimit else {
-            print("numDailyTransactionsss")
-            print(numDailyTransactions)
-            print(dailyTransactionsLimit)
-            print(dailyLimit)
             self.presentBottomAlertFullData(status: .error, message: "Excedió número de movimientos diarios permitidos", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
             return
         }
@@ -417,9 +409,7 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
         //let view = getErrorMPViewController(subtitle: subtitle, message: msg, isDouble: isDouble)
         //self.presenter?.showError(view)
     }
-    
-    
-    
+
 }
 
 extension GSSALinkDePagoViewController: UITextFieldDelegate{
