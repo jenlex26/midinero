@@ -159,6 +159,24 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
         }
     }
     
+    func tryGetCreditCardContract(CardNumber: String, CreditCardContract: @escaping (CreditCardContractResponde?) -> ()){
+        if GLOBAL_ENVIROMENT == .develop{
+            self.urlPath = "https://apigateway.superappbaz.com/"
+            self.strPathEndpoint = "integracion/superapp/prestamos/tarjeta-credito/v1/tarjetas/contratos/busquedas"
+        }else{
+            self.strPathEndpoint = "/superapp/prestamos/tarjeta-credito/v1/tarjetas/contratos/busquedas"
+        }
+        
+        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: CreditCardContractBody.init(transaccion: CreditCardContractTransaccion.init(numeroTarjeta: CardNumber)), environment: GLOBAL_ENVIROMENT) { (objRes: CreditCardContractGenericRawReponse?, error) in
+            let response = objRes?.body
+            if error.code == 0 {
+                CreditCardContract(response)
+            } else {
+                CreditCardContract(nil)
+            }
+        }
+    }
+    
     func tryGetCreditCardMovements(Body: CreditCardMovementsBody, CreditCardMovements: @escaping (CreditCardMovementsResponse?) -> ()){
         
         if GLOBAL_ENVIROMENT == .develop{

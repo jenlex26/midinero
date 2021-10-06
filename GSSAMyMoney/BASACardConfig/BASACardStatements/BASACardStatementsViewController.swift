@@ -94,8 +94,9 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
             tagSendStatementsButtonClick(origin: "credito")
         }else{
             tagSendStatementsButtonClick(origin: "debito")
-            table.selectRow(at: [0, (2 + selectedIndex)], animated: true, scrollPosition: .middle)
-            table.delegate?.tableView!(table, didSelectRowAt: [0, 2+selectedIndex])
+           // table.selectRow(at: [0, (2 + selectedIndex)], animated: true, scrollPosition: .middle)
+           // table.delegate?.tableView!(table, didSelectRowAt: [0, 2+selectedIndex])
+            selectCell(indexPath: [0, (2 + selectedIndex)])
         }
         
         //        let success = GSVTOperationStatusViewController(status: .success(title: "Operación completada", message: "Estados de cuenta envíados", views: []), plainButtonAction: {
@@ -124,6 +125,30 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
         }
         view.frame = self.view.frame
         table.addSubview(view)
+    }
+    
+    func selectCell(indexPath: IndexPath){
+            activityObserved()
+            if table.cellForRow(at: indexPath) is BASASwitchItemCell{
+                let cell = table.cellForRow(at: indexPath) as! BASASwitchItemCell
+                if cell.tag != 0{
+                    let data = requestData[cell.tag - 1]
+                    GSVCLoader.show()
+                    let body = RequestDocumentBody.init(primerTokenVerificacion: customToken.shared.firstVerification, referencia: GSSISessionInfo.sharedInstance.gsUser.account?.number?.formatToTnuocca14Digits().encryptAlnova() ?? "", periodo: data.periodo ?? "")
+                    
+                  // let testBody = RequestDocumentBody.init(primerTokenVerificacion: customToken.shared.firstVerification, referencia: "01180100151815".encryptAlnova(), periodo: "21-01")
+                    
+                    presenter?.requestDocument(body: body, Document: { Document in
+                        if Document != nil{
+                            let view = GSSADocumentReaderRouter.createModule(base64Document: Document?.resultado?.documento ?? "")
+                           self.navigationController?.pushViewController(view, animated: true)
+                        }else{
+                           self.presentBottomAlertFullData(status: .error, message: "Ocurrió un problema al consultar su estado de cuenta, intente más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+                        }
+                        GSVCLoader.hide()
+                    })
+                }
+            }
     }
     
     @objc func selectAllStatements(sender: UISwitch){
@@ -174,8 +199,7 @@ class BASACardStatementsViewController: UIViewController, BASACardStatementsView
     
     @objc func closeView(_ sender: Any){
         self.navigationController?.popViewController(animated: true)
-    }
-    
+    }   
     @IBAction func close(_ sender: Any){
         self.navigationController?.popViewController(animated: true)
     }
@@ -254,8 +278,8 @@ extension BASACardStatementsViewController: UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        activityObserved()
-        if table.cellForRow(at: indexPath) is BASASwitchItemCell{
+      activityObserved()
+        /*   if table.cellForRow(at: indexPath) is BASASwitchItemCell{
             let cell = table.cellForRow(at: indexPath) as! BASASwitchItemCell
             if cell.tag != 0{
                 let data = requestData[cell.tag - 1]
@@ -267,13 +291,13 @@ extension BASACardStatementsViewController: UITableViewDelegate, UITableViewData
                 presenter?.requestDocument(body: body, Document: { Document in
                     if Document != nil{
                         let view = GSSADocumentReaderRouter.createModule(base64Document: Document?.resultado?.documento ?? "")
-                        self.navigationController?.pushViewController(view, animated: true)
+                       self.navigationController?.pushViewController(view, animated: true)
                     }else{
-                        self.presentBottomAlertFullData(status: .error, message: "Ocurrió un problema al consultar su estado de cuenta, intente más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+                       self.presentBottomAlertFullData(status: .error, message: "Ocurrió un problema al consultar su estado de cuenta, intente más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
                     }
                     GSVCLoader.hide()
                 })
             }
-        }
+        } */
     }
 }

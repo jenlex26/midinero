@@ -123,7 +123,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
             if Movements != nil{
                 debitCardMovementsV2 = Movements
                 setTableForDebitCard()
-                //loadActiveCardV2()
+                loadActiveCardV2()
             }else{
                 self.presentBottomAlertFullData(status: .error, message: "No podemos cargar tus movimientos en este momento, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
             }
@@ -154,6 +154,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                 creditCardData = CreditCard
                 NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "reloadCreditCardData"), object: CreditCard, userInfo: nil))
                 loadCreditCardBalance()
+              
             }else{
                 GSVCLoader.hide()
                 self.presentBottomAlertFullData(status: .error, message: "No podemos obtener los datos de la tarjeta en este momento, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
@@ -169,7 +170,15 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                 creditCardBalance = creditCardBalanceResponse
                 NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "reloadCreditCardBalance"), object: creditCardBalanceResponse, userInfo: nil))
                 setTableForCreditCard()
-                loadCreditCardMovements()
+                
+                presenter?.requestCreditCardContract(CardNumber: creditCardData?.resultado?.tarjetas?.first?.numero ?? "", CreditCardContract: { CreditCardContract in
+                    if CreditCardContract != nil{
+                        loadCreditCardMovements(idSubproducto: CreditCardContract?.resultado?.numeroContrato ?? "")
+                    }else{
+                        GSVCLoader.hide()
+                        self.presentBottomAlertFullData(status: .error, message: "No se pudo obtener su contrato en este momento", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
+                    }
+                })
             }else{
                 GSVCLoader.hide()
                 self.presentBottomAlertFullData(status: .error, message: "No podemos obtener los saldos de la tarjeta de crédito en este momento, intente más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
@@ -177,9 +186,13 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         })
     }
     
-    func loadCreditCardMovements(){
-        presenter?.requestCreditCardMovements(Body: CreditCardMovementsBody.init(transaccion: CreditCardMovementsTransaccion.init(fechaInicio: "2021-04-01", fechaFin: "2021-07-01")), CreditCardMovements: { [self] CreditCardMovements in
+    func loadCreditCardMovements(idSubproducto: String){
+        let finalDate = Date().withFormatter(formatter: "yyyy-MM-dd")
+        let initialDate = Calendar.current.date(byAdding: .day, value: -60, to: Date())?.withFormatter(formatter: "yyyy-MM-dd")
+        
+        presenter?.requestCreditCardMovements(Body: CreditCardMovementsBody.init(transaccion: CreditCardMovementsTransaccion.init(fechaFin: finalDate, idSubproducto: idSubproducto.removeWhiteSpaces(), fechaInicio: initialDate, numeroDias: "60")), CreditCardMovements: { [self] CreditCardMovements in
             GSVCLoader.hide()
+            
             if let CreditCardMovements = CreditCardMovements{
                 creditCardMovements = CreditCardMovements
                 setTableForCreditCard()
@@ -344,8 +357,8 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         let infoCreditCell = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASACreditCardInfoCell") as! BASACreditCardInfoCell
         
         if creditCardData != nil{
-            infoCreditCell.lblCreditLimit.text = creditCardBalance?.resultado?.montoLimiteCredito?.moneyFormat()
-            infoCreditCell.lblMinimumPayment.text = creditCardBalance?.resultado?.montoPagoMinimo?.moneyFormat()
+            infoCreditCell.lblCreditLimit.text = creditCardBalance?.resultado?.montoLimiteCredito?.moneyFormatWithoutSplit()
+            infoCreditCell.lblMinimumPayment.text = creditCardBalance?.resultado?.montoPagoMinimo?.moneyFormatWithoutSplit()
             
             infoCreditCell.lblCutOffDate.text = creditCardBalance?.resultado?.fechaCorte?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMMM")
             
@@ -353,8 +366,8 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
             let date = "Próxima fecha de pago \(creditCardBalance?.resultado?.fechaPago?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd") ?? "Desconocida") de \(creditCardBalance?.resultado?.fechaPago?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "MMMM") ?? "")"
             
             infoCreditCell.lblNextPaymentDate.text = date
-            infoCreditCell.lblPaymentToSettle.text = creditCardBalance?.resultado?.saldoDispuesto?.moneyFormat()
-            infoCreditCell.lblNotInterestPayment.text = creditCardBalance?.resultado?.pagoSinInteres?.moneyFormat()
+            infoCreditCell.lblPaymentToSettle.text = creditCardBalance?.resultado?.saldoDispuesto?.moneyFormatWithoutSplit()
+            infoCreditCell.lblNotInterestPayment.text = creditCardBalance?.resultado?.pagoSinInteres?.moneyFormatWithoutSplit()
         }
         //TAMAÑO ANTERIOR 380.0
         cellsArray.append([infoCreditCell:320.0])
@@ -367,9 +380,9 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
             for item in creditCardMovements!.resultado!.movimientos!{
                 let movement = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAMovementCell") as! BASAMovementTableViewCell
                 movement.lblTitle.text = item.concepto
-                movement.lblAmount.text = item.monto?.moneyFormat() ?? ""
+                movement.lblAmount.text = item.monto?.moneyFormatWithoutSplit() ?? ""
                 movement.lblDate.text = item.fechaHora?.dateFormatter(format: "yyyy-MM-dd HH:mm:ss", outputFormat: "dd MMM yyyy")
-                movement.setArrow(amount: (item.monto?.moneyFormat() ?? ""))
+                movement.setArrow(idTipo: item.idTipo ?? "")
                 cellsArray.append([movement:88.0])
             }
         }else{

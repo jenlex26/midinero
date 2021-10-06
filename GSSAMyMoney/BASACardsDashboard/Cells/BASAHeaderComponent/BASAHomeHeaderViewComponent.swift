@@ -146,8 +146,9 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
             guard let cell = cardCollection.cellForItem(at: [0,0]) as? BASACardCell else{
                 return
             }
-            cell.lblBalance.text = data.resultado?.montoLimiteCredito?.moneyFormat()
-            cell.lblOweMoney.text = "Debes \(data.resultado?.saldoDispuesto?.moneyFormat() ?? "")"
+            
+            cell.lblBalance.text = data.resultado?.saldoDisponible?.moneyFormatWithoutSplit()
+            cell.lblOweMoney.text = "Debes \(data.resultado?.saldoDispuesto?.moneyFormatWithoutSplit() ?? "")"
         }
     }
     

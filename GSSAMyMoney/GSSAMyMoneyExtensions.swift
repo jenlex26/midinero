@@ -355,7 +355,7 @@ extension String{
     }
     
     func removeDiacritics() -> String {
-        let userInput: String = self
+        let userInput: String = self.replacingOccurrences(of: "#", with: "")
         return userInput.folding(options: .diacriticInsensitive, locale: .current)
     }
 }
@@ -395,5 +395,14 @@ extension Int{
 extension Character{
     func toString() -> String{
         return String(self)
+    }
+}
+
+extension Date{
+    func withFormatter(formatter: String) -> String{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = formatter
+        let dateFormatted = dateFormatter.string(from: self)
+        return dateFormatted
     }
 }

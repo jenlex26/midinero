@@ -29,4 +29,16 @@ class BASAMovementTableViewCell: UITableViewCell {
             imgView.tintColor = .systemGreen
         }
     }
+    
+    func setArrow(idTipo: String){
+        if idTipo == "A"{
+            imgView.image = UIImage.arrowRight()
+            imgView.tintColor = .systemGreen
+        }else if idTipo == "C"{
+            imgView.image = UIImage.arrowLeft()
+            imgView.tintColor = .systemPink
+        }else{
+            imgView.isHidden = true
+        }
+    }
 }

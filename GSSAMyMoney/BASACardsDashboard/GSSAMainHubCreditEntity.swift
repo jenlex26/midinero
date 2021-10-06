@@ -24,7 +24,6 @@ struct GenericRawCreditCardResponse: Codable {
     var statusCodeValue: Int?
 }
 
-
 // MARK: - CreditCardResponse
 struct CreditCardResponse: Codable {
     var mensaje, folio: String?
@@ -51,7 +50,6 @@ struct CreditCardBalanceBody: Codable {
 struct CreditCardBalanceTransaccion: Codable {
     var numeroTarjeta: String?
 }
-
 
 // MARK: - GenericRawResponse
 struct GenericRawCreditCardBalanceResponse: Codable {
@@ -86,10 +84,8 @@ struct CreditCardMovementsBody: Codable {
 
 // MARK: - CreditCardMovementsTransaccion
 struct CreditCardMovementsTransaccion: Codable {
-    var fechaInicio, fechaFin: String?
+    var fechaFin, idSubproducto, fechaInicio, numeroDias: String?
 }
-
-
 
 // MARK: - GenericRawResponse
 struct GenericRawCreditCardMovementsResponse: Codable {
@@ -115,7 +111,6 @@ struct CreditCardMovement: Codable {
     var divisa, tipoDeCambio, montoOriginal, referencia: String?
     var fechaHora: String?
 }
-
 
 // MARK: - CreditCardInfoResponse
 struct CreditCardInfoResponse: Codable {
@@ -146,5 +141,40 @@ struct CreditCardInfoCard: Codable {
 
 // MARK: - Headers
 struct CreditCardInfoResponseHeaders: Codable {
+    
 }
 
+
+// MARK: - CreditCardContractBody
+struct CreditCardContractBody: Codable {
+    var transaccion: CreditCardContractTransaccion?
+}
+
+// MARK: - Transaccion
+struct CreditCardContractTransaccion: Codable {
+    var numeroTarjeta: String?
+}
+
+
+// MARK: - CreditCardGenericRawReponse
+struct CreditCardContractGenericRawReponse: Codable {
+    var headers: Headers?
+    var body: CreditCardContractResponde?
+    var statusCodeValue: Int?
+    var statusCode: String?
+}
+
+// MARK: - Body
+struct CreditCardContractResponde: Codable {
+    var mensaje, folio: String?
+    var resultado: CreditCardContractResult?
+}
+
+// MARK: - Resultado
+struct CreditCardContractResult: Codable {
+    var numeroContrato: String?
+}
+
+// MARK: - Headers
+struct Headers: Codable {
+}
