@@ -123,7 +123,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
             if Movements != nil{
                 debitCardMovementsV2 = Movements
                 setTableForDebitCard()
-                loadActiveCardV2()
+               // loadActiveCardV2()
             }else{
                 self.presentBottomAlertFullData(status: .error, message: "No podemos cargar tus movimientos en este momento, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
             }
