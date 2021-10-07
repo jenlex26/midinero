@@ -13,6 +13,7 @@ class RequestCardCell: UITableViewCell{
     @IBOutlet weak var buttonView: UIView!
     @IBOutlet weak var lblTitle  : GSVCLabel! 
     @IBOutlet weak var cellButton: UIButton!
+    @IBOutlet weak var imgIcon  : UIImageView!
     
     var cellViewController: UIViewController!
     
@@ -22,5 +23,7 @@ class RequestCardCell: UITableViewCell{
         self.selectionStyle = .none
         buttonView.layer.cornerRadius = 10
         buttonView.layer.masksToBounds = true
+        imgIcon.image = UIImage.chevronRight()
     }
+        
 }

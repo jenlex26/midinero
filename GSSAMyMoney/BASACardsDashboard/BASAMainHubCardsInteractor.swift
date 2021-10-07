@@ -40,9 +40,9 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
         
         if GLOBAL_ENVIROMENT == .develop{
             self.urlPath = "https://apigateway.superappbaz.com/"
-            self.strPathEndpoint = "integracion/superapp/dinero/captacion/cuentas/v1/busquedas"
+            self.strPathEndpoint = "integracion/superapp/dinero/captacion/cuentas/v2/busquedas"
         }else{
-            self.strPathEndpoint = "/superapp/dinero/captacion/cuentas/v1/busquedas"
+            self.strPathEndpoint = "/superapp/dinero/captacion/cuentas/v2/busquedas"
         }
         
         sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [], objBody: requestBody, environment: GLOBAL_ENVIROMENT) { (objRes: BalanceResponse?, error) in

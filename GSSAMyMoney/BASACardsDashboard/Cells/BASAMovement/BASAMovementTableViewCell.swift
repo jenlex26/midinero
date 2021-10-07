@@ -10,10 +10,11 @@ import GSSAVisualComponents
 
 class BASAMovementTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var lblTitle: GSVCLabel!
+    @IBOutlet weak var lblTitle : GSVCLabel!
     @IBOutlet weak var lblAmount: GSVCLabel!
-    @IBOutlet weak var lblDate: GSVCLabel!
-    @IBOutlet weak var imgView: UIImageView!
+    @IBOutlet weak var lblDate  : GSVCLabel!
+    @IBOutlet weak var imgView  : UIImageView!
+    @IBOutlet weak var separator : UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

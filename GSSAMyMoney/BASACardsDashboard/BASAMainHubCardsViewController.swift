@@ -123,7 +123,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
             if Movements != nil{
                 debitCardMovementsV2 = Movements
                 setTableForDebitCard()
-               // loadActiveCardV2()
+                 loadActiveCardV2()
             }else{
                 self.presentBottomAlertFullData(status: .error, message: "No podemos cargar tus movimientos en este momento, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
             }
@@ -322,7 +322,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                         }else{
                             movementCell.lblDate.text = item.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy")
                         }
-                        
+                        movementCell.separator.isHidden = false
                         movementCell.tag = index
                         movementCell.lblTitle.text = item.concepto?.alnovaDecrypt()
                         cellsArray.append([movementCell:88.0])
@@ -360,17 +360,17 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
             infoCreditCell.lblCreditLimit.text = creditCardBalance?.resultado?.montoLimiteCredito?.moneyFormatWithoutSplit()
             infoCreditCell.lblMinimumPayment.text = creditCardBalance?.resultado?.montoPagoMinimo?.moneyFormatWithoutSplit()
             
-            infoCreditCell.lblCutOffDate.text = creditCardBalance?.resultado?.fechaCorte?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMMM")
+            infoCreditCell.lblCutOffDate.text = creditCardBalance?.resultado?.fechaCorte?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMMM").removeZeroInDate()
             
             
-            let date = "Próxima fecha de pago \(creditCardBalance?.resultado?.fechaPago?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd") ?? "Desconocida") de \(creditCardBalance?.resultado?.fechaPago?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "MMMM") ?? "")"
+            let date = "Próxima fecha de pago \(creditCardBalance?.resultado?.fechaPago?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd").removeZeroInDate() ?? "Desconocida") de \(creditCardBalance?.resultado?.fechaPago?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "MMMM") ?? "")"
             
             infoCreditCell.lblNextPaymentDate.text = date
             infoCreditCell.lblPaymentToSettle.text = creditCardBalance?.resultado?.saldoDispuesto?.moneyFormatWithoutSplit()
             infoCreditCell.lblNotInterestPayment.text = creditCardBalance?.resultado?.pagoSinInteres?.moneyFormatWithoutSplit()
         }
         //TAMAÑO ANTERIOR 380.0
-        cellsArray.append([infoCreditCell:320.0])
+        cellsArray.append([infoCreditCell:330.0])
         
         let separator = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "SectionCell") as! SectionCell
         separator.lblTitle.text = "Movimientos"
@@ -381,8 +381,11 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                 let movement = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAMovementCell") as! BASAMovementTableViewCell
                 movement.lblTitle.text = item.concepto
                 movement.lblAmount.text = item.monto?.moneyFormatWithoutSplit() ?? ""
-                movement.lblDate.text = item.fechaHora?.dateFormatter(format: "yyyy-MM-dd HH:mm:ss", outputFormat: "dd MMM yyyy")
+                
+                movement.lblDate.text = item.fechaHora?.components(separatedBy: " ").first?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy")
+                
                 movement.setArrow(idTipo: item.idTipo ?? "")
+                movement.separator.isHidden = false
                 cellsArray.append([movement:88.0])
             }
         }else{

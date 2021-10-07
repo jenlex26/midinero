@@ -90,6 +90,7 @@
             <connections>
                 <outlet property="buttonView" destination="oMf-6b-twD" id="O7b-CH-aAf"/>
                 <outlet property="cellButton" destination="ZeO-at-1xG" id="wdL-ml-ned"/>
+                <outlet property="imgIcon" destination="OvC-gI-vL3" id="kcG-in-9tp"/>
                 <outlet property="lblTitle" destination="dtM-yd-udu" id="3p5-0v-scj"/>
             </connections>
             <point key="canvasLocation" x="131.15942028985509" y="92.745535714285708"/>

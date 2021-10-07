@@ -358,6 +358,14 @@ extension String{
         let userInput: String = self.replacingOccurrences(of: "#", with: "")
         return userInput.folding(options: .diacriticInsensitive, locale: .current)
     }
+    
+    func removeZeroInDate() -> String{
+        var string = self
+        if self.first == "0"{
+            string.removeFirst()
+        }
+        return string
+    }
 }
 
 extension Int{
