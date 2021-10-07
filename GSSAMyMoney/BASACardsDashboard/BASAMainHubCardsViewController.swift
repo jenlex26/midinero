@@ -349,7 +349,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         }
         
         let digitalCardCell = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "RequestCardCell") as! RequestCardCell
-        digitalCardCell.lblTitle.text = "Tarjeta digital baz"
+        digitalCardCell.lblTitle.text = "Tarjeta digital"
         digitalCardCell.cellViewController = self
         digitalCardCell.cellButton.addTarget(self, action: #selector(showAlert), for: .touchUpInside)
         cellsArray.append([digitalCardCell:119.0])
@@ -360,10 +360,10 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
             infoCreditCell.lblCreditLimit.text = creditCardBalance?.resultado?.montoLimiteCredito?.moneyFormatWithoutSplit()
             infoCreditCell.lblMinimumPayment.text = creditCardBalance?.resultado?.montoPagoMinimo?.moneyFormatWithoutSplit()
             
-            infoCreditCell.lblCutOffDate.text = creditCardBalance?.resultado?.fechaCorte?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMMM").removeZeroInDate()
+            infoCreditCell.lblCutOffDate.text = creditCardBalance?.resultado?.fechaCorte?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMMM").removeZeroInDate().lowercased()
             
             
-            let date = "Próxima fecha de pago \(creditCardBalance?.resultado?.fechaPago?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd").removeZeroInDate() ?? "Desconocida") de \(creditCardBalance?.resultado?.fechaPago?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "MMMM") ?? "")"
+            let date = "Próxima fecha de pago \(creditCardBalance?.resultado?.fechaPago?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd").removeZeroInDate() ?? "Desconocida") de \(creditCardBalance?.resultado?.fechaPago?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "MMMM") ?? "")".lowercased()
             
             infoCreditCell.lblNextPaymentDate.text = date
             infoCreditCell.lblPaymentToSettle.text = creditCardBalance?.resultado?.saldoDispuesto?.moneyFormatWithoutSplit()
