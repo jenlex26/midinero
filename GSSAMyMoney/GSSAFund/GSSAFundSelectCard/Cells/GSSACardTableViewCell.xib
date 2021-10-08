@@ -42,8 +42,8 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <button contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sF5-2B-why">
-                                <rect key="frame" x="368" y="23" width="58" height="57"/>
+                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sF5-2B-why">
+                                <rect key="frame" x="379" y="33.5" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="sF5-2B-why" secondAttribute="height" multiplier="1:1" id="Z5T-Cu-5a6"/>
                                     <constraint firstAttribute="height" constant="35" id="o8o-jG-Sso"/>

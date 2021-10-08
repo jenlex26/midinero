@@ -12,6 +12,7 @@ import UIKit
 import baz_ios_sdk_link_pago
 import GSSASessionInfo
 
+
 class GSSAFundSelectCardInteractor: GSSAFundSelectCardInteractorProtocol {
 
     weak var presenter: GSSAFundSelectCardPresenterProtocol?
@@ -43,6 +44,7 @@ class GSSAFundSelectCardInteractor: GSSAFundSelectCardInteractorProtocol {
         }, failure: { [weak self] message in
             guard let self = self else { return }
             
+            //print("Error message: \(message)")
             self.presenter?.getCardsError()
         })
     }
@@ -81,15 +83,14 @@ class GSSAFundSelectCardInteractor: GSSAFundSelectCardInteractorProtocol {
             }
 
             GSSAFundSharedVariables.shared.ecommerceResponse = response
+            
             self.requestEcommerceSMMInformation()
-            //self.getDummyInformation()
-
-
-
-
+            
+          //  self.presenter?.getEccomerceSMMInformationSuccess()
         }, failure: {  [weak self] message in
             guard let self = self else { return }
 
+            //print("Message Error: \(message ?? "")")
             self.presenter?.getEccomerceInformationError()
         })
     }
@@ -102,7 +103,7 @@ extension GSSAFundSelectCardInteractor {
     private func requestEcommerceSMMInformation(){
         guard let email = email,
               let afiliationNumber = afiliationNumber else {
-            self.presenter?.getEccomerceInformation()
+            self.presenter?.getEccomerceInformationError()
             return 
         }
         
@@ -116,61 +117,11 @@ extension GSSAFundSelectCardInteractor {
                 self.presenter?.getEccomerceInformationError()
                 return
             }
-
-            
-            self.requestEcommerceSMTInformation()
+            self.presenter?.getEccomerceSMMInformationSuccess()
         } failure: {
             [weak self] message in
             guard let self = self else { return }
             self.presenter?.getEccomerceInformationError()
-            
-            //self.requestEcommerceSMTInformation()
         }
     }
-        
-    private func requestEcommerceSMTInformation() {
-        guard let email = email,
-              let afiliationNumber = afiliationNumber else {
-            self.presenter?.getEccomerceInformationError()
-            return
-        }
-    
-        LNKPG_Facade.shared.getEcommerceSMTInformation(numeroAfiliacion: afiliationNumber, email: email) { [weak self] (information) in
-
-            guard let self = self else { return }
-            
-            
-            guard let _ = information else {
-                self.presenter?.getEccomerceInformationError()
-                return
-            }
-            if let response = information {
-                GSSAFundSharedVariables.shared.ecommerceSMTIResponse = response
-            }
-
-            let _ = GSSAFundSharedVariables.shared.getIdTransactionSuperApp()
-
-            self.presenter?.getEccomerceInformationSuccess()
-        } failure: { [weak self] (error) in
-            guard let self = self else { return }
-            self.presenter?.getEccomerceInformationError()
-            //let _ = GSSAFundSharedVariables.shared.getIdTransactionSuperApp()
-            //self.presenter?.getEccomerceInformationSuccess()
-        }
-    }
-    
-//    private func getDummyInformation() {
-//        GSSAFundSharedVariables.shared.ecommerceSMMIResponse = LNKPG_ESM_MovementsResponseFacade(numeroMovimientosMensuales: 10, movimientos: false)
-//
-//        GSSAFundSharedVariables.shared.ecommerceSMTIResponse = LNKPG_ESM_TransactionsResponseFacade(limiteDiario: true, limiteMensual: true , numeroTransaccionesDiarias: 10, numeroTransaccionesMensuales: 0)
-//
-//        GSSAFundSharedVariables.shared.ecommerceResponse?.limiteTarjetasPermitidas = 2
-//
-//        let _ = GSSAFundSharedVariables.shared.getIdTransactionSuperApp()
-//
-//
-//        self.presenter?.getEccomerceInformationSuccess()
-////        var ecommerceSMMIResponse: LNKPG_ESM_MovementsResponseFacade?
-////        var ecommerceSMTIResponse: LNKPG_ESM_TransactionsResponseFacade?
-//    }
 }

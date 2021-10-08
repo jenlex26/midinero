@@ -22,7 +22,7 @@ protocol GSSAFundSelectCardWireframeProtocol: AnyObject {
 //MARK: Presenter -
 protocol GSSAFundSelectCardPresenterProtocol: AnyObject {
     func getEccomerceInformation()
-    func getEccomerceInformationSuccess()
+    func getEccomerceSMMInformationSuccess()
     func getEccomerceInformationError()
     
     func getCards()
@@ -59,7 +59,6 @@ protocol GSSAFundSelectCardViewProtocol: AnyObject {
     
     func deleteCardSuccess(response: LNKPG_TokenCardDeleteResponseFacade)
     func deleteCardError()
-    
-    func getEccomerceInformationSuccess()
+    func getEccomerceSMMInformationSuccess()
     func getEccomerceInformationError()
 }

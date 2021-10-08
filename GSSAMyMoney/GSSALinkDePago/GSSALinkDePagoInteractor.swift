@@ -42,13 +42,14 @@ class GSSALinkDePagoInteractor: GSSAURLSessionTaskCoordinatorBridge, GSSALinkDeP
             }
             
             GSSAFundSharedVariables.shared.ecommerceResponse = response
+            //self.presenter?.getEccomerceInformationSuccess()
             
             self.requestEcommerceSMTInformation()
             
-            
-            //self.requestEcommerceSMMInformation()
         }, failure: {  [weak self] message in
             guard let self = self else { return }
+            
+            //print("Message Error: \(message ?? "")")
             self.presenter?.getEccomerceInformationError()
         })
     }
@@ -60,17 +61,19 @@ class GSSALinkDePagoInteractor: GSSAURLSessionTaskCoordinatorBridge, GSSALinkDeP
         self.strPathEndpoint = "/superapp/enrolamiento/gestion-usuarios/v1/usuarios/correo"
         
         sendRequest(strUrl: strPathEndpoint, method: .PUT, objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: DigitalCardResponse?, error) in
+            //debug//print(objRes ?? "NiL")
             
             if error.code == 0 {
                 Response(objRes)
             } else {
                 Response(nil)
+               // debug//print(error)
             }
         }
     }
     
     private func requestEcommerceSMTInformation() {
-        guard let email = email,
+        guard let email = GSSISessionInfo.sharedInstance.gsUser.email,
               let afiliationNumber = afiliationNumber else {
             self.presenter?.getEccomerceInformationError()
             return

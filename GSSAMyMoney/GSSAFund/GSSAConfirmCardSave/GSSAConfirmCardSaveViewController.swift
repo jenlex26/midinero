@@ -22,7 +22,9 @@ class GSSAConfirmCardSaveViewController: GSSAMasterViewController, GSSAConfirmCa
     @IBOutlet weak var saveView: UIView!
     @IBOutlet weak var editBtn: GSVCButton!
     @IBOutlet weak var saveCardSwitch: UISwitch!
-    
+    var limitCardPermitted: Int = 0
+    var limitMovementsPerMonth: Int = 0
+
     //MARK: - Properties
     var tokenCardRequest: LNKPG_TokenCardRequestFacade?
     private var canSave: Bool = false
@@ -40,20 +42,8 @@ class GSSAConfirmCardSaveViewController: GSSAMasterViewController, GSSAConfirmCa
     }
     //MARK: - @IBActions
     @IBAction func next(_ sender: Any) {
-        guard let tokenCardRequest = tokenCardRequest,
-              let firstName = tokenCardRequest.payer?.firstName,
-              let lastName = tokenCardRequest.payer?.lastName,          
-              let accountNumber = tokenCardRequest.card?.number,
-              let expirationMonth = tokenCardRequest.card?.expirationMonth,
-              let expirationYear = tokenCardRequest.card?.expirationYear,
-              let type = tokenCardRequest.card?.type else { return }
-        
-        GSSAFundSharedVariables.shared.cardInformation = LNKPG_CardInformationFacade(transactionCurrencyCode: GSSAFundSharedVariables.shared.currencyCode, payer: LNKPG_CardInformationFacade.__Payer(firstName: firstName, lastName: lastName), card: LNKPG_CardInformationFacade.__Card(expirationMonth: expirationMonth, expirationYear: expirationYear, number: accountNumber, type: type))
-        
-        
-        
-            GSVCLoader.show()
-            presenter?.requestSaveCard(tokenCardRequest: tokenCardRequest)
+        GSVCLoader.show()
+        presenter?.getEccomerceInformation()
     }
     
     @IBAction func editAction(_ sender: Any) {
@@ -84,13 +74,31 @@ extension GSSAConfirmCardSaveViewController: UITextFieldDelegate {
 extension GSSAConfirmCardSaveViewController {
     func onSuccess(_ response: LNKPG_TokenCardResponseFacade) {
         GSVCLoader.hide()
-        
-        //presenter?.goToError(message: "Alta procesada, su tarjeta estará activa en 24 horas",isDouble: false,  isWarning: true)
         presenter?.goToNextFlow()
     }
     
     func onError() {
+        GSVCLoader.hide()
         showError()
+    }
+    
+    func validateMovements() {
+        
+        limitCardPermitted = GSSAFundSharedVariables.shared.ecommerceResponse?.limiteTarjetasPermitidas ?? 0
+        limitMovementsPerMonth = GSSAFundSharedVariables.shared.ecommerceSMMIResponse?.numeroMovimientosMensuales ?? 0
+        
+        guard let tokenCardRequest = tokenCardRequest,
+              let firstName = tokenCardRequest.payer?.firstName,
+              let lastName = tokenCardRequest.payer?.lastName,
+              let accountNumber = tokenCardRequest.card?.number,
+              let expirationMonth = tokenCardRequest.card?.expirationMonth,
+              let expirationYear = tokenCardRequest.card?.expirationYear,
+              let type = tokenCardRequest.card?.type else {
+            GSVCLoader.hide()
+            return }
+        
+        GSSAFundSharedVariables.shared.cardInformation = LNKPG_CardInformationFacade(transactionCurrencyCode: GSSAFundSharedVariables.shared.currencyCode, payer: LNKPG_CardInformationFacade.__Payer(firstName: firstName, lastName: lastName), card: LNKPG_CardInformationFacade.__Card(expirationMonth: expirationMonth, expirationYear: expirationYear, number: accountNumber, type: type))
+            presenter?.requestSaveCard(tokenCardRequest: tokenCardRequest)
     }
 }
 
@@ -109,9 +117,7 @@ extension GSSAConfirmCardSaveViewController {
         
         editBtn.setTitleColor(.GSVCPrincipal100, for: .normal)
         saveView.backgroundColor = .GSVCBase200
-        
         canSave = true
-        
         setupInfo()
     }
     
@@ -132,14 +138,13 @@ extension GSSAConfirmCardSaveViewController {
     private func showError() {
         GSVCLoader.hide()
         let message = "Ocurrio un error intentelo más tarde"
-        
         presenter?.goToError(message: message, isDouble: false, isWarning: false)
     }
     
     internal func showErrorTokenNoActivo() {
         GSVCLoader.hide()
         let message = "Alta procesada, su tarjeta estará activa en 24 horas"
-        presenter?.goToError(message: message, isDouble: false, isWarning: false)
+        presenter?.goToError(message: message, isDouble: false, isWarning: true)
     }
     
     private func showBottomAlert(msg: String) {

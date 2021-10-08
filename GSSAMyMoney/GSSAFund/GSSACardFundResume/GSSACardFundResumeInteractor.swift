@@ -12,10 +12,75 @@ import UIKit
 import baz_ios_sdk_link_pago
 import GSSASessionInfo
 
-class GSSACardFundResumeInteractor: GSSACardFundResumeInteractorProtocol {
+class GSSACardFundResumeInteractor {
 
     weak var presenter: GSSACardFundResumePresenterProtocol?
     internal var amountPlusComission = 0.0
+    //MARK: - Properties
+    private let afiliationNumber: String? = GSSAFundSharedVariables.shared.numeroAfiliacion
+    private let email = GSSISessionInfo.sharedInstance.gsUser.email?.lowercased()
+}
+
+extension GSSACardFundResumeInteractor: GSSACardFundResumeInteractorProtocol {
+    
+    func getEccomerceInformation() {
+        //self.requestEcommerceSMMInformation()
+        guard let afiliationNumber = afiliationNumber else {
+            self.presenter?.getEccomerceInformationError()
+            return
+        }
+
+        LNKPG_Facade.shared.Initialize(environment: .release)
+        LNKPG_Facade.shared.getEcommerceInformation(numeroAfiliacion: afiliationNumber, success: { [weak self] response in
+            guard let self = self else { return }
+
+            guard let response = response else {
+                self.presenter?.getEccomerceInformationError()
+                return
+            }
+
+            GSSAFundSharedVariables.shared.ecommerceResponse = response
+          
+            self.requestEcommerceSMTInformation()
+          
+            //self.presenter?.getEccomerceSMTInformationSuccess()
+            
+        }, failure: {  [weak self] message in
+            guard let self = self else { return }
+
+            //print("Message Error: \(message ?? "")")
+            self.presenter?.getEccomerceInformationError()
+        })
+    }
+    
+    private func requestEcommerceSMTInformation() {
+        guard let email = email,
+              let afiliationNumber = afiliationNumber else {
+            self.presenter?.getEccomerceInformationError()
+            return
+        }
+    
+        LNKPG_Facade.shared.getEcommerceSMTInformation(numeroAfiliacion: afiliationNumber, email: email) { [weak self] (information) in
+
+            guard let self = self else { return }
+            
+            
+            guard let _ = information else {
+                self.presenter?.getEccomerceInformationError()
+                return
+            }
+            if let response = information {
+                GSSAFundSharedVariables.shared.ecommerceSMTIResponse = response
+            }
+
+            let _ = GSSAFundSharedVariables.shared.getIdTransactionSuperApp()
+
+            self.presenter?.getEccomerceSMTInformationSuccess()
+        } failure: { [weak self] (error) in
+            guard let self = self else { return }
+            self.presenter?.getEccomerceInformationError()
+        }
+    }
     
     func enroll(request: LNKPG_EnrollmentRequestFacade) {
         if let _ = GSSAFundSharedVariables.shared.transactionAmountPlusComission {
@@ -32,7 +97,10 @@ class GSSACardFundResumeInteractor: GSSACardFundResumeInteractorProtocol {
             self.payServices(enrollmentRequest: request)
         }, failure: {
             [weak self] error in
-    
+            
+            //print("errorrrr")
+            //print(error)
+            
             guard let self = self else { return }
             
             self.presenter?.enrollError()

@@ -50,8 +50,8 @@ class GSSAFundSelectCardPresenter: GSSAFundSelectCardPresenterProtocol {
         interactor?.getEccomerceInformation()
     }
     
-    func getEccomerceInformationSuccess() {
-        view?.getEccomerceInformationSuccess()
+    func getEccomerceSMMInformationSuccess() {
+        view?.getEccomerceSMMInformationSuccess()
     }
     
     func getEccomerceInformationError() {

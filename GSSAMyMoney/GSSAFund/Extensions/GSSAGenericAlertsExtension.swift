@@ -16,8 +16,8 @@ import GSSAInterceptor
 
 extension UIViewController
 {
-    func getWarningMPViewController(title: String? = nil,subtitle: String? = nil, message:String?, releaseLastFlow:Bool = false) -> GSVTOperationStatusViewController {
-        return prepareMPVC(title: title ?? "Advertencia", subtitle: subtitle ?? "", message: message ?? "", isWarning: true, releaseLastFlow: releaseLastFlow)
+    func getWarningMPViewController(title: String? = nil,subtitle: String? = nil, message:String?, releaseLastFlow:Bool = false, requireContactAlert: Bool = true) -> GSVTOperationStatusViewController {
+        return prepareMPVC(title: title ?? "Advertencia", subtitle: subtitle ?? "", message: message ?? "", isWarning: true, releaseLastFlow: releaseLastFlow, requireContactAlert: requireContactAlert)
     }
     
     public func getErrorMPViewController(title: String? = nil,subtitle: String? = nil, message:String?, releaseLastFlow:Bool = false, isDouble: Bool? = false) -> GSVTOperationStatusViewController
@@ -25,7 +25,7 @@ extension UIViewController
         return prepareMPVC(title: title ?? "Algo falló", subtitle: subtitle ?? "Por el momento no podemos completar tu solicitud. Estamos trabajando para resolverlo.", message: message ?? "Ocurrio algo inesperado, intentalo de nuevo mas tarde", isWarning: false, releaseLastFlow: releaseLastFlow, isDouble: isDouble)
     }
     
-    private func prepareMPVC(title: String, subtitle: String = "", message: String = "", isWarning: Bool = false, releaseLastFlow:Bool = false, isDouble: Bool? = nil) -> GSVTOperationStatusViewController {
+    private func prepareMPVC(title: String, subtitle: String = "", message: String = "", isWarning: Bool = false, releaseLastFlow:Bool = false, isDouble: Bool? = nil, requireContactAlert: Bool = true) -> GSVTOperationStatusViewController {
         let subtitleErrorMessage = subtitle
         let configPhone =  RemoteConfig.remoteConfig().remoteString(forKey: "iOS_SA_phone_contact") ?? ""
         let contactMessage:String =  "Contáctanos a través del servicio a clientes en tu Chat Linea SAPP \(configPhone)"
@@ -59,11 +59,24 @@ extension UIViewController
             
             }
         }
-        
-        return isWarning
-            ? GSVTOperationStatusViewController(status: .caution(title: title, message: subtitleErrorMessage, views: [servicemessageAlert,contactAlert]),plainButtonAction: plainButtonAction)
+        var boxButton : [UIView]?
+        if requireContactAlert == true{
+            boxButton = [servicemessageAlert,contactAlert]
+        }else{
+            boxButton = [servicemessageAlert]
+        }
+        let controller = isWarning
+            ? GSVTOperationStatusViewController(status: .caution(title: title, message: subtitleErrorMessage, views: boxButton),plainButtonAction: plainButtonAction)
             : GSVTOperationStatusViewController(status: .error(title: title, message: subtitleErrorMessage, views: [servicemessageAlert,contactAlert]),roundButtonAction: roundButtonAction,
             plainButtonAction: plainButtonAction)
+        for elements in controller.view.subviews{
+            if elements.isKind(of: UIScrollView.self){
+                NSLayoutConstraint.activate([
+                    elements.subviews[0].heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height - 100)
+                ])
+            }
+        }
+        return controller
     }
     
     private func popToViewController(ofClass: AnyClass, animated: Bool = true) {

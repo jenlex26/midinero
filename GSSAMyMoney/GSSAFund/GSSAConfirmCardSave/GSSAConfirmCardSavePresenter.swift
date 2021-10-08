@@ -12,10 +12,6 @@ import UIKit
 import baz_ios_sdk_link_pago
 
 class GSSAConfirmCardSavePresenter: GSSAConfirmCardSavePresenterProtocol {
-    func showErrorTokenNoActivo() {
-        
-    }
-    
 
     weak private var view: GSSAConfirmCardSaveViewProtocol?
     var interactor: GSSAConfirmCardSaveInteractorProtocol?
@@ -56,5 +52,17 @@ class GSSAConfirmCardSavePresenter: GSSAConfirmCardSavePresenterProtocol {
     
     func returnTo(vc: AnyClass, animated: Bool) {
         router.returnTo(vc: vc, animated: animated)
+    }
+    
+    func getEccomerceSMMInformationSuccess() {
+        view?.validateMovements()
+    }
+    
+    func getEccomerceInformationError() {
+        view?.onError()
+    }
+    
+    func getEccomerceInformation() {
+        interactor?.getEccomerceInformation()
     }
 }

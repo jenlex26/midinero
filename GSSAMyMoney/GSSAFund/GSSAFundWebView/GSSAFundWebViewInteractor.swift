@@ -10,9 +10,13 @@
 
 import UIKit
 import baz_ios_sdk_link_pago
+import GSSAServiceCoordinator
+import GSSASecurityManager
+import GSSASessionInfo
+import GSSAFunctionalUtilities
 
-class GSSAFundWebViewInteractor: GSSAFundWebViewInteractorProtocol {
-
+class GSSAFundWebViewInteractor: GSSAURLSessionTaskCoordinatorBridge, GSSAFundWebViewInteractorProtocol {
+    
     weak var presenter: GSSAFundWebViewPresenterProtocol?
     
     func checkFund() {
@@ -27,7 +31,10 @@ class GSSAFundWebViewInteractor: GSSAFundWebViewInteractorProtocol {
             guard let self = self else { return }
             
             NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "showLoading"), object: nil, userInfo: nil))
-       
+            
+            //print("response111")
+            //print(response)
+            
             guard let merchantID = GSSAFundSharedVariables.shared.ecommerceResponse?.comerciosCybs?.id,
                   let merchantReference = GSSAFundSharedVariables.shared.idTransaccionSuperApp,
                   let amount = GSSAFundSharedVariables.shared.transactionAmountPlusComission /*GSSAFundSharedVariables.shared.amount*/,
@@ -93,7 +100,7 @@ class GSSAFundWebViewInteractor: GSSAFundWebViewInteractorProtocol {
                     guard let self = self else { return }
                     self.presenter?.onError(content: error)
                 }
-
+                
             } failure: { [weak self] error in
                 guard let self = self else { return }
                 self.presenter?.onError(content: error)
@@ -103,4 +110,109 @@ class GSSAFundWebViewInteractor: GSSAFundWebViewInteractorProtocol {
             self.presenter?.onError(content: error)
         }
     }
+    
+    func sendBinnacle(SendBinnacleResponse: @escaping (String?) -> ()){
+        var body = SendBinnacleBody.init()
+        let singletonData = GSSAFundSharedVariables.shared
+        
+        let userSharedInstance = GSSISessionInfo.sharedInstance.gsUser
+        
+        let commerce = SendBinnacleTransaccionComerce.init(id: singletonData.ecommerceResponse?.comercio?.id, canal: singletonData.ecommerceResponse?.comercio?.canal, idTerminal: singletonData.ecommerceResponse?.comercio?.idTerminal?.encryptAlnova(), numeroAfiliacion: singletonData.ecommerceResponse?.comercio?.numeroAfiliacion, nombre: singletonData.ecommerceResponse?.comercio?.nombre, comerciosCybs: ComerciosCybs.init(id: singletonData.ecommerceResponse?.comerciosCybs?.id))
+        
+        let ecommerce = SendBinnacleTransaccionEcommerce.init(usuario: "\(singletonData.ecommerceResponse?.usuario ?? 0)", version3D: singletonData.ecommerceResponse?.version3D, pagoTarjeta: singletonData.ecommerceResponse?.pagoTarjeta, pagoReferencia: singletonData.ecommerceResponse?.pagoReferencia, pagoQR: singletonData.ecommerceResponse?.pagoQR, monto: singletonData.enrollmentRequest?.amount?.encryptAlnova(), comercio: commerce)
+        
+        let surNames = (userSharedInstance?.lastName ?? "") + " " + (userSharedInstance?.secondLastName ?? "")
+        
+        let address = SendBinnacleAddress.init(codigoPais: singletonData.cardInformationResponse?.payer?.address?.countryCode?.encryptAlnova(), estado: userSharedInstance?.address?.state?.encryptAlnova(), calle: userSharedInstance?.address?.street?.encryptAlnova(), ciudad: userSharedInstance?.address?.city?.encryptAlnova(), codigoPostal: userSharedInstance?.address?.zipCode?.encryptAlnova())
+        
+        let client = SendBinnacleClient.init(nombre: userSharedInstance?.name?.encryptAlnova(), apellidos: surNames.encryptAlnova(), telefono: userSharedInstance?.phone?.encryptAlnova(), correo: userSharedInstance?.email?.encryptAlnova(), domicilio: address)
+        
+        let instrument = SendBinnacleTransaccionInstrument.init(id: singletonData.cardInformationResponse?.instrumentIdentifierId?.encryptAlnova(), estatus: singletonData.cardInformationResponse?.instrumentIdentifierStatus)
+        
+        let paymenth = SendBinnacleTransaccionInstrument.init(id: singletonData.cardInformationResponse?.paySubscriptionId?.encryptAlnova(), estatus: singletonData.cardInformationResponse?.descriptionTransactionStatus)
+        
+        let card = SendBinnacleCard.init(tipo: singletonData.cardInformation?.card?.type, numero: singletonData.cardInformation?.card?.number?.encryptAlnova(), mesExpiracion: singletonData.cardInformation?.card?.expirationMonth, anioExpiracion: singletonData.cardInformation?.card?.expirationYear)
+        
+        let operacion = SendBinnacleTransaccionOperation.init(referenciaComercial: singletonData.authValidateResponse?.merchantReference?.encryptAlnova(), divisa: singletonData.currencyCode, codigo: singletonData.cardInformationResponse?.reasonCode, idSolicitud: singletonData.cardInformationResponse?.requestID, instrumento: instrument, pago: paymenth, cliente: client, tarjeta: card)
+        
+        body = SendBinnacleBody.init(transaccion: SendBinnacleTransaccion.init(ecommerce: ecommerce, operacion: operacion))
+        
+        if GLOBAL_ENVIROMENT == .develop{
+            self.urlPath = "https://apigateway.superappbaz.com/"
+            self.strPathEndpoint = "integracion/superapp/dinero/captacion/gestion-tarjetas-digitales/v1/fondeos/bitacoras"
+        }else{
+            self.strPathEndpoint = "/superapp/dinero/captacion/gestion-tarjetas-digitales/v1/fondeos/bitacoras"
+        }
+        
+        let idLealtad = HeadersCustom.init(value: "99553877".encryptAlnova(), forHTTPHeaderField: "x-id-lealtad")
+        
+        sendRequest(strUrl: strPathEndpoint, method: .POST, arrHeaders: [idLealtad], objBody: body, environment: GLOBAL_ENVIROMENT) { (objRes: DebitCardInfoResponse?, error) in
+            if error.code == 0{
+                SendBinnacleResponse("success")
+            }else{
+                SendBinnacleResponse(nil)
+            }
+        }
+    }
+}
+
+// MARK: - SendBinnacleBody
+struct SendBinnacleBody: Codable {
+    var transaccion: SendBinnacleTransaccion?
+}
+
+// MARK: - Transaccion
+struct SendBinnacleTransaccion: Codable {
+    var ecommerce: SendBinnacleTransaccionEcommerce?
+    var operacion: SendBinnacleTransaccionOperation?
+}
+
+// MARK: - Ecommerce
+struct SendBinnacleTransaccionEcommerce: Codable {
+    var usuario, version3D: String?
+    var pagoTarjeta, pagoReferencia, pagoQR: Bool?
+    var monto: String?
+    var comercio: SendBinnacleTransaccionComerce?
+}
+
+// MARK: - Comercio
+struct SendBinnacleTransaccionComerce: Codable {
+    var id, canal, idTerminal, numeroAfiliacion: String?
+    var nombre: String?
+    var comerciosCybs: ComerciosCybs?
+}
+
+// MARK: - ComerciosCybs
+struct ComerciosCybs: Codable {
+    var id: String?
+}
+
+// MARK: - Operacion
+struct SendBinnacleTransaccionOperation: Codable {
+    var referenciaComercial, divisa, codigo, idSolicitud: String?
+    var instrumento, pago: SendBinnacleTransaccionInstrument?
+    var cliente: SendBinnacleClient?
+    var tarjeta: SendBinnacleCard?
+}
+
+// MARK: - Cliente
+struct SendBinnacleClient: Codable {
+    var nombre, apellidos, telefono, correo: String?
+    var domicilio: SendBinnacleAddress?
+}
+
+// MARK: - Domicilio
+struct SendBinnacleAddress: Codable {
+    var codigoPais, estado, calle, ciudad: String?
+    var codigoPostal: String?
+}
+
+// MARK: - Instrumento
+struct SendBinnacleTransaccionInstrument: Codable {
+    var id, estatus: String?
+}
+
+// MARK: - Tarjeta
+struct SendBinnacleCard: Codable {
+    var tipo, numero, mesExpiracion, anioExpiracion: String?
 }

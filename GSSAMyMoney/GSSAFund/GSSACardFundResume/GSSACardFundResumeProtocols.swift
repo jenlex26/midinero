@@ -28,6 +28,10 @@ protocol GSSACardFundResumePresenterProtocol: class {
     func goToTicket(folio: String)
     func returnTo(vc: AnyClass, animated: Bool)
     func goToNextFlow()
+    
+    func getEccomerceInformationError()
+    func getEccomerceSMTInformationSuccess()
+    func getEccomerceInformation()
 }
 
 //MARK: Interactor -
@@ -36,6 +40,7 @@ protocol GSSACardFundResumeInteractorProtocol: class {
   var presenter: GSSACardFundResumePresenterProtocol?  { get set }
     
     func enroll(request: LNKPG_EnrollmentRequestFacade)
+    func getEccomerceInformation()
 }
 
 //MARK: View -
@@ -45,4 +50,6 @@ protocol GSSACardFundResumeViewProtocol: class {
     
     func enrollSuccess(responseEnroll: LNKPG_EnrollmentResponseFacade, responseOtp: LNKPG_SessionOTPResponseFacade?, responseCargo: LNKPG_CargoEcommerceResponseFacade?,  responseFondeo: LNKPG_FondeoAccountResponseFacade?)
     func enrollError()
+    
+    func getEccomerceSMTInformationSuccess()
 }

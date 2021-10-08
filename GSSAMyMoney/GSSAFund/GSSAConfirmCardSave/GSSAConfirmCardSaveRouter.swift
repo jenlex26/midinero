@@ -44,7 +44,7 @@ class GSSAConfirmCardSaveRouter: GSSAConfirmCardSaveWireframeProtocol {
         if !isWarning {
             errorVC = viewController?.getErrorMPViewController(message: message, isDouble: isDouble)
         } else {
-            errorVC = viewController?.getWarningMPViewController(message: message, releaseLastFlow: true)
+            errorVC = viewController?.getWarningMPViewController(title: "Registro exitoso", message: message, releaseLastFlow: true, requireContactAlert: false)
         }
         
         viewController?.navigationController?.pushViewController(errorVC, animated: true)

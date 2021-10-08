@@ -398,6 +398,10 @@ extension Int{
         return amountFormat.mutableString.description
         
     }
+    
+    func toString() -> String{
+        return String(self)
+    }
 }
 
 extension Character{

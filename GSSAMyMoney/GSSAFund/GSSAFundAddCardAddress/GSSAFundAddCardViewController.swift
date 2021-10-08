@@ -93,8 +93,8 @@ class GSSAFundAddCardViewController: UIViewController {
     }
     
     func validateFields() -> Bool {
-        var isValid = true
-        
+        var isValid = 0
+        emailField.setAppearance(.active)
         nameField.setAppearance(.active)
         nameInfoLabel.isHidden = false
         lastNameField.setAppearance(.active)
@@ -109,46 +109,58 @@ class GSSAFundAddCardViewController: UIViewController {
         if nameField.text!.count == 0 || nameField.text!.count >= 50{
             nameField.setAppearance(.error(message: "Ingresa tu(s) nombre(s)"))
             nameInfoLabel.isHidden = true
-            isValid = false
+            isValid += 1
         }
         
         if lastNameField.text!.count == 0 || lastNameField.text!.count >= 50{
             lastNameField.setAppearance(.error(message: "Ingresa tus apellidos"))
             apInfoLabel.isHidden = true
-            isValid = false
+            isValid += 1
         }
         
         if phoneField.text!.count == 0 || phoneField.text!.count >= 11{
             phoneField.setAppearance(.error(message: "Ingresa tu número de celular"))
-            isValid = false
+            isValid += 1
         }
         
         if streetField.text!.count == 0 || streetField.text!.count >= 50{
             streetField.setAppearance(.error(message: "Ingresa tu calle"))
-            isValid = false
+            isValid += 1
         }
         
         if zipCodeField.text!.count == 0 || zipCodeField.text!.count >= 6{
             zipCodeField.setAppearance(.error(message: "Ingresa tu código postal"))
-            isValid = false
+            isValid += 1
         }
         
         if cityField.text!.count == 0 || cityField.text!.count >= 50{
             cityField.setAppearance(.error(message: "Ingresa tu ciudad"))
-            isValid = false
+            isValid += 1
+        }
+        
+        if NSPredicate(format:"SELF MATCHES %@", "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}").evaluate(with: emailField.text) == false{
+            emailField.setAppearance(.error(message: "El correo electrónico no es valido"))
+            emailField.becomeFirstResponder()
+            isValid += 1
+        }
+        
+        if emailField.text?.count == 0 || emailField.text == "" {
+            emailField.setAppearance(.error(message: "Ingresa tu correo electrónico"))
+            emailField.becomeFirstResponder()
+            isValid += 1
         }
         
         if  self.selectedCountry == nil {
             countryField.setAppearance(.error(message: "Ingresa tu pais"))
-            isValid = false
+            isValid += 1
         }
         
         if self.selectedState == nil {
             stateField.setAppearance(.error(message: "Ingresa tu estado"))
-            isValid = false
+            isValid += 1
         }
         
-        return isValid
+        return isValid == 0 ? true : false
     }
     
     func showError() {

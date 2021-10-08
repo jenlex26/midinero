@@ -276,6 +276,11 @@
 		EEF2ED2A2698A4AA0009F771 /* GSDigitalCardEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF2ED292698A4AA0009F771 /* GSDigitalCardEntity.swift */; };
 		EEF728A72699382C0093F0DA /* GSSANewBeneficiaryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF728A62699382C0093F0DA /* GSSANewBeneficiaryEntity.swift */; };
 		F00BFB0526F93AB7000D7FD2 /* GSSAInterceptor.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE898F6C26E828260000B119 /* GSSAInterceptor.xcframework */; };
+		F0A056B92710C0D000BBB1A6 /* GSSALinkDePagoCorreoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A056B42710C0D000BBB1A6 /* GSSALinkDePagoCorreoViewController.swift */; };
+		F0A056BA2710C0D000BBB1A6 /* GSSALinkDePagoCorreoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A056B52710C0D000BBB1A6 /* GSSALinkDePagoCorreoRouter.swift */; };
+		F0A056BB2710C0D000BBB1A6 /* GSSALinkDePagoCorreoProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A056B62710C0D000BBB1A6 /* GSSALinkDePagoCorreoProtocols.swift */; };
+		F0A056BC2710C0D000BBB1A6 /* GSSALinkDePagoCorreoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A056B72710C0D000BBB1A6 /* GSSALinkDePagoCorreoPresenter.swift */; };
+		F0A056BD2710C0D000BBB1A6 /* GSSALinkDePagoCorreoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0A056B82710C0D000BBB1A6 /* GSSALinkDePagoCorreoViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -549,6 +554,11 @@
 		EEF2ED292698A4AA0009F771 /* GSDigitalCardEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSDigitalCardEntity.swift; sourceTree = "<group>"; };
 		EEF728A62699382C0093F0DA /* GSSANewBeneficiaryEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSANewBeneficiaryEntity.swift; sourceTree = "<group>"; };
 		F09ED91026FBE4970030762A /* GSSAAceptaPago.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GSSAAceptaPago.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F0A056B42710C0D000BBB1A6 /* GSSALinkDePagoCorreoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSSALinkDePagoCorreoViewController.swift; sourceTree = "<group>"; };
+		F0A056B52710C0D000BBB1A6 /* GSSALinkDePagoCorreoRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSSALinkDePagoCorreoRouter.swift; sourceTree = "<group>"; };
+		F0A056B62710C0D000BBB1A6 /* GSSALinkDePagoCorreoProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSSALinkDePagoCorreoProtocols.swift; sourceTree = "<group>"; };
+		F0A056B72710C0D000BBB1A6 /* GSSALinkDePagoCorreoPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSSALinkDePagoCorreoPresenter.swift; sourceTree = "<group>"; };
+		F0A056B82710C0D000BBB1A6 /* GSSALinkDePagoCorreoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GSSALinkDePagoCorreoViewController.xib; sourceTree = "<group>"; };
 		F0C4F96726F1611200E8B852 /* SDKCHome.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SDKCHome.xcframework; path = "../aceptapago-ios-sdk-base/AceptaPagoSDKBase/SDKCHome.xcframework"; sourceTree = "<group>"; };
 		F0C4F96B26F1639E00E8B852 /* SDKCInquiry.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SDKCInquiry.xcframework; path = "../aceptapago-ios-sdk-base/AceptaPagoSDKBase/SDKCInquiry.xcframework"; sourceTree = "<group>"; };
 		F0C4F96C26F1639E00E8B852 /* SDKCNip.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SDKCNip.xcframework; path = "../aceptapago-ios-sdk-base/AceptaPagoSDKBase/SDKCNip.xcframework"; sourceTree = "<group>"; };
@@ -1371,6 +1381,7 @@
 		EED2CB92269D0C3000A1E129 /* GSSALinkDePago */ = {
 			isa = PBXGroup;
 			children = (
+				F0A056B32710C0D000BBB1A6 /* GSSALinkDePagoCorreo */,
 				EED2CB93269D0C4B00A1E129 /* GSSALinkDePagoPresenter.swift */,
 				EED2CB94269D0C4B00A1E129 /* GSSALinkDePagoRouter.swift */,
 				EED2CB95269D0C4B00A1E129 /* GSSALinkDePagoViewController.swift */,
@@ -1380,6 +1391,19 @@
 				EED2CB9F269D361100A1E129 /* GSSALinkDePagoEntity.swift */,
 			);
 			path = GSSALinkDePago;
+			sourceTree = "<group>";
+		};
+		F0A056B32710C0D000BBB1A6 /* GSSALinkDePagoCorreo */ = {
+			isa = PBXGroup;
+			children = (
+				F0A056B42710C0D000BBB1A6 /* GSSALinkDePagoCorreoViewController.swift */,
+				F0A056B52710C0D000BBB1A6 /* GSSALinkDePagoCorreoRouter.swift */,
+				F0A056B62710C0D000BBB1A6 /* GSSALinkDePagoCorreoProtocols.swift */,
+				F0A056B72710C0D000BBB1A6 /* GSSALinkDePagoCorreoPresenter.swift */,
+				F0A056B82710C0D000BBB1A6 /* GSSALinkDePagoCorreoViewController.xib */,
+			);
+			name = GSSALinkDePagoCorreo;
+			path = "../../../../../../Downloads/GSSAFun&LinkDePago/GSSALinkDePago/GSSALinkDePagoCorreo";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1479,6 +1503,7 @@
 				EEAD108026C20792000E5BEF /* GSSAFundAddCardViewController.xib in Resources */,
 				10E9EDE0267D6BA400F45640 /* BASAHomeHeaderViewComponent.xib in Resources */,
 				10E9EDC8267D6BA400F45640 /* BASACardLimitsViewController.xib in Resources */,
+				F0A056BD2710C0D000BBB1A6 /* GSSALinkDePagoCorreoViewController.xib in Resources */,
 				10E9EDB2267D6BA400F45640 /* BASACardStatementsViewController.xib in Resources */,
 				EE97BB072684DF30000AE34C /* GSNoMovementsCell.xib in Resources */,
 				EEAFA7A4268CF3DD00DBC192 /* GSSANewBeneficiaryAddressViewController.xib in Resources */,
@@ -1553,6 +1578,7 @@
 				EEAD106526C20792000E5BEF /* GSSAFundSetCVVPresenter.swift in Sources */,
 				10E9EDEB267D6BA400F45640 /* BASAMovementTableViewCell.swift in Sources */,
 				EEAD105626C20792000E5BEF /* GSSACardFundResumePresenter.swift in Sources */,
+				F0A056BB2710C0D000BBB1A6 /* GSSALinkDePagoCorreoProtocols.swift in Sources */,
 				10E9EDE6267D6BA400F45640 /* BASAMyCreditItem.swift in Sources */,
 				EEAD106026C20792000E5BEF /* GSSAFundSelectCardPresenter.swift in Sources */,
 				EEAD108426C20792000E5BEF /* GSSAFundAddCardInteractor.swift in Sources */,
@@ -1601,6 +1627,7 @@
 				EE2A25EE26B2142900E1C2C5 /* GSSARequestDebitCardViewController.swift in Sources */,
 				10E9EDF0267D6BA400F45640 /* BASAMainHubCardsProtocols.swift in Sources */,
 				EED2727926E674D0006AB542 /* GSSADocumentReaderPresenter.swift in Sources */,
+				F0A056B92710C0D000BBB1A6 /* GSSALinkDePagoCorreoViewController.swift in Sources */,
 				10E9EDB6267D6BA400F45640 /* RequestCardCell.swift in Sources */,
 				EED2CB9D269D0C4B00A1E129 /* GSSALinkDePagoInteractor.swift in Sources */,
 				10E9EDD9267D6BA400F45640 /* BASABeneficiaryListPresenter.swift in Sources */,
@@ -1648,6 +1675,7 @@
 				EED2CB9C269D0C4B00A1E129 /* GSSALinkDePagoProtocols.swift in Sources */,
 				10E9EDD4267D6BA400F45640 /* BASANewBeneficiaryViewController.swift in Sources */,
 				10E9EDE7267D6BA400F45640 /* BASAButtonsCell.swift in Sources */,
+				F0A056BC2710C0D000BBB1A6 /* GSSALinkDePagoCorreoPresenter.swift in Sources */,
 				EE2A25FB26B300CE00E1C2C5 /* GSSAPhysicalCardRequestAddressViewController.swift in Sources */,
 				EEAD107626C20792000E5BEF /* GSSAVisualsExtension.swift in Sources */,
 				EEAD106426C20792000E5BEF /* GSSAFundSetCVVViewController.swift in Sources */,
@@ -1701,6 +1729,7 @@
 				EE2A25FD26B300CE00E1C2C5 /* GSSAPhysicalCardRequestAddressInteractor.swift in Sources */,
 				EE477BF426937F7D00DC5CF9 /* GSSAMainHubCreditEntity.swift in Sources */,
 				EEAD105826C20792000E5BEF /* GSSACardFundResumeProtocols.swift in Sources */,
+				F0A056BA2710C0D000BBB1A6 /* GSSALinkDePagoCorreoRouter.swift in Sources */,
 				EEAD106326C20792000E5BEF /* GSSAFundSetCVVInteractor.swift in Sources */,
 				2E854FA326E7D346001521D1 /* GSSACardPaymentBtnCoreViewViewController.swift in Sources */,
 				10E9EDC5267D6BA400F45640 /* BASAInfoCardCell.swift in Sources */,

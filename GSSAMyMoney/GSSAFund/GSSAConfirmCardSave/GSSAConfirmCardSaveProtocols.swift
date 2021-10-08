@@ -25,7 +25,9 @@ protocol GSSAConfirmCardSavePresenterProtocol: class {
     func requestSaveCard(tokenCardRequest: LNKPG_TokenCardRequestFacade)
     func onSuccess(_ response: LNKPG_TokenCardResponseFacade)
     func onError()
-    
+    func getEccomerceInformation()
+    func getEccomerceSMMInformationSuccess()
+    func getEccomerceInformationError()
     func goToNextFlow()
     func returnTo(vc: AnyClass, animated: Bool)
     func goToError(message: String, isDouble: Bool, isWarning: Bool)
@@ -37,7 +39,7 @@ protocol GSSAConfirmCardSavePresenterProtocol: class {
 protocol GSSAConfirmCardSaveInteractorProtocol: class {
     
     var presenter: GSSAConfirmCardSavePresenterProtocol?  { get set }
-    
+    func getEccomerceInformation()
     func requestSaveCard(tokenCardRequest: LNKPG_TokenCardRequestFacade)
 }
 
@@ -49,4 +51,5 @@ protocol GSSAConfirmCardSaveViewProtocol: class {
     func onSuccess(_ response: LNKPG_TokenCardResponseFacade)
     func onError()
     func showErrorTokenNoActivo()
+    func validateMovements()
 }

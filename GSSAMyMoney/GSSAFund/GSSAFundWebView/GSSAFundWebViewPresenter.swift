@@ -34,6 +34,10 @@ class GSSAFundWebViewPresenter: GSSAFundWebViewPresenterProtocol {
         view?.onError(content: content)
     }
 
+    func requestBinnacle(SendBinnacleResponse: @escaping (String?) -> ()) {
+        interactor?.sendBinnacle(SendBinnacleResponse: SendBinnacleResponse)
+    }
+    
     func goToTicket(folio: String) {
         router.goToTicket(folio: folio)
     }

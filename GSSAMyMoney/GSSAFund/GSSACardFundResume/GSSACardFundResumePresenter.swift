@@ -49,4 +49,16 @@ class GSSACardFundResumePresenter: GSSACardFundResumePresenterProtocol {
     func returnTo(vc: AnyClass, animated: Bool) {
         router.returnTo(vc: vc, animated: animated)
     }
+    
+    func getEccomerceInformation() {
+        interactor?.getEccomerceInformation()
+    }
+    
+    func getEccomerceInformationError() {
+        view?.enrollError()
+    }
+    
+    func getEccomerceSMTInformationSuccess() {
+        view?.getEccomerceSMTInformationSuccess()
+    }
 }

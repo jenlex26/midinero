@@ -22,7 +22,7 @@ protocol GSSAFundWebViewPresenterProtocol: AnyObject {
     func checkFund()
     func onSucess(folio: String)
     func onError(content: String?)
-    
+    func requestBinnacle(SendBinnacleResponse: @escaping (String?) -> ())
     func goToError(message: String, isDouble: Bool)
     func goToTicket(folio: String)
 }
@@ -32,6 +32,7 @@ protocol GSSAFundWebViewInteractorProtocol: AnyObject {
     
     var presenter: GSSAFundWebViewPresenterProtocol?  { get set }
     
+    func sendBinnacle(SendBinnacleResponse: @escaping (String?) -> ())
     func checkFund()
 }
 
