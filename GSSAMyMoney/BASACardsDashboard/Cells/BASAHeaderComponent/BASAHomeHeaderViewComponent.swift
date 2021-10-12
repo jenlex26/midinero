@@ -173,7 +173,7 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
                        })
         showOnlyLendsInCredit = true
     }
-        
+    
     @IBAction func debitCardClick(_ sender: Any){
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "HomeHeaderViewChange"), object:  cardType.debit, userInfo: nil))
         debitCardView.isHidden = false
@@ -201,6 +201,7 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
             self.cardCollection.scrollToItem(at: [0,1], at: .left, animated: false)
             self.cardCollection.isScrollEnabled = false
             self.pageController.isHidden = true
+            handleCardChange(index: 1)
         }else{
             self.cardCollection.scrollToItem(at: [0,0], at: .left, animated: false)
             self.cardCollection.isScrollEnabled = false
@@ -302,15 +303,17 @@ extension BASAHomeHeaderViewComponent: UICollectionViewDelegate, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "dashboard", screenName: "movimientos", type: "click", element: "carrusel", origin: "credito")
-        switch indexPath.row{
-        case 1:
-            pageController.currentPage = 0
-            handleCardChange(index: 0)
-        case 0:
-            pageController.currentPage = 1
-            handleCardChange(index: 1)
-        default:
-            handleCardChange(index: indexPath.row)
+        if showOnlyLendsInCredit == false{
+            switch indexPath.row{
+            case 1:
+                pageController.currentPage = 0
+                handleCardChange(index: 0)
+            case 0:
+                pageController.currentPage = 1
+                handleCardChange(index: 1)
+            default:
+                handleCardChange(index: indexPath.row)
+            }
         }
     }
 }

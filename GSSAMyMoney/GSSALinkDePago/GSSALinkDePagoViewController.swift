@@ -56,8 +56,8 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
         txtAmount.addTarget(self, action: #selector(ammountFormatter(sender:)), for: .editingChanged)
         txtAmount.addTarget(self, action: #selector(onStartEdit), for: .editingDidBegin)
         setUpToolBar()
-        
-        
+        self.navigationController?.navigationBar.backgroundColor = .white
+        self.view.backgroundColor = .white
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.title = "Recarga tu tarjeta"
         if GSSISessionInfo.sharedInstance.gsUser.email?.isValidEmail == true{

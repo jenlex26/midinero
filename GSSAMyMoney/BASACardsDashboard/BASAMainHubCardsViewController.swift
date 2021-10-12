@@ -111,11 +111,8 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     
     func loadDebitMovementsV2(){
         var body = MovimientosBodyv2.init()
-        if GLOBAL_ENVIROMENT == .develop{
-            body =  MovimientosBodyv2.init(transaccion: MovementsBodyDataV2.init(sicu: GSSISessionInfo.sharedInstance.gsUser.SICU, numeroCuenta:  GSSISessionInfo.sharedInstance.gsUser.account?.number?.formatToTnuocca14Digits().encryptAlnova(), geolocalizacion: Geolocalizacion.init(latitud: "", longitud: "")))
-        }else{
-            body =  MovimientosBodyv2.init(transaccion: MovementsBodyDataV2.init(sicu: GSSISessionInfo.sharedInstance.gsUser.SICU, numeroCuenta:  GSSISessionInfo.sharedInstance.gsUser.account?.number?.formatToTnuocca14Digits().encryptAlnova(), geolocalizacion: Geolocalizacion.init(latitud: "", longitud: "")))
-        }
+       
+        body =  MovimientosBodyv2.init(transaccion: MovementsBodyDataV2.init(sicu: GSSISessionInfo.sharedInstance.gsUser.SICU, numeroCuenta:  GSSISessionInfo.sharedInstance.gsUser.account?.number?.formatToTnuocca14Digits().encryptAlnova(), geolocalizacion: Geolocalizacion.init(latitud: "", longitud: "")))
         
         self.presenter?.requestDebitCardMovementsV2(Body: body, Movements: { [self] Movements in
             GSVCLoader.hide()
@@ -123,7 +120,9 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
             if Movements != nil{
                 debitCardMovementsV2 = Movements
                 setTableForDebitCard()
-                 //loadActiveCardV2()
+                if myMoneyFrameworkSettings.shared.showCredit == true{
+                    loadActiveCardV2()
+                }
             }else{
                 self.presentBottomAlertFullData(status: .error, message: "No podemos cargar tus movimientos en este momento, intenta más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: true, optionalButtonText:nil)
             }
@@ -222,11 +221,9 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     
     func loadActiveCardV2(){
         presenter?.requestCreditCardNumber(CardInfoResponse: { [self] CreditCardInfoResponse in
-            if CreditCardInfoResponse !=  nil{
-                if CreditCardInfoResponse?.body?.resultado?.tarjetas?.count ?? 0 > 0{
-                    creditCardInfo = CreditCardInfoResponse
-                    NotificationCenter.default.post(name: Notification.Name("creditCardAvailable"), object: nil)
-                }
+            if CreditCardInfoResponse?.body?.resultado?.tarjetas?.count ?? 0 > 0{
+                creditCardInfo = CreditCardInfoResponse
+                NotificationCenter.default.post(name: Notification.Name("creditCardAvailable"), object: nil)
             }else{
                 presenter?.requestUserLends(Lends: { LendsResponse in
                     if LendsResponse != nil{
@@ -413,7 +410,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
             infoCell.lblFixedPayment.text = lendsData?.resultado?.pagoNormal?.moneyFormatWithoutSplit()
             infoCell.lblPaymentDay.text = lendsData?.resultado?.fechaProximoPago?.dateFormatter(format: "yyyy/MM/dd", outputFormat: "EEEE")
         }
-        cellsArray.append([infoCell:300.0])
+        cellsArray.append([infoCell:250.0])
         
         let separator = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "SectionCell") as! SectionCell
         separator.lblTitle.text = "Mis créditos"
@@ -423,9 +420,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
             for item in lendsData!.resultado!.productos!{
                 if item.id != 0{
                     let creditItem = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAMyCreditItem") as! BASAMyCreditItem
-                    
                     creditItem.lblAmount.text = item.pagoLiquidar?.moneyFormat()
-                    
                     creditItem.setTitle(id: item.id ?? -1)
                     cellsArray.append([creditItem:180.0])
                 }

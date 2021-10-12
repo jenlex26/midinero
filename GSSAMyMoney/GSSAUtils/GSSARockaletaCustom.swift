@@ -7,12 +7,7 @@
 
 import Foundation
 import UIKit
-//
-//  GSFRockaletaControl.swift
-//  GSSAVisualComponents
-//
-//  Created by cemartinezga on 02/08/21.
-//
+
 public class GSFMoneyRockaletaControl: UIRefreshControl {
     
     var rock: UIImageView?

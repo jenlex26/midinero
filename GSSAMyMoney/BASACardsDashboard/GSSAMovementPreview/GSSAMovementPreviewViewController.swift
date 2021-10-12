@@ -86,7 +86,7 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
             cell.lblDate.numberOfLines = 2
             cell.lblDate.styleType = 6
             if element.key.removeWhiteSpaces() != ""{
-                if element.value == "Nombre del beneficiario" || element.value == "Ordenante"{
+                if element.value == "Nombre del beneficiario" || element.value == "Ordenante" || element.key.count > 30{
                     cellsArray.append([cell:90.0])
                 }else{
                     cellsArray.append([cell:75.0])

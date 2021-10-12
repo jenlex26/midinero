@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Información" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xmM-gg-BLJ" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                        <rect key="frame" x="15" y="20" width="373" height="30"/>
+                        <rect key="frame" x="15" y="20" width="211" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="Sdz-cC-Fyl"/>
                         </constraints>
@@ -33,13 +33,13 @@
                         </userDefinedRuntimeAttributes>
                     </label>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="kIp-aG-KNE">
-                        <rect key="frame" x="40" y="60" width="318" height="153"/>
+                        <rect key="frame" x="40" y="60" width="156" height="216"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="4fk-ni-RvT">
-                                <rect key="frame" x="0.0" y="0.0" width="318" height="30.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="156" height="43"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Día de pago " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IQT-mD-3rc" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                        <rect key="frame" x="0.0" y="0.0" width="159" height="30.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="78" height="43"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -50,7 +50,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aTU-cD-VLj" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                        <rect key="frame" x="159" y="0.0" width="159" height="30.5"/>
+                                        <rect key="frame" x="78" y="0.0" width="78" height="43"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -63,10 +63,10 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="iz6-Gf-vse">
-                                <rect key="frame" x="0.0" y="30.5" width="318" height="30.5"/>
+                                <rect key="frame" x="0.0" y="43" width="156" height="43.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pago con descuento" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8MW-3a-RyU" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                        <rect key="frame" x="0.0" y="0.0" width="285" height="30.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="139" height="43.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -77,7 +77,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N6m-au-GrB" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                        <rect key="frame" x="285" y="0.0" width="33" height="30.5"/>
+                                        <rect key="frame" x="139" y="0.0" width="17" height="43.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -90,10 +90,10 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="VtX-Af-VPE">
-                                <rect key="frame" x="0.0" y="61" width="318" height="31"/>
+                                <rect key="frame" x="0.0" y="86.5" width="156" height="43"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pago semanal" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g5a-mf-BDn" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                        <rect key="frame" x="0.0" y="0.0" width="159" height="31"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="78" height="43"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -104,7 +104,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UHd-Df-KNH" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                        <rect key="frame" x="159" y="0.0" width="159" height="31"/>
+                                        <rect key="frame" x="78" y="0.0" width="78" height="43"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -117,10 +117,10 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="HHD-Td-mmD">
-                                <rect key="frame" x="0.0" y="92" width="318" height="30.5"/>
+                                <rect key="frame" x="0.0" y="129.5" width="156" height="43.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pago sugerido" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ghR-vN-u8w" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                        <rect key="frame" x="0.0" y="0.0" width="116" height="30.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="116" height="43.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="116" id="0qk-h3-Mjp"/>
                                         </constraints>
@@ -134,7 +134,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qKW-Jy-6DM">
-                                        <rect key="frame" x="116" y="0.0" width="43" height="30.5"/>
+                                        <rect key="frame" x="116" y="0.0" width="20" height="43.5"/>
                                         <color key="tintColor" red="0.41162583229999999" green="0.1316206157" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" image="info.circle.fill" catalog="system"/>
                                         <connections>
@@ -142,7 +142,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4iM-yo-ucc" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                        <rect key="frame" x="159" y="0.0" width="159" height="30.5"/>
+                                        <rect key="frame" x="136" y="0.0" width="20" height="43.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -155,10 +155,10 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="aMk-zR-gBC">
-                                <rect key="frame" x="0.0" y="122.5" width="318" height="30.5"/>
+                                <rect key="frame" x="0.0" y="173" width="156" height="43"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Próxima fecha de pago" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P3x-sw-Gbh" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                        <rect key="frame" x="0.0" y="0.0" width="159" height="30.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="78" height="43"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -169,7 +169,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fHT-kL-Xlw" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                        <rect key="frame" x="159" y="0.0" width="159" height="30.5"/>
+                                        <rect key="frame" x="78" y="0.0" width="78" height="43"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -181,30 +181,30 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k1Q-Bd-0ZT" customClass="GSVCButton" customModule="GSSAVisualComponents">
+                                <rect key="frame" x="0.0" y="216" width="156" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="6iV-0M-uHU"/>
+                                    <constraint firstAttribute="width" constant="200" id="tQp-AT-hwW"/>
+                                </constraints>
+                                <state key="normal" title="Pagar"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="style">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
                         </subviews>
                     </stackView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k1Q-Bd-0ZT" customClass="GSVCButton" customModule="GSSAVisualComponents">
-                        <rect key="frame" x="99" y="228" width="200" height="50"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="50" id="6iV-0M-uHU"/>
-                            <constraint firstAttribute="width" constant="200" id="tQp-AT-hwW"/>
-                        </constraints>
-                        <state key="normal" title="Pagar"/>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="style">
-                                <integer key="value" value="1"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                    </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zor-EM-mBk">
-                        <rect key="frame" x="0.0" y="296" width="398" height="8"/>
+                        <rect key="frame" x="0.0" y="296" width="236" height="8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="8" id="AVt-D3-tGm"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ICz-LY-sM9">
-                        <rect key="frame" x="0.0" y="0.0" width="398" height="13"/>
+                        <rect key="frame" x="0.0" y="0.0" width="236" height="13"/>
                         <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="13" id="daC-gE-kvX"/>
@@ -212,18 +212,16 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="k1Q-Bd-0ZT" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="6HB-ts-1YD"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="kIp-aG-KNE" secondAttribute="trailing" constant="20" id="8Or-dp-npd"/>
                     <constraint firstItem="xmM-gg-BLJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="8Th-Ob-hjv"/>
                     <constraint firstItem="ICz-LY-sM9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="B6H-KB-2wH"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="kIp-aG-KNE" secondAttribute="trailing" constant="20" id="C0a-HZ-0Fa"/>
                     <constraint firstAttribute="trailing" secondItem="xmM-gg-BLJ" secondAttribute="trailing" constant="10" id="ML9-b6-IrK"/>
                     <constraint firstAttribute="bottom" secondItem="Zor-EM-mBk" secondAttribute="bottom" id="N3l-M2-JAK"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="k1Q-Bd-0ZT" secondAttribute="bottom" constant="15" id="QCh-CI-d9P"/>
                     <constraint firstItem="xmM-gg-BLJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="Upb-0f-ARI"/>
                     <constraint firstAttribute="trailing" secondItem="ICz-LY-sM9" secondAttribute="trailing" id="VaL-kk-TQd"/>
                     <constraint firstItem="kIp-aG-KNE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="ZRZ-zY-eJ1"/>
                     <constraint firstAttribute="trailing" secondItem="Zor-EM-mBk" secondAttribute="trailing" id="bNb-qb-CUW"/>
-                    <constraint firstItem="k1Q-Bd-0ZT" firstAttribute="top" secondItem="kIp-aG-KNE" secondAttribute="bottom" constant="15" id="n4J-33-HTg"/>
+                    <constraint firstItem="Zor-EM-mBk" firstAttribute="top" secondItem="kIp-aG-KNE" secondAttribute="bottom" constant="20" id="dD5-cq-0go"/>
                     <constraint firstItem="kIp-aG-KNE" firstAttribute="top" secondItem="xmM-gg-BLJ" secondAttribute="bottom" constant="10" id="tNz-ma-741"/>
                     <constraint firstItem="ICz-LY-sM9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="y1S-aR-LFQ"/>
                     <constraint firstItem="Zor-EM-mBk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="zcR-5l-DXD"/>
@@ -244,40 +242,40 @@
     </objects>
     <designables>
         <designable name="4iM-yo-ucc">
-            <size key="intrinsicContentSize" width="18" height="20.5"/>
+            <size key="intrinsicContentSize" width="20" height="22.5"/>
         </designable>
         <designable name="8MW-3a-RyU">
-            <size key="intrinsicContentSize" width="156" height="20.5"/>
+            <size key="intrinsicContentSize" width="165.5" height="22.5"/>
         </designable>
         <designable name="IQT-mD-3rc">
-            <size key="intrinsicContentSize" width="95.5" height="20.5"/>
+            <size key="intrinsicContentSize" width="102.5" height="22.5"/>
         </designable>
         <designable name="N6m-au-GrB">
-            <size key="intrinsicContentSize" width="18" height="20.5"/>
+            <size key="intrinsicContentSize" width="20" height="22.5"/>
         </designable>
         <designable name="P3x-sw-Gbh">
-            <size key="intrinsicContentSize" width="174" height="20.5"/>
+            <size key="intrinsicContentSize" width="187" height="22.5"/>
         </designable>
         <designable name="UHd-Df-KNH">
-            <size key="intrinsicContentSize" width="18" height="20.5"/>
+            <size key="intrinsicContentSize" width="20" height="22.5"/>
         </designable>
         <designable name="aTU-cD-VLj">
-            <size key="intrinsicContentSize" width="8" height="20.5"/>
+            <size key="intrinsicContentSize" width="9.5" height="22.5"/>
         </designable>
         <designable name="fHT-kL-Xlw">
-            <size key="intrinsicContentSize" width="8" height="20.5"/>
+            <size key="intrinsicContentSize" width="9.5" height="22.5"/>
         </designable>
         <designable name="g5a-mf-BDn">
-            <size key="intrinsicContentSize" width="106.5" height="20.5"/>
+            <size key="intrinsicContentSize" width="116" height="22.5"/>
         </designable>
         <designable name="ghR-vN-u8w">
-            <size key="intrinsicContentSize" width="109.5" height="20.5"/>
+            <size key="intrinsicContentSize" width="116" height="22.5"/>
         </designable>
         <designable name="k1Q-Bd-0ZT">
-            <size key="intrinsicContentSize" width="40" height="30"/>
+            <size key="intrinsicContentSize" width="50" height="35"/>
         </designable>
         <designable name="xmM-gg-BLJ">
-            <size key="intrinsicContentSize" width="90.5" height="20.5"/>
+            <size key="intrinsicContentSize" width="123" height="28"/>
         </designable>
     </designables>
     <resources>
