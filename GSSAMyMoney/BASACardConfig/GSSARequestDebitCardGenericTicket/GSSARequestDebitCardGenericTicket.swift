@@ -37,14 +37,14 @@ class GSSARequestDebitCardGenericTicket
         return informationview
     }
     
-     class func getTicketInfo()->[GSVTResumeCellInfo] {
+    class func getTicketInfo(invoice: String)->[GSVTResumeCellInfo] {
         
         // Payment Detail Configuration Cell Start
         let selectedAddress = requestedAddress.shared
         let  paymentDetailOption:[(subTitle: String?, info: String)] =
             [
                 (subTitle: "Tarjeta baz física", info: "Pago de \(selectedAddress.amount ?? "tarjeta física")"),
-                (subTitle: "Número de pedido baz física", info: "v12345678ekt")
+                (subTitle: "Número de pedido baz física", info: invoice)
             ]
         
         let paymentDetailCell = GSVTResumeCellInfo(sectionTitle: "Detalle del pago",
@@ -53,12 +53,13 @@ class GSSARequestDebitCardGenericTicket
         // Payment Detail Configuration Cell End
         
         
+        let completeName = (GSSISessionInfo.sharedInstance.gsUser.name ?? "") + " "  + (GSSISessionInfo.sharedInstance.gsUser.lastName ?? "") + " " + (GSSISessionInfo.sharedInstance.gsUser.secondLastName ?? "")
         // Address Detail Configuration Cell Start
         
         let addressDetailOption:[(subTitle: String?, info: String)] =
             [
                 (subTitle: "Domicilio", info: "\(selectedAddress.street ?? "") \(selectedAddress.externalNumber  ?? "") \(selectedAddress.internalNumber  ?? "" ) \(selectedAddress.postalCode  ?? "" )  \(selectedAddress.suburb  ?? "" )  \(selectedAddress.country  ?? "" )  \(selectedAddress.city  ?? "" )" ),
-                (subTitle: "Recibe", info: (GSSISessionInfo.sharedInstance.gsUser.name ?? "" + " " + (GSSISessionInfo.sharedInstance.gsUser.lastName ?? "")) ),
+                (subTitle: "Recibe", info: completeName),
                 (subTitle: "Entrega estimada", info: "Entre 2 y 10 dias hábiles")
             ]
         
@@ -71,7 +72,7 @@ class GSSARequestDebitCardGenericTicket
         return [paymentDetailCell,addressDetailCell]
     }
     
-    class func getGenericTicket(delegate: GSVTTicketOperationDelegate )-> GSVTTicketOperationController {
+    class func getGenericTicket(delegate: GSVTTicketOperationDelegate, invoice: String)-> GSVTTicketOperationController {
         
         //Title Info
         let mainInfo = GSVTTicketMainInfo(title: "Tarjeta física en camino")
@@ -80,7 +81,7 @@ class GSSARequestDebitCardGenericTicket
         let informationView = getWarningBox(message: "Cuando llegue tu paquete asegúrate de que esté en buenas condiciones")
         
         // Ticket instance
-        let ticket = GSVTTicketOperationController(mainInfo: mainInfo, operationInfo: getTicketInfo(), generatedInfo: nil,aditionalInfo: [informationView], firstActionTitle: "Compartir")
+        let ticket = GSVTTicketOperationController(mainInfo: mainInfo, operationInfo: getTicketInfo(invoice: invoice), generatedInfo: nil,aditionalInfo: [informationView], firstActionTitle: "Compartir")
         ticket.modalPresentationStyle = .overCurrentContext
         
         // Ticket delegate

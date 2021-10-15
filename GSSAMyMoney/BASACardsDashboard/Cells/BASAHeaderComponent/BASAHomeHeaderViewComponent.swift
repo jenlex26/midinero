@@ -266,7 +266,7 @@ extension BASAHomeHeaderViewComponent: UICollectionViewDelegate, UICollectionVie
             cell.lblCardNumber.isHidden = false
             cell.lblVigencia.isHidden = false
             cell.lblExpDate.isHidden = false
-            
+            cell.btnConfig.isHidden = true
             cell.btnConfig.backgroundColor = .black
             cell.btnConfig.tag = 1
             cell.lblOweMoney.textColor = .white

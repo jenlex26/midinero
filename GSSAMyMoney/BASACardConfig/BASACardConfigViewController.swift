@@ -14,6 +14,7 @@ import GSSAVisualTemplates
 import GSSAFunctionalUtilities
 import GSSASessionInfo
 import FirebaseRemoteConfig
+import AVKit
 
 class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol, GSVCBottomAlertHandler{
     
@@ -38,6 +39,8 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
     var contractNumber = ""
     var cancelReload = false
     var cellsArray: Array<[UITableViewCell:CGFloat]> = []
+    var defaultCaseTouchCount = 0
+    var deviceShaked = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +53,7 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
         table.alwaysBounceVertical = false
         if credit == true{
             CLABE = ""
+            setTableForDebitCard()
         }else{
             setTableForDebitCard()
         }
@@ -67,6 +71,18 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
                     }
                 }
             }
+        }
+    }
+    
+    override func becomeFirstResponder() -> Bool {
+        return true
+    }
+    
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?){
+        if motion == .motionShake{
+            deviceShaked = true
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(.success)
         }
     }
     
@@ -137,8 +153,8 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
             configurations.append(userOptions.init(title: "Beneficiarios", subTitle: nil, image: chevronRight, tag: 3))
             //configurations.append(userOptions.init(title: "Activar tarjeta fisica", subTitle: nil, image: chevronRight, tag: 7))
         }else{
-            configurations.append(userOptions(title: "Número de tarjeta física", subTitle: CLABE, image: docFill, tag: 5))
-            configurations.append(userOptions(title: "Estado de cuenta", subTitle: nil, image: chevronRight, tag: 1))
+            configurations.append(userOptions(title: "Número de tarjeta", subTitle: CLABE, image: docFill, tag: 5))
+          //  configurations.append(userOptions(title: "Estado de cuenta", subTitle: nil, image: chevronRight, tag: 1))
         }
         
     }
@@ -170,6 +186,32 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
         }
     }
     
+    func setTableForCreditCard(){
+        removeAllExceptFirst()
+        if myMoneyFrameworkSettings.shared.showCreditCardControlSettings == true{
+            let cardControl = table.dequeueReusableCell(withIdentifier: "BASACardControl") as! BASACardControl
+            cardControl.lblCheckNIP.text = "Activa tu tarjeta física"
+            //cell.btnCheckNIP.addTarget(self, action: #selector(checkNIP(sender:)), for: .touchUpInside)
+            cardControl.btnCheckNIP.addTarget(self, action: #selector(activateCreditCard), for: .touchUpInside)
+            cardControl.turnOfSwitch.addTarget(self, action: #selector(turnOnCard(sender:)), for: .valueChanged)
+            cardControl.reportCardView.isHidden = true
+            cellsArray.append([cardControl:300.0])
+        }
+        
+        let cell = table.dequeueReusableCell(withIdentifier: "SectionCell") as! SectionCell
+        cell.lblTitle.text = "Información"
+        cellsArray.append([cell:50.0])
+        
+        for item in configurations{
+            let cell = table.dequeueReusableCell(withIdentifier: "ConfigItemCell") as! ConfigItemCell
+            let data = item
+            cell.tag = data.tag ?? -1
+            cell.configureCell(title: data.title, subtitle: data.subTitle, image: data.image)
+            cellsArray.append([cell:75.0])
+        }
+        
+    }
+    
     func setTableForDebitCard(){
         removeAllExceptFirst()
         //Crea las celdas de las opciones genericas y añade nuevas al arreglo
@@ -184,7 +226,6 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
             cell.configureCell(title: data.title, subtitle: data.subTitle, image: data.image)
             cellsArray.append([cell:75.0])
         }
-        
     }
     
     func configureDebitCard(forStatus: status){
@@ -230,6 +271,29 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
             }
             self.table.reloadData()
             GSVCLoader.hide()
+        }
+    }
+    
+    func handleEasterEgg(){
+        let generator = UINotificationFeedbackGenerator()
+        defaultCaseTouchCount += 1
+        if defaultCaseTouchCount >= 5{
+            generator.notificationOccurred(.warning)
+            if UIPasteboard.general.string == "1"{
+                defaultCaseTouchCount = 0
+                generator.notificationOccurred(.error)
+                let dictionary = Bundle.main.infoDictionary!
+                let version = dictionary["CFBundleShortVersionString"] as! String
+                let build = dictionary["CFBundleVersion"] as! String
+                let mainInfo = "Main version \(version) build \(build)"
+                presentBottomAlertFullData(status: .info, message: "BUNDLE VERSION \(Bundle.init(identifier: "mx.com.gruposalinas.GSSAMyMoney")?.infoDictionary?["CFBundleShortVersionString"] as? String ?? "") \n \(mainInfo)", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+            }else if UIPasteboard.general.string == Date().getString(withFormat: "HHmm"){
+                generator.notificationOccurred(.error)
+                let completeName = (GSSISessionInfo.sharedInstance.gsUser.name ?? "SIN NOMBRE") + " "  + (GSSISessionInfo.sharedInstance.gsUser.lastName ?? "SIN LASTNAME") + " " + (GSSISessionInfo.sharedInstance.gsUser.secondLastName ?? "SIN SECOND LAST NAME")
+                let sharedinstance = GSSISessionInfo.sharedInstance.gsUser
+                let string = "SICU: \(sharedinstance?.SICU ?? "SIN SICU")\nEMAIL: \(sharedinstance?.email ?? "SIN CORREO")\nACCOUNT: \(sharedinstance?.account?.number ?? "SIN NÙMERO DE CUENTA")\nNAME:\(completeName)"
+                UIPasteboard.general.string = string
+            }
         }
     }
     
@@ -280,45 +344,12 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if credit == true{
-            switch indexPath.row{
-            case 0:
-                let cell = table.dequeueReusableCell(withIdentifier: "BASACardControl") as! BASACardControl
-                cell.lblCheckNIP.text = "Activa tu tarjeta física"
-                //cell.btnCheckNIP.addTarget(self, action: #selector(checkNIP(sender:)), for: .touchUpInside)
-                cell.btnCheckNIP.addTarget(self, action: #selector(activateCreditCard), for: .touchUpInside)
-                cell.turnOfSwitch.addTarget(self, action: #selector(turnOnCard(sender:)), for: .valueChanged)
-                cell.reportCardView.isHidden = true
-                return cell
-            case 1:
-                let cell = table.dequeueReusableCell(withIdentifier: "SectionCell") as! SectionCell
-                cell.lblTitle.text = "Información"
-                return cell
-            default:
-                let cell = table.dequeueReusableCell(withIdentifier: "ConfigItemCell") as! ConfigItemCell
-                let data = configurations[indexPath.row - 2]
-                cell.tag = data.tag ?? -1
-                cell.configureCell(title: data.title, subtitle: data.subTitle, image: data.image)
-                return cell
-            }
-        }else{
-            return cellsArray[indexPath.row].first!.key
-        }
+        return cellsArray[indexPath.row].first!.key
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if credit == true{
-            switch indexPath.row{
-            case 0:
-                return 180.0
-            case 1:
-                return 60.0
-            default:
-                return 75.0
-            }
-        }else{
-            return cellsArray[indexPath.row].first?.value ?? 0.0
-        }
+        
+        return cellsArray[indexPath.row].first?.value ?? 0.0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -367,7 +398,9 @@ extension BASACardConfigViewController: UITableViewDelegate, UITableViewDataSour
                 self.navigationController?.pushViewController(view, animated: true)
             }
         default:
-           ()
+            if deviceShaked == true{
+                handleEasterEgg()
+            }
         }
     }
 }

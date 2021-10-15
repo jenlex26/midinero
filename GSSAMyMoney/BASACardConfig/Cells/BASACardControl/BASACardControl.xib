@@ -208,6 +208,7 @@
                 <outlet property="btnCheckNIP" destination="Sye-f6-UqY" id="9jb-iN-gTJ"/>
                 <outlet property="cardControlView" destination="wyh-xA-QEb" id="CTy-zM-HaY"/>
                 <outlet property="lblCheckNIP" destination="Xul-6a-bhu" id="sL0-Te-83J"/>
+                <outlet property="lockIcon" destination="HgC-zB-efj" id="CfU-F2-q0E"/>
                 <outlet property="nipCardView" destination="vei-zf-Q3b" id="3EX-0x-4js"/>
                 <outlet property="reportCardView" destination="JNd-xh-jAJ" id="BQ0-a4-esc"/>
                 <outlet property="turnOfSwitch" destination="eyA-gb-Sja" id="bmZ-eY-ZKb"/>

@@ -66,7 +66,7 @@ class GSSARequestDebitCardViewController: GSSAMasterViewController, GSSARequestD
         GSVCLoader.show()
         presenter?.requestCard(commission: amount.moneyToDoubleString(), Response: { Response in
             if Response != nil{
-                self.present(GSSARequestDebitCardGenericTicket.getGenericTicket(delegate: self), animated: true)
+                self.present(GSSARequestDebitCardGenericTicket.getGenericTicket(delegate: self, invoice: Response?.folio ?? ""), animated: true)
             }else{
                 self.presentBottomAlertFullData(status: .error, message: "Ocurrió un problema al solicitar su tarjeta, intente de nuevo más tared", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
             }

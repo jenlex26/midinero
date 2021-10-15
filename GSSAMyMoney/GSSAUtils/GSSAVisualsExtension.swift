@@ -32,6 +32,16 @@ extension UIColor {
 }
 
 extension UIImage{
+    class func lockIcon() -> UIImage{
+        var image = UIImage()
+        if #available(iOS 13.0, *) {
+            image = UIImage(systemName: "lock.fill") ?? UIImage()
+        }else{
+            image = UIImage(named: "lockIcon", in: Bundle.init(identifier: "mx.com.gruposalinas.GSSAMyMoney"), compatibleWith: nil) ?? UIImage()
+        }
+        return image
+    }
+    
     class func backIcon(tint: UIColor) -> UIImage{
         var image = UIImage()
         if #available(iOS 13.0, *) {

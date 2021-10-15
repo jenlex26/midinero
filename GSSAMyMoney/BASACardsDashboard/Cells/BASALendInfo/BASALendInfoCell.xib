@@ -137,9 +137,6 @@
                                         <rect key="frame" x="116" y="0.0" width="20" height="43.5"/>
                                         <color key="tintColor" red="0.41162583229999999" green="0.1316206157" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" image="info.circle.fill" catalog="system"/>
-                                        <connections>
-                                            <action selector="showMessage:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Pz5-TJ-bCa"/>
-                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4iM-yo-ucc" customClass="GSVCLabel" customModule="GSSAVisualComponents">
                                         <rect key="frame" x="136" y="0.0" width="20" height="43.5"/>

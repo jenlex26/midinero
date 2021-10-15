@@ -345,11 +345,11 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
             loadCreditCardInfo()
         }
         
-        let digitalCardCell = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "RequestCardCell") as! RequestCardCell
-        digitalCardCell.lblTitle.text = "Tarjeta digital"
-        digitalCardCell.cellViewController = self
-        digitalCardCell.cellButton.addTarget(self, action: #selector(showAlert), for: .touchUpInside)
-        cellsArray.append([digitalCardCell:119.0])
+        //let digitalCardCell = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "RequestCardCell") as! RequestCardCell
+        //digitalCardCell.lblTitle.text = "Tarjeta digital"
+        //digitalCardCell.cellViewController = self
+        //digitalCardCell.cellButton.addTarget(self, action: #selector(showAlert), for: .touchUpInside)
+        //cellsArray.append([digitalCardCell:119.0])
         
         let infoCreditCell = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASACreditCardInfoCell") as! BASACreditCardInfoCell
         
@@ -418,12 +418,12 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         
         if lendsData?.resultado?.productos != nil{
             for item in lendsData!.resultado!.productos!{
-                if item.id != 0{
+                //if item.id != 0{
                     let creditItem = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAMyCreditItem") as! BASAMyCreditItem
-                    creditItem.lblAmount.text = item.pagoLiquidar?.moneyFormat()
+                    creditItem.lblAmount.text = item.pagoLiquidar?.moneyFormatWithoutSplit()
                     creditItem.setTitle(id: item.id ?? -1)
                     cellsArray.append([creditItem:180.0])
-                }
+               // }
             }
         }
         

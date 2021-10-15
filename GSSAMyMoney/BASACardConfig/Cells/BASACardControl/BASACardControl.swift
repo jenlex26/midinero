@@ -17,6 +17,7 @@ class BASACardControl: UITableViewCell {
     @IBOutlet weak var nipCardView      : UIView!
     @IBOutlet weak var btnCheckNIP      : UIButton!
     @IBOutlet weak var lblCheckNIP      : GSVCLabel!
+    @IBOutlet weak var lockIcon         : UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,5 +27,6 @@ class BASACardControl: UITableViewCell {
         self.cardControlView.layer.shadowRadius = 6
         self.cardControlView.layer.shadowOpacity = 0.1
         self.cardControlView.layer.masksToBounds = true
+        lockIcon.image = UIImage.lockIcon()
     }
 }
