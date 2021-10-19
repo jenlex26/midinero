@@ -282,6 +282,18 @@
 		F0A056BC2710C0D000BBB1A6 /* GSSALinkDePagoCorreoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A056B72710C0D000BBB1A6 /* GSSALinkDePagoCorreoPresenter.swift */; };
 		F0A056BD2710C0D000BBB1A6 /* GSSALinkDePagoCorreoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0A056B82710C0D000BBB1A6 /* GSSALinkDePagoCorreoViewController.xib */; };
 		F0DB9FC22714832E0087E7C4 /* GSSAVersionSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DB9FC12714832E0087E7C4 /* GSSAVersionSettings.swift */; };
+		F0FF3B8A271DDD12007026B0 /* GSSAAddFundsMenuPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF3B84271DDD12007026B0 /* GSSAAddFundsMenuPresenter.swift */; };
+		F0FF3B8B271DDD12007026B0 /* GSSAAddFundsMenuRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF3B85271DDD12007026B0 /* GSSAAddFundsMenuRouter.swift */; };
+		F0FF3B8C271DDD12007026B0 /* GSSAAddFundsMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF3B86271DDD12007026B0 /* GSSAAddFundsMenuViewController.swift */; };
+		F0FF3B8D271DDD12007026B0 /* GSSAAddFundsMenuProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF3B87271DDD12007026B0 /* GSSAAddFundsMenuProtocols.swift */; };
+		F0FF3B8E271DDD12007026B0 /* GSSAAddFundsMenuInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF3B88271DDD12007026B0 /* GSSAAddFundsMenuInteractor.swift */; };
+		F0FF3B8F271DDD12007026B0 /* GSSAAddFundsMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0FF3B89271DDD12007026B0 /* GSSAAddFundsMenuViewController.xib */; };
+		F0FF3B97271E2BF3007026B0 /* GSSATransferFromOtherBankPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF3B91271E2BF3007026B0 /* GSSATransferFromOtherBankPresenter.swift */; };
+		F0FF3B98271E2BF3007026B0 /* GSSATransferFromOtherBankRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF3B92271E2BF3007026B0 /* GSSATransferFromOtherBankRouter.swift */; };
+		F0FF3B99271E2BF3007026B0 /* GSSATransferFromOtherBankViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF3B93271E2BF3007026B0 /* GSSATransferFromOtherBankViewController.swift */; };
+		F0FF3B9A271E2BF3007026B0 /* GSSATransferFromOtherBankProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF3B94271E2BF3007026B0 /* GSSATransferFromOtherBankProtocols.swift */; };
+		F0FF3B9B271E2BF3007026B0 /* GSSATransferFromOtherBankInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF3B95271E2BF3007026B0 /* GSSATransferFromOtherBankInteractor.swift */; };
+		F0FF3B9C271E2BF3007026B0 /* GSSATransferFromOtherBankViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0FF3B96271E2BF3007026B0 /* GSSATransferFromOtherBankViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -574,6 +586,18 @@
 		F0C4F98B26F164DF00E8B852 /* SDKProductos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SDKProductos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0C4F98C26F164DF00E8B852 /* SDKUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SDKUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0DB9FC12714832E0087E7C4 /* GSSAVersionSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAVersionSettings.swift; sourceTree = "<group>"; };
+		F0FF3B84271DDD12007026B0 /* GSSAAddFundsMenuPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAAddFundsMenuPresenter.swift; sourceTree = "<group>"; };
+		F0FF3B85271DDD12007026B0 /* GSSAAddFundsMenuRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAAddFundsMenuRouter.swift; sourceTree = "<group>"; };
+		F0FF3B86271DDD12007026B0 /* GSSAAddFundsMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAAddFundsMenuViewController.swift; sourceTree = "<group>"; };
+		F0FF3B87271DDD12007026B0 /* GSSAAddFundsMenuProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAAddFundsMenuProtocols.swift; sourceTree = "<group>"; };
+		F0FF3B88271DDD12007026B0 /* GSSAAddFundsMenuInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAAddFundsMenuInteractor.swift; sourceTree = "<group>"; };
+		F0FF3B89271DDD12007026B0 /* GSSAAddFundsMenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GSSAAddFundsMenuViewController.xib; sourceTree = "<group>"; };
+		F0FF3B91271E2BF3007026B0 /* GSSATransferFromOtherBankPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSATransferFromOtherBankPresenter.swift; sourceTree = "<group>"; };
+		F0FF3B92271E2BF3007026B0 /* GSSATransferFromOtherBankRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSATransferFromOtherBankRouter.swift; sourceTree = "<group>"; };
+		F0FF3B93271E2BF3007026B0 /* GSSATransferFromOtherBankViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSATransferFromOtherBankViewController.swift; sourceTree = "<group>"; };
+		F0FF3B94271E2BF3007026B0 /* GSSATransferFromOtherBankProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSATransferFromOtherBankProtocols.swift; sourceTree = "<group>"; };
+		F0FF3B95271E2BF3007026B0 /* GSSATransferFromOtherBankInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSATransferFromOtherBankInteractor.swift; sourceTree = "<group>"; };
+		F0FF3B96271E2BF3007026B0 /* GSSATransferFromOtherBankViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GSSATransferFromOtherBankViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -857,6 +881,7 @@
 		10E9ED7B267D6BA400F45640 /* BASACardsDashboard */ = {
 			isa = PBXGroup;
 			children = (
+				F0577D4D271DDA96005953FC /* GSSAAddFundsMenu */,
 				EEAEFB05269E089800F97E4D /* GSSAMovementPreview */,
 				10E9ED7C267D6BA400F45640 /* Cells */,
 				10E9ED99267D6BA400F45640 /* BASAMainHubCardsProtocols.swift */,
@@ -1390,6 +1415,20 @@
 			path = GSSALinkDePago;
 			sourceTree = "<group>";
 		};
+		F0577D4D271DDA96005953FC /* GSSAAddFundsMenu */ = {
+			isa = PBXGroup;
+			children = (
+				F0FF3B90271E2BDA007026B0 /* GSSATransferFromOtherBank */,
+				F0FF3B84271DDD12007026B0 /* GSSAAddFundsMenuPresenter.swift */,
+				F0FF3B85271DDD12007026B0 /* GSSAAddFundsMenuRouter.swift */,
+				F0FF3B86271DDD12007026B0 /* GSSAAddFundsMenuViewController.swift */,
+				F0FF3B87271DDD12007026B0 /* GSSAAddFundsMenuProtocols.swift */,
+				F0FF3B88271DDD12007026B0 /* GSSAAddFundsMenuInteractor.swift */,
+				F0FF3B89271DDD12007026B0 /* GSSAAddFundsMenuViewController.xib */,
+			);
+			path = GSSAAddFundsMenu;
+			sourceTree = "<group>";
+		};
 		F0A056B32710C0D000BBB1A6 /* GSSALinkDePagoCorreo */ = {
 			isa = PBXGroup;
 			children = (
@@ -1415,6 +1454,19 @@
 				EE36C43026878F11001AD9F2 /* GSSASecurityController.swift */,
 			);
 			path = GSSAUtils;
+			sourceTree = "<group>";
+		};
+		F0FF3B90271E2BDA007026B0 /* GSSATransferFromOtherBank */ = {
+			isa = PBXGroup;
+			children = (
+				F0FF3B91271E2BF3007026B0 /* GSSATransferFromOtherBankPresenter.swift */,
+				F0FF3B92271E2BF3007026B0 /* GSSATransferFromOtherBankRouter.swift */,
+				F0FF3B93271E2BF3007026B0 /* GSSATransferFromOtherBankViewController.swift */,
+				F0FF3B94271E2BF3007026B0 /* GSSATransferFromOtherBankProtocols.swift */,
+				F0FF3B95271E2BF3007026B0 /* GSSATransferFromOtherBankInteractor.swift */,
+				F0FF3B96271E2BF3007026B0 /* GSSATransferFromOtherBankViewController.xib */,
+			);
+			path = GSSATransferFromOtherBank;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1510,6 +1562,7 @@
 				10E9EDB9267D6BA400F45640 /* BASAButtonCell.xib in Resources */,
 				10E9EDE8267D6BA400F45640 /* BASAButtonsCell.xib in Resources */,
 				10E9EDBB267D6BA400F45640 /* BASACardControl.xib in Resources */,
+				F0FF3B9C271E2BF3007026B0 /* GSSATransferFromOtherBankViewController.xib in Resources */,
 				10E9EDC1267D6BA400F45640 /* SectionCell.xib in Resources */,
 				EEAD108026C20792000E5BEF /* GSSAFundAddCardViewController.xib in Resources */,
 				10E9EDE0267D6BA400F45640 /* BASAHomeHeaderViewComponent.xib in Resources */,
@@ -1531,6 +1584,7 @@
 				10E9EDF3267D6BA400F45640 /* BASAMainHubCardsViewController.xib in Resources */,
 				10E9EDE1267D6BA400F45640 /* BASALendInfoCell.xib in Resources */,
 				2E854FB226E7D6E7001521D1 /* GSSACardPaymentBtnSliderViewViewController.xib in Resources */,
+				F0FF3B8F271DDD12007026B0 /* GSSAAddFundsMenuViewController.xib in Resources */,
 				EEAD105F26C20792000E5BEF /* GSSAFundSelectCardViewController.xib in Resources */,
 				EEAB93A626DEE184000F2541 /* GSSAActivateCreditCardViewController.xib in Resources */,
 				EE2A262026B36DF300E1C2C5 /* GSSASetCVVViewController.xib in Resources */,
@@ -1562,6 +1616,7 @@
 				10E9EDBA267D6BA400F45640 /* BASACardControl.swift in Sources */,
 				EEAD108526C20792000E5BEF /* GSSACardInfoView.swift in Sources */,
 				EE951C0326C2DA77006AA374 /* GSSAGenericErrorExtension.swift in Sources */,
+				F0FF3B8A271DDD12007026B0 /* GSSAAddFundsMenuPresenter.swift in Sources */,
 				EED2727D26E674D0006AB542 /* GSSADocumentReaderInteractor.swift in Sources */,
 				EE0655D92682AE6600F7C73D /* GSDigitalCardConfigRouter.swift in Sources */,
 				2E854FA126E7D346001521D1 /* GSSACardPaymentBtnCoreViewPresenter.swift in Sources */,
@@ -1606,12 +1661,15 @@
 				10E9EDC3267D6BA400F45640 /* ConfigItemCell.swift in Sources */,
 				10E9EDB1267D6BA400F45640 /* BASACardStatementsViewController.swift in Sources */,
 				10E9EDFD267D6BA400F45640 /* BASAShadowRadiusBaseControl.swift in Sources */,
+				F0FF3B97271E2BF3007026B0 /* GSSATransferFromOtherBankPresenter.swift in Sources */,
 				10E9EDD8267D6BA400F45640 /* BASABeneficiaryListViewController.swift in Sources */,
 				EEE84F6E26B4B37400C5CACE /* GSSACardNIPViewController.swift in Sources */,
 				10E9EDAE267D6BA400F45640 /* BASACardStatementsPresenter.swift in Sources */,
 				EE2A260E26B366D200E1C2C5 /* GSSActivateDebitCardViewController.swift in Sources */,
 				EEAD107826C20792000E5BEF /* StringExtension.swift in Sources */,
+				F0FF3B9A271E2BF3007026B0 /* GSSATransferFromOtherBankProtocols.swift in Sources */,
 				10E9EDE2267D6BA400F45640 /* BASALendInfoCell.swift in Sources */,
+				F0FF3B8B271DDD12007026B0 /* GSSAAddFundsMenuRouter.swift in Sources */,
 				10E9EDFB267D6BA400F45640 /* BASARadiusButtonView.swift in Sources */,
 				2E854FAD26E7D6E7001521D1 /* GSSACardPaymentBtnSliderViewPresenter.swift in Sources */,
 				EEAD107026C20792000E5BEF /* GSSAConfirmCardSaveRouter.swift in Sources */,
@@ -1681,11 +1739,13 @@
 				EEAD106926C20792000E5BEF /* GSSAFundSharedVariables.swift in Sources */,
 				EEAD107F26C20792000E5BEF /* GSSAFundAddCardRouter.swift in Sources */,
 				EEAD107126C20792000E5BEF /* GSSAConfirmCardSavePresenter.swift in Sources */,
+				F0FF3B8D271DDD12007026B0 /* GSSAAddFundsMenuProtocols.swift in Sources */,
 				EEAD105D26C20792000E5BEF /* GSSAFundSelectCardRouter.swift in Sources */,
 				EEAFA7A3268CF3DD00DBC192 /* GSSANewBeneficiaryAddressInteractor.swift in Sources */,
 				EED2CB9C269D0C4B00A1E129 /* GSSALinkDePagoProtocols.swift in Sources */,
 				10E9EDD4267D6BA400F45640 /* BASANewBeneficiaryViewController.swift in Sources */,
 				10E9EDE7267D6BA400F45640 /* BASAButtonsCell.swift in Sources */,
+				F0FF3B8C271DDD12007026B0 /* GSSAAddFundsMenuViewController.swift in Sources */,
 				F0A056BC2710C0D000BBB1A6 /* GSSALinkDePagoCorreoPresenter.swift in Sources */,
 				EE2A25FB26B300CE00E1C2C5 /* GSSAPhysicalCardRequestAddressViewController.swift in Sources */,
 				EEAD107626C20792000E5BEF /* GSSAVisualsExtension.swift in Sources */,
@@ -1723,11 +1783,13 @@
 				EEAD107C26C20792000E5BEF /* GSSAFundWebViewViewController.swift in Sources */,
 				EE2A261D26B36DF300E1C2C5 /* GSSASetCVVViewController.swift in Sources */,
 				2E854FA426E7D346001521D1 /* GSSACardPaymentBtnCoreViewProtocols.swift in Sources */,
+				F0FF3B98271E2BF3007026B0 /* GSSATransferFromOtherBankRouter.swift in Sources */,
 				EE2A261026B366D200E1C2C5 /* GSSActivateDebitCardInteractor.swift in Sources */,
 				EE2A260D26B366D200E1C2C5 /* GSSActivateDebitCardRouter.swift in Sources */,
 				EE2A25FC26B300CE00E1C2C5 /* GSSAPhysicalCardRequestAddressProtocols.swift in Sources */,
 				EEAD108226C20792000E5BEF /* GSSAFundAddCardViewController.swift in Sources */,
 				EEAEFB0E269E08BD00F97E4D /* GSSAMovementPreviewViewController.swift in Sources */,
+				F0FF3B99271E2BF3007026B0 /* GSSATransferFromOtherBankViewController.swift in Sources */,
 				EE2A261E26B36DF300E1C2C5 /* GSSASetCVVProtocols.swift in Sources */,
 				10E9EDF6267D6BA400F45640 /* BASAMainHubCardsRouter.swift in Sources */,
 				EEC54C2226C32F7100D54B0D /* GSSAFundTicket.swift in Sources */,
@@ -1754,6 +1816,8 @@
 				EED3E40C269E88BF00BDF898 /* BASAA.swift in Sources */,
 				EE344CC626BCA583001727B4 /* GSSARockaletaCustom.swift in Sources */,
 				EEAEFB13269E0F5400F97E4D /* GSSAGradientController.swift in Sources */,
+				F0FF3B9B271E2BF3007026B0 /* GSSATransferFromOtherBankInteractor.swift in Sources */,
+				F0FF3B8E271DDD12007026B0 /* GSSAAddFundsMenuInteractor.swift in Sources */,
 				EEE84F6F26B4B37400C5CACE /* GSSACardNIPProtocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

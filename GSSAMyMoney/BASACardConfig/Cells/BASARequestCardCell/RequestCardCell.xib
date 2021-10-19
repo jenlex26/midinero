@@ -33,7 +33,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tarjeta digital" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dtM-yd-udu" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                <rect key="frame" x="67" y="28" width="146" height="20.5"/>
+                                <rect key="frame" x="67" y="27" width="146" height="22.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -51,15 +51,30 @@
                                     <constraint firstAttribute="height" constant="24" id="pl4-oQ-pmE"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="emp-8t-B0r" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                                <rect key="frame" x="67" y="49.5" width="180" height="24.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="styleType">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="MFD-Ao-hLo" firstAttribute="centerY" secondItem="oMf-6b-twD" secondAttribute="centerY" id="7c1-Pn-DB7"/>
                             <constraint firstItem="dtM-yd-udu" firstAttribute="centerY" secondItem="MFD-Ao-hLo" secondAttribute="centerY" id="91h-vW-XLC"/>
+                            <constraint firstAttribute="bottom" secondItem="emp-8t-B0r" secondAttribute="bottom" constant="2" id="9Xh-HW-ZwR"/>
                             <constraint firstItem="ZeO-at-1xG" firstAttribute="top" secondItem="oMf-6b-twD" secondAttribute="top" id="AVd-pj-wzL"/>
+                            <constraint firstItem="emp-8t-B0r" firstAttribute="trailing" secondItem="OvC-gI-vL3" secondAttribute="trailing" id="Abe-fF-jE7"/>
                             <constraint firstItem="OvC-gI-vL3" firstAttribute="centerY" secondItem="oMf-6b-twD" secondAttribute="centerY" id="Aez-YG-I6q"/>
+                            <constraint firstItem="emp-8t-B0r" firstAttribute="leading" secondItem="dtM-yd-udu" secondAttribute="leading" id="G2i-4l-eTY"/>
                             <constraint firstAttribute="bottom" secondItem="ZeO-at-1xG" secondAttribute="bottom" id="Gut-MJ-RhH"/>
                             <constraint firstItem="OvC-gI-vL3" firstAttribute="leading" secondItem="dtM-yd-udu" secondAttribute="trailing" constant="10" id="glb-re-fTH"/>
+                            <constraint firstItem="emp-8t-B0r" firstAttribute="top" secondItem="dtM-yd-udu" secondAttribute="bottom" id="k7f-ZY-9iY"/>
                             <constraint firstAttribute="trailing" secondItem="ZeO-at-1xG" secondAttribute="trailing" id="lkj-AM-fZF"/>
                             <constraint firstAttribute="trailing" secondItem="OvC-gI-vL3" secondAttribute="trailing" constant="20" id="nqs-AE-0p0"/>
                             <constraint firstItem="MFD-Ao-hLo" firstAttribute="leading" secondItem="oMf-6b-twD" secondAttribute="leading" constant="16" id="qcR-G2-EYV"/>
@@ -92,13 +107,14 @@
                 <outlet property="cellButton" destination="ZeO-at-1xG" id="wdL-ml-ned"/>
                 <outlet property="imgIcon" destination="OvC-gI-vL3" id="kcG-in-9tp"/>
                 <outlet property="lblTitle" destination="dtM-yd-udu" id="3p5-0v-scj"/>
+                <outlet property="lblTracking" destination="emp-8t-B0r" id="SbZ-YV-5P1"/>
             </connections>
             <point key="canvasLocation" x="131.15942028985509" y="92.745535714285708"/>
         </tableViewCell>
     </objects>
     <designables>
         <designable name="dtM-yd-udu">
-            <size key="intrinsicContentSize" width="102" height="20.5"/>
+            <size key="intrinsicContentSize" width="110.5" height="22.5"/>
         </designable>
     </designables>
     <resources>

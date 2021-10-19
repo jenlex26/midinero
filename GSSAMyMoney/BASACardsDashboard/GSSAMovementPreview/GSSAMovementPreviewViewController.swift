@@ -29,7 +29,8 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
     @IBOutlet weak var buttonStackSize: NSLayoutConstraint!
     
     var cellsArray:  Array<[UITableViewCell:CGFloat]> = []
-    var details: [String:String] = [:]
+    //[[DATA:ORDER]:LABEL TITLE]
+    var details: [[String:Int]:String] = [:]
     var data: DebitCardTransactionItemV2!
     var movementsArray: DebitCardTransactionV2!
     var index: Int!
@@ -82,18 +83,25 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
             cell.lblAmount.isHidden = true
             cell.lblTitle.text = element.value
             cell.lblTitle.styleType = 8
-            cell.lblDate.text = element.key
+            cell.lblTitle.textColor = .darkGray
+            cell.lblDate.text = element.key.keys.first
             cell.lblDate.numberOfLines = 2
             cell.lblDate.styleType = 6
-            if element.key.removeWhiteSpaces() != ""{
-                if element.value == "Nombre del beneficiario" || element.value == "Ordenante" || element.key.count > 30{
+            cell.lblDate.textColor = .black
+            cell.tag = element.key.values.first ?? 0
+            
+            if element.key.keys.first?.removeWhiteSpaces() != ""{
+                if element.value == "Nombre del beneficiario" || element.value == "Ordenante" || element.key.keys.first?.count ?? 0 > 30{
                     cellsArray.append([cell:90.0])
                 }else{
                     cellsArray.append([cell:75.0])
                 }
             }
         }
-        cellsArray = cellsArray.sorted(by: { ($0.first?.key as! BASAMovementTableViewCell).lblTitle.text!  < ($1.first?.key as! BASAMovementTableViewCell).lblTitle.text! })
+       
+       
+        cellsArray = cellsArray.sorted(by: { ($0.first?.key as! BASAMovementTableViewCell).tag  < ($1.first?.key as! BASAMovementTableViewCell).tag })
+        
         
         if SPEI == true{
             let sectionCell =  table.dequeueReusableCell(withIdentifier: "SectionCell")!
@@ -134,37 +142,38 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
         
         lblTitle.text = transaction.concepto?.alnovaDecrypt()
         
-        details.updateValue("Descripción", forKey: transaction.concepto?.alnovaDecrypt() ?? "")
-        //details.updateValue("Realizado", forKey: transaction.nombreOrdenante ?? "")
+        if transaction.idOperacion == "AB2"{
+            let lastAccountDigits = GSSISessionInfo.sharedInstance.gsUser.account?.number?.removeWhiteSpaces().suffix(4)
+            details.updateValue("Realizado con", forKey: ["Baz****\(lastAccountDigits ?? "")": 1])
+            details.updateValue("Para", forKey: [transaction.descripcion?.showOnlyNumbers.withCellphoneFormat ?? "":2])
+            details.updateValue("Compañia", forKey: [transaction.descripcion?.components(separatedBy: " ").last ?? "":3])
+            details.updateValue("Fecha", forKey: [(transaction.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy") ?? ""):5])
+            details.updateValue("Hora", forKey: [(data.hora?.timeFormatter() ?? ""):6])
+        }else{
+            details.updateValue("Descripción", forKey: [transaction.concepto?.alnovaDecrypt() ?? "":0])
+            details.updateValue("Id de operación", forKey: [transaction.idOperacion ?? "":7])
+            details.updateValue("Fecha y hora de registro", forKey: [(transaction.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy") ?? "") + " " + (data.hora?.timeFormatter() ?? ""):8])
+        }
+       
         //details.updateValue("Para", forKey:  transaction.descripcionBeneficiario ?? "")
-        details.updateValue("Id de operación", forKey: transaction.idOperacion ?? "")
-        details.updateValue("Folio", forKey: transaction.folio ?? "")
-        details.updateValue("Número de operación", forKey: transaction.numeroOperacion ?? "")
-        details.updateValue("Fecha y hora de registro", forKey: (transaction.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy") ?? "") + " " + (data.hora?.timeFormatter() ?? ""))
+     
+        details.updateValue("Folio", forKey: [transaction.folio ?? "":9])
+        details.updateValue("Número de operación", forKey: [transaction.numeroOperacion ?? "":99])
         
         let descriptionData = transaction.descripcionOperacion?.components(separatedBy: "|")
         let urlFotoData = transaction.urlFoto?.components(separatedBy: "|")
-        var claveInstitucion = ""
-        
+  
         if descriptionData?.count ?? 0 >= 2{
-            if descriptionData![0].count >= 4{
-                claveInstitucion = descriptionData![0].suffix(4).description
-            }
-            
             if descriptionData![1] == "r"{
                 let amount = transaction.importe?.alnovaDecrypt().removeWhiteSpaces()
                 lblAmount.text = String((Double(amount ?? "0.0") ?? 0.0) * -1.0).moneyFormatWithoutSplit()
-                details.updateValue("Estatus", forKey: "MOV. PENDIENTE")
+                details.updateValue("Estatus", forKey: ["MOV. PENDIENTE":10])
             }
         }else{
-            if urlFotoData![0].count >= 4{
-                claveInstitucion = urlFotoData![0].suffix(4).description
-            }
-            
             if urlFotoData![1] == "r"{
                 let amount = transaction.importe?.alnovaDecrypt().removeWhiteSpaces()
                 lblAmount.text = String((Double(amount ?? "0.0") ?? 0.0) * -1.0).moneyFormatWithoutSplit()
-                details.updateValue("Estatus", forKey: "MOV. PENDIENTE")
+                details.updateValue("Estatus", forKey: ["MOV. PENDIENTE":10])
             }
         }
         
@@ -182,28 +191,24 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
                     let data = Response?.resultado
                     
                     let originData = data?.numeroCuentaOrigen?.components(separatedBy: "|")
-                    
-                    details.updateValue("Clave de rastreo", forKey: transaction.descripcion ?? "")
-                    details.updateValue("Ordenante", forKey: (originData?[0].nameFormatter() ?? "") + "\n" + (originData?[1] ?? ""))
-                    
                     let destinationData = data?.importeBeneficiario?.components(separatedBy: "|")
-                    
                     let referenceData = data?.nombreBeneficiario?.components(separatedBy: "|")
                     
-                    details.updateValue("Referencia", forKey: referenceData?[0] ?? "")
-                    details.updateValue("Concepto ", forKey: referenceData?[1] ?? "")
-                    
-                    details.updateValue("Nombre del beneficiario", forKey: (destinationData?[0] ?? "") + "\nCuenta: " + (destinationData?[1] ?? ""))
+                    details.updateValue("Clave de rastreo", forKey: [(referenceData?[3] ?? ""):11])
+                    details.updateValue("Ordenante", forKey: [(originData?[0].nameFormatter() ?? "") + "\n" + (originData?[1] ?? ""):12])
+                    details.updateValue("Referencia", forKey: [referenceData?[0] ?? "":13])
+                    details.updateValue("Concepto ", forKey: [referenceData?[1] ?? "":14])
+                    details.updateValue("Nombre del beneficiario", forKey: [(destinationData?[0] ?? "") + "\nCuenta: " + (destinationData?[1] ?? ""):15])
                     
                     switch data?.estatusTransferencia{
                     case "T":
-                        details.updateValue("Estatus de transferencia", forKey: "Liquidada")
+                        details.updateValue("Estatus de transferencia", forKey: ["Liquidada":16])
                     case "C":
-                        details.updateValue("Estatus de transferencia", forKey: "Liquidada por contingencia")
+                        details.updateValue("Estatus de transferencia", forKey: ["Liquidada por contingencia":16])
                     case .none:
-                        details.updateValue("Estatus de transferencia", forKey: "")
+                        details.updateValue("Estatus de transferencia", forKey: ["":16])
                     case .some(_):
-                        details.updateValue("Estatus de transferencia", forKey: "")
+                        details.updateValue("Estatus de transferencia", forKey: ["":16])
                     }
                     
                     let URLData = data?.urlEstatusTransferencia?.components(separatedBy: "|")
@@ -305,3 +310,4 @@ extension GSSAMovementPreviewViewController: UITableViewDelegate, UITableViewDat
         activityObserved()
     }
 }
+

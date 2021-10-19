@@ -102,4 +102,10 @@ extension UIViewController{
                 GSSISessionInfo.sharedInstance.gsUser.updateInfo(info: ["account": mapAccount])
             }
         }
+    
+    func getCompleteUserName() -> String{
+        var name = ""
+        name = "\(GSSISessionInfo.sharedInstance.gsUser.name ?? "") \(GSSISessionInfo.sharedInstance.gsUser.lastName ?? "") \(GSSISessionInfo.sharedInstance.gsUser.secondLastName ?? "")"
+        return name
+    }
 }

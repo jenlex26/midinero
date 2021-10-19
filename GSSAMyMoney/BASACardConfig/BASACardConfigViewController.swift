@@ -41,6 +41,7 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
     var cellsArray: Array<[UITableViewCell:CGFloat]> = []
     var defaultCaseTouchCount = 0
     var deviceShaked = false
+    var trackingKey = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,6 +114,7 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
                 presenter?.requestCardStatus(CardSearchResponse: { [self] CardSearchResponse in
                     if CardSearchResponse != nil{
                         if CardSearchResponse?.resultado?.tarjeta?.estatus?.alnovaDecrypt().removeWhiteSpaces() == "ENVIADA" || CardSearchResponse?.resultado?.tarjeta?.estatus?.alnovaDecrypt().removeWhiteSpaces() == "PENDENTRE"{
+                            trackingKey = CardSearchResponse?.resultado?.tarjeta?.numeroGuia ?? ""
                             configureDebitCard(forStatus: .activate )
                         }else{
                             configureDebitCard(forStatus: .unknown)
@@ -154,7 +156,7 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
             //configurations.append(userOptions.init(title: "Activar tarjeta fisica", subTitle: nil, image: chevronRight, tag: 7))
         }else{
             configurations.append(userOptions(title: "Número de tarjeta", subTitle: CLABE, image: docFill, tag: 5))
-          //  configurations.append(userOptions(title: "Estado de cuenta", subTitle: nil, image: chevronRight, tag: 1))
+            //  configurations.append(userOptions(title: "Estado de cuenta", subTitle: nil, image: chevronRight, tag: 1))
         }
         
     }
@@ -248,6 +250,10 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
                 cell.buttonView.isUserInteractionEnabled = false
                 cell.backgroundColor = UIColor.GSVCBase300()
                 cell.tag = 7
+                
+                if trackingKey.alnovaDecrypt().removeWhiteSpaces() != ""{
+                    cell.lblTracking.text = "Número de guía: \(trackingKey.alnovaDecrypt()) DHL"
+                }
                 cellsArray.insert([cell:111.0], at: 0)
             case .active:
                 //                let cell = table.dequeueReusableCell(withIdentifier: "BASACardControl") as! BASACardControl

@@ -14,6 +14,7 @@ class RequestCardCell: UITableViewCell{
     @IBOutlet weak var lblTitle  : GSVCLabel! 
     @IBOutlet weak var cellButton: UIButton!
     @IBOutlet weak var imgIcon  : UIImageView!
+    @IBOutlet weak var lblTracking: GSVCLabel!
     
     var cellViewController: UIViewController!
     
