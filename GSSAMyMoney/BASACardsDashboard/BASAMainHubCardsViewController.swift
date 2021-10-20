@@ -409,8 +409,10 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
             infoCell.lblSuggestedPayment.text = String(lendsData?.resultado?.pagoSugerido ?? 0).moneyFormatWithoutSplit()
             infoCell.lblFixedPayment.text = lendsData?.resultado?.pagoNormal?.moneyFormatWithoutSplit()
             infoCell.lblPaymentDay.text = lendsData?.resultado?.fechaProximoPago?.dateFormatter(format: "yyyy/MM/dd", outputFormat: "EEEE")
+            infoCell.lblDigitalPayment.text = lendsData?.resultado?.pagoPuntualDigital?.moneyFormatWithoutSplit()
         }
-        cellsArray.append([infoCell:250.0])
+        
+        cellsArray.append([infoCell:290.0])
         
         let separator = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "SectionCell") as! SectionCell
         separator.lblTitle.text = "Mis créditos"
@@ -490,7 +492,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     }
     
     @objc func showToolTip(){
-        GSVTTooltipRouter.createModule(target: self, title: "Pago sugerido", message: "Al realizar este pago, aprovechas los beneficios del pago puntual y adelantas una semana para terminar de pagar antes.")
+        GSVTTooltipRouter.createModule(target: self, title: "Pago sugerido", message: "Es el pago correspondiente a esta semana, más una semana adelantada.")
     }
     
     @objc func showAlert(){

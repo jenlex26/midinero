@@ -294,9 +294,8 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
                 presentBottomAlertFullData(status: .info, message: "BUNDLE VERSION \(Bundle.init(identifier: "mx.com.gruposalinas.GSSAMyMoney")?.infoDictionary?["CFBundleShortVersionString"] as? String ?? "") \n \(mainInfo)", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
             }else if UIPasteboard.general.string == Date().getString(withFormat: "HHmm"){
                 generator.notificationOccurred(.error)
-                let completeName = (GSSISessionInfo.sharedInstance.gsUser.name ?? "SIN NOMBRE") + " "  + (GSSISessionInfo.sharedInstance.gsUser.lastName ?? "SIN LASTNAME") + " " + (GSSISessionInfo.sharedInstance.gsUser.secondLastName ?? "SIN SECOND LAST NAME")
                 let sharedinstance = GSSISessionInfo.sharedInstance.gsUser
-                let string = "SICU: \(sharedinstance?.SICU ?? "SIN SICU")\nEMAIL: \(sharedinstance?.email ?? "SIN CORREO")\nACCOUNT: \(sharedinstance?.account?.number ?? "SIN NÙMERO DE CUENTA")\nNAME:\(completeName)"
+                let string = "SICU: \(sharedinstance?.SICU ?? "SIN SICU")\nEMAIL: \(sharedinstance?.email ?? "SIN CORREO")\nACCOUNT: \(sharedinstance?.account?.number ?? "SIN NÙMERO DE CUENTA")\nNAME:\(getCompleteUserName())\nPHONE:\(sharedinstance?.phone ?? "SIN NÚMERO DE TELÉFONO")\nCARD:\(sharedinstance?.account?.card ?? "SIN NÚMERO DE TARJETA")"
                 UIPasteboard.general.string = string
             }
         }

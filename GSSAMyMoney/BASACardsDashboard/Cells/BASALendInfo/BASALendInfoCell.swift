@@ -18,6 +18,7 @@ class BASALendInfoCell: UITableViewCell {
     @IBOutlet weak var lblFixedPayment         : GSVCLabel!
     @IBOutlet weak var lblSuggestedPayment     : GSVCLabel!
     @IBOutlet weak var lblNextPayment          : GSVCLabel!
+    @IBOutlet weak var lblDigitalPayment    : GSVCLabel! 
     
     var cellViewController: UIViewController?
 

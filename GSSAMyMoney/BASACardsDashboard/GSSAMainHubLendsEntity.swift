@@ -26,6 +26,7 @@ struct LendsResponseResult: Codable {
     var fechaProximoPago, fechaProximoPagoDesarrollada: String?
     var pagoPuntual, pagoNormal, pagoSugerido, pagoRequerido: Int?
     var pagoLiquidar: Int?
+    var pagoPuntualDigital: String?
     var productos: [LendsResponseProducts]?
 }
 

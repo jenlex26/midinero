@@ -86,7 +86,7 @@
                     <rect key="frame" x="29" y="50" width="262" height="127.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detalle de movimiento" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.65000000000000002" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tnc-nS-WIw" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                            <rect key="frame" x="0.0" y="0.0" width="262" height="22.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="262" height="30"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -97,7 +97,7 @@
                             </userDefinedRuntimeAttributes>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BPR-N6-9ve">
-                            <rect key="frame" x="0.0" y="27.5" width="262" height="40"/>
+                            <rect key="frame" x="0.0" y="35" width="262" height="40"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zje-0A-qH6">
                                     <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
@@ -164,7 +164,7 @@
                             </constraints>
                         </stackView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qfd-hU-t6A" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                            <rect key="frame" x="0.0" y="72.5" width="262" height="22.5"/>
+                            <rect key="frame" x="0.0" y="80" width="262" height="22"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -175,7 +175,7 @@
                             </userDefinedRuntimeAttributes>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00 - 0000 00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vXl-TQ-k6g" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                            <rect key="frame" x="0.0" y="100" width="262" height="27.5"/>
+                            <rect key="frame" x="0.0" y="107" width="262" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -218,17 +218,18 @@
         </view>
     </objects>
     <designables>
+        <designable name="IgZ-T5-pxA"/>
         <designable name="qfd-hU-t6A">
-            <size key="intrinsicContentSize" width="15.5" height="20.5"/>
+            <size key="intrinsicContentSize" width="18" height="22.5"/>
         </designable>
         <designable name="sb6-Mf-WF8">
-            <size key="intrinsicContentSize" width="15.5" height="20.5"/>
+            <size key="intrinsicContentSize" width="37.5" height="45"/>
         </designable>
         <designable name="tnc-nS-WIw">
-            <size key="intrinsicContentSize" width="169.5" height="20.5"/>
+            <size key="intrinsicContentSize" width="256.5" height="31"/>
         </designable>
         <designable name="vXl-TQ-k6g">
-            <size key="intrinsicContentSize" width="128.5" height="20.5"/>
+            <size key="intrinsicContentSize" width="126" height="22.5"/>
         </designable>
     </designables>
     <resources>
