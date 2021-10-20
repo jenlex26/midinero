@@ -103,8 +103,9 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
                 contractNumber = dataArray?[1].alnovaDecrypt() ?? ""
                 customToken.shared.contractNumber = dataArray?[1].alnovaDecrypt() ?? ""
                 customToken.shared.debitCardNumber = debitCardNumber
+                
                 if let cardStatusString = RemoteConfig.remoteConfig().remoteString(forKey: "iOS_MOB_SA_MMPIN"){
-                    if cardStatusString == "true"{
+                    if cardStatusString == "true" || myMoneyFrameworkSettings.shared.showPINinUserActivarions == true{
                         configureDebitCard(forStatus: .active )
                     }else{
                         GSVCLoader.hide()
@@ -113,12 +114,10 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
             }else{
                 presenter?.requestCardStatus(CardSearchResponse: { [self] CardSearchResponse in
                     if CardSearchResponse != nil{
-                        if CardSearchResponse?.resultado?.tarjeta?.estatus?.alnovaDecrypt().removeWhiteSpaces() == "ENVIADA" || CardSearchResponse?.resultado?.tarjeta?.estatus?.alnovaDecrypt().removeWhiteSpaces() == "PENDENTRE"{
+                        if CardSearchResponse?.resultado?.tarjeta?.estatus?.alnovaDecrypt().removeWhiteSpaces() != "ENTREGADA"{
                             trackingKey = CardSearchResponse?.resultado?.tarjeta?.numeroGuia ?? ""
-                            configureDebitCard(forStatus: .activate )
-                        }else{
-                            configureDebitCard(forStatus: .unknown)
                         }
+                        configureDebitCard(forStatus: .activate)
                     }else{
                         configureDebitCard(forStatus: .request)
                     }
@@ -252,7 +251,7 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
                 cell.tag = 7
                 
                 if trackingKey.alnovaDecrypt().removeWhiteSpaces() != ""{
-                    cell.lblTracking.text = "Número de guía: \(trackingKey.alnovaDecrypt()) DHL"
+                    cell.lblTracking.text = "Número de guía: \(trackingKey.alnovaDecrypt().removeWhiteSpaces()) DHL"
                 }
                 cellsArray.insert([cell:111.0], at: 0)
             case .active:
