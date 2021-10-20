@@ -84,19 +84,8 @@ class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
     
     @IBAction func foundAccoun(sender: Any){
         if cellViewController != nil{
-            if RemoteConfig.remoteConfig().remoteString(forKey: "iOS_SA_CashInWindow") == "false"{
-                let view = GSSAAddFundsMenuRouter.createModule()
-                cellViewController.navigationController?.pushViewController(view, animated: true)
-            }else{
-                sendToFund = true
-                tagFundAccount()
-                let verification = GSVTDigitalSignViewController(delegate: self)
-                verification.bShouldWaitForNewToken = false
-                verification.modalPresentationStyle = .fullScreen
-                if cellViewController != nil{
-                    cellViewController.present(verification, animated: true, completion: nil)
-                }
-            }
+            GSINAdminNavigator.shared.startFlow(forAction: "GSIFTr_MenuReload",
+                                         navigateDelegate: self)
         }
     }
     
@@ -130,13 +119,8 @@ class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
     
     func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
         if cellViewController != nil{
-            if sendToFund == true{
-                let view = GSSALinkDePagoRouter.createModuleWithNavigation()
-                cellViewController.navigationController?.pushViewController(view, animated: true)
-            }else{
-                GSINAdminNavigator.shared.startFlow(forAction: "GSIFPqr_CashPickup",
-                                                    navigateDelegate: self)
-            }
+            GSINAdminNavigator.shared.startFlow(forAction: "GSIFPqr_CashPickup",
+                                                                navigateDelegate: self)
         }
     }
 }
