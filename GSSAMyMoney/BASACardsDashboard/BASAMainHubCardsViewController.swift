@@ -221,7 +221,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     
     func loadActiveCardV2(){
         presenter?.requestCreditCardNumber(CardInfoResponse: { [self] CreditCardInfoResponse in
-            if CreditCardInfoResponse?.body?.resultado?.tarjetas?.count ?? 0 > 0{
+            if CreditCardInfoResponse?.body?.resultado?.tarjetas?.first?.numero?.isValidCreditCard() == true{
                 creditCardInfo = CreditCardInfoResponse
                 NotificationCenter.default.post(name: Notification.Name("creditCardAvailable"), object: nil)
             }else{
@@ -259,6 +259,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     
     func setTableForDebitCard(){
         viewMode = 0
+        createTag(eventName: "SA|MD|movimientosDebito|pageView")
         let header = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAHomeHeaderViewComponent") as! BASAHomeHeaderViewComponent
         header.cellViewController = self
         let accountData = accountBalance?.resultado.cliente?.cuentas
@@ -337,6 +338,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     }
     
     func setTableForCreditCard(){
+        createTag(eventName: "SA|MD|movimientosCredito|pageView")
         createTag(eventName: .pageView, section: "mi_dinero", flow: "dashboard", screenName: "movimientos", origin: "credito")
         viewMode = 1
         removeAllExceptFirst()
@@ -394,6 +396,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     }
     
     func setTableForLends(){
+        createTag(eventName: "SA|MD|movimientosPrestamos|pageView")
         createTag(eventName: .pageView, section: "mi_dinero", flow: "dashboard", screenName: "movimientos", origin: "debito")
         viewMode = 2
         removeAllExceptFirst()

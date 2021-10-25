@@ -104,6 +104,13 @@ extension UIViewController{
         }
     }
     
+    func createTag(eventName: String){
+        activityTime.shared.startTime = Date()
+        activityTime.shared.time = 300.0
+        let tagEvent = GSSAFirebaseEvent(.custom(eventName))
+        GSSAAnalytics.firebase.tracking(event: tagEvent)
+    }
+    
     enum eventNames{
         case UIInteraction
         case pageView

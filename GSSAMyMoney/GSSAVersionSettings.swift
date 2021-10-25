@@ -14,5 +14,11 @@ public struct myMoneyFrameworkSettings{
     var showPINinUserActivarions : Bool = false
     var enableEasterEgg             : Bool = true
     var showCreditCardControlSettings: Bool = false
+    var acceptedCardBins: [BINS] = [BINS.init(BIN: "458909", segments: ["03","06","04"]), BINS.init(BIN: "516583", segments: ["03","06","09"])]
     private init() { }
+}
+
+struct BINS{
+    var BIN: String
+    var segments: [String]
 }

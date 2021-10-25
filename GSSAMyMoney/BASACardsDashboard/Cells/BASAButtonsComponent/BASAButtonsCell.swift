@@ -119,6 +119,7 @@ class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
     
     func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
         if cellViewController != nil{
+            createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "dashboard", screenName: "movimientos", type: "click", element: "retiro_sin_tarjeta", origin: "debito")
             GSINAdminNavigator.shared.startFlow(forAction: "GSIFPqr_CashPickup",
                                                                 navigateDelegate: self)
         }
