@@ -318,17 +318,6 @@ extension BASAHomeHeaderViewComponent: UICollectionViewDelegate, UICollectionVie
     }
 }
 
-
-extension UIView{
-    func applyBlurEffect() {
-        let blurEffect = UIBlurEffect(style: .light)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = bounds
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        addSubview(blurEffectView)
-    }
-}
-
 enum cardType{
     case debit
     case credit

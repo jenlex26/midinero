@@ -397,7 +397,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     
     func setTableForLends(){
         createTag(eventName: "SA|MD|movimientosPrestamos|pageView")
-        createTag(eventName: .pageView, section: "mi_dinero", flow: "dashboard", screenName: "movimientos", origin: "debito")
+        createTag(eventName: .pageView, section: "mi_dinero", flow: "dashboard", screenName: "movimientos", origin: "prestamos")
         viewMode = 2
         removeAllExceptFirst()
         

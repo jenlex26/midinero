@@ -67,6 +67,14 @@ extension UIView{
             layer.mask = mask
         }
     }
+    
+    func applyBlurEffect() {
+        let blurEffect = UIBlurEffect(style: .light)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        addSubview(blurEffectView)
+    }
 }
 
 extension UIViewController{
