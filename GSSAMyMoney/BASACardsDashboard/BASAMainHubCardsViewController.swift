@@ -519,7 +519,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
 
 extension BASAMainHubCardsViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return  cellsArray.count
+        return cellsArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -531,10 +531,9 @@ extension BASAMainHubCardsViewController:UITableViewDelegate,UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = BasaMainHubTableView.cellForRow(at: indexPath)
-        if cell is BASAMovementTableViewCell{
+        if BasaMainHubTableView.cellForRow(at: indexPath) is BASAMovementTableViewCell{
             if debitCardMovementsV2?.resultado?.movimientos?.count ?? 0 > 0 && viewMode == 0{
-                let item = cell as! BASAMovementTableViewCell
+                let item = BasaMainHubTableView.cellForRow(at: indexPath) as! BASAMovementTableViewCell
                 let data = debitCardMovementsV2?.resultado?.movimientos![item.tag]
                 let view = GSSAMovementPreviewRouter.createModule(index: item.tag, item: data!, array: debitCardMovementsV2!)
                 view.modalPresentationStyle = .overCurrentContext

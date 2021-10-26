@@ -11,22 +11,22 @@
 import Foundation
 
 //MARK: Wireframe -
-protocol GSSActivateDebitCardWireframeProtocol: class {
+protocol GSSActivateDebitCardWireframeProtocol: AnyObject {
 
 }
 //MARK: Presenter -
-protocol GSSActivateDebitCardPresenterProtocol: class {
+protocol GSSActivateDebitCardPresenterProtocol: AnyObject {
 
 }
 
 //MARK: Interactor -
-protocol GSSActivateDebitCardInteractorProtocol: class {
+protocol GSSActivateDebitCardInteractorProtocol: AnyObject {
 
   var presenter: GSSActivateDebitCardPresenterProtocol?  { get set }
 }
 
 //MARK: View -
-protocol GSSActivateDebitCardViewProtocol: class {
+protocol GSSActivateDebitCardViewProtocol: AnyObject {
 
   var presenter: GSSActivateDebitCardPresenterProtocol?  { get set }
 }

@@ -14,22 +14,22 @@ import GSSASecurityManager
 import GSSAFunctionalUtilities
 import GSSASessionInfo
 //MARK: Wireframe -
-protocol BASANewBeneficiaryWireframeProtocol: class {
+protocol BASANewBeneficiaryWireframeProtocol: AnyObject {
 
 }
 //MARK: Presenter -
-protocol BASANewBeneficiaryPresenterProtocol: class {
+protocol BASANewBeneficiaryPresenterProtocol: AnyObject {
     func requestSetNewBeneficiary(Body: NewBeneficiaryBody, method: EKTHTTPRequestMethod, DataCard: @escaping (DigitalCardResponse?) -> ())
 }
 
 //MARK: Interactor -
-protocol BASANewBeneficiaryInteractorProtocol: class {
+protocol BASANewBeneficiaryInteractorProtocol: AnyObject {
     var presenter: BASANewBeneficiaryPresenterProtocol?  { get set }
     func trySetNewBeneficiary(Body: NewBeneficiaryBody, method: EKTHTTPRequestMethod, DataCard: @escaping (DigitalCardResponse?) -> ())
 }
 
 //MARK: View -
-protocol BASANewBeneficiaryViewProtocol: class {
+protocol BASANewBeneficiaryViewProtocol: AnyObject {
 
   var presenter: BASANewBeneficiaryPresenterProtocol?  { get set }
 }
