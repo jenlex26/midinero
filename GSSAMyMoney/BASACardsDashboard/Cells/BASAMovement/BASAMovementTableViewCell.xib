@@ -26,8 +26,8 @@
                             <constraint firstAttribute="height" constant="20" id="dP1-1E-Db2"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Compra en OXXO" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tum-Yi-C0A" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                        <rect key="frame" x="50" y="19" width="260" height="22.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tum-Yi-C0A" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                        <rect key="frame" x="50" y="21" width="260" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -37,8 +37,11 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$70.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="21I-Yb-sa8" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                        <rect key="frame" x="246" y="45" width="54" height="22.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="21I-Yb-sa8" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                        <rect key="frame" x="232" y="39.5" width="68" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="999" constant="68" id="sFr-bc-JpN"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -48,8 +51,8 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16 Abr 2021" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HQQ-iP-dYm" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                        <rect key="frame" x="50" y="46.5" width="74.5" height="20"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- - -" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HQQ-iP-dYm" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                        <rect key="frame" x="50" y="44" width="24" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -85,6 +88,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="amountSize" destination="sFr-bc-JpN" id="r4k-dd-4sk"/>
                 <outlet property="imgView" destination="PXo-EC-Zzn" id="rO4-fG-mP5"/>
                 <outlet property="lblAmount" destination="21I-Yb-sa8" id="a2M-aX-bh1"/>
                 <outlet property="lblDate" destination="HQQ-iP-dYm" id="8b4-Gu-TnB"/>
@@ -96,13 +100,13 @@
     </objects>
     <designables>
         <designable name="21I-Yb-sa8">
-            <size key="intrinsicContentSize" width="54" height="22.5"/>
+            <size key="intrinsicContentSize" width="22" height="24"/>
         </designable>
         <designable name="HQQ-iP-dYm">
-            <size key="intrinsicContentSize" width="74.5" height="20"/>
+            <size key="intrinsicContentSize" width="24" height="14.5"/>
         </designable>
         <designable name="tum-Yi-C0A">
-            <size key="intrinsicContentSize" width="140.5" height="22.5"/>
+            <size key="intrinsicContentSize" width="7" height="18"/>
         </designable>
     </designables>
     <resources>

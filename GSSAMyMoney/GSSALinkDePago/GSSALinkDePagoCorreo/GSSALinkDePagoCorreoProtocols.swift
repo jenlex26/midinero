@@ -12,16 +12,16 @@ import Foundation
 import UIKit
 
 //MARK: Wireframe -
-protocol GSSALinkDePagoCorreoWireframeProtocol: class {
+protocol GSSALinkDePagoCorreoWireframeProtocol: AnyObject {
 
 }
 //MARK: Presenter -
-protocol GSSALinkDePagoCorreoPresenterProtocol: class {
+protocol GSSALinkDePagoCorreoPresenterProtocol: AnyObject {
     
 }
 
 //MARK: View -
-protocol GSSALinkDePagoCorreoViewProtocol: class {
+protocol GSSALinkDePagoCorreoViewProtocol: AnyObject {
 
   var presenter: GSSALinkDePagoCorreoPresenterProtocol?  { get set }
 }

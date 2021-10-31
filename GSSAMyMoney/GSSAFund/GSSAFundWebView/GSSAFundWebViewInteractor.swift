@@ -32,8 +32,7 @@ class GSSAFundWebViewInteractor: GSSAURLSessionTaskCoordinatorBridge, GSSAFundWe
             
             NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "showLoading"), object: nil, userInfo: nil))
             
-            //print("response111")
-            //print(response)
+        
             
             guard let merchantID = GSSAFundSharedVariables.shared.ecommerceResponse?.comerciosCybs?.id,
                   let merchantReference = GSSAFundSharedVariables.shared.idTransaccionSuperApp,

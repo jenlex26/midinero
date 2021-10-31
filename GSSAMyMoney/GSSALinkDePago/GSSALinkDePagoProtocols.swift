@@ -12,12 +12,12 @@ import Foundation
 import UIKit
 
 //MARK: Wireframe -
-protocol GSSALinkDePagoWireframeProtocol: class {
+protocol GSSALinkDePagoWireframeProtocol: AnyObject {
     func showError(_ view: UIViewController)
     func showAlert(_ view: UIViewController) 
 }
 //MARK: Presenter -
-protocol GSSALinkDePagoPresenterProtocol: class {
+protocol GSSALinkDePagoPresenterProtocol: AnyObject {
     func requestMailUpdate(body: UpdateMailBody, Response: @escaping (DigitalCardResponse?) -> ())
     
     func getEccomerceInformation()
@@ -30,14 +30,14 @@ protocol GSSALinkDePagoPresenterProtocol: class {
 }
 
 //MARK: Interactor -
-protocol GSSALinkDePagoInteractorProtocol: class {
+protocol GSSALinkDePagoInteractorProtocol: AnyObject {
   var presenter: GSSALinkDePagoPresenterProtocol?  { get set }
     func tryMailUpdate(body: UpdateMailBody, Response: @escaping (DigitalCardResponse?) -> ())
     func getEccomerceInformation()
 }
 
 //MARK: View -
-protocol GSSALinkDePagoViewProtocol: class {
+protocol GSSALinkDePagoViewProtocol: AnyObject {
 
   var presenter: GSSALinkDePagoPresenterProtocol?  { get set }
     

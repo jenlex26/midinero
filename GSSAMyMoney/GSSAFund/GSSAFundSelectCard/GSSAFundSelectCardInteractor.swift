@@ -25,13 +25,15 @@ class GSSAFundSelectCardInteractor: GSSAFundSelectCardInteractorProtocol {
     //private let email = mail
     
     func getCards() {
+        guard let usrICU = GSSISessionInfo.sharedInstance.gsUser.SICU else { self.presenter?.getCardsError()
+            return }
         guard let email = email,
               let afiliationNumber = afiliationNumber else {
             self.presenter?.getCardsError()
             return
         }
         
-        LNKPG_Facade.shared.getListCard(numeroAfiliacion: afiliationNumber, email: email, success: { [weak self] cards in
+        LNKPG_Facade.shared.getListCard(xicu : usrICU, numeroAfiliacion: afiliationNumber, email: email, success: { [weak self] cards in
             guard let self = self else { return }
             
             guard let cards = cards else {
@@ -44,7 +46,7 @@ class GSSAFundSelectCardInteractor: GSSAFundSelectCardInteractorProtocol {
         }, failure: { [weak self] message in
             guard let self = self else { return }
             
-            //print("Error message: \(message)")
+           
             self.presenter?.getCardsError()
         })
     }
@@ -90,7 +92,7 @@ class GSSAFundSelectCardInteractor: GSSAFundSelectCardInteractorProtocol {
         }, failure: {  [weak self] message in
             guard let self = self else { return }
 
-            //print("Message Error: \(message ?? "")")
+            
             self.presenter?.getEccomerceInformationError()
         })
     }

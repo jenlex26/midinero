@@ -9,6 +9,7 @@
 //
 
 import UIKit
+import GSSAFirebaseManager
 
 class GSSAFundWebViewRouter: GSSAFundWebViewWireframeProtocol {
     
@@ -44,5 +45,12 @@ class GSSAFundWebViewRouter: GSSAFundWebViewWireframeProtocol {
 
         vc.navigationController?.isNavigationBarHidden = true
         vc.navigationController?.pushViewController(ticket, animated: false)
+        analitics()
     }
+    func analitics(){
+            activityTime.shared.startTime = Date()
+              activityTime.shared.time = 300.0
+              let tagEvent = GSSAFirebaseEvent(.custom("SA|MD:fondear|dineroRecibido|pageview"))
+              GSSAAnalytics.firebase.tracking(event: tagEvent)
+        }
 }

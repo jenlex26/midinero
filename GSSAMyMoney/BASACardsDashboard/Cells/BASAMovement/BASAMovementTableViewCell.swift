@@ -15,6 +15,7 @@ class BASAMovementTableViewCell: UITableViewCell {
     @IBOutlet weak var lblDate  : GSVCLabel!
     @IBOutlet weak var imgView  : UIImageView!
     @IBOutlet weak var separator : UIView!
+    @IBOutlet var amountSize: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()

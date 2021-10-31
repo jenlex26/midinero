@@ -48,7 +48,6 @@ extension GSSACardFundResumeInteractor: GSSACardFundResumeInteractorProtocol {
         }, failure: {  [weak self] message in
             guard let self = self else { return }
 
-            //print("Message Error: \(message ?? "")")
             self.presenter?.getEccomerceInformationError()
         })
     }
@@ -98,8 +97,7 @@ extension GSSACardFundResumeInteractor: GSSACardFundResumeInteractorProtocol {
         }, failure: {
             [weak self] error in
             
-            //print("errorrrr")
-            //print(error)
+           
             
             guard let self = self else { return }
             

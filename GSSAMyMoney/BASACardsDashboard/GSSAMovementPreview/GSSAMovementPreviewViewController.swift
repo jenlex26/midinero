@@ -81,6 +81,7 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
             let cell = table.dequeueReusableCell(withIdentifier: "BASAMovementCell") as! BASAMovementTableViewCell
             cell.imgView.isHidden = true
             cell.lblAmount.isHidden = true
+            cell.amountSize.constant = -10
             cell.lblTitle.text = element.value
             cell.lblTitle.styleType = 8
             cell.lblTitle.textColor = .darkGray
@@ -91,7 +92,7 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
             cell.tag = element.key.values.first ?? 0
             
             if element.key.keys.first?.removeWhiteSpaces() != ""{
-                if element.value == "Nombre del beneficiario" || element.value == "Ordenante" || element.key.keys.first?.count ?? 0 > 30{
+                if element.value == "Nombre del beneficiario" || element.value == "Ordenante" || element.key.keys.first?.count ?? 0 > 25{
                     cellsArray.append([cell:90.0])
                 }else{
                     cellsArray.append([cell:75.0])
@@ -142,6 +143,7 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
         
         lblTitle.text = transaction.concepto?.alnovaDecrypt()
         
+        //AB2 TIEMPO AIRE
         if transaction.idOperacion == "AB2"{
             let lastAccountDigits = GSSISessionInfo.sharedInstance.gsUser.account?.number?.removeWhiteSpaces().suffix(4)
             details.updateValue("Realizado con", forKey: ["Baz****\(lastAccountDigits ?? "")": 1])
@@ -155,7 +157,7 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
             details.updateValue("Fecha y hora de registro", forKey: [(transaction.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy") ?? "") + " " + (data.hora?.timeFormatter() ?? ""):8])
         }
        
-        //details.updateValue("Para", forKey:  transaction.descripcionBeneficiario ?? "")
+        //details.updateValue("Para", forKey:  transaction.descripcionBeneficiario ?? n"")
      
         details.updateValue("Folio", forKey: [transaction.folio ?? "":9])
         details.updateValue("Número de operación", forKey: [transaction.numeroOperacion ?? "":99])
@@ -177,7 +179,7 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
             }
         }
         
-        
+        //212 - 213 SPEI
         if transaction.idOperacion == "212" || transaction.idOperacion == "213"{
             URLBanxico = "https://www.banxico.org.mx/cep/"
             //if GLOBAL_ENVIROMENT == .develop{
@@ -205,6 +207,8 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
                         details.updateValue("Estatus de transferencia", forKey: ["Liquidada":16])
                     case "C":
                         details.updateValue("Estatus de transferencia", forKey: ["Liquidada por contingencia":16])
+                    case "D":
+                        details.updateValue("Estatus de transferencia", forKey: ["Devuelta":16])
                     case .none:
                         details.updateValue("Estatus de transferencia", forKey: ["":16])
                     case .some(_):

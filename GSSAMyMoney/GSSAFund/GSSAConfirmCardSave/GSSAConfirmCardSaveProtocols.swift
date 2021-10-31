@@ -12,7 +12,7 @@ import Foundation
 import baz_ios_sdk_link_pago
 
 //MARK: Wireframe -
-protocol GSSAConfirmCardSaveWireframeProtocol: class {
+protocol GSSAConfirmCardSaveWireframeProtocol: AnyObject {
     func goToNextFlow()
     func returnTo(vc: AnyClass, animated: Bool)
     func goToError(message: String, isDouble: Bool, isWarning: Bool)
@@ -20,7 +20,7 @@ protocol GSSAConfirmCardSaveWireframeProtocol: class {
 }
 
 //MARK: Presenter -
-protocol GSSAConfirmCardSavePresenterProtocol: class {
+protocol GSSAConfirmCardSavePresenterProtocol: AnyObject {
     
     func requestSaveCard(tokenCardRequest: LNKPG_TokenCardRequestFacade)
     func onSuccess(_ response: LNKPG_TokenCardResponseFacade)
@@ -36,7 +36,7 @@ protocol GSSAConfirmCardSavePresenterProtocol: class {
 }
 
 //MARK: Interactor -
-protocol GSSAConfirmCardSaveInteractorProtocol: class {
+protocol GSSAConfirmCardSaveInteractorProtocol: AnyObject {
     
     var presenter: GSSAConfirmCardSavePresenterProtocol?  { get set }
     func getEccomerceInformation()
@@ -44,7 +44,7 @@ protocol GSSAConfirmCardSaveInteractorProtocol: class {
 }
 
 //MARK: View -
-protocol GSSAConfirmCardSaveViewProtocol: class {
+protocol GSSAConfirmCardSaveViewProtocol: AnyObject {
 
   var presenter: GSSAConfirmCardSavePresenterProtocol?  { get set }
     

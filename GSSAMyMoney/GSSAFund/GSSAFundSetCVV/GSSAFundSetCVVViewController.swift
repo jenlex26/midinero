@@ -35,11 +35,10 @@ class GSSAFundSetCVVViewController: GSSAMasterViewController, UITextFieldDelegat
         
         createTag(eventName: .pageView, section: "mi_dinero", flow: "fondear_cuenta", screenName: "validacion_de_tarjeta", origin: "")
         
-        if #available(iOS 13.0, *){}else{
-            txtCVV.image = UIImage(named: "openEye", in: Bundle.init(for: GSSAFundSetCVVViewController.self), compatibleWith: nil)?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate) ?? UIImage()
-            txtCVV.imageTyped = UIImage(named: "closedEye", in: Bundle.init(for: GSSAFundSetCVVViewController.self), compatibleWith: nil)?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate) ?? UIImage()
-            txtCVV.tintColor = UIColor.GSVCSecundary100
-        }
+        
+        txtCVV.image = UIImage(named: "openEye", in: Bundle.init(for: GSSAFundSetCVVViewController.self), compatibleWith: nil)?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate) ?? UIImage()
+        txtCVV.imageTyped = UIImage(named: "closedEye", in: Bundle.init(for: GSSAFundSetCVVViewController.self), compatibleWith: nil)?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate) ?? UIImage()
+        txtCVV.tintColor = UIColor.GSVCSecundary100
         
         if UIDevice.current.screenType == .iPhones_5_5s_5c_SE{
             txtCVV.addTarget(self, action: #selector(startEditing), for: .editingDidBegin)

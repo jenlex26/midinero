@@ -40,6 +40,16 @@ class GSSAFundSetCardNumberViewController: UIViewController, GSSAFundSetCardNumb
         cardNumberTextField.delegate = self
         cardNumberTextField.allowActions(.allowAll)
         cardNumberTextField.contentFormat(.numeric)
+        cardNumberTextField.image = UIImage(named: "ic_camera", in: Bundle.init(for: GSSAFundSetCVVViewController.self), compatibleWith: nil)?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate) ?? UIImage()
+        cardNumberTextField.imageTyped = UIImage(named: "ic_camera", in: Bundle.init(for: GSSAFundSetCVVViewController.self), compatibleWith: nil)?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate) ?? UIImage()
+        cardNumberTextField.image =  cardNumberTextField.image.tint(with: .GSVCSecundary100)
+        cardNumberTextField.imageTyped =  cardNumberTextField.imageTyped.tint(with: .GSVCSecundary100)
+        cardNumberTextField.rightButtonAction { onTap in
+//            let view = BAZ_CardScannerMain.createModule(navigation: self.navigationController ?? UINavigationController(), delegate: self)
+//            view.modalPresentationStyle = .overCurrentContext
+            //self.navigationController?.pushViewController(view, animated: true)
+//            self.present(view, animated: true, completion: nil)
+        }
         
         expirationTextField.delegate = self
         
@@ -157,5 +167,27 @@ extension GSSAFundSetCardNumberViewController: UITextFieldDelegate {
         if textField.tag == 2 || textField.tag == 3 {
             scrollView.setContentOffset(CGPoint(x: 0.0, y: 0.0), animated: true)
         }
+    }
+    private func formattedByMask(text: String, maskToReplace: String, characterToReplace: Character) -> String {
+        let letters = text.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+        var result = ""
+        var index = letters.startIndex
+        for ch in maskToReplace where index < letters.endIndex {
+            if ch == characterToReplace {
+                result.append(letters[index])
+                index = letters.index(after: index)
+            } else {
+                result.append(ch)
+            }
+        }
+        return result
+    }
+}
+
+
+extension GSSAFundSetCardNumberViewController: BAZ_CardScannerViewDelegate{
+    func notifyCodeScanner(barcode: BAZ_CardScannerEntity) {
+        cardNumberTextField.text = formattedByMask(text: barcode.numberCard ?? "", maskToReplace: "#### #### #### ####", characterToReplace: "#")
+        expirationTextField.text = "\(barcode.expirationMount ?? "")/\(barcode.expirationYear ?? "")"
     }
 }

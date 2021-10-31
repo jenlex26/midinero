@@ -91,7 +91,7 @@ class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
     
     @IBAction func cashWithdrawal(sender: Any){
         sendToFund = false
-        let verification = GSVTDigitalSignViewController(delegate: self)
+        let verification = GSVTDigitalSignViewController(delegate: self, bShouldWaitForNewToken: false)
         verification.bShouldWaitForNewToken = false
         verification.modalPresentationStyle = .fullScreen
         if cellViewController != nil{
@@ -119,9 +119,12 @@ class BASAButtonsCell: UITableViewCell, GSVTDigitalSignDelegate {
     
     func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
         if cellViewController != nil{
-            createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "dashboard", screenName: "movimientos", type: "click", element: "retiro_sin_tarjeta", origin: "debito")
-            GSINAdminNavigator.shared.startFlow(forAction: "GSIFPqr_CashPickup",
-                                                                navigateDelegate: self)
+            if success{
+                GSVCLoader.show()
+                createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "dashboard", screenName: "movimientos", type: "click", element: "retiro_sin_tarjeta", origin: "debito")
+                GSINAdminNavigator.shared.startFlow(forAction: "GSIFPqr_CashPickup",
+                                                                    navigateDelegate: self)
+            }
         }
     }
 }

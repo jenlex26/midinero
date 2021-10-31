@@ -47,7 +47,7 @@ extension GSSAConfirmCardSaveInteractor: GSSAConfirmCardSaveInteractorProtocol {
         }, failure: {  [weak self] message in
             guard let self = self else { return }
 
-            //print("Message Error: \(message ?? "")")
+           
             self.presenter?.getEccomerceInformationError()
         })
     }
@@ -78,13 +78,15 @@ extension GSSAConfirmCardSaveInteractor: GSSAConfirmCardSaveInteractorProtocol {
     }
     
     func requestSaveCard(tokenCardRequest: LNKPG_TokenCardRequestFacade) {
-        //print(tokenCardRequest)
-        LNKPG_Facade.shared.postCreateToken(token: tokenCardRequest) {[weak self] response in
+       
+        guard let usrICU = GSSISessionInfo.sharedInstance.gsUser.SICU else { self.presenter?.onError()
+            return }
+        LNKPG_Facade.shared.postCreateToken(xicu: usrICU, token: tokenCardRequest) {[weak self] response in
             guard let self = self else  { return }
-            //print("\n\n##############\n\(response)\n################\n\n")
+           
             if let response = response {
                 if let createdCardToken = response.paySubscriptionId {
-                    LNKPG_Facade.shared.getListCard(numeroAfiliacion: GSSAFundSharedVariables.shared.numeroAfiliacion ?? "", email: (GSSISessionInfo.sharedInstance.gsUser.email ?? "").lowercased()) { tokens in
+                    LNKPG_Facade.shared.getListCard(xicu: usrICU, numeroAfiliacion: GSSAFundSharedVariables.shared.numeroAfiliacion ?? "", email: (GSSISessionInfo.sharedInstance.gsUser.email ?? "").lowercased()) { tokens in
                         if let nonNilTokens = tokens {
                             for token in nonNilTokens {
                                 if createdCardToken == token.token ?? ""{
@@ -110,7 +112,7 @@ extension GSSAConfirmCardSaveInteractor: GSSAConfirmCardSaveInteractorProtocol {
         } failure: { [weak self] error in
             guard let self = self else  { return }
             
-            //print(error)
+            
             self.presenter?.onError()
         }
     }

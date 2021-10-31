@@ -12,12 +12,12 @@ import Foundation
 import baz_ios_sdk_link_pago
 
 //MARK: Wireframe -
-protocol GSSAFundSetCVVWireframeProtocol: class {
+protocol GSSAFundSetCVVWireframeProtocol: AnyObject {
     func goToError(message: String, isDouble: Bool)
     func goToNextFlow()
 }
 //MARK: Presenter -
-protocol GSSAFundSetCVVPresenterProtocol: class {
+protocol GSSAFundSetCVVPresenterProtocol: AnyObject {
     func searchAccount(token: String)
     
     func searchAccountSuccess(response: LNKPG_CardInformationResponseFacade)
@@ -28,7 +28,7 @@ protocol GSSAFundSetCVVPresenterProtocol: class {
 }
 
 //MARK: Interactor -
-protocol GSSAFundSetCVVInteractorProtocol: class {
+protocol GSSAFundSetCVVInteractorProtocol: AnyObject {
 
   var presenter: GSSAFundSetCVVPresenterProtocol?  { get set }
     
@@ -36,7 +36,7 @@ protocol GSSAFundSetCVVInteractorProtocol: class {
 }
 
 //MARK: View -
-protocol GSSAFundSetCVVViewProtocol: class {
+protocol GSSAFundSetCVVViewProtocol: AnyObject {
 
   var presenter: GSSAFundSetCVVPresenterProtocol?  { get set }
     

@@ -56,8 +56,8 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
         txtAmount.addTarget(self, action: #selector(ammountFormatter(sender:)), for: .editingChanged)
         txtAmount.addTarget(self, action: #selector(onStartEdit), for: .editingDidBegin)
         setUpToolBar()
-        self.navigationController?.navigationBar.backgroundColor = .white
-        self.view.backgroundColor = .white
+        
+        
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.title = "Recarga tu tarjeta"
         if GSSISessionInfo.sharedInstance.gsUser.email?.isValidEmail == true{
@@ -149,7 +149,9 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
         txtAmount.inputAccessoryView = numberToolbar
     }
     
-    func optionalAction() {}
+    func optionalAction() {
+//        "Ok"
+    }
     
     func isValidAmount() -> Bool{
         if txtAmount.text?.haveData() == true{
@@ -198,7 +200,9 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
         self.navigationController?.pushViewController(GSSAFundSelectCardRouter.createModule(loadingModel: validado!, comission: self.comission), animated: true)
     }
     
-    func forgotDigitalSign(_ forgotSecurityCodeViewController: UIViewController?) { () }
+    func forgotDigitalSign(_ forgotSecurityCodeViewController: UIViewController?) {
+//        "forgot"
+    }
     
     func verification(_ success: Bool, withSecurityCode securityCode: String?, andUsingBiometric usingBiometric: Bool) {
         txtAmount.becomeFirstResponder()
@@ -209,12 +213,12 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
     }
     
     public static func validateStrings(parameters: [String : Any]?) -> PB_HomeEntity? {
-        guard let amount: String = parameters?["amount"] as? String else { return nil }
-        guard let numeroCuentaCliente: String = parameters?["numeroCuentaCliente"] as? String else { return nil }
-        guard let merchantDetail: String = parameters?["merchantDetail"] as? String else { return nil }
-        guard let correo: String = parameters?["correo"] as? String else { return nil }
-        guard let numeroAfiliacion: String = parameters?["numeroAfiliacion"] as? String else { return nil }
-        guard let idTransaccion: String = parameters?["idTransaccion"] as? String else { return nil }
+        guard let amount: String = parameters?["amount"] as? String else { debugPrint("Falta Campo amount"); return nil }
+        guard let numeroCuentaCliente: String = parameters?["numeroCuentaCliente"] as? String else { debugPrint("Falta Campo numeroCuentaCliente"); return nil }
+        guard let merchantDetail: String = parameters?["merchantDetail"] as? String else { debugPrint("Falta Campo merchantDetail"); return nil }
+        guard let correo: String = parameters?["correo"] as? String else { debugPrint("Falta Campo correo"); return nil }
+        guard let numeroAfiliacion: String = parameters?["numeroAfiliacion"] as? String else { debugPrint("Falta Campo numeroAfiliacion"); return nil }
+        guard let idTransaccion: String = parameters?["idTransaccion"] as? String else { debugPrint("Falta Campo idTransaccion"); return nil }
         return PB_HomeEntity(
             amount: amount,
             numeroAfiliacion: numeroAfiliacion,

@@ -16,7 +16,7 @@ import GSSAFunctionalUtilities
 import GSSAFirebaseManager
 import baz_ios_sdk_link_pago
 
-public protocol GSSALinkDePagoCorreoViewControllerDelegate: class {
+public protocol GSSALinkDePagoCorreoViewControllerDelegate: AnyObject {
     func notifyCloseAction()
     func notifyEmail(email: String)
 }

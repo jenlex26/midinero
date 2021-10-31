@@ -11,14 +11,14 @@
 import Foundation
 import baz_ios_sdk_link_pago
 //MARK: Wireframe -
-protocol GSSACardFundResumeWireframeProtocol: class {
+protocol GSSACardFundResumeWireframeProtocol: AnyObject {
     func goToError(message: String, isDouble: Bool)
     func goToTicket(folio: String)
     func returnTo(vc: AnyClass, animated: Bool)
     func goToNextFlow()
 }
 //MARK: Presenter -
-protocol GSSACardFundResumePresenterProtocol: class {
+protocol GSSACardFundResumePresenterProtocol: AnyObject {
     func enroll(request: LNKPG_EnrollmentRequestFacade)
     
     func enrollSuccess(responseEnroll: LNKPG_EnrollmentResponseFacade, responseOtp: LNKPG_SessionOTPResponseFacade?, responseCargo: LNKPG_CargoEcommerceResponseFacade?,  responseFondeo: LNKPG_FondeoAccountResponseFacade?)
@@ -35,7 +35,7 @@ protocol GSSACardFundResumePresenterProtocol: class {
 }
 
 //MARK: Interactor -
-protocol GSSACardFundResumeInteractorProtocol: class {
+protocol GSSACardFundResumeInteractorProtocol: AnyObject {
 
   var presenter: GSSACardFundResumePresenterProtocol?  { get set }
     
@@ -44,7 +44,7 @@ protocol GSSACardFundResumeInteractorProtocol: class {
 }
 
 //MARK: View -
-protocol GSSACardFundResumeViewProtocol: class {
+protocol GSSACardFundResumeViewProtocol: AnyObject {
 
   var presenter: GSSACardFundResumePresenterProtocol?  { get set }
     

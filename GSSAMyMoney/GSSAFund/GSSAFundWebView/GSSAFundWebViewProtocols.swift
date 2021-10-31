@@ -11,7 +11,7 @@
 import UIKit
 
 //MARK: Wireframe -
-protocol GSSAFundWebViewWireframeProtocol: class {
+protocol GSSAFundWebViewWireframeProtocol: AnyObject {
     func goToError(message: String, isDouble: Bool)
     func goToTicket(folio: String)
 }
