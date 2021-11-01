@@ -163,7 +163,10 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
         //details.updateValue("Para", forKey:  transaction.descripcionBeneficiario ?? n"")
         
         details.updateValue("Folio", forKey: [transaction.folio ?? "":9])
-        details.updateValue("Número de operación", forKey: [transaction.numeroOperacion ?? "":99])
+        
+        if transaction.idOperacion != "212" && transaction.idOperacion != "213"{
+          details.updateValue("Número de operación", forKey: [transaction.numeroOperacion ?? "":99])
+        }
         
         let descriptionData = transaction.descripcionOperacion?.components(separatedBy: "|")
         let urlFotoData = transaction.urlFoto?.components(separatedBy: "|")
