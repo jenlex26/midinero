@@ -31,6 +31,7 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
     var cellsArray:  Array<[UITableViewCell:CGFloat]> = []
     //[[DATA:ORDER]:LABEL TITLE]
     var details: [[String:Int]:String] = [:]
+   // var detailsV3: Array<[String:String]> = []
     var data: DebitCardTransactionItemV2!
     var movementsArray: DebitCardTransactionV2!
     var index: Int!
@@ -86,7 +87,7 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
             cell.lblTitle.styleType = 8
             cell.lblTitle.textColor = .darkGray
             cell.lblDate.text = element.key.keys.first
-            cell.lblDate.numberOfLines = 2
+            cell.lblDate.numberOfLines = 3
             cell.lblDate.styleType = 6
             cell.lblDate.textColor = .black
             cell.tag = element.key.values.first ?? 0
@@ -99,8 +100,8 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
                 }
             }
         }
-       
-       
+        
+        
         cellsArray = cellsArray.sorted(by: { ($0.first?.key as! BASAMovementTableViewCell).tag  < ($1.first?.key as! BASAMovementTableViewCell).tag })
         
         
@@ -154,17 +155,19 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
         }else{
             details.updateValue("Descripción", forKey: [transaction.concepto?.alnovaDecrypt() ?? "":0])
             details.updateValue("Id de operación", forKey: [transaction.idOperacion ?? "":7])
-            details.updateValue("Fecha y hora de registro", forKey: [(transaction.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy") ?? "") + " " + (data.hora?.timeFormatter() ?? ""):8])
+            if transaction.idOperacion != "212" && transaction.idOperacion != "213"{
+             details.updateValue("Fecha y hora de registro", forKey: [(transaction.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy") ?? "") + " " + (data.hora?.timeFormatter() ?? ""):8])
+            }
         }
-       
+        
         //details.updateValue("Para", forKey:  transaction.descripcionBeneficiario ?? n"")
-     
+        
         details.updateValue("Folio", forKey: [transaction.folio ?? "":9])
         details.updateValue("Número de operación", forKey: [transaction.numeroOperacion ?? "":99])
         
         let descriptionData = transaction.descripcionOperacion?.components(separatedBy: "|")
         let urlFotoData = transaction.urlFoto?.components(separatedBy: "|")
-  
+        
         if descriptionData?.count ?? 0 >= 2{
             if descriptionData![1] == "r"{
                 let amount = transaction.importe?.alnovaDecrypt().removeWhiteSpaces()
@@ -189,47 +192,76 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
             
             presenter?.requestGetSPEIDetail(Body: body, claveRastreo: transaction.descripcion ?? "", Response: {  [self] Response in
                 if Response != nil{
-                    
                     let data = Response?.resultado
                     
                     let originData = data?.numeroCuentaOrigen?.components(separatedBy: "|")
                     let destinationData = data?.importeBeneficiario?.components(separatedBy: "|")
                     let referenceData = data?.nombreBeneficiario?.components(separatedBy: "|")
-                    
-                    details.updateValue("Clave de rastreo", forKey: [(referenceData?[3] ?? ""):11])
-                    details.updateValue("Ordenante", forKey: [(originData?[0].nameFormatter() ?? "") + "\n" + (originData?[1] ?? ""):12])
-                    details.updateValue("Referencia", forKey: [referenceData?[0] ?? "":13])
-                    details.updateValue("Concepto ", forKey: [referenceData?[1] ?? "":14])
-                    details.updateValue("Nombre del beneficiario", forKey: [(destinationData?[0] ?? "") + "\nCuenta: " + (destinationData?[1] ?? ""):15])
-                    
-                    switch data?.estatusTransferencia{
-                    case "T":
-                        details.updateValue("Estatus de transferencia", forKey: ["Liquidada":16])
-                    case "C":
-                        details.updateValue("Estatus de transferencia", forKey: ["Liquidada por contingencia":16])
-                    case "D":
-                        details.updateValue("Estatus de transferencia", forKey: ["Devuelta":16])
-                    case .none:
-                        details.updateValue("Estatus de transferencia", forKey: ["":16])
-                    case .some(_):
-                        details.updateValue("Estatus de transferencia", forKey: ["":16])
-                    }
-                    
                     let URLData = data?.urlEstatusTransferencia?.components(separatedBy: "|")
                     
-                    if URLData?.count ?? 0 >= 3{
-                        URLBanxico = "https://www.banxico.org.mx/cep/go?i=" + URLData![0]
-                        URLBanxico = URLBanxico + "&s=" + URLData![1]
-                        URLBanxico = URLBanxico + "&d=" + (URLData?[2].alnovaDecrypt().removeWhiteSpaces().replacingOccurrences(of: "\r\n", with: ""))!
+                    if myMoneyFrameworkSettings.shared.showV2SPEIDetail == true{
+                        details.updateValue("Clave de rastreo", forKey: [(referenceData?[3] ?? ""):-6])
+                        details.updateValue("Ordenante", forKey: [(originData?[0].nameFormatter() ?? "") + "\n" + (originData?[1] ?? ""):12])
+                        details.updateValue("Referencia", forKey: [referenceData?[0] ?? "":-3])
+                        details.updateValue("Concepto", forKey: [referenceData?[1] ?? "":-8])
+                        
+                        details.updateValue("Folio", forKey: [referenceData?[2] ?? "":-7])
+                        
+                        
+                        details.updateValue("Para", forKey: ["Nombre del beneficiario\n" + (destinationData?[0] ?? "") + "\n*Dato no verificado por esta institución*" :-10])
+                        
+                        details.updateValue("Fecha", forKey: [(referenceData?[4] ?? "") + " " + (referenceData?[5] ?? ""):-5])
+                        
+                        details.updateValue("Institución receptora****", forKey: [((destinationData?[1].components(separatedBy: "-").last?.removeWhiteSpaces() ?? "") + " " + (destinationData?[2].maskedAccount ?? "")):-9])
+                        
+                        switch data?.estatusTransferencia{
+                        case "T":
+                            details.updateValue("Estatus de transferencia", forKey: ["Liquidada":-4])
+                        case "C":
+                            details.updateValue("Estatus de transferencia", forKey: ["Liquidada por contingencia":-4])
+                        case "D":
+                            details.updateValue("Estatus de transferencia", forKey: ["Devuelta":-4])
+                        case .none:
+                            details.updateValue("Estatus de transferencia", forKey: ["":-4])
+                        case .some(_):
+                            details.updateValue("Estatus de transferencia", forKey: ["":-4])
+                        }
+                        
+                        if URLData?.count ?? 0 >= 3{
+                            URLBanxico = "https://www.banxico.org.mx/cep/go?i=" + URLData![0]
+                            URLBanxico = URLBanxico + "&s=" + URLData![1]
+                            URLBanxico = URLBanxico + "&d=" + (URLData?[2].alnovaDecrypt().removeWhiteSpaces().replacingOccurrences(of: "\r\n", with: ""))!
+                        }
+                    }else{
+                        details.updateValue("Clave de rastreo", forKey: [(referenceData?[3] ?? ""):11])
+                        details.updateValue("Ordenante", forKey: [(originData?[0].nameFormatter() ?? "") + "\n" + (originData?[1] ?? ""):12])
+                        details.updateValue("Referencia", forKey: [referenceData?[0] ?? "":13])
+                        details.updateValue("Concepto ", forKey: [referenceData?[1] ?? "":14])
+                        details.updateValue("Nombre del beneficiario", forKey: [(destinationData?[0] ?? "") + "\nCuenta: " + (destinationData?[1] ?? ""):15])
+                        
+                        switch data?.estatusTransferencia{
+                        case "T":
+                            details.updateValue("Estatus de transferencia", forKey: ["Liquidada":16])
+                        case "C":
+                            details.updateValue("Estatus de transferencia", forKey: ["Liquidada por contingencia":16])
+                        case "D":
+                            details.updateValue("Estatus de transferencia", forKey: ["Devuelta":16])
+                        case .none:
+                            details.updateValue("Estatus de transferencia", forKey: ["":16])
+                        case .some(_):
+                            details.updateValue("Estatus de transferencia", forKey: ["":16])
+                        }
+                        
+                        if URLData?.count ?? 0 >= 3{
+                            URLBanxico = "https://www.banxico.org.mx/cep/go?i=" + URLData![0]
+                            URLBanxico = URLBanxico + "&s=" + URLData![1]
+                            URLBanxico = URLBanxico + "&d=" + (URLData?[2].alnovaDecrypt().removeWhiteSpaces().replacingOccurrences(of: "\r\n", with: ""))!
+                        }
                     }
-                    
                 }
                 GSVCLoader.hide()
                 setOptions(SPEI: true)
             })
-            //            }else{
-            //                setOptions(SPEI: true)
-            //            }
         }else{
             setOptions(SPEI: false)
         }
@@ -304,9 +336,9 @@ extension GSSAMovementPreviewViewController: UITableViewDelegate, UITableViewDat
                 UIApplication.shared.open(url)
             }
         case .none:
-           ()
+            ()
         case .some(_):
-           ()
+            ()
         }
     }
     
