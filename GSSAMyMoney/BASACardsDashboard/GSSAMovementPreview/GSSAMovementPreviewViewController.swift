@@ -201,7 +201,7 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
                     
                     if myMoneyFrameworkSettings.shared.showV2SPEIDetail == true{
                         details.updateValue("Clave de rastreo", forKey: [(referenceData?[3] ?? ""):-6])
-                        details.updateValue("Ordenante", forKey: [(originData?[0].nameFormatter() ?? "") + "\n" + (originData?[1] ?? ""):12])
+                       // details.updateValue("Ordenante", forKey: [(originData?[0].nameFormatter() ?? "") + "\n" + (originData?[1] ?? ""):12])
                         details.updateValue("Referencia", forKey: [referenceData?[0] ?? "":-3])
                         details.updateValue("Concepto", forKey: [referenceData?[1] ?? "":-8])
                         
