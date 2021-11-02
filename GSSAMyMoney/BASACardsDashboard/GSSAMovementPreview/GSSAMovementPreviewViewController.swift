@@ -30,8 +30,8 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
     
     var cellsArray:  Array<[UITableViewCell:CGFloat]> = []
     //[[DATA:ORDER]:LABEL TITLE]
-    var details: [[String:Int]:String] = [:]
-   // var detailsV3: Array<[String:String]> = []
+   // var details: [[String:Int]:String] = [:]
+    var details: Array<[String:String]> = []
     var data: DebitCardTransactionItemV2!
     var movementsArray: DebitCardTransactionV2!
     var index: Int!
@@ -83,17 +83,22 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
             cell.imgView.isHidden = true
             cell.lblAmount.isHidden = true
             cell.amountSize.constant = -10
-            cell.lblTitle.text = element.value
+            cell.lblTitle.text = element.first?.key
             cell.lblTitle.styleType = 8
             cell.lblTitle.textColor = .darkGray
-            cell.lblDate.text = element.key.keys.first
+            cell.lblDate.text = element.first?.value
             cell.lblDate.numberOfLines = 3
             cell.lblDate.styleType = 6
             cell.lblDate.textColor = .black
-            cell.tag = element.key.values.first ?? 0
             
-            if element.key.keys.first?.removeWhiteSpaces() != ""{
-                if element.value == "Nombre del beneficiario" || element.value == "Ordenante" || element.key.keys.first?.count ?? 0 > 25{
+            if element.first?.value.removeWhiteSpaces() != ""{
+                if element.first?.value.contains("Nombre del beneficiario") == true{
+                    cellsArray.append([cell:105.0])
+                }else if element.first?.key == "Ordenante" {
+                    cellsArray.append([cell:90.0])
+                }else if element.first?.value.count ?? 0 > 25 && UIDevice.current.screenType == .iPhones_5_5s_5c_SE{
+                    cellsArray.append([cell:90.0])
+                }else if element.first?.value.count ?? 0 > 30{
                     cellsArray.append([cell:90.0])
                 }else{
                     cellsArray.append([cell:75.0])
@@ -102,7 +107,7 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
         }
         
         
-        cellsArray = cellsArray.sorted(by: { ($0.first?.key as! BASAMovementTableViewCell).tag  < ($1.first?.key as! BASAMovementTableViewCell).tag })
+        //cellsArray = cellsArray.sorted(by: { ($0.first?.key as! BASAMovementTableViewCell).tag  < ($1.first?.key as! BASAMovementTableViewCell).tag })
         
         
         if SPEI == true{
@@ -147,25 +152,23 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
         //AB2 TIEMPO AIRE
         if transaction.idOperacion == "AB2"{
             let lastAccountDigits = GSSISessionInfo.sharedInstance.gsUser.account?.number?.removeWhiteSpaces().suffix(4)
-            details.updateValue("Realizado con", forKey: ["Baz****\(lastAccountDigits ?? "")": 1])
-            details.updateValue("Para", forKey: [transaction.descripcion?.showOnlyNumbers.withCellphoneFormat ?? "":2])
-            details.updateValue("Compañia", forKey: [transaction.descripcion?.components(separatedBy: " ").last ?? "":3])
-            details.updateValue("Fecha", forKey: [(transaction.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy") ?? ""):5])
-            details.updateValue("Hora", forKey: [(data.hora?.timeFormatter() ?? ""):6])
+            details.append(["Realizado con":"Baz****\(lastAccountDigits ?? "")"])
+            details.append(["Para": transaction.descripcion?.showOnlyNumbers.withCellphoneFormat ?? ""])
+            details.append(["Compañia": transaction.descripcion?.components(separatedBy: " ").last ?? ""])
+            details.append(["Fecha":(transaction.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy") ?? "")])
+            details.append(["Hora":(data.hora?.timeFormatter() ?? "")])
         }else{
-            details.updateValue("Descripción", forKey: [transaction.concepto?.alnovaDecrypt() ?? "":0])
-            details.updateValue("Id de operación", forKey: [transaction.idOperacion ?? "":7])
             if transaction.idOperacion != "212" && transaction.idOperacion != "213"{
-             details.updateValue("Fecha y hora de registro", forKey: [(transaction.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy") ?? "") + " " + (data.hora?.timeFormatter() ?? ""):8])
+                details.append(["Descripción":transaction.concepto?.alnovaDecrypt() ?? ""])
+                details.append(["Id de operación":transaction.idOperacion ?? ""])
+                details.append(["Fecha y hora de registro":(transaction.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy") ?? "") + " " + (data.hora?.timeFormatter() ?? "")])
             }
         }
         
-        //details.updateValue("Para", forKey:  transaction.descripcionBeneficiario ?? n"")
-        
-        details.updateValue("Folio", forKey: [transaction.folio ?? "":9])
+        details.append(["Folio":transaction.folio ?? ""])
         
         if transaction.idOperacion != "212" && transaction.idOperacion != "213"{
-          details.updateValue("Número de operación", forKey: [transaction.numeroOperacion ?? "":99])
+            details.append(["Número de operación":transaction.numeroOperacion ?? ""])
         }
         
         let descriptionData = transaction.descripcionOperacion?.components(separatedBy: "|")
@@ -175,13 +178,13 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
             if descriptionData![1] == "r"{
                 let amount = transaction.importe?.alnovaDecrypt().removeWhiteSpaces()
                 lblAmount.text = String((Double(amount ?? "0.0") ?? 0.0) * -1.0).moneyFormatWithoutSplit()
-                details.updateValue("Estatus", forKey: ["MOV. PENDIENTE":10])
+                details.append(["Estatus":"MOV. PENDIENTE"])
             }
         }else{
             if urlFotoData![1] == "r"{
                 let amount = transaction.importe?.alnovaDecrypt().removeWhiteSpaces()
                 lblAmount.text = String((Double(amount ?? "0.0") ?? 0.0) * -1.0).moneyFormatWithoutSplit()
-                details.updateValue("Estatus", forKey: ["MOV. PENDIENTE":10])
+                details.append(["Estatus":"MOV. PENDIENTE"])
             }
         }
         
@@ -203,32 +206,30 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
                     let URLData = data?.urlEstatusTransferencia?.components(separatedBy: "|")
                     
                     if myMoneyFrameworkSettings.shared.showV2SPEIDetail == true{
-                        details.updateValue("Clave de rastreo", forKey: [(referenceData?[3] ?? ""):-6])
                        // details.updateValue("Ordenante", forKey: [(originData?[0].nameFormatter() ?? "") + "\n" + (originData?[1] ?? ""):12])
-                        details.updateValue("Referencia", forKey: [referenceData?[0] ?? "":-3])
-                        details.updateValue("Concepto", forKey: [referenceData?[1] ?? "":-8])
-                        
-                        details.updateValue("Folio", forKey: [referenceData?[2] ?? "":-7])
-                        
-                        
-                        details.updateValue("Para", forKey: ["Nombre del beneficiario\n" + (destinationData?[0] ?? "") + "\n*Dato no verificado por esta institución*" :-10])
-                        
-                        details.updateValue("Fecha", forKey: [(referenceData?[4] ?? "") + " " + (referenceData?[5] ?? ""):-5])
-                        
-                        details.updateValue("Institución receptora****", forKey: [((destinationData?[1].components(separatedBy: "-").last?.removeWhiteSpaces() ?? "") + " " + (destinationData?[2].maskedAccount ?? "")):-9])
+                        details.append(["Para":"Nombre del beneficiario\n" + (destinationData?[0] ?? "") + "\n" + "*Dato no verificado por esta institución*"])
+                        details.append(["Institución receptora****":((destinationData?[1].components(separatedBy: "-").last?.removeWhiteSpaces() ?? "") + " " + (destinationData?[2].maskedAccount ?? ""))])
+                        details.append(["Concepto":referenceData?[1] ?? ""])
+                        details.append(["Folio":referenceData?[2] ?? ""])
+                        details.append(["Clave de rastreo": (referenceData?[3] ?? "")])
+                        details.append(["Fecha":(referenceData?[4] ?? "") + " " + (referenceData?[5] ?? "")])
                         
                         switch data?.estatusTransferencia{
                         case "T":
-                            details.updateValue("Estatus de transferencia", forKey: ["Liquidada":-4])
+                            details.append(["Estatus de transferencia":"Liquidada"])
+                        case "APLICADA":
+                            details.append(["Estatus de transferencia":"Aplicada"])
                         case "C":
-                            details.updateValue("Estatus de transferencia", forKey: ["Liquidada por contingencia":-4])
+                            details.append(["Estatus de transferencia":"Liquidada por contingencia"])
                         case "D":
-                            details.updateValue("Estatus de transferencia", forKey: ["Devuelta":-4])
+                            details.append(["Estatus de transferencia":"Devuelta"])
                         case .none:
-                            details.updateValue("Estatus de transferencia", forKey: ["":-4])
+                            details.append(["Estatus de transferencia":""])
                         case .some(_):
-                            details.updateValue("Estatus de transferencia", forKey: ["":-4])
+                            details.append(["Estatus de transferencia":""])
                         }
+                        
+                        details.append(["Referencia":referenceData?[0] ?? ""])
                         
                         if URLData?.count ?? 0 >= 3{
                             URLBanxico = "https://www.banxico.org.mx/cep/go?i=" + URLData![0]
@@ -236,24 +237,29 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
                             URLBanxico = URLBanxico + "&d=" + (URLData?[2].alnovaDecrypt().removeWhiteSpaces().replacingOccurrences(of: "\r\n", with: ""))!
                         }
                     }else{
-                        details.updateValue("Clave de rastreo", forKey: [(referenceData?[3] ?? ""):11])
-                        details.updateValue("Ordenante", forKey: [(originData?[0].nameFormatter() ?? "") + "\n" + (originData?[1] ?? ""):12])
-                        details.updateValue("Referencia", forKey: [referenceData?[0] ?? "":13])
-                        details.updateValue("Concepto ", forKey: [referenceData?[1] ?? "":14])
-                        details.updateValue("Nombre del beneficiario", forKey: [(destinationData?[0] ?? "") + "\nCuenta: " + (destinationData?[1] ?? ""):15])
+                        details.append(["Clave de rastreo":(referenceData?[3] ?? "")])
+                        details.append(["Ordenante":(originData?[0].nameFormatter() ?? "") + "\n" + (originData?[1] ?? "")])
+                        details.append(["Referencia":referenceData?[0] ?? ""])
+                        details.append(["Concepto ":referenceData?[1] ?? ""])
+                        details.append(["Nombre del beneficiario":(destinationData?[0] ?? "") + "\nCuenta: " + (destinationData?[1] ?? "")])
                         
                         switch data?.estatusTransferencia{
                         case "T":
-                            details.updateValue("Estatus de transferencia", forKey: ["Liquidada":16])
+                            details.append(["Estatus de transferencia":"Liquidada"])
+                        case "APLICADA":
+                            details.append(["Estatus de transferencia":"Aplicada"])
                         case "C":
-                            details.updateValue("Estatus de transferencia", forKey: ["Liquidada por contingencia":16])
+                            details.append(["Estatus de transferencia":"Liquidada por contingencia"])
                         case "D":
-                            details.updateValue("Estatus de transferencia", forKey: ["Devuelta":16])
+                            details.append(["Estatus de transferencia":"Devuelta"])
                         case .none:
-                            details.updateValue("Estatus de transferencia", forKey: ["":16])
+                            details.append(["Estatus de transferencia":""])
                         case .some(_):
-                            details.updateValue("Estatus de transferencia", forKey: ["":16])
+                            details.append(["Estatus de transferencia":""])
                         }
+                        
+                        details.append(["Descripción":transaction.concepto?.alnovaDecrypt() ?? ""])
+                        details.append(["Id de operación":transaction.idOperacion ?? ""])
                         
                         if URLData?.count ?? 0 >= 3{
                             URLBanxico = "https://www.banxico.org.mx/cep/go?i=" + URLData![0]
@@ -262,7 +268,9 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
                         }
                     }
                 }
-                GSVCLoader.hide()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                    GSVCLoader.hide()
+                })
                 setOptions(SPEI: true)
             })
         }else{
