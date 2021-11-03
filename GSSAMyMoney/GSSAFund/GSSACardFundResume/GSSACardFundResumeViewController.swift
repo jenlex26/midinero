@@ -57,11 +57,11 @@ extension GSSACardFundResumeViewController: GSSACardFundResumeViewProtocol {
         dailyTransactionsLimit = GSSAFundSharedVariables.shared.ecommerceResponse?.limiteTransaccionesDia ?? 0
         montlyTransactionsLimit = GSSAFundSharedVariables.shared.ecommerceResponse?.limiteTransaccionesMes ?? 0
     
-//        guard dailyLimit, numDailyTransactions < dailyTransactionsLimit else {
-//            self.presentBottomAlertFullData(status: .error, message: "Excedió número de transacciones diarios permitidos", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
-//            GSVCLoader.hide()
-//            return
-//        }
+        guard dailyLimit, numDailyTransactions < dailyTransactionsLimit else {
+            self.presentBottomAlertFullData(status: .error, message: "Excedió número de transacciones diarios permitidos", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+            GSVCLoader.hide()
+            return
+        }
         
         guard monthlyLimit, numMonthlyTransactions < montlyTransactionsLimit else {
             self.presentBottomAlertFullData(status: .error, message: "Excedió número de transacciones mensuales permitidos", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)

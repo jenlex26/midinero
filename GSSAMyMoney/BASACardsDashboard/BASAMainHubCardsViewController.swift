@@ -375,7 +375,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         separator.lblTitle.text = "Movimientos"
         cellsArray.append([separator:60.0])
         
-        if creditCardMovements?.resultado?.movimientos != nil{
+        if creditCardMovements?.resultado?.movimientos?.count ?? 0 > 0{
             for item in creditCardMovements!.resultado!.movimientos!{
                 let movement = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAMovementCell") as! BASAMovementTableViewCell
                 movement.lblTitle.text = item.concepto
@@ -505,7 +505,9 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
             case .lending:
                 setTableForLends()
             case .offlineWallet:
-                setTableForOfflineWallet()
+                if myMoneyFrameworkSettings.shared.showOfflineWallet == true{
+                 setTableForOfflineWallet()
+                }else{()}
             }
         }
     }

@@ -75,7 +75,9 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadCreditCard(notification:)), name: NSNotification.Name(rawValue: "reloadCreditCardData"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadCreditCardBalance(notification:)), name: NSNotification.Name(rawValue: "reloadCreditCardBalance"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(setTableOnlyForLends(notification:)), name: NSNotification.Name(rawValue: "onlyLendsAvaliable"), object: nil)
+        
         self.btnSelect.isHidden = true
+        
         if myMoneyFrameworkSettings.shared.showOfflineWallet == true{
             debitCardView.isHidden = true
             cardCollection.isHidden = false
@@ -124,16 +126,18 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
     
     @objc func reloadCards(notification: Notification){
         if notification.object != nil{
-            data = notification.object as? BalanceResponse
+            let data = notification.object as! BalanceResponse
             
-            let amountString = data?.resultado.cliente?.cuentas?.first?.saldoDisponible?.alnovaDecrypt().moneyFormat() ?? "0"
+            let amountString = data.resultado.cliente?.cuentas?.first?.saldoDisponible?.alnovaDecrypt().moneyFormat() ?? "0"
             UserDefaults.standard.setValue(amountString, forKey: "debitAccountBalance")
             debitCardlblBalance.text = amountString
-            debitCardlblCardNumber.text = data?.resultado.cliente?.cuentas?.first?.numeroTarjeta?.alnovaDecrypt().tnuoccaFormat
-            self.cardCollection.reloadData()
-            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "HomeHeaderViewChange"), object:  cardType.debit, userInfo: nil))
-            pageController.currentPage = 0
-            lblTitle.text = "Dinero"
+            debitCardlblCardNumber.text = data.resultado.cliente?.cuentas?.first?.numeroTarjeta?.alnovaDecrypt().tnuoccaFormat
+            if myMoneyFrameworkSettings.shared.showOfflineWallet == true{
+                self.cardCollection.reloadData()
+                NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "HomeHeaderViewChange"), object:  cardType.debit, userInfo: nil))
+                pageController.currentPage = 0
+                lblTitle.text = "Dinero"
+            }
         }
     }
     
@@ -185,9 +189,9 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
     }
     
     @IBAction func debitCardClick(_ sender: Any){
-        showDebitOptions = true
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "HomeHeaderViewChange"), object:  cardType.debit, userInfo: nil))
         if myMoneyFrameworkSettings.shared.showOfflineWallet == true{
+            showDebitOptions = true
             pageController.isHidden = false
             debitCardView.isHidden = true
             cardCollection.isHidden = false
@@ -207,7 +211,9 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
     
     @IBAction func creditCardClick(_ sender: Any){
         showDebitOptions = false
-        self.cardCollection.reloadData()
+        if myMoneyFrameworkSettings.shared.showOfflineWallet == true{
+            self.cardCollection.reloadData()
+        }
         debitButton.isEnabled = true
         creditButton.isEnabled = false
         debitCardView.isHidden = true
@@ -219,6 +225,7 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
             self.lblTitle.textColor = .white
             self.backButton.tintColor = .white
         })
+        
         if showOnlyLendsInCredit == true{
             self.cardCollection.scrollToItem(at: [0,1], at: .left, animated: false)
             self.cardCollection.isScrollEnabled = false
@@ -278,7 +285,7 @@ extension BASAHomeHeaderViewComponent: UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if showDebitOptions ==  true{
+        if showDebitOptions ==  true && myMoneyFrameworkSettings.shared.showOfflineWallet == true{
             switch indexPath.row{
             case 0:
                 let cell = cardCollection.dequeueReusableCell(withReuseIdentifier: "card", for: indexPath) as! BASACardCell
@@ -387,7 +394,7 @@ extension BASAHomeHeaderViewComponent: UICollectionViewDelegate, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "dashboard", screenName: "movimientos", type: "click", element: "carrusel", origin: "credito")
-        if showDebitOptions == true{
+        if showDebitOptions == true  && myMoneyFrameworkSettings.shared.showOfflineWallet == true{
             switch indexPath.row{
             case 1:
                 pageController.currentPage = 0

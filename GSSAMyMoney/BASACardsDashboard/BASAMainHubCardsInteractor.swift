@@ -190,7 +190,9 @@ open class BASAMainHubCardsInteractor: GSSAURLSessionTaskCoordinatorBridge, BASA
             let response = objRes?.body
             if error.code == 0 {
                 CreditCardMovements(response)
-            } else {
+            }else if error.code == 400{
+                CreditCardMovements(CreditCardMovementsResponse.init(mensaje: "", folio: "", resultado: CreditCardMovementsResult.init(movimientos: [])))
+            }else{
                 CreditCardMovements(nil)
             }
         }
