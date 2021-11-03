@@ -411,16 +411,16 @@
     </objects>
     <designables>
         <designable name="6go-dx-BRI">
-            <size key="intrinsicContentSize" width="89.5" height="16"/>
+            <size key="intrinsicContentSize" width="103" height="20"/>
         </designable>
         <designable name="8gy-nS-1Md">
-            <size key="intrinsicContentSize" width="73" height="16"/>
+            <size key="intrinsicContentSize" width="83.5" height="20"/>
         </designable>
         <designable name="Zyf-a5-X5g">
-            <size key="intrinsicContentSize" width="86" height="16"/>
+            <size key="intrinsicContentSize" width="101" height="20"/>
         </designable>
         <designable name="cEY-tC-AX6">
-            <size key="intrinsicContentSize" width="108" height="16"/>
+            <size key="intrinsicContentSize" width="127.5" height="20"/>
         </designable>
     </designables>
     <resources>

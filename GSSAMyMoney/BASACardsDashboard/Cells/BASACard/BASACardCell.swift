@@ -16,18 +16,14 @@ class BASACardCell: UICollectionViewCell {
     @IBOutlet weak var lblVigencia       : UILabel!
     @IBOutlet weak var lblOweMoney       : UILabel!
     @IBOutlet weak var btnConfig         : UIButton!
+    @IBOutlet weak var cardImage        : UIImageView!
+    @IBOutlet weak var bazIcon         : UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         btnConfig.layer.masksToBounds = true
         btnConfig.layer.cornerRadius = btnConfig.frame.width/2
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadCards(notification:)), name: NSNotification.Name(rawValue: "reloadHeaderData"), object: nil)
     }
     
-    @objc func reloadCards(notification: Notification){
-        if notification.object != nil{
-            let data = notification.object as? BalanceResponse
-            //self.lblCardNumber.text = data?.resultado.cliente?.cuentas?.first?.numero?.tnuoccaFormat
-        }
-    }
+    
 }

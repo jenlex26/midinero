@@ -39,6 +39,7 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
     var creditCardData: CreditCardResponse?
     var creditCardBalance: CreditCardBalanceResponse?
     var showOnlyLendsInCredit: Bool = false
+    var showDebitOptions = true
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -75,11 +76,17 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadCreditCardBalance(notification:)), name: NSNotification.Name(rawValue: "reloadCreditCardBalance"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(setTableOnlyForLends(notification:)), name: NSNotification.Name(rawValue: "onlyLendsAvaliable"), object: nil)
         self.btnSelect.isHidden = true
-        setUpDebitCard()
+        if myMoneyFrameworkSettings.shared.showOfflineWallet == true{
+            debitCardView.isHidden = true
+            cardCollection.isHidden = false
+            pageController.isHidden = false
+            showDebitOptions = true
+        }else{
+            setUpDebitCard()
+        }
     }
     
     func setUpDebitCard(){
-        
         NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: Notification.Name("creditCardAvailable"), object: nil)
         
         debitCardlblBalance.textColor = .black
@@ -88,7 +95,6 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
         debitCardbtnConfig.setImage(UIImage(named: "ic_more_icon", in: Bundle(for: BASAHomeHeaderViewComponent.self), compatibleWith: nil), for: .normal)
         debitCardbtnConfig.tag = 0
         if data != nil{
-            
             debitCardlblBalance.text = data!.resultado.cliente?.cuentas?.first?.saldoDisponible?.alnovaDecrypt().moneyFormat()
         }
     }
@@ -118,12 +124,16 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
     
     @objc func reloadCards(notification: Notification){
         if notification.object != nil{
-            let data = notification.object as! BalanceResponse
+            data = notification.object as? BalanceResponse
             
-            let amountString = data.resultado.cliente?.cuentas?.first?.saldoDisponible?.alnovaDecrypt().moneyFormat() ?? "0"
+            let amountString = data?.resultado.cliente?.cuentas?.first?.saldoDisponible?.alnovaDecrypt().moneyFormat() ?? "0"
             UserDefaults.standard.setValue(amountString, forKey: "debitAccountBalance")
             debitCardlblBalance.text = amountString
-            debitCardlblCardNumber.text = data.resultado.cliente?.cuentas?.first?.numeroTarjeta?.alnovaDecrypt().tnuoccaFormat
+            debitCardlblCardNumber.text = data?.resultado.cliente?.cuentas?.first?.numeroTarjeta?.alnovaDecrypt().tnuoccaFormat
+            self.cardCollection.reloadData()
+            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "HomeHeaderViewChange"), object:  cardType.debit, userInfo: nil))
+            pageController.currentPage = 0
+            lblTitle.text = "Dinero"
         }
     }
     
@@ -175,10 +185,20 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
     }
     
     @IBAction func debitCardClick(_ sender: Any){
+        showDebitOptions = true
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "HomeHeaderViewChange"), object:  cardType.debit, userInfo: nil))
-        debitCardView.isHidden = false
-        cardCollection.isHidden = true
-        pageController.isHidden = true
+        if myMoneyFrameworkSettings.shared.showOfflineWallet == true{
+            pageController.isHidden = false
+            debitCardView.isHidden = true
+            cardCollection.isHidden = false
+            pageController.currentPage = 0
+            self.cardCollection.isScrollEnabled = true
+            self.cardCollection.reloadData()
+            self.cardCollection.scrollToItem(at: [0,0], at: .left, animated: false)
+        }else{
+            cardCollection.isHidden = true
+            debitCardView.isHidden = false
+        }
         debitButton.style = 7
         creditButton.style = 8
         debitButton.isEnabled = false
@@ -186,6 +206,8 @@ class BASAHomeHeaderViewComponent: UITableViewCell {
     }
     
     @IBAction func creditCardClick(_ sender: Any){
+        showDebitOptions = false
+        self.cardCollection.reloadData()
         debitButton.isEnabled = true
         creditButton.isEnabled = false
         debitCardView.isHidden = true
@@ -256,43 +278,105 @@ extension BASAHomeHeaderViewComponent: UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch indexPath.row{
-        case 0:
-            let cell = cardCollection.dequeueReusableCell(withReuseIdentifier: "card", for: indexPath) as! BASACardCell
-            cell.lblBalance.textColor = .white
-            cell.lblExpDate.textColor = .white
-            cell.lblVigencia.textColor = .white
-            cell.lblOweMoney.isHidden = false
-            cell.lblCardNumber.isHidden = false
-            cell.lblVigencia.isHidden = false
-            cell.lblExpDate.isHidden = false
-            cell.btnConfig.isHidden = true
-            cell.btnConfig.backgroundColor = .black
-            cell.btnConfig.tag = 1
-            cell.lblOweMoney.textColor = .white
-            cell.lblCardNumber.textColor = .white
-            cell.CardBackgroundView.layer.borderColor = UIColor.white.cgColor
-            cell.CardBackgroundView.blurBackground(style: .dark, fallbackColor: .white)
-            
-            if creditCardData != nil{
-                cell.lblCardNumber.text = creditCardData?.resultado?.tarjetas?.first?.numero?.tnuoccaFormat
-                cell.lblExpDate.text = creditCardData?.resultado?.tarjetas?.first?.expiracion?.replacingOccurrences(of: "-", with: "/")
+        if showDebitOptions ==  true{
+            switch indexPath.row{
+            case 0:
+                let cell = cardCollection.dequeueReusableCell(withReuseIdentifier: "card", for: indexPath) as! BASACardCell
+                cell.lblBalance.textColor = .white
+                cell.lblOweMoney.isHidden = true
+                cell.lblCardNumber.isHidden = true
+                cell.lblVigencia.isHidden = true
+                cell.lblExpDate.isHidden = true
+                cell.btnConfig.isHidden = false
+                cell.btnConfig.backgroundColor = UIColor(red: 101/255, green: 156/255, blue: 71/255, alpha: 1.0)
+                cell.btnConfig.tag = 1
+                cell.lblOweMoney.textColor = .white
+                cell.lblCardNumber.textColor = .white
+                cell.cardImage.image = UIImage(named: "debitCard3", in: Bundle.init(for: BASAHomeHeaderViewComponent.self), compatibleWith: nil)
+                
+                cell.lblBalance.text = data?.resultado.cliente?.cuentas?.first?.saldoDisponible?.alnovaDecrypt().moneyFormat()
+                
+                if creditCardData != nil{
+                    cell.lblCardNumber.text = creditCardData?.resultado?.tarjetas?.first?.numero?.tnuoccaFormat
+                    cell.lblExpDate.text = creditCardData?.resultado?.tarjetas?.first?.expiracion?.replacingOccurrences(of: "-", with: "/")
+                }
+                
+                cell.btnConfig.tag = 0 
+                cell.btnConfig.addTarget(self, action: #selector(openConfig(sender:)), for: .touchUpInside)
+                
+                cell.CardBackgroundView.layer.borderWidth = 0.5
+                cell.CardBackgroundView.layer.cornerRadius = 10
+                cell.CardBackgroundView.layer.masksToBounds = true
+                return cell
+            case 1:
+                let cell = cardCollection.dequeueReusableCell(withReuseIdentifier: "card", for: indexPath) as! BASACardCell
+                cell.lblBalance.textColor = .white
+                cell.lblOweMoney.isHidden = true
+                cell.lblCardNumber.isHidden = true
+                cell.lblVigencia.isHidden = true
+                cell.lblExpDate.isHidden = true
+                cell.btnConfig.isHidden = false
+                cell.btnConfig.backgroundColor = UIColor(red: 101/255, green: 156/255, blue: 71/255, alpha: 1.0)
+                cell.btnConfig.tag = 1
+                cell.lblOweMoney.textColor = .white
+                cell.lblCardNumber.textColor = .white
+                cell.cardImage.image = UIImage(named: "offlineCard", in: Bundle.init(for: BASAHomeHeaderViewComponent.self), compatibleWith: nil)
+                cell.bazIcon.isHidden = true
+                cell.lblBalance.text = "$0.00"
+                
+                if creditCardData != nil{
+                    cell.lblCardNumber.text = creditCardData?.resultado?.tarjetas?.first?.numero?.tnuoccaFormat
+                    cell.lblExpDate.text = creditCardData?.resultado?.tarjetas?.first?.expiracion?.replacingOccurrences(of: "-", with: "/")
+                }
+                
+                cell.btnConfig.isHidden = true
+                
+                cell.CardBackgroundView.layer.borderWidth = 0.5
+                cell.CardBackgroundView.layer.cornerRadius = 10
+                cell.CardBackgroundView.layer.masksToBounds = true
+                return cell
+            default:
+                return UICollectionViewCell()
             }
-            
-            cell.btnConfig.addTarget(self, action: #selector(openConfig(sender:)), for: .touchUpInside)
-            
-            cell.CardBackgroundView.layer.borderWidth = 0.5
-            cell.CardBackgroundView.layer.cornerRadius = 10
-            cell.CardBackgroundView.layer.masksToBounds = true
-            return cell
-        case 1:
-            let cell = cardCollection.dequeueReusableCell(withReuseIdentifier: "BASALendViewCVC", for: indexPath) as! BASALendViewCVC
-            if lendsData != nil{
-                cell.lblAmount.text = lendsData?.resultado?.pagoLiquidar?.moneyFormatWithoutSplit()
+        }else{
+            switch indexPath.row{
+            case 0:
+                let cell = cardCollection.dequeueReusableCell(withReuseIdentifier: "card", for: indexPath) as! BASACardCell
+                cell.lblBalance.textColor = .white
+                cell.lblExpDate.textColor = .white
+                cell.lblVigencia.textColor = .white
+                cell.lblOweMoney.isHidden = false
+                cell.lblCardNumber.isHidden = false
+                cell.lblVigencia.isHidden = false
+                cell.lblExpDate.isHidden = false
+                cell.btnConfig.isHidden = true
+                cell.btnConfig.backgroundColor = .black
+                cell.btnConfig.tag = 1
+                cell.lblOweMoney.textColor = .white
+                cell.lblCardNumber.textColor = .white
+                cell.CardBackgroundView.layer.borderColor = UIColor.white.cgColor
+                cell.CardBackgroundView.blurBackground(style: .dark, fallbackColor: .white)
+                
+                if creditCardData != nil{
+                    cell.lblCardNumber.text = creditCardData?.resultado?.tarjetas?.first?.numero?.tnuoccaFormat
+                    cell.lblExpDate.text = creditCardData?.resultado?.tarjetas?.first?.expiracion?.replacingOccurrences(of: "-", with: "/")
+                }
+                
+                cell.btnConfig.addTarget(self, action: #selector(openConfig(sender:)), for: .touchUpInside)
+                
+                cell.CardBackgroundView.layer.borderWidth = 0.5
+                cell.CardBackgroundView.layer.cornerRadius = 10
+                cell.CardBackgroundView.layer.masksToBounds = true
+                return cell
+            case 1:
+                let cell = cardCollection.dequeueReusableCell(withReuseIdentifier: "BASALendViewCVC", for: indexPath) as! BASALendViewCVC
+                if lendsData != nil{
+                    cell.lblAmount.text = lendsData?.resultado?.pagoLiquidar?.moneyFormatWithoutSplit()
+                }
+                return cell
+            default:
+                return UICollectionViewCell()
             }
-            return cell
-        default:
-            return UICollectionViewCell()
         }
     }
     
@@ -303,16 +387,33 @@ extension BASAHomeHeaderViewComponent: UICollectionViewDelegate, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         createTag(eventName: .UIInteraction, section: "mi_dinero", flow: "dashboard", screenName: "movimientos", type: "click", element: "carrusel", origin: "credito")
-        if showOnlyLendsInCredit == false{
+        if showDebitOptions == true{
             switch indexPath.row{
             case 1:
                 pageController.currentPage = 0
-                handleCardChange(index: 0)
+                lblTitle.text = "Dinero"
+                NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "HomeHeaderViewChange"), object:  cardType.debit, userInfo: nil))
             case 0:
                 pageController.currentPage = 1
-                handleCardChange(index: 1)
+                lblTitle.text = "Monedero para envío sin conexión"
+                NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "HomeHeaderViewChange"), object:  cardType.offlineWallet, userInfo: nil))
             default:
                 handleCardChange(index: indexPath.row)
+            }
+        }else{
+            if showOnlyLendsInCredit == false{
+                switch indexPath.row{
+                case 1:
+                    lblTitle.text = "Dinero"
+                    pageController.currentPage = 0
+                    handleCardChange(index: 0)
+                case 0:
+                    lblTitle.text = "Dinero"
+                    pageController.currentPage = 1
+                    handleCardChange(index: 1)
+                default:
+                    handleCardChange(index: indexPath.row)
+                }
             }
         }
     }
@@ -322,4 +423,5 @@ enum cardType{
     case debit
     case credit
     case lending
+    case offlineWallet
 }

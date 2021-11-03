@@ -254,7 +254,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         self.BasaMainHubTableView.register(UINib(nibName: "BASALendInfoCell", bundle: bundle), forCellReuseIdentifier: "BASALendInfoCell")
         self.BasaMainHubTableView.register(UINib(nibName: "BASAMyCreditItem", bundle: bundle), forCellReuseIdentifier: "BASAMyCreditItem")
         self.BasaMainHubTableView.register(UINib(nibName: "GSNoMovementsCell", bundle: bundle), forCellReuseIdentifier: "GSNoMovementsCell")
-        
+        self.BasaMainHubTableView.register(UINib(nibName: "GSSAOfflineControlCell", bundle: bundle), forCellReuseIdentifier: "GSOfflineControlCell")
     }
     
     func setTableForDebitCard(){
@@ -435,6 +435,20 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
         addTableComponents()
     }
     
+    func setTableForOfflineWallet(){
+        removeAllExceptFirst()
+        let offlineControl = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "GSOfflineControlCell") as! GSSAOfflineControlCell
+        cellsArray.append([offlineControl:135])
+        
+        let emptyMovements = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "GSNoMovementsCell") as! GSNoMovementsCell
+        emptyMovements.imgView.image = UIImage(named: "walletInfo", in: Bundle.init(for: BASAMainHubCardsViewController.self), compatibleWith: nil)
+        emptyMovements.lblTitle.isHidden = true
+        emptyMovements.lblSubtitle.text = "Aquí podrás reservar dinero para hacer compras, envíos y pagos aunque no tengas conexión a internet."
+        cellsArray.append([emptyMovements:321])
+        
+        addTableComponents()
+    }
+    
     func removeAllExceptFirst(){
         if cellsArray.count > 0{
             let count = cellsArray.count
@@ -490,6 +504,8 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
                 setTableForDebitCard()
             case .lending:
                 setTableForLends()
+            case .offlineWallet:
+                setTableForOfflineWallet()
             }
         }
     }

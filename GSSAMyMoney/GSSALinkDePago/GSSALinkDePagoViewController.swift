@@ -239,10 +239,10 @@ class GSSALinkDePagoViewController: GSSAMasterViewController, GSSALinkDePagoView
     private func showAlert() {
         activityObserved()
         
-        guard dailyLimit, numDailyTransactions < dailyTransactionsLimit else {
-            self.presentBottomAlertFullData(status: .error, message: "Excedió número de transacciones diarios permitidos", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
-            return
-        }
+//        guard dailyLimit, numDailyTransactions < dailyTransactionsLimit else {
+//            self.presentBottomAlertFullData(status: .error, message: "Excedió número de transacciones diarios permitidos", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
+//            return
+//        }
 
         guard monthlyLimit, numMonthlyTransactions < montlyTransactionsLimit else {
             self.presentBottomAlertFullData(status: .error, message: "Excedió número de transacciones mensuales permitidos", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)

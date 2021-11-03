@@ -26,11 +26,18 @@ class GSSAFundSetCardNumberViewController: UIViewController, GSSAFundSetCardNumb
 	override func viewDidLoad() {
         super.viewDidLoad()
         setView()
+        cleanTxtField()
         createTag(eventName: .pageView, section: "mi_dinero", flow: "fondear_cuenta", screenName: "nueva_tarjeta", origin: "")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    func cleanTxtField(){
+        cardNumberTextField.text = ""
+        expirationTextField.text = ""
+        cvvTextField.text = ""
     }
     
     //MARK: - Methods
@@ -44,7 +51,9 @@ class GSSAFundSetCardNumberViewController: UIViewController, GSSAFundSetCardNumb
         cardNumberTextField.imageTyped = UIImage(named: "ic_camera", in: Bundle.init(for: GSSAFundSetCVVViewController.self), compatibleWith: nil)?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate) ?? UIImage()
         cardNumberTextField.image =  cardNumberTextField.image.tint(with: .GSVCSecundary100)
         cardNumberTextField.imageTyped =  cardNumberTextField.imageTyped.tint(with: .GSVCSecundary100)
+        cardNumberTextField.rightView?.isHidden = true
         cardNumberTextField.rightButtonAction { onTap in
+            
 //            let view = BAZ_CardScannerMain.createModule(navigation: self.navigationController ?? UINavigationController(), delegate: self)
 //            view.modalPresentationStyle = .overCurrentContext
             //self.navigationController?.pushViewController(view, animated: true)

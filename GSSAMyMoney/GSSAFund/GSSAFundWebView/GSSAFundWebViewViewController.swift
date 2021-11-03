@@ -55,6 +55,7 @@ class GSSAFundWebViewViewController: UIViewController, GSSAFundWebViewViewProtoc
 //MARK: - Presenter Methods
 extension GSSAFundWebViewViewController {
     func onSucess(folio: String) {
+        
         presenter?.requestBinnacle(SendBinnacleResponse: { _ in
             GSVCLoader.hide()
             self.presenter?.goToTicket(folio: folio)
@@ -84,6 +85,7 @@ extension GSSAFundWebViewViewController: LNKPG_WebViewFacadeDelegate {
     
     func notifyFailure() {
         GSVCLoader.hide()
+        onError(content: "Error")
     }
     
     func notifyLoad(){

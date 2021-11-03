@@ -16,10 +16,14 @@ import GSSASessionInfo
 import GSSAFunctionalUtilities
 
 class GSSAFundWebViewInteractor: GSSAURLSessionTaskCoordinatorBridge, GSSAFundWebViewInteractorProtocol {
-    
+    var loads = 0
     weak var presenter: GSSAFundWebViewPresenterProtocol?
     
     func checkFund() {
+        if loads == 3{
+            presenter?.onError(content: "Operacion cancelada por el usuario")
+        }
+        loads += 1
         guard let enrollmentID = GSSAFundSharedVariables.shared.enrollmentResponse?.payer?.xid else {
             presenter?.onError(content: nil)
             return

@@ -280,6 +280,8 @@
 		F03CB1AE272BD0250002E523 /* BAZ_CardScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03CB1A9272BD0250002E523 /* BAZ_CardScannerView.swift */; };
 		F03CB1AF272BD0250002E523 /* BAZ_CardScannerViewUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03CB1AA272BD0250002E523 /* BAZ_CardScannerViewUI.swift */; };
 		F03CB1B0272BD0250002E523 /* BAZ_CardScannerEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03CB1AC272BD0250002E523 /* BAZ_CardScannerEntity.swift */; };
+		F09649622731F97700B2118F /* GSSAOfflineControlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09649602731F97700B2118F /* GSSAOfflineControlCell.swift */; };
+		F09649632731F97700B2118F /* GSSAOfflineControlCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F09649612731F97700B2118F /* GSSAOfflineControlCell.xib */; };
 		F0DB9FC22714832E0087E7C4 /* GSSAVersionSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DB9FC12714832E0087E7C4 /* GSSAVersionSettings.swift */; };
 		F0F062492729FF0B00C9EB92 /* GSSALinkDePagoCorreoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F062442729FF0B00C9EB92 /* GSSALinkDePagoCorreoViewController.swift */; };
 		F0F0624A2729FF0B00C9EB92 /* GSSALinkDePagoCorreoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F062452729FF0B00C9EB92 /* GSSALinkDePagoCorreoRouter.swift */; };
@@ -562,6 +564,8 @@
 		F03CB1A9272BD0250002E523 /* BAZ_CardScannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BAZ_CardScannerView.swift; sourceTree = "<group>"; };
 		F03CB1AA272BD0250002E523 /* BAZ_CardScannerViewUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BAZ_CardScannerViewUI.swift; sourceTree = "<group>"; };
 		F03CB1AC272BD0250002E523 /* BAZ_CardScannerEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BAZ_CardScannerEntity.swift; sourceTree = "<group>"; };
+		F09649602731F97700B2118F /* GSSAOfflineControlCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAOfflineControlCell.swift; sourceTree = "<group>"; };
+		F09649612731F97700B2118F /* GSSAOfflineControlCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GSSAOfflineControlCell.xib; sourceTree = "<group>"; };
 		F0DB9FC12714832E0087E7C4 /* GSSAVersionSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSAVersionSettings.swift; sourceTree = "<group>"; };
 		F0F062442729FF0B00C9EB92 /* GSSALinkDePagoCorreoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSSALinkDePagoCorreoViewController.swift; sourceTree = "<group>"; };
 		F0F062452729FF0B00C9EB92 /* GSSALinkDePagoCorreoRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSSALinkDePagoCorreoRouter.swift; sourceTree = "<group>"; };
@@ -856,6 +860,7 @@
 		10E9ED7C267D6BA400F45640 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				F096495F2731F93E00B2118F /* GSSAOfflineControl */,
 				EE97BB032684DF08000AE34C /* GSNoMovementsCell */,
 				10E9ED7D267D6BA400F45640 /* BASACardInfoComponent */,
 				10E9ED80267D6BA400F45640 /* BASAHeaderComponent */,
@@ -1390,6 +1395,15 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
+		F096495F2731F93E00B2118F /* GSSAOfflineControl */ = {
+			isa = PBXGroup;
+			children = (
+				F09649602731F97700B2118F /* GSSAOfflineControlCell.swift */,
+				F09649612731F97700B2118F /* GSSAOfflineControlCell.xib */,
+			);
+			path = GSSAOfflineControl;
+			sourceTree = "<group>";
+		};
 		F0DB9FC0271482B60087E7C4 /* GSSAUtils */ = {
 			isa = PBXGroup;
 			children = (
@@ -1525,6 +1539,7 @@
 				10E9EDD2267D6BA400F45640 /* BASANewBeneficiaryViewController.xib in Resources */,
 				10E9EDD7267D6BA400F45640 /* BASABeneficiaryListViewController.xib in Resources */,
 				10E9EDD6267D6BA400F45640 /* BASACardConfigViewController.xib in Resources */,
+				F09649632731F97700B2118F /* GSSAOfflineControlCell.xib in Resources */,
 				EEAD106726C20792000E5BEF /* GSSAFundSetCVVViewController.xib in Resources */,
 				10E9EDBC267D6BA400F45640 /* BASASwitchItemCell.xib in Resources */,
 				10E9EDF3267D6BA400F45640 /* BASAMainHubCardsViewController.xib in Resources */,
@@ -1656,6 +1671,7 @@
 				10E9EDF8267D6BA400F45640 /* BASADigitalCardPresenter.swift in Sources */,
 				EE2CA7522696D7D20023BE1D /* GSSACardLimitsEntity.swift in Sources */,
 				EEAA129126C5E79800F57C97 /* GSSACardNIPEntity.swift in Sources */,
+				F09649622731F97700B2118F /* GSSAOfflineControlCell.swift in Sources */,
 				EE2A25F926B300CE00E1C2C5 /* GSSAPhysicalCardRequestAddressPresenter.swift in Sources */,
 				EE2A261B26B36DF200E1C2C5 /* GSSASetCVVPresenter.swift in Sources */,
 				EEAD107A26C20792000E5BEF /* GSSAFundWebViewRouter.swift in Sources */,
@@ -1905,7 +1921,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.9;
+				MARKETING_VERSION = 0.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = mx.com.gruposalinas.GSSAMyMoney;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1936,7 +1952,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.9;
+				MARKETING_VERSION = 0.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = mx.com.gruposalinas.GSSAMyMoney;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

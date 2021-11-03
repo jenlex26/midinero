@@ -24,10 +24,10 @@
                         </constraints>
                     </imageView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="jJV-eG-J5P">
-                        <rect key="frame" x="40" y="229" width="366" height="47"/>
+                        <rect key="frame" x="40" y="229" width="366" height="48.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aún no realizas ningún movimiento" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xCF-7L-5TM" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                <rect key="frame" x="0.0" y="0.0" width="366" height="20.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="366" height="22.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -37,8 +37,8 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aquí podrás revisar la actividad de tu tarjeta." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mgm-oG-2Ph" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                <rect key="frame" x="0.0" y="26.5" width="366" height="20.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aquí podrás revisar la actividad de tu tarjeta." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mgm-oG-2Ph" customClass="GSVCLabel" customModule="GSSAVisualComponents">
+                                <rect key="frame" x="0.0" y="28.5" width="366" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -61,9 +61,22 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="imgView" destination="gbv-pd-wWW" id="8Pz-Do-UG0"/>
+                <outlet property="lblSubtitle" destination="mgm-oG-2Ph" id="1T2-at-Slf"/>
+                <outlet property="lblTitle" destination="xCF-7L-5TM" id="wYs-mR-GuK"/>
+            </connections>
             <point key="canvasLocation" x="91.304347826086968" y="168.41517857142856"/>
         </tableViewCell>
     </objects>
+    <designables>
+        <designable name="mgm-oG-2Ph">
+            <size key="intrinsicContentSize" width="315.5" height="20"/>
+        </designable>
+        <designable name="xCF-7L-5TM">
+            <size key="intrinsicContentSize" width="286" height="22.5"/>
+        </designable>
+    </designables>
     <resources>
         <image name="movementsImage" width="295" height="240"/>
     </resources>
