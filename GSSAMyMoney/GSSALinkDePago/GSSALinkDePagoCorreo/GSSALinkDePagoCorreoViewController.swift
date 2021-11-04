@@ -51,10 +51,6 @@ class GSSALinkDePagoCorreoViewController: GSSAMasterViewController, GSVCBottomAl
         createTag(eventName: .pageView, section: "mi_dinero", flow: "fondear_cuenta", screenName: "monto", origin: "")
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-       
-    }
-    
     func setUpToolBar(){
         let buttonTwo =  UIBarButtonItem(title: "Listo", style: .done, target: self, action: #selector(doneButtonClick))
         buttonTwo.tintColor = .white

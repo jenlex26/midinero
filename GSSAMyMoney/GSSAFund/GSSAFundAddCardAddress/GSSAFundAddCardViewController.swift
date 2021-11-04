@@ -47,8 +47,8 @@ class GSSAFundAddCardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setView()
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name:UIResponder.keyboardWillHideNotification, object: nil)
         createTag(eventName: .pageView, section: "mi_dinero", flow: "fondear_cuenta", screenName: "datos_personales", origin: "")
     }
     

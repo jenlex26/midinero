@@ -53,7 +53,7 @@ class GSSAFundSetCardNumberViewController: UIViewController, GSSAFundSetCardNumb
         cardNumberTextField.imageTyped =  cardNumberTextField.imageTyped.tint(with: .GSVCSecundary100)
         cardNumberTextField.rightView?.isHidden = true
         cardNumberTextField.rightButtonAction { onTap in
-            
+            ()
 //            let view = BAZ_CardScannerMain.createModule(navigation: self.navigationController ?? UINavigationController(), delegate: self)
 //            view.modalPresentationStyle = .overCurrentContext
             //self.navigationController?.pushViewController(view, animated: true)

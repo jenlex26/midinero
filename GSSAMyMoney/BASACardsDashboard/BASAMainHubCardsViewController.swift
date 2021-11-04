@@ -19,7 +19,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     
     var bottomAlert: GSVCBottomAlert?
     var presenter: BASAMainHubCardsPresenterProtocol?
-    var viewMode = 0
+    var viewMode = cardType.debit
     
     @IBOutlet weak var BasaMainHubTableView:UITableView!
     @IBOutlet weak var headerImage: UIImageView!
@@ -258,7 +258,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     }
     
     func setTableForDebitCard(){
-        viewMode = 0
+        viewMode = .debit
         createTag(eventName: "SA|MD|movimientosDebito|pageView")
         let header = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASAHomeHeaderViewComponent") as! BASAHomeHeaderViewComponent
         header.cellViewController = self
@@ -340,7 +340,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     func setTableForCreditCard(){
         createTag(eventName: "SA|MD|movimientosCredito|pageView")
         createTag(eventName: .pageView, section: "mi_dinero", flow: "dashboard", screenName: "movimientos", origin: "credito")
-        viewMode = 1
+        viewMode = .credit
         removeAllExceptFirst()
         
         if creditCardData == nil{
@@ -398,7 +398,7 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     func setTableForLends(){
         createTag(eventName: "SA|MD|movimientosPrestamos|pageView")
         createTag(eventName: .pageView, section: "mi_dinero", flow: "dashboard", screenName: "movimientos", origin: "prestamos")
-        viewMode = 2
+        viewMode = .lending
         removeAllExceptFirst()
         
         let infoCell = BasaMainHubTableView.dequeueReusableCell(withIdentifier: "BASALendInfoCell") as! BASALendInfoCell
@@ -523,14 +523,14 @@ class BASAMainHubCardsViewController: UIViewController, BASAMainHubCardsViewProt
     
     @objc func refresh(_ sender: AnyObject) {
         switch viewMode{
-        case 0:
+        case .debit:
             loadDebitBalance()
-        case 1:
+        case .credit:
             loadCreditCardInfo()
-        case 2:
+        case .lending:
             loadLends()
-        default:
-           ()
+        case .offlineWallet:
+              ()
         }
     }
 }
@@ -550,7 +550,7 @@ extension BASAMainHubCardsViewController:UITableViewDelegate,UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if BasaMainHubTableView.cellForRow(at: indexPath) is BASAMovementTableViewCell{
-            if debitCardMovementsV2?.resultado?.movimientos?.count ?? 0 > 0 && viewMode == 0{
+            if debitCardMovementsV2?.resultado?.movimientos?.count ?? 0 > 0 && viewMode == .debit{
                 let item = BasaMainHubTableView.cellForRow(at: indexPath) as! BASAMovementTableViewCell
                 let data = debitCardMovementsV2?.resultado?.movimientos![item.tag]
                 let view = GSSAMovementPreviewRouter.createModule(index: item.tag, item: data!, array: debitCardMovementsV2!)
