@@ -183,7 +183,7 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
                 cellsToRemove.append([0,n])
             }
             
-            table.deleteRows(at: cellsToRemove, with: .fade)
+            table.deleteRows(at: cellsToRemove, with: .none)
         }
     }
     
@@ -191,7 +191,7 @@ class BASACardConfigViewController: UIViewController, BASACardConfigViewProtocol
         removeAllExceptFirst()
         if myMoneyFrameworkSettings.shared.showCreditCardControlSettings == true{
             let cardControl = table.dequeueReusableCell(withIdentifier: "BASACardControl") as! BASACardControl
-            cardControl.lblCheckNIP.text = "Activa tu tarjeta física"
+            cardControl.lblCheckNIP.text = "Activa tu tarjeta"
             //cell.btnCheckNIP.addTarget(self, action: #selector(checkNIP(sender:)), for: .touchUpInside)
             cardControl.btnCheckNIP.addTarget(self, action: #selector(activateCreditCard), for: .touchUpInside)
             cardControl.turnOfSwitch.addTarget(self, action: #selector(turnOnCard(sender:)), for: .valueChanged)

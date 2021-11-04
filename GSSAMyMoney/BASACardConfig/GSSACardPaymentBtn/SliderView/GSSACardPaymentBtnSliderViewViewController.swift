@@ -27,7 +27,7 @@ class GSSACardPaymentBtnSliderViewViewController: UIViewController, GSSACardPaym
 
     func configureSliderBtn(){
         let buttoncolor = UIColor(red: 0.44, green: 0.72, blue: 0.27, alpha: 1.00)
-        let SB = GSVCSliderButton.init(delegate: self,strInstruction: "Desliza para pagar ", withSuccesText: false,succesBackgroundColor: .white,thumbnailColor: buttoncolor,thumbnailImage: UIImage(named: "arrastrar3")?.imageFlippedForRightToLeftLayoutDirection(), frame: CGRect(x: 0, y: 0, width: sliderView.frame.width, height: 70))
+        let SB = GSVCSliderButton.init(delegate: self,strInstruction: "Desliza para solicitar ", withSuccesText: false,succesBackgroundColor: .white,thumbnailColor: buttoncolor,thumbnailImage: UIImage(named: "arrastrar3")?.imageFlippedForRightToLeftLayoutDirection(), frame: CGRect(x: 0, y: 0, width: sliderView.frame.width, height: 70))
         sliderView.addSubview(SB)
     }
     

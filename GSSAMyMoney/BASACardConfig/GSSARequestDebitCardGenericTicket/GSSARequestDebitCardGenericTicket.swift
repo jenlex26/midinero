@@ -43,8 +43,8 @@ class GSSARequestDebitCardGenericTicket
         let selectedAddress = requestedAddress.shared
         let  paymentDetailOption:[(subTitle: String?, info: String)] =
             [
-                (subTitle: "Tarjeta baz física", info: "Pago de \(selectedAddress.amount ?? "tarjeta física")"),
-                (subTitle: "Número de pedido baz física", info: invoice)
+                (subTitle: "Tarjeta baz", info: "Pago de \(selectedAddress.amount ?? "tarjeta")"),
+                (subTitle: "Número de pedido baz", info: invoice)
             ]
         
         let paymentDetailCell = GSVTResumeCellInfo(sectionTitle: "Detalle del pago",
@@ -60,7 +60,7 @@ class GSSARequestDebitCardGenericTicket
             [
                 (subTitle: "Domicilio", info: "\(selectedAddress.street ?? "") \(selectedAddress.externalNumber  ?? "") \(selectedAddress.internalNumber  ?? "" ) \(selectedAddress.postalCode  ?? "" )  \(selectedAddress.suburb  ?? "" )  \(selectedAddress.country  ?? "" )  \(selectedAddress.city  ?? "" )" ),
                 (subTitle: "Recibe", info: completeName),
-                (subTitle: "Entrega estimada", info: "Entre 2 y 10 dias hábiles")
+                (subTitle: "Entrega estimada", info: "Entre 2 y 10 días hábiles")
             ]
         
         let addressDetailCell = GSVTResumeCellInfo(sectionTitle: "Detalle del pago",
@@ -75,7 +75,7 @@ class GSSARequestDebitCardGenericTicket
     class func getGenericTicket(delegate: GSVTTicketOperationDelegate, invoice: String)-> GSVTTicketOperationController {
         
         //Title Info
-        let mainInfo = GSVTTicketMainInfo(title: "Tarjeta física en camino")
+        let mainInfo = GSVTTicketMainInfo(title: "Tarjeta en camino")
         
         // Blue Info
         let informationView = getWarningBox(message: "Cuando llegue tu paquete asegúrate de que esté en buenas condiciones")

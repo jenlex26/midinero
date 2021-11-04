@@ -66,7 +66,7 @@ class GSSARequestDebitCardViewController: GSSAMasterViewController, GSSARequestD
         GSVCLoader.show()
         presenter?.requestCard(commission: amount.moneyToDoubleString(), Response: { Response in
             if Response != nil{
-                self.present(GSSARequestDebitCardGenericTicket.getGenericTicket(delegate: self, invoice: Response?.folio ?? ""), animated: true)
+                self.present(GSSARequestDebitCardGenericTicket.getGenericTicket(delegate: self, invoice: Response?.folio?.alnovaDecrypt() ?? ""), animated: true)
             }else{
                 self.presentBottomAlertFullData(status: .error, message: "Ocurrió un problema al solicitar su tarjeta, intente de nuevo más tarde", attributedString: nil, canBeClosed: true, animated: true, showOptionalButton: false, optionalButtonText: nil)
             }
@@ -82,7 +82,6 @@ class GSSARequestDebitCardViewController: GSSAMasterViewController, GSSARequestD
             if Response != nil{
                 amount = Response?.resultado?.montoTotal?.alnovaDecrypt().moneyFormatWithoutSplit() ?? ""
                     lblShippingCost.text = "Solicítala con un costo de \(Response?.resultado?.montoTotal?.alnovaDecrypt().moneyFormatWithoutSplit() ?? "")"
-                    self.lblShippingCostSubtitle.text = "Solicítala con un costo de \(Response?.resultado?.montoTotal?.alnovaDecrypt().moneyFormatWithoutSplit() ?? "")"
                 requestedAddress.shared.amount = amount
                  GSVCLoader.hide()
             }else{
