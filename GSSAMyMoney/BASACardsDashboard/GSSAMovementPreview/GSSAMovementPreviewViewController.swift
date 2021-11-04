@@ -30,7 +30,7 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
     
     var cellsArray:  Array<[UITableViewCell:CGFloat]> = []
     //[[DATA:ORDER]:LABEL TITLE]
-   // var details: [[String:Int]:String] = [:]
+    // var details: [[String:Int]:String] = [:]
     var details: Array<[String:String]> = []
     var data: DebitCardTransactionItemV2!
     var movementsArray: DebitCardTransactionV2!
@@ -158,16 +158,31 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
             details.append(["Fecha":(transaction.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy") ?? "")])
             details.append(["Hora":(data.hora?.timeFormatter() ?? "")])
         }else{
-            if transaction.idOperacion != "212" && transaction.idOperacion != "213"{
-                details.append(["Descripción":transaction.concepto?.alnovaDecrypt() ?? ""])
-                details.append(["Id de operación":transaction.idOperacion ?? ""])
-                details.append(["Fecha y hora de registro":(transaction.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy") ?? "") + " " + (data.hora?.timeFormatter() ?? "")])
+                        if transaction.idOperacion != "212" && transaction.idOperacion != "213" && transaction.idOperacion != "Z87" && transaction.idOperacion != "Z88"{
+                            details.append(["Id de operación":transaction.idOperacion ?? ""])
+                            details.append(["Descripción":transaction.concepto?.alnovaDecrypt() ?? ""])
+            
+                            details.append(["Fecha y hora de registro":(transaction.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy") ?? "") + " " + (data.hora?.timeFormatter() ?? "")])
+                        }
+        }
+        
+        if transaction.idOperacion == "Z87" || transaction.idOperacion == "Z88"{
+            let lastAccountDigits = GSSISessionInfo.sharedInstance.gsUser.account?.number?.removeWhiteSpaces().suffix(4)
+            if transaction.idOperacion == "Z87"{
+                details.append(["Realizado con":"Baz****\(lastAccountDigits ?? "")"])
+                details.append(["Desde ": transaction.descripcion ?? ""])
+            }else{
+                details.append(["Cuenta":"Baz****\(lastAccountDigits ?? "")"])
+                details.append(["Para":transaction.descripcion ?? ""])
             }
+            details.append(["Tipo de operación": transaction.concepto ?? ""])
+            details.append(["Fecha y hora de registro":(transaction.fecha?.dateFormatter(format: "yyyy-MM-dd", outputFormat: "dd MMM yyyy") ?? "") + " " + (data.hora?.timeFormatter() ?? "")])
+            details.append(["Folio":transaction.numeroOperacion ?? ""])
         }
         
         details.append(["Folio":transaction.folio ?? ""])
         
-        if transaction.idOperacion != "212" && transaction.idOperacion != "213"{
+        if transaction.idOperacion != "212" && transaction.idOperacion != "213" && transaction.idOperacion != "Z87" && transaction.idOperacion != "Z88"{
             details.append(["Número de operación":transaction.numeroOperacion ?? ""])
         }
         
@@ -204,7 +219,7 @@ class GSSAMovementPreviewViewController: UIViewController, GSSAMovementPreviewVi
                     let destinationData = data?.importeBeneficiario?.components(separatedBy: "|")
                     let referenceData = data?.nombreBeneficiario?.components(separatedBy: "|")
                     let URLData = data?.urlEstatusTransferencia?.components(separatedBy: "|")
-                    
+                        
                     if myMoneyFrameworkSettings.shared.showV2SPEIDetail == true{
                        // details.updateValue("Ordenante", forKey: [(originData?[0].nameFormatter() ?? "") + "\n" + (originData?[1] ?? ""):12])
                         details.append(["Para":"Nombre del beneficiario\n" + (destinationData?[0] ?? "") + "\n" + "*Dato no verificado por esta institución*"])
