@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -28,14 +28,14 @@
                                         <rect key="frame" x="0.0" y="0.0" width="95" height="114"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fondear_wallet" translatesAutoresizingMaskIntoConstraints="NO" id="ekx-QI-b0u">
-                                                <rect key="frame" x="17.5" y="7" width="60" height="60"/>
+                                                <rect key="frame" x="17.5" y="6.5" width="60" height="60"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="60" id="KGb-ln-fl3"/>
                                                     <constraint firstAttribute="height" constant="60" id="YhT-L5-5fN"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Depositar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JsM-3F-7Ew" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                                <rect key="frame" x="13.5" y="77" width="68" height="20"/>
+                                                <rect key="frame" x="10.5" y="76.5" width="74" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -48,6 +48,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ycd-XE-Yxg">
                                                 <rect key="frame" x="0.0" y="0.0" width="95" height="114"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <connections>
+                                                    <action selector="withdraw:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="iIv-eg-a7u"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -67,14 +70,14 @@
                                         <rect key="frame" x="95" y="0.0" width="95" height="114"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="retirar_wallet" translatesAutoresizingMaskIntoConstraints="NO" id="9Z3-XU-wpf">
-                                                <rect key="frame" x="17.5" y="7" width="60" height="60"/>
+                                                <rect key="frame" x="17.5" y="6.5" width="60" height="60"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="7cQ-c1-sRc"/>
                                                     <constraint firstAttribute="width" constant="60" id="HFI-k0-vsK"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Retirar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IKI-SC-gCf" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                                <rect key="frame" x="24.5" y="77" width="46" height="20"/>
+                                                <rect key="frame" x="22.5" y="76.5" width="50.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -87,6 +90,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U0s-Wx-36P">
                                                 <rect key="frame" x="0.0" y="0.0" width="95" height="114"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <connections>
+                                                    <action selector="fundAccount:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="VkL-jC-hIf"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -106,14 +112,14 @@
                                         <rect key="frame" x="190" y="0.0" width="95" height="114"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eliminar_wallet" translatesAutoresizingMaskIntoConstraints="NO" id="WhY-qr-DZg">
-                                                <rect key="frame" x="17.5" y="7" width="60" height="60"/>
+                                                <rect key="frame" x="17.5" y="6.5" width="60" height="60"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="WWx-Ld-rgv"/>
                                                     <constraint firstAttribute="width" constant="60" id="eVw-iZ-Ow4"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Eliminar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aHw-ot-Qlj" customClass="GSVCLabel" customModule="GSSAVisualComponents">
-                                                <rect key="frame" x="19.5" y="77" width="56" height="20"/>
+                                                <rect key="frame" x="17.5" y="76.5" width="60" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -126,6 +132,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2GA-DK-K6g">
                                                 <rect key="frame" x="0.0" y="0.0" width="95" height="114"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <connections>
+                                                    <action selector="deleteWallet:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="RB0-Sp-1kY"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -178,13 +187,13 @@
     </objects>
     <designables>
         <designable name="IKI-SC-gCf">
-            <size key="intrinsicContentSize" width="46" height="20"/>
+            <size key="intrinsicContentSize" width="50.5" height="20.5"/>
         </designable>
         <designable name="JsM-3F-7Ew">
-            <size key="intrinsicContentSize" width="68" height="20"/>
+            <size key="intrinsicContentSize" width="74" height="20.5"/>
         </designable>
         <designable name="aHw-ot-Qlj">
-            <size key="intrinsicContentSize" width="56" height="20"/>
+            <size key="intrinsicContentSize" width="60" height="20.5"/>
         </designable>
     </designables>
     <resources>

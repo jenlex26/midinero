@@ -33,22 +33,22 @@ class GSSAFundSelectCardInteractor: GSSAFundSelectCardInteractorProtocol {
             return
         }
         
-        LNKPG_Facade.shared.getListCard(xicu : usrICU, numeroAfiliacion: afiliationNumber, email: email, success: { [weak self] cards in
-            guard let self = self else { return }
-            
-            guard let cards = cards else {
-                self.presenter?.getCardsError()
-                return
-            }
-            
-            self.presenter?.getCardsSuccess(cards: cards)
-            
-        }, failure: { [weak self] message in
-            guard let self = self else { return }
-            
-           
-            self.presenter?.getCardsError()
-        })
+//        LNKPG_Facade.shared.getListCard(xicu : usrICU, numeroAfiliacion: afiliationNumber, email: email, success: { [weak self] cards in
+//            guard let self = self else { return }
+//            
+//            guard let cards = cards else {
+//                self.presenter?.getCardsError()
+//                return
+//            }
+//            
+//            self.presenter?.getCardsSuccess(cards: cards)
+//            
+//        }, failure: { [weak self] message in
+//            guard let self = self else { return }
+//            
+//           
+//            self.presenter?.getCardsError()
+//        })
     }
     
     func deleteCard(body request: LNKPG_TokenCardDeleteRequestFacade) {

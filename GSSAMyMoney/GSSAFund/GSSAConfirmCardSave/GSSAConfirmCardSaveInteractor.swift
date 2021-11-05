@@ -81,39 +81,39 @@ extension GSSAConfirmCardSaveInteractor: GSSAConfirmCardSaveInteractorProtocol {
        
         guard let usrICU = GSSISessionInfo.sharedInstance.gsUser.SICU else { self.presenter?.onError()
             return }
-        LNKPG_Facade.shared.postCreateToken(xicu: usrICU, token: tokenCardRequest) {[weak self] response in
-            guard let self = self else  { return }
-           
-            if let response = response {
-                if let createdCardToken = response.paySubscriptionId {
-                    LNKPG_Facade.shared.getListCard(xicu: usrICU, numeroAfiliacion: GSSAFundSharedVariables.shared.numeroAfiliacion ?? "", email: (GSSISessionInfo.sharedInstance.gsUser.email ?? "").lowercased()) { tokens in
-                        if let nonNilTokens = tokens {
-                            for token in nonNilTokens {
-                                if createdCardToken == token.token ?? ""{
-                                    if !(token.activo ?? false) {
-                                        self.presenter?.onErrorTokenNoActivo()
-                                        return
-                                    }
-                                }
-                            }
-                            self.presenter?.onSuccess(response)
-                        }
-                    } failure: { error in
-                        self.presenter?.onError()
-                        return
-                    }
-                }else{
-                    self.presenter?.onError()
-                }
-            } else {
-                self.presenter?.onError()
-            }
-            
-        } failure: { [weak self] error in
-            guard let self = self else  { return }
-            
-            
-            self.presenter?.onError()
-        }
+//        LNKPG_Facade.shared.postCreateToken(xicu: usrICU, token: tokenCardRequest) {[weak self] response in
+//            guard let self = self else  { return }
+//           
+//            if let response = response {
+//                if let createdCardToken = response.paySubscriptionId {
+//                    LNKPG_Facade.shared.getListCard(xicu: usrICU, numeroAfiliacion: GSSAFundSharedVariables.shared.numeroAfiliacion ?? "", email: (GSSISessionInfo.sharedInstance.gsUser.email ?? "").lowercased()) { tokens in
+//                        if let nonNilTokens = tokens {
+//                            for token in nonNilTokens {
+//                                if createdCardToken == token.token ?? ""{
+//                                    if !(token.activo ?? false) {
+//                                        self.presenter?.onErrorTokenNoActivo()
+//                                        return
+//                                    }
+//                                }
+//                            }
+//                            self.presenter?.onSuccess(response)
+//                        }
+//                    } failure: { error in
+//                        self.presenter?.onError()
+//                        return
+//                    }
+//                }else{
+//                    self.presenter?.onError()
+//                }
+//            } else {
+//                self.presenter?.onError()
+//            }
+//            
+//        } failure: { [weak self] error in
+//            guard let self = self else  { return }
+//            
+//            
+//            self.presenter?.onError()
+//        }
     }
 }
