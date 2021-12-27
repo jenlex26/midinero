@@ -162,7 +162,7 @@ class GSSANewBeneficiaryAddressViewController: UIViewController, GSSANewBenefici
                     alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
                     self.present(alert, animated: true, completion: nil)
                 }else{
-                    GSVCLoader.show(type: .native)
+                    GSVCLoader.show()
                     presenter?.requestLocationInfo(CP: beneficiaryPublicData.shared.codigoPostal ?? "", LocationInfo: { [self] LocationInfo in
                         GSVCLoader.hide()
                         if LocationInfo != nil {
